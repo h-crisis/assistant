@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ol3 test</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="http://openlayers.org/en/v3.15.0/css/ol.css" type="text/css">
+    <link rel="stylesheet" href="http://openlayers.org/en/v3.15.0/css/sample.css" type="text/css">
+    <script src="http://openlayers.org/en/v3.15.0/build/ol.js"></script>
+    <style>
+
+
+    </style>
+</head>
+<body>
+<div id="dotInfomationHinan" class="dotInfomationHinan"></div>
+<div id="overlayHinan" style="background-color:whitesmoke; border: 1px solid black; padding: 5px 10px;"></div>
+<div id="overlayHosp" style="background-color:white; border: 1px solid black; padding: 5px 10px;"></div>
+<script type="text/javascript">
+
+    // 国土地理院からラスタ形式の地図情報を取得 //
+    var wmsMap = new ol.layer.Tile({source: new ol.source.XYZ({
+        url : 'http://cyberjapandata.gsi.go.jp/xyz/std/{z}/{x}/{y}.png',
+        attribution  : "<a href='http://www.gsi.go.jp/kikakuchousei/kikakuchousei40182.html' target='_blank'>国土地理院</a>"
+    })});
+
+    // 地図の初期表示地域を和光市周辺に
+    var view = new ol.View({
+        center: ol.proj.transform([130.611129, 32.787558,13], 'EPSG:4326', 'EPSG:3857'),
+        zoom: 14,
+        projection : 'EPSG:3857'
+
+    });
+
+    // wmsMapをマップとして描写するように設定
+
+
+    // GeoJson情報をベクタ形式で取得
+    var vectorSourceHinan = new ol.source.Vector({
+        format: new ol.format.GeoJSON(),
+        url: '/Users/komori/Desktop/N03-20150101_11_GML/test/JSON_20160421.json'		// ↑のpath.jsonを、jsonファイルの存在するパスに設定 //
+    });
+
+    var vectorSourceHosp = new ol.source.Vector({
+        format: new ol.format.GeoJSON(),
+        url: '/Users/komori/Desktop/N03-20150101_11_GML/test/JSON_20160421.json'		// ↑のpath.jsonを、jsonファイルの存在するパスに設定 //
+    });
+
+    var countryStyle = new ol.style.Style({
+        stroke: new ol.style.Stroke({
+            color: 'black',
+            width: 4
+        }),
+        fill : new ol.style.Fill({
+            color: 'rgba(0, 0, 0, 0)'
+        })
+    });
+
+    var vectorLayerHinan = new ol.layer.Vector({
+        source: vectorSourceHinan,
+        style: countryStyle
+    });
+
+    var vectorLayerHosp = new ol.layer.Vector({
+        source: vectorSourceHosp
+    });
+
+    /* geoserver上のファイルをソースとして取得する例
+     ::::::::::::::::::::::::::::::::::::::::::::::::::
+
+     var vectorSource3 = new ol.source.Vector({
+     format: new ol.format.GeoJSON(),
+     url: 'http://server.titech.ichilab.org:8080/geoserver/SIP4/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=SIP4:道路情報&maxFeatures=1000&outputFormat=application%2Fjson',
+     projection: ''
+     });
+
+     var vectorLayer3 = new ol.layer.Vector({
+     source: vectorSource3
+     });
+
+     ::::::::::::::::::::::::::::::::::::::::::*/
+
+    // vectorSourceから得られた描写情報を基に、マップ上に線や点をプロット
+
+    var dotInfomationHinan = new ol.Map({
+        layers: [,vectorLayerHinan,vectorLayerHosp],
+        target: 'dotInfomationHinan',
+        view: view,
+        projection : 'EPSG:3857'
+    });
+
+    /* ↑と同じ作業
+
+     var dotInfomation2 = new ol.Map({
+     layers: [vectorLayer2,vectorLayer3],
+     target: 'dotInfomation2',
+     transparent: true,
+     view: view,
+     renderer: ['canvas']
+     });
+
+     */
+
+    // プロットした情報にオーバーレイヤを追加する準備
+    var overlayHinan = new ol.Overlay({
+        element: document.getElementById('overlayHinan'),
+        positioning: 'bottom-center'
+    });
+
+    var overlayHosp = new ol.Overlay({
+        element: document.getElementById('overlayHosp'),
+        positioning: 'bottom-center'
+    });
+
+    // クリックした地点の情報を取得し、表示する
+    dotInfomationHinan.on('singleclick', function(e) {
+        var coordinate = e.coordinate;
+        var pixel = dotInfomationHinan.getPixelFromCoordinate(coordinate);
+        var labelA = '';
+        var labelB = '';
+        var labelC = '';
+        var labelD = '';
+        var labelE = '';
+        dotInfomationHinan.forEachFeatureAtPixel(pixel, function(feature){
+            // the attribute data of GeoJSON of USGS earthquake data.
+            labelA = feature.get('避難所コー');
+            labelB = feature.get('名称');
+            labelC = feature.get('郵便番号');
+            labelD = feature.get('住所');
+            labelE = feature.get('二次医療圏');
+        });
+        if (labelA.length > 0) {
+            overlayHosp.setPosition();
+            dotInfomationHinan.addOverlay(overlayHosp);
+            var element = overlayHinan.getElement();
+            element.innerHTML =
+                    "避難所コード:" + labelA + '<br>' +
+                    "避難所名    :" + labelB + '<br>' +
+                    "郵便番号    :" + labelC + '<br>' +
+                    "住所        :" + labelD + '<br>' +
+                    "二次医療圏   :" + labelE;
+            overlayHinan.setPosition(coordinate);
+            dotInfomationHinan.addOverlay(overlayHinan);
+        }
+    });
+
+    dotInfomationHinan.on('pointermove', function(evt) {
+        if (evt.dragging) {
+            return;
+        }
+        var pixel = dotInfomationHinan.getEventPixel(evt.originalEvent);
+        var hit = dotInfomationHinan.forEachLayerAtPixel(pixel, function() {
+            return true;
+        });
+        dotInfomationHinan.getTargetElement().style.cursor = hit ? 'pointer' : '';
+    });
+
+
+
+
+</script>
+</body>
+</html>
