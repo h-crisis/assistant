@@ -14,9 +14,7 @@
 <button id="distribution-vis" style="z-index: 3;position: absolute; bottom: 35%;left: 0px;width: 5%;height: 5%;">震度分布 ON/OFF</button>
 <button id="hospital-vis" style="z-index: 3;position: absolute; bottom: 30%;left: 0px;width: 5%;height: 5%;" >病院 ON/OFF</button>
 <button id="office-vis" style="z-index: 3;position: absolute; bottom: 25%;left: 0px;width: 5%;height: 5%;">役所 ON/OFF</button>
-<button id="hinan1-vis" style="z-index: 3;position: absolute; bottom: 20%;left: 0px;width: 5%;height: 5%;">避難所1日目 ON/OFF</button>
-<button id="hinan4-vis" style="z-index: 3;position: absolute; bottom: 15%;left: 0px;width: 5%;height: 5%;">避難所4日目 ON/OFF</button>
-<button id="hinan14-vis" style="z-index: 3;position: absolute; bottom: 10%;left: 0px;width: 5%;height: 5%;">避難所14日目 ON/OFF</button>
+<button id="hinan1-vis" style="z-index: 3;position: absolute; bottom: 18%;left: 0px;width: 5%;height: 7%;">避難所Day1 /Day4/Day14</button>
 <table id="info" style="z-index: 3;position: absolute;top: 0%;right: 0px;width: 15%;height: 90%; background-color:whitesmoke; border: 2px solid burlywood; padding: 5px 10px; display:list-item; table-layout: fixed; overflow:scroll;">&nbsp;</table>
 <a href='http://www.gsi.go.jp/' target='_blank' style="z-index: 2;position: absolute;bottom: 4%;left: 1%;">国土地理院</a>
 <script>
@@ -276,13 +274,13 @@
         }),
         style: function(feature, resolution) {
             var hinanNum = feature.get('避難者数');
-
             styleHinan.getText().setText(resolution < 10 ? feature.get('名称') + "(避難者数"　+ feature.get('避難者数') + "人)": '');
-            styleHinan.getImage().setScale(hinanNum > 300 ? 0.15 : hinanNum > 100 ? 0.1 : hinanNum > 20 ? 0.07 : 0.05);
+            styleHinan.getImage().setScale(hinanNum > 300 ? 0.15 : hinanNum > 100 ? 0.1 : hinanNum > 20 ? 0.07 :  0.05);
             styleHinan.getImage().setOpacity(hinanNum > 0 ? 0.85 : 0);
             return styleHinan;
         }
     });
+    map.addLayer(hinanLayer1);
     var hinanLayer4 = new ol.layer.Vector({
         source: new ol.source.Vector({
             url: 'HinanDay4.geojson',
@@ -296,16 +294,21 @@
             return styleHinan;
         }
     });
+    map.addLayer(hinanLayer4);
     var hinanLayer14 = new ol.layer.Vector({
         source: new ol.source.Vector({
             url: 'HinanDay14.geojson',
             format: new ol.format.GeoJSON()
         }),
         style: function(feature, resolution) {
+            var hinanNum = feature.get('避難者数');
             styleHinan.getText().setText(resolution < 10 ? feature.get('名称') + "(避難者数"　+ feature.get('避難者数') + "人)": '');
+            styleHinan.getImage().setScale(hinanNum > 300 ? 0.15 : hinanNum > 100 ? 0.1 : hinanNum > 20 ? 0.07 : 0.05);
+            styleHinan.getImage().setOpacity(hinanNum > 0 ? 0.85 : 0);
             return styleHinan;
         }
     });
+    map.addLayer(hinanLayer14);
     var officeLayer = new ol.layer.Vector({
         source: new ol.source.Vector({
             url: 'Office.geojson',
@@ -341,111 +344,47 @@
     };
     map.addLayer(distribLayer);
     distribLayer.setVisible(false);
-    hinanLayer1.setVisible(true);
-    hinanLayer4.setVisible(true);
-    hinanLayer14.setVisible(true);
-    officeLayer.setVisible(true);
-    hospLayer.setVisible(true);
+    hinanLayer1.setVisible(false);
+    hinanLayer4.setVisible(false);
+    hinanLayer14.setVisible(false);
+    officeLayer.setVisible(false);
+    hospLayer.setVisible(false);
     var hinanOnOff1   = document.getElementById('hinan1-vis');
-    var hinanOnOff4   = document.getElementById('hinan4-vis');
-    var hinanOnOff14   = document.getElementById('hinan14-vis');
     hinanOnOff1.addEventListener('click', hinanButton1);
-    var chs1 = 0;
+    var chs = 0;
     var day = 0;
     function hinanButton1() {
-        if (chs1%2 == 0) {
+        if (chs%4 == 0) {
             day = 1;
             hinanLayer1.setVisible(true);
             hinanLayer4.setVisible(false);
             hinanLayer14.setVisible(false);
             this.style.backgroundColor = "green";
-            hinanOnOff4.style.backgroundColor = "whitesmoke";
-            hinanOnOff14.style.backgroundColor = "whitesmoke";
-            map.addLayer(hinanLayer1);
-            map.removeLayer(hinanLayer4);
-            map.removeLayer(hinanLayer14);
-            chs1++;
-            if(chs4!==0){
-                chs4++;}
-            if(chs14!==0){
-            chs14++;}
-        } else {
-            hinanLayer1.setVisible(false);
-            hinanLayer4.setVisible(false);
-            hinanLayer14.setVisible(false);
-            this.style.backgroundColor = "whitesmoke";
-            map.removeLayer(hinanLayer1);
-            map.removeLayer(hinanLayer4);
-            map.removeLayer(hinanLayer14);
-            chs1++;
-        }
-    };
-    map.addLayer(hinanLayer1);
-    hinanLayer1.setVisible(false);
-    hinanOnOff4.addEventListener('click', hinanButton4);
-    var chs4 = 0;
-    function hinanButton4() {
-        if (chs4%2 == 0) {
+            chs++;
+        } else if (chs%4 == 1) {
             day = 4;
             hinanLayer1.setVisible(false);
             hinanLayer4.setVisible(true);
             hinanLayer14.setVisible(false);
-            this.style.backgroundColor = "green";
-            hinanOnOff1.style.backgroundColor = "whitesmoke";
-            hinanOnOff14.style.backgroundColor = "whitesmoke";
-            map.removeLayer(hinanLayer1);
-            map.addLayer(hinanLayer4);
-            map.removeLayer(hinanLayer14);
-            if(chs1!==0){
-                chs1++;}
-            chs4++;
-            if(chs14!==0){
-                chs14++;}
-        } else {
-            hinanLayer1.setVisible(false);
-            hinanLayer4.setVisible(false);
-            hinanLayer14.setVisible(false);
-            this.style.backgroundColor = "whitesmoke";
-            map.removeLayer(hinanLayer1);
-            map.removeLayer(hinanLayer4);
-            map.removeLayer(hinanLayer14);
-            chs4++;
-        }
-    };
-    map.addLayer(hinanLayer4);
-    hinanLayer4.setVisible(false);
-    hinanOnOff14.addEventListener('click', hinanButton14);
-    var chs14 = 0;
-    function hinanButton14() {
-        if (chs14%2 == 0) {
+            this.style.backgroundColor = "pink";
+            chs++;
+        } else if (chs%4 == 2) {
             day = 14;
             hinanLayer1.setVisible(false);
             hinanLayer4.setVisible(false);
             hinanLayer14.setVisible(true);
-            this.style.backgroundColor = "green";
-            hinanOnOff1.style.backgroundColor = "whitesmoke";
-            hinanOnOff4.style.backgroundColor = "whitesmoke";
-            map.removeLayer(hinanLayer1);
-            map.removeLayer(hinanLayer4);
-            map.addLayer(hinanLayer14);
-            if(chs1!==0){
-                chs1++;}
-            if(chs4!==0){
-                chs4++;}
-            chs14++;
+            this.style.backgroundColor = "yellow";
+            chs++;
         } else {
+            day = 0;
             hinanLayer1.setVisible(false);
             hinanLayer4.setVisible(false);
             hinanLayer14.setVisible(false);
-            this.style.backgroundColor = "white";
-            map.removeLayer(hinanLayer1);
-            map.removeLayer(hinanLayer4);
-            map.removeLayer(hinanLayer14);
-            chs14++;
+            this.style.backgroundColor = "whitesmoke";
+            chs++;
         }
     };
-    map.addLayer(hinanLayer14);
-    hinanLayer14.setVisible(false);
+
     var officeOnOff   = document.getElementById('office-vis');
     officeOnOff.addEventListener('click', officeButton);
     function officeButton() {
@@ -500,9 +439,6 @@
         var labelHinan = new Array(80);
         var labelSelf = '';
         map.forEachFeatureAtPixel(pixel, function(feature){
-            var city = new Array(2000);
-            city[0] = feature.getId();
-            console.log(city[0]);
             labelB = feature.get('名称');
             labelC = feature.get('住所');
             labelD = feature.get('避難者数');
@@ -619,7 +555,6 @@
                     "ガス    :" + labelHinan[12] + '<br>' +
                     "通信    :" + labelHinan[13] + '<br>' +
                     '<a href="http://www.niph.go.jp" target="_blank">NIPH</a>';
-            styleHinan.getImage(city[0]).setScale(2);
             overlayHinan.setPosition(coordinate);
             map.addOverlay(overlayHinan);
         } else if (day == 14) {
