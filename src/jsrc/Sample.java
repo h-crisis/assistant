@@ -1,8 +1,10 @@
+package jsrc;
+
 /**
  * Created by manabu on 2016/05/24.
  */
-public class Test {
+public class Sample {
     public static void main(String args[]) {
-        System.out.println("test");
+        System.out.println("Sample");
     }
- }
+}
