@@ -45,7 +45,7 @@ public class openShapeFile {
         FeatureIterator i = featureSource.getFeatures().features();
         while(i.hasNext()) {
             SimpleFeature feature = (SimpleFeature)i.next();
-            System.out.println(((SimpleFeature) i.next());
+            //System.out.println(((SimpleFeature) i.next());
         }
     }
 }
