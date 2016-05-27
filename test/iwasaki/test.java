@@ -11,35 +11,20 @@ public class test {
     public static void main(String args[]) throws Exception
     {
 
-            File file = new File("assistant/test/iwasaki/test.csv");
-            FileReader fr = new FileReader(file);
-            BufferedReader br = new BufferedReader(fr);
+        File file = new File("test/iwasaki/test.csv");
+        FileReader fr = new FileReader(file);
+        BufferedReader br = new BufferedReader(fr);
 
-            String str = br.readLine();
-            while(str != null)
-            {
-                System.out.println(str);
-                str = br.readLine();
-            }
+        String str = br.readLine();
+        int sum = 0;
 
-            br.close();
-
-
-
-
-
-        int sum =0;
-        for(int i=0; i<3; i++)
-        {
-            String num = br.readLine();
-            int number = Integer.parseInt(num);
-            sum = sum + number;
+        while((str = br.readLine()) != null) {
+            String[] pair = str.split(",");
+            System.out.println(pair[2]);
+            sum = sum + Integer.parseInt(pair[2]);
         }
-
-
-
-        System.out.println("競技者人口の人数は" + sum +"です");
-
+        br.close();
+        System.out.println("合計は" + sum + "です。");
     }
 
 
