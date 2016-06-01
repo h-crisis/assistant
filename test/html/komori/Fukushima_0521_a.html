@@ -439,16 +439,13 @@
         var labelB = '';
         var labelC = '';
         var labelD = '';
-        var labelE = '';
-        var labelF = '';
-        var labelG = '';
-        var labelH = '';
-        var labelI = '';
-        var labelJ = '';
+        var labelHosp = new Array(5)
         var labelHinan = new Array(80);
         var label = new Array(10);
         var labelSelf = '';
-        var labelH14 =
+        var arrayHosp =
+                ['医療機関名','住所','電話番号','二次医療圏']
+        var arrayH14 =
         ['男性', '女性', '高齢者', '身体障害者', '乳幼児', '妊婦', '自立歩行不', 'その他要', '人工透析', '人工呼吸器', '電気',
             '水', 'ガス', '通信', '換気', '暖房', 'トイレ', '汚物', 'ゴミ', '食品', '衛生', '飲料水', '食事', '有無と方法',
             '医師', '看護師', '薬剤師', '事務', '総数', 'インフルエンザ', '呼吸器疾患', '呼吸困難', '発熱', '下痢', '嘔気・嘔吐',
@@ -460,12 +457,10 @@
             label[0] = feature.get('P34_003');
             label[1] = feature.get('P34_004');
             labelD = feature.get('避難者数');
-            labelE = feature.get('P34_003');
-            labelF = feature.get('P34_004');
-            labelG = feature.get('医療機関名');
-            labelH = feature.get('住所');
-            labelI = feature.get('電話番号');
-            labelJ = feature.get('二次医療圏');
+            labelHosp[0] = feature.get('医療機関名');
+            labelHosp[1] = feature.get('住所');
+            labelHosp[2] = feature.get('電話番号');
+            labelHosp[3] = feature.get('二次医療圏');
             labelSelf = feature.getId();
             labelHinan[0] = feature.get('男');
             labelHinan[1] = feature.get('女');
@@ -520,44 +515,48 @@
             document.getElementById( 'info' ).style.display = 'none';
             overlayHinan.setPosition();
             map.addOverlay(overlayHinan);
-        } else if(typeof labelB === "undefined" && typeof labelG === "undefined") {
-            document.getElementById( 'info' ).style.display = 'block';
-            overlayHinan.setPosition();
-            map.addOverlay(overlayHinan);
-            var element = overlayHinan.getElement();
-            element.innerHTML =
-                    "名称    :" + labelE + '<br>' +
-                    "住所    :" + labelF;
-            while (i < 3) {
+        } else if(typeof labelB === "undefined" && typeof labelHosp[0] === "undefined") {
+            document.getElementById( 'info' ).style.display = 'none';
+
+            info.innerHTML = "<div style='background-color:#888888; color:white; text-align:center' type=button id=showBtn value=隠す onclick=showHide()>閉じる</div>";
+            info.innerHTML = info.innerHTML +  label[0];
+            while (i < 2) {
                 info.innerHTML = info.innerHTML + "<tr><td style=font-size:24px;background-color:#888888;color:white>a</><td style=font-size:24px;background-color:white;>b</td></tr>";
                 i++
             }
+            info.innerHTML = info.innerHTML + "<a href=http://www.niph.go.jp target=_blank>NIPH</a>" + "<br>";
             for (i = 0; i < 2; i++){
                 info.rows[0].cells[0].innerHTML = "名称";
                 info.rows[1].cells[0].innerHTML = "住所";
                 info.rows[i].cells[1].innerHTML = label[i];
             }
-            console.log(info.rows[1].cells[1])
             overlayHinan.setPosition(coordinate);
-            map.addOverlay(overlayHinan);
-        }
-        else if (typeof labelE === "undefined" && typeof labelB === "undefined") {
-            document.getElementById( 'info' ).style.display = 'block';
-            overlayHinan.setPosition();
-            map.addOverlay(overlayHinan);
             var element = overlayHinan.getElement();
             element.innerHTML =
-                    "名称    :" + labelG + '<br>' +
-                    "住所    :" + labelH + '<br>' +
-                    "電話番号        :" + labelI + '<br>' +
-                    "二次医療圏    :" + labelJ;
-            info.innerHTML =
-                    "名称    :" + labelG + '<br>' +
-                    "住所    :" + labelH + '<br>' +
-                    "電話番号        :" + labelI + '<br>' +
-                    "二次医療圏    :" + labelJ + '<br>' +
-                    '<a href="http://www.niph.go.jp" target="_blank">NIPH</a>';
+                    "名称    :" + label[0] + '<br>' +
+                    "住所    :" + label[1];
+            map.addOverlay(overlayHinan);
+        }
+        else if (typeof label[0] === "undefined" && typeof labelB === "undefined") {
+            document.getElementById( 'info' ).style.display = 'block';
+            info.innerHTML = "<div style='background-color:#888888; color:white; text-align:center' type=button id=showBtn value=隠す onclick=showHide()>閉じる</div>";
+            info.innerHTML = info.innerHTML +  labelHosp[0];
+            while (i < 4) {
+                info.innerHTML = info.innerHTML + "<tr><td style=font-size:24px;background-color:#888888;color:white></td><td style=font-size:24px;background-color:white;text-align:right;></td></tr>";
+                i++
+            }
+            info.innerHTML = info.innerHTML + "<a href=http://www.niph.go.jp target=_blank>NIPH</a>" + "<br>";
+            for (i = 0; i < 4; i++){
+                info.rows[i].cells[0].innerHTML = arrayHosp[i];
+                info.rows[i].cells[1].innerHTML = labelHosp[i];
+            }
             overlayHinan.setPosition(coordinate);
+            var element = overlayHinan.getElement();
+            element.innerHTML =
+                    "名称    :" + labelHosp[0] + '<br>' +
+                    "住所    :" + labelHosp[1] + '<br>' +
+                    "電話番号        :" + labelHosp[2] + '<br>' +
+                    "二次医療圏    :" + labelHosp[3];
             map.addOverlay(overlayHinan);
         } else if (day == 1 || day == 4) {
             document.getElementById( 'info' ).style.display = 'block';
@@ -571,13 +570,16 @@
             info.rows[0].cells[0].innerHTML = "総数";
             info.rows[0].cells[1].innerHTML = labelD + "人";
             for (i = 1; i < 15; i++){
-                info.rows[i].cells[0].innerHTML = labelH14[i-1];
+                info.rows[i].cells[0].innerHTML = arrayH14[i-1];
                 if (labelHinan[i-1] === ""){
-                    info.rows[i].cells[1].innerHTML = labelHinan[i-1]
+                    info.rows[i].cells[1].innerHTML = labelHinan[i-1];
                 } else if(labelHinan[i-1] >= 0) {
                     info.rows[i].cells[1].innerHTML = labelHinan[i-1] + "人";
                 } else {
-                    info.rows[i].cells[1].innerHTML = labelHinan[i-1]
+                    info.rows[i].cells[1].innerHTML = labelHinan[i-1];
+                    if (info.rows[i].cells[1].innerHTML === "undefined"){
+                        info.rows[i].cells[1].innerHTML = "情報無し";
+                    }
                 }
             }
             overlayHinan.setPosition(coordinate);
@@ -605,12 +607,16 @@
             info.rows[0].cells[0].innerHTML = "総数";
             info.rows[0].cells[1].innerHTML = labelD + "人";
             for (i = 1; i < 44; i++){
-                info.rows[i].cells[0].innerHTML = labelH14[i-1];
+                info.rows[i].cells[0].innerHTML = arrayH14[i-1];
                 if (labelHinan[i-1] === ""){
-                    info.rows[i].cells[1].innerHTML = labelHinan[i-1]
+                    info.rows[i].cells[1].innerHTML = "情報無し";
                 } else if(labelHinan[i-1] >= 0) {
                     info.rows[i].cells[1].innerHTML = labelHinan[i-1] + "人";
-                } else if(labelHinan[43]) {
+                } else  {
+                    info.rows[i].cells[1].innerHTML = labelHinan[i-1];
+                    if (info.rows[i].cells[1].innerHTML === "undefined"){
+                        info.rows[i].cells[1].innerHTML = "情報無し";
+                    }
                 }
             }
             overlayHinan.setPosition(coordinate);
