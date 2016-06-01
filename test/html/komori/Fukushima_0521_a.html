@@ -451,6 +451,8 @@
             '医師', '看護師', '薬剤師', '事務', '総数', 'インフルエンザ', '呼吸器疾患', '呼吸困難', '発熱', '下痢', '嘔気・嘔吐',
             '発疹', '不眠・不安', '精神科疾患', '病院搬送', '高血圧', '糖尿病', '潰瘍性大腸炎', 'パーキンソン病', '備考']
         var i = 0;
+        var lon = "";
+        var lat = "";
         map.forEachFeatureAtPixel(pixel, function(feature){
             labelB = feature.get('名称');
             labelC = feature.get('住所');
@@ -591,6 +593,10 @@
             map.addOverlay(overlayHinan);
         } else if (day == 14) {
             document.getElementById( 'info' ).style.display = 'block';
+            lon = coordinate[0];
+            lat = coordinate[1];
+            map.getView().setCenter([lon,lat]);
+            map.getView().setZoom(14);
             info.innerHTML = "<div style='background-color:#888888; color:white; text-align:center' type=button id=showBtn value=隠す onclick=showHide()>閉じる</div>";
             info.innerHTML = info.innerHTML +  labelB;
             while (i < 44) {
