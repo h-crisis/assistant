@@ -41,8 +41,6 @@
                   continue;
               }
           }
-          
-          
       }
 
     client = mows.createClient(inputBrokerWs);
