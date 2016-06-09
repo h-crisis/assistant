@@ -10,12 +10,13 @@
 <body>
 <div id="map" class="map" style="z-index: 1;position: absolute;top: 0px;left: 0px;width: 100%;height: 100%;"></div>
 <div id="overlayHinan" style="background-color:whitesmoke; border: 1px solid black; padding: 5px 10px;"></div>
-<button id="map-vis" style="z-index: 3;position: absolute; bottom: 40%;left: 0px;width: 5%;height: 7%;">地理院地図 /OSM/SAT</button>
-<button id="distribution-vis" style="z-index: 3;position: absolute; bottom: 35%;left: 0px;width: 5%;height: 5%;">震度分布 ON/OFF</button>
-<button id="hospital-vis" style="z-index: 3;position: absolute; bottom: 30%;left: 0px;width: 5%;height: 5%;" >病院 ON/OFF</button>
-<button id="office-vis" style="z-index: 3;position: absolute; bottom: 25%;left: 0px;width: 5%;height: 5%;">役所 ON/OFF</button>
-<button id="hinan1-vis" style="z-index: 3;position: absolute; bottom: 18%;left: 0px;width: 5%;height: 7%;">避難所Day1 /Day4/Day14</button>
-<button id="backToCenter" style="z-index: 3;position: absolute; bottom: 13%;left: 0px;width: 5%;height: 5%;">震源に移動</button>
+<button id="map-vis" style="z-index: 3;position: absolute; bottom: 43%;left: 0px;width: 5%;height: 7%;">地理院地図 /OSM/SAT</button>
+<button id="distribution-vis" style="z-index: 3;position: absolute; bottom: 38%;left: 0px;width: 5%;height: 5%;">震度分布 ON/OFF</button>
+<button id="hospital-vis" style="z-index: 3;position: absolute; bottom: 33%;left: 0px;width: 5%;height: 5%;" >病院 ON/OFF</button>
+<button id="office-vis" style="z-index: 3;position: absolute; bottom: 28%;left: 0px;width: 5%;height: 5%;">役所 ON/OFF</button>
+<button id="hinan1-vis" style="z-index: 3;position: absolute; bottom: 21%;left: 0px;width: 5%;height: 7%;">避難所Day1 /Day4/Day14</button>
+<button id="goToHypoCenter" style="z-index: 3;position: absolute; bottom: 16%;left: 0px;width: 5%;height: 5%;">震源に移動</button>
+<button id="goToSelect" style="z-index: 3;position: absolute; bottom: 11%;left: 0px;width: 5%;height: 5%;">選択施設へ 拡大移動</button>
 <table id="info" style="z-index: 3;position: absolute;top: 0%;right: 0px;width: 20%;height: 90%; background-color:whitesmoke; border: 2px solid burlywood; padding: 5px 10px; table-layout: fixed; overflow:scroll; display:none; font-size:24px;">
 </table>
 <a href='http://www.gsi.go.jp/' target='_blank' style="z-index: 2;position: absolute;bottom: 4%;left: 1%;">国土地理院</a>
@@ -242,11 +243,24 @@
         ])
     });
 
-    var backCenter = document.getElementById('backToCenter');
-    backCenter.addEventListener('click', backButton);
-    function backButton() {
-        map.getView().setCenter(ol.proj.transform([140.461129, 37.787558, 13], 'EPSG:4326', 'EPSG:3857'))
+    var goHypoCenter = document.getElementById('goToHypoCenter');
+    goHypoCenter.addEventListener('click', goHypoButton);
+    function goHypoButton() {
+        map.getView().setCenter(ol.proj.transform([140.461129, 37.787558], 'EPSG:4326', 'EPSG:3857'))
+        map.getView().setZoom(11);
         }
+
+    var flagSelected = false ;
+    var lon, lat;
+    var goFacility = document.getElementById('goToSelect');
+    goFacility.addEventListener('click', function(evt) {
+
+        if (flagSelected == true) {
+            console.log(flagSelected);
+            map.getView().setCenter([lon,lat]);
+            map.getView().setZoom(14);
+        }
+    });
 
     var mapSwitch   = document.getElementById('map-vis');
     osmQuestLayer.setVisible(false);
@@ -451,6 +465,8 @@
             '医師', '看護師', '薬剤師', '事務', '総数', 'インフルエンザ', '呼吸器疾患', '呼吸困難', '発熱', '下痢', '嘔気・嘔吐',
             '発疹', '不眠・不安', '精神科疾患', '病院搬送', '高血圧', '糖尿病', '潰瘍性大腸炎', 'パーキンソン病', '備考']
         var i = 0;
+        var coordinate4326;
+
         map.forEachFeatureAtPixel(pixel, function(feature){
             labelB = feature.get('名称');
             labelC = feature.get('住所');
@@ -506,25 +522,31 @@
             labelHinan[41] = feature.get('潰瘍性大腸');
             labelHinan[42] = feature.get('パーキンソ');
             labelHinan[43] = feature.get('備考');
+            coordinate4326 = feature.getGeometry().getExtent();
+            lon = coordinate4326[0]
+            lat = coordinate4326[1]
         });
         if (labelSelf === "") {
             labelSelf = "noPlace";
         }
         info.innerHTML="";
         if(labelSelf == "noPlace") {
+            flagSelected = false;
             document.getElementById( 'info' ).style.display = 'none';
             overlayHinan.setPosition();
             map.addOverlay(overlayHinan);
         } else if(typeof labelB === "undefined" && typeof labelHosp[0] === "undefined") {
+            flagSelected = true;
             document.getElementById( 'info' ).style.display = 'none';
-
             info.innerHTML = "<div style='background-color:#888888; color:white; text-align:center' type=button id=showBtn value=隠す onclick=showHide()>閉じる</div>";
             info.innerHTML = info.innerHTML +  label[0];
             while (i < 2) {
                 info.innerHTML = info.innerHTML + "<tr><td style=font-size:24px;background-color:#888888;color:white>a</><td style=font-size:24px;background-color:white;>b</td></tr>";
                 i++
             }
-            info.innerHTML = info.innerHTML + "<a href=http://www.niph.go.jp target=_blank>NIPH</a>" + "<br>";
+            info.innerHTML = info.innerHTML + "<a href=http://localhost:63342/assistant/html/komori/what-mqtt.html id=niphLonLat target=_blank>NIPH</a>" + "<br>";
+            var niphAddress=document.getElementById('niphLonLat');
+            niphAddress.href='http://localhost:63342/assistant/html/komori/what-mqtt.html' + '?' + 'x=' + lon + ',y=' + lat;
             for (i = 0; i < 2; i++){
                 info.rows[0].cells[0].innerHTML = "名称";
                 info.rows[1].cells[0].innerHTML = "住所";
@@ -538,6 +560,7 @@
             map.addOverlay(overlayHinan);
         }
         else if (typeof label[0] === "undefined" && typeof labelB === "undefined") {
+            flagSelected = true;
             document.getElementById( 'info' ).style.display = 'block';
             info.innerHTML = "<div style='background-color:#888888; color:white; text-align:center' type=button id=showBtn value=隠す onclick=showHide()>閉じる</div>";
             info.innerHTML = info.innerHTML +  labelHosp[0];
@@ -545,7 +568,9 @@
                 info.innerHTML = info.innerHTML + "<tr><td style=font-size:24px;background-color:#888888;color:white></td><td style=font-size:24px;background-color:white;text-align:right;></td></tr>";
                 i++
             }
-            info.innerHTML = info.innerHTML + "<a href=http://www.niph.go.jp target=_blank>NIPH</a>" + "<br>";
+            info.innerHTML = info.innerHTML + "<a href=http://localhost:63342/assistant/html/komori/what-mqtt.html id=niphLonLat target=_blank>NIPH</a>" + "<br>";
+            var niphAddress=document.getElementById('niphLonLat');
+            niphAddress.href='http://localhost:63342/assistant/html/komori/what-mqtt.html' + '?' + 'x=' + lon + ',y=' + lat;
             for (i = 0; i < 4; i++){
                 info.rows[i].cells[0].innerHTML = arrayHosp[i];
                 info.rows[i].cells[1].innerHTML = labelHosp[i];
@@ -559,6 +584,7 @@
                     "二次医療圏    :" + labelHosp[3];
             map.addOverlay(overlayHinan);
         } else if (day == 1 || day == 4) {
+            flagSelected = true;
             document.getElementById( 'info' ).style.display = 'block';
             info.innerHTML = "<div style='background-color:#888888; color:white; text-align:center' type=button id=showBtn value=隠す onclick=showHide()>閉じる</div>";
             info.innerHTML = info.innerHTML +  labelB;
@@ -566,7 +592,9 @@
                 info.innerHTML = info.innerHTML + "<tr><td style=font-size:24px;background-color:#888888;color:white></td><td style=font-size:24px;background-color:white;text-align:right;></td></tr>";
                 i++
             }
-            info.innerHTML = info.innerHTML + "<a href=http://www.niph.go.jp target=_blank>NIPH</a>" + "<br>";
+            info.innerHTML = info.innerHTML + "<a href=http://localhost:63342/assistant/html/komori/what-mqtt.html id=niphLonLat target=_blank>NIPH</a>" + "<br>";
+            var niphAddress=document.getElementById('niphLonLat');
+            niphAddress.href='http://localhost:63342/assistant/html/komori/what-mqtt.html' + '?' + 'x=' + lon + ',y=' + lat;
             info.rows[0].cells[0].innerHTML = "総数";
             info.rows[0].cells[1].innerHTML = labelD + "人";
             for (i = 1; i < 15; i++){
@@ -590,11 +618,12 @@
                     "避難者数 :" + labelD + "人";
             map.addOverlay(overlayHinan);
         } else if (day == 14) {
+            flagSelected = true;
             document.getElementById( 'info' ).style.display = 'block';
             info.innerHTML = "<div style='background-color:#888888; color:white; text-align:center' type=button id=showBtn value=隠す onclick=showHide()>閉じる</div>";
             info.innerHTML = info.innerHTML +  labelB;
             while (i < 44) {
-                info.innerHTML = info.innerHTML + "<tr><td style=font-size:24px;background-color:#888888;color:white></td><td style=font-size:24px;background-color:white;text-align:right;></td></tr>";
+                info.innerHTML = info.innerHTML + "<tr><td style=font-size:24px;background-color:#888899;color:white></td><td style=font-size:24px;background-color:white;text-align:right;></td></tr>";
                 i++
             }
             if (labelHinan[43] === ""){
@@ -603,7 +632,9 @@
             else {
                 info.innerHTML = info.innerHTML + "備考:" + labelHinan[43] + "<br>";
             }
-            info.innerHTML = info.innerHTML + "<a href=http://www.niph.go.jp target=_blank>NIPH</a>" + "<br>";
+            info.innerHTML = info.innerHTML + "<a href=http://localhost:63342/assistant/html/komori/what-mqtt.html id=niphLonLat target=_blank>NIPH</a>" + "<br>";
+            var niphAddress=document.getElementById('niphLonLat');
+            niphAddress.href='http://localhost:63342/assistant/html/komori/what-mqtt.html' + '?' + 'x=' + lon + ',y=' + lat;
             info.rows[0].cells[0].innerHTML = "総数";
             info.rows[0].cells[1].innerHTML = labelD + "人";
             for (i = 1; i < 44; i++){
@@ -627,9 +658,13 @@
                     "避難者数 :" + labelD + "人";
             map.addOverlay(overlayHinan);
         } else {
+            flagSelected = false;
             overlayHinan.setPosition();
             map.addOverlay(overlayHinan);
         }
+
+
+
     });
     function showHide(){
         document.getElementById('info').style.display = 'none';
