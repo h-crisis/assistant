@@ -25,7 +25,7 @@ var map = new ol.Map({
     ],
     target: 'map',
     view: new ol.View({
-        center: ol.proj.transform([140.461129, 37.787558, 13], 'EPSG:4326', 'EPSG:3857'),
+        center: ol.proj.transform([140.461129, 35.774460, 13], 'EPSG:4326', 'EPSG:3857'),
         zoom: 11,
         minZoom: 7,
         maxZoom: 15
@@ -252,9 +252,9 @@ map.on('click', function(evt) {
             info.innerHTML = info.innerHTML + "<tr><td style=font-size:24px;background-color:#888888;color:white>a</><td style=font-size:24px;background-color:white;>b</td></tr>";
             i++
         }
-        info.innerHTML = info.innerHTML + "<a href=http://localhost:63342/assistant/html/komori/shelter-emergency.html id=niphLonLat target=_blank>NIPH</a>" + "<br>";
+        info.innerHTML = info.innerHTML + "<a href=mqtt/shelter-emergency.html id=niphLonLat target=_blank>NIPH</a>" + "<br>";
         var niphAddress=document.getElementById('niphLonLat');
-        niphAddress.href='http://localhost:63342/assistant/html/komori/shelter-emergency.html' + '?' + 'x=' + lon + ',y=' + lat;
+        niphAddress.href='http://niph.go.jp';
         for (i = 0; i < 2; i++){
             info.rows[0].cells[0].innerHTML = "名称";
             info.rows[1].cells[0].innerHTML = "住所";
@@ -276,9 +276,9 @@ map.on('click', function(evt) {
             info.innerHTML = info.innerHTML + "<tr><td style=font-size:24px;background-color:#888888;color:white></td><td style=font-size:24px;background-color:white;text-align:right;></td></tr>";
             i++
         }
-        info.innerHTML = info.innerHTML + "<a href=http://localhost:63342/assistant/html/komori/shelter-emergency.html id=niphLonLat target=_blank>NIPH</a>" + "<br>";
+        info.innerHTML = info.innerHTML + "<a href=mqtt/shelter-emergency.html id=niphLonLat target=_blank>NIPH</a>" + "<br>";
         var niphAddress=document.getElementById('niphLonLat');
-        niphAddress.href='http://localhost:63342/assistant/html/komori/shelter-emergency.html' + '?' + 'x=' + lon + ',y=' + lat;
+        niphAddress.href='http://niph.go.jp';
         for (i = 0; i < 4; i++){
             info.rows[i].cells[0].innerHTML = arrayHosp[i];
             info.rows[i].cells[1].innerHTML = labelHosp[i];
@@ -300,9 +300,9 @@ map.on('click', function(evt) {
             info.innerHTML = info.innerHTML + "<tr><td style=font-size:24px;background-color:#888888;color:white></td><td style=font-size:24px;background-color:white;text-align:right;></td></tr>";
             i++
         }
-        info.innerHTML = info.innerHTML + "<a href=http://localhost:63342/assistant/html/komori/shelter-emergency.html id=niphLonLat target=_blank>NIPH</a>" + "<br>";
+        info.innerHTML = info.innerHTML + "<a href=mqtt/shelter-emergency.html id=niphLonLat target=_blank>NIPH</a>" + "<br>";
         var niphAddress=document.getElementById('niphLonLat');
-        niphAddress.href='http://localhost:63342/assistant/html/komori/shelter-emergency.html' + '?' + 'x=' + lon + ',y=' + lat;
+        niphAddress.href='http://h-crisis.niph.go.jp/assistant/wp-content/uploads/sites/4/test/mqtt/shelter-emergency.html' + '?' + 'x=' + lon + ',y=' + lat + ',ID=' + labelC + ',Name=' + labelB;
         info.rows[0].cells[0].innerHTML = "総数";
         info.rows[0].cells[1].innerHTML = labelD + "人";
         for (i = 1; i < 15; i++){
@@ -340,9 +340,9 @@ map.on('click', function(evt) {
         else {
             info.innerHTML = info.innerHTML + "備考:" + labelHinan[43] + "<br>";
         }
-        info.innerHTML = info.innerHTML + "<a href=http://localhost:63342/assistant/html/komori/shelter-emergency.html id=niphLonLat target=_blank>NIPH</a>" + "<br>";
+        info.innerHTML = info.innerHTML + "<a href=mqtt/shelter-emergency.html id=niphLonLat target=_blank>NIPH</a>" + "<br>";
         var niphAddress=document.getElementById('niphLonLat');
-        niphAddress.href='http://localhost:63342/assistant/html/komori/shelter-emergency.html' + '?' + 'x=' + lon + ',y=' + lat;
+        niphAddress.href='http://h-crisis.niph.go.jp/assistant/wp-content/uploads/sites/4/test/mqtt/shelter-emergency.html_2' + '?' + 'x=' + lon + ',y=' + lat + ',ID=' + labelC + ',Name=' + labelB;
         info.rows[0].cells[0].innerHTML = "総数";
         info.rows[0].cells[1].innerHTML = labelD + "人";
         for (i = 1; i < 44; i++){

@@ -11,7 +11,7 @@ var styleSI7 = new ol.style.Style({
         anchorXUnits: 'fraction',
         anchorYUnits: 'fraction',
         opacity: 0.85,
-        src: "img/7.png"
+        src: "http://h-crisis.niph.go.jp/assistant/wp-content/uploads/sites/4/test/img/7.png"
     })
 });
 var styleSI6S = new ol.style.Style({
@@ -24,7 +24,7 @@ var styleSI6S = new ol.style.Style({
         anchorXUnits: 'fraction',
         anchorYUnits: 'fraction',
         opacity: 0.85,
-        src: "img/6s.png"
+        src: "http://h-crisis.niph.go.jp/assistant/wp-content/uploads/sites/4/test/img/6s.png"
     })
 });
 var styleSI6W = new ol.style.Style({
@@ -37,7 +37,7 @@ var styleSI6W = new ol.style.Style({
         anchorXUnits: 'fraction',
         anchorYUnits: 'fraction',
         opacity: 0.85,
-        src: "img/6w.png"
+        src: "http://h-crisis.niph.go.jp/assistant/wp-content/uploads/sites/4/test/img/6w.png"
     })
 });
 var styleSI5S = new ol.style.Style({
@@ -50,7 +50,7 @@ var styleSI5S = new ol.style.Style({
         anchorXUnits: 'fraction',
         anchorYUnits: 'fraction',
         opacity: 0.85,
-        src: "img/5s.png"
+        src: "http://h-crisis.niph.go.jp/assistant/wp-content/uploads/sites/4/test/img/5s.png"
     })
 });
 var styleSI5W = new ol.style.Style({
@@ -63,7 +63,7 @@ var styleSI5W = new ol.style.Style({
         anchorXUnits: 'fraction',
         anchorYUnits: 'fraction',
         opacity: 0.85,
-        src: "img/5w.png"
+        src: "http://h-crisis.niph.go.jp/assistant/wp-content/uploads/sites/4/test/img/5w.png"
     })
 });
 var styleSI4 = new ol.style.Style({
@@ -76,7 +76,7 @@ var styleSI4 = new ol.style.Style({
         anchorXUnits: 'fraction',
         anchorYUnits: 'fraction',
         opacity: 0.85,
-        src: "img/4.png"
+        src: "http://h-crisis.niph.go.jp/assistant/wp-content/uploads/sites/4/test/img/4.png"
     })
 });
 var styleSI3 = new ol.style.Style({
@@ -89,7 +89,7 @@ var styleSI3 = new ol.style.Style({
         anchorXUnits: 'fraction',
         anchorYUnits: 'fraction',
         opacity: 0.85,
-        src: "img/3.png"
+        src: "http://h-crisis.niph.go.jp/assistant/wp-content/uploads/sites/4/test/img/3.png"
     })
 });
 var styleSI2 = new ol.style.Style({
@@ -102,7 +102,7 @@ var styleSI2 = new ol.style.Style({
         anchorXUnits: 'fraction',
         anchorYUnits: 'fraction',
         opacity: 0.85,
-        src: "img/2.png"
+        src: "http://h-crisis.niph.go.jp/assistant/wp-content/uploads/sites/4/test/img/2.png"
     })
 });
 var styleSI1 = new ol.style.Style({
@@ -115,7 +115,7 @@ var styleSI1 = new ol.style.Style({
         anchorXUnits: 'fraction',
         anchorYUnits: 'fraction',
         opacity: 0.85,
-        src: "img/1.png"
+        src: "http://h-crisis.niph.go.jp/assistant/wp-content/uploads/sites/4/test/img/1.png"
     })
 });
 
@@ -125,7 +125,7 @@ var styleSI1 = new ol.style.Style({
 // 余震発生毎に,si_y02.GeoJson,si_y03.GeoJson...とファイルが作成される
 var layerSI = new ol.layer.Vector({
     source: new ol.source.Vector({
-        url: 'geojson/si_h01.geojson',
+        url: 'http://h-crisis.niph.go.jp/assistant/wp-content/uploads/sites/4/test/geojson/si_h01.geojson',
         format: new ol.format.GeoJSON()
     }),
     style: function(feature, resolution) {

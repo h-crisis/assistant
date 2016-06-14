@@ -12,13 +12,13 @@ var styleOffice = new ol.style.Style({
         anchorXUnits: 'fraction',
         anchorYUnits: 'fraction',
         opacity: 0.85,
-        src: "img/office.png"
+        src: "http://h-crisis.niph.go.jp/assistant/wp-content/uploads/sites/4/test/img/office.png"
     })
 });
 
 var officeLayer = new ol.layer.Vector({
     source: new ol.source.Vector({
-        url: 'geojson/Office.geojson',
+        url: 'http://h-crisis.niph.go.jp/assistant/wp-content/uploads/sites/4/test/geojson/Office.geojson',
         format: new ol.format.GeoJSON()
     }),
     style: function(feature, resolution) {
