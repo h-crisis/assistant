@@ -47,6 +47,9 @@ public class ReadPathFile {
     private File fileCHUGOKU_SHIKOKU; // 中国四国ディレクトリへのパス
     private File fileKYUSHU_OKINAWA; // 九州沖縄ディレクトリへのパス
 
+    private String pathOut; // 出力ディレクリへのパス
+    private File fileOut;
+
     private ArrayList<File> fileList;
 
     ReadPathFile() {
@@ -78,6 +81,7 @@ public class ReadPathFile {
         pathKINKI = filePathList.get(10);
         pathCHUGOKU_SHIKOKU = filePathList.get(11);
         pathKYUSHU_OKINAWA = filePathList.get(12);
+        pathOut = filePathList.get(13);
 
         fileJPNMAP = new File(pathJPNMAP);
         fileWIDEMAP = new File(pathWIDEMAP);
@@ -92,6 +96,7 @@ public class ReadPathFile {
         fileKINKI = new File(pathKINKI);
         fileCHUGOKU_SHIKOKU = new File(pathCHUGOKU_SHIKOKU);
         fileKYUSHU_OKINAWA = new File(pathKYUSHU_OKINAWA);
+        fileOut = new File(pathOut);
 
         confirmConfigFile();
         createFileList();
@@ -196,6 +201,14 @@ public class ReadPathFile {
             System.out.println("\t\tError: 九州沖縄ディレクトリが存在しません。");
             throw new RuntimeException("九州沖縄ディレクトリが存在しません。");
         }
+
+        if(fileOut.exists())
+            System.out.println("\t\t14.出力ディレクトリは存在します。");
+        else {
+            System.out.println("\t\tError: 出力ディレクトリが存在しません。");
+            throw new RuntimeException("出力ディレクトリが存在しません。");
+        }
+        System.out.println("\tデータファイルを全て確認しました。");
     }
 
     public void createFileList() {
@@ -213,6 +226,7 @@ public class ReadPathFile {
         fileList.add(fileKINKI);
         fileList.add(fileCHUGOKU_SHIKOKU);
         fileList.add(fileKYUSHU_OKINAWA);
+        fileList.add(fileOut);
     }
 
     /**

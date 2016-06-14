@@ -23,9 +23,14 @@ public class ZmapArea2 {
         filePathList.add("/Volumes/My Passport/AreaMap2/KINKI/MAPDAT/TOWNMP");
         filePathList.add("/Volumes/My Passport/AreaMap2/CHUGOKU_SHIKOKU/MAPDAT/TOWNMP");
         filePathList.add("/Volumes/My Passport/AreaMap2/KYUSHU_OKINAWA/MAPDAT/TOWNMP");
+        filePathList.add("/Volumes/My Passport/AreaMap2/OUT");
 
         ReadPathFile rpf = new ReadPathFile(filePathList);
         ArrayList<File> fileList = rpf.getFileList();
-        System.out.println(fileList.size());
+
+        OutDirs of = new OutDirs(fileList.get(13));
+        ArrayList<File> outFileList = of.getOutFileList();
+
+        System.out.println(outFileList.size());
     }
 }
