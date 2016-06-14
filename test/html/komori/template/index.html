@@ -269,19 +269,19 @@
     }
     map.addLayer(hinanLayer14);
     hinanLayer14.setVisible(false);
-    var officeOnOff   = document.getElementById('office-vis');
-    officeOnOff.addEventListener('click', officeButton);
-    function officeButton() {
-        if (officeLayer.getVisible()) {
-            officeLayer.setVisible(false);
-            this.style.backgroundColor = "whitesmoke";
-            this.style.color = "black";
-        } else {
-            officeLayer.setVisible(true);
-            this.style.backgroundColor = "black";
-            this.style.color = "whitesmoke";
+        var officeOnOff   = document.getElementById('office-vis');
+        officeOnOff.addEventListener('click', officeButton);
+        function officeButton() {
+            if (officeLayer.getVisible()) {
+                officeLayer.setVisible(false);
+                this.style.backgroundColor = "whitesmoke";
+                this.style.color = "black";
+            } else {
+                officeLayer.setVisible(true);
+                this.style.backgroundColor = "black";
+                this.style.color = "whitesmoke";
+            }
         }
-    }
     map.addLayer(officeLayer);
     officeLayer.setVisible(false);
     var hospOnOff   = document.getElementById('hospital-vis');
@@ -347,6 +347,8 @@
         displayFeatureInfo(evt.pixel, evt.coordinate);
 
     });
+
+
 </script>
 </body>
 </html>
