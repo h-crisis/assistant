@@ -42,7 +42,6 @@
               }
           }
       }
-
     client = mows.createClient(inputBrokerWs);
     client && client.publish(inputTopicPub, inputMessage);
     alert("送信しました!")

@@ -22,7 +22,7 @@ var style = new ol.style.Style({
         anchorXUnits: 'fraction',
         anchorYUnits: 'fraction',
         opacity: 0.85,
-        src: "Hospital.png"
+        src: "hospital.png"
     })
 });
 var style1 = new ol.style.Style({

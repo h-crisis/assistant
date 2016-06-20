@@ -16,6 +16,20 @@ var styleHinan = new ol.style.Style({
     })
 });
 
+var shltrJPN = new ol.layer.Vector({
+    source: new ol.source.Vector({
+        url: 'http://h-crisis.niph.go.jp/assistant/wp-content/uploads/sites/4/test/geojson/shelterJPN.geojson',
+        format: new ol.format.GeoJSON(),
+    }),
+    style: function(feature, resolution) {
+        var hinanNum = feature.get('避難所コー');
+        styleHinan.getText().setText(resolution < 10 ? feature.get('名称') + "(避難者数"　+ feature.get('避難者数') + "人)": '');
+        styleHinan.getImage().setScale(hinanNum > 300 ? 0.5 : hinanNum > 100 ? 1 : hinanNum > 20 ? 0.07 :  0.5);
+        styleHinan.getImage().setOpacity(hinanNum > 0 ? 0.85 : 0);
+        return styleHinan;
+    }
+});
+
 var hinanLayer1 = new ol.layer.Vector({
     source: new ol.source.Vector({
         url: 'http://h-crisis.niph.go.jp/assistant/wp-content/uploads/sites/4/test/geojson/HinanDay1.geojson',

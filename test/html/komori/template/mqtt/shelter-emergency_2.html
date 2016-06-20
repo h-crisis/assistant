@@ -80,6 +80,8 @@
                             }
                         }
                     }
+                    var timeStamp = new Date();
+                    createMsg = createMsg + ',' + timeStamp;
                     console.log(topicMsg + " : " + createMsg);
                     onlySubmit(topicMsg, createMsg);
                 }
@@ -94,9 +96,9 @@
                 }
                 else {
                     var pairUrlStr = urlStr.split(',');
-
-                    if(pairUrlStr.length==2) {
-                        console.log(pairUrlStr.length);
+                    if(pairUrlStr.length>=2) {
+                        console.log(pairUrlStr[0])
+                        pairUrlStr[0] = pairUrlStr[0].substr(1);
                         document.getElementById('inputCode').value = pairUrlStr[0];
                         document.getElementById('inputShelter').value = pairUrlStr[1];
 

@@ -291,18 +291,18 @@ map.on('click', function(evt) {
             "電話番号        :" + labelHosp[2] + '<br>' +
             "二次医療圏    :" + labelHosp[3];
         map.addOverlay(overlayInfo);
-    } else if (day == 1 || day == 4) {
+    }else if (day == 1 || day == 4) {
         flagSelected = true;
         document.getElementById( 'info' ).style.display = 'block';
-        info.innerHTML = "<div style='background-color:#888888; color:white; text-align:center' type=button id=showBtn value=隠す onclick=showHide()>閉じる</div>";
+        info.innerHTML = "<div style='background-color:#888888; color:white; text-align:center;' type=button id=showBtn value=隠す onclick=showHide()>閉じる</div>";
         info.innerHTML = info.innerHTML +  labelB;
+        info.innerHTML = info.innerHTML +  "<div style='background-color:#888888; text-align:center' type=button ><a href=mqtt/shelter-emergency.html style='display:block; width:100%; color:white; text-decoration:none' id=niphLonLat target=_blank>入力画面を開く</a></div>";
+        var niphAddress=document.getElementById('niphLonLat');
+        niphAddress.href='http://h-crisis.niph.go.jp/assistant/wp-content/uploads/sites/4/test/mqtt/shelter-emergency_2.html' + '?' + 'ID=' + labelC + ',Name=' + labelB + ',x=' + lon + ',y=' + lat;
         while (i < 15) {
             info.innerHTML = info.innerHTML + "<tr><td style=font-size:24px;background-color:#888888;color:white></td><td style=font-size:24px;background-color:white;text-align:right;></td></tr>";
             i++
         }
-        info.innerHTML = info.innerHTML + "<a href=mqtt/shelter-emergency.html id=niphLonLat target=_blank>NIPH</a>" + "<br>";
-        var niphAddress=document.getElementById('niphLonLat');
-        niphAddress.href='http://h-crisis.niph.go.jp/assistant/wp-content/uploads/sites/4/test/mqtt/shelter-emergency.html' + '?' + 'x=' + lon + ',y=' + lat + ',ID=' + labelC + ',Name=' + labelB;
         info.rows[0].cells[0].innerHTML = "総数";
         info.rows[0].cells[1].innerHTML = labelD + "人";
         for (i = 1; i < 15; i++){
@@ -327,9 +327,13 @@ map.on('click', function(evt) {
         map.addOverlay(overlayInfo);
     } else if (day == 14) {
         flagSelected = true;
+        var urlInputScreen = 'mqtt/shelter-emergency_2.html' + '?' + 'ID=' + labelC + ',Name=' + labelB + ',x=' + lon + ',y=' + lat;
         document.getElementById( 'info' ).style.display = 'block';
-        info.innerHTML = "<div style='background-color:#888888; color:white; text-align:center' type=button id=showBtn value=隠す onclick=showHide()>閉じる</div>";
+        info.innerHTML = "<div style='background-color:#888888; color:white; text-align:center;' type=button id=showBtn value=隠す onclick=showHide()>閉じる</div>";
         info.innerHTML = info.innerHTML +  labelB;
+        info.innerHTML = info.innerHTML +  "<div style='background-color:#888888; text-align:center' type=button ><a href=mqtt/shelter-emergency.html style='display:block; width:100%; color:white; text-decoration:none' id=niphLonLat target=_blank>入力画面を開く</a></div>";
+        var niphAddress=document.getElementById('niphLonLat');
+        niphAddress.href='http://h-crisis.niph.go.jp/assistant/wp-content/uploads/sites/4/test/mqtt/shelter-emergency_2.html' + '?' + 'ID=' + labelC + ',Name=' + labelB + ',x=' + lon + ',y=' + lat;
         while (i < 44) {
             info.innerHTML = info.innerHTML + "<tr><td style=font-size:24px;background-color:#888888;color:white></td><td style=font-size:24px;background-color:white;text-align:right;></td></tr>";
             i++
@@ -340,9 +344,6 @@ map.on('click', function(evt) {
         else {
             info.innerHTML = info.innerHTML + "備考:" + labelHinan[43] + "<br>";
         }
-        info.innerHTML = info.innerHTML + "<a href=mqtt/shelter-emergency.html id=niphLonLat target=_blank>NIPH</a>" + "<br>";
-        var niphAddress=document.getElementById('niphLonLat');
-        niphAddress.href='http://h-crisis.niph.go.jp/assistant/wp-content/uploads/sites/4/test/mqtt/shelter-emergency.html_2' + '?' + 'x=' + lon + ',y=' + lat + ',ID=' + labelC + ',Name=' + labelB;
         info.rows[0].cells[0].innerHTML = "総数";
         info.rows[0].cells[1].innerHTML = labelD + "人";
         for (i = 1; i < 44; i++){
@@ -365,12 +366,9 @@ map.on('click', function(evt) {
             "住所    :" + labelC + '<br>' +
             "避難者数 :" + labelD + "人";
         map.addOverlay(overlayInfo);
-    } else {
-        flagSelected = false;
-        overlayInfo.setPosition();
-        map.addOverlay(overlayInfo);
+
     }
-    
+
 });
 function showHide(){
     document.getElementById('info').style.display = 'none';
