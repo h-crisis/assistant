@@ -5,10 +5,12 @@
     <title>Title</title>
     <link rel="stylesheet" href="http://openlayers.org/en/v3.15.0/css/ol.css" type="text/css">
     <script src="http://openlayers.org/en/v3.15.0/build/ol.js"></script>
+    <script src="http://code.jquery.com/jquery.min.js"></script>
     <script src="si.js"></script>
     <script src="shelter.js"></script>
     <script src="hospital.js"></script>
     <script src="office.js"></script>
+    <script src="locationChecker.js"></script>
 </head>
 <body>
 <div id="map" class="map" style="z-index: 1;position: absolute;top: 0px;left: 0px;width: 100%;height: 100%;"></div>
@@ -20,9 +22,12 @@
 <button id="hinan1-vis" style="z-index: 3;position: absolute; bottom: 21%;left: 0px;width: 5%;height: 7%;">避難所Day1 /Day4/Day14</button>
 <button id="goToHypoCenter" style="z-index: 3;position: absolute; bottom: 16%;left: 0px;width: 5%;height: 5%;">震源に移動</button>
 <button id="goToSelect" style="z-index: 3;position: absolute; bottom: 11%;left: 0px;width: 5%;height: 5%;">選択施設へ 拡大移動</button>
-<table id="info" style="z-index: 3;position: absolute;top: 0%;right: 0px;width: 20%;height: 90%; background-color:whitesmoke; border: 2px solid burlywood; padding: 5px 10px; table-layout: fixed; overflow:scroll; display:none; font-size:24px;"></table>>
-<a href='http://www.gsi.go.jp/' target='_blank' style="z-index: 2;position: absolute;bottom: 4%;left: 1%;">国土地理院</a>
+<table id="info" style="z-index: 3;position: absolute; top: 0%; right: 0px;width: 20%;height: 90%; background-color:whitesmoke; border: 2px solid burlywood; padding: 5px 10px; table-layout: fixed; overflow:scroll; display:none; font-size:24px;"></table>
+<a href='http://www.gsi.go.jp/' target='_blank' style="z-index: 4;position: absolute;bottom: 4%;left: 1%;">国土地理院</a>
+<input type="hidden" name="latlonCurr" id="latlonCurr">
 <script type="text/javascript" src="mapa.js">
+</script>
+<script type="text/javascript" src="sizeChecker.js">
 </script>
 </body>
 </html>

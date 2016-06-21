@@ -17,6 +17,8 @@ var hybQuestLayer = new ol.layer.Tile({
     source: additionalmapHyb,
     opacity: 1
 });
+
+
 var basemap = new ol.source.XYZ({
     url : 'http://cyberjapandata.gsi.go.jp/xyz/std/{z}/{x}/{y}.png',
     attribution  : "<a href='http://www.gsi.go.jp/kikakuchousei/kikakuchousei40182.html' target='_blank'>国土地理院</a>"
@@ -30,7 +32,7 @@ var map = new ol.Map({
     ],
     target: 'map',
     view: new ol.View({
-        center: ol.proj.transform([140.461129, 35.774460, 13], 'EPSG:4326', 'EPSG:3857'),
+        center: ol.proj.transform([140.461129, 37.774460, 13], 'EPSG:4326', 'EPSG:3857'),
         zoom: 11,
         minZoom: 7,
         maxZoom: 15
@@ -48,8 +50,13 @@ var map = new ol.Map({
 var goHypoCenter = document.getElementById('goToHypoCenter');
 goHypoCenter.addEventListener('click', goHypoButton);
 function goHypoButton() {
-    map.getView().setCenter(ol.proj.transform([140.461129, 37.787558], 'EPSG:4326', 'EPSG:3857'))
-    map.getView().setZoom(11);
+    var nowLatLon = document.getElementById('latlonCurr').value;
+    var nowLatLon = nowLatLon.split(',');
+    var latNow = nowLatLon[1].substr(0,8);
+    var lonNow = nowLatLon[0].substr(0,8);
+    console.log(latNow,lonNow);
+    map.getView().setCenter(ol.proj.transform([lonNow,latNow], 'EPSG:4326', 'EPSG:3857'))
+    map.getView().setZoom(2);
 }
 
 var flagSelected = false ;
@@ -93,14 +100,14 @@ function mapButton() {
 };
 
 map.addLayer(layerSI);
-map.addLayer(shltrJPN);
+//map.addLayer(shltrJPN);
 map.addLayer(hinanLayer1);
 map.addLayer(hinanLayer4);
 map.addLayer(hinanLayer14);
 map.addLayer(officeLayer);
 map.addLayer(hospLayer);
 layerSI.setVisible(false);
-shltrJPN.setVisible(false);
+//shltrJPN.setVisible(false);
 hinanLayer1.setVisible(false);
 hinanLayer4.setVisible(false);
 hinanLayer14.setVisible(false);
@@ -110,8 +117,11 @@ hospLayer.setVisible(false);
 var distribOnOff   = document.getElementById('distribution-vis');
 distribOnOff.addEventListener('click', siButton);
 
+
 var hinanOnOff1   = document.getElementById('hinan1-vis');
 hinanOnOff1.addEventListener('click', hinanButton1);
+
+/*
 var chs = 0;
 function hinanButton1() {
     if (chs % 2 == 0) {
@@ -124,9 +134,9 @@ function hinanButton1() {
         chs++;
     }
 };
+*/
 
-/*
- var chs = 0;
+var chs = 0;
 var day = 0;
 function hinanButton1() {
     if (chs%4 == 0) {
@@ -159,7 +169,6 @@ function hinanButton1() {
         chs++;
     }
 };
-*/
 
 var officeOnOff   = document.getElementById('office-vis');
 officeOnOff.addEventListener('click', officeButton);
@@ -215,6 +224,8 @@ map.on('click', function(evt) {
             '発疹', '不眠・不安', '精神科疾患', '病院搬送', '高血圧', '糖尿病', '潰瘍性大腸炎', 'パーキンソン病', '備考']
     var arrayShltr = ['避難所コード','避難所名','都道府県','市区町村','住所']
     var i = 0;
+    var j = 0;
+    var k = 0;
     var coordinate4326;
 
     map.forEachFeatureAtPixel(pixel, function(feature){
@@ -319,31 +330,9 @@ map.on('click', function(evt) {
             "住所    :" + label[1];
         map.addOverlay(overlayInfo);
     }
-    else if (typeof label[0] === "undefined" && typeof labelC === "undefined") {
-        flagSelected = true;
-        document.getElementById( 'info' ).style.display = 'block';
-        info.innerHTML = "<div style='background-color:#888888; color:white; text-align:center' type=button id=showBtn value=隠す onclick=showHide()>閉じる</div>";
-        info.innerHTML = info.innerHTML +  labelHosp[0];
-        while (i < 4) {
-            info.innerHTML = info.innerHTML + "<tr><td style=font-size:24px;background-color:#888888;color:white></td><td style=font-size:24px;background-color:white;text-align:right;></td></tr>";
-            i++
-        }
-        info.innerHTML = info.innerHTML + "<a href=mqtt/shelter-emergency.html id=niphLonLat target=_blank>NIPH</a>" + "<br>";
-        var niphAddress=document.getElementById('niphLonLat');
-        niphAddress.href='http://niph.go.jp';
-        for (i = 0; i < 4; i++){
-            info.rows[i].cells[0].innerHTML = arrayHosp[i];
-            info.rows[i].cells[1].innerHTML = labelHosp[i];
-        }
-        overlayInfo.setPosition(coordinate);
-        var element = overlayInfo.getElement();
-        element.innerHTML =
-            "名称    :" + labelHosp[0] + '<br>' +
-            "住所    :" + labelHosp[1] + '<br>' +
-            "電話番号        :" + labelHosp[2] + '<br>' +
-            "二次医療圏    :" + labelHosp[3];
-        map.addOverlay(overlayInfo);
-    } else if(labelShltrJPN[0] !== ""){
+
+/*
+    else if(labelShltrJPN[0] !== "" && typeof labelHosp[0] === "undefined"){
         flagSelected = true;
         document.getElementById( 'info' ).style.display = 'block';
         info.innerHTML = "<div style='background-color:#888888; color:white; text-align:center;' type=button id=showBtn value=隠す onclick=showHide()>閉じる</div>";
@@ -373,10 +362,40 @@ map.on('click', function(evt) {
         element.innerHTML =
             "名称    :" + labelShltrJPN[1] + '<br>' +
             "住所    :" + labelC;
-        console.log(labelB);
         map.addOverlay(overlayInfo);
     }
-        /*
+*/
+
+    else if (labelShltrJPN[0] !== "" && typeof labelHosp[0] !== "undefined") {
+        flagSelected = true;
+        document.getElementById( 'info' ).style.display = 'block';
+        info.innerHTML = "<div style='background-color:#888888; color:white; text-align:center;' type=button id=showBtn value=隠す onclick=showHide()>閉じる</div>";
+        info.innerHTML = info.innerHTML +  labelHosp[0];
+        info.innerHTML = info.innerHTML +  "<div style='background-color:#888888; text-align:center' type=button ><a href=mqtt/shelter-emergency.html style='display:block; width:100%; color:white; text-decoration:none' id=niphLonLat target=_blank>入力画面を開く</a></div>";
+        var niphAddress=document.getElementById('niphLonLat');
+        niphAddress.href='mqtt/hospital-emergency.html' + '?' + 'ID=' + labelHosp[1] + ',Name=' + labelHosp[0] + ',MedDist=' + labelHosp[3] + ',TEL=' + labelHosp[2] + ',x=' + lon + ',y=' + lat;
+        while (i < 4) {
+            info.innerHTML = info.innerHTML + "<tr><td style=font-size:24px;background-color:#888888;color:white></td><td style=font-size:24px;background-color:white;text-align:right;></td></tr>";
+            i++
+        }
+        for (i = 0; i < 4; i++){
+            info.rows[i].cells[0].innerHTML = arrayHosp[i];
+            info.rows[i].cells[1].innerHTML = labelHosp[i];
+        }
+        overlayInfo.setPosition(coordinate);
+        var element = overlayInfo.getElement();
+        element.innerHTML =
+            "名称    :" + labelHosp[0] + '<br>' +
+            "住所    :" + labelHosp[1] + '<br>' +
+            "電話番号        :" + labelHosp[2] + '<br>' +
+            "二次医療圏    :" + labelHosp[3];
+        map.addOverlay(overlayInfo);
+    }
+
+
+
+
+
     else if (day == 1 || day == 4) {
         flagSelected = true;
         document.getElementById( 'info' ).style.display = 'block';
@@ -420,31 +439,99 @@ map.on('click', function(evt) {
         info.innerHTML = info.innerHTML +  "<div style='background-color:#888888; text-align:center' type=button ><a href=mqtt/shelter-emergency.html style='display:block; width:100%; color:white; text-decoration:none' id=niphLonLat target=_blank>入力画面を開く</a></div>";
         var niphAddress=document.getElementById('niphLonLat');
         niphAddress.href='mqtt/shelter-emergency_2.html' + '?' + 'ID=' + labelC + ',Name=' + labelB + ',x=' + lon + ',y=' + lat;
-        while (i < 44) {
-            info.innerHTML = info.innerHTML + "<tr><td style=font-size:24px;background-color:#888888;color:white></td><td style=font-size:24px;background-color:white;text-align:right;></td></tr>";
-            i++
-        }
-        if (labelHinan[43] === ""){
-            info.innerHTML = info.innerHTML + "備考:情報無し" + "<br>";
-        }
-        else {
-            info.innerHTML = info.innerHTML + "備考:" + labelHinan[43] + "<br>";
-        }
-        info.rows[0].cells[0].innerHTML = "総数";
-        info.rows[0].cells[1].innerHTML = labelD + "人";
-        for (i = 1; i < 44; i++){
-            info.rows[i].cells[0].innerHTML = arrayH14[i-1];
-            if (labelHinan[i-1] === ""){
-                info.rows[i].cells[1].innerHTML = "情報無し";
-            } else if(labelHinan[i-1] >= 0) {
-                info.rows[i].cells[1].innerHTML = labelHinan[i-1] + "人";
-            } else  {
-                info.rows[i].cells[1].innerHTML = labelHinan[i-1];
-                if (info.rows[i].cells[1].innerHTML === "undefined"){
+
+        // 画面サイズで表示変更
+        if (window.innerWidth < window.innerHeight) {
+
+            while (i < 15) {
+                info.innerHTML = info.innerHTML + "<tr><td style=font-size:24px;background-color:#888888;color:white></td><td style=font-size:24px;background-color:white;text-align:right;></td><td style=font-size:24px;background-color:#888888;color:white></td><td style=font-size:24px;background-color:white;text-align:right;></td><td style=font-size:24px;background-color:#888888;color:white></td><td style=font-size:24px;background-color:white;text-align:right;></td></tr>";
+                i++
+            }
+            if (labelHinan[43] === "") {
+                info.innerHTML = info.innerHTML + "備考:情報無し" + "<br>";
+            }
+            else {
+                info.innerHTML = info.innerHTML + "備考:" + labelHinan[43] + "<br>";
+            }
+            info.rows[0].cells[0].innerHTML = "総数";
+            info.rows[0].cells[1].innerHTML = labelD + "人";
+
+            for (i = 1; i < 16; i++) {
+                for (j = 0; j < 5 ; j++) {
+                    if(i > 1 && j == 0) {
+                        info.rows[i - 1].cells[j].innerHTML = arrayH14[k];
+                        if (labelHinan[k] === "") {
+                            info.rows[i - 1].cells[j + 1].innerHTML = "情報無し";
+                        } else if (labelHinan[k] >= 0) {
+                            info.rows[i - 1].cells[j + 1].innerHTML = labelHinan[k] + "人";
+                        } else {
+                            info.rows[i - 1].cells[j + 1].innerHTML = labelHinan[k];
+                            if (info.rows[i - 1].cells[j + 1].innerHTML === "undefined") {
+                                info.rows[i - 1].cells[j + 1].innerHTML = "情報無し";
+                            }
+                        }
+                        k++
+                    } else if(j == 2 && k < 43){
+                        info.rows[i - 1].cells[j].innerHTML = arrayH14[k];
+                        if (labelHinan[k] === "") {
+                            info.rows[i - 1].cells[j + 1].innerHTML = "情報無し";
+                        } else if (labelHinan[k] >= 0) {
+                            info.rows[i - 1].cells[j + 1].innerHTML = labelHinan[k] + "人";
+                        } else {
+                            info.rows[i - 1].cells[j + 1].innerHTML = labelHinan[k];
+                            if (info.rows[i - 1].cells[j + 1].innerHTML === "undefined") {
+                                info.rows[i - 1].cells[j + 1].innerHTML = "情報無し";
+                            }
+                        }
+                        k++
+                    } else if(j == 4 && k < 43){
+                        info.rows[i - 1].cells[j].innerHTML = arrayH14[k];
+                        if (labelHinan[k] === "") {
+                            info.rows[i - 1].cells[j + 1].innerHTML = "情報無し";
+                        } else if (labelHinan[k] >= 0) {
+                            info.rows[i - 1].cells[j + 1].innerHTML = labelHinan[k] + "人";
+                        } else {
+                            info.rows[i - 1].cells[j + 1].innerHTML = labelHinan[k];
+                            if (info.rows[i - 1].cells[j + 1].innerHTML === "undefined") {
+                                info.rows[i - 1].cells[j + 1].innerHTML = "情報無し";
+                            }
+                        }
+                        k++
+                    }
+                }
+            }
+
+
+        } else {
+            while (i < 44) {
+                info.innerHTML = info.innerHTML + "<tr><td style=font-size:24px;background-color:#888888;color:white></td><td style=font-size:24px;background-color:white;text-align:right;></td></tr>";
+                i++
+            }
+            if (labelHinan[43] === "") {
+                info.innerHTML = info.innerHTML + "備考:情報無し" + "<br>";
+            }
+            else {
+                info.innerHTML = info.innerHTML + "備考:" + labelHinan[43] + "<br>";
+            }
+            info.rows[0].cells[0].innerHTML = "総数";
+            info.rows[0].cells[1].innerHTML = labelD + "人";
+            for (i = 1; i < 44; i++) {
+                info.rows[i].cells[0].innerHTML = arrayH14[i - 1];
+                if (labelHinan[i - 1] === "") {
                     info.rows[i].cells[1].innerHTML = "情報無し";
+                } else if (labelHinan[i - 1] >= 0) {
+                    info.rows[i].cells[1].innerHTML = labelHinan[i - 1] + "人";
+                } else {
+                    info.rows[i].cells[1].innerHTML = labelHinan[i - 1];
+                    if (info.rows[i].cells[1].innerHTML === "undefined") {
+                        info.rows[i].cells[1].innerHTML = "情報無し";
+                    }
                 }
             }
         }
+
+
+
         overlayInfo.setPosition(coordinate);
         var element = overlayInfo.getElement();
         element.innerHTML =
@@ -454,12 +541,13 @@ map.on('click', function(evt) {
         map.addOverlay(overlayInfo);
 
 
-        var markerA = makeMarkerOverlay('img/shelter_green.gif', [lon,lat]);
+        var markerA
         map.removeOverlay(markerA);
+        markerA = makeMarkerOverlay('img/shelter_green.gif', [lon,lat]);
         map.addOverlay(markerA);
 
     }
-     */
+
 
      else {
         flagSelected = false;

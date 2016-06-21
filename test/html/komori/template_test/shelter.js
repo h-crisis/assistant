@@ -16,6 +16,7 @@ var styleHinan = new ol.style.Style({
     })
 });
 
+/*
 var shltrJPN = new ol.layer.Vector({
     source: new ol.source.Vector({
         url: 'geojson/shelterJPN.geojson',
@@ -29,6 +30,8 @@ var shltrJPN = new ol.layer.Vector({
         return styleHinan;
     }
 });
+*/
+
 
 var hinanLayer1 = new ol.layer.Vector({
     source: new ol.source.Vector({
