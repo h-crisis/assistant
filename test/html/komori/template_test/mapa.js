@@ -54,9 +54,11 @@ function goHypoButton() {
     var nowLatLon = nowLatLon.split(',');
     var latNow = nowLatLon[1].substr(0,8);
     var lonNow = nowLatLon[0].substr(0,8);
+    latNow = latNow * 21481508.34 / 180;
+    lonNow = lonNow * 20037508.34 / 180;
     console.log(latNow,lonNow);
-    map.getView().setCenter(ol.proj.transform([lonNow,latNow], 'EPSG:4326', 'EPSG:3857'))
-    map.getView().setZoom(2);
+    map.getView().setCenter([lonNow,latNow]);
+    map.getView().setZoom(12);
 }
 
 var flagSelected = false ;
