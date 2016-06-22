@@ -18,6 +18,15 @@ var hybQuestLayer = new ol.layer.Tile({
     opacity: 1
 });
 
+var wmsSource = new ol.source.TileWMS({
+    url: 'http://192.168.1.100:8080/geoserver/wms',
+    params: {LAYERS : 'hcrisis:Shelter'},
+    serverType: 'geoserver'
+});
+
+var wmsLayer = new ol.layer.Tile({
+    source: wmsSource
+});
 
 var basemap = new ol.source.XYZ({
     url : 'http://cyberjapandata.gsi.go.jp/xyz/std/{z}/{x}/{y}.png',
@@ -28,8 +37,7 @@ var baseLayer = new ol.layer.Tile({
     opacity: 1
 });
 var map = new ol.Map({
-    layers: [baseLayer, osmQuestLayer, satQuestLayer, hybQuestLayer
-    ],
+    layers: [baseLayer, osmQuestLayer, satQuestLayer, hybQuestLayer, wmsLayer],
     target: 'map',
     view: new ol.View({
         center: ol.proj.transform([140.461129, 37.774460, 13], 'EPSG:4326', 'EPSG:3857'),
@@ -217,8 +225,6 @@ map.on('click', function(evt) {
     var label = new Array(10);
     var labelShltrJPN = new Array(7);
     var labelSelf = '';
-    var arrayHosp =
-        ['医療機関名','住所','電話番号','二次医療圏']
     var arrayH14 =
         ['男性', '女性', '高齢者', '身体障害者', '乳幼児', '妊婦', '自立歩行不', 'その他要', '人工透析', '人工呼吸器', '電気',
             '水', 'ガス', '通信', '換気', '暖房', 'トイレ', '汚物', 'ゴミ', '食品', '衛生', '飲料水', '食事', '有無と方法',
@@ -229,6 +235,7 @@ map.on('click', function(evt) {
     var j = 0;
     var k = 0;
     var coordinate4326;
+    var type
 
     map.forEachFeatureAtPixel(pixel, function(feature){
         labelB = feature.get('名称');
@@ -236,10 +243,7 @@ map.on('click', function(evt) {
         label[0] = feature.get('P34_003');
         label[1] = feature.get('P34_004');
         labelD = feature.get('避難者数');
-        labelHosp[0] = feature.get('医療機関名');
-        labelHosp[1] = feature.get('住所');
-        labelHosp[2] = feature.get('電話番号');
-        labelHosp[3] = feature.get('二次医療圏');
+        labelHosp[0] = feature.get('都道府県');
         labelSelf = feature.getId();
         labelHinan[0] = feature.get('男');
         labelHinan[1] = feature.get('女');
@@ -298,7 +302,10 @@ map.on('click', function(evt) {
         lat = coordinate4326[1]
         ordLon = feature.get('経度');
         ordLat = feature.get('緯度');
+        type = feature.get('NAME')
+        console.log(type);
     });
+    
     if (labelSelf === "") {
         labelSelf = "noPlace";
     }
@@ -369,33 +376,35 @@ map.on('click', function(evt) {
 */
 
     else if (labelShltrJPN[0] !== "" && typeof labelHosp[0] !== "undefined") {
+        sho();
         flagSelected = true;
         document.getElementById( 'info' ).style.display = 'block';
         info.innerHTML = "<div style='background-color:#888888; color:white; text-align:center;' type=button id=showBtn value=隠す onclick=showHide()>閉じる</div>";
         info.innerHTML = info.innerHTML +  labelHosp[0];
-        info.innerHTML = info.innerHTML +  "<div style='background-color:#888888; text-align:center' type=button ><a href=mqtt/shelter-emergency.html style='display:block; width:100%; color:white; text-decoration:none' id=niphLonLat target=_blank>入力画面を開く</a></div>";
+        info.innerHTML = info.innerHTML +  "<div style='background-color:#888888; text-align:center' type=button ><a href=mqtt/shelter-emergency.html style='display:block; width:100%; color:white; text-decoration:none' id=niphLonLat target=_blank>概要</a></div>" +
+            "<button style='background-color:#888888; text-align:center' type=button ><a style='display:block; width:100%; color:white; text-decoration:none' id=niphLonLat>概要</a></button>";
         var niphAddress=document.getElementById('niphLonLat');
-        niphAddress.href='mqtt/hospital-emergency.html' + '?' + 'ID=' + labelHosp[1] + ',Name=' + labelHosp[0] + ',MedDist=' + labelHosp[3] + ',TEL=' + labelHosp[2] + ',x=' + lon + ',y=' + lat;
-        while (i < 4) {
-            info.innerHTML = info.innerHTML + "<tr><td style=font-size:24px;background-color:#888888;color:white></td><td style=font-size:24px;background-color:white;text-align:right;></td></tr>";
-            i++
+            // 'mqtt/hospital-emergency.html' + '?' + 'ID=' + labelHosp[1] + ',Name=' + labelHosp[0] + ',MedDist=' + labelHosp[3] + ',TEL=' + labelHosp[2] + ',x=' + lon + ',y=' + lat;
+            while (i < 8) {
+                info.innerHTML = info.innerHTML + "<tr><td style=font-size:24px;background-color:#888888;color:white></td><td style=font-size:24px;background-color:white;text-align:right;></td></tr>";
+                i++
+            }
+            for (i = 0; i < 8; i++) {
+                info.rows[i].cells[0].innerHTML = arrayHosp[i];
+                info.rows[i].cells[1].innerHTML = labelHosp[i];
+            }
+            overlayInfo.setPosition(coordinate);
+            var element = overlayInfo.getElement();
+            element.innerHTML =
+                "名称    :" + labelHosp[4] + '<br>' +
+                //   "住所    :" + labelHosp[1] + '<br>' +
+                //   "電話番号        :" + labelHosp[2] + '<br>' +
+                "二次医療圏    :" + labelHosp[1];
+            map.addOverlay(overlayInfo);
         }
-        for (i = 0; i < 4; i++){
-            info.rows[i].cells[0].innerHTML = arrayHosp[i];
-            info.rows[i].cells[1].innerHTML = labelHosp[i];
-        }
-        overlayInfo.setPosition(coordinate);
-        var element = overlayInfo.getElement();
-        element.innerHTML =
-            "名称    :" + labelHosp[0] + '<br>' +
-            "住所    :" + labelHosp[1] + '<br>' +
-            "電話番号        :" + labelHosp[2] + '<br>' +
-            "二次医療圏    :" + labelHosp[3];
-        map.addOverlay(overlayInfo);
-    }
 
 
-
+        
 
 
     else if (day == 1 || day == 4) {
@@ -560,4 +569,41 @@ map.on('click', function(evt) {
 });
 function showHide(){
     document.getElementById('info').style.display = 'none';
+}
+
+function sho(evt) {
+        displayFeatureInfo(evt.pixel);
+        var coordinate = evt.coordinate;
+        var pixel = map.getPixelFromCoordinate(coordinate);
+        var info = document.getElementById('info');
+        document.getElementById('info').innerHTML = '';
+        var labelHosp = new Array(5);
+    console.log("adada");
+    map.forEachFeatureAtPixel(pixel, function(feature) {
+        var arrayHosp =
+            ['都道府県', '二次医療圏', '支援要請', '医療派遣ステータス', '医療機関名', 'チーム数', '最終更新日時', '医師出勤状況'];
+        labelHosp[1] = feature.get('二次医療圏');
+        labelHosp[2] = "要・不要・未"
+        labelHosp[3] = "要手配・手配済・未入力"
+        labelHosp[4] = feature.get('医療機関名');
+        labelHosp[5] = "チーム数";
+        labelHosp[6] = "更新日時";
+        labelHosp[7] = "医師出勤状況";
+
+        info.innerHTML = "<div style='background-color:#888888; color:white; text-align:center;' type=button id=showBtn value=隠す onclick=showHide()>閉じる</div>";
+        info.innerHTML = info.innerHTML +  labelHosp[0];
+        info.innerHTML = info.innerHTML +  "<div style='background-color:#888888; text-align:center' type=button ><a href=mqtt/shelter-emergency.html style='display:block; width:100%; color:white; text-decoration:none' id=niphLonLat target=_blank>概要</a></div>" +
+            "<button style='background-color:#888888; text-align:center' type=button ><a style='display:block; width:100%; color:white; text-decoration:none' id=niphLonLat>概要</a></button>";
+        var niphAddress=document.getElementById('niphLonLat');
+        // 'mqtt/hospital-emergency.html' + '?' + 'ID=' + labelHosp[1] + ',Name=' + labelHosp[0] + ',MedDist=' + labelHosp[3] + ',TEL=' + labelHosp[2] + ',x=' + lon + ',y=' + lat;
+        while (i < 8) {
+            info.innerHTML = info.innerHTML + "<tr><td style=font-size:24px;background-color:#888888;color:white></td><td style=font-size:24px;background-color:white;text-align:right;></td></tr>";
+            i++
+        }
+        for (i = 0; i < 8; i++) {
+            info.rows[i].cells[0].innerHTML = arrayHosp[i];
+            info.rows[i].cells[1].innerHTML = labelHosp[i];
+        }
+
+    })
 }
