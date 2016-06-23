@@ -74,5 +74,6 @@
     <orderEntry type="library" name="Maven: org.geotools:gt-epsg-hsql:14.3" level="project" />
     <orderEntry type="library" name="Maven: org.hsqldb:hsqldb:2.3.0" level="project" />
     <orderEntry type="library" name="Maven: org.geotools:gt-epsg-extension:14.3" level="project" />
+    <orderEntry type="library" name="Maven: org.eclipse.paho:org.eclipse.paho.client.mqttv3:1.0.2" level="project" />
   </component>
 </module>
