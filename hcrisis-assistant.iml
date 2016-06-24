@@ -14,9 +14,6 @@
     <orderEntry type="library" scope="TEST" name="Maven: org.hamcrest:hamcrest-core:1.3" level="project" />
     <orderEntry type="library" name="Maven: org.geotools:gt-shapefile:14.3" level="project" />
     <orderEntry type="library" name="Maven: org.geotools:gt-data:14.3" level="project" />
-    <orderEntry type="library" name="Maven: org.geotools:gt-main:14.3" level="project" />
-    <orderEntry type="library" name="Maven: org.geotools:gt-api:14.3" level="project" />
-    <orderEntry type="library" name="Maven: com.vividsolutions:jts:1.13" level="project" />
     <orderEntry type="library" name="Maven: org.jdom:jdom:1.1.3" level="project" />
     <orderEntry type="library" name="Maven: javax.media:jai_core:1.1.3" level="project" />
     <orderEntry type="library" name="Maven: org.geotools:gt-swing:14.3" level="project" />
@@ -74,6 +71,12 @@
     <orderEntry type="library" name="Maven: org.geotools:gt-epsg-hsql:14.3" level="project" />
     <orderEntry type="library" name="Maven: org.hsqldb:hsqldb:2.3.0" level="project" />
     <orderEntry type="library" name="Maven: org.geotools:gt-epsg-extension:14.3" level="project" />
+    <orderEntry type="library" name="Maven: org.geotools:gt-geojson:14.3" level="project" />
+    <orderEntry type="library" name="Maven: org.geotools:gt-main:14.3" level="project" />
+    <orderEntry type="library" name="Maven: org.geotools:gt-api:14.3" level="project" />
+    <orderEntry type="library" name="Maven: com.vividsolutions:jts:1.13" level="project" />
+    <orderEntry type="library" name="Maven: com.googlecode.json-simple:json-simple:1.1" level="project" />
+    <orderEntry type="library" name="Maven: commons-lang:commons-lang:2.6" level="project" />
     <orderEntry type="library" name="Maven: org.eclipse.paho:org.eclipse.paho.client.mqttv3:1.0.2" level="project" />
   </component>
 </module>
