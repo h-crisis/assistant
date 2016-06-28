@@ -49,7 +49,19 @@ public class MedicalInstituteEMIS {
         SimpleFeatureType type = DataUtilities.createType("Medical Institute",
                 "the_geom:Point:srid=4612," +
                 "code:String," +
-                "name:String"
+                "name:String," +
+                "prefecture:String," +
+                "address:String," + // 5
+                "assist:String,mds:String,team:String,rd:String,atd:String," + // 5
+                "e001:String,e002:String,e003:String,e004:String,e005:String,e006:String,e007:String,e008:String,e009:String,e010:String,e011:String,e012:String," +
+                "d_f001:String,d_f002:String,d_f003:String,d_f004:String,d_f005:String," +
+                "d_l001:String,d_l002:String,d_l003:String,d_l004:String,d_l005:String,d_l006:String,d_l007:String," +
+                "d_c001:String,d_c002:String," +
+                "d_p001:String,d_p002:String,d_p003:String,d_p004:String,d_p005:String," +
+                "d_k001:String,d_k002:String,d_k003:String,d_k004:String,d_k005:String,d_k006:String,d_k007:String,d_k008:String,d_k009:String,d_k010:String,d_k011:String,d_k012:String,d_k013:String," +
+                "d_g001:String,d_g002:String,d_g003:String,d_g004:String,d_g005:String,d_g006:String,d_g007:String," +
+                "d_s001:String,d_s002:String,d_s003:String,d_s004:String,d_s005:String,d_s006:String," +
+                "d_o:String,d_i:String,d_date:String,aid:String,head:String,end:String"
         );
         System.out.println("CreateFeatureType: " + type);
         return type;
@@ -118,7 +130,7 @@ public class MedicalInstituteEMIS {
                 pair[i].trim();
 
             String str = "," + pair[3] + "," + pair[4];
-            for(int i =6; i<pair.length; i++) {
+            for(int i = 6; i<pair.length; i++) {
                 str = str + "," + pair[i];
             }
             statusMap.put(pair[0], str);
@@ -134,7 +146,7 @@ public class MedicalInstituteEMIS {
                     str = str + "," + pair[j];
             }
             else
-                str = str + ",未,未入力,0,,0,,,,,,,,,,,,,,,,,,,,,,,,,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,, , , , , , ,0,0,0,0,0,0,, , ,0,,1";
+                str = str + ",未,未入力,0,,0,,,,,,,,,,,,,,,,,,,,,,,,,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,,,,,,,0,0,0,0,0,0,,,,0,,1";
             pw.println(str);
         }
         pw.close();
@@ -156,12 +168,24 @@ public class MedicalInstituteEMIS {
                 double lon = Double.parseDouble(pair[7]);
                 String code = pair[0];
                 String name = pair[1];
+                String prefecture = pair[4];
+                String address = pair[5];
 
                 Point point = geometryFactory.createPoint(new Coordinate(lon, lat));
-
                 featureBuilder.add(point);
                 featureBuilder.add(code);
                 featureBuilder.add(name);
+                featureBuilder.add(prefecture);
+                featureBuilder.add(address);
+                for(int i=12; i < pair.length; i++) {
+                    if(pair[i].length()>50) {
+                        System.out.println(pair[i] + ">>" + pair[i].substring(0, 50));
+                        featureBuilder.add(pair[i].substring(0, 50) + "...");
+                    }
+                    else
+                        featureBuilder.add(pair[i]);
+                }
+
                 SimpleFeature feature = featureBuilder.buildFeature(null);
                 features.add(feature);
             }
@@ -169,7 +193,7 @@ public class MedicalInstituteEMIS {
         finally {
             br.close();
         }
-        System.out.println("Featureの作成が完了しました");
+        System.out.println(features.size() + "のFeatureの作成が完了しました");
     }
 
     public void createShapeFile() throws Exception {
