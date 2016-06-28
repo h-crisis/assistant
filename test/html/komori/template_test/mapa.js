@@ -18,15 +18,6 @@ var hybQuestLayer = new ol.layer.Tile({
     opacity: 1
 });
 
-var wmsSource = new ol.source.TileWMS({
-    url: 'http://192.168.1.100:8080/geoserver/wms',
-    params: {LAYERS : 'hcrisis:Shelter'},
-    serverType: 'geoserver'
-});
-
-var wmsLayer = new ol.layer.Tile({
-    source: wmsSource
-});
 
 var basemap = new ol.source.XYZ({
     url : 'http://cyberjapandata.gsi.go.jp/xyz/std/{z}/{x}/{y}.png',
@@ -37,7 +28,8 @@ var baseLayer = new ol.layer.Tile({
     opacity: 1
 });
 var map = new ol.Map({
-    layers: [baseLayer, osmQuestLayer, satQuestLayer, hybQuestLayer, wmsLayer],
+    layers: [baseLayer, osmQuestLayer, satQuestLayer, hybQuestLayer
+    ],
     target: 'map',
     view: new ol.View({
         center: ol.proj.transform([140.461129, 37.774460, 13], 'EPSG:4326', 'EPSG:3857'),
@@ -235,7 +227,6 @@ map.on('click', function(evt) {
     var j = 0;
     var k = 0;
     var coordinate4326;
-    var type
 
     map.forEachFeatureAtPixel(pixel, function(feature){
         labelB = feature.get('名称');
@@ -302,10 +293,7 @@ map.on('click', function(evt) {
         lat = coordinate4326[1]
         ordLon = feature.get('経度');
         ordLat = feature.get('緯度');
-        type = feature.get('NAME')
-        console.log(type);
     });
-    
     if (labelSelf === "") {
         labelSelf = "noPlace";
     }
@@ -376,7 +364,7 @@ map.on('click', function(evt) {
 */
 
     else if (labelShltrJPN[0] !== "" && typeof labelHosp[0] !== "undefined") {
-        sho();
+        
         flagSelected = true;
         document.getElementById( 'info' ).style.display = 'block';
         info.innerHTML = "<div style='background-color:#888888; color:white; text-align:center;' type=button id=showBtn value=隠す onclick=showHide()>閉じる</div>";
