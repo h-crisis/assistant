@@ -42,31 +42,53 @@
         ※ 情報が取得できなかった場合、該当箇所は空欄のままで送信してください。
         <br>
         <form>
-            <label>地区名:<input type="text" id="inputDist"  value=""></label>
+            管理統括・代表者の情報
+            <br>
+            <label>氏名(立場):<input type="text" id="inputRep"  value=""></label>
+            <label>その他:<input type="text" id="inputRepRest"  value=""></label>
         </form>
         <hr>
-        <form>避難所電話：
-            <label><input type="radio" name="q21" value="開通" onclick="inputTELNumber()">開通</label>
-            <label><input type="radio" name="q21" value="不通" onclick="inputTELNumber()" checked="checked">不通</label>
+        <form>連絡体制／指揮命令系統：
+            <label><input type="text" id="inputCommunication"  value=""></label>
+            <br>
+            自主組織
+            <label><input type="radio" name="q21" value="有" onclick="inputSELFORGAN()">有</label>
+            <label><input type="radio" name="q21" value="無" onclick="inputSELFORGAN()" checked="checked">無</label>
+            <input style="display:none" type="text" id="inputSelfOrganDetail"  value="">
         </form>
-        <input style="display:none" type="text" id="inputTELNumber"  value="">
+            外部組織
+            <label><input type="radio" name="q22" value="有" onclick="inputOUTERORGAN()">有</label>
+            <label><input type="radio" name="q22" value="無" onclick="inputOUTERORGAN()" checked="checked">無</label>
+        <form>
+            <p id="inputOuterOrgan" style="display:none">チーム数/人数/職種</p>
+            <label><input style="display:none" type="text" id="inputOuterOrganTeam" value=""></label>
+            <label><input style="display:none" type="text" id="inputOuterOrganNum" value=""></label>
+            <label><input style="display:none" type="text" id="inputOuterOrganJob" value=""></label>
+        </form>
+        ボランティア
+        <label><input type="radio" name="q23" value="有" onclick="inputVOLUNTEER()">有</label>
+        <label><input type="radio" name="q23" value="無" onclick="inputVOLUNTEER()" checked="checked">無</label>
+        <form>
+            <p id="inputVolunteerOrgan" style="display:none">チーム数/人数/職種</p>
+            <label><input style="display:none" type="text" id="inputVolunteerOrganTeam" value=""></label>
+            <label><input style="display:none" type="text" id="inputVolunteerOrganNum" value=""></label>
+            <label><input style="display:none" type="text" id="inputVolunteerOrganJob" value=""></label>
+        </form>
         <hr>
         <form>
-            <label>リーダー氏名:<input type="text" id="inputLeaderName"  value=""></label>
-            <label>リーダー電話番号:<input type="text" id="inputLeaderTEL"  value=""></label>
-            <label>リーダーメールアドレス:<input type="text" id="inputLeaderMail"  value=""></label><br>
-            既医療支援：
-            <label><input type="checkbox" name="C1" value="DMAT">DMAT</label>
-            <label><input type="checkbox" name="C1" value="JMAT">JMAT</label>
-            <label><input type="checkbox" name="C1" value="日赤">日赤</label>
-            <label><input type="checkbox" name="C1" value="大学">大学</label>
-            <label><input type="checkbox" name="C1" value="国病">国病</label>
-            <label><input type="checkbox" name="C1" value="AMAT">AMAT</label>
-            <label><input type="checkbox" name="C1" value="都道府県">都道府県</label>
-            <label><input type="checkbox" name="C1" value="リハ団体">リハ団体</label>
-            <label><input type="checkbox" name="C1" value="その他">その他</label>
-            <label><input type="checkbox" name="C1" value="その他">なし</label>
+            医療の提供状況
+            <label>救護所:<input type="radio" name="q24" value="有">有</label>
+            <label><input type="radio" name="q24" value="無" checked="checked">無</label>
+            <br>
+            <label>巡回診療:<input type="radio" name="q25" value="有">有</label>
+            <label><input type="radio" name="q25" value="無" checked="checked">無</label>
+            <br>
+            <label>地域の医師との連携:<input type="radio" name="q26" value="有">有</label>
+            <label><input type="radio" name="q26" value="無" checked="checked">無</label>
         </form>
+        <hr>
+        <label>避難者への情報伝達手段(黒板・掲示板・マイク・チラシ配布など)<br>
+            <input style="width: 350px" type="text" id="inputOrganOther" value=""></label>
     </fieldset>
     <fieldset>
         <legend>避難所情報の入力：人数</legend>
@@ -274,20 +296,21 @@
                         ',' + document.getElementById('inputSchelterTEL').value +
                         ',' + document.getElementById('inputSchelterFAX').value +
                         ',' + document.getElementById('inputSchelterEMAIL').value +
-                        ',' + document.getElementById('inputDist').value +
-                        ',' + document.getElementById('inputTELNumber').value +
-                        ',' + document.getElementById('inputLeaderName').value +
-                        ',' + document.getElementById('inputLeaderTEL').value +
-                        ',' + document.getElementById('inputLeaderMail').value +
-                        ',' + document.getElementById('inputPerWide').value +
-                        ',' + document.getElementById('inputTotalPatient').value +
-                        ',' + document.getElementById('inputP_Feaver').value +
-                        ',' + document.getElementById('inputP_Head').value +
-                        ',' + document.getElementById('inputP_Cough').value +
-                        ',' + document.getElementById('inputP_Injury').value +
-                        ',' + document.getElementById('inputP_Nausea').value +
-                        ',' + document.getElementById('inputP_Diarrhea').value +
-                        ',' + document.getElementById('inputP_TRest').value +
+                        ',' + document.getElementById('inputSchelterAREA').value +
+                        ',' + document.getElementById('inputSchelterAREAPER').value +
+                        ',' + document.getElementById('inputSchelterTRAFFIC').value +
+                        ',' + document.getElementById('inputRep').value +
+                        ',' + document.getElementById('inputRepRest').value +
+                        ',' + document.getElementById('inputCommunication').value +
+                        ',' + document.getElementById('inputSelfOrganDetail').value +
+                        ',' + document.getElementById('inputOuterOrganTeam').value +
+                        ',' + document.getElementById('inputOuterOrganNum').value +
+                        ',' + document.getElementById('inputOuterOrganJob').value +
+                        ',' + document.getElementById('inputVolunteerOrganTeam').value +
+                        ',' + document.getElementById('inputVolunteerOrganNum').value +
+                        ',' + document.getElementById('inputVolunteerOrganJob').value +
+                        ',' + document.getElementById('inputOrganOther').value +
+
                         ',' + document.getElementById('inputTotalSupport').value +
                         ',' + document.getElementById('inputS_Total').value +
                         ',' + document.getElementById('inputS_Partial').value +
@@ -330,11 +353,39 @@
         <input id = "submitBtn" type="button" onclick="createMessage();" value="送信" />
         <script>
 
-            function inputTELNumber(){
+            function inputSELFORGAN(){
                 if (document.getElementsByName('q21')[0].checked) {
-                    document.getElementById('inputTELNumber').style.display = 'block';
+                    document.getElementById('inputSelfOrganDetail').style.display = 'block';
                 } else {
-                    document.getElementById('inputTELNumber').style.display = 'none';
+                    document.getElementById('inputSelfOrganDetail').style.display = 'none';
+                }
+            }
+
+            function inputOUTERORGAN(){
+                if (document.getElementsByName('q22')[0].checked) {
+                    document.getElementById('inputOuterOrgan').style.display = 'block';
+                    document.getElementById('inputOuterOrganTeam').style.display = 'block';
+                    document.getElementById('inputOuterOrganNum').style.display = 'block';
+                    document.getElementById('inputOuterOrganJob').style.display = 'block';
+                } else {
+                    document.getElementById('inputOuterOrgan').style.display = 'none';
+                    document.getElementById('inputOuterOrganTeam').style.display = 'none';
+                    document.getElementById('inputOuterOrganNum').style.display = 'none';
+                    document.getElementById('inputOuterOrganJob').style.display = 'none';
+                }
+            }
+
+            function inputVOLUNTEER(){
+                if (document.getElementsByName('q23')[0].checked) {
+                    document.getElementById('inputVolunteerOrgan').style.display = 'block';
+                    document.getElementById('inputVolunteerOrganTeam').style.display = 'block';
+                    document.getElementById('inputVolunteerOrganNum').style.display = 'block';
+                    document.getElementById('inputVolunteerOrganJob').style.display = 'block';
+                } else {
+                    document.getElementById('inputVolunteerOrgan').style.display = 'none';
+                    document.getElementById('inputVolunteerOrganTeam').style.display = 'none';
+                    document.getElementById('inputVolunteerOrganNum').style.display = 'none';
+                    document.getElementById('inputVolunteerOrganJob').style.display = 'none';
                 }
             }
 
