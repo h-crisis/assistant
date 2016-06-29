@@ -26,7 +26,6 @@ var officeLayer = new ol.layer.Vector({
         return styleOffice;
     }
 });
-
 // 役所ボタンの挙動を制御する関数
 function officeButton() {
     if (officeLayer.getVisible()) {
