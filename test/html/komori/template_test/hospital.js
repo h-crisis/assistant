@@ -18,7 +18,7 @@ var styleHosp = new ol.style.Style({
 
 var hospLayer = new ol.layer.Vector({
     source: new ol.source.Vector({
-        url: 'geojson/Hospital.geojson',
+        url: 'geojson/medical_status.geojson',
         format: new ol.format.GeoJSON()
     }),
     style: function(feature, resolution) {

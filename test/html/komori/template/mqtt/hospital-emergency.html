@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>H-CRISIS Assistant 医療機関情報緊急時入力</title>
+    <script src="mqttws31.js"></script>
+    <script src="mqtthcrisis.js"></script>
+</head>
+<body>
+<form>
+    <fieldset>
+        <legend>医療機関情報の入力</legend>
+        ※ 情報が取得できなかった場合、該当箇所は空欄のままで送信してください。
+        <br>
+        ※ 記録者名は入力必須です。
+        <br>
+        <label>医療機関コード:<input type="text" id="inputCode"  value=""></label>
+        <label>県名:<input type="text" id="inputPrf"  value=""></label><br>
+        <label>医療機関名:<input type="text" id="inputHospital"  value=""></label><br>
+        <label>記録者:<input type="text" id="inputHuman"  value=""></label><br>
+        <form width="100">支援要否：
+            <label><input type="radio" name="q0" value="11">要</label>
+            <label><input type="radio" name="q0" value="0" checked="checked">不要</label>
+        </form>
+        <br>
+        <label>チーム数:<input type="text" id="inputTeam"  value=""></label><br>
+        <label>医師出勤状況:<input type="text" id="inputDocter"  value=""></label><br>
+        <form width="100">医師派遣ステータス：
+            <label><input type="radio" name="q1" value="要手配">要手配</label>
+            <label><input type="radio" name="q1" value="手配済">手配済</label>
+            <label><input type="radio" name="q1" value="支援中" checked="checked">支援中</label>
+        </form>
+        <form>入院病棟の倒壊・倒壊の恐れ：
+            <label><input type="radio" name="q2" value="11">有</label>
+            <label><input type="radio" name="q2" value="0" checked="checked">無</label>
+        </form>
+        <form>電気使用：
+            <label><input type="radio" name="q3" value="11">可</label>
+            <label><input type="radio" name="q3" value="0" checked="checked">不可</label>
+        </form>
+        <form>水使用：
+            <label><input type="radio" name="q4" value="102">利用可</label>
+            <label><input type="radio" name="q4" value="0" checked="checked">不可</label>
+        </form>
+        <form>医療ガス使用：
+            <label><input type="radio" name="q5" value="11">可</label>
+            <label><input type="radio" name="q5" value="0" checked="checked">不可</label>
+        </form>
+        <form>医療品衛生資機材使用：
+            <label><input type="radio" name="q6" value="11">可</label>
+            <label><input type="radio" name="q6" value="0" checked="checked">不可</label>
+        </form>
+        <form>多数患者受信：
+            <label><input type="radio" name="q7" value="11">可</label>
+            <label><input type="radio" name="q7" value="0" checked="checked">不可</label>
+        </form>
+        <br>
+        <label>職員状況:<input type="text" id="inputStaff"  value=""></label><br>
+        <label>その他情報:<input type="text" id="inputOther"  value=""></label><br>
+        <label>電話番号:<input type="text" id="inputTEL"  value=""></label><br>
+        <label>メールアドレス:<input type="text" id="inputMail"  value=""></label><br>
+    </fieldset>
+
+    <fieldset>
+        <script>
+            function createMessage() {
+                //var createMsg = "test";
+                var topicMsg = "/h-crisis/shelter/emergency/" + document.getElementById('inputCode').value;
+                var createMsg = document.getElementById('inputCode').value +
+                        ',' + document.getElementById('inputPrf').value +
+                        ',' + document.getElementById('inputHospital').value +
+                        ',' + document.getElementById('inputHuman').value +
+                        ',' + document.getElementById('inputTeam').value +
+                        ',' + document.getElementById('inputDocter').value +
+                        ',' + document.getElementById('inputStaff').value +
+                        ',' + document.getElementById('inputOther').value +
+                        ',' + document.getElementById('inputTEL').value +
+                        ',' + document.getElementById('inputMail').value;
+
+
+                for(var i = 0; i < 9; i++) {
+                    var arrayValue = "q" + i;
+                    var tmpList = document.getElementsByName(arrayValue);
+                    for(var j=0; j<tmpList.length; j++) {
+                        if(tmpList[j].checked) {
+                            createMsg = createMsg + ',' + tmpList[j].value;
+                            continue;
+                        }
+                    }
+                }
+                createMsg = createMsg + ',' + lat + ',' + lon;
+                var nowTime = new Date();
+                var nowYer = nowTime.getFullYear();
+                var nowMon = nowTime.getMonth() + 1;
+                var nowDay = nowTime.getDate();
+                var nowHrs = nowTime.getHours();
+                var nowMin = nowTime.getMinutes();
+                createMsg = createMsg + ',' + nowYer + "/" + nowMon + "/" + nowDay + "/" + nowHrs + ":" + nowMin + "";
+                console.log(topicMsg + " : " + createMsg);
+                onlySubmit(topicMsg, createMsg);
+            }
+        </script>
+        <input id ="closeBtn" type="button" onclick="window.close()" value="閉じる" />
+        <input id = "submitBtn" type="button" onclick="createMessage();" value="送信" />
+        <script>
+            var urlStr = location.search;
+            if(urlStr === '') {
+                // 避難所IDと避難所名がないと送信ボタンが押せない設定
+                document.getElementById('submitBtn').disabled = 'true';
+            }
+            else {
+                var pairUrlStr = urlStr.split(',');
+                if(pairUrlStr.length>=2) {
+                    console.log(pairUrlStr[0])
+                    pairUrlStr[0] = pairUrlStr[0].substr(4);
+                    pairUrlStr[0] = decodeURI(pairUrlStr[0]);
+                    pairUrlStr[1] = pairUrlStr[1].substr(5);
+                    pairUrlStr[1] = decodeURI(pairUrlStr[1]);
+                    pairUrlStr[2] = pairUrlStr[2].substr(11);
+                    pairUrlStr[2] = decodeURI(pairUrlStr[2]);
+                    document.getElementById('inputCode').value = pairUrlStr[0];
+                    document.getElementById('inputCode').disabled = 'true';
+                    document.getElementById('inputHospital').value = pairUrlStr[1];
+                    document.getElementById('inputHospital').disabled = 'true';
+                    document.getElementById('inputPrf').value = pairUrlStr[2];
+
+                }
+            }
+        </script>
+
+    </fieldset>
+</form>
+</body>
+</html>

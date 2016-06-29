@@ -32,7 +32,7 @@ var map = new ol.Map({
     ],
     target: 'map',
     view: new ol.View({
-        center: ol.proj.transform([140.461129, 37.774460, 13], 'EPSG:4326', 'EPSG:3857'),
+        center: ol.proj.transform([134.261129, 33.574460, 13], 'EPSG:4326', 'EPSG:3857'),
         zoom: 11,
         minZoom: 7,
         maxZoom: 15
@@ -215,7 +215,7 @@ map.on('click', function(evt) {
     var labelHosp = new Array(5)
     var labelHinan = new Array(80);
     var label = new Array(10);
-    var labelShltrJPN = new Array(7);
+    var labelShltrJPN = new Array(20);
     var labelSelf = '';
     var arrayH14 =
         ['男性', '女性', '高齢者', '身体障害者', '乳幼児', '妊婦', '自立歩行不', 'その他要', '人工透析', '人工呼吸器', '電気',
@@ -223,6 +223,9 @@ map.on('click', function(evt) {
             '医師', '看護師', '薬剤師', '事務', '総数', 'インフルエンザ', '呼吸器疾患', '呼吸困難', '発熱', '下痢', '嘔気・嘔吐',
             '発疹', '不眠・不安', '精神科疾患', '病院搬送', '高血圧', '糖尿病', '潰瘍性大腸炎', 'パーキンソン病', '備考']
     var arrayShltr = ['避難所コード','避難所名','都道府県','市区町村','住所']
+    var labelHosp = new Array(10);
+    var arrayHosp =
+            ['都道府県', '二次医療圏', '支援要請', '医療派遣ステータス', '医療機関名', 'チーム数', '最終更新日時', '医師出勤状況'];
     var i = 0;
     var j = 0;
     var k = 0;
@@ -234,7 +237,7 @@ map.on('click', function(evt) {
         label[0] = feature.get('P34_003');
         label[1] = feature.get('P34_004');
         labelD = feature.get('避難者数');
-        labelHosp[0] = feature.get('都道府県');
+        labelHosp[0] = feature.get('prefecture');
         labelSelf = feature.getId();
         labelHinan[0] = feature.get('男');
         labelHinan[1] = feature.get('女');
@@ -287,6 +290,30 @@ map.on('click', function(evt) {
         labelShltrJPN[3] = feature.get('市区町村');
         labelShltrJPN[4] = feature.get('都道府県コ');
         labelShltrJPN[5] = feature.get('市区町村コ');
+
+        arrayHosp =
+            ['都道府県', '医療機関コード', '支援要否', '医療派遣ステータス', '医療機関名', 'チーム数', '最終更新日時', '医師出勤状況', 
+                '入院病棟の倒壊・倒壊の恐れ', '電気使用', '水使用', '医療ガス使用', '医療品衛生資機材使用', '多数患者受信', '職員状況',
+                'その他', '情報取得日時', '電話番号', 'メールアドレス', '更新日時'];
+        labelHosp[1] = feature.get('code');
+        labelHosp[2] = feature.get('assist');
+        labelHosp[3] = feature.get('mds');
+        labelHosp[4] = feature.get('name');
+        labelHosp[5] = feature.get('team');
+        labelHosp[6] = feature.get('rd');
+        labelHosp[7] = feature.get('atd');
+        labelHosp[8] = feature.get('e001');
+        labelHosp[9] = feature.get('e002');
+        labelHosp[10] = feature.get('e003');
+        labelHosp[11] = feature.get('e004');
+        labelHosp[12] = feature.get('e005');
+        labelHosp[13] = feature.get('e006');
+        labelHosp[14] = feature.get('e007');
+        labelHosp[15] = feature.get('e008');
+        labelHosp[16] = feature.get('e009');
+        labelHosp[17] = feature.get('e010');
+        labelHosp[18] = feature.get('e011');
+        labelHosp[19] = feature.get('e012');
 
         coordinate4326 = feature.getGeometry().getExtent();
         lon = coordinate4326[0]
@@ -373,11 +400,11 @@ map.on('click', function(evt) {
             "<button style='background-color:#888888; text-align:center' type=button ><a style='display:block; width:100%; color:white; text-decoration:none' id=niphLonLat>概要</a></button>";
         var niphAddress=document.getElementById('niphLonLat');
             // 'mqtt/hospital-emergency.html' + '?' + 'ID=' + labelHosp[1] + ',Name=' + labelHosp[0] + ',MedDist=' + labelHosp[3] + ',TEL=' + labelHosp[2] + ',x=' + lon + ',y=' + lat;
-            while (i < 8) {
+            while (i < 20) {
                 info.innerHTML = info.innerHTML + "<tr><td style=font-size:24px;background-color:#888888;color:white></td><td style=font-size:24px;background-color:white;text-align:right;></td></tr>";
                 i++
             }
-            for (i = 0; i < 8; i++) {
+            for (i = 0; i < 20; i++) {
                 info.rows[i].cells[0].innerHTML = arrayHosp[i];
                 info.rows[i].cells[1].innerHTML = labelHosp[i];
             }
@@ -387,7 +414,7 @@ map.on('click', function(evt) {
                 "名称    :" + labelHosp[4] + '<br>' +
                 //   "住所    :" + labelHosp[1] + '<br>' +
                 //   "電話番号        :" + labelHosp[2] + '<br>' +
-                "二次医療圏    :" + labelHosp[1];
+                "支援要否    :" + labelHosp[3];
             map.addOverlay(overlayInfo);
         }
 

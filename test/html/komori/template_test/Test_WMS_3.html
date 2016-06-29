@@ -61,15 +61,29 @@
                     'propertyName':  'CODE,NAME,ADDRESS'});
         console.log(url);
 
-        reqwest({
-            url: url,
-            type: 'json',
-        }).then(function (data) {
-            var feature = data.features[0];
-            var props = feature.properties;
-            var info = "<h2>" + props.NAME + "</h2><p>" + props.DESCRIPTIO + "</p>";
-            popup.show(evt.coordinate, info);
-        });
+        if (url) {
+            var parser = new ol.format.GeoJSON();
+            $.ajax({
+                url: url,
+                dataType: 'json',
+                jsonCallback: 'parseResponse'
+            }).then(function(response) {
+                var result = parser.readFeatures(response);
+                if (result.length) {
+                    var info = [];
+                    for (var i = 0, ii = result.length; i < ii; ++i) {
+                        // 読み込んできたfeatureをinfoにpushする
+                        info.push(result[i].get('CODE'));
+                        info.push(result[i].get('NAME'));
+                    }
+                    console.log(info);
+                    console.log(evt.coordinate);
+                    container.innerHTML = "国名" + info;
+                } else {
+                    container.innerHTML = '&nbsp;';
+                }
+            });
+        }
 
     });
 
