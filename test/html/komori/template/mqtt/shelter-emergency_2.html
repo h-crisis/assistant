@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>H-CRISIS Assistant 避難所情報緊急時入力</title>
+    <script src="mqttws31.js"></script>
+    <script src="mqtthcrisis.js"></script>
+</head>
+<body>
+    <form>
+        <fieldset>
+            <legend>避難所情報の入力</legend>
+            ※ 情報が取得できなかった場合、該当箇所は空欄のままで送信してください。
+            <br>
+            ※ 記録者名は入力必須です。
+            <br>
+            <label>避難所コード:<input type="text" id="inputCode"  value=""></label>
+            <label>避難所名:<input type="text" id="inputShelter"  value=""></label><br>
+            <label>記録者:<input type="text" id="inputHuman"  value=""></label><br>
+            <label>避難者数:<input type="text" id="inputNum" value=""></label><br>
+            <form width="100">電気：
+                <label><input type="radio" name="q0" value="可">可</label>
+                <label><input type="radio" name="q0" value="不可" checked="checked">不可</label>
+            </form>
+            <form>ガス：
+                <label><input type="radio" name="q1" value="可">可</label>
+                <label><input type="radio" name="q1" value="不可" checked="checked">不可</label>
+            </form>
+            <form>水道：
+                <label><input type="radio" name="q2" value="可">可</label>
+                <label><input type="radio" name="q2" value="不可" checked="checked">不可</label>
+            </form>
+            <form>飲料水：
+                <label><input type="radio" name="q3" value="飲用可">飲用可</label>
+                <label><input type="radio" name="q3" value="利用可">利用可</label>
+                <label><input type="radio" name="q3" value="不可" checked="checked">不可</label>
+            </form>
+            <form>固定電話：
+                <label><input type="radio" name="q4" value="可">可</label>
+                <label><input type="radio" name="q4" value="不可" checked="checked">不可</label>
+            </form>
+            <form>携帯電話：
+                <label><input type="radio" name="q5" value="可">可</label>
+                <label><input type="radio" name="q5" value="不可" checked="checked">不可</label>
+            </form>
+            <form>通信：
+                <label><input type="radio" name="q6" value="可">可</label>
+                <label><input type="radio" name="q6" value="不可" checked="checked">不可</label>
+            </form>
+            <form>トイレ：
+                <label><input type="radio" name="q7" value="可">使用可</label>
+                <label><input type="radio" name="q7" value="不可">使用不可</label>
+                <label><input type="radio" name="q7" value="無" checked="checked">無</label>
+            </form>
+            <form>食料：
+                <label><input type="radio" name="q8" value="有">有</label>
+                <label><input type="radio" name="q8" value="無" checked="checked">無</label>
+            </form>
+        </fieldset>
+
+        <fieldset>
+            <script>
+                function createMessage() {
+                    //var createMsg = "test";
+                    var topicMsg = "/h-crisis/shelter/emergency/" + document.getElementById('inputCode').value;
+
+                    var createMsg = document.getElementById('inputCode').value +
+                            ',' + document.getElementById('inputShelter').value +
+                            ',' + document.getElementById('inputHuman').value +
+                            ',' + document.getElementById('inputNum').value;
+
+                    for(var i = 0; i < 9; i++) {
+                        var arrayValue = "q" + i;
+                        var tmpList = document.getElementsByName(arrayValue);
+                        for(var j=0; j<tmpList.length; j++) {
+                            if(tmpList[j].checked) {
+                                createMsg = createMsg + ',' + tmpList[j].value;
+                                continue;
+                            }
+                        }
+                    }
+                    var timeStamp = new Date();
+                    createMsg = createMsg + ',' + timeStamp;
+                    console.log(topicMsg + " : " + createMsg);
+                    onlySubmit(topicMsg, createMsg);
+                }
+            </script>
+            <input id ="closeBtn" type="button" onclick="window.close()" value="閉じる" />
+            <input id = "submitBtn" type="button" onclick="createMessage();" value="送信" />
+            <script>
+                var urlStr = location.search;
+                if(urlStr === '') {
+                    // 避難所IDと避難所名がないと送信ボタンが押せない設定
+                     document.getElementById('submitBtn').disabled = 'true';
+                }
+                else {
+                    var pairUrlStr = urlStr.split(',');
+                    if(pairUrlStr.length>=2) {
+                        console.log(pairUrlStr[0])
+                        pairUrlStr[0] = pairUrlStr[0].substr(1);
+                        document.getElementById('inputCode').value = pairUrlStr[0];
+                        document.getElementById('inputShelter').value = pairUrlStr[1];
+
+                    }
+                }
+            </script>
+
+        </fieldset>
+    </form>
+</body>
+</html>

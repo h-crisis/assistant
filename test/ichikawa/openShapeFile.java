@@ -3,6 +3,7 @@ package ichikawa;
 import org.geotools.data.FileDataStore;
 import org.geotools.data.FileDataStoreFinder;
 import org.geotools.data.FeatureSource;
+import org.geotools.data.shapefile.ShapefileDataStore;
 import org.geotools.data.simple.SimpleFeatureCollection;
 import org.geotools.data.simple.SimpleFeatureSource;
 import org.geotools.feature.FeatureIterator;
@@ -10,6 +11,7 @@ import org.opengis.feature.Feature;
 import org.opengis.feature.simple.SimpleFeature;
 
 import java.io.File;
+import java.nio.charset.Charset;
 
 /**
  * Created by manabu on 2016/05/24.
@@ -46,6 +48,28 @@ public class openShapeFile {
         while(i.hasNext()) {
             SimpleFeature feature = (SimpleFeature)i.next();
             //System.out.println(((SimpleFeature) i.next());
+        }
+    }
+
+    public void openShapeFile3() throws Exception {
+        // Shapeファイルを指定する
+        File file = new File("files/ShapeFiles/municipalities/municipalities.shp");
+
+        // ShapeファイルをShapefileDataStoreに紐付ける。
+        ShapefileDataStore store = new ShapefileDataStore(file.toURI().toURL());
+
+        //文字コードを指定する
+        store.setCharset(Charset.forName("UTF-8"));
+
+        // storeからSimpleFeatureSourceオブジェクトを作成する。
+        SimpleFeatureSource featureSource = store.getFeatureSource();
+
+        // FeatureSourceから全Featureを要素にもつコレクションが取り、イテレーターを定義する。
+        SimpleFeatureCollection c = featureSource.getFeatures();
+        FeatureIterator i = featureSource.getFeatures().features();
+        while(i.hasNext()) {
+            SimpleFeature feature = (SimpleFeature)i.next();
+            System.out.println(((feature)));
         }
     }
 }
