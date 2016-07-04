@@ -7,6 +7,7 @@ import org.geotools.data.FileDataStoreFinder;
 import org.geotools.data.simple.SimpleFeatureCollection;
 import org.geotools.data.simple.SimpleFeatureIterator;
 import org.geotools.data.simple.SimpleFeatureSource;
+import org.geotools.math.Line;
 import org.opengis.feature.simple.SimpleFeature;
 import org.opengis.geometry.Geometry;
 
