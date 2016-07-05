@@ -7,29 +7,52 @@ import java.io.*;
  */
 public class ReadDatFiles {
     public static void main(String args[]) throws IOException {
-        File file = new File("files/ZenrinFiles/MAPDAT/JPNMAP");
-        readFiles(file);
+        File jpnmapFile = new File("/Users/manabu/Dropbox/GIS/GISデータ/ゼンリン/Area Map2/ZENKOKU/MAPDAT/JPNMAP");
+        File widemapFile = new File("/Users/manabu/Dropbox/GIS/GISデータ/ゼンリン/Area Map2/ZENKOKU/MAPDAT/WIDEMAP");
+        File geograFile = new File("/Users/manabu/Dropbox/GIS/GISデータ/ゼンリン/Area Map2/ZENKOKU/MAPDAT/GEOGRA");
+        File topogrFile = new File("/Users/manabu/Dropbox/GIS/GISデータ/ゼンリン/Area Map2/ZENKOKU/MAPDAT/TOPOGR");
+        File outDir = new File("/Users/manabu/Dropbox/GIS/GISデータ/ゼンリン/Area Map2/OUT/TXT");
+        readFiles(jpnmapFile, outDir, 1);
+        readFiles(widemapFile, outDir, 2);
+        readFiles(geograFile, outDir, 3);
+        readFiles(topogrFile, outDir, 4);
+
     }
 
-    public static void readFiles(File dir) throws IOException {
-        System.out.println("フォルダ内のDATファイルを探す");
+    public static void readFiles(File dir, File outDir, int level) throws IOException {
+        System.out.println(dir + "を探索します。");
         if(dir.isDirectory()) {
             File fileList[] = dir.listFiles();
             for(int i=0; i<fileList.length; i++) {
-                if(fileList[i].isFile())
-                    if(isDatFile(fileList[i]))
-                        readDatFile(fileList[i]);
-                    else
-                        ;
-                else {
-                    ;
+                if(fileList[i].isFile()) {
+                    if (isDatFile(fileList[i]))
+                        readDatFile(fileList[i], outDir, level);
                 }
+                else
+                    readDir(fileList[i], outDir, level);
             }
         }
         else {
             System.out.println("\tError: 出力パスがディレクトリではありません。");
             throw new RuntimeException("Error: 出力パスがディレクトリではありません。");
         }
+    }
+
+    public static void readDir(File dir, File outDir, int level) throws IOException {
+        System.out.println("\t" + dir + "を探索します。");
+        if(dir.listFiles()!=null) {
+            File fileList[] = dir.listFiles();
+            for (int i = 0; i < fileList.length; i++) {
+                if (fileList[i].isFile())
+                    if (isDatFile(fileList[i]))
+                        readDatFile(fileList[i], outDir, level);
+                else {
+                    readDir(fileList[i], outDir, level);
+                }
+            }
+        }
+        else
+            System.out.println("\t" + dir + "はNULLでした。");
     }
 
     public static boolean isDatFile(File file) {
@@ -39,7 +62,7 @@ public class ReadDatFiles {
             return false;
     }
 
-    public static void readDatFile(File file) throws IOException {
+    public static void readDatFile(File file, File outDir, int level) throws IOException {
         file.setReadOnly();
         BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file), "Shift_JIS"));
         String line;
@@ -50,7 +73,7 @@ public class ReadDatFiles {
                 while(line!=null) { // 空行までループ
                     if(line.startsWith("FigNum")) {
                         figNum = line;
-                        System.out.println("変換するFigureの数: " + figNum);
+                        System.out.println("\t\t" + file.getName() + "の変換するFigureの数: " + figNum.substring(7,figNum.length()-1));
                     }
                     else if(line.equals(""))
                         break; // パラグラフの終わりが来たら解析終了
@@ -62,15 +85,22 @@ public class ReadDatFiles {
                 System.out.println("空行です");
             else if(line.startsWith("[")){ // 上記以外の処理　[から始まるパラグラフ
                 String str = "";
-                int figType = 0;
+                int layer = 0;
                 while(line!=null) { // ファイルの終わりまでループ
                     if(line.startsWith("[")) {
                         str = line;
                     }
-                    else if(line.startsWith("FIGTYPE")) {
+                    else if(line.startsWith("LAYER")) {
                         String pair[] = line.split("=");
                         str = str + "\n" + line;
-                        figType = Integer.parseInt(pair[1]);
+                        layer = Integer.parseInt(pair[1]);
+                    }
+                    else if(line.startsWith("DISPLEVEL")) {
+                        String pair[] = line.split("=");
+                        int DispLevel = Integer.parseInt(pair[1]);
+                        DispLevel = DispLevel/2 + (level-1) * 5 + 1;
+                        str = str + "\n" + pair[0] + "=" + Integer.toString(DispLevel);
+
                     }
                     else if(line.equals(""))
                         break;
@@ -78,7 +108,11 @@ public class ReadDatFiles {
                         str = str + "\n" + line;
                     line = br.readLine();
                 }
-                System.out.println(figType);
+
+                File outFile = new File(outDir.getPath() + "/" + Integer.toString(layer) + ".txt");
+                PrintWriter pw = new PrintWriter(new OutputStreamWriter(new FileOutputStream(outFile, true),"Shift_JIS"));
+                pw.write(str + "\n\n");
+                pw.close();
             }
 
         }
