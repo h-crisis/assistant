@@ -23,8 +23,8 @@ public class HcrisisAssistant {
 
     public static void doMedicalInstituteEMIS() throws Exception {
         MedicalInstituteEMIS mie = new MedicalInstituteEMIS("files/WorkingFiles/EMIS医療機関情報_kochi.csv"
-                ,"files/WorkingFiles/medical_status_20160630132514.csv"
-                ,"files/WorkingFiles/outFile_20160630132514.csv");
+                ,"files/WorkingFiles/medical_status_20160630143035.csv"
+                ,"files/WorkingFiles/outFile_20160630143035.csv");
         mie.comineMedicalInstituteFiles();
         mie.createFeatures();
         mie.createShapeFile();
