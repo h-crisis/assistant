@@ -50,12 +50,14 @@ public class Csv2Shape {
 
         public static void main (String[]args)throws Exception {
             // Set cross-platform look & feel for compatability
-            UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
+            //UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
 
 
 
             //File file = JFileDataStoreChooser.showOpenFile("csv", null);
-            File file = new File("test/iwasaki/Shapeloctiontest.csv");
+            File file = new File("test/iwasaki/Shapelocationtest.csv");
+            if(file.exists())
+                System.out.println("File Exist.");
             if (file == null) {
                 return;
             }
