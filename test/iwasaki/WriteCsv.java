@@ -9,7 +9,7 @@ import java.util.Random;
 /**
  * Created by daiki on 2016/05/28.
  */
-//csvファイルを作成し、
+//csvファイルを作成し、、書き込む
 public class WriteCsv {
     public static void main(String args[]) throws Exception
     {
@@ -32,7 +32,7 @@ public class WriteCsv {
         }
 
 
-        //配列の数字を入れ替える。
+        //配列の数字を入れ替える。（200回）
         int a,r,temp;
         Random rnd = new Random();
         for ( int t=0; t<200; t++)
