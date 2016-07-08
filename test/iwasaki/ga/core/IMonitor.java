@@ -1,29 +1,29 @@
-package ga.core;
+package iwasaki.ga.core;
 
 
 /**
- * W’c‚Ì“à•”ó‘Ô‚ğƒ‚ƒjƒ^ƒŠƒ“ƒO‚·‚é‚½‚ß‚Ìƒ‚ƒjƒ^EƒCƒ“ƒ^[ƒtƒF[ƒX
+ * ï¿½Wï¿½cï¿½Ì“ï¿½ï¿½ï¿½ï¿½ï¿½Ô‚ï¿½ï¿½ï¿½ï¿½jï¿½^ï¿½ï¿½ï¿½ï¿½ï¿½Oï¿½ï¿½ï¿½é‚½ï¿½ß‚Ìƒï¿½ï¿½jï¿½^ï¿½Eï¿½Cï¿½ï¿½ï¿½^ï¿½[ï¿½tï¿½Fï¿½[ï¿½X
  * @since 2
  * @author yamhan
  */
 public interface IMonitor {
 	
 	/**
-	 * ƒƒMƒ“ƒO‚ğŠJn‚·‚éD•K—v‚É‰‚¶‚ÄCƒXƒgƒŠ[ƒ€“™‚ğƒI[ƒvƒ“‚·‚é‚±‚ÆD
-	 * @param baseDir ƒƒMƒ“ƒOæ‚ÌƒtƒHƒ‹ƒ_
+	 * ï¿½ï¿½ï¿½Mï¿½ï¿½ï¿½Oï¿½ï¿½ï¿½Jï¿½nï¿½ï¿½ï¿½ï¿½Dï¿½Kï¿½vï¿½É‰ï¿½ï¿½ï¿½ï¿½ÄCï¿½Xï¿½gï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Iï¿½[ï¿½vï¿½ï¿½ï¿½ï¿½ï¿½é‚±ï¿½ÆD
+	 * @param baseDir ï¿½ï¿½ï¿½Mï¿½ï¿½ï¿½Oï¿½ï¿½Ìƒtï¿½Hï¿½ï¿½ï¿½_
 	 * @since 2
 	 */
 	void startMonitoring(String baseDir);
 	
 	/**
-	 * ƒƒOo—ÍD
-	 * @param iteration ¢‘ã”
-	 * @param evalCount •]‰¿‰ñ”
-	 * @param bestIndex Å—ÇŒÂ‘Ì‚Ì”z—ñ”Ô†
-	 * @param average W’c‚Ì•]‰¿’l‚Ì•½‹Ï
-	 * @param pop W’c
-	 * @param parents ‚±‚Ì¶¬‚ÉQ‰Á‚µ‚½e
-	 * @param kids ¶¬‚³‚ê‚½‘S‚Ä‚Ìq
+	 * ï¿½ï¿½ï¿½Oï¿½oï¿½ÍD
+	 * @param iteration ï¿½ï¿½ï¿½ã”
+	 * @param evalCount ï¿½]ï¿½ï¿½ï¿½ï¿½
+	 * @param bestIndex ï¿½Å—ÇŒÂ‘Ì‚Ì”zï¿½ï¿½Ôï¿½
+	 * @param average ï¿½Wï¿½cï¿½Ì•]ï¿½ï¿½ï¿½lï¿½Ì•ï¿½ï¿½ï¿½
+	 * @param pop ï¿½Wï¿½c
+	 * @param parents ï¿½ï¿½ï¿½Ìï¿½ï¿½ï¿½ï¿½ÉQï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½e
+	 * @param kids ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ê‚½ï¿½Sï¿½Ä‚Ìq
 	 * @since 2
 	 */
 	void output(long iteration, long evalCount, int bestIndex,
@@ -31,7 +31,7 @@ public interface IMonitor {
 							 IIndividual[] parents, IIndividual[] kids);
 	
 	/**
-	 * ƒƒMƒ“ƒO‚ğI—¹‚·‚éD
+	 * ï¿½ï¿½ï¿½Mï¿½ï¿½ï¿½Oï¿½ï¿½ï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½ï¿½D
 	 * @since 2
 	 */
 	void endMonitoring();

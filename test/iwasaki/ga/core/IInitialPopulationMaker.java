@@ -1,23 +1,23 @@
-package ga.core;
+package iwasaki.ga.core;
 
 
 /**
- * ‰ŠúW’c¶¬ŠíƒCƒ“ƒ^[ƒtƒF[ƒXD
+ * ï¿½ï¿½ï¿½ï¿½ï¿½Wï¿½cï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½^ï¿½[ï¿½tï¿½Fï¿½[ï¿½Xï¿½D
  * @since 2
  * @author isao
  */
 public interface IInitialPopulationMaker {
 	
 	/**
-	 * ‰ŠúW’c‚ğ¶¬‚µ‚Ä•Ô‚·D
-	 * @return ‰ŠúW’c
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½Wï¿½cï¿½ğ¶ï¿½ï¿½ï¿½ï¿½Ä•Ô‚ï¿½ï¿½D
+	 * @return ï¿½ï¿½ï¿½ï¿½ï¿½Wï¿½c
 	 * @since 2
 	 */
 	TPopulation createInitialPopulation();
 	
 	/**
-	 * ŒÂ‘Ìƒtƒ@ƒNƒgƒŠ‚ğ•Ô‚·D
-	 * @return ŒÂ‘Ìƒtƒ@ƒNƒgƒŠ
+	 * ï¿½Â‘Ìƒtï¿½@ï¿½Nï¿½gï¿½ï¿½ï¿½ï¿½Ô‚ï¿½ï¿½D
+	 * @return ï¿½Â‘Ìƒtï¿½@ï¿½Nï¿½gï¿½ï¿½
 	 */
 	IIndividualFactory getIndividualFactory();
 

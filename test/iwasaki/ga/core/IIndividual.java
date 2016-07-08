@@ -1,81 +1,81 @@
-package ga.core;
+package iwasaki.ga.core;
 
 import java.io.BufferedReader;
 import java.io.PrintWriter;
 
 /**
- * ’P–Ú“IÅ“K‰»—pŒÂ‘ÌƒCƒ“ƒ^[ƒtƒF[ƒX
+ * ï¿½Pï¿½Ú“Iï¿½Å“Kï¿½ï¿½ï¿½pï¿½Â‘ÌƒCï¿½ï¿½ï¿½^ï¿½[ï¿½tï¿½Fï¿½[ï¿½X
  * @since 2
  * @author yamhan, isao
  */
 public interface IIndividual {
 
-	/** ŒÂ‘Ì‚ª¶‘¶‚µ‚Ä‚¢‚é‚±‚Æ‚ğ•\‚·D */
+	/** ï¿½Â‘Ì‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½é‚±ï¿½Æ‚ï¿½\ï¿½ï¿½ï¿½D */
 	int VALID = 1;
 
-	/** ŒÂ‘Ì‚ª€–S‚µ‚Ä‚¢‚é‚±‚Æ‚ğ•\‚·D */
+	/** ï¿½Â‘Ì‚ï¿½ï¿½ï¿½ï¿½Sï¿½ï¿½ï¿½Ä‚ï¿½ï¿½é‚±ï¿½Æ‚ï¿½\ï¿½ï¿½ï¿½D */
 	int INVALID = 0;
 
 	/**
-	 * ©•ª©g‚Ì•¡»‚ğ•Ô‚·D
-	 * @return ©•ª©g‚Ì•¡»
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½gï¿½Ì•ï¿½ï¿½ï¿½ï¿½ï¿½Ô‚ï¿½ï¿½D
+	 * @return ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½gï¿½Ì•ï¿½ï¿½ï¿½
 	 * @since 2
 	 */
 	Object clone();
 
 	/**
-	 * src‚ğ©•ª©g‚ÉƒRƒs[‚µ‚ÄC‚»‚ÌŒ‹‰Ê‚ğ•Ô‚·D
-	 * @param src ƒRƒs[Œ³
-	 * @return ©•ª©g
+	 * srcï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½gï¿½ÉƒRï¿½sï¿½[ï¿½ï¿½ï¿½ÄCï¿½ï¿½ï¿½ÌŒï¿½ï¿½Ê‚ï¿½Ô‚ï¿½ï¿½D
+	 * @param src ï¿½Rï¿½sï¿½[ï¿½ï¿½
+	 * @return ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½g
 	 * @since 2
 	 */
 	IIndividual copyFrom(IIndividual src);
 
 	/**
-	 * “ü—ÍƒXƒgƒŠ[ƒ€‚©‚çƒf[ƒ^‚ğ“Ç‚İ‚ŞD
-	 * @param br “ü—ÍƒXƒgƒŠ[ƒ€
+	 * ï¿½ï¿½ï¿½ÍƒXï¿½gï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½fï¿½[ï¿½^ï¿½ï¿½Ç‚İï¿½ï¿½ŞD
+	 * @param br ï¿½ï¿½ï¿½ÍƒXï¿½gï¿½ï¿½ï¿½[ï¿½ï¿½
 	 * @throws Exception
 	 * @since 2
 	 */
 	void readFrom(BufferedReader br) throws Exception;
 
 	/**
-	 * o—ÍƒXƒgƒŠ[ƒ€‚Öƒf[ƒ^‚ğ‘‚«o‚·D
-	 * @param pw o—ÍƒXƒgƒŠ[ƒ€
+	 * ï¿½oï¿½ÍƒXï¿½gï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½Öƒfï¿½[ï¿½^ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½oï¿½ï¿½ï¿½D
+	 * @param pw ï¿½oï¿½ÍƒXï¿½gï¿½ï¿½ï¿½[ï¿½ï¿½
 	 * @since 2
 	 */
 	void writeTo(PrintWriter pw);
 
 	/**
-	 * •W€o—Í‚Öƒf[ƒ^‚ğ‘‚«o‚·D
+	 * ï¿½Wï¿½ï¿½ï¿½oï¿½Í‚Öƒfï¿½[ï¿½^ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½oï¿½ï¿½ï¿½D
 	 * @since 2
 	 */
 	void printOn();
 
 	/**
-	 * •]‰¿’l‚ğ•Ô‚·D
-	 * @return •]‰¿’l
+	 * ï¿½]ï¿½ï¿½ï¿½lï¿½ï¿½Ô‚ï¿½ï¿½D
+	 * @return ï¿½]ï¿½ï¿½ï¿½l
 	 * @since 2
 	 */
 	double getEvaluationValue();
 
 	/**
-	 * •]‰¿’l‚ğİ’è‚·‚éD
-	 * @param value •]‰¿’l
+	 * ï¿½]ï¿½ï¿½ï¿½lï¿½ï¿½İ’è‚·ï¿½ï¿½D
+	 * @param value ï¿½]ï¿½ï¿½ï¿½l
 	 * @since 2
 	 */
 	void setEvaluationValue(double value);
 
 	/**
-	 * ŒÂ‘Ì‚ª¶‘¶‚µ‚Ä‚¢‚é‚©€–S‚µ‚Ä‚¢‚é‚©‚Ì’l‚ğ•Ô‚·D 
-	 * @return IIndividual.VALID:¶‘¶, IIndividual.INVALID:€–S
+	 * ï¿½Â‘Ì‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½é‚©ï¿½ï¿½ï¿½Sï¿½ï¿½ï¿½Ä‚ï¿½ï¿½é‚©ï¿½Ì’lï¿½ï¿½Ô‚ï¿½ï¿½D 
+	 * @return IIndividual.VALID:ï¿½ï¿½ï¿½ï¿½, IIndividual.INVALID:ï¿½ï¿½ï¿½S
 	 * @since 2
 	 */
 	int getStatus();	
 
 	/**
-	 * ŒÂ‘Ì‚ª¶‘¶‚µ‚Ä‚¢‚é‚©€–S‚µ‚Ä‚¢‚é‚©‚Ì’l‚ğİ’è‚·‚éD
-	 * @param status IIndividual.VALID:¶‘¶, IIndividual.INVALID:€–S
+	 * ï¿½Â‘Ì‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½é‚©ï¿½ï¿½ï¿½Sï¿½ï¿½ï¿½Ä‚ï¿½ï¿½é‚©ï¿½Ì’lï¿½ï¿½İ’è‚·ï¿½ï¿½D
+	 * @param status IIndividual.VALID:ï¿½ï¿½ï¿½ï¿½, IIndividual.INVALID:ï¿½ï¿½ï¿½S
 	 * @since 2
 	 */
 	void setStatus(int status);

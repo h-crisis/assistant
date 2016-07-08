@@ -1,11 +1,11 @@
 package iwasaki.sample;
 
-import evaluator.*;
-import ga.realcode.IRealNumberCoding;
-import ga.realcode.TRealNumberIndividual;
-import ga.realcode.TUndxMgg;
-import ga.realcode.TVector;
-import ga.util.TMyRandom;
+import iwasaki.evaluator.*;
+import iwasaki.ga.realcode.IRealNumberCoding;
+import iwasaki.ga.realcode.TRealNumberIndividual;
+import iwasaki.ga.realcode.TUndxMgg;
+import iwasaki.ga.realcode.TVector;
+import iwasaki.ga.util.TMyRandom;
 
 import java.util.LinkedList;
 import java.util.List;

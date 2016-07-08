@@ -1,26 +1,26 @@
-package ga.mgg;
+package iwasaki.ga.mgg;
 
-import ga.core.IIndividual;
-import ga.core.TPopulation;
-import ga.util.TRoulette;
+import iwasaki.ga.core.IIndividual;
+import iwasaki.ga.core.TPopulation;
+import iwasaki.ga.util.TRoulette;
 
 /**
- * Å—ÇŒÂ‘Ì‘I‘ğ‚Æƒ‰ƒ“ƒN‚ÉŠî‚Ã‚­ƒ‹[ƒŒƒbƒg‘I‘ğ‚ğ‘g‚İ‡‚í‚¹‚½¶‘¶‘I‘ğ
+ * ï¿½Å—ÇŒÂ‘Ì‘Iï¿½ï¿½ï¿½Æƒï¿½ï¿½ï¿½ï¿½Nï¿½ÉŠï¿½Ã‚ï¿½ï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½bï¿½gï¿½Iï¿½ï¿½ï¿½ï¿½gï¿½İï¿½ï¿½í‚¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Iï¿½ï¿½
  * @since 2
  * @author isao
  */
 public class TBestAndRankBasedRouletteSelection implements ISelectionForSurvival {
 
-	/** ‰Æ‘° */
+	/** ï¿½Æ‘ï¿½ */
 	private IIndividual[] fFamily;
 
-	/** Å—ÇŒÂ‘Ì‚Ì“Y‚¦š */
+	/** ï¿½Å—ÇŒÂ‘Ì‚Ì“Yï¿½ï¿½ï¿½ï¿½ */
 	private final static int BEST_KIDS_INDEX = 0; 
 
-	/** ƒ‹[ƒŒƒbƒg */
+	/** ï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½bï¿½g */
 	private TRoulette fRoulette;
 	
-	/** Å¬‰»‚©H */
+	/** ï¿½Åï¿½ï¿½ï¿½ï¿½ï¿½ï¿½H */
 	private boolean fMinimization;
 
 	public TBestAndRankBasedRouletteSelection(boolean isMinimization) {
@@ -46,9 +46,9 @@ public class TBestAndRankBasedRouletteSelection implements ISelectionForSurvival
 	}
 	
 	/**
-	 * ‰Æ‘°‚ÌƒTƒCƒY‚ğİ’è‚·‚éD
-	 * @param noOfParents eŒÂ‘Ì‚Ì”
-	 * @param noOfKids qŒÂ‘Ì‚Ì”
+	 * ï¿½Æ‘ï¿½ï¿½ÌƒTï¿½Cï¿½Yï¿½ï¿½İ’è‚·ï¿½ï¿½D
+	 * @param noOfParents ï¿½eï¿½Â‘Ì‚Ìï¿½
+	 * @param noOfKids ï¿½qï¿½Â‘Ì‚Ìï¿½
 	 * @since 2
 	 * @author isao
 	 */
@@ -60,9 +60,9 @@ public class TBestAndRankBasedRouletteSelection implements ISelectionForSurvival
 	}
 	
 	/**
-	 * eŒÂ‘Ì‚ÆqŒÂ‘Ì‚ğ‰Æ‘°‚É“o˜^‚·‚éD
-	 * @param parents eŒÂ‘Ì‚Ì”z—ñ
-	 * @param kids qŒÂ‘Ì‚Ì”z—ñ
+	 * ï¿½eï¿½Â‘Ì‚Æqï¿½Â‘Ì‚ï¿½ï¿½Æ‘ï¿½ï¿½É“oï¿½^ï¿½ï¿½ï¿½ï¿½D
+	 * @param parents ï¿½eï¿½Â‘Ì‚Ì”zï¿½ï¿½
+	 * @param kids ï¿½qï¿½Â‘Ì‚Ì”zï¿½ï¿½
 	 * @since 2
 	 * @author isao
 	 */
@@ -77,8 +77,8 @@ public class TBestAndRankBasedRouletteSelection implements ISelectionForSurvival
 	}
 
 	/**
-	 * ŒÂ‘Ì”z—ñ‚ğƒ\[ƒg‚·‚é
-	 * @param array ƒ\[ƒg‚·‚éŒÂ‘Ì”z—ñ
+	 * ï¿½Â‘Ì”zï¿½ï¿½ï¿½ï¿½\ï¿½[ï¿½gï¿½ï¿½ï¿½ï¿½
+	 * @param array ï¿½\ï¿½[ï¿½gï¿½ï¿½ï¿½ï¿½Â‘Ì”zï¿½ï¿½
 	 * @since 2
 	 * @author isao
 	 */
@@ -95,11 +95,11 @@ public class TBestAndRankBasedRouletteSelection implements ISelectionForSurvival
 	}
 	
 	/**
-	 * ŒÂ‘Ìa‚ÆŒÂ‘Ìb‚ğ”äŠr‚·‚éD
-	 * @param a ŒÂ‘ÌA
-	 * @param b ŒÂ‘ÌB
-	 * @param problem –â‘è
-	 * @return a‚æ‚è‚àb‚ª—D‚ê‚Ä‚¢‚éê‡‚Ítrue, ‚»‚¤‚Å‚È‚¢‚Æ‚«‚Ífalse
+	 * ï¿½Â‘ï¿½aï¿½ÆŒÂ‘ï¿½bï¿½ï¿½ï¿½rï¿½ï¿½ï¿½ï¿½D
+	 * @param a ï¿½Â‘ï¿½A
+	 * @param b ï¿½Â‘ï¿½B
+	 * @param problem ï¿½ï¿½ï¿½
+	 * @return aï¿½ï¿½ï¿½ï¿½bï¿½ï¿½ï¿½Dï¿½ï¿½Ä‚ï¿½ï¿½ï¿½ê‡ï¿½ï¿½true, ï¿½ï¿½ï¿½ï¿½ï¿½Å‚È‚ï¿½ï¿½Æ‚ï¿½ï¿½ï¿½false
 	 * @since 2
 	 * @author isao
 	 */
@@ -116,9 +116,9 @@ public class TBestAndRankBasedRouletteSelection implements ISelectionForSurvival
 	}
 
 	/**
-	 * qW’c’†‚ÌÅ—ÇŒÂ‘Ì‚ğ•Ô‚·
-	 * @param kids qW’c
-	 * @return Å—ÇŒÂ‘Ì
+	 * ï¿½qï¿½Wï¿½cï¿½ï¿½ï¿½ÌÅ—ÇŒÂ‘Ì‚ï¿½Ô‚ï¿½
+	 * @param kids ï¿½qï¿½Wï¿½c
+	 * @return ï¿½Å—ÇŒÂ‘ï¿½
 	 * @since 2
 	 * @author isao
 	 */
@@ -127,9 +127,9 @@ public class TBestAndRankBasedRouletteSelection implements ISelectionForSurvival
 	}
 	
 	/**
-	 * ƒ‹[ƒŒƒbƒg‘I‘ğ‚É‚æ‚èCÅ—ÇŒÂ‘Ì‚ğœ‚¢‚½qW’c‚Ì’†‚©‚çƒ‰ƒ“ƒ_ƒ€‚ÉŒÂ‘Ì‚ğˆê‚Â‘I‚Ô
-	 * @param kids qW’c
-	 * @return ‘I‘ğ‚³‚ê‚½ŒÂ‘Ì
+	 * ï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½bï¿½gï¿½Iï¿½ï¿½ï¿½É‚ï¿½ï¿½Cï¿½Å—ÇŒÂ‘Ì‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½qï¿½Wï¿½cï¿½Ì’ï¿½ï¿½ï¿½ï¿½çƒ‰ï¿½ï¿½ï¿½_ï¿½ï¿½ï¿½ÉŒÂ‘Ì‚ï¿½ï¿½ï¿½Â‘Iï¿½ï¿½
+	 * @param kids ï¿½qï¿½Wï¿½c
+	 * @return ï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½ê‚½ï¿½Â‘ï¿½
 	 * @since 2
 	 * @author isao
 	 */
@@ -144,9 +144,9 @@ public class TBestAndRankBasedRouletteSelection implements ISelectionForSurvival
 	}
 	
 	/**
-	 * qW’c‚Ì¶‘¶‚µ‚Ä‚¢‚éŒÂ‘Ì”‚ğ•Ô‚·
-	 * @param kids qW’c
-	 * @return ¶‘¶‚µ‚Ä‚¢‚éŒÂ‘Ì‚Ì”
+	 * ï¿½qï¿½Wï¿½cï¿½Ìï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½Â‘Ìï¿½ï¿½ï¿½Ô‚ï¿½
+	 * @param kids ï¿½qï¿½Wï¿½c
+	 * @return ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½Â‘Ì‚Ìï¿½
 	 * @since 2
 	 * @author isao
 	 */

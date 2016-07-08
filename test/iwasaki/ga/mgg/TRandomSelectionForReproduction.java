@@ -1,17 +1,17 @@
-package ga.mgg;
+package iwasaki.ga.mgg;
 
-import ga.core.IIndividual;
-import ga.core.TPopulation;
-import ga.util.TRandomCombination;
+import iwasaki.ga.core.IIndividual;
+import iwasaki.ga.core.TPopulation;
+import iwasaki.ga.util.TRandomCombination;
 
 /**
- * W’c‚©‚çeŒÂ‘Ì‚ğƒ‰ƒ“ƒ_ƒ€‚É‘I‘ğ‚·‚é•¡»‘I‘ğŠí
+ * ï¿½Wï¿½cï¿½ï¿½ï¿½ï¿½eï¿½Â‘Ì‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½_ï¿½ï¿½ï¿½É‘Iï¿½ï¿½ï¿½ï¿½ï¿½é•¡ï¿½ï¿½ï¿½Iï¿½ï¿½ï¿½ï¿½
  * @since 2
  * @author isao
  */
 public class TRandomSelectionForReproduction implements ISelectionForReproduction {
 
-	/** ƒ‰ƒ“ƒ_ƒ€‚È‘g‚İ‡‚í‚¹¶¬ŠíD•¡»‘I‘ğ‚Å—˜—p‚³‚ê‚é */
+	/** ï¿½ï¿½ï¿½ï¿½ï¿½_ï¿½ï¿½ï¿½È‘gï¿½İï¿½ï¿½í‚¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Dï¿½ï¿½ï¿½ï¿½ï¿½Iï¿½ï¿½ï¿½Å—ï¿½ï¿½pï¿½ï¿½ï¿½ï¿½ï¿½ */
 	private TRandomCombination fRandomCombination;
 
 	/**

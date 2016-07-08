@@ -1,35 +1,35 @@
-package ga.bitstring;
+package iwasaki.ga.bitstring;
 
-import ga.core.IIndividual;
-import ga.core.IIndividualFactory;
-import ga.core.IInitialPopulationMaker;
-import ga.core.TPopulation;
-import ga.util.TMyRandom;
+import iwasaki.ga.core.IIndividual;
+import iwasaki.ga.core.IIndividualFactory;
+import iwasaki.ga.core.IInitialPopulationMaker;
+import iwasaki.ga.core.TPopulation;
+import iwasaki.ga.util.TMyRandom;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 
 /**
- * ƒoƒCƒiƒŠƒR[ƒfƒBƒ“ƒOŒÂ‘Ì‚©‚ç\¬‚³‚ê‚é‰ŠúW’c¶¬Ší
+ * ï¿½oï¿½Cï¿½iï¿½ï¿½ï¿½Rï¿½[ï¿½fï¿½Bï¿½ï¿½ï¿½Oï¿½Â‘Ì‚ï¿½ï¿½ï¿½\ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½é‰ï¿½ï¿½ï¿½Wï¿½cï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
  * @since 2
  * @author isao
  */
 public class TBitStringPopulationMaker implements IInitialPopulationMaker {
 	
-	/** W’cƒTƒCƒY */
+	/** ï¿½Wï¿½cï¿½Tï¿½Cï¿½Y */
 	private int fPopulationSize = 0;
 	
-	/** ƒrƒbƒg” */
+	/** ï¿½rï¿½bï¿½gï¿½ï¿½ */
 	private int fNoOfBits = 0;
 
-	/** ŒÂ‘Ìƒtƒ@ƒNƒgƒŠ */
+	/** ï¿½Â‘Ìƒtï¿½@ï¿½Nï¿½gï¿½ï¿½ */
 	private TBitStringIndividualFactory fIndividualFactory;
 	
 	/**
-	 * ƒRƒ“ƒXƒgƒ‰ƒNƒ^
-	 * @param populationSize W’cƒTƒCƒY
-	 * @param noOfBits ƒrƒbƒg”
+	 * ï¿½Rï¿½ï¿½ï¿½Xï¿½gï¿½ï¿½ï¿½Nï¿½^
+	 * @param populationSize ï¿½Wï¿½cï¿½Tï¿½Cï¿½Y
+	 * @param noOfBits ï¿½rï¿½bï¿½gï¿½ï¿½
 	 * @since 2
 	 */
 	public TBitStringPopulationMaker(int populationSize, int noOfBits) {
@@ -39,8 +39,8 @@ public class TBitStringPopulationMaker implements IInitialPopulationMaker {
 	}
 	
 	/**
-	 * ƒrƒbƒg”‚ğ•Ô‚·D
-	 * @return ƒrƒbƒg”
+	 * ï¿½rï¿½bï¿½gï¿½ï¿½ï¿½ï¿½Ô‚ï¿½ï¿½D
+	 * @return ï¿½rï¿½bï¿½gï¿½ï¿½
 	 * @since 2
 	 */
 	public int getNoOfBits() {
@@ -48,8 +48,8 @@ public class TBitStringPopulationMaker implements IInitialPopulationMaker {
 	}
 
 	/**
-	 * W’cƒTƒCƒY‚ğ•Ô‚·D
-	 * @return W’cƒTƒCƒY
+	 * ï¿½Wï¿½cï¿½Tï¿½Cï¿½Yï¿½ï¿½Ô‚ï¿½ï¿½D
+	 * @return ï¿½Wï¿½cï¿½Tï¿½Cï¿½Y
 	 * @since 2
 	 */
 	public int getPopulationSize() {
@@ -57,8 +57,8 @@ public class TBitStringPopulationMaker implements IInitialPopulationMaker {
 	}
 
 	/**
-	 * ŒÂ‘Ì‚ğƒ‰ƒ“ƒ_ƒ€‚É‰Šú‰»‚·‚éD
-	 * @param ind ŒÂ‘Ì
+	 * ï¿½Â‘Ì‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½_ï¿½ï¿½ï¿½Éï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½D
+	 * @param ind ï¿½Â‘ï¿½
 	 * @since 2
 	 */
 	private void initInitIndividual(IIndividual ind) {
@@ -72,7 +72,7 @@ public class TBitStringPopulationMaker implements IInitialPopulationMaker {
 	}
 	
 	/**
-	 * ‰ŠúW’c‚ğ¶¬‚·‚éD
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½Wï¿½cï¿½ğ¶ï¿½ï¿½ï¿½ï¿½ï¿½D
 	 * @since 2
 	 */
 	public TPopulation createInitialPopulation() {
@@ -93,9 +93,9 @@ public class TBitStringPopulationMaker implements IInitialPopulationMaker {
 	}
 	
 	/**
-	 * W’c‚ğƒtƒ@ƒCƒ‹‚Éo—Í‚·‚éD
-	 * @param pop W’c
-	 * @param filename o—Íæ‚Ìƒtƒ@ƒCƒ‹–¼
+	 * ï¿½Wï¿½cï¿½ï¿½ï¿½tï¿½@ï¿½Cï¿½ï¿½ï¿½Éoï¿½Í‚ï¿½ï¿½ï¿½D
+	 * @param pop ï¿½Wï¿½c
+	 * @param filename ï¿½oï¿½Íï¿½Ìƒtï¿½@ï¿½Cï¿½ï¿½ï¿½ï¿½
 	 * @since 2
 	 */
 	private static void writePopulation(TPopulation pop, String filename) {
@@ -111,8 +111,8 @@ public class TBitStringPopulationMaker implements IInitialPopulationMaker {
 	}
 
 	/**
-	 * ƒƒCƒ“
-	 * @param args W’cƒTƒCƒY ŸŒ³” ‚P•Ï”‚ ‚½‚è‚Ìƒrƒbƒg” ¶¬”ÍˆÍ‚ÌÅ¬’l Å‘å’l ƒCƒ‹ƒXƒP[ƒ‹«(true/false) ƒtƒ@ƒCƒ‹–¼ ŠJn”Ô† I—¹”Ô†
+	 * ï¿½ï¿½ï¿½Cï¿½ï¿½
+	 * @param args ï¿½Wï¿½cï¿½Tï¿½Cï¿½Y ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Pï¿½Ïï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ìƒrï¿½bï¿½gï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ÍˆÍ‚ÌÅï¿½ï¿½l ï¿½Å‘ï¿½l ï¿½Cï¿½ï¿½ï¿½Xï¿½Pï¿½[ï¿½ï¿½ï¿½ï¿½(true/false) ï¿½tï¿½@ï¿½Cï¿½ï¿½ï¿½ï¿½ ï¿½Jï¿½nï¿½Ôï¿½ ï¿½Iï¿½ï¿½ï¿½Ôï¿½
 	 * @since 2
 	 */
 	public static void main(String[] args) {

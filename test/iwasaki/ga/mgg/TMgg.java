@@ -1,68 +1,68 @@
-package ga.mgg;
+package iwasaki.ga.mgg;
 
-import ga.core.IIndividual;
-import ga.core.IIndividualFactory;
-import ga.core.IKidMaker;
-import ga.core.IKidMakerFactory;
-import ga.core.TPopulation;
-import ga.core.TPopulationStatistics;
+import iwasaki.ga.core.IIndividual;
+import iwasaki.ga.core.IIndividualFactory;
+import iwasaki.ga.core.IKidMaker;
+import iwasaki.ga.core.IKidMakerFactory;
+import iwasaki.ga.core.TPopulation;
+import iwasaki.ga.core.TPopulationStatistics;
 
 /**
- * SOARS—p¢‘ãŒğ‘ãƒ‚ƒfƒ‹Minimal Generation Gap (MGG)
+ * SOARSï¿½pï¿½ï¿½ï¿½ï¿½ï¿½ãƒ‚ï¿½fï¿½ï¿½Minimal Generation Gap (MGG)
  * @since 2
  * @author yamhan, isao
  */
 public class TMgg {
 	
-	/** ŒÂ‘Ìƒtƒ@ƒNƒgƒŠ */
+	/** ï¿½Â‘Ìƒtï¿½@ï¿½Nï¿½gï¿½ï¿½ */
 	private IIndividualFactory fIndividualFactory;
 	
-	/** qŒÂ‘Ì¶¬Šíƒtƒ@ƒNƒgƒŠ */
+	/** ï¿½qï¿½Â‘Ìï¿½ï¿½ï¿½ï¿½ï¿½tï¿½@ï¿½Nï¿½gï¿½ï¿½ */
 	private IKidMakerFactory fKidMakerFactory;
 	
-	/** •¡»‘I‘ğŠíƒtƒ@ƒNƒgƒŠ */
+	/** ï¿½ï¿½ï¿½ï¿½ï¿½Iï¿½ï¿½ï¿½ï¿½tï¿½@ï¿½Nï¿½gï¿½ï¿½ */
 	private ISelectionForReproductionFactory fSelectionForReproductionFactory;
 	
-	/** ¶‘¶‘I‘ğŠíƒtƒ@ƒNƒgƒŠ */
+	/** ï¿½ï¿½ï¿½ï¿½ï¿½Iï¿½ï¿½ï¿½ï¿½tï¿½@ï¿½Nï¿½gï¿½ï¿½ */
 	private ISelectionForSurvivalFactory fSelectionForSuvivalFactory;
 		
-	/** Œ»İ‚Ì”½•œ‰ñ” */
+	/** ï¿½ï¿½ï¿½İ‚Ì”ï¿½ï¿½ï¿½ï¿½ï¿½ */
 	private long fIteration;
 
-	/** Œğ³‰ñ” */
+	/** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
 	private int fNoOfCrossovers;
 	
-	/** W’c */
+	/** ï¿½Wï¿½c */
 	private TPopulation fPopulation;
 	
-	/** qŒÂ‘Ì¶¬Ší */
+	/** ï¿½qï¿½Â‘Ìï¿½ï¿½ï¿½ï¿½ï¿½ */
 	private IKidMaker fKidMaker;
 	
-	/** eŒÂ‘Ì‚Ì“Y‚¦š */		
+	/** ï¿½eï¿½Â‘Ì‚Ì“Yï¿½ï¿½ï¿½ï¿½ */		
 	private int[] fParentIndices;
 
-	/** eŒÂ‘Ì‚Ì”z—ñ */
+	/** ï¿½eï¿½Â‘Ì‚Ì”zï¿½ï¿½ */
 	private IIndividual[] fParents;
 
-	/** qŒÂ‘Ì‚Ì”z—ñ */	
+	/** ï¿½qï¿½Â‘Ì‚Ì”zï¿½ï¿½ */	
 	private IIndividual[] fKids;
 	
-	/** •¡»‘I‘ğŠí */
+	/** ï¿½ï¿½ï¿½ï¿½ï¿½Iï¿½ï¿½ï¿½ï¿½ */
 	private ISelectionForReproduction fSelectionForReproduction;
 	
-	/** ¶‘¶‘I‘ğŠí */
+	/** ï¿½ï¿½ï¿½ï¿½ï¿½Iï¿½ï¿½ï¿½ï¿½ */
 	private ISelectionForSurvival fSelectionForSurvival;
 	
-	/** W’c‚Ì“Œv */
+	/** ï¿½Wï¿½cï¿½Ì“ï¿½ï¿½v */
 	private TPopulationStatistics fPopulationStatistics;
 	
 	/**
-	 * ƒRƒ“ƒXƒgƒ‰ƒNƒ^
-	 * @param selectionForReproductionFactory •¡»‘I‘ğŠíƒtƒ@ƒNƒgƒŠ
-	 * @param kidMakerFactory ŒÂ‘Ì¶¬Šíƒtƒ@ƒNƒgƒŠ
-	 * @param noOfCrossovers Œğ³‰ñ”
-	 * @param selectionForSurvivalFactory ¶‘¶‘I‘ğŠíƒtƒ@ƒNƒgƒŠ 
-	 * @param individualFactory ŒÂ‘Ìƒtƒ@ƒNƒgƒŠ
+	 * ï¿½Rï¿½ï¿½ï¿½Xï¿½gï¿½ï¿½ï¿½Nï¿½^
+	 * @param selectionForReproductionFactory ï¿½ï¿½ï¿½ï¿½ï¿½Iï¿½ï¿½ï¿½ï¿½tï¿½@ï¿½Nï¿½gï¿½ï¿½
+	 * @param kidMakerFactory ï¿½Â‘Ìï¿½ï¿½ï¿½ï¿½ï¿½tï¿½@ï¿½Nï¿½gï¿½ï¿½
+	 * @param noOfCrossovers ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	 * @param selectionForSurvivalFactory ï¿½ï¿½ï¿½ï¿½ï¿½Iï¿½ï¿½ï¿½ï¿½tï¿½@ï¿½Nï¿½gï¿½ï¿½ 
+	 * @param individualFactory ï¿½Â‘Ìƒtï¿½@ï¿½Nï¿½gï¿½ï¿½
 	 * @since 2
 	 * @author yamhan, isao
 	 */
@@ -91,8 +91,8 @@ public class TMgg {
 	}
 	
 	/**
-	 * Œ»İ‚Ì”½•œ‰ñ”‚ğ•Ô‚·D
-	 * @return ”½•œ‰ñ”
+	 * ï¿½ï¿½ï¿½İ‚Ì”ï¿½ï¿½ï¿½ï¿½ñ”‚ï¿½Ô‚ï¿½ï¿½D
+	 * @return ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 * @since 2
 	 * @author yamhan, isao
 	 */
@@ -101,8 +101,8 @@ public class TMgg {
 	}
 
 	/**
-	 * Œ»İ‚Ì”½•œ‰ñ”‚ğİ’è‚·‚éD
-	 * @param itr ”½•œ‰ñ”
+	 * ï¿½ï¿½ï¿½İ‚Ì”ï¿½ï¿½ï¿½ï¿½ñ”‚ï¿½İ’è‚·ï¿½ï¿½D
+	 * @param itr ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 * @since 2
 	 * @author yamhan, isao
 	 */
@@ -111,8 +111,8 @@ public class TMgg {
 	}
 
 	/**
-	 * W’c’†‚ÌÅ—ÇŒÂ‘Ì‚ğ•Ô‚·D
-	 * @return Å—ÇŒÂ‘Ì
+	 * ï¿½Wï¿½cï¿½ï¿½ï¿½ÌÅ—ÇŒÂ‘Ì‚ï¿½Ô‚ï¿½ï¿½D
+	 * @return ï¿½Å—ÇŒÂ‘ï¿½
 	 * @since 2
 	 * @author yamhan, isao
 	 */
@@ -121,8 +121,8 @@ public class TMgg {
 	}
 
 	/**
-	 * W’c’†‚ÌÅ—ÇŒÂ‘Ì‚Ì“Y‚¦š‚ğ•Ô‚·D
-	 * @return Å—ÇŒÂ‘Ì‚Ì“Y‚¦š
+	 * ï¿½Wï¿½cï¿½ï¿½ï¿½ÌÅ—ÇŒÂ‘Ì‚Ì“Yï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô‚ï¿½ï¿½D
+	 * @return ï¿½Å—ÇŒÂ‘Ì‚Ì“Yï¿½ï¿½ï¿½ï¿½
 	 * @since 2
 	 * @author yamhan, isao
 	 */
@@ -132,8 +132,8 @@ public class TMgg {
 
 
 	/**
-	 * Å—ÇŒÂ‘Ì‚Ì•]‰¿’l‚ğ•Ô‚·D
-	 * @return Å—ÇŒÂ‘Ì‚Ì•]‰¿’l
+	 * ï¿½Å—ÇŒÂ‘Ì‚Ì•]ï¿½ï¿½ï¿½lï¿½ï¿½Ô‚ï¿½ï¿½D
+	 * @return ï¿½Å—ÇŒÂ‘Ì‚Ì•]ï¿½ï¿½ï¿½l
 	 * @since 2
 	 * @author yamhan, isao
 	 */
@@ -142,9 +142,9 @@ public class TMgg {
 	}
 
 	/**
-	 * W’c’†‚ÌVALID‚ÈŒÂ‘Ì‚Ì•½‹Ï•]‰¿’l‚ğ•Ô‚·D
-	 * W’c’†‚ÉVALID‚ÈŒÂ‘Ì‚ªˆê‚Â‚à‚È‚¯‚ê‚Î•½‹Ï•]‰¿’l‚Í0‚Æ‚·‚éD
-	 * @return •½‹Ï•]‰¿’l
+	 * ï¿½Wï¿½cï¿½ï¿½ï¿½ï¿½VALIDï¿½ÈŒÂ‘Ì‚Ì•ï¿½ï¿½Ï•]ï¿½ï¿½ï¿½lï¿½ï¿½Ô‚ï¿½ï¿½D
+	 * ï¿½Wï¿½cï¿½ï¿½ï¿½ï¿½VALIDï¿½ÈŒÂ‘Ì‚ï¿½ï¿½ï¿½Â‚ï¿½ï¿½È‚ï¿½ï¿½ï¿½Î•ï¿½ï¿½Ï•]ï¿½ï¿½ï¿½lï¿½ï¿½0ï¿½Æ‚ï¿½ï¿½ï¿½D
+	 * @return ï¿½ï¿½ï¿½Ï•]ï¿½ï¿½ï¿½l
 	 * @since 2
 	 * @author yamhan, isao
 	 */
@@ -153,8 +153,8 @@ public class TMgg {
 	}
 	
 	/**
-	 * q‚ğ¶¬‚·‚é‚½‚ß‚Ìe‚ğ‘I‘ğ‚µ‚½ŒãCŒğ³‚ğŒğ³‰ñ”‚¾‚¯Às‚µ‚Äq‚ğ•¡”¶¬‚·‚éD
-	 * @return e‚Æ¶¬‚³‚ê‚½q
+	 * ï¿½qï¿½ğ¶ï¿½ï¿½ï¿½ï¿½é‚½ï¿½ß‚Ìeï¿½ï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ñ”‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½sï¿½ï¿½ï¿½Äqï¿½ğ•¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½D
+	 * @return ï¿½eï¿½Æï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ê‚½ï¿½q
 	 */
 	public IIndividual[] selectParentsAndMakeKids() {
 		fSelectionForReproduction.doIt(fPopulation, fParentIndices, fParents);
@@ -173,7 +173,7 @@ public class TMgg {
 	}
 	
 	/**
-	 * ¶‘¶‘I‘ğ‚ğs‚¢C¢‘ã‚ğ1i‚ß‚éD
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½sï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½ï¿½ï¿½1ï¿½iï¿½ß‚ï¿½D
 	 */
 	public void doSelectionForSurvival() {
 		fSelectionForSurvival.doIt(fPopulation, fParentIndices, fParents, fKids);
@@ -181,8 +181,8 @@ public class TMgg {
 	}
 
 	/**
-	 * W’c‚ğ•Ô‚·D
-	 * @return Œ»İ‚ÌW’c
+	 * ï¿½Wï¿½cï¿½ï¿½Ô‚ï¿½ï¿½D
+	 * @return ï¿½ï¿½ï¿½İ‚ÌWï¿½c
 	 * @since 2
 	 * @author yamhan, isao
 	 */
@@ -191,12 +191,12 @@ public class TMgg {
 	}
 	
 	/**
-	 * W’c‚ğİ’è‚·‚éD
-	 * ‚±‚Ì‚Æ‚«C“à•”“I‚É‚ÍˆÈ‰º‚Ìˆ—‚ª‚È‚³‚ê‚éF
-	 * - ”½•œ‰ñ”‚ğ‚O‚Éİ’è‚·‚éD
-	 * - ‰Šúó‘Ô‚ÌƒƒO‚ğo—Í‚·‚éD
-	 * - qŒÂ‘ÌW’c‚ªW’c’†‚Ì‚ ‚éŒÂ‘Ì‚Æ“¯‚¶İ’è‚É‰Šú‰»‚³‚ê‚éD
-	 * @param pop W’c
+	 * ï¿½Wï¿½cï¿½ï¿½İ’è‚·ï¿½ï¿½D
+	 * ï¿½ï¿½ï¿½Ì‚Æ‚ï¿½ï¿½Cï¿½ï¿½ï¿½ï¿½ï¿½Iï¿½É‚ÍˆÈ‰ï¿½ï¿½Ìï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È‚ï¿½ï¿½ï¿½ï¿½F
+	 * - ï¿½ï¿½ï¿½ï¿½ï¿½ñ”‚ï¿½ï¿½Oï¿½Éİ’è‚·ï¿½ï¿½D
+	 * - ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô‚Ìƒï¿½ï¿½Oï¿½ï¿½ï¿½oï¿½Í‚ï¿½ï¿½ï¿½D
+	 * - ï¿½qï¿½Â‘ÌWï¿½cï¿½ï¿½ï¿½Wï¿½cï¿½ï¿½ï¿½Ì‚ï¿½ï¿½ï¿½Â‘Ì‚Æ“ï¿½ï¿½ï¿½ï¿½İ’ï¿½Éï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½D
+	 * @param pop ï¿½Wï¿½c
 	 * @since 2
 	 * @author yamhan, isao
 	 */
@@ -213,8 +213,8 @@ public class TMgg {
 	}
 	
 	/**
-	 * qW’c‚ğ¶¬‚µC¶¬‚µ‚½qW’c‚ğ•Ô‚·D
-	 * @param parents eW’c
+	 * ï¿½qï¿½Wï¿½cï¿½ğ¶ï¿½ï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½qï¿½Wï¿½cï¿½ï¿½Ô‚ï¿½ï¿½D
+	 * @param parents ï¿½eï¿½Wï¿½c
 	 * @since 2
 	 * @author yamhan, isao
 	 */	

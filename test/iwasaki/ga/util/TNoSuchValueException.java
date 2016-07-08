@@ -1,31 +1,31 @@
-package ga.util;
+package iwasaki.ga.util;
 
 /**
- * —v‹‚³‚ê‚½’l‚ª‘¶Ý‚¹‚¸C‘ã‚í‚è‚É•Ô‚·‚±‚Æ‚ª‚Å‚«‚é“KØ‚È’l‚à‚È‚¢ó‹µ‚Å“Š‚°‚ç‚ê‚é—áŠOD
+ * ï¿½vï¿½ï¿½ï¿½ï¿½ï¿½ê‚½ï¿½lï¿½ï¿½ï¿½ï¿½ï¿½Ý‚ï¿½ï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½ï¿½É•Ô‚ï¿½ï¿½ï¿½ï¿½Æ‚ï¿½ï¿½Å‚ï¿½ï¿½ï¿½Kï¿½Ø‚È’lï¿½ï¿½ï¿½È‚ï¿½ï¿½ó‹µ‚Å“ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Oï¿½D
  * <p>
- * ‚±‚Ì—áŠO‚ÍRuntimeException‚ðŒp³‚µ‚Ä‚¢‚é‚½‚ßCƒLƒƒƒbƒ`‚µ‚È‚­‚Ä‚àƒRƒ“ƒpƒCƒ‹ƒGƒ‰[‚É‚Í‚È‚è‚Ü‚¹‚ñD
+ * ï¿½ï¿½ï¿½Ì—ï¿½Oï¿½ï¿½RuntimeExceptionï¿½ï¿½ï¿½pï¿½ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½é‚½ï¿½ßCï¿½Lï¿½ï¿½ï¿½bï¿½`ï¿½ï¿½ï¿½È‚ï¿½ï¿½Ä‚ï¿½ï¿½Rï¿½ï¿½ï¿½pï¿½Cï¿½ï¿½ï¿½Gï¿½ï¿½ï¿½[ï¿½É‚Í‚È‚ï¿½Ü‚ï¿½ï¿½ï¿½D
  * <p>
- * ‚±‚Ì—áŠO‚ÍC—v‹‚³‚ê‚½’l‚ª˜_—“I‚É‘¶Ý‚µ‚¦‚È‚¢‚æ‚¤‚Èó‹µ‚ðŽ¦´‚µ‚Ü‚·D
- * —á‚¦‚ÎC—v‘f”0‚ÌW‡‚Ì•½‹Ï’l‚ª—v‹‚³‚ê‚½ê‡‚È‚Ç‚É‚±‚Ì—áŠO‚ð“Š‚°‚Ü‚·D
+ * ï¿½ï¿½ï¿½Ì—ï¿½Oï¿½ÍCï¿½vï¿½ï¿½ï¿½ï¿½ï¿½ê‚½ï¿½lï¿½ï¿½ï¿½_ï¿½ï¿½ï¿½Iï¿½É‘ï¿½ï¿½Ý‚ï¿½ï¿½ï¿½ï¿½È‚ï¿½ï¿½æ‚¤ï¿½Èó‹µ‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½D
+ * ï¿½á‚¦ï¿½ÎCï¿½vï¿½fï¿½ï¿½0ï¿½ÌWï¿½ï¿½ï¿½Ì•ï¿½ï¿½Ï’lï¿½ï¿½ï¿½vï¿½ï¿½ï¿½ï¿½ï¿½ê‚½ï¿½ê‡ï¿½È‚Ç‚É‚ï¿½ï¿½Ì—ï¿½Oï¿½ð“Š‚ï¿½ï¿½Ü‚ï¿½ï¿½D
  * <p>
- * ˆêŽž“I‚ÈáŠQ‚âƒZƒLƒ…ƒŠƒeƒBã‚Ì§ŒÀ‚È‚Ç‚É‚æ‚é—v‹‹‘”Û‚ðŽ¦´‚·‚é‚½‚ß‚É‚±‚Ì—áŠO‚ðŽg‚Á‚Ä‚Í‚¢‚¯‚Ü‚¹‚ñD
- * —á‚¦‚ÎCƒlƒbƒgƒ[ƒN‚ÌáŠQ‚âƒtƒ@ƒCƒ‹‚ÌƒAƒNƒZƒXŒ ŒÀ‚È‚Ç‚Ì——R‚É‚æ‚è
- * ’l‚ª“Ç‚Ýo‚¹‚È‚¢‚æ‚¤‚Èê‡‚É‚ÍC‚±‚Ì—áŠO‚ð“Š‚°‚Ä‚Í‚¢‚¯‚Ü‚¹‚ñD
- * ‚»‚ê‚ç‚Ì—p“r‚É‚ÍJDK‚É‚»‚ê‚È‚è‚Ì—áŠO‚ª—pˆÓ‚³‚ê‚Ä‚¢‚Ü‚·‚Ì‚Å‚»‚¿‚ç‚ð—˜—p‚µ‚Ä‚­‚¾‚³‚¢D
+ * ï¿½êŽžï¿½Iï¿½Èï¿½Qï¿½ï¿½Zï¿½Lï¿½ï¿½ï¿½ï¿½ï¿½eï¿½Bï¿½ï¿½Ìï¿½ï¿½ï¿½ï¿½È‚Ç‚É‚ï¿½ï¿½vï¿½ï¿½ï¿½ï¿½ï¿½Û‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½é‚½ï¿½ß‚É‚ï¿½ï¿½Ì—ï¿½Oï¿½ï¿½ï¿½gï¿½ï¿½ï¿½Ä‚Í‚ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½D
+ * ï¿½á‚¦ï¿½ÎCï¿½lï¿½bï¿½gï¿½ï¿½ï¿½[ï¿½Nï¿½Ìï¿½Qï¿½ï¿½tï¿½@ï¿½Cï¿½ï¿½ï¿½ÌƒAï¿½Nï¿½Zï¿½Xï¿½ï¿½ï¿½ï¿½ï¿½È‚Ç‚Ì—ï¿½ï¿½Rï¿½É‚ï¿½ï¿½
+ * ï¿½lï¿½ï¿½ï¿½Ç‚Ýoï¿½ï¿½ï¿½È‚ï¿½ï¿½æ‚¤ï¿½Èê‡ï¿½É‚ÍCï¿½ï¿½ï¿½Ì—ï¿½Oï¿½ð“Š‚ï¿½ï¿½Ä‚Í‚ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½D
+ * ï¿½ï¿½ï¿½ï¿½ï¿½Ì—pï¿½rï¿½É‚ï¿½JDKï¿½É‚ï¿½ï¿½ï¿½È‚ï¿½Ì—ï¿½Oï¿½ï¿½ï¿½pï¿½Ó‚ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½Ü‚ï¿½ï¿½Ì‚Å‚ï¿½ï¿½ï¿½ï¿½ï¿½ð—˜—pï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½D
  * @since 74
  * @author hmkz
  */
 public class TNoSuchValueException extends RuntimeException {
 	/**
-	 * ‹ó‚ÌƒƒbƒZ[ƒW‚ð‚à‚Á‚½—áŠO‚ð¶¬‚·‚é
+	 * ï¿½ï¿½Ìƒï¿½ï¿½bï¿½Zï¿½[ï¿½Wï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Oï¿½ð¶ï¿½ï¿½ï¿½ï¿½ï¿½
 	 * @since 74
 	 * @author hmkz
 	 */
 	public TNoSuchValueException() {}
 
 	/**
-	 * Žw’è‚³‚ê‚½ƒƒbƒZ[ƒW‚ð‚à‚Á‚½—áŠO‚ð¶¬‚·‚é
-	 * @param message —áŠOƒƒbƒZ[ƒW
+	 * ï¿½wï¿½è‚³ï¿½ê‚½ï¿½ï¿½ï¿½bï¿½Zï¿½[ï¿½Wï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Oï¿½ð¶ï¿½ï¿½ï¿½ï¿½ï¿½
+	 * @param message ï¿½ï¿½Oï¿½ï¿½ï¿½bï¿½Zï¿½[ï¿½W
 	 * @since 74
 	 * @author hmkz
 	 */

@@ -1,11 +1,11 @@
 /**
  * 
  */
-package evaluator;
+package iwasaki.evaluator;
 
-import ga.bitstring.TBitString;
-import ga.bitstring.TBitStringIndividual;
-import ga.core.IIndividual;
+import iwasaki.ga.bitstring.TBitString;
+import iwasaki.ga.bitstring.TBitStringIndividual;
+import iwasaki.ga.core.IIndividual;
 
 import java.util.List;
 
@@ -16,8 +16,8 @@ import java.util.List;
 public class OneMaxEvaluator {
 
 	/**
-	 * ŒÂ‘Ì‚ğ•]‰¿‚·‚éD
-	 * @param ind ŒÂ‘Ì
+	 * ï¿½Â‘Ì‚ï¿½]ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½D
+	 * @param ind ï¿½Â‘ï¿½
 	 */
 	private static void evaluateIndividual(TBitStringIndividual ind) {
 		TBitString str = ind.getBitString();
@@ -30,8 +30,8 @@ public class OneMaxEvaluator {
 	}
 
 	/**
-	 * W’c’†‚Ì‘S‚Ä‚ÌŒÂ‘Ì‚ğ•]‰¿‚·‚éD
-	 * @param pop W’c
+	 * ï¿½Wï¿½cï¿½ï¿½ï¿½Ì‘Sï¿½Ä‚ÌŒÂ‘Ì‚ï¿½]ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½D
+	 * @param pop ï¿½Wï¿½c
 	 */
 	public static void evaluatePopulation(List<TBitStringIndividual> pop) {
 		for (int i = 0; i < pop.size(); ++i) {
@@ -40,8 +40,8 @@ public class OneMaxEvaluator {
 	}
 
 	/**
-	 * ŒÂ‘Ì‚ğ‰æ–Ê‚Éo—Í‚·‚éD
-	 * @param ind ŒÂ‘Ì
+	 * ï¿½Â‘Ì‚ï¿½ï¿½ï¿½Ê‚Éoï¿½Í‚ï¿½ï¿½ï¿½D
+	 * @param ind ï¿½Â‘ï¿½
 	 */
 	public static void printIndividual(TBitStringIndividual ind) {
 		System.out.println("Evaluation value: " + ind.getEvaluationValue());

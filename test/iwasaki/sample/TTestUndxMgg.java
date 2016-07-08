@@ -1,7 +1,8 @@
 package iwasaki.sample;
-import evaluator.SphereEvaluator;
-import ga.realcode.TRealNumberIndividual;
-import ga.realcode.TUndxMgg;
+
+import iwasaki.evaluator.SphereEvaluator;
+import iwasaki.ga.realcode.TRealNumberIndividual;
+import iwasaki.ga.realcode.TUndxMgg;
 
 import java.util.List;
 

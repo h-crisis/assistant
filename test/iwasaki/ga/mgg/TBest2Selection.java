@@ -1,23 +1,23 @@
-package ga.mgg;
+package iwasaki.ga.mgg;
 
-import ga.core.IIndividual;
-import ga.core.TPopulation;
+import iwasaki.ga.core.IIndividual;
+import iwasaki.ga.core.TPopulation;
 
 /**
- * ãˆÊ‚QŒÂ‘Ì‚ğ‘I‘ğ‚·‚é¶‘¶‘I‘ğŠíD
+ * ï¿½ï¿½Ê‚Qï¿½Â‘Ì‚ï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½é¶ï¿½ï¿½ï¿½Iï¿½ï¿½ï¿½ï¿½D
  * @since 2
  * @author isao
  */
 public class TBest2Selection implements ISelectionForSurvival {
 
-	/** ‰Æ‘° */
+	/** ï¿½Æ‘ï¿½ */
 	private IIndividual[] fFamily;
 
-	/** Å¬‰»–â‘è‚©H */
+	/** ï¿½Åï¿½ï¿½ï¿½ï¿½ï¿½è‚©ï¿½H */
 	private boolean fMinimization;
 	
 	/**
-	 * ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+	 * ï¿½Rï¿½ï¿½ï¿½Xï¿½gï¿½ï¿½ï¿½Nï¿½^
 	 * @since 2
 	 * @author isao
 	 */
@@ -43,9 +43,9 @@ public class TBest2Selection implements ISelectionForSurvival {
 	}
 
 	/**
-	 * ‰Æ‘°‚ÌƒTƒCƒY‚ğİ’è‚·‚éD
-	 * @param noOfParents eŒÂ‘Ì‚Ì”
-	 * @param noOfKids qŒÂ‘Ì‚Ì”
+	 * ï¿½Æ‘ï¿½ï¿½ÌƒTï¿½Cï¿½Yï¿½ï¿½İ’è‚·ï¿½ï¿½D
+	 * @param noOfParents ï¿½eï¿½Â‘Ì‚Ìï¿½
+	 * @param noOfKids ï¿½qï¿½Â‘Ì‚Ìï¿½
 	 * @since 2
 	 * @author isao
 	 */
@@ -56,9 +56,9 @@ public class TBest2Selection implements ISelectionForSurvival {
 	}
 	
 	/**
-	 * eŒÂ‘Ì‚ÆqŒÂ‘Ì‚ğ‰Æ‘°‚É“o˜^‚·‚éD
-	 * @param parents eŒÂ‘Ì‚Ì”z—ñ
-	 * @param kids qŒÂ‘Ì‚Ì”z—ñ
+	 * ï¿½eï¿½Â‘Ì‚Æqï¿½Â‘Ì‚ï¿½ï¿½Æ‘ï¿½ï¿½É“oï¿½^ï¿½ï¿½ï¿½ï¿½D
+	 * @param parents ï¿½eï¿½Â‘Ì‚Ì”zï¿½ï¿½
+	 * @param kids ï¿½qï¿½Â‘Ì‚Ì”zï¿½ï¿½
 	 * @since 2
 	 * @author isao
 	 */
@@ -73,8 +73,8 @@ public class TBest2Selection implements ISelectionForSurvival {
 	}
 
 	/**
-	 * ŒÂ‘Ì”z—ñ‚ğƒ\[ƒg‚·‚é
-	 * @param array ƒ\[ƒg‚·‚éŒÂ‘Ì”z—ñ
+	 * ï¿½Â‘Ì”zï¿½ï¿½ï¿½ï¿½\ï¿½[ï¿½gï¿½ï¿½ï¿½ï¿½
+	 * @param array ï¿½\ï¿½[ï¿½gï¿½ï¿½ï¿½ï¿½Â‘Ì”zï¿½ï¿½
 	 * @since 2
 	 * @author isao
 	 */
@@ -91,11 +91,11 @@ public class TBest2Selection implements ISelectionForSurvival {
 	}
 	
 	/**
-	 * ŒÂ‘Ìa‚ÆŒÂ‘Ìb‚ğ”äŠr‚·‚éD
-	 * @param a ŒÂ‘ÌA
-	 * @param b ŒÂ‘ÌB
-	 * @param problem –â‘è
-	 * @return a‚æ‚è‚àb‚ª—D‚ê‚Ä‚¢‚éê‡‚Ítrue, ‚»‚¤‚Å‚È‚¢‚Æ‚«‚Ífalse
+	 * ï¿½Â‘ï¿½aï¿½ÆŒÂ‘ï¿½bï¿½ï¿½ï¿½rï¿½ï¿½ï¿½ï¿½D
+	 * @param a ï¿½Â‘ï¿½A
+	 * @param b ï¿½Â‘ï¿½B
+	 * @param problem ï¿½ï¿½ï¿½
+	 * @return aï¿½ï¿½ï¿½ï¿½bï¿½ï¿½ï¿½Dï¿½ï¿½Ä‚ï¿½ï¿½ï¿½ê‡ï¿½ï¿½true, ï¿½ï¿½ï¿½ï¿½ï¿½Å‚È‚ï¿½ï¿½Æ‚ï¿½ï¿½ï¿½false
 	 * @since 2
 	 * @author isao
 	 */

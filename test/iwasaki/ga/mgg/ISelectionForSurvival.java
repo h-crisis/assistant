@@ -1,29 +1,29 @@
-package ga.mgg;
+package iwasaki.ga.mgg;
 
-import ga.core.IIndividual;
-import ga.core.TPopulation;
+import iwasaki.ga.core.IIndividual;
+import iwasaki.ga.core.TPopulation;
 
 /**
- * ¶‘¶‘I‘ğ‚ğ’è‹`‚·‚é‚½‚ß‚ÌƒCƒ“ƒ^[ƒtƒF[ƒX
+ * ï¿½ï¿½ï¿½ï¿½ï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½`ï¿½ï¿½ï¿½é‚½ï¿½ß‚ÌƒCï¿½ï¿½ï¿½^ï¿½[ï¿½tï¿½Fï¿½[ï¿½X
  * @since 2
  * @author isao
  */
 public interface ISelectionForSurvival {
 	
 	/**
-	 * ¶‘¶‘I‘ğ‚ğÀs‚·‚é
-	 * @param pop Œ»İ‚ÌW’c
-	 * @param parentIndices W’c“à‚É‚¨‚¯‚éeŒÂ‘Ì‚ÌˆÊ’u
-	 * @param parents eŒÂ‘Ì
-	 * @param kids qŒÂ‘Ì
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½sï¿½ï¿½ï¿½ï¿½
+	 * @param pop ï¿½ï¿½ï¿½İ‚ÌWï¿½c
+	 * @param parentIndices ï¿½Wï¿½cï¿½ï¿½ï¿½É‚ï¿½ï¿½ï¿½ï¿½ï¿½eï¿½Â‘Ì‚ÌˆÊ’u
+	 * @param parents ï¿½eï¿½Â‘ï¿½
+	 * @param kids ï¿½qï¿½Â‘ï¿½
 	 * @since 2
 	 * @author isao
 	 */
 	public void doIt(TPopulation pop,  int[] parentIndices, IIndividual[] parents, IIndividual[] kids);
 	
 	/**
-	 * Å¬‰»‚©H
-	 * @return true:Å¬‰»CfalseFÅ‘å‰»
+	 * ï¿½Åï¿½ï¿½ï¿½ï¿½ï¿½ï¿½H
+	 * @return true:ï¿½Åï¿½ï¿½ï¿½ï¿½Cfalseï¿½Fï¿½Å‘å‰»
 	 */
 	public boolean isMinimization();
 

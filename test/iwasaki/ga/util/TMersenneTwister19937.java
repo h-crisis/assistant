@@ -1,4 +1,4 @@
-package ga.util;
+package iwasaki.ga.util;
 /*
  * TMersenneTwister19937 : A Java implementation of the MT19937 (Mersenne Twister)
  *            pseudo random number generator algorithm based upon the

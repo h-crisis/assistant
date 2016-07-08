@@ -1,10 +1,10 @@
-package ga.realcode;
+package iwasaki.ga.realcode;
 
-import ga.core.IIndividual;
-import ga.core.IIndividualFactory;
+import iwasaki.ga.core.IIndividual;
+import iwasaki.ga.core.IIndividualFactory;
 
 /**
- * ŒÂ‘Ìƒtƒ@ƒNƒgƒŠ
+ * ï¿½Â‘Ìƒtï¿½@ï¿½Nï¿½gï¿½ï¿½
  * @since 2
  * @author yamhan, isao
  * @author hmkz
@@ -14,7 +14,7 @@ public class TRealNumberIndividualFactory implements IIndividualFactory {
 	private int fDimension = -1;
 	
 	/**
-	 * ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+	 * ï¿½Rï¿½ï¿½ï¿½Xï¿½gï¿½ï¿½ï¿½Nï¿½^
 	 * @since 2
 	 * @author yamhan, isao
 	 */
@@ -22,8 +22,8 @@ public class TRealNumberIndividualFactory implements IIndividualFactory {
 	}
 
 	/**
-	 * ƒRƒ“ƒXƒgƒ‰ƒNƒ^
-	 * @param dim ŸŒ³”
+	 * ï¿½Rï¿½ï¿½ï¿½Xï¿½gï¿½ï¿½ï¿½Nï¿½^
+	 * @param dim ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 * @since 2
 	 * @author yamhan, isao
 	 */	
@@ -32,8 +32,8 @@ public class TRealNumberIndividualFactory implements IIndividualFactory {
 	}
 
 	/**
-	 * ŒÂ‘Ì‚ğ¶¬‚·‚éD
-	 * @return ¶¬‚³‚ê‚½ŒÂ‘Ì
+	 * ï¿½Â‘Ì‚ğ¶ï¿½ï¿½ï¿½ï¿½ï¿½D
+	 * @return ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ê‚½ï¿½Â‘ï¿½
 	 * @since 2
 	 * @author yamhan, isao
 	 */
@@ -45,7 +45,7 @@ public class TRealNumberIndividualFactory implements IIndividualFactory {
 	}
 
 	/**
-	 * “¯‚¶ŸŒ³”‚ÌTRealNumberIndividual‚ğ¶¬‚·‚é‚È‚çtrueC‚»‚¤‚Å‚È‚¯‚ê‚ÎfalseD
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½TRealNumberIndividualï¿½ğ¶ï¿½ï¿½ï¿½ï¿½ï¿½È‚ï¿½trueï¿½Cï¿½ï¿½ï¿½ï¿½ï¿½Å‚È‚ï¿½ï¿½ï¿½ï¿½falseï¿½D
 	 * @since 55
 	 * @author hmkz
 	 */

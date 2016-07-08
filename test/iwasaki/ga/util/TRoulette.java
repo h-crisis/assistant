@@ -1,24 +1,24 @@
-package ga.util;
+package iwasaki.ga.util;
 
 
 /**
- * ƒ‹[ƒŒƒbƒg
+ * ï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½bï¿½g
  * @since 2
  * @author yamhan, isao
  */
 public class TRoulette {
 
-	/** ƒXƒƒbƒg‚Ì” */
+	/** ï¿½Xï¿½ï¿½ï¿½bï¿½gï¿½Ìï¿½ */
 	private int fNoOfSlots;
 	
-	/** Œ»İ‚ÌƒXƒƒbƒg‚ÌˆÊ’u */
+	/** ï¿½ï¿½ï¿½İ‚ÌƒXï¿½ï¿½ï¿½bï¿½gï¿½ÌˆÊ’u */
 	private int fCurrentSlotIndex;
 	
-	/** ƒXƒƒbƒg */
+	/** ï¿½Xï¿½ï¿½ï¿½bï¿½g */
 	private double[] fSlots;
 
 	/**
-	 * ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+	 * ï¿½Rï¿½ï¿½ï¿½Xï¿½gï¿½ï¿½ï¿½Nï¿½^
 	 * @since 2
 	 * @author yamhan, isao
 	 */
@@ -28,8 +28,8 @@ public class TRoulette {
 	}
 	
 	/**
-	 * ƒRƒ“ƒXƒgƒ‰ƒNƒ^
-	 * @param noOfSlots ƒ‹[ƒŒƒbƒg‚ÌƒXƒƒbƒg‚Ì”
+	 * ï¿½Rï¿½ï¿½ï¿½Xï¿½gï¿½ï¿½ï¿½Nï¿½^
+	 * @param noOfSlots ï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½bï¿½gï¿½ÌƒXï¿½ï¿½ï¿½bï¿½gï¿½Ìï¿½
 	 * @since 2
 	 * @author yamhan, isao
 	 */
@@ -39,8 +39,8 @@ public class TRoulette {
 	}
 	
 	/**
-	 * ƒ‹[ƒŒƒbƒgsrc‚Ìƒpƒ‰ƒ[ƒ^‚ğƒRƒs[‚·‚éD
-	 * @param src ƒRƒs[Œ³‚Ìƒ‹[ƒŒƒbƒg
+	 * ï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½bï¿½gsrcï¿½Ìƒpï¿½ï¿½ï¿½ï¿½ï¿½[ï¿½^ï¿½ï¿½ï¿½Rï¿½sï¿½[ï¿½ï¿½ï¿½ï¿½D
+	 * @param src ï¿½Rï¿½sï¿½[ï¿½ï¿½ï¿½Ìƒï¿½ï¿½[ï¿½ï¿½ï¿½bï¿½g
 	 * @since 2
 	 * @author yamhan, isao
 	 */
@@ -52,8 +52,8 @@ public class TRoulette {
 	}	
 	
 	/**
-	 * ƒXƒƒbƒg”‚ğƒZƒbƒg‚·‚éD
-	 * @param noOfSlots ƒXƒƒbƒg”
+	 * ï¿½Xï¿½ï¿½ï¿½bï¿½gï¿½ï¿½ï¿½ï¿½ï¿½Zï¿½bï¿½gï¿½ï¿½ï¿½ï¿½D
+	 * @param noOfSlots ï¿½Xï¿½ï¿½ï¿½bï¿½gï¿½ï¿½
 	 * @since 2
 	 * @author yamhan, isao
 	 */
@@ -66,8 +66,8 @@ public class TRoulette {
 	}
 	
 	/**
-	 * ƒXƒƒbƒg”‚ğ•Ô‚·D
-	 * @return ƒXƒƒbƒg”
+	 * ï¿½Xï¿½ï¿½ï¿½bï¿½gï¿½ï¿½ï¿½ï¿½Ô‚ï¿½ï¿½D
+	 * @return ï¿½Xï¿½ï¿½ï¿½bï¿½gï¿½ï¿½
 	 * @since 2
 	 * @author yamhan, isao
 	 */
@@ -76,8 +76,8 @@ public class TRoulette {
 	}
 		
 	/**
-	 * Œ»İ‚ÌƒXƒƒbƒg‚ÌˆÊ’u‚ğƒŠƒZƒbƒg‚·‚éD<BR>
-	 * ƒJƒŒƒ“ƒgƒXƒƒbƒg‚ğ0‚É‚·‚éD
+	 * ï¿½ï¿½ï¿½İ‚ÌƒXï¿½ï¿½ï¿½bï¿½gï¿½ÌˆÊ’uï¿½ï¿½ï¿½ï¿½ï¿½Zï¿½bï¿½gï¿½ï¿½ï¿½ï¿½D<BR>
+	 * ï¿½Jï¿½ï¿½ï¿½ï¿½ï¿½gï¿½Xï¿½ï¿½ï¿½bï¿½gï¿½ï¿½0ï¿½É‚ï¿½ï¿½ï¿½D
 	 * @since 2
 	 * @author yamhan, isao
 	 */	
@@ -86,8 +86,8 @@ public class TRoulette {
 	}
 	
 	/**
-	 * Œ»İ‚ÌƒXƒƒbƒg‚ÌˆÊ’u‚ğ•Ô‚·D
-	 * @return Œ»İ‚ÌƒXƒƒbƒg‚ÌˆÊ’u
+	 * ï¿½ï¿½ï¿½İ‚ÌƒXï¿½ï¿½ï¿½bï¿½gï¿½ÌˆÊ’uï¿½ï¿½Ô‚ï¿½ï¿½D
+	 * @return ï¿½ï¿½ï¿½İ‚ÌƒXï¿½ï¿½ï¿½bï¿½gï¿½ÌˆÊ’u
 	 * @since 2
 	 * @author yamhan, isao
 	 */
@@ -96,8 +96,8 @@ public class TRoulette {
 	}
 	
 	/**
-	 * ƒXƒƒbƒg‚É’l‚ğƒZƒbƒg‚·‚éD
-	 * @param value ƒZƒbƒg‚·‚é’l
+	 * ï¿½Xï¿½ï¿½ï¿½bï¿½gï¿½É’lï¿½ï¿½ï¿½Zï¿½bï¿½gï¿½ï¿½ï¿½ï¿½D
+	 * @param value ï¿½Zï¿½bï¿½gï¿½ï¿½ï¿½ï¿½l
 	 * @since 2
 	 * @author yamhan, isao
 	 */
@@ -112,9 +112,9 @@ public class TRoulette {
 	}
 	
 	/**
-	 * index”Ô–Ú‚ÌƒXƒƒbƒg‚Ì’l‚ğ•Ô‚·D
-	 * @param index ’l‚ğ“¾‚½‚¢ƒXƒƒbƒg‚ÌˆÊ’u
-	 * @return ƒXƒƒbƒg‚Ì’l
+	 * indexï¿½Ô–Ú‚ÌƒXï¿½ï¿½ï¿½bï¿½gï¿½Ì’lï¿½ï¿½Ô‚ï¿½ï¿½D
+	 * @param index ï¿½lï¿½ğ“¾‚ï¿½ï¿½ï¿½ï¿½Xï¿½ï¿½ï¿½bï¿½gï¿½ÌˆÊ’u
+	 * @return ï¿½Xï¿½ï¿½ï¿½bï¿½gï¿½Ì’l
 	 * @since 2
 	 * @author yamhan, isao
 	 */
@@ -123,8 +123,8 @@ public class TRoulette {
 	}
 	
 	/**
-	 * ƒ‹[ƒŒƒbƒg‚ğ‰ñ‚µ‚ÄCƒ‰ƒ“ƒ_ƒ€‚É”Ô†‚ğ•Ô‚·
-	 * @return ‘I‚Î‚ê‚½”Ô†
+	 * ï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½bï¿½gï¿½ï¿½ï¿½ñ‚µ‚ÄCï¿½ï¿½ï¿½ï¿½ï¿½_ï¿½ï¿½ï¿½É”Ôï¿½ï¿½ï¿½Ô‚ï¿½
+	 * @return ï¿½Iï¿½Î‚ê‚½ï¿½Ôï¿½
 	 * @since 2
 	 * @author yamhan, isao
 	 */

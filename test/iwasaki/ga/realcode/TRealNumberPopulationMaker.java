@@ -1,42 +1,42 @@
-package ga.realcode;
+package iwasaki.ga.realcode;
 
-import ga.core.IIndividual;
-import ga.core.IIndividualFactory;
-import ga.core.IInitialPopulationMaker;
-import ga.core.TPopulation;
-import ga.util.TMyRandom;
+import iwasaki.ga.core.IIndividual;
+import iwasaki.ga.core.IIndividualFactory;
+import iwasaki.ga.core.IInitialPopulationMaker;
+import iwasaki.ga.core.TPopulation;
+import iwasaki.ga.util.TMyRandom;
 
 import java.io.FileWriter;
 import java.io.PrintWriter;
 
 /**
- * À”ƒxƒNƒgƒ‹ŒÂ‘Ì‚©‚ç\¬‚³‚ê‚é‰ŠúW’c¶¬ŠíD
- * ‚½‚¾‚µC‰Šú‰»‚Ì’è‹`ˆæ‚ÍC[0.0, 1.0]‚Å‚ ‚éD
+ * ï¿½ï¿½ï¿½ï¿½ï¿½xï¿½Nï¿½gï¿½ï¿½ï¿½Â‘Ì‚ï¿½ï¿½ï¿½\ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½é‰ï¿½ï¿½ï¿½Wï¿½cï¿½ï¿½ï¿½ï¿½ï¿½ï¿½D
+ * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì’ï¿½`ï¿½ï¿½ÍC[0.0, 1.0]ï¿½Å‚ï¿½ï¿½ï¿½D
  * @since 2
  * @author isao
  */
 public class TRealNumberPopulationMaker implements IInitialPopulationMaker {
 
-	/** W’cƒTƒCƒY */
+	/** ï¿½Wï¿½cï¿½Tï¿½Cï¿½Y */
 	private int fPopulationSize = 0;
 
-	/** ŸŒ³” */
+	/** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
 	private int fDimension = 0;
 	
-	/** ŒÂ‘Ìƒtƒ@ƒNƒgƒŠ */
+	/** ï¿½Â‘Ìƒtï¿½@ï¿½Nï¿½gï¿½ï¿½ */
 	private IIndividualFactory fIndividualFactory = null;
 	
-	/** ’è‹`ˆæ‚ÌÅ¬’l */
+	/** ï¿½ï¿½`ï¿½ï¿½ÌÅï¿½ï¿½l */
 	public static final double MIN = 0.0;
 	
-	/** ’è‹`ˆæ‚ÌÅ‘å’l */
+	/** ï¿½ï¿½`ï¿½ï¿½ÌÅ‘ï¿½l */
 	public static final double MAX = 1.0;
 	
 	/**
-	 * ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+	 * ï¿½Rï¿½ï¿½ï¿½Xï¿½gï¿½ï¿½ï¿½Nï¿½^
 	 * @since 2
 	 * @author isao
-	 * @author hmkz À‘•‚ğˆÏ÷‚µ‚½
+	 * @author hmkz ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ïï¿½ï¿½ï¿½ï¿½ï¿½
 	 */
 	public TRealNumberPopulationMaker(int popSize, int dim) {
 		fPopulationSize = popSize;
@@ -45,11 +45,11 @@ public class TRealNumberPopulationMaker implements IInitialPopulationMaker {
 	}
 	
 	/**
-	 * ƒRƒs[ƒRƒ“ƒXƒgƒ‰ƒNƒ^
-	 * @param src ƒRƒs[Œ³
+	 * ï¿½Rï¿½sï¿½[ï¿½Rï¿½ï¿½ï¿½Xï¿½gï¿½ï¿½ï¿½Nï¿½^
+	 * @param src ï¿½Rï¿½sï¿½[ï¿½ï¿½
 	 * @since 2
 	 * @author isao
-	 * @author hmkz ŒÂ‘Ìƒtƒ@ƒNƒgƒŠ‚Æ–â‘è‚ÌƒRƒs[ˆ—‚ğ’Ç‰Á
+	 * @author hmkz ï¿½Â‘Ìƒtï¿½@ï¿½Nï¿½gï¿½ï¿½ï¿½Æ–ï¿½ï¿½ÌƒRï¿½sï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç‰ï¿½
 	 */
 	public TRealNumberPopulationMaker(TRealNumberPopulationMaker src) {
 		fPopulationSize = src.fPopulationSize;
@@ -58,12 +58,12 @@ public class TRealNumberPopulationMaker implements IInitialPopulationMaker {
 	}
 	
 	/**
-	 * ƒRƒs[
-	 * @param src ƒRƒs[Œ³
-	 * @return ƒRƒs[Œ‹‰Ê
+	 * ï¿½Rï¿½sï¿½[
+	 * @param src ï¿½Rï¿½sï¿½[ï¿½ï¿½
+	 * @return ï¿½Rï¿½sï¿½[ï¿½ï¿½ï¿½ï¿½
 	 * @since 2
 	 * @author isao
-	 * @author hmkz ŒÂ‘Ìƒtƒ@ƒNƒgƒŠ‚Æ–â‘è‚ÌƒRƒs[ˆ—‚ğ’Ç‰Á
+	 * @author hmkz ï¿½Â‘Ìƒtï¿½@ï¿½Nï¿½gï¿½ï¿½ï¿½Æ–ï¿½ï¿½ÌƒRï¿½sï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç‰ï¿½
 	 */
 	public TRealNumberPopulationMaker copyFrom(TRealNumberPopulationMaker src) {
 		fPopulationSize = src.fPopulationSize;
@@ -81,11 +81,11 @@ public class TRealNumberPopulationMaker implements IInitialPopulationMaker {
 	}
 	
 	/**
-	 * ŒÂ‘Ì‚Ìƒ‰ƒ“ƒ_ƒ€‰Šú‰»‚ğs‚¤D
-	 * @param ind ŒÂ‘Ì
+	 * ï¿½Â‘Ì‚Ìƒï¿½ï¿½ï¿½ï¿½_ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½sï¿½ï¿½ï¿½D
+	 * @param ind ï¿½Â‘ï¿½
 	 * @since 2
 	 * @author isao
-	 * @author hmkz ŠmÀ‚ÉÀs‰Â”\‰ğ‚ğì‚é‚½‚ßCŒÂ‘Ì¶¬‚ÌŒã‚É•]‰¿‚às‚¤‚æ‚¤‚É•ÏX‚µ‚½
+	 * @author hmkz ï¿½mï¿½ï¿½ï¿½Éï¿½ï¿½sï¿½Â”\ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½é‚½ï¿½ßCï¿½Â‘Ìï¿½ï¿½ï¿½ï¿½ÌŒï¿½É•]ï¿½ï¿½ï¿½ï¿½ï¿½sï¿½ï¿½ï¿½æ‚¤ï¿½É•ÏXï¿½ï¿½ï¿½ï¿½
 	 */
 	private void initInitIndividual(IIndividual ind) {
 		TMyRandom rand = TMyRandom.getInstance();
@@ -97,12 +97,12 @@ public class TRealNumberPopulationMaker implements IInitialPopulationMaker {
 	}
 	
 	/**
-	 * ƒ‰ƒ“ƒ_ƒ€‚ÈW’c‚ğ¶¬‚·‚éD
-	 * –â‘è‚ªİ’è‚³‚ê‚Ä‚¢‚éê‡CÀs‰Â”\‰ğ‚Ì‚İ‚©‚ç‚È‚éW’c‚ª¶¬‚³‚ê‚éD
-	 * @return W’c
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½_ï¿½ï¿½ï¿½ÈWï¿½cï¿½ğ¶ï¿½ï¿½ï¿½ï¿½ï¿½D
+	 * ï¿½ï¿½è‚ªï¿½İ’è‚³ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½ê‡ï¿½Cï¿½ï¿½ï¿½sï¿½Â”\ï¿½ï¿½ï¿½Ì‚İ‚ï¿½ï¿½ï¿½È‚ï¿½Wï¿½cï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½D
+	 * @return ï¿½Wï¿½c
 	 * @since 2
 	 * @author isao
-	 * @author hmkz –â‘è‚ªİ’è‚³‚ê‚Ä‚¢‚éê‡C•K‚¸Às‰Â”\‰ğ‚ğ¶¬‚·‚é‚æ‚¤‚É‚µ‚½D
+	 * @author hmkz ï¿½ï¿½è‚ªï¿½İ’è‚³ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½ê‡ï¿½Cï¿½Kï¿½ï¿½ï¿½ï¿½ï¿½sï¿½Â”\ï¿½ï¿½ï¿½ğ¶ï¿½ï¿½ï¿½ï¿½ï¿½æ‚¤ï¿½É‚ï¿½ï¿½ï¿½ï¿½D
 	 */
 	public TPopulation createInitialPopulation() {
 		TPopulation result = new TPopulation(fIndividualFactory, fPopulationSize);
@@ -114,8 +114,8 @@ public class TRealNumberPopulationMaker implements IInitialPopulationMaker {
 	}
 	
 	/**
-	 * W’cƒTƒCƒY‚ğ•Ô‚·D
-	 * @return W’cƒTƒCƒY
+	 * ï¿½Wï¿½cï¿½Tï¿½Cï¿½Yï¿½ï¿½Ô‚ï¿½ï¿½D
+	 * @return ï¿½Wï¿½cï¿½Tï¿½Cï¿½Y
 	 * @since 2
 	 * @author isao
 	 */
@@ -124,8 +124,8 @@ public class TRealNumberPopulationMaker implements IInitialPopulationMaker {
 	}
 
 	/**
-	 * W’cƒTƒCƒY‚ğİ’è‚·‚éD
-	 * @param populationSize W’cƒTƒCƒY
+	 * ï¿½Wï¿½cï¿½Tï¿½Cï¿½Yï¿½ï¿½İ’è‚·ï¿½ï¿½D
+	 * @param populationSize ï¿½Wï¿½cï¿½Tï¿½Cï¿½Y
 	 * @since 2
 	 * @author isao
 	 */
@@ -134,8 +134,8 @@ public class TRealNumberPopulationMaker implements IInitialPopulationMaker {
 	}
 
 	/**
-	 * ŸŒ³”‚ğ•Ô‚·D
-	 * @return ŸŒ³”
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô‚ï¿½ï¿½D
+	 * @return ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 * @since 2
 	 * @author isao
 	 */
@@ -144,8 +144,8 @@ public class TRealNumberPopulationMaker implements IInitialPopulationMaker {
 	}
 
 	/**
-	 * ŸŒ³”‚ğİ’è‚·‚éD
-	 * @param dim ŸŒ³”
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½İ’è‚·ï¿½ï¿½D
+	 * @param dim ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 * @since 2
 	 * @author isao
 	 */
@@ -154,9 +154,9 @@ public class TRealNumberPopulationMaker implements IInitialPopulationMaker {
 	}
 	
 	/**
-	 * W’c‚ğƒtƒ@ƒCƒ‹‚Öo—Í‚·‚éD
-	 * @param pop W’c
-	 * @param filename ƒtƒ@ƒCƒ‹–¼
+	 * ï¿½Wï¿½cï¿½ï¿½ï¿½tï¿½@ï¿½Cï¿½ï¿½ï¿½Öoï¿½Í‚ï¿½ï¿½ï¿½D
+	 * @param pop ï¿½Wï¿½c
+	 * @param filename ï¿½tï¿½@ï¿½Cï¿½ï¿½ï¿½ï¿½
 	 * @since 2
 	 * @author isao
 	 */
@@ -172,8 +172,8 @@ public class TRealNumberPopulationMaker implements IInitialPopulationMaker {
 	}
 
 	/**
-	 * ƒƒCƒ“
-	 * @param args W’cƒTƒCƒY ŸŒ³” ƒtƒ@ƒCƒ‹–¼ ŠJn”Ô† I—¹”Ô†
+	 * ï¿½ï¿½ï¿½Cï¿½ï¿½
+	 * @param args ï¿½Wï¿½cï¿½Tï¿½Cï¿½Y ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½tï¿½@ï¿½Cï¿½ï¿½ï¿½ï¿½ ï¿½Jï¿½nï¿½Ôï¿½ ï¿½Iï¿½ï¿½ï¿½Ôï¿½
 	 * @since 2
 	 * @author isao
 	 */

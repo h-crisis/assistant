@@ -1,21 +1,21 @@
-package ga.bitstring;
+package iwasaki.ga.bitstring;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 
 /**
- * ƒrƒbƒgƒXƒgƒŠƒ“ƒO
+ * ï¿½rï¿½bï¿½gï¿½Xï¿½gï¿½ï¿½ï¿½ï¿½ï¿½O
  * @since 2
  * @author isao
  */
 public class TBitString {
 	
-	/** ƒf[ƒ^ */
+	/** ï¿½fï¿½[ï¿½^ */
 	private int[] fArray;
 	
 	/**
-	 * ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+	 * ï¿½Rï¿½ï¿½ï¿½Xï¿½gï¿½ï¿½ï¿½Nï¿½^
 	 * @since 2
 	 */
 	public TBitString() {
@@ -23,8 +23,8 @@ public class TBitString {
 	}
 	
 	/**
-	 * ƒRƒ“ƒXƒgƒ‰ƒNƒ^
-	 * @param length ƒrƒbƒgƒXƒgƒŠƒ“ƒO’·
+	 * ï¿½Rï¿½ï¿½ï¿½Xï¿½gï¿½ï¿½ï¿½Nï¿½^
+	 * @param length ï¿½rï¿½bï¿½gï¿½Xï¿½gï¿½ï¿½ï¿½ï¿½ï¿½Oï¿½ï¿½
 	 * @since 2
 	 */
 	public TBitString(int length) {
@@ -32,8 +32,8 @@ public class TBitString {
 	}
 	
 	/**
-	 * ƒRƒ“ƒXƒgƒ‰ƒNƒ^
-	 * @param str 0‚Æ1‚©‚ç‚È‚é•¶š—ñ
+	 * ï¿½Rï¿½ï¿½ï¿½Xï¿½gï¿½ï¿½ï¿½Nï¿½^
+	 * @param str 0ï¿½ï¿½1ï¿½ï¿½ï¿½ï¿½È‚é•¶ï¿½ï¿½ï¿½ï¿½
 	 * @since 2
 	 */
 	public TBitString(String str) {
@@ -42,8 +42,8 @@ public class TBitString {
 	}
 	
 	/**
-	 * ƒRƒ“ƒXƒgƒ‰ƒNƒ^
-	 * @param src ƒRƒs[Œ³
+	 * ï¿½Rï¿½ï¿½ï¿½Xï¿½gï¿½ï¿½ï¿½Nï¿½^
+	 * @param src ï¿½Rï¿½sï¿½[ï¿½ï¿½
 	 * @since 2
 	 */
 	public TBitString(TBitString src) {
@@ -54,8 +54,8 @@ public class TBitString {
 	}
 	
 	/**
-	 * ƒRƒs[
-	 * @param src ƒRƒs[Œ³
+	 * ï¿½Rï¿½sï¿½[
+	 * @param src ï¿½Rï¿½sï¿½[ï¿½ï¿½
 	 * @since 2
 	 */
 	public void copyFrom(TBitString src) {
@@ -66,7 +66,7 @@ public class TBitString {
 	}
 	
 	/**
-	 * •W€o—Í‚Öo—Í‚·‚éD
+	 * ï¿½Wï¿½ï¿½ï¿½oï¿½Í‚Öoï¿½Í‚ï¿½ï¿½ï¿½D
 	 * @since 2
 	 */
 	public void printOn() {
@@ -74,9 +74,9 @@ public class TBitString {
 	}
 	
 	/**
-	 * “ü—ÍƒXƒgƒŠ[ƒ€‚©‚çƒf[ƒ^‚ğ“Ç‚İ‚Ş
-	 * @param br “ü—ÍƒXƒgƒŠ[ƒ€
-	 * @throws IOException “Ç‚İ‚İ‚É¸”s‚µ‚½ê‡‚É“Š‚°‚ç‚ê‚éD
+	 * ï¿½ï¿½ï¿½ÍƒXï¿½gï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½fï¿½[ï¿½^ï¿½ï¿½Ç‚İï¿½ï¿½ï¿½
+	 * @param br ï¿½ï¿½ï¿½ÍƒXï¿½gï¿½ï¿½ï¿½[ï¿½ï¿½
+	 * @throws IOException ï¿½Ç‚İï¿½ï¿½İ‚Éï¿½ï¿½sï¿½ï¿½ï¿½ï¿½ï¿½ê‡ï¿½É“ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½D
 	 * @since 2
 	 */
 	public void readFrom(BufferedReader br) throws IOException {
@@ -84,9 +84,9 @@ public class TBitString {
 	}
 	
 	/**
-	 * o—ÍƒXƒgƒŠ[ƒ€‚Öƒf[ƒ^‚ğ‘‚«o‚·D
-	 * @param pw o—ÍƒXƒgƒŠ[ƒ€
-	 * @throws IOException ‘‚«o‚µ‚É¸”s‚µ‚½ê‡‚É“Š‚°‚ç‚ê‚éD
+	 * ï¿½oï¿½ÍƒXï¿½gï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½Öƒfï¿½[ï¿½^ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½oï¿½ï¿½ï¿½D
+	 * @param pw ï¿½oï¿½ÍƒXï¿½gï¿½ï¿½ï¿½[ï¿½ï¿½
+	 * @throws IOException ï¿½ï¿½ï¿½ï¿½ï¿½oï¿½ï¿½ï¿½Éï¿½ï¿½sï¿½ï¿½ï¿½ï¿½ï¿½ê‡ï¿½É“ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½D
 	 * @since 2
 	 */
 	public void writeTo(PrintWriter pw) {
@@ -94,8 +94,8 @@ public class TBitString {
 	}
 	
 	/**
-	 * ƒrƒbƒgƒXƒgƒŠƒ“ƒO’·‚ğİ’è‚·‚éD
-	 * @param length ƒrƒbƒgƒXƒgƒŠƒ“ƒO’·
+	 * ï¿½rï¿½bï¿½gï¿½Xï¿½gï¿½ï¿½ï¿½ï¿½ï¿½Oï¿½ï¿½ï¿½ï¿½İ’è‚·ï¿½ï¿½D
+	 * @param length ï¿½rï¿½bï¿½gï¿½Xï¿½gï¿½ï¿½ï¿½ï¿½ï¿½Oï¿½ï¿½
 	 * @since 2
 	 */
 	public void setLength(int length) {
@@ -106,8 +106,8 @@ public class TBitString {
 	}
 	
 	/**
-	 * ƒrƒbƒgƒXƒgƒŠƒ“ƒO’·‚ğ•Ô‚·D
-	 * @return ƒrƒbƒgƒXƒgƒŠƒ“ƒO’·
+	 * ï¿½rï¿½bï¿½gï¿½Xï¿½gï¿½ï¿½ï¿½ï¿½ï¿½Oï¿½ï¿½ï¿½ï¿½Ô‚ï¿½ï¿½D
+	 * @return ï¿½rï¿½bï¿½gï¿½Xï¿½gï¿½ï¿½ï¿½ï¿½ï¿½Oï¿½ï¿½
 	 * @since 2
 	 */
 	public int getLength() {
@@ -115,9 +115,9 @@ public class TBitString {
 	}
 
 	/**
-	 * index”Ô–Ú‚Ìƒf[ƒ^‚ğ•Ô‚·D
-	 * @param index “Y‚¦š
-	 * @return ƒf[ƒ^ (0 or 1)
+	 * indexï¿½Ô–Ú‚Ìƒfï¿½[ï¿½^ï¿½ï¿½Ô‚ï¿½ï¿½D
+	 * @param index ï¿½Yï¿½ï¿½ï¿½ï¿½
+	 * @return ï¿½fï¿½[ï¿½^ (0 or 1)
 	 * @since 2
 	 */
 	public int getData(int index) {
@@ -125,9 +125,9 @@ public class TBitString {
 	}
 	
 	/**
-	 * index”Ô–Ú‚Édata‚ğİ’è‚·‚éD
-	 * @param index “Y‚¦š
-	 * @param data ƒf[ƒ^ (0 or 1)
+	 * indexï¿½Ô–Ú‚ï¿½dataï¿½ï¿½İ’è‚·ï¿½ï¿½D
+	 * @param index ï¿½Yï¿½ï¿½ï¿½ï¿½
+	 * @param data ï¿½fï¿½[ï¿½^ (0 or 1)
 	 * @since 2
 	 */
 	public void setData(int index, int data) {
@@ -135,8 +135,8 @@ public class TBitString {
 	}
 
 	/**
-	 * ‘S‚Ä‚Ìƒrƒbƒg‚Édata‚ğİ’è‚·‚éD
-	 * @param data ƒf[ƒ^ (0 or 1)
+	 * ï¿½Sï¿½Ä‚Ìƒrï¿½bï¿½gï¿½ï¿½dataï¿½ï¿½İ’è‚·ï¿½ï¿½D
+	 * @param data ï¿½fï¿½[ï¿½^ (0 or 1)
 	 * @since 2
 	 */
 	public void setToAllBits(int data) {
@@ -146,8 +146,8 @@ public class TBitString {
 	}
 	
 	/**
-	 * index”Ô–Ú‚Ìdata‚ğ”½“]‚·‚éD
-	 * @param index “Y‚¦š
+	 * indexï¿½Ô–Ú‚ï¿½dataï¿½ğ”½“]ï¿½ï¿½ï¿½ï¿½D
+	 * @param index ï¿½Yï¿½ï¿½ï¿½ï¿½
 	 * @since 2
 	 */
 	public void flip(int index) {
@@ -155,7 +155,7 @@ public class TBitString {
 	}
 	
 	/**
-	 * ‘S‚Ä‚Ìƒrƒbƒg‚ğ”½“]‚·‚éD
+	 * ï¿½Sï¿½Ä‚Ìƒrï¿½bï¿½gï¿½ğ”½“]ï¿½ï¿½ï¿½ï¿½D
 	 * @since 2
 	 */
 	public void flipAllBits() {
@@ -165,8 +165,8 @@ public class TBitString {
 	}
 	
 	/**
-	 * x‚Æ‚Ì˜_—Ï‚ğ‚Æ‚éD
-	 * @param x ƒrƒbƒgƒXƒgƒŠƒ“ƒO
+	 * xï¿½Æ‚Ì˜_ï¿½ï¿½ï¿½Ï‚ï¿½ï¿½Æ‚ï¿½D
+	 * @param x ï¿½rï¿½bï¿½gï¿½Xï¿½gï¿½ï¿½ï¿½ï¿½ï¿½O
 	 * @since 2
 	 */
 	public void and(TBitString x) {
@@ -176,8 +176,8 @@ public class TBitString {
 	}
 	
 	/**
-	 * x‚Æ‚Ì˜_—˜a‚ğ‚Æ‚éD
-	 * @param x ƒrƒbƒgƒXƒgƒŠƒ“ƒO
+	 * xï¿½Æ‚Ì˜_ï¿½ï¿½ï¿½aï¿½ï¿½ï¿½Æ‚ï¿½D
+	 * @param x ï¿½rï¿½bï¿½gï¿½Xï¿½gï¿½ï¿½ï¿½ï¿½ï¿½O
 	 * @since 2
 	 */
 	public void or(TBitString x) {
@@ -188,8 +188,8 @@ public class TBitString {
 	}
 	
 	/**
-	 * x‚Æ‚Ì”r‘¼“I˜_—˜a‚ğ‚Æ‚éD
-	 * @param x ƒrƒbƒgƒXƒgƒŠƒ“ƒO
+	 * xï¿½Æ‚Ì”rï¿½ï¿½ï¿½Iï¿½_ï¿½ï¿½ï¿½aï¿½ï¿½ï¿½Æ‚ï¿½D
+	 * @param x ï¿½rï¿½bï¿½gï¿½Xï¿½gï¿½ï¿½ï¿½ï¿½ï¿½O
 	 * @since 2
 	 */
 	public void xor(TBitString x) {
@@ -203,8 +203,8 @@ public class TBitString {
 	}
 	
 	/**
-	 * 0‚Æ1‚©‚ç‚È‚é•¶š—ñ‚Åƒf[ƒ^‚ğ‰Šú‰»‚·‚éD
-	 * @param str 0‚Æ1‚©‚ç‚È‚é•¶š—ñ
+	 * 0ï¿½ï¿½1ï¿½ï¿½ï¿½ï¿½È‚é•¶ï¿½ï¿½ï¿½ï¿½Åƒfï¿½[ï¿½^ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½D
+	 * @param str 0ï¿½ï¿½1ï¿½ï¿½ï¿½ï¿½È‚é•¶ï¿½ï¿½ï¿½ï¿½
 	 * @since 2
 	 */
 	public void fromString(String str) {
@@ -215,8 +215,8 @@ public class TBitString {
 	}
 
 	/**
-	 * •¶š—ñ‚É•ÏŠ·‚·‚éD
-	 * @return 0‚Æ1‚©‚ç‚È‚é•¶š—ñ
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É•ÏŠï¿½ï¿½ï¿½ï¿½ï¿½D
+	 * @return 0ï¿½ï¿½1ï¿½ï¿½ï¿½ï¿½È‚é•¶ï¿½ï¿½ï¿½ï¿½
 	 * @since 2
 	 */
 	@Override

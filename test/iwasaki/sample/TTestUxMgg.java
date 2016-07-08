@@ -1,9 +1,9 @@
 package iwasaki.sample;
-import evaluator.OneMaxEvaluator;
-import ga.bitstring.TBitString;
-import ga.bitstring.TBitStringIndividual;
-import ga.bitstring.TUxMgg;
-import ga.core.IIndividual;
+import iwasaki.evaluator.OneMaxEvaluator;
+import iwasaki.ga.bitstring.TBitString;
+import iwasaki.ga.bitstring.TBitStringIndividual;
+import iwasaki.ga.bitstring.TUxMgg;
+import iwasaki.ga.core.IIndividual;
 
 import java.util.List;
 
@@ -28,7 +28,7 @@ public class TTestUxMgg {
 	 * ���C�����\�b�h
 	 * @param args �Ȃ�
 	 */
-/*	public static void main(String[] args) {
+	public static void main(String[] args) {
 		TUxMgg ga = new TUxMgg( false, NO_OF_BITS, POPULATION_SIZE, NO_OF_CROSSOVERS, true);
 		List<TBitStringIndividual> initialPopulation = ga.getInitialPopulation();
 		OneMaxEvaluator.evaluatePopulation( initialPopulation);
@@ -41,7 +41,7 @@ public class TTestUxMgg {
 		System.out.println();
 		System.out.println( "*** Best individual ***");
 		OneMaxEvaluator.printIndividual( ga.getBestIndividual());
-	}*/
+	}
 //}
 
 //	/**

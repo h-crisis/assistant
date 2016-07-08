@@ -1,23 +1,23 @@
-package ga.bitstring;
+package iwasaki.ga.bitstring;
 
-import ga.util.TMyRandom;
+import iwasaki.ga.util.TMyRandom;
 
 
 /**
- * ˆê—lŒğ³
+ * ï¿½ï¿½lï¿½ï¿½ï¿½ï¿½
  * @since 2
  * @author isao
  */
 public class TUx {
 	
-	/** e‚P */
+	/** ï¿½eï¿½P */
 	private TBitString fParent1;
 	
-	/** e‚Q */
+	/** ï¿½eï¿½Q */
 	private TBitString fParent2;
 
 	/**
-	 * ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+	 * ï¿½Rï¿½ï¿½ï¿½Xï¿½gï¿½ï¿½ï¿½Nï¿½^
 	 * @since 2
 	 */
 	public TUx() {
@@ -26,9 +26,9 @@ public class TUx {
 	}
 	
 	/**
-	 * —¼e‚ğİ’è‚·‚éD
-	 * @param p1 e‚P
-	 * @param p2 e‚Q
+	 * ï¿½ï¿½ï¿½eï¿½ï¿½İ’è‚·ï¿½ï¿½D
+	 * @param p1 ï¿½eï¿½P
+	 * @param p2 ï¿½eï¿½Q
 	 * @since 2
 	 */
 	public void setParents(TBitString p1, TBitString p2) {
@@ -37,9 +37,9 @@ public class TUx {
 	}
 	
 	/**
-	 * qŒÂ‘Ì‚ğ¶¬‚·‚éD
-	 * @param kid1 q‚P
-	 * @param kid2 q‚Q
+	 * ï¿½qï¿½Â‘Ì‚ğ¶ï¿½ï¿½ï¿½ï¿½ï¿½D
+	 * @param kid1 ï¿½qï¿½P
+	 * @param kid2 ï¿½qï¿½Q
 	 * @since 2
 	 */
 	public void doIt(TBitString kid1, TBitString kid2) {

@@ -1,31 +1,31 @@
-package ga.util;
+package iwasaki.ga.util;
 /**
- * ŒvŽZŒë·‚ðl—¶‚µ‚ÄŽÀ”’l‚Ì”äŠr‚ðs‚¤D
+ * ï¿½vï¿½Zï¿½ë·ï¿½ï¿½ï¿½lï¿½ï¿½ï¿½ï¿½ï¿½ÄŽï¿½ï¿½ï¿½ï¿½lï¿½Ì”ï¿½rï¿½ï¿½ï¿½sï¿½ï¿½ï¿½D
  * <p>
- * ‚±‚ÌƒNƒ‰ƒX‚Ì”äŠrƒƒ\ƒbƒh‚Å‚ÍC
- * ”äŠr‚·‚é2ŽÀ”‚Ì·‚Ìâ‘Î’l‚ªÝ’è‚³‚ê‚½‹–—eŒë·–¢–ž‚Å‚ ‚ê‚Î“™‚µ‚¢‚Æ‚Ý‚È‚µ‚Ü‚·D
+ * ï¿½ï¿½ï¿½ÌƒNï¿½ï¿½ï¿½Xï¿½Ì”ï¿½rï¿½ï¿½ï¿½\ï¿½bï¿½hï¿½Å‚ÍC
+ * ï¿½ï¿½rï¿½ï¿½ï¿½ï¿½2ï¿½ï¿½ï¿½ï¿½ï¿½Ìï¿½ï¿½Ìï¿½Î’lï¿½ï¿½ï¿½Ý’è‚³ï¿½ê‚½ï¿½ï¿½ï¿½eï¿½ë·ï¿½ï¿½ï¿½ï¿½ï¿½Å‚ï¿½ï¿½ï¿½Î“ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ‚Ý‚È‚ï¿½ï¿½Ü‚ï¿½ï¿½D
  * <p>
- * double‚âfloat‚ÌŒvŽZ‚É‚ÍŒë·‚ª‚Â‚«‚à‚Ì‚È‚Ì‚Å
- * ==, <, >, <=, >=‰‰ŽZŽq‚Å”äŠr‚¹‚¸C•K‚¸‚±‚ÌƒNƒ‰ƒX‚ðŽg‚¢‚Ü‚µ‚å‚¤D
+ * doubleï¿½ï¿½floatï¿½ÌŒvï¿½Zï¿½É‚ÍŒë·ï¿½ï¿½ï¿½Â‚ï¿½ï¿½ï¿½ï¿½Ì‚È‚Ì‚ï¿½
+ * ==, <, >, <=, >=ï¿½ï¿½ï¿½Zï¿½qï¿½Å”ï¿½rï¿½ï¿½ï¿½ï¿½ï¿½Cï¿½Kï¿½ï¿½ï¿½ï¿½ï¿½ÌƒNï¿½ï¿½ï¿½Xï¿½ï¿½ï¿½gï¿½ï¿½ï¿½Ü‚ï¿½ï¿½å‚¤ï¿½D
  * <p>
- * DoubleƒNƒ‰ƒX‚Ì”äŠrƒƒ\ƒbƒhi{@link Double#compareTo(Double)}, {@link Double#equals(Object)}j
- * ‚à‹–—eŒë·‚É‚Í‘Î‰ž‚µ‚Ä‚¢‚È‚¢‚±‚Æ‚É’ˆÓ‚µ‚Ä‚­‚¾‚³‚¢D
+ * Doubleï¿½Nï¿½ï¿½ï¿½Xï¿½Ì”ï¿½rï¿½ï¿½ï¿½\ï¿½bï¿½hï¿½i{@link Double#compareTo(Double)}, {@link Double#equals(Object)}ï¿½j
+ * ï¿½ï¿½ï¿½ï¿½ï¿½eï¿½ë·ï¿½É‚Í‘Î‰ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½È‚ï¿½ï¿½ï¿½ï¿½Æ‚É’ï¿½ï¿½Ó‚ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½D
  * <p>
- * EPS’l‚ð0‚ÉÝ’è‚µ‚½ê‡C‚±‚ÌƒNƒ‰ƒX‚Ì”äŠrƒƒ\ƒbƒh‚Í==, <, >, <=, >=‰‰ŽZŽq‚Ì“®ì‚Æˆê’v‚µ‚Ü‚·D
+ * EPSï¿½lï¿½ï¿½0ï¿½ÉÝ’è‚µï¿½ï¿½ï¿½ê‡ï¿½Cï¿½ï¿½ï¿½ÌƒNï¿½ï¿½ï¿½Xï¿½Ì”ï¿½rï¿½ï¿½ï¿½\ï¿½bï¿½hï¿½ï¿½==, <, >, <=, >=ï¿½ï¿½ï¿½Zï¿½qï¿½Ì“ï¿½ï¿½ï¿½Æˆï¿½vï¿½ï¿½ï¿½Ü‚ï¿½ï¿½D
  * @since 59
  * @author hmkz
  */
 public class TComparator {
 	
-	/** ‹–—eŒë·‚ÌƒfƒtƒHƒ‹ƒg’l */
+	/** ï¿½ï¿½ï¿½eï¿½ë·ï¿½Ìƒfï¿½tï¿½Hï¿½ï¿½ï¿½gï¿½l */
 	public static final double DEFAULT_EPS = 1e-15;
 	
-	/** Œ»ÝÝ’è‚³‚ê‚Ä‚¢‚é‹–—eŒë· */
+	/** ï¿½ï¿½ï¿½ÝÝ’è‚³ï¿½ï¿½Ä‚ï¿½ï¿½é‹–ï¿½eï¿½ë· */
 	private static double fEps = DEFAULT_EPS;
 	
 	/**
-	 * ‹–—eŒë·‚ðÝ’è‚·‚éD
-	 * @param eps ‹–—eŒë·
+	 * ï¿½ï¿½ï¿½eï¿½ë·ï¿½ï¿½Ý’è‚·ï¿½ï¿½D
+	 * @param eps ï¿½ï¿½ï¿½eï¿½ë·
 	 * @since 59
 	 * @author hmkz
 	 */
@@ -37,8 +37,8 @@ public class TComparator {
 	}
 	
 	/**
-	 * Œ»ÝÝ’è‚³‚ê‚Ä‚¢‚é‹–—eŒë·‚ð•Ô‚·D
-	 * @return ‹–—eŒë·
+	 * ï¿½ï¿½ï¿½ÝÝ’è‚³ï¿½ï¿½Ä‚ï¿½ï¿½é‹–ï¿½eï¿½ë·ï¿½ï¿½Ô‚ï¿½ï¿½D
+	 * @return ï¿½ï¿½ï¿½eï¿½ë·
 	 * @since 59
 	 * @author hmkz
 	 */
@@ -47,11 +47,11 @@ public class TComparator {
 	}
 	
 	/**
-	 * ‹–—eŒë·‚Â‚«‚Ìa == bD
-	 * a‚Æb‚Ì·‚ª‹–—eŒë·ˆÈ“à‚Å‚ ‚ê‚Î^‚Æ‚Ý‚È‚·D
-	 * @param a ”äŠr‚·‚éŽÀ”‚P
-	 * @param b ”äŠr‚·‚éŽÀ”‚Q
-	 * @return a, b‚Ì·‚Ìâ‘Î’l‚ª‹–—eŒë·ˆÈ“à‚Å‚ ‚ê‚ÎtrueC‚»‚¤‚Å‚È‚¯‚ê‚ÎfalseD
+	 * ï¿½ï¿½ï¿½eï¿½ë·ï¿½Â‚ï¿½ï¿½ï¿½a == bï¿½D
+	 * aï¿½ï¿½bï¿½Ìï¿½ï¿½ï¿½ï¿½ï¿½ï¿½eï¿½ë·ï¿½È“ï¿½ï¿½Å‚ï¿½ï¿½ï¿½Î^ï¿½Æ‚Ý‚È‚ï¿½ï¿½D
+	 * @param a ï¿½ï¿½rï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½P
+	 * @param b ï¿½ï¿½rï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Q
+	 * @return a, bï¿½Ìï¿½ï¿½Ìï¿½Î’lï¿½ï¿½ï¿½ï¿½ï¿½eï¿½ë·ï¿½È“ï¿½ï¿½Å‚ï¿½ï¿½ï¿½ï¿½trueï¿½Cï¿½ï¿½ï¿½ï¿½ï¿½Å‚È‚ï¿½ï¿½ï¿½ï¿½falseï¿½D
 	 * @since 59
 	 * @author hmkz
 	 */
@@ -60,12 +60,12 @@ public class TComparator {
 	}
 	
 	/**
-	 * ‹–—eŒë·‚Â‚«‚Ìa > bD
-	 * a‚ªb‚æ‚è‚à‹–—eŒë·ˆÈã‚É‘å‚«‚¯‚ê‚Î^‚Æ‚·‚éD
-	 * ‹–—eŒë·‚Ì‚½‚ßCŒµ–§‚É‚Ía > b‚Å‚ ‚Á‚Ä‚à‚±‚Ìƒƒ\ƒbƒh‚ªfalse‚ð•Ô‚µ‚¤‚é‚±‚Æ‚É’ˆÓ‚·‚é‚±‚ÆD
-	 * @param a ”äŠr‚·‚éŽÀ”‚P
-	 * @param b ”äŠr‚·‚éŽÀ”‚Q
-	 * @return a‚ªb‚æ‚è‹–—eŒë·ˆÈã‘å‚«‚¯‚ê‚ÎtrueC‚»‚¤‚Å‚È‚¯‚ê‚ÎfalseD
+	 * ï¿½ï¿½ï¿½eï¿½ë·ï¿½Â‚ï¿½ï¿½ï¿½a > bï¿½D
+	 * aï¿½ï¿½bï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½eï¿½ë·ï¿½Èï¿½É‘å‚«ï¿½ï¿½ï¿½ï¿½Î^ï¿½Æ‚ï¿½ï¿½ï¿½D
+	 * ï¿½ï¿½ï¿½eï¿½ë·ï¿½Ì‚ï¿½ï¿½ßCï¿½ï¿½ï¿½ï¿½ï¿½É‚ï¿½a > bï¿½Å‚ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½ï¿½Ìƒï¿½ï¿½\ï¿½bï¿½hï¿½ï¿½falseï¿½ï¿½Ô‚ï¿½ï¿½ï¿½ï¿½é‚±ï¿½Æ‚É’ï¿½ï¿½Ó‚ï¿½ï¿½é‚±ï¿½ÆD
+	 * @param a ï¿½ï¿½rï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½P
+	 * @param b ï¿½ï¿½rï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Q
+	 * @return aï¿½ï¿½bï¿½ï¿½è‹–ï¿½eï¿½ë·ï¿½Èï¿½å‚«ï¿½ï¿½ï¿½ï¿½ï¿½trueï¿½Cï¿½ï¿½ï¿½ï¿½ï¿½Å‚È‚ï¿½ï¿½ï¿½ï¿½falseï¿½D
 	 * @since 59
 	 * @author hmkz
 	 */
@@ -74,12 +74,12 @@ public class TComparator {
 	}
 
 	/**
-	 * ‹–—eŒë·‚Â‚«‚Ìa >= bD
-	 * a‚ªb‚Æ“™‚µ‚¢‚©‘å‚«‚¯‚ê‚Î^‚Æ‚·‚éD
-	 * ‹–—eŒë·‚Ì‚½‚ßCŒµ–§‚É‚Ía < b‚Å‚ ‚Á‚Ä‚à‚±‚Ìƒƒ\ƒbƒh‚ªtrue‚ð•Ô‚µ‚¤‚é‚±‚Æ‚É’ˆÓ‚·‚é‚±‚ÆD
-	 * @param a ”äŠr‚·‚éŽÀ”‚P
-	 * @param b ”äŠr‚·‚éŽÀ”‚Q
-	 * @return a‚ªb‚Æ“™‚µ‚¢‚©‘å‚«‚¯‚ê‚ÎtrueC‚»‚¤‚Å‚È‚¯‚ê‚ÎfalseD
+	 * ï¿½ï¿½ï¿½eï¿½ë·ï¿½Â‚ï¿½ï¿½ï¿½a >= bï¿½D
+	 * aï¿½ï¿½bï¿½Æ“ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½å‚«ï¿½ï¿½ï¿½ï¿½Î^ï¿½Æ‚ï¿½ï¿½ï¿½D
+	 * ï¿½ï¿½ï¿½eï¿½ë·ï¿½Ì‚ï¿½ï¿½ßCï¿½ï¿½ï¿½ï¿½ï¿½É‚ï¿½a < bï¿½Å‚ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½ï¿½Ìƒï¿½ï¿½\ï¿½bï¿½hï¿½ï¿½trueï¿½ï¿½Ô‚ï¿½ï¿½ï¿½ï¿½é‚±ï¿½Æ‚É’ï¿½ï¿½Ó‚ï¿½ï¿½é‚±ï¿½ÆD
+	 * @param a ï¿½ï¿½rï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½P
+	 * @param b ï¿½ï¿½rï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Q
+	 * @return aï¿½ï¿½bï¿½Æ“ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½å‚«ï¿½ï¿½ï¿½ï¿½ï¿½trueï¿½Cï¿½ï¿½ï¿½ï¿½ï¿½Å‚È‚ï¿½ï¿½ï¿½ï¿½falseï¿½D
 	 * @since 59
 	 * @author hmkz
 	 */
@@ -88,12 +88,12 @@ public class TComparator {
 	}
 
 	/**
-	 * ‹–—eŒë·‚Â‚«‚Ìa < bD
-	 * a‚ªb‚æ‚è‚à‹–—eŒë·ˆÈã‚É¬‚³‚¯‚ê‚Î^‚Æ‚·‚éD
-	 * ‹–—eŒë·‚Ì‚½‚ßCŒµ–§‚É‚Ía < b‚Å‚ ‚Á‚Ä‚à‚±‚Ìƒƒ\ƒbƒh‚ªfalse‚ð•Ô‚µ‚¤‚é‚±‚Æ‚É’ˆÓ‚·‚é‚±‚ÆD
-	 * @param a ”äŠr‚·‚éŽÀ”‚P
-	 * @param b ”äŠr‚·‚éŽÀ”‚Q
-	 * @return a‚ªb‚æ‚è‹–—eŒë·ˆÈã¬‚³‚¯‚ê‚ÎtrueC‚»‚¤‚Å‚È‚¯‚ê‚ÎfalseD
+	 * ï¿½ï¿½ï¿½eï¿½ë·ï¿½Â‚ï¿½ï¿½ï¿½a < bï¿½D
+	 * aï¿½ï¿½bï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½eï¿½ë·ï¿½Èï¿½Éï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î^ï¿½Æ‚ï¿½ï¿½ï¿½D
+	 * ï¿½ï¿½ï¿½eï¿½ë·ï¿½Ì‚ï¿½ï¿½ßCï¿½ï¿½ï¿½ï¿½ï¿½É‚ï¿½a < bï¿½Å‚ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½ï¿½Ìƒï¿½ï¿½\ï¿½bï¿½hï¿½ï¿½falseï¿½ï¿½Ô‚ï¿½ï¿½ï¿½ï¿½é‚±ï¿½Æ‚É’ï¿½ï¿½Ó‚ï¿½ï¿½é‚±ï¿½ÆD
+	 * @param a ï¿½ï¿½rï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½P
+	 * @param b ï¿½ï¿½rï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Q
+	 * @return aï¿½ï¿½bï¿½ï¿½è‹–ï¿½eï¿½ë·ï¿½Èã¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½trueï¿½Cï¿½ï¿½ï¿½ï¿½ï¿½Å‚È‚ï¿½ï¿½ï¿½ï¿½falseï¿½D
 	 * @since 59
 	 * @author hmkz
 	 */
@@ -102,12 +102,12 @@ public class TComparator {
 	}
 
 	/**
-	 * ‹–—eŒë·‚Â‚«‚Ìa <= bD
-	 * a‚ªb‚Æ“™‚µ‚¢‚©¬‚³‚¯‚ê‚Î^‚Æ‚·‚éD
-	 * ‹–—eŒë·‚Ì‚½‚ßCŒµ–§‚É‚Ía > b‚Å‚ ‚Á‚Ä‚à‚±‚Ìƒƒ\ƒbƒh‚ªtrue‚ð•Ô‚µ‚¤‚é‚±‚Æ‚É’ˆÓ‚·‚é‚±‚ÆD
-	 * @param a ”äŠr‚·‚éŽÀ”‚P
-	 * @param b ”äŠr‚·‚éŽÀ”‚Q
-	 * @return a‚ªb‚Æ“™‚µ‚¢‚©¬‚³‚¯‚ê‚ÎtrueC‚»‚¤‚Å‚È‚¯‚ê‚ÎfalseD
+	 * ï¿½ï¿½ï¿½eï¿½ë·ï¿½Â‚ï¿½ï¿½ï¿½a <= bï¿½D
+	 * aï¿½ï¿½bï¿½Æ“ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î^ï¿½Æ‚ï¿½ï¿½ï¿½D
+	 * ï¿½ï¿½ï¿½eï¿½ë·ï¿½Ì‚ï¿½ï¿½ßCï¿½ï¿½ï¿½ï¿½ï¿½É‚ï¿½a > bï¿½Å‚ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½ï¿½Ìƒï¿½ï¿½\ï¿½bï¿½hï¿½ï¿½trueï¿½ï¿½Ô‚ï¿½ï¿½ï¿½ï¿½é‚±ï¿½Æ‚É’ï¿½ï¿½Ó‚ï¿½ï¿½é‚±ï¿½ÆD
+	 * @param a ï¿½ï¿½rï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½P
+	 * @param b ï¿½ï¿½rï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Q
+	 * @return aï¿½ï¿½bï¿½Æ“ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½trueï¿½Cï¿½ï¿½ï¿½ï¿½ï¿½Å‚È‚ï¿½ï¿½ï¿½ï¿½falseï¿½D
 	 * @since 59
 	 * @author hmkz
 	 */
@@ -116,7 +116,7 @@ public class TComparator {
 	}
 	
 	/**
-	 * ‚±‚ÌƒNƒ‰ƒX‚ÍƒCƒ“ƒXƒ^ƒ“ƒX‚ðì‚ç‚È‚¢D
+	 * ï¿½ï¿½ï¿½ÌƒNï¿½ï¿½ï¿½Xï¿½ÍƒCï¿½ï¿½ï¿½Xï¿½^ï¿½ï¿½ï¿½Xï¿½ï¿½ï¿½ï¿½ï¿½È‚ï¿½ï¿½D
 	 * @since 59
 	 * @author hmkz
 	 */

@@ -1,11 +1,11 @@
 /**
  * 
  */
-package evaluator;
+package iwasaki.evaluator;
 
-import ga.core.IIndividual;
-import ga.realcode.TRealNumberIndividual;
-import ga.realcode.TVector;
+import iwasaki.ga.core.IIndividual;
+import iwasaki.ga.realcode.TRealNumberIndividual;
+import iwasaki.ga.realcode.TVector;
 import java.util.Random;
 
 import java.util.List;

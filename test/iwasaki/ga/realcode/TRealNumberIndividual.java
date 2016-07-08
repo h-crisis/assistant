@@ -1,30 +1,30 @@
-package ga.realcode;
+package iwasaki.ga.realcode;
 
-import ga.core.IIndividual;
-import ga.util.TComparator;
+import iwasaki.ga.core.IIndividual;
+import iwasaki.ga.util.TComparator;
 
 import java.io.BufferedReader;
 import java.io.PrintWriter;
 
 /**
- * À”’lƒxƒNƒgƒ‹ƒR[ƒfƒBƒ“ƒO‚ÌŒÂ‘Ì
+ * ï¿½ï¿½ï¿½ï¿½ï¿½lï¿½xï¿½Nï¿½gï¿½ï¿½ï¿½Rï¿½[ï¿½fï¿½Bï¿½ï¿½ï¿½Oï¿½ÌŒÂ‘ï¿½
  * @since 2
  * @author yamhan
  * @author hmkz
  */
 public class TRealNumberIndividual implements IIndividual, IRealNumberCoding {
 
-	/** ó‘ÔiÀs‰Â”\ŒÂ‘Ì‚©‚Ç‚¤‚©Hj */
+	/** ï¿½ï¿½Ôiï¿½ï¿½ï¿½sï¿½Â”\ï¿½Â‘Ì‚ï¿½ï¿½Ç‚ï¿½ï¿½ï¿½ï¿½Hï¿½j */
 	private int fStatus;
 	
-	/** •]‰¿’l */
+	/** ï¿½]ï¿½ï¿½ï¿½l */
 	private double fEvaluationValue;
 	
-	/** À”ƒxƒNƒgƒ‹ */
+	/** ï¿½ï¿½ï¿½ï¿½ï¿½xï¿½Nï¿½gï¿½ï¿½ */
 	private TVector fRealVector;
 
 	/**
-	 * ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+	 * ï¿½Rï¿½ï¿½ï¿½Xï¿½gï¿½ï¿½ï¿½Nï¿½^
 	 * @since 2
 	 */
 	public TRealNumberIndividual() {
@@ -32,8 +32,8 @@ public class TRealNumberIndividual implements IIndividual, IRealNumberCoding {
 	}
 	
 	/**
-	 * ƒRƒ“ƒXƒgƒ‰ƒNƒ^
-	 * @param dimension ŸŒ³”
+	 * ï¿½Rï¿½ï¿½ï¿½Xï¿½gï¿½ï¿½ï¿½Nï¿½^
+	 * @param dimension ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 * @since 2
 	 */
 	public TRealNumberIndividual(int dimension) {
@@ -43,8 +43,8 @@ public class TRealNumberIndividual implements IIndividual, IRealNumberCoding {
 	}
 	
 	/**
-	 * ƒRƒs[ƒRƒ“ƒXƒgƒ‰ƒNƒ^
-	 * @param src ƒRƒs[Œ³
+	 * ï¿½Rï¿½sï¿½[ï¿½Rï¿½ï¿½ï¿½Xï¿½gï¿½ï¿½ï¿½Nï¿½^
+	 * @param src ï¿½Rï¿½sï¿½[ï¿½ï¿½
 	 * @since 62
 	 */
 	public TRealNumberIndividual(TRealNumberIndividual src) {
@@ -138,8 +138,8 @@ public class TRealNumberIndividual implements IIndividual, IRealNumberCoding {
 	}
 
 	/**
-	 * ŒÂ‘Ì‚ÉŠÜ‚Ü‚ê‚éƒxƒNƒgƒ‹‚ğ•Ô‚·D
-	 * @return ŒÂ‘Ì‚ÌƒxƒNƒgƒ‹
+	 * ï¿½Â‘Ì‚ÉŠÜ‚Ü‚ï¿½ï¿½xï¿½Nï¿½gï¿½ï¿½ï¿½ï¿½Ô‚ï¿½ï¿½D
+	 * @return ï¿½Â‘Ì‚Ìƒxï¿½Nï¿½gï¿½ï¿½
 	 * @since 2
 	 */
 	public TVector getVector() {
@@ -147,9 +147,9 @@ public class TRealNumberIndividual implements IIndividual, IRealNumberCoding {
 	}
 
 	/**
-	 * ŒÂ‘Ì‚Ì‚à‚Â•]‰¿’lCó‘ÔCƒxƒNƒgƒ‹‚ª‚·‚×‚Ä“™‚µ‚¢ê‡‚Étrue‚ğ•Ô‚·D‚»‚¤‚Å‚È‚¯‚ê‚ÎfalseD
-	 * •]‰¿’l‚ÆƒxƒNƒgƒ‹‚Ìƒ`ƒFƒbƒN‚ÌÛ‚É‚ÍŒë·‚ğ‹–—e‚·‚éD
-	 * ‹–—eŒë·‚ÌŠm”FEİ’è‚É‚Í{@link util.TComparator}ƒNƒ‰ƒX‚ğg‚¤D
+	 * ï¿½Â‘Ì‚Ì‚ï¿½ï¿½Â•]ï¿½ï¿½ï¿½lï¿½Cï¿½ï¿½ÔCï¿½xï¿½Nï¿½gï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×‚Ä“ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ê‡ï¿½ï¿½trueï¿½ï¿½Ô‚ï¿½ï¿½Dï¿½ï¿½ï¿½ï¿½ï¿½Å‚È‚ï¿½ï¿½ï¿½ï¿½falseï¿½D
+	 * ï¿½]ï¿½ï¿½ï¿½lï¿½Æƒxï¿½Nï¿½gï¿½ï¿½ï¿½Ìƒ`ï¿½Fï¿½bï¿½Nï¿½ÌÛ‚É‚ÍŒë·ï¿½ï¿½ï¿½ï¿½ï¿½eï¿½ï¿½ï¿½ï¿½D
+	 * ï¿½ï¿½ï¿½eï¿½ë·ï¿½ÌŠmï¿½Fï¿½Eï¿½İ’ï¿½É‚ï¿½{@link util.TComparator}ï¿½Nï¿½ï¿½ï¿½Xï¿½ï¿½ï¿½gï¿½ï¿½ï¿½D
 	 * @since 50
 	 */
 	@Override

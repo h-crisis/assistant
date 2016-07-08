@@ -1,14 +1,14 @@
-package ga.mgg;
+package iwasaki.ga.mgg;
 /**
- * ¶‘¶‘I‘ğŠíƒtƒ@ƒNƒgƒŠ
+ * ï¿½ï¿½ï¿½ï¿½ï¿½Iï¿½ï¿½ï¿½ï¿½tï¿½@ï¿½Nï¿½gï¿½ï¿½
  * @since 2
  * @author isao
  */
 public interface ISelectionForSurvivalFactory {
 
 	/**
-	 * ¶‘¶‘I‘ğŠí‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‚ğ¶¬‚·‚éD
-	 * @return ¶‘¶‘I‘ğŠí‚ÌƒCƒ“ƒXƒ^ƒ“ƒX
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½Iï¿½ï¿½ï¿½ï¿½ÌƒCï¿½ï¿½ï¿½Xï¿½^ï¿½ï¿½ï¿½Xï¿½ğ¶ï¿½ï¿½ï¿½ï¿½ï¿½D
+	 * @return ï¿½ï¿½ï¿½ï¿½ï¿½Iï¿½ï¿½ï¿½ï¿½ÌƒCï¿½ï¿½ï¿½Xï¿½^ï¿½ï¿½ï¿½X
 	 * @since 2
 	 * @author isao
 	 */

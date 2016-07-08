@@ -1,8 +1,8 @@
-package ga.mgg;
+package iwasaki.ga.mgg;
 
 
 /**
- * ƒ‰ƒ“ƒ_ƒ€•¡»‘I‘ğŠíƒtƒ@ƒNƒgƒŠ
+ * ï¿½ï¿½ï¿½ï¿½ï¿½_ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Iï¿½ï¿½ï¿½ï¿½tï¿½@ï¿½Nï¿½gï¿½ï¿½
  * @since 2
  * @author isao
  */

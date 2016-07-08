@@ -1,35 +1,35 @@
-package ga.realcode;
+package iwasaki.ga.realcode;
 
-import ga.core.IIndividual;
-import ga.core.IKidMaker;
+import iwasaki.ga.core.IIndividual;
+import iwasaki.ga.core.IKidMaker;
 
 /**
- * UNDX‚É‚æ‚éq¶¬Ší
+ * UNDXï¿½É‚ï¿½ï¿½qï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
  * @since 2
  * @author isao
  */
 public class TUndxKidMaker implements IKidMaker {
 	
-	/** UNDX‚ª•K—v‚Æ‚·‚éeŒÂ‘Ì‚Ì” */
+	/** UNDXï¿½ï¿½ï¿½Kï¿½vï¿½Æ‚ï¿½ï¿½ï¿½eï¿½Â‘Ì‚Ìï¿½ */
 	private static final int NO_OF_PARENTS = 3;
 
 	/** UNDX */
 	private TUndx fUndx;
 	
 	/**
-	 * ƒRƒ“ƒXƒgƒ‰ƒNƒ^
-	 * ƒvƒƒpƒeƒB‚Æ‚µ‚ÄCundx.alpha, undx.beta‚ª•K—vD
+	 * ï¿½Rï¿½ï¿½ï¿½Xï¿½gï¿½ï¿½ï¿½Nï¿½^
+	 * ï¿½vï¿½ï¿½ï¿½pï¿½eï¿½Bï¿½Æ‚ï¿½ï¿½ÄCundx.alpha, undx.betaï¿½ï¿½ï¿½Kï¿½vï¿½D
 	 * @since 2
 	 * @author isao
-	 * @author hmkz ƒ¿ƒÀ‚Ì“Ç‚İ‚İ‚ªƒRƒƒ“ƒgƒAƒEƒg‚³‚ê‚Ä‚¢‚½–â‘è‚ğC³
+	 * @author hmkz ï¿½ï¿½ï¿½ï¿½ï¿½Ì“Ç‚İï¿½ï¿½İ‚ï¿½ï¿½Rï¿½ï¿½ï¿½ï¿½ï¿½gï¿½Aï¿½Eï¿½gï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Cï¿½ï¿½
 	 */
 	public TUndxKidMaker(double alpha, double beta) {
 		fUndx = new TUndx(alpha, beta);
 	}
 	
 	/**
-	 * ƒVƒXƒeƒ€ƒpƒ‰ƒ[ƒ^ƒ¿‚ğİ’è‚·‚é
-	 * @param alpha ƒVƒXƒeƒ€ƒpƒ‰ƒ[ƒ^ƒ¿
+	 * ï¿½Vï¿½Xï¿½eï¿½ï¿½ï¿½pï¿½ï¿½ï¿½ï¿½ï¿½[ï¿½^ï¿½ï¿½ï¿½ï¿½İ’è‚·ï¿½ï¿½
+	 * @param alpha ï¿½Vï¿½Xï¿½eï¿½ï¿½ï¿½pï¿½ï¿½ï¿½ï¿½ï¿½[ï¿½^ï¿½ï¿½
 	 * @since 2
 	 * @author isao
 	 */
@@ -38,8 +38,8 @@ public class TUndxKidMaker implements IKidMaker {
 	}
 	
 	/**
-	 * ƒVƒXƒeƒ€ƒpƒ‰ƒ[ƒ^ƒ¿‚ğ•Ô‚·D
-	 * @return ƒVƒXƒeƒ€ƒpƒ‰ƒ[ƒ^ƒ¿
+	 * ï¿½Vï¿½Xï¿½eï¿½ï¿½ï¿½pï¿½ï¿½ï¿½ï¿½ï¿½[ï¿½^ï¿½ï¿½ï¿½ï¿½Ô‚ï¿½ï¿½D
+	 * @return ï¿½Vï¿½Xï¿½eï¿½ï¿½ï¿½pï¿½ï¿½ï¿½ï¿½ï¿½[ï¿½^ï¿½ï¿½
 	 * @since 2
 	 * @author isao
 	 */
@@ -48,8 +48,8 @@ public class TUndxKidMaker implements IKidMaker {
 	}
 	
 	/**
-	 * ƒVƒXƒeƒ€ƒpƒ‰ƒ[ƒ^ƒÀ‚ğİ’è‚·‚éD
-	 * @param beta ƒVƒXƒeƒ€ƒpƒ‰ƒ[ƒ^ƒÀ
+	 * ï¿½Vï¿½Xï¿½eï¿½ï¿½ï¿½pï¿½ï¿½ï¿½ï¿½ï¿½[ï¿½^ï¿½ï¿½ï¿½ï¿½İ’è‚·ï¿½ï¿½D
+	 * @param beta ï¿½Vï¿½Xï¿½eï¿½ï¿½ï¿½pï¿½ï¿½ï¿½ï¿½ï¿½[ï¿½^ï¿½ï¿½
 	 * @since 2
 	 * @author isao
 	 */
@@ -58,8 +58,8 @@ public class TUndxKidMaker implements IKidMaker {
 	}
 	
 	/**
-	 * ƒVƒXƒeƒ€ƒpƒ‰ƒ[ƒ^ƒÀ‚ğ•Ô‚·
-	 * @return ƒVƒXƒeƒ€ƒpƒ‰ƒ[ƒ^ƒÀ
+	 * ï¿½Vï¿½Xï¿½eï¿½ï¿½ï¿½pï¿½ï¿½ï¿½ï¿½ï¿½[ï¿½^ï¿½ï¿½ï¿½ï¿½Ô‚ï¿½
+	 * @return ï¿½Vï¿½Xï¿½eï¿½ï¿½ï¿½pï¿½ï¿½ï¿½ï¿½ï¿½[ï¿½^ï¿½ï¿½
 	 * @since 2
 	 * @author isao
 	 */

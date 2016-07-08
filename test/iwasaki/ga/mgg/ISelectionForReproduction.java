@@ -1,20 +1,20 @@
-package ga.mgg;
+package iwasaki.ga.mgg;
 
-import ga.core.IIndividual;
-import ga.core.TPopulation;
+import iwasaki.ga.core.IIndividual;
+import iwasaki.ga.core.TPopulation;
 
 /**
- * •¡»‘I‘ğƒCƒ“ƒ^[ƒtƒF[ƒX
+ * ï¿½ï¿½ï¿½ï¿½ï¿½Iï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½^ï¿½[ï¿½tï¿½Fï¿½[ï¿½X
  * @since 2
  * @author isao
  */
 public interface ISelectionForReproduction {
 	
 	/**
-	 * ¶‘¶‘I‘ğ‚ğs‚È‚¤
-	 * @param pop W’c
-	 * @param parentIndices ‘I‘ğ‚³‚ê‚½eŒÂ‘Ì‚ÌW’c’†‚É‚¨‚¯‚éˆÊ’u
-	 * @param parents ‘I‘ğ‚³‚ê‚½eŒÂ‘Ì‚ÌƒRƒs[
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½sï¿½È‚ï¿½
+	 * @param pop ï¿½Wï¿½c
+	 * @param parentIndices ï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½ê‚½ï¿½eï¿½Â‘Ì‚ÌWï¿½cï¿½ï¿½ï¿½É‚ï¿½ï¿½ï¿½ï¿½ï¿½Ê’u
+	 * @param parents ï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½ê‚½ï¿½eï¿½Â‘Ì‚ÌƒRï¿½sï¿½[
 	 * @since 2
 	 */
 	public void doIt(TPopulation pop, int[] parentIndices, IIndividual[] parents);

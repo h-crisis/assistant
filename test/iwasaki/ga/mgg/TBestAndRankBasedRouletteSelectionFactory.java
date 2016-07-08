@@ -1,12 +1,12 @@
-package ga.mgg;
+package iwasaki.ga.mgg;
 /**
- * TBestAndRankBasedRouletteSelection‚Ìƒtƒ@ƒNƒgƒŠ
+ * TBestAndRankBasedRouletteSelectionï¿½Ìƒtï¿½@ï¿½Nï¿½gï¿½ï¿½
  * @since 2
  * @author isao
  */
 public class TBestAndRankBasedRouletteSelectionFactory implements ISelectionForSurvivalFactory {
 	
-	/** Å¬‰»‚©H */
+	/** ï¿½Åï¿½ï¿½ï¿½ï¿½ï¿½ï¿½H */
 	private boolean fMinimization;
 
 	public TBestAndRankBasedRouletteSelectionFactory(boolean isMinimization) {

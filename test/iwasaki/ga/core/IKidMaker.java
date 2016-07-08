@@ -1,37 +1,37 @@
-package ga.core;
+package iwasaki.ga.core;
 
 
 /**
- * ŒÂ‘Ì¶¬ŠíiŒð³C“Ë‘R•ÏˆÙCetc.j‚Í‚±‚ÌƒCƒ“ƒ^[ƒtƒF[ƒX‚ðŽÀ‘•‚·‚é‚±‚ÆD
+ * ï¿½Â‘Ìï¿½ï¿½ï¿½ï¿½ï¿½iï¿½ï¿½ï¿½ï¿½ï¿½Cï¿½Ë‘Rï¿½ÏˆÙCetc.ï¿½jï¿½Í‚ï¿½ï¿½ÌƒCï¿½ï¿½ï¿½^ï¿½[ï¿½tï¿½Fï¿½[ï¿½Xï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½é‚±ï¿½ÆD
  * @since 2
  * @author yamhan
  */
 public interface IKidMaker {
 
 	/**
-	 * ŒÂ‘Ì¶¬‚É•K—v‚ÈeŒÂ‘Ì‚Ì”‚ð•Ô‚·D<BR>
-	 * @return ŒÂ‘Ì¶¬‚É•K—v‚ÈeŒÂ‘Ì‚Ì”
+	 * ï¿½Â‘Ìï¿½ï¿½ï¿½ï¿½É•Kï¿½vï¿½Èeï¿½Â‘Ì‚Ìï¿½ï¿½ï¿½Ô‚ï¿½ï¿½D<BR>
+	 * @return ï¿½Â‘Ìï¿½ï¿½ï¿½ï¿½É•Kï¿½vï¿½Èeï¿½Â‘Ì‚Ìï¿½
 	 * @since 2
 	 */
 	int getNoOfParents();
 	
 	/**
-	 * ŒÂ‘Ì¶¬‚ÉŽg—p‚³‚ê‚éeŒÂ‘Ì‚ðƒZƒbƒg‚·‚éD
-	 * “n‚·‚×‚«eŒÂ‘Ì‚Ì”‚Í{@link #getNoOfParents()}‚Å“¾‚é‚±‚ÆD
-	 * @param parents eŒÂ‘Ì
-	 * @throws IllegalArgumentException parents‚Ì—v‘f”‚ªgetNoOfParents‚Ì–ß‚è’l‚ÆˆÙ‚È‚é‚Æ‚«Dparents‚Énull‚ªŠÜ‚Ü‚ê‚é‚Æ‚«D
-	 * ‚±‚ÌƒCƒ“ƒ^[ƒtƒF[ƒX‚ÌŽÀ‘•ŽÒ‚Í‚±‚Ì‘¼‚É‚à—áŠO‚ð“Š‚°‚éðŒ‚ð’Ç‰Á‚µ‚Ä‚æ‚¢D
+	 * ï¿½Â‘Ìï¿½ï¿½ï¿½ï¿½ÉŽgï¿½pï¿½ï¿½ï¿½ï¿½ï¿½eï¿½Â‘Ì‚ï¿½ï¿½Zï¿½bï¿½gï¿½ï¿½ï¿½ï¿½D
+	 * ï¿½nï¿½ï¿½ï¿½×‚ï¿½ï¿½eï¿½Â‘Ì‚Ìï¿½ï¿½ï¿½{@link #getNoOfParents()}ï¿½Å“ï¿½ï¿½é‚±ï¿½ÆD
+	 * @param parents ï¿½eï¿½Â‘ï¿½
+	 * @throws IllegalArgumentException parentsï¿½Ì—vï¿½fï¿½ï¿½ï¿½ï¿½getNoOfParentsï¿½Ì–ß‚ï¿½lï¿½ÆˆÙ‚È‚ï¿½Æ‚ï¿½ï¿½Dparentsï¿½ï¿½nullï¿½ï¿½ï¿½Ü‚Ü‚ï¿½ï¿½Æ‚ï¿½ï¿½D
+	 * ï¿½ï¿½ï¿½ÌƒCï¿½ï¿½ï¿½^ï¿½[ï¿½tï¿½Fï¿½[ï¿½Xï¿½ÌŽï¿½ï¿½ï¿½ï¿½Ò‚Í‚ï¿½ï¿½Ì‘ï¿½ï¿½É‚ï¿½ï¿½ï¿½Oï¿½ð“Š‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç‰ï¿½ï¿½ï¿½ï¿½Ä‚æ‚¢ï¿½D
 	 * @since 2
 	 */
 	void setParents(IIndividual[] parents);
 	
 	/**
-	 * setParents‚ÅÝ’è‚³‚ê‚½eŒÂ‘Ì‚©‚çnoOfKidsŒÂ‚ÌŽqŒÂ‘Ì‚ð¶¬‚·‚éD
-	 * ¶¬‚³‚ê‚½ŽqŒÂ‘Ì‚ÍC”z—ñkids‚Ö‘ã“ü‚³‚ê‚Ä•Ô‹p‚³‚ê‚éD
-	 * @param noOfKids ¶¬‚·‚×‚«ŽqŒÂ‘Ì‚Ì”
-	 * @param kids ¶¬‚³‚ê‚½ŽqŒÂ‘Ì‚ðŽó‚¯Žæ‚é”z—ñD”z—ñ‚ÌŠe—v‘f‚ÍIIndividual‚ðŽÀ‘•‚µ‚½ƒNƒ‰ƒX‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‚Å‰Šú‰»‚³‚ê‚Ä‚¢‚È‚¯‚ê‚Î‚È‚ç‚È‚¢D
-	 * @throws IllegalArgumentException noOfKids > kids.length‚Ì‚Æ‚«Dkids‚Énull‚ªŠÜ‚Ü‚ê‚é‚Æ‚«D
-	 * ‚±‚ÌƒCƒ“ƒ^[ƒtƒF[ƒX‚ÌŽÀ‘•ŽÒ‚Í‚±‚Ì‘¼‚É‚à—áŠO‚ð“Š‚°‚éðŒ‚ð’Ç‰Á‚µ‚Ä‚æ‚¢D
+	 * setParentsï¿½ÅÝ’è‚³ï¿½ê‚½ï¿½eï¿½Â‘Ì‚ï¿½ï¿½ï¿½noOfKidsï¿½Â‚ÌŽqï¿½Â‘Ì‚ð¶ï¿½ï¿½ï¿½ï¿½ï¿½D
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ê‚½ï¿½qï¿½Â‘Ì‚ÍCï¿½zï¿½ï¿½kidsï¿½Ö‘ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä•Ô‹pï¿½ï¿½ï¿½ï¿½ï¿½D
+	 * @param noOfKids ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×‚ï¿½ï¿½qï¿½Â‘Ì‚Ìï¿½
+	 * @param kids ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ê‚½ï¿½qï¿½Â‘Ì‚ï¿½ï¿½ó‚¯Žï¿½ï¿½zï¿½ï¿½Dï¿½zï¿½ï¿½ÌŠeï¿½vï¿½fï¿½ï¿½IIndividualï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Nï¿½ï¿½ï¿½Xï¿½ÌƒCï¿½ï¿½ï¿½Xï¿½^ï¿½ï¿½ï¿½Xï¿½Åï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½È‚ï¿½ï¿½ï¿½Î‚È‚ï¿½È‚ï¿½ï¿½D
+	 * @throws IllegalArgumentException noOfKids > kids.lengthï¿½Ì‚Æ‚ï¿½ï¿½Dkidsï¿½ï¿½nullï¿½ï¿½ï¿½Ü‚Ü‚ï¿½ï¿½Æ‚ï¿½ï¿½D
+	 * ï¿½ï¿½ï¿½ÌƒCï¿½ï¿½ï¿½^ï¿½[ï¿½tï¿½Fï¿½[ï¿½Xï¿½ÌŽï¿½ï¿½ï¿½ï¿½Ò‚Í‚ï¿½ï¿½Ì‘ï¿½ï¿½É‚ï¿½ï¿½ï¿½Oï¿½ð“Š‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç‰ï¿½ï¿½ï¿½ï¿½Ä‚æ‚¢ï¿½D
 	 * @since 2
 	 */
 	void doIt(int noOfKids, IIndividual[] kids);

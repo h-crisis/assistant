@@ -1,17 +1,17 @@
-package ga.bitstring;
+package iwasaki.ga.bitstring;
 
-import ga.core.IKidMaker;
-import ga.core.IKidMakerFactory;
+import iwasaki.ga.core.IKidMaker;
+import iwasaki.ga.core.IKidMakerFactory;
 
 /**
- * ˆê—lŒğ³ƒtƒ@ƒNƒgƒŠ
+ * ï¿½ï¿½lï¿½ï¿½ï¿½ï¿½ï¿½tï¿½@ï¿½Nï¿½gï¿½ï¿½
  * @since 2
  * @author isao
  */
 public class TUxKidMakerFactory implements IKidMakerFactory {
 
 	/**
-	 * ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+	 * ï¿½Rï¿½ï¿½ï¿½Xï¿½gï¿½ï¿½ï¿½Nï¿½^
 	 * @since 2
 	 */
 	public TUxKidMakerFactory() {

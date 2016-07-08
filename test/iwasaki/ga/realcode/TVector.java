@@ -1,34 +1,34 @@
-package ga.realcode;
+package iwasaki.ga.realcode;
 
 import java.io.BufferedReader;
 import java.io.PrintWriter;
 import java.util.Arrays;
 
-import ga.util.TComparator;
+import iwasaki.ga.util.TComparator;
 
 /**
- * À”ƒxƒNƒgƒ‹
+ * ï¿½ï¿½ï¿½ï¿½ï¿½xï¿½Nï¿½gï¿½ï¿½
  * @since 2
  * @author yamhan, isao
  * @author hmkz
  */
 public class TVector {
 	
-	/** ƒxƒNƒgƒ‹‚Ì—v‘f */
+	/** ï¿½xï¿½Nï¿½gï¿½ï¿½ï¿½Ì—vï¿½f */
 	private double[] fArray;	
 
 	/**
-	 * ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+	 * ï¿½Rï¿½ï¿½ï¿½Xï¿½gï¿½ï¿½ï¿½Nï¿½^
 	 * @since 2
 	 * @author yamhan, isao
-	 * @author hmkz {@link #TVector(int)}‚ÉˆÏ÷
+	 * @author hmkz {@link #TVector(int)}ï¿½ÉˆÏï¿½
 	 */
 	public TVector() {
 		this(0);
 	}
 	
 	/**
-	 * ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+	 * ï¿½Rï¿½ï¿½ï¿½Xï¿½gï¿½ï¿½ï¿½Nï¿½^
 	 * @param dimension 
 	 * @since 2
 	 * @author yamhan, isao
@@ -38,33 +38,33 @@ public class TVector {
 	}
 	
 	/**
-	 * ƒRƒ“ƒXƒgƒ‰ƒNƒ^
-	 * @param array À”’l‚Ì”z—ñ
+	 * ï¿½Rï¿½ï¿½ï¿½Xï¿½gï¿½ï¿½ï¿½Nï¿½^
+	 * @param array ï¿½ï¿½ï¿½ï¿½ï¿½lï¿½Ì”zï¿½ï¿½
 	 * @since 2
 	 * @author yamhan, isao
-	 * @author hmkz {@link Arrays#copyOf(double[], int)}‚ğg‚Á‚Ä‘‚«’¼‚·
+	 * @author hmkz {@link Arrays#copyOf(double[], int)}ï¿½ï¿½ï¿½gï¿½ï¿½ï¿½Äï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 */
 	public TVector(double[] array) {
 		fArray = Arrays.copyOf(array, array.length);
 	}
 
 	/**
-	 * ƒRƒs[ƒRƒ“ƒXƒgƒ‰ƒNƒ^
-	 * @param src ƒRƒs[Œ³
+	 * ï¿½Rï¿½sï¿½[ï¿½Rï¿½ï¿½ï¿½Xï¿½gï¿½ï¿½ï¿½Nï¿½^
+	 * @param src ï¿½Rï¿½sï¿½[ï¿½ï¿½
 	 * @since 2
 	 * @author yamhan, isao
-	 * @author hmkz {@link #TVector(double[])}‚ÉˆÏ÷
+	 * @author hmkz {@link #TVector(double[])}ï¿½ÉˆÏï¿½
 	 */
 	public TVector(TVector src) {
 		this(src.fArray);
 	}
 	
 	/**
-	 * ƒxƒNƒgƒ‹src‚©‚çƒpƒ‰ƒ[ƒ^‚ğƒRƒs[‚·‚éD
-	 * @param src ƒRƒs[Œ³‚ÌƒxƒNƒgƒ‹
+	 * ï¿½xï¿½Nï¿½gï¿½ï¿½srcï¿½ï¿½ï¿½ï¿½pï¿½ï¿½ï¿½ï¿½ï¿½[ï¿½^ï¿½ï¿½ï¿½Rï¿½sï¿½[ï¿½ï¿½ï¿½ï¿½D
+	 * @param src ï¿½Rï¿½sï¿½[ï¿½ï¿½ï¿½Ìƒxï¿½Nï¿½gï¿½ï¿½
 	 * @since 2
 	 * @author yamhan, isao
-	 * @author hmkz {@link System#arraycopy(Object, int, Object, int, int)}‚ğg‚Á‚Ä‘‚«’¼‚·
+	 * @author hmkz {@link System#arraycopy(Object, int, Object, int, int)}ï¿½ï¿½ï¿½gï¿½ï¿½ï¿½Äï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 */
 	public TVector copyFrom(TVector src) {
 		if(fArray.length != src.fArray.length) {		
@@ -75,8 +75,8 @@ public class TVector {
 	}
 	
 	/**
-	 * ƒxƒNƒgƒ‹‚Ìƒpƒ‰ƒ[ƒ^‚ğ‘‚«‚ŞŠÖ”D
-	 * @param pw ‘‚«‚İæ
+	 * ï¿½xï¿½Nï¿½gï¿½ï¿½ï¿½Ìƒpï¿½ï¿½ï¿½ï¿½ï¿½[ï¿½^ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ŞŠÖï¿½ï¿½D
+	 * @param pw ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½İï¿½
 	 * @since 2
 	 * @author yamhan, isao
 	 */
@@ -89,9 +89,9 @@ public class TVector {
 	}
 	
 	/**
-	 * ƒxƒNƒgƒ‹‚Ìƒpƒ‰ƒ[ƒ^‚ğ“Ç‚İ‚ŞŠÖ”D
-	 * @param br “Ç‚İ‚İŒ³
-	 * @throws Exception “Ç‚İ‚İ‚ÌException
+	 * ï¿½xï¿½Nï¿½gï¿½ï¿½ï¿½Ìƒpï¿½ï¿½ï¿½ï¿½ï¿½[ï¿½^ï¿½ï¿½Ç‚İï¿½ï¿½ŞŠÖï¿½ï¿½D
+	 * @param br ï¿½Ç‚İï¿½ï¿½İŒï¿½
+	 * @throws Exception ï¿½Ç‚İï¿½ï¿½İï¿½ï¿½ï¿½Exception
 	 * @since 2
 	 * @author yamhan, isao
 	 */
@@ -105,7 +105,7 @@ public class TVector {
 	}
 	
 	/**
-	 * •W€o—Í‚ÖƒxƒNƒgƒ‹‚Ì“à—e‚ğ‘‚«o‚·D
+	 * ï¿½Wï¿½ï¿½ï¿½oï¿½Í‚Öƒxï¿½Nï¿½gï¿½ï¿½ï¿½Ì“ï¿½ï¿½eï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½oï¿½ï¿½ï¿½D
 	 * @since 2
 	 * @author yamhan
 	 */
@@ -117,8 +117,8 @@ public class TVector {
 	}
 	
 	/**
-	 * ŸŒ³”‚ğƒZƒbƒg‚·‚éD
-	 * @param dimension ŸŒ³”
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Zï¿½bï¿½gï¿½ï¿½ï¿½ï¿½D
+	 * @param dimension ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 * @since 2
 	 * @author yamhan, isao
 	 */
@@ -130,8 +130,8 @@ public class TVector {
 	}
 		
 	/**
-	 * ŸŒ³”‚ğ“¾‚éD
-	 * @return ŸŒ³”
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ğ“¾‚ï¿½D
+	 * @return ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 * @since 2
 	 * @author yamhan, isao
 	 */	
@@ -140,9 +140,9 @@ public class TVector {
 	}
 	
 	/**
-	 * ƒyƒNƒgƒ‹‚Éƒf[ƒ^‚ğƒZƒbƒg‚·‚éD
-	 * @param index ƒZƒbƒg‚·‚éƒf[ƒ^‚ÌˆÊ’u
-	 * @param data ƒf[ƒ^
+	 * ï¿½yï¿½Nï¿½gï¿½ï¿½ï¿½Éƒfï¿½[ï¿½^ï¿½ï¿½ï¿½Zï¿½bï¿½gï¿½ï¿½ï¿½ï¿½D
+	 * @param index ï¿½Zï¿½bï¿½gï¿½ï¿½ï¿½ï¿½fï¿½[ï¿½^ï¿½ÌˆÊ’u
+	 * @param data ï¿½fï¿½[ï¿½^
 	 * @since 2
 	 * @author yamhan, isao
 	 */
@@ -151,9 +151,9 @@ public class TVector {
 	}
 	
 	/**
-	 * ƒxƒNƒgƒ‹‚Ìƒf[ƒ^‚ğ“¾‚éD
-	 * @param index “¾‚½‚¢ƒf[ƒ^‚Ì“Y‚¦š
-	 * @return “¾‚½‚¢ƒf[ƒ^
+	 * ï¿½xï¿½Nï¿½gï¿½ï¿½ï¿½Ìƒfï¿½[ï¿½^ï¿½ğ“¾‚ï¿½D
+	 * @param index ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½fï¿½[ï¿½^ï¿½Ì“Yï¿½ï¿½ï¿½ï¿½
+	 * @return ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½fï¿½[ï¿½^
 	 * @since 2
 	 * @author yamhan, isao
 	 */
@@ -162,8 +162,8 @@ public class TVector {
 	}
 	
 	/**
-	 * ƒxƒNƒgƒ‹“¯m‚ğ‘«‚·D
-	 * @param src ‘«‚·ƒxƒNƒgƒ‹
+	 * ï¿½xï¿½Nï¿½gï¿½ï¿½ï¿½ï¿½ï¿½mï¿½ğ‘«‚ï¿½ï¿½D
+	 * @param src ï¿½ï¿½ï¿½ï¿½ï¿½xï¿½Nï¿½gï¿½ï¿½
 	 * @since 2
 	 * @author yamhan, isao
 	 */
@@ -175,8 +175,8 @@ public class TVector {
 	}
 	
 	/**
-	 * ƒxƒNƒgƒ‹“¯m‚ğˆø‚­D
-	 * @param src ˆø‚­ƒxƒNƒgƒ‹
+	 * ï¿½xï¿½Nï¿½gï¿½ï¿½ï¿½ï¿½ï¿½mï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½D
+	 * @param src ï¿½ï¿½ï¿½ï¿½ï¿½xï¿½Nï¿½gï¿½ï¿½
 	 * @since 2
 	 * @author yamhan, isao
 	 */
@@ -188,8 +188,8 @@ public class TVector {
 	}
 	
 	/**
-	 * ƒxƒNƒgƒ‹‚ğÀ””{‚·‚éD
-	 * @param a ƒxƒNƒgƒ‹‚Ì”{—¦
+	 * ï¿½xï¿½Nï¿½gï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½{ï¿½ï¿½ï¿½ï¿½D
+	 * @param a ï¿½xï¿½Nï¿½gï¿½ï¿½ï¿½Ì”{ï¿½ï¿½
 	 * @since 2
 	 * @author yamhan, isao
 	 */
@@ -201,9 +201,9 @@ public class TVector {
 	}
 	
 	/**
-	 * ƒxƒNƒgƒ‹‚Ì“àÏ‚ğ•Ô‚·D
-	 * @param y ƒxƒNƒgƒ‹
-	 * @return y‚Æ‚Ì“àÏ
+	 * ï¿½xï¿½Nï¿½gï¿½ï¿½ï¿½Ì“ï¿½ï¿½Ï‚ï¿½Ô‚ï¿½ï¿½D
+	 * @param y ï¿½xï¿½Nï¿½gï¿½ï¿½
+	 * @return yï¿½Æ‚Ì“ï¿½ï¿½ï¿½
 	 * @since 2
 	 * @author yamhan, isao
 	 */
@@ -216,8 +216,8 @@ public class TVector {
 	}
 	
 	/**
-	 * ƒxƒNƒgƒ‹‚Ì’·‚³‚ğ•Ô‚·D
-	 * @return ƒxƒNƒgƒ‹‚Ì’·‚³D
+	 * ï¿½xï¿½Nï¿½gï¿½ï¿½ï¿½Ì’ï¿½ï¿½ï¿½ï¿½ï¿½Ô‚ï¿½ï¿½D
+	 * @return ï¿½xï¿½Nï¿½gï¿½ï¿½ï¿½Ì’ï¿½ï¿½ï¿½ï¿½D
 	 * @since 2
 	 * @author yamhan, isao
 	 */
@@ -230,7 +230,7 @@ public class TVector {
 	}
 	
 	/**
-	 * ’PˆÊƒxƒNƒgƒ‹‰»‚·‚éD
+	 * ï¿½Pï¿½Êƒxï¿½Nï¿½gï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½D
 	 * @since 2
 	 * @author yamhan, isao
 	 */
@@ -243,7 +243,7 @@ public class TVector {
 	}
  
  	/**
- 	 * ƒxƒNƒgƒ‹‚ÌŠe—v‘f‚ğ0.0‚Å‰Šú‰»‚·‚éD
+ 	 * ï¿½xï¿½Nï¿½gï¿½ï¿½ï¿½ÌŠeï¿½vï¿½fï¿½ï¿½0.0ï¿½Åï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½D
 	 * @since 2
 	 * @author yamhan, isao
  	 */
@@ -255,8 +255,8 @@ public class TVector {
 	}
 	
 	/**
-	 * ƒxƒNƒgƒ‹o‚Æ‚Ìƒ†[ƒNƒŠƒbƒh‹——£‚ªTComparator.getEps()ˆÈ‰º‚È‚ç‚ÎtrueD‚»‚¤‚Å‚È‚¯‚ê‚Îfalse
-	 * ‹–—eŒë·‚ÍTComparatorƒNƒ‰ƒX‚ğ—p‚¢‚ÄŠm”FEİ’è‚Å‚«‚éD
+	 * ï¿½xï¿½Nï¿½gï¿½ï¿½oï¿½Æ‚Ìƒï¿½ï¿½[ï¿½Nï¿½ï¿½ï¿½bï¿½hï¿½ï¿½ï¿½ï¿½ï¿½ï¿½TComparator.getEps()ï¿½È‰ï¿½ï¿½È‚ï¿½ï¿½trueï¿½Dï¿½ï¿½ï¿½ï¿½ï¿½Å‚È‚ï¿½ï¿½ï¿½ï¿½false
+	 * ï¿½ï¿½ï¿½eï¿½ë·ï¿½ï¿½TComparatorï¿½Nï¿½ï¿½ï¿½Xï¿½ï¿½pï¿½ï¿½ï¿½ÄŠmï¿½Fï¿½Eï¿½İ’ï¿½Å‚ï¿½ï¿½ï¿½D
 	 * @see TComparator#getEps()
 	 * @see TComparator#setEps(double)
 	 * @since 49
@@ -275,10 +275,10 @@ public class TVector {
 	}
 
 	/**
-	 * ‚±‚ÌƒxƒNƒgƒ‹‚Æw’è‚³‚ê‚½ƒxƒNƒgƒ‹v‚Æ‚Ìƒ†[ƒNƒŠƒbƒh‹——£‚ğ•Ô‚·D
-	 * ‚Q‚Â‚ÌƒxƒNƒgƒ‹‚ÌŸŒ³”‚ª“¯‚¶‚Å‚ ‚é‚±‚ÆD
-	 * @param v ‚±‚ÌƒxƒNƒgƒ‹‚Æ“¯‚¶ŸŒ³”‚ğ‚à‚ÂƒxƒNƒgƒ‹
-	 * @return ƒ†[ƒNƒŠƒbƒh‹——£
+	 * ï¿½ï¿½ï¿½Ìƒxï¿½Nï¿½gï¿½ï¿½ï¿½Æwï¿½è‚³ï¿½ê‚½ï¿½xï¿½Nï¿½gï¿½ï¿½vï¿½Æ‚Ìƒï¿½ï¿½[ï¿½Nï¿½ï¿½ï¿½bï¿½hï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô‚ï¿½ï¿½D
+	 * ï¿½Qï¿½Â‚Ìƒxï¿½Nï¿½gï¿½ï¿½ï¿½Ìï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Å‚ï¿½ï¿½é‚±ï¿½ÆD
+	 * @param v ï¿½ï¿½ï¿½Ìƒxï¿½Nï¿½gï¿½ï¿½ï¿½Æ“ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Âƒxï¿½Nï¿½gï¿½ï¿½
+	 * @return ï¿½ï¿½ï¿½[ï¿½Nï¿½ï¿½ï¿½bï¿½hï¿½ï¿½ï¿½ï¿½
 	 * @since 87
 	 * @author hmkz
 	 */

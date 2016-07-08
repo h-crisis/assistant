@@ -1,16 +1,16 @@
-package ga.realcode;
+package iwasaki.ga.realcode;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import ga.core.IIndividual;
-import ga.core.IKidMakerFactory;
-import ga.core.TPopulation;
-import ga.mgg.ISelectionForReproductionFactory;
-import ga.mgg.ISelectionForSurvivalFactory;
-import ga.mgg.TBestAndRankBasedRouletteSelectionFactory;
-import ga.mgg.TMgg;
-import ga.mgg.TRandomSelectionForReproductionFactory;
+import iwasaki.ga.core.IIndividual;
+import iwasaki.ga.core.IKidMakerFactory;
+import iwasaki.ga.core.TPopulation;
+import iwasaki.ga.mgg.ISelectionForReproductionFactory;
+import iwasaki.ga.mgg.ISelectionForSurvivalFactory;
+import iwasaki.ga.mgg.TBestAndRankBasedRouletteSelectionFactory;
+import iwasaki.ga.mgg.TMgg;
+import iwasaki.ga.mgg.TRandomSelectionForReproductionFactory;
 
 /**
  * UNDX+MGG�N���X

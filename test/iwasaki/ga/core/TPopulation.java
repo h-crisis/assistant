@@ -1,4 +1,4 @@
-package ga.core;
+package iwasaki.ga.core;
 
 
 import java.io.BufferedReader;
@@ -6,7 +6,7 @@ import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.StringTokenizer;
 /**
- * W’c
+ * ï¿½Wï¿½c
  * @since 2
  * @author yamhan, isao
  * @author kinoshita
@@ -14,22 +14,22 @@ import java.util.StringTokenizer;
  */
 public class TPopulation {
 
-	/** ŒÂ‘Ì‚Ì”z—ñ */
+	/** ï¿½Â‘Ì‚Ì”zï¿½ï¿½ */
 	private IIndividual[] fArray = new IIndividual[0];
 	
-	/** ŒÂ‘Ì‚ğ¶¬‚·‚é */
+	/** ï¿½Â‘Ì‚ğ¶ï¿½ï¿½ï¿½ï¿½ï¿½ */
 	private IIndividualFactory fIndividualFactory = null;
 
 	/**
-	 * ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+	 * ï¿½Rï¿½ï¿½ï¿½Xï¿½gï¿½ï¿½ï¿½Nï¿½^
 	 * @since 2
 	 */
 	public TPopulation() {
 	}
 	
 	/**
-	 * ƒRƒ“ƒXƒgƒ‰ƒNƒ^
-	 * @param factory ŒÂ‘Ìƒtƒ@ƒNƒgƒŠ
+	 * ï¿½Rï¿½ï¿½ï¿½Xï¿½gï¿½ï¿½ï¿½Nï¿½^
+	 * @param factory ï¿½Â‘Ìƒtï¿½@ï¿½Nï¿½gï¿½ï¿½
 	 * @since 2
 	 */
 	public TPopulation(IIndividualFactory factory) {
@@ -37,9 +37,9 @@ public class TPopulation {
 	}
 
 	/**
-	 * ƒRƒ“ƒXƒgƒ‰ƒNƒ^
-	 * @param factory ŒÂ‘Ìƒtƒ@ƒNƒgƒŠ
-	 * @param size W’cƒTƒCƒY
+	 * ï¿½Rï¿½ï¿½ï¿½Xï¿½gï¿½ï¿½ï¿½Nï¿½^
+	 * @param factory ï¿½Â‘Ìƒtï¿½@ï¿½Nï¿½gï¿½ï¿½
+	 * @param size ï¿½Wï¿½cï¿½Tï¿½Cï¿½Y
 	 * @since 2
 	 */
 	public TPopulation(IIndividualFactory factory, int size) {
@@ -51,8 +51,8 @@ public class TPopulation {
 	}
 	
 	/**
-	 * ƒRƒs[ƒRƒ“ƒXƒgƒ‰ƒNƒ^
-	 * @param src ƒRƒs[Œ³
+	 * ï¿½Rï¿½sï¿½[ï¿½Rï¿½ï¿½ï¿½Xï¿½gï¿½ï¿½ï¿½Nï¿½^
+	 * @param src ï¿½Rï¿½sï¿½[ï¿½ï¿½
 	 * @since 2
 	 */
 	public TPopulation(TPopulation src) {
@@ -69,8 +69,8 @@ public class TPopulation {
 	}
 	
 	/**
-	 * ŒÂ‘Ìsrc‚Ìƒpƒ‰ƒ[ƒ^‚ğ©•ª‚ÉƒRƒs[‚·‚éD
-	 * @param src ƒRƒs[Œ³
+	 * ï¿½Â‘ï¿½srcï¿½Ìƒpï¿½ï¿½ï¿½ï¿½ï¿½[ï¿½^ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÉƒRï¿½sï¿½[ï¿½ï¿½ï¿½ï¿½D
+	 * @param src ï¿½Rï¿½sï¿½[ï¿½ï¿½
 	 * @since 2
 	 */
 	public void copyFrom(TPopulation src) {
@@ -87,9 +87,9 @@ public class TPopulation {
 	}
 
 	/**
-	 * ŒÂ‘Ì‚Ìƒpƒ‰ƒ[ƒ^‚ğ‘‚«‚ŞD
-	 * @param pw ‘‚«‚İæ
-	 * @throws Exception ‘‚«‚İ‚ÌException
+	 * ï¿½Â‘Ì‚Ìƒpï¿½ï¿½ï¿½ï¿½ï¿½[ï¿½^ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ŞD
+	 * @param pw ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½İï¿½
+	 * @throws Exception ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½İï¿½ï¿½ï¿½Exception
 	 * @since 2
 	 */
 	public void writeTo(PrintWriter pw) throws Exception {
@@ -101,9 +101,9 @@ public class TPopulation {
 	}
 	
 	/**
-	 * ŒÂ‘Ì‚Ìƒpƒ‰ƒ[ƒ^‚ğ“Ç‚İ‚ŞD
-	 * @param br “Ç‚İ‚İŒ³
-	 * @throws Exception “Ç‚İ‚İ‚ÌException
+	 * ï¿½Â‘Ì‚Ìƒpï¿½ï¿½ï¿½ï¿½ï¿½[ï¿½^ï¿½ï¿½Ç‚İï¿½ï¿½ŞD
+	 * @param br ï¿½Ç‚İï¿½ï¿½İŒï¿½
+	 * @throws Exception ï¿½Ç‚İï¿½ï¿½İï¿½ï¿½ï¿½Exception
 	 * @since 2
 	 */
 	public void readFrom(BufferedReader br) throws Exception {
@@ -119,8 +119,8 @@ public class TPopulation {
 	}
 	
 	/**
-	 * W’cƒTƒCƒY‚ğƒZƒbƒg‚·‚éD
-	 * @param size W’cƒTƒCƒY
+	 * ï¿½Wï¿½cï¿½Tï¿½Cï¿½Yï¿½ï¿½ï¿½Zï¿½bï¿½gï¿½ï¿½ï¿½ï¿½D
+	 * @param size ï¿½Wï¿½cï¿½Tï¿½Cï¿½Y
 	 * @since 2
 	 */
 	public void setSize(int size) {
@@ -134,8 +134,8 @@ public class TPopulation {
 	}
 	
 	/**
-	 * W’cƒTƒCƒY‚ğ“¾‚éD
-	 * @return W’cƒTƒCƒY
+	 * ï¿½Wï¿½cï¿½Tï¿½Cï¿½Yï¿½ğ“¾‚ï¿½D
+	 * @return ï¿½Wï¿½cï¿½Tï¿½Cï¿½Y
 	 * @since 2
 	 */
 	public int getSize() {
@@ -143,9 +143,9 @@ public class TPopulation {
 	}
 	
 	/**
-	 * W’c’†‚ÉŒÂ‘Ì‚ğƒZƒbƒg‚·‚éD
-	 * @param index ƒZƒbƒg‚·‚é“Y‚¦š
-	 * @param src ƒZƒbƒg‚·‚éŒÂ‘Ì
+	 * ï¿½Wï¿½cï¿½ï¿½ï¿½ÉŒÂ‘Ì‚ï¿½ï¿½Zï¿½bï¿½gï¿½ï¿½ï¿½ï¿½D
+	 * @param index ï¿½Zï¿½bï¿½gï¿½ï¿½ï¿½ï¿½Yï¿½ï¿½ï¿½ï¿½
+	 * @param src ï¿½Zï¿½bï¿½gï¿½ï¿½ï¿½ï¿½Â‘ï¿½
 	 * @since 2
 	 */
 	public void setIndividual(int index, IIndividual src) {
@@ -153,9 +153,9 @@ public class TPopulation {
 	}
 
 	/**
-	 * W’c’†‚ÌŒÂ‘Ì‚ğ“¾‚éD
-	 * @param index “¾‚½‚¢ŒÂ‘Ì‚Ì“Y‚¦š
-	 * @return ŒÂ‘Ì
+	 * ï¿½Wï¿½cï¿½ï¿½ï¿½ÌŒÂ‘Ì‚ğ“¾‚ï¿½D
+	 * @param index ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â‘Ì‚Ì“Yï¿½ï¿½ï¿½ï¿½
+	 * @return ï¿½Â‘ï¿½
 	 * @since 2
 	 */
 	public IIndividual getIndividual(int index) {
@@ -163,8 +163,8 @@ public class TPopulation {
 	}
 
 	/**
-	 * ŒÂ‘Ìƒtƒ@ƒNƒgƒŠ‚ğ•Ô‚·D
-	 * @return ŒÂ‘Ìƒtƒ@ƒNƒgƒŠ
+	 * ï¿½Â‘Ìƒtï¿½@ï¿½Nï¿½gï¿½ï¿½ï¿½ï¿½Ô‚ï¿½ï¿½D
+	 * @return ï¿½Â‘Ìƒtï¿½@ï¿½Nï¿½gï¿½ï¿½
 	 * @since 2
 	 */
 	public IIndividualFactory getIndividualFactory() {
@@ -172,8 +172,8 @@ public class TPopulation {
 	}
 
 	/**
-	 * ŒÂ‘Ìƒtƒ@ƒNƒgƒŠ‚ğİ’è‚·‚éD
-	 * @param factory ŒÂ‘Ìƒtƒ@ƒNƒgƒŠ
+	 * ï¿½Â‘Ìƒtï¿½@ï¿½Nï¿½gï¿½ï¿½ï¿½ï¿½İ’è‚·ï¿½ï¿½D
+	 * @param factory ï¿½Â‘Ìƒtï¿½@ï¿½Nï¿½gï¿½ï¿½
 	 * @since 2
 	 */
 	public void setIndividualFactory(IIndividualFactory factory) {
@@ -181,7 +181,7 @@ public class TPopulation {
 	}
 
 	/**
-	 * ŒÂ‘Ìƒtƒ@ƒNƒgƒŠ‚ÆW’c“à‚ÌŠeŒÂ‘Ì‚Ì‚·‚×‚Ä‚ª“™‚µ‚¢ê‡‚ÍtrueC‚»‚¤‚Å‚È‚¯‚ê‚ÎfalseD
+	 * ï¿½Â‘Ìƒtï¿½@ï¿½Nï¿½gï¿½ï¿½ï¿½ÆWï¿½cï¿½ï¿½ï¿½ÌŠeï¿½Â‘Ì‚Ì‚ï¿½ï¿½×‚Ä‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ê‡ï¿½ï¿½trueï¿½Cï¿½ï¿½ï¿½ï¿½ï¿½Å‚È‚ï¿½ï¿½ï¿½ï¿½falseï¿½D
 	 * @since 55
 	 */
 	@Override

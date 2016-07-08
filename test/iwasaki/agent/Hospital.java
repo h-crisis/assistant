@@ -1,4 +1,4 @@
-package agent;
+package iwasaki.agent;
 
 import java.util.HashMap;
 import java.util.HashSet;

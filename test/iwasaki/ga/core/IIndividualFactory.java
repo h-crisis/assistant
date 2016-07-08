@@ -1,14 +1,14 @@
-package ga.core;
+package iwasaki.ga.core;
 /**
- * ’P–Ú“IÅ“K‰»—pŒÂ‘Ìƒtƒ@ƒNƒgƒŠEƒCƒ“ƒ^[ƒtƒF[ƒX
+ * ï¿½Pï¿½Ú“Iï¿½Å“Kï¿½ï¿½ï¿½pï¿½Â‘Ìƒtï¿½@ï¿½Nï¿½gï¿½ï¿½ï¿½Eï¿½Cï¿½ï¿½ï¿½^ï¿½[ï¿½tï¿½Fï¿½[ï¿½X
  * @since 2
  * @author yamhan, isao
  */
 public interface IIndividualFactory {
 	
 	/**
-	 * ŒÂ‘Ì‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‚ğ¶¬‚·‚éD
-	 * @return IIndividualŒ^‚ÌƒCƒ“ƒXƒ^ƒ“ƒX
+	 * ï¿½Â‘Ì‚ÌƒCï¿½ï¿½ï¿½Xï¿½^ï¿½ï¿½ï¿½Xï¿½ğ¶ï¿½ï¿½ï¿½ï¿½ï¿½D
+	 * @return IIndividualï¿½^ï¿½ÌƒCï¿½ï¿½ï¿½Xï¿½^ï¿½ï¿½ï¿½X
 	 * @since 2
 	 */
 	IIndividual create();

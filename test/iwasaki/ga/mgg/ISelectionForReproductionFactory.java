@@ -1,14 +1,14 @@
-package ga.mgg;
+package iwasaki.ga.mgg;
 /**
- * •¡»‘I‘ğŠíƒtƒ@ƒNƒgƒŠ
+ * ï¿½ï¿½ï¿½ï¿½ï¿½Iï¿½ï¿½ï¿½ï¿½tï¿½@ï¿½Nï¿½gï¿½ï¿½
  * @since 2
  * @author isao
  */
 public interface ISelectionForReproductionFactory {
 	
 	/**
-	 * •¡»‘I‘ğŠí‚ğì¬‚·‚éD
-	 * @return •¡»‘I‘ğŠí
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ì¬ï¿½ï¿½ï¿½ï¿½D
+	 * @return ï¿½ï¿½ï¿½ï¿½ï¿½Iï¿½ï¿½ï¿½ï¿½
 	 * @since 2
 	 * @author isao
 	 */

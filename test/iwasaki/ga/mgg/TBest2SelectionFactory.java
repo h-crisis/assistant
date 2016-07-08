@@ -1,18 +1,18 @@
-package ga.mgg;
+package iwasaki.ga.mgg;
 
 /**
- * ãˆÊ‚QŒÂ‘Ì‚ğ‘I‘ğ‚·‚é¶‘¶‘I‘ğŠí‚Ìƒtƒ@ƒNƒgƒŠD
+ * ï¿½ï¿½Ê‚Qï¿½Â‘Ì‚ï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½é¶ï¿½ï¿½ï¿½Iï¿½ï¿½ï¿½ï¿½Ìƒtï¿½@ï¿½Nï¿½gï¿½ï¿½ï¿½D
  * @since 2
  * @author isao
  */
 public class TBest2SelectionFactory implements ISelectionForSurvivalFactory {
 	
-	/** Å¬‰»‚©H */
+	/** ï¿½Åï¿½ï¿½ï¿½ï¿½ï¿½ï¿½H */
 	private boolean fMinimization;
 
 	/**
-	 * ƒRƒ“ƒXƒgƒ‰ƒNƒ^
-	 * @param minimization Å¬‰»Ftrue, Å‘å‰»Ffalse
+	 * ï¿½Rï¿½ï¿½ï¿½Xï¿½gï¿½ï¿½ï¿½Nï¿½^
+	 * @param minimization ï¿½Åï¿½ï¿½ï¿½ï¿½Ftrue, ï¿½Å‘å‰»ï¿½Ffalse
 	 */
 	public TBest2SelectionFactory(boolean minimization) {
 		fMinimization = minimization;

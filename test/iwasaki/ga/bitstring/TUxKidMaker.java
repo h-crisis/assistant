@@ -1,23 +1,23 @@
-package ga.bitstring;
+package iwasaki.ga.bitstring;
 
-import ga.core.IIndividual;
-import ga.core.IKidMaker;
+import iwasaki.ga.core.IIndividual;
+import iwasaki.ga.core.IKidMaker;
 
 /**
- * TUx‚Ì‚İ‚ğ—˜—p‚µ‚½q¶¬Ší
+ * TUxï¿½Ì‚İ‚ğ—˜—pï¿½ï¿½ï¿½ï¿½ï¿½qï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
  * @since 2
  * @author isao
  */
 public class TUxKidMaker implements IKidMaker {
 	
-	/** ˆê—lŒğ³ */
+	/** ï¿½ï¿½lï¿½ï¿½ï¿½ï¿½ */
 	private TUx fUx;
 	
-	/** ˆê—lŒğ³‚ª•K—v‚Æ‚·‚éeŒÂ‘Ì‚Ì” */
+	/** ï¿½ï¿½lï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Kï¿½vï¿½Æ‚ï¿½ï¿½ï¿½eï¿½Â‘Ì‚Ìï¿½ */
 	private static final int NO_OF_PARENTS = 2;
 
 	/**
-	 * ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+	 * ï¿½Rï¿½ï¿½ï¿½Xï¿½gï¿½ï¿½ï¿½Nï¿½^
 	 * @since 2
 	 */
 	public TUxKidMaker() {

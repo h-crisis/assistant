@@ -1,28 +1,28 @@
-package ga.bitstring;
+package iwasaki.ga.bitstring;
 
-import ga.core.IIndividual;
+import iwasaki.ga.core.IIndividual;
 
 import java.io.BufferedReader;
 import java.io.PrintWriter;
 
 /**
- * ƒrƒbƒgƒXƒgƒŠƒ“ƒO‚ÌŒÂ‘Ì
+ * ï¿½rï¿½bï¿½gï¿½Xï¿½gï¿½ï¿½ï¿½ï¿½ï¿½Oï¿½ÌŒÂ‘ï¿½
  * @since 2
  * @author isao
  */
 public class TBitStringIndividual implements IIndividual, IBitCoding {
 
-	/** ó‘ÔiÀs‰Â”\ŒÂ‘Ì‚©‚Ç‚¤‚©Hj */
+	/** ï¿½ï¿½Ôiï¿½ï¿½ï¿½sï¿½Â”\ï¿½Â‘Ì‚ï¿½ï¿½Ç‚ï¿½ï¿½ï¿½ï¿½Hï¿½j */
 	private int fStatus;
 	
-	/** •]‰¿’l */
+	/** ï¿½]ï¿½ï¿½ï¿½l */
 	private double fEvaluationValue;
 	
-	/** ƒrƒbƒgƒXƒgƒŠƒ“ƒO */
+	/** ï¿½rï¿½bï¿½gï¿½Xï¿½gï¿½ï¿½ï¿½ï¿½ï¿½O */
 	private TBitString fBitString;	
 
 	/**
-	 * ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+	 * ï¿½Rï¿½ï¿½ï¿½Xï¿½gï¿½ï¿½ï¿½Nï¿½^
 	 * @since 2
 	 */
 	public TBitStringIndividual() {
@@ -32,8 +32,8 @@ public class TBitStringIndividual implements IIndividual, IBitCoding {
 	}
 
 	/**
-	 * ƒRƒ“ƒXƒgƒ‰ƒNƒ^
-	 * @param noOfBits ƒrƒbƒg”
+	 * ï¿½Rï¿½ï¿½ï¿½Xï¿½gï¿½ï¿½ï¿½Nï¿½^
+	 * @param noOfBits ï¿½rï¿½bï¿½gï¿½ï¿½
 	 * @since 2
 	 */
 	public TBitStringIndividual(int noOfBits) {
@@ -43,8 +43,8 @@ public class TBitStringIndividual implements IIndividual, IBitCoding {
 	}
 
 	/**
-	 * ƒRƒ“ƒXƒgƒ‰ƒNƒ^
-	 * @param src ƒRƒs[Œ³
+	 * ï¿½Rï¿½ï¿½ï¿½Xï¿½gï¿½ï¿½ï¿½Nï¿½^
+	 * @param src ï¿½Rï¿½sï¿½[ï¿½ï¿½
 	 * @since 2
 	 */
 	public TBitStringIndividual(TBitStringIndividual src) {
@@ -62,8 +62,8 @@ public class TBitStringIndividual implements IIndividual, IBitCoding {
 	}
 
 	/**
-	 * ƒRƒs[
-	 * @param src ƒRƒs[Œ³
+	 * ï¿½Rï¿½sï¿½[
+	 * @param src ï¿½Rï¿½sï¿½[ï¿½ï¿½
 	 * @since 2
 	 */
 	public IIndividual copyFrom(IIndividual src) {

@@ -1,15 +1,15 @@
-package ga.bitstring;
+package iwasaki.ga.bitstring;
 
 /**
- * ƒrƒbƒgƒXƒgƒŠƒ“ƒOEƒR[ƒfƒBƒ“ƒOEƒCƒ“ƒ^[ƒtƒF[ƒX
+ * ï¿½rï¿½bï¿½gï¿½Xï¿½gï¿½ï¿½ï¿½ï¿½ï¿½Oï¿½Eï¿½Rï¿½[ï¿½fï¿½Bï¿½ï¿½ï¿½Oï¿½Eï¿½Cï¿½ï¿½ï¿½^ï¿½[ï¿½tï¿½Fï¿½[ï¿½X
  * @since 2
  * @author isao
  */
 public interface IBitCoding {
 	
 	/**
-	 * ƒrƒbƒgƒXƒgƒŠƒ“ƒO‚ğ•Ô‚·D
-	 * @return ƒrƒbƒgƒXƒgƒŠƒ“ƒO
+	 * ï¿½rï¿½bï¿½gï¿½Xï¿½gï¿½ï¿½ï¿½ï¿½ï¿½Oï¿½ï¿½Ô‚ï¿½ï¿½D
+	 * @return ï¿½rï¿½bï¿½gï¿½Xï¿½gï¿½ï¿½ï¿½ï¿½ï¿½O
 	 * @since 2
 	 */
 	TBitString getBitString();

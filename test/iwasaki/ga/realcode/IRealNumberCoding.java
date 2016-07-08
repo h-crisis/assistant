@@ -1,15 +1,15 @@
-package ga.realcode;
+package iwasaki.ga.realcode;
 
 /**
- * À”’lƒR[ƒfƒBƒ“ƒOƒCƒ“ƒ^[ƒtƒF[ƒXD
+ * ï¿½ï¿½ï¿½ï¿½ï¿½lï¿½Rï¿½[ï¿½fï¿½Bï¿½ï¿½ï¿½Oï¿½Cï¿½ï¿½ï¿½^ï¿½[ï¿½tï¿½Fï¿½[ï¿½Xï¿½D
  * @since 2
  * @author isao
  */
 public interface IRealNumberCoding {
 	
 	/**
-	 * À”’lƒxƒNƒgƒ‹‚ğ•Ô‚·D
-	 * @return À”’lƒxƒNƒgƒ‹
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½lï¿½xï¿½Nï¿½gï¿½ï¿½ï¿½ï¿½Ô‚ï¿½ï¿½D
+	 * @return ï¿½ï¿½ï¿½ï¿½ï¿½lï¿½xï¿½Nï¿½gï¿½ï¿½
 	 * @since 2
 	 */
 	public TVector getVector();

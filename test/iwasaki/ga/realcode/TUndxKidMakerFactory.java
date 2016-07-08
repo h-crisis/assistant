@@ -1,10 +1,10 @@
-package ga.realcode;
+package iwasaki.ga.realcode;
 
-import ga.core.IKidMaker;
-import ga.core.IKidMakerFactory;
+import iwasaki.ga.core.IKidMaker;
+import iwasaki.ga.core.IKidMakerFactory;
 
 /**
- * UNDXƒtƒ@ƒNƒgƒŠ
+ * UNDXï¿½tï¿½@ï¿½Nï¿½gï¿½ï¿½
  * @since 2
  * @author isao
  */
@@ -15,8 +15,8 @@ public class TUndxKidMakerFactory implements IKidMakerFactory {
 	private double fBeta;
 	
 	/**
-	 * ƒRƒ“ƒXƒgƒ‰ƒNƒ^
-	 * @param prop ƒvƒƒpƒeƒB
+	 * ï¿½Rï¿½ï¿½ï¿½Xï¿½gï¿½ï¿½ï¿½Nï¿½^
+	 * @param prop ï¿½vï¿½ï¿½ï¿½pï¿½eï¿½B
 	 * @since 2
 	 * @author isao
 	 */

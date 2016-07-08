@@ -1,30 +1,30 @@
-package ga.core;
+package iwasaki.ga.core;
 
-import ga.util.TNoSuchValueException;
+import iwasaki.ga.util.TNoSuchValueException;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 
 /**
- * W’c‚Ì“Œv‚ð‚Æ‚é
+ * ï¿½Wï¿½cï¿½Ì“ï¿½ï¿½vï¿½ï¿½ï¿½Æ‚ï¿½
  * @since 38
  * @author hmkz
  */
 public class TPopulationStatistics {
 
-	/** “Œv‚Ì•êW’c */
+	/** ï¿½ï¿½ï¿½vï¿½Ì•ï¿½Wï¿½c */
 	private TPopulation fPopulation;
 
-	/** Å¬‰»‚©H */
+	/** ï¿½Åï¿½ï¿½ï¿½ï¿½ï¿½ï¿½H */
 	private boolean fMinimization;
 	
-	/** \•ª‚É‚O‚É‹ß‚¢” */
+	/** ï¿½\ï¿½ï¿½ï¿½É‚Oï¿½É‹ß‚ï¿½ï¿½ï¿½ */
 	public static final double EPS = 1e-30;
 	
 	/**
-	 * ƒRƒ“ƒXƒgƒ‰ƒNƒ^
-	 * @param population “Œv‚Ì•êW’c
-	 * @param isMinimization Å¬‰»Ftrue, Å‘å‰»Ftrue
+	 * ï¿½Rï¿½ï¿½ï¿½Xï¿½gï¿½ï¿½ï¿½Nï¿½^
+	 * @param population ï¿½ï¿½ï¿½vï¿½Ì•ï¿½Wï¿½c
+	 * @param isMinimization ï¿½Åï¿½ï¿½ï¿½ï¿½Ftrue, ï¿½Å‘å‰»ï¿½Ftrue
 	 * @since 38
 	 */
 	public TPopulationStatistics(TPopulation population, boolean isMinimization) {
@@ -33,9 +33,9 @@ public class TPopulationStatistics {
 	}
 
 	/**
-	 * W’c‚ðÝ’è‚·‚éD
-	 * W’c’†‚ÌŒÂ‘Ì‚É‚Ínull‚ªŠÜ‚Ü‚ê‚Ä‚Í‚¢‚¯‚È‚¢D
-	 * @param population W’c
+	 * ï¿½Wï¿½cï¿½ï¿½Ý’è‚·ï¿½ï¿½D
+	 * ï¿½Wï¿½cï¿½ï¿½ï¿½ÌŒÂ‘Ì‚É‚ï¿½nullï¿½ï¿½ï¿½Ü‚Ü‚ï¿½Ä‚Í‚ï¿½ï¿½ï¿½ï¿½È‚ï¿½ï¿½D
+	 * @param population ï¿½Wï¿½c
 	 * @since 38
 	 */
 	public void	setPopulation(TPopulation population) {
@@ -43,9 +43,9 @@ public class TPopulationStatistics {
 	}
 
 	/**
-	 * W’c’†‚ÌVALID‚ÈŒÂ‘Ì‚Ì•½‹Ï•]‰¿’l‚ð•Ô‚·D
-	 * @return •½‹Ï•]‰¿’l
-	 * @throws TNoSuchValueException W’c’†‚ÉVALID‚ÈŒÂ‘Ì‚ªˆê‚Â‚à‚È‚¢‚Æ‚«D
+	 * ï¿½Wï¿½cï¿½ï¿½ï¿½ï¿½VALIDï¿½ÈŒÂ‘Ì‚Ì•ï¿½ï¿½Ï•]ï¿½ï¿½ï¿½lï¿½ï¿½Ô‚ï¿½ï¿½D
+	 * @return ï¿½ï¿½ï¿½Ï•]ï¿½ï¿½ï¿½l
+	 * @throws TNoSuchValueException ï¿½Wï¿½cï¿½ï¿½ï¿½ï¿½VALIDï¿½ÈŒÂ‘Ì‚ï¿½ï¿½ï¿½Â‚ï¿½ï¿½È‚ï¿½ï¿½Æ‚ï¿½ï¿½D
 	 * @since 38
 	 */
 	public double	getAverageOfEvaluationValues() {
@@ -65,11 +65,11 @@ public class TPopulationStatistics {
 	}
 
 	/**
-	 * W’c’†‚ÌÅ—ÇŒÂ‘Ì‚ð•Ô‚·D
-	 * W’cƒTƒCƒY‚ª0‚Å‚ ‚é‚©CŽÀs‰Â”\‰ð‚ª1‚Â‚à‚È‚¢ê‡CÅ—ÇŒÂ‘Ì‚Í‘¶Ý‚µ‚È‚¢D
-	 * ‚»‚Ì‚Æ‚«‚±‚Ìƒƒ\ƒbƒh‚Í—áŠO‚ð“Š‚°‚éD
-	 * @return Å—ÇŒÂ‘Ì
-	 * @throws TNoSuchValueException W’c’†‚ÉVALID‚ÈŒÂ‘Ì‚ªˆê‚Â‚à‚È‚¢‚Æ‚«D
+	 * ï¿½Wï¿½cï¿½ï¿½ï¿½ÌÅ—ÇŒÂ‘Ì‚ï¿½Ô‚ï¿½ï¿½D
+	 * ï¿½Wï¿½cï¿½Tï¿½Cï¿½Yï¿½ï¿½0ï¿½Å‚ï¿½ï¿½é‚©ï¿½Cï¿½ï¿½ï¿½sï¿½Â”\ï¿½ï¿½ï¿½ï¿½1ï¿½Â‚ï¿½ï¿½È‚ï¿½ï¿½ê‡ï¿½Cï¿½Å—ÇŒÂ‘Ì‚Í‘ï¿½ï¿½Ý‚ï¿½ï¿½È‚ï¿½ï¿½D
+	 * ï¿½ï¿½ï¿½Ì‚Æ‚ï¿½ï¿½ï¿½ï¿½Ìƒï¿½ï¿½\ï¿½bï¿½hï¿½Í—ï¿½Oï¿½ð“Š‚ï¿½ï¿½ï¿½D
+	 * @return ï¿½Å—ÇŒÂ‘ï¿½
+	 * @throws TNoSuchValueException ï¿½Wï¿½cï¿½ï¿½ï¿½ï¿½VALIDï¿½ÈŒÂ‘Ì‚ï¿½ï¿½ï¿½Â‚ï¿½ï¿½È‚ï¿½ï¿½Æ‚ï¿½ï¿½D
 	 * @since 38
 	 */
 	public IIndividual getBestIndividual() {
@@ -77,10 +77,10 @@ public class TPopulationStatistics {
 	}
 
 	/**
-	 * W’c’†‚ÌÅ—ÇŒÂ‘Ì‚Ì“Y‚¦Žš‚ð•Ô‚·D
-	 * W’c’†‚ÉÅ—ÇŒÂ‘Ì‚ª‘¶Ý‚µ‚È‚¢ê‡C‚±‚Ìƒƒ\ƒbƒh‚Í—áŠO‚ð“Š‚°‚éD
-	 * @return Å—ÇŒÂ‘Ì‚Ì“Y‚¦Žš
-	 * @throws TNoSuchValueException W’c’†‚ÉVALID‚ÈŒÂ‘Ì‚ªˆê‚Â‚à‚È‚¢‚Æ‚«
+	 * ï¿½Wï¿½cï¿½ï¿½ï¿½ÌÅ—ÇŒÂ‘Ì‚Ì“Yï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô‚ï¿½ï¿½D
+	 * ï¿½Wï¿½cï¿½ï¿½ï¿½ÉÅ—ÇŒÂ‘Ì‚ï¿½ï¿½ï¿½ï¿½Ý‚ï¿½ï¿½È‚ï¿½ï¿½ê‡ï¿½Cï¿½ï¿½ï¿½Ìƒï¿½ï¿½\ï¿½bï¿½hï¿½Í—ï¿½Oï¿½ð“Š‚ï¿½ï¿½ï¿½D
+	 * @return ï¿½Å—ÇŒÂ‘Ì‚Ì“Yï¿½ï¿½ï¿½ï¿½
+	 * @throws TNoSuchValueException ï¿½Wï¿½cï¿½ï¿½ï¿½ï¿½VALIDï¿½ÈŒÂ‘Ì‚ï¿½ï¿½ï¿½Â‚ï¿½ï¿½È‚ï¿½ï¿½Æ‚ï¿½
 	 * @since 38
 	 */
 	public int getBestIndex() {
@@ -104,10 +104,10 @@ public class TPopulationStatistics {
 	}
 
 	/**
-	 * Å—ÇŒÂ‘Ì‚Ì•]‰¿’l‚ð•Ô‚·D
-	 * W’c’†‚ÉÅ—ÇŒÂ‘Ì‚ª‘¶Ý‚µ‚È‚¢ê‡C‚±‚Ìƒƒ\ƒbƒh‚Í—áŠO‚ð“Š‚°‚éD
-	 * @return Å—ÇŒÂ‘Ì‚Ì•]‰¿’l
-	 * @throws TNoSuchValueException W’c’†‚ÉVALID‚ÈŒÂ‘Ì‚ªˆê‚Â‚à‚È‚¢‚Æ‚«
+	 * ï¿½Å—ÇŒÂ‘Ì‚Ì•]ï¿½ï¿½ï¿½lï¿½ï¿½Ô‚ï¿½ï¿½D
+	 * ï¿½Wï¿½cï¿½ï¿½ï¿½ÉÅ—ÇŒÂ‘Ì‚ï¿½ï¿½ï¿½ï¿½Ý‚ï¿½ï¿½È‚ï¿½ï¿½ê‡ï¿½Cï¿½ï¿½ï¿½Ìƒï¿½ï¿½\ï¿½bï¿½hï¿½Í—ï¿½Oï¿½ð“Š‚ï¿½ï¿½ï¿½D
+	 * @return ï¿½Å—ÇŒÂ‘Ì‚Ì•]ï¿½ï¿½ï¿½l
+	 * @throws TNoSuchValueException ï¿½Wï¿½cï¿½ï¿½ï¿½ï¿½VALIDï¿½ÈŒÂ‘Ì‚ï¿½ï¿½ï¿½Â‚ï¿½ï¿½È‚ï¿½ï¿½Æ‚ï¿½
 	 * @since 38
 	 */
 	public double getBestEvaluationValue() {
@@ -115,9 +115,9 @@ public class TPopulationStatistics {
 	}
 
 	/**
-	 * W’c’†‚ÌŒÂ‘Ì‚ð•]‰¿’l‚É‚µ‚½‚ª‚Á‚Ä•À‚×‘Ö‚¦‚éD
-	 * •]‰¿’l‚ª—Ç‚¢ŒÂ‘Ì‚Ù‚Çæ“ª‚É•À‚ÔD
-	 * INVALID‚ÈŒÂ‘Ì‚ÍVALID‚ÈŒÂ‘Ì‚æ‚è‚àŒã‚ë‚É‚­‚éD
+	 * ï¿½Wï¿½cï¿½ï¿½ï¿½ÌŒÂ‘Ì‚ï¿½]ï¿½ï¿½ï¿½lï¿½É‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä•ï¿½ï¿½×‘Ö‚ï¿½ï¿½ï¿½D
+	 * ï¿½]ï¿½ï¿½ï¿½lï¿½ï¿½ï¿½Ç‚ï¿½ï¿½Â‘Ì‚Ù‚Çæ“ªï¿½É•ï¿½ï¿½ÔD
+	 * INVALIDï¿½ÈŒÂ‘Ì‚ï¿½VALIDï¿½ÈŒÂ‘Ì‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É‚ï¿½ï¿½ï¿½D
 	 * @since 75
 	 */
 	public void sort() {
@@ -137,7 +137,7 @@ public class TPopulationStatistics {
 	}
 
 	/**
-	 * W’c’†‚ÌŒÂ‘Ì‚ð•À‚×‘Ö‚¦‚é
+	 * ï¿½Wï¿½cï¿½ï¿½ï¿½ÌŒÂ‘Ì‚ï¿½ï¿½ï¿½×‘Ö‚ï¿½ï¿½ï¿½
 	 * @param c
 	 * @since 75
 	 */
@@ -147,7 +147,7 @@ public class TPopulationStatistics {
 	}
 
 	/**
-	 * x‚Ìi”Ô–Ú‚Æj”Ô–Ú‚Ì—v‘f‚ðŒðŠ·‚·‚é
+	 * xï¿½ï¿½iï¿½Ô–Ú‚ï¿½jï¿½Ô–Ú‚Ì—vï¿½fï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 * @param x
 	 * @param i
 	 * @param j
@@ -161,16 +161,16 @@ public class TPopulationStatistics {
 	}
 
 	/**
-	 * —v‘f”‚ª­‚È‚¢ê‡‚É‚Íƒ}[ƒWƒ\[ƒg‚Í“K‚³‚È‚¢D‚±‚Ì’l‚æ‚è­‚È‚¯‚ê‚Î‘}“üƒ\[ƒg‚ð—p‚¢‚éD
+	 * ï¿½vï¿½fï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È‚ï¿½ï¿½ê‡ï¿½É‚Íƒ}ï¿½[ï¿½Wï¿½\ï¿½[ï¿½gï¿½Í“Kï¿½ï¿½ï¿½È‚ï¿½ï¿½Dï¿½ï¿½ï¿½Ì’lï¿½ï¿½è­ï¿½È‚ï¿½ï¿½ï¿½Î‘}ï¿½ï¿½ï¿½\ï¿½[ï¿½gï¿½ï¿½pï¿½ï¿½ï¿½ï¿½D
 	 */
 	private static final int INSERTIONSORT_THRESHOLD = 7;
 
 	/**
-	 * @param src Œ³‚ÌW’c
-	 * @param dest ƒ\[ƒgÏ‚Ý‚Ì’l‚ª“ü‚é
-	 * @param low ƒ\[ƒg”ÍˆÍ‚Ìæ“ª‚ÌƒCƒ“ƒfƒbƒNƒX
-	 * @param high ƒ\[ƒg”ÍˆÍ‚Ì––”ö‚ÌƒCƒ“ƒfƒbƒNƒX
-	 * @param off src‚É‚¨‚¢‚Älow‚Æhigh‚ð‘Î‰ž‚³‚¹‚é‚½‚ß‚ÌƒIƒtƒZƒbƒg
+	 * @param src ï¿½ï¿½ï¿½ÌWï¿½c
+	 * @param dest ï¿½\ï¿½[ï¿½gï¿½Ï‚Ý‚Ì’lï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	 * @param low ï¿½\ï¿½[ï¿½gï¿½ÍˆÍ‚Ìæ“ªï¿½ÌƒCï¿½ï¿½ï¿½fï¿½bï¿½Nï¿½X
+	 * @param high ï¿½\ï¿½[ï¿½gï¿½ÍˆÍ‚Ì–ï¿½ï¿½ï¿½ï¿½ÌƒCï¿½ï¿½ï¿½fï¿½bï¿½Nï¿½X
+	 * @param off srcï¿½É‚ï¿½ï¿½ï¿½ï¿½ï¿½lowï¿½ï¿½highï¿½ï¿½Î‰ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½é‚½ï¿½ß‚ÌƒIï¿½tï¿½Zï¿½bï¿½g
 	 * @since 75
 	 */
 	private static void mergeSort(TPopulation src, TPopulation dest, int low, int high, int off, Comparator c) {
@@ -208,9 +208,9 @@ public class TPopulationStatistics {
 	}
 
 	/**
-	 * ƒtƒBƒ‹ƒ^f‚ð’Ê‰ß‚·‚éŒÂ‘Ì‚Ì”‚ðƒJƒEƒ“ƒg‚µC‚»‚Ì’l‚ð•Ô‚·D
-	 * @param f W’c‚Ì’†‚©‚ç“Á’è‚ÌðŒ‚ð–ž‚½‚·—v‘f‚¾‚¯‚ð‘I‚Ño‚·ƒtƒBƒ‹ƒ^
-	 * @return ƒtƒBƒ‹ƒ^f‚ªtrue‚ð•Ô‚·—v‘f‚Ì”
+	 * ï¿½tï¿½Bï¿½ï¿½ï¿½^fï¿½ï¿½Ê‰ß‚ï¿½ï¿½ï¿½Â‘Ì‚Ìï¿½ï¿½ï¿½ï¿½Jï¿½Eï¿½ï¿½ï¿½gï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½Ì’lï¿½ï¿½Ô‚ï¿½ï¿½D
+	 * @param f ï¿½Wï¿½cï¿½Ì’ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ìï¿½ï¿½ï¿½ï¿½ð–ž‚ï¿½ï¿½ï¿½ï¿½vï¿½fï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Iï¿½Ñoï¿½ï¿½ï¿½tï¿½Bï¿½ï¿½ï¿½^
+	 * @return ï¿½tï¿½Bï¿½ï¿½ï¿½^fï¿½ï¿½trueï¿½ï¿½Ô‚ï¿½ï¿½vï¿½fï¿½Ìï¿½
 	 * @since 98
 	 */
 	public int frequency(IPopulationFilter f) {
@@ -225,9 +225,9 @@ public class TPopulationStatistics {
 	}
 
 	/**
-	 * W’c’†‚ÌŒÂ‘Ì‚ð“Á’è‚ÌðŒ‚ÅƒtƒBƒ‹ƒ^ƒŠƒ“ƒO‚µCðŒ‚ð–ž‚½‚µ‚½ŒÂ‘Ì‚Ì‚Ý‚©‚ç¬‚éV‚½‚ÈW’c‚ð•Ô‚·D
-	 * @param f ƒtƒBƒ‹ƒ^
-	 * @return ƒtƒBƒ‹ƒ^ƒŠƒ“ƒO‚³‚êCðŒ‚ð–ž‚½‚·ŒÂ‘Ì‚Ì‚Ý‚Å\¬‚³‚ê‚½W’c
+	 * ï¿½Wï¿½cï¿½ï¿½ï¿½ÌŒÂ‘Ì‚ï¿½ï¿½ï¿½ï¿½Ìï¿½ï¿½ï¿½ï¿½Åƒtï¿½Bï¿½ï¿½ï¿½^ï¿½ï¿½ï¿½ï¿½ï¿½Oï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½ï¿½ï¿½ð–ž‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â‘Ì‚Ì‚Ý‚ï¿½ï¿½ç¬ï¿½ï¿½Vï¿½ï¿½ï¿½ÈWï¿½cï¿½ï¿½Ô‚ï¿½ï¿½D
+	 * @param f ï¿½tï¿½Bï¿½ï¿½ï¿½^
+	 * @return ï¿½tï¿½Bï¿½ï¿½ï¿½^ï¿½ï¿½ï¿½ï¿½ï¿½Oï¿½ï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½ï¿½ï¿½ð–ž‚ï¿½ï¿½ï¿½ï¿½Â‘Ì‚Ì‚Ý‚Å\ï¿½ï¿½ï¿½ï¿½ï¿½ê‚½ï¿½Wï¿½c
 	 * @since 98
 	 */
 	public TPopulation subset(IPopulationFilter f) {
@@ -246,11 +246,11 @@ public class TPopulationStatistics {
 	}
 	
 	/**
-	 * ŒÂ‘Ìa‚ÆŒÂ‘Ìb‚ð”äŠr‚·‚éD
-	 * @param a ŒÂ‘ÌA
-	 * @param b ŒÂ‘ÌB
-	 * @param problem –â‘è
-	 * @return a‚æ‚è‚àb‚ª—D‚ê‚Ä‚¢‚éê‡‚Ítrue, ‚»‚¤‚Å‚È‚¢‚Æ‚«‚Ífalse
+	 * ï¿½Â‘ï¿½aï¿½ÆŒÂ‘ï¿½bï¿½ï¿½ï¿½rï¿½ï¿½ï¿½ï¿½D
+	 * @param a ï¿½Â‘ï¿½A
+	 * @param b ï¿½Â‘ï¿½B
+	 * @param problem ï¿½ï¿½ï¿½
+	 * @return aï¿½ï¿½ï¿½ï¿½bï¿½ï¿½ï¿½Dï¿½ï¿½Ä‚ï¿½ï¿½ï¿½ê‡ï¿½ï¿½true, ï¿½ï¿½ï¿½ï¿½ï¿½Å‚È‚ï¿½ï¿½Æ‚ï¿½ï¿½ï¿½false
 	 * @since 2
 	 */
 	private boolean isABetterThanB(IIndividual a, IIndividual b) {
@@ -266,8 +266,8 @@ public class TPopulationStatistics {
 	}
 	
 	/**
-	 * ŒÂ‘Ìa‚ÆŒÂ‘Ìb‚Ì•]‰¿’l‚ª“¯‚¶‚©‚Ç‚¤‚©’²‚×‚é
-	 * @return “¯‚¶Ftrue, ˆÙ‚È‚éFfalse
+	 * ï¿½Â‘ï¿½aï¿½ÆŒÂ‘ï¿½bï¿½Ì•]ï¿½ï¿½ï¿½lï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×‚ï¿½
+	 * @return ï¿½ï¿½ï¿½ï¿½ï¿½Ftrue, ï¿½Ù‚È‚ï¿½Ffalse
 	 * @since 2
 	 */
 	public boolean isAEqualToB(IIndividual a, IIndividual b) {

@@ -1,11 +1,11 @@
 package iwasaki.sample;
 
-import evaluator.CspEvaluator;
-import ga.realcode.IRealNumberCoding;
-import ga.realcode.TRealNumberIndividual;
-import ga.realcode.TUndxMgg;
-import ga.realcode.TVector;
-import ga.util.TMyRandom;
+import iwasaki.evaluator.CspEvaluator;
+import iwasaki.ga.realcode.IRealNumberCoding;
+import iwasaki.ga.realcode.TRealNumberIndividual;
+import iwasaki.ga.realcode.TUndxMgg;
+import iwasaki.ga.realcode.TVector;
+import iwasaki.ga.util.TMyRandom;
 
 import java.io.BufferedReader;
 import java.io.DataInputStream;
@@ -20,7 +20,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
-import agent.*;
+import iwasaki.agent.*;
 
 
 //Developed by Shuang Chang to optimize resource allocation at post-disaster era while satisfying a set of constrains. 
@@ -551,7 +551,7 @@ public class TestRMundxMgg {
 		///////////////////////////////////Resource allocation to hospital//////////////////////////////////////////
 		
 		initialize();
-		readInput("HospitalSpec.csv", "PatientSpec.csv", "DistanceMatrix.csv");
+		readInput("test/iwasaki/Hospitalspec.csv", "test/iwasaki/PatientSpec.csv", "test/iwasaki/DistanceMatrix.csv");
 		makeInputExpect();
 		//makeInputCoordinate();
 		String mode = "both"; //mode: evaluation mode: both (difference+distance); diff (different); dis (distance)

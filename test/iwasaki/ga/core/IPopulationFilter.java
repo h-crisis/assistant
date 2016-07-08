@@ -1,19 +1,19 @@
-package ga.core;
+package iwasaki.ga.core;
 
 
 /**
- * W’c‚Ì’†‚©‚ç“Á’è‚ÌðŒ‚ð–ž‚½‚·ŒÂ‘Ì‚Ì‚Ý‚ð‘I‚Ño‚·‚½‚ß‚É—p‚¢‚éƒtƒBƒ‹ƒ^D
- * {@link #accept(int, IIndividual)}ƒƒ\ƒbƒh‚ÉCŒÂ‘Ì‚ªƒtƒBƒ‹ƒ^‚ð’Ê‰ß‚·‚éðŒ‚ð‘‚«CƒR[ƒ‹ƒoƒbƒN‚µ‚ÄŽg—p‚·‚éD
- * Žg—p—á‚ÍTPopulationStatistics‚ðŽQÆ‚µ‚Ä‚­‚¾‚³‚¢D
+ * ï¿½Wï¿½cï¿½Ì’ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ìï¿½ï¿½ï¿½ï¿½ð–ž‚ï¿½ï¿½ï¿½ï¿½Â‘Ì‚Ì‚Ý‚ï¿½Iï¿½Ñoï¿½ï¿½ï¿½ï¿½ï¿½ß‚É—pï¿½ï¿½ï¿½ï¿½tï¿½Bï¿½ï¿½ï¿½^ï¿½D
+ * {@link #accept(int, IIndividual)}ï¿½ï¿½ï¿½\ï¿½bï¿½hï¿½ÉCï¿½Â‘Ì‚ï¿½ï¿½tï¿½Bï¿½ï¿½ï¿½^ï¿½ï¿½Ê‰ß‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Cï¿½Rï¿½[ï¿½ï¿½ï¿½oï¿½bï¿½Nï¿½ï¿½ï¿½ÄŽgï¿½pï¿½ï¿½ï¿½ï¿½D
+ * ï¿½gï¿½pï¿½ï¿½ï¿½TPopulationStatisticsï¿½ï¿½ï¿½Qï¿½Æ‚ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½D
  * @since 98
  * @author hmkz
  */
 public interface IPopulationFilter {
 	/**
-	 * ˆø”‚ÅŽw’è‚³‚ê‚½ŒÂ‘Ì‚ª‚±‚ÌƒtƒBƒ‹ƒ^‚ð’Ê‰ß‚·‚é‚©‚Ç‚¤‚©‚ð”»’è‚·‚éD
-	 * @param index ŒÂ‘Ì‚ÌƒCƒ“ƒfƒbƒNƒX
-	 * @param ind ‚±‚ÌƒtƒBƒ‹ƒ^‚ð’Ê‰ß‚·‚é‚©‚Ç‚¤‚©”»’è‚ðŽó‚¯‚éŒÂ‘ÌD
-	 * @return ŒÂ‘Ì‚ªƒtƒBƒ‹ƒ^‚ð’Ê‰ß‚·‚éê‡‚ÍtrueC‚»‚¤‚Å‚È‚¯‚ê‚ÎfalseD
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ÅŽwï¿½è‚³ï¿½ê‚½ï¿½Â‘Ì‚ï¿½ï¿½ï¿½ï¿½Ìƒtï¿½Bï¿½ï¿½ï¿½^ï¿½ï¿½Ê‰ß‚ï¿½ï¿½é‚©ï¿½Ç‚ï¿½ï¿½ï¿½ï¿½ð”»’è‚·ï¿½ï¿½D
+	 * @param index ï¿½Â‘Ì‚ÌƒCï¿½ï¿½ï¿½fï¿½bï¿½Nï¿½X
+	 * @param ind ï¿½ï¿½ï¿½Ìƒtï¿½Bï¿½ï¿½ï¿½^ï¿½ï¿½Ê‰ß‚ï¿½ï¿½é‚©ï¿½Ç‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ó‚¯‚ï¿½Â‘ÌD
+	 * @return ï¿½Â‘Ì‚ï¿½ï¿½tï¿½Bï¿½ï¿½ï¿½^ï¿½ï¿½Ê‰ß‚ï¿½ï¿½ï¿½ê‡ï¿½ï¿½trueï¿½Cï¿½ï¿½ï¿½ï¿½ï¿½Å‚È‚ï¿½ï¿½ï¿½ï¿½falseï¿½D
 	 * @since 98
 	 */
 	public boolean accept(int index, IIndividual ind);

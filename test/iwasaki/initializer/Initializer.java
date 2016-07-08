@@ -3,10 +3,10 @@
  */
 package iwasaki.initializer;
 
-import ga.bitstring.TBitStringIndividual;
-import ga.bitstring.TUxMgg;
-import ga.realcode.TRealNumberIndividual;
-import ga.realcode.TUndxMgg;
+import iwasaki.ga.bitstring.TBitStringIndividual;
+import iwasaki.ga.bitstring.TUxMgg;
+import iwasaki.ga.realcode.TRealNumberIndividual;
+import iwasaki.ga.realcode.TUndxMgg;
 
 import java.util.List;
 

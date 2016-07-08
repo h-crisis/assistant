@@ -15,9 +15,9 @@ public class TestfirstDMATPlace {
 
     public static void main(String args[]) throws Exception {
 
-        File Medicalfacility = new File("/test/iwasaki/SCIE16/src/Medicalfacility.csv");
-        File Medicallocation = new File("/test/iwasaki/SCIE16/src/Medicallocation.csv");
-        File DMATlevel = new File("/Users/daiki/Desktop/DMATlevel.csv");
+        File Medicalfacility = new File("test/iwasaki/Medicalfacility.csv");
+        File Medicallocation = new File("test/iwasaki/Medicallocation.csv");
+        File DMATlevel = new File("test/iwasaki/DMATlevel.csv");
         //File Medeicalcapacity
         //File patientetNumber
 

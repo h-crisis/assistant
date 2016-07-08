@@ -1,4 +1,4 @@
-package ga.util;
+package iwasaki.ga.util;
 
 
 import java.io.FileInputStream;
@@ -11,18 +11,18 @@ import java.io.OutputStream;
 import java.util.*;
 
 /**
- * —”ƒNƒ‰ƒXDƒVƒ“ƒOƒ‹ƒgƒ“ƒpƒ^[ƒ“‚ª—p‚¢‚ç‚ê‚Ä‚¢‚éD
+ * ï¿½ï¿½ï¿½ï¿½ï¿½Nï¿½ï¿½ï¿½Xï¿½Dï¿½Vï¿½ï¿½ï¿½Oï¿½ï¿½ï¿½gï¿½ï¿½ï¿½pï¿½^ï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½pï¿½ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½D
  * @since 2
  * @author yamhan, isao
  * @author hmkz
  */
-// 2007/07/21 hmkz ƒƒ\ƒbƒh–¼‚ÍgetDouble‚æ‚ènext`‚ªD‚İ‚Å‚·Dgetter‚Å‚È‚¢‚à‚Ì‚ğget`‚ÆŒÄ‚Ô‚Ì‚Í•s©‘R‚Å‚ÍH
+// 2007/07/21 hmkz ï¿½ï¿½ï¿½\ï¿½bï¿½hï¿½ï¿½ï¿½ï¿½getDoubleï¿½ï¿½ï¿½nextï¿½`ï¿½ï¿½ï¿½Dï¿½İ‚Å‚ï¿½ï¿½Dgetterï¿½Å‚È‚ï¿½ï¿½ï¿½ï¿½Ì‚ï¿½getï¿½`ï¿½ÆŒÄ‚Ô‚Ì‚Í•sï¿½ï¿½ï¿½Rï¿½Å‚ÍH
 public class TMyRandom {
 
-	/** —”ƒWƒFƒlƒŒ[ƒ^D1‚Â‚µ‚©‘¶İ‚µ‚È‚¢(Singleton)D*/
+	/** ï¿½ï¿½ï¿½ï¿½ï¿½Wï¿½Fï¿½lï¿½ï¿½ï¿½[ï¿½^ï¿½D1ï¿½Â‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½İ‚ï¿½ï¿½È‚ï¿½(Singleton)ï¿½D*/
 	private static TMyRandom fInstance;
 	
-	/** —”¶¬Ší */
+	/** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
 	private Random fRandom;
 	
 	private TMyRandom() {
@@ -34,8 +34,8 @@ public class TMyRandom {
 	}
 	
 	/**
-	 * —”‚Ìí‚ğƒZƒbƒg‚·‚éD
-	 * @param seed —”‚Ìí
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½Ìï¿½ï¿½ï¿½Zï¿½bï¿½gï¿½ï¿½ï¿½ï¿½D
+	 * @param seed ï¿½ï¿½ï¿½ï¿½ï¿½Ìï¿½
 	 * @since 2
 	 * @author yamhan, isao
 	 */
@@ -44,9 +44,9 @@ public class TMyRandom {
 	}
 	
 	/**
-	 * TMyRandomŒ^‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‚ğ“¾‚éD<BR>
-	 * —”‚Ìí‚ÍC‚±‚Ìƒƒ\ƒbƒhÀs‚ÌŠÔ‚É‚æ‚èŒˆ’è‚·‚éD
-	 * @return TMyRandom‚ÌƒCƒ“ƒXƒ^ƒ“ƒX
+	 * TMyRandomï¿½^ï¿½ÌƒCï¿½ï¿½ï¿½Xï¿½^ï¿½ï¿½ï¿½Xï¿½ğ“¾‚ï¿½D<BR>
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½Ìï¿½ÍCï¿½ï¿½ï¿½Ìƒï¿½ï¿½\ï¿½bï¿½hï¿½ï¿½ï¿½sï¿½ï¿½ï¿½Ìï¿½ï¿½Ô‚É‚ï¿½èŒˆï¿½è‚·ï¿½ï¿½D
+	 * @return TMyRandomï¿½ÌƒCï¿½ï¿½ï¿½Xï¿½^ï¿½ï¿½ï¿½X
 	 * @since 2
 	 * @author yamhan, isao
 	 */
@@ -58,10 +58,10 @@ public class TMyRandom {
 	}
 	
 	/**
-	 * TMyRandomŒ^‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‚ğ“¾‚éD<BR>
-	 * —”‚Ìí‚ÍCseed‚É‚È‚éD
-	 * @param seed —”‚Ìí
-	 * @return TMyRandom‚ÌƒCƒ“ƒXƒ^ƒ“ƒX
+	 * TMyRandomï¿½^ï¿½ÌƒCï¿½ï¿½ï¿½Xï¿½^ï¿½ï¿½ï¿½Xï¿½ğ“¾‚ï¿½D<BR>
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½Ìï¿½ÍCseedï¿½É‚È‚ï¿½D
+	 * @param seed ï¿½ï¿½ï¿½ï¿½ï¿½Ìï¿½
+	 * @return TMyRandomï¿½ÌƒCï¿½ï¿½ï¿½Xï¿½^ï¿½ï¿½ï¿½X
 	 * @since 2
 	 * @author yamhan, isao
 	 */
@@ -75,9 +75,9 @@ public class TMyRandom {
 	}
 
 	/**
-	 * w’è‚³‚ê‚½ƒIƒuƒWƒFƒNƒgƒCƒ[ƒW‚©‚ç•œŒ³‚³‚ê‚½TMyRandomŒ^‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‚ğ•Ô‚·D
-	 * @param filename ƒIƒuƒWƒFƒNƒgƒCƒ[ƒW‚ªŠi”[‚³‚ê‚Ä‚¢‚éƒtƒ@ƒCƒ‹–¼
-	 * @return TMyRandomŒ^‚ÌƒCƒ“ƒXƒ^ƒ“ƒX
+	 * ï¿½wï¿½è‚³ï¿½ê‚½ï¿½Iï¿½uï¿½Wï¿½Fï¿½Nï¿½gï¿½Cï¿½ï¿½ï¿½[ï¿½Wï¿½ï¿½ï¿½ç•œï¿½ï¿½ï¿½ï¿½ï¿½ê‚½TMyRandomï¿½^ï¿½ÌƒCï¿½ï¿½ï¿½Xï¿½^ï¿½ï¿½ï¿½Xï¿½ï¿½Ô‚ï¿½ï¿½D
+	 * @param filename ï¿½Iï¿½uï¿½Wï¿½Fï¿½Nï¿½gï¿½Cï¿½ï¿½ï¿½[ï¿½Wï¿½ï¿½ï¿½iï¿½[ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½tï¿½@ï¿½Cï¿½ï¿½ï¿½ï¿½
+	 * @return TMyRandomï¿½^ï¿½ÌƒCï¿½ï¿½ï¿½Xï¿½^ï¿½ï¿½ï¿½X
 	 * @since 2
 	 * @author yamhan, isao
 	 */
@@ -94,8 +94,8 @@ public class TMyRandom {
 	}
 	
 	/**
-	 * ƒIƒuƒWƒFƒNƒgƒCƒ[ƒW‚ğƒtƒ@ƒCƒ‹‚Öo—Í‚·‚éD
-	 * @param filename o—Íæ‚Ìƒtƒ@ƒCƒ‹–¼
+	 * ï¿½Iï¿½uï¿½Wï¿½Fï¿½Nï¿½gï¿½Cï¿½ï¿½ï¿½[ï¿½Wï¿½ï¿½ï¿½tï¿½@ï¿½Cï¿½ï¿½ï¿½Öoï¿½Í‚ï¿½ï¿½ï¿½D
+	 * @param filename ï¿½oï¿½Íï¿½Ìƒtï¿½@ï¿½Cï¿½ï¿½ï¿½ï¿½
 	 * @throws FileNotFoundException
 	 * @throws IOException
 	 * @since 2
@@ -108,8 +108,8 @@ public class TMyRandom {
 	}
 	
 	/**
-	 * ƒIƒuƒWƒFƒNƒgƒCƒ[ƒW‚ğƒXƒgƒŠ[ƒ€‚Öo—Í‚·‚éD
-	 * @param os o—Íæ‚ÌƒXƒgƒŠ[ƒ€
+	 * ï¿½Iï¿½uï¿½Wï¿½Fï¿½Nï¿½gï¿½Cï¿½ï¿½ï¿½[ï¿½Wï¿½ï¿½ï¿½Xï¿½gï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½Öoï¿½Í‚ï¿½ï¿½ï¿½D
+	 * @param os ï¿½oï¿½Íï¿½ÌƒXï¿½gï¿½ï¿½ï¿½[ï¿½ï¿½
 	 * @throws IOException
 	 * @since 2
 	 * @author yamhan, isao
@@ -120,10 +120,10 @@ public class TMyRandom {
 	}
 	
 	/**
-	 * min < = randomDouble < = max ‚Æ‚È‚éÀ”—”randomDouble‚ğ•Ô‚·D
-	 * @param min —”‚ÌÅ¬’l
-	 * @param max —”‚ÌÅ‘å’l
-	 * @return À”—”
+	 * min < = randomDouble < = max ï¿½Æ‚È‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½randomDoubleï¿½ï¿½Ô‚ï¿½ï¿½D
+	 * @param min ï¿½ï¿½ï¿½ï¿½ï¿½ÌÅï¿½ï¿½l
+	 * @param max ï¿½ï¿½ï¿½ï¿½ï¿½ÌÅ‘ï¿½l
+	 * @return ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 * @since 2
 	 * @author yamhan, isao
 	 */
@@ -136,10 +136,10 @@ public class TMyRandom {
 	}	
 
 	/**
-	 * min <= randomInt <= max ‚Æ‚È‚é®”—”randomInt‚ğ•Ô‚·D
-	 * @param min —”‚ÌÅ¬’l
-	 * @param max —”‚ÌÅ‘å’l
-	 * @return ®”—”
+	 * min <= randomInt <= max ï¿½Æ‚È‚é®ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½randomIntï¿½ï¿½Ô‚ï¿½ï¿½D
+	 * @param min ï¿½ï¿½ï¿½ï¿½ï¿½ÌÅï¿½ï¿½l
+	 * @param max ï¿½ï¿½ï¿½ï¿½ï¿½ÌÅ‘ï¿½l
+	 * @return ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 * @since 2
 	 * @author yamhan, isao
 	 */
@@ -150,10 +150,10 @@ public class TMyRandom {
 	}
 	
 	/**
-	 * ³‹K—”‚ğ•Ô‚·D
-	 * @param mean •½‹Ï’l
-	 * @param sigma •W€•Î·
-	 * @return ³‹K—”
+	 * ï¿½ï¿½ï¿½Kï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô‚ï¿½ï¿½D
+	 * @param mean ï¿½ï¿½ï¿½Ï’l
+	 * @param sigma ï¿½Wï¿½ï¿½ï¿½Îï¿½
+	 * @return ï¿½ï¿½ï¿½Kï¿½ï¿½ï¿½ï¿½
 	 * @since 2
 	 * @author yamhan, isao
 	 */
@@ -162,8 +162,8 @@ public class TMyRandom {
 	}
 
 	/**
-	 * true‚Ü‚½‚Ífalse‚ğŒÜ•ªŒÜ•ª‚ÌŠm—¦‚Å•Ô‚·D
-	 * @return true‚Ü‚½‚Ífalse
+	 * trueï¿½Ü‚ï¿½ï¿½ï¿½falseï¿½ï¿½ï¿½Ü•ï¿½ï¿½Ü•ï¿½ï¿½ÌŠmï¿½ï¿½ï¿½Å•Ô‚ï¿½ï¿½D
+	 * @return trueï¿½Ü‚ï¿½ï¿½ï¿½false
 	 * @since 48
 	 * @author hmkz
 	 */
@@ -172,9 +172,9 @@ public class TMyRandom {
 	}
 	
 	/**
-	 * ”z—ñ‚ğƒVƒƒƒbƒtƒ‹‚·‚éD
-	 * —v‘f‚Íˆê—l‚É“ü‚ê‘Ö‚í‚éD
-	 * @param buf ƒVƒƒƒbƒtƒ‹‚³‚ê‚é”z—ñ
+	 * ï¿½zï¿½ï¿½ï¿½ï¿½Vï¿½ï¿½ï¿½bï¿½tï¿½ï¿½ï¿½ï¿½ï¿½ï¿½D
+	 * ï¿½vï¿½fï¿½Íˆï¿½lï¿½É“ï¿½ï¿½ï¿½Ö‚ï¿½ï¿½D
+	 * @param buf ï¿½Vï¿½ï¿½ï¿½bï¿½tï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½zï¿½ï¿½
 	 * @since 19
 	 * @author hmkz
 	 */
@@ -188,9 +188,9 @@ public class TMyRandom {
 	}
 
 	/**
-	 * ”z—ñ‚ğƒVƒƒƒbƒtƒ‹‚·‚éD
-	 * —v‘f‚Íˆê—l‚É“ü‚ê‘Ö‚í‚éD
-	 * @param buf ƒVƒƒƒbƒtƒ‹‚³‚ê‚é”z—ñ
+	 * ï¿½zï¿½ï¿½ï¿½ï¿½Vï¿½ï¿½ï¿½bï¿½tï¿½ï¿½ï¿½ï¿½ï¿½ï¿½D
+	 * ï¿½vï¿½fï¿½Íˆï¿½lï¿½É“ï¿½ï¿½ï¿½Ö‚ï¿½ï¿½D
+	 * @param buf ï¿½Vï¿½ï¿½ï¿½bï¿½tï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½zï¿½ï¿½
 	 * @since 48
 	 * @author hmkz
 	 */
@@ -204,10 +204,10 @@ public class TMyRandom {
 	}
 
 	/**
-	 * min <= n <= max ‚Æ‚È‚é®”—”n‚Åbuf‚Ì—v‘f‚ğ‚¤‚ß‚éD
-	 * @param buf ®”—”‚ª‘ã“ü‚³‚ê‚é
-	 * @param min —”‚ÌÅ¬’li‚±‚Ì’l‚ğŠÜ‚Şj
-	 * @param max —”‚ÌÅ‘å’li‚±‚Ì’l‚ğŠÜ‚Şj
+	 * min <= n <= max ï¿½Æ‚È‚é®ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½nï¿½ï¿½bufï¿½Ì—vï¿½fï¿½ï¿½ï¿½ï¿½ï¿½ß‚ï¿½D
+	 * @param buf ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	 * @param min ï¿½ï¿½ï¿½ï¿½ï¿½ÌÅï¿½ï¿½lï¿½iï¿½ï¿½ï¿½Ì’lï¿½ï¿½ï¿½Ü‚Şj
+	 * @param max ï¿½ï¿½ï¿½ï¿½ï¿½ÌÅ‘ï¿½lï¿½iï¿½ï¿½ï¿½Ì’lï¿½ï¿½ï¿½Ü‚Şj
 	 * @since 48
 	 * @author hmkz
 	 */
@@ -218,10 +218,10 @@ public class TMyRandom {
 	}
 
 	/**
-	 * min <= d <= max ‚Æ‚È‚é—”d‚Åbuf‚Ì—v‘f‚ğ‚¤‚ß‚éD
-	 * @param buf ®”—”‚ª‘ã“ü‚³‚ê‚é
-	 * @param min —”‚ÌÅ¬’li‚±‚Ì’l‚ğŠÜ‚Şj
-	 * @param max —”‚ÌÅ‘å’li‚±‚Ì’l‚ğŠÜ‚Şj
+	 * min <= d <= max ï¿½Æ‚È‚é—ï¿½ï¿½dï¿½ï¿½bufï¿½Ì—vï¿½fï¿½ï¿½ï¿½ï¿½ï¿½ß‚ï¿½D
+	 * @param buf ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	 * @param min ï¿½ï¿½ï¿½ï¿½ï¿½ÌÅï¿½ï¿½lï¿½iï¿½ï¿½ï¿½Ì’lï¿½ï¿½ï¿½Ü‚Şj
+	 * @param max ï¿½ï¿½ï¿½ï¿½ï¿½ÌÅ‘ï¿½lï¿½iï¿½ï¿½ï¿½Ì’lï¿½ï¿½ï¿½Ü‚Şj
 	 * @since 48
 	 * @author hmkz
 	 */

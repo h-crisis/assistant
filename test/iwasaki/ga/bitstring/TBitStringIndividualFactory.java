@@ -1,20 +1,20 @@
-package ga.bitstring;
+package iwasaki.ga.bitstring;
 
-import ga.core.IIndividual;
-import ga.core.IIndividualFactory;
+import iwasaki.ga.core.IIndividual;
+import iwasaki.ga.core.IIndividualFactory;
 
 /**
- * ƒrƒbƒgƒXƒgƒŠƒ“ƒOŒÂ‘Ì‚Ìƒtƒ@ƒNƒgƒŠ
+ * ï¿½rï¿½bï¿½gï¿½Xï¿½gï¿½ï¿½ï¿½ï¿½ï¿½Oï¿½Â‘Ì‚Ìƒtï¿½@ï¿½Nï¿½gï¿½ï¿½
  * @since 2
  * @author isao
  */
 public class TBitStringIndividualFactory implements IIndividualFactory {
 	
-	/** ƒrƒbƒg” */
+	/** ï¿½rï¿½bï¿½gï¿½ï¿½ */
 	private int fNoOfBits;
 
 	/**
-	 * ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+	 * ï¿½Rï¿½ï¿½ï¿½Xï¿½gï¿½ï¿½ï¿½Nï¿½^
 	 * @since 2
 	 */
 	public TBitStringIndividualFactory() {
@@ -22,8 +22,8 @@ public class TBitStringIndividualFactory implements IIndividualFactory {
 	}
 	
 	/**
-	 * ƒRƒ“ƒXƒgƒ‰ƒNƒ^
-	 * @param noOfBits ƒrƒbƒg”
+	 * ï¿½Rï¿½ï¿½ï¿½Xï¿½gï¿½ï¿½ï¿½Nï¿½^
+	 * @param noOfBits ï¿½rï¿½bï¿½gï¿½ï¿½
 	 * @since 2
 	 */
 	public TBitStringIndividualFactory(int noOfBits) {

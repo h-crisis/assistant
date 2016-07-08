@@ -1,38 +1,38 @@
-package ga.bitstring;
+package iwasaki.ga.bitstring;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import ga.core.IIndividual;
-import ga.core.IKidMakerFactory;
-import ga.core.TPopulation;
-import ga.mgg.ISelectionForReproductionFactory;
-import ga.mgg.ISelectionForSurvivalFactory;
-import ga.mgg.TBest2SelectionFactory;
-import ga.mgg.TBestAndRankBasedRouletteSelectionFactory;
-import ga.mgg.TMgg;
-import ga.mgg.TRandomSelectionForReproductionFactory;
+import iwasaki.ga.core.IIndividual;
+import iwasaki.ga.core.IKidMakerFactory;
+import iwasaki.ga.core.TPopulation;
+import iwasaki.ga.mgg.ISelectionForReproductionFactory;
+import iwasaki.ga.mgg.ISelectionForSurvivalFactory;
+import iwasaki.ga.mgg.TBest2SelectionFactory;
+import iwasaki.ga.mgg.TBestAndRankBasedRouletteSelectionFactory;
+import iwasaki.ga.mgg.TMgg;
+import iwasaki.ga.mgg.TRandomSelectionForReproductionFactory;
 
 /**
- * UX+MGGƒNƒ‰ƒX
+ * UX+MGGï¿½Nï¿½ï¿½ï¿½X
  * @author isao
  *
  */
 public class TUxMgg {
 	
-	/** W’c */
+	/** ï¿½Wï¿½c */
 	private TPopulation fPopulation;
 	
 	/** MGG */
 	private TMgg fMgg;
 	
 	/**
-	 * ƒRƒ“ƒXƒgƒ‰ƒNƒ^
-	 * @param isMinimization Å¬‰»–â‘è‚©H
-	 * @param noOfBits ƒrƒbƒg”
-	 * @param populationSize W’cƒTƒCƒY
-	 * @param noOfCrossovers Œğ³‰ñ”
-	 * @param useRouletteSelection ¶‘¶‘I‘ğ‚É‚¨‚¢‚ÄCƒ‹[ƒŒƒbƒg‘I‘ğ‚ğg‚¤‚©H@false‚É‚·‚é‚ÆCBest2‚ª‘I‘ğ‚³‚ê‚é‚æ‚¤‚É‚È‚éD
+	 * ï¿½Rï¿½ï¿½ï¿½Xï¿½gï¿½ï¿½ï¿½Nï¿½^
+	 * @param isMinimization ï¿½Åï¿½ï¿½ï¿½ï¿½ï¿½è‚©ï¿½H
+	 * @param noOfBits ï¿½rï¿½bï¿½gï¿½ï¿½
+	 * @param populationSize ï¿½Wï¿½cï¿½Tï¿½Cï¿½Y
+	 * @param noOfCrossovers ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	 * @param useRouletteSelection ï¿½ï¿½ï¿½ï¿½ï¿½Iï¿½ï¿½ï¿½É‚ï¿½ï¿½ï¿½ï¿½ÄCï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½bï¿½gï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½gï¿½ï¿½ï¿½ï¿½ï¿½Hï¿½@falseï¿½É‚ï¿½ï¿½ï¿½ÆCBest2ï¿½ï¿½ï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½æ‚¤ï¿½É‚È‚ï¿½D
 	 */
 	public TUxMgg(boolean isMinimization, int noOfBits, int populationSize, int noOfCrossovers, boolean useRouletteSelection) {
 		ISelectionForReproductionFactory selectionForReproductionFactory = new TRandomSelectionForReproductionFactory();
@@ -51,8 +51,8 @@ public class TUxMgg {
 	}
 	
 	/**
-	 * –¢•]‰¿‚ÌŒÂ‘Ì‚©‚ç\¬‚³‚ê‚é‰ŠúW’c‚ğ•Ô‚·D
-	 * @return ‰ŠúW’c
+	 * ï¿½ï¿½ï¿½]ï¿½ï¿½ï¿½ÌŒÂ‘Ì‚ï¿½ï¿½ï¿½\ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½é‰ï¿½ï¿½ï¿½Wï¿½cï¿½ï¿½Ô‚ï¿½ï¿½D
+	 * @return ï¿½ï¿½ï¿½ï¿½ï¿½Wï¿½c
 	 */
 	public List<TBitStringIndividual> getInitialPopulation() {
 		List<TBitStringIndividual> initPop = new ArrayList<TBitStringIndividual>();
@@ -70,8 +70,8 @@ public class TUxMgg {
 //	}
 
 	/**
-	 * W’c‚©‚ç‘I‘ğ‚³‚ê‚½eŒÂ‘Ì‚ÆCeŒÂ‘Ì‚©‚ç¶¬‚³‚ê‚½–¢•]‰¿‚ÌqŒÂ‘Ì‚©‚ç\¬‚³‚ê‚é‰Æ‘°W’c‚ğ•Ô‚·D
-	 * @return ‰Æ‘°W’c
+	 * ï¿½Wï¿½cï¿½ï¿½ï¿½ï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½ê‚½ï¿½eï¿½Â‘Ì‚ÆCï¿½eï¿½Â‘Ì‚ï¿½ï¿½ç¶ï¿½ï¿½ï¿½ï¿½ï¿½ê‚½ï¿½ï¿½ï¿½]ï¿½ï¿½ï¿½Ìqï¿½Â‘Ì‚ï¿½ï¿½ï¿½\ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ‘ï¿½ï¿½Wï¿½cï¿½ï¿½Ô‚ï¿½ï¿½D
+	 * @return ï¿½Æ‘ï¿½ï¿½Wï¿½c
 	 */
 	public List<TBitStringIndividual> selectParentsAndMakeKids() {
 		IIndividual[] tmp = fMgg.selectParentsAndMakeKids();
@@ -91,8 +91,8 @@ public class TUxMgg {
 //	}
 
 	/**
-	 * ¶‘¶‘I‘ğ‚ğs‚Á‚½Œã‚ÌW’c‚ğ•Ô‚·D
-	 * @return W’c
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½sï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÌWï¿½cï¿½ï¿½Ô‚ï¿½ï¿½D
+	 * @return ï¿½Wï¿½c
 	 */
 	public List<TBitStringIndividual> doSelectionForSurvival() {
 		fMgg.doSelectionForSurvival();
@@ -112,32 +112,32 @@ public class TUxMgg {
 //	}
 
 	/**
-	 * W’c“à‚ÌÅ—ÇŒÂ‘Ì‚ğ•Ô‚·D
-	 * @return W’c“à‚ÌÅ—ÇŒÂ‘Ì
+	 * ï¿½Wï¿½cï¿½ï¿½ï¿½ÌÅ—ÇŒÂ‘Ì‚ï¿½Ô‚ï¿½ï¿½D
+	 * @return ï¿½Wï¿½cï¿½ï¿½ï¿½ÌÅ—ÇŒÂ‘ï¿½
 	 */
 	public TBitStringIndividual getBestIndividual() {
 		return (TBitStringIndividual)fMgg.getBestIndividual();
 	}
 	
 	/**
-	 * W’c“à‚ÌÅ—ÇŒÂ‘Ì‚Ì•]‰¿’l‚ğ•Ô‚·D
-	 * @return W’c“à‚ÌÅ—ÇŒÂ‘Ì‚Ì•]‰¿’l
+	 * ï¿½Wï¿½cï¿½ï¿½ï¿½ÌÅ—ÇŒÂ‘Ì‚Ì•]ï¿½ï¿½ï¿½lï¿½ï¿½Ô‚ï¿½ï¿½D
+	 * @return ï¿½Wï¿½cï¿½ï¿½ï¿½ÌÅ—ÇŒÂ‘Ì‚Ì•]ï¿½ï¿½ï¿½l
 	 */
 	public double getBestEvaluationValue() {
 		return fMgg.getBestEvaluationValue();
 	}
 	
 	/**
-	 * W’c“à‚ÌŒÂ‘Ì‚Ì•]‰¿’l‚Ì•½‹Ï’l‚ğ•Ô‚·D
-	 * @return W’c“à‚ÌŒÂ‘Ì‚Ì•]‰¿’l‚Ì•½‹Ï’l
+	 * ï¿½Wï¿½cï¿½ï¿½ï¿½ÌŒÂ‘Ì‚Ì•]ï¿½ï¿½ï¿½lï¿½Ì•ï¿½ï¿½Ï’lï¿½ï¿½Ô‚ï¿½ï¿½D
+	 * @return ï¿½Wï¿½cï¿½ï¿½ï¿½ÌŒÂ‘Ì‚Ì•]ï¿½ï¿½ï¿½lï¿½Ì•ï¿½ï¿½Ï’l
 	 */
 	public double getAverageOfEvaluationValues() {
 		return fMgg.getAverageOfEvaluationValues();
 	}
 	
 	/**
-	 * Œ»İ‚Ì”½•œ‰ñ”(¢‘ã”)‚ğ•Ô‚·D
-	 * @return Œ»İ‚Ì”½•œ‰ñ”(¢‘ã”)
+	 * ï¿½ï¿½ï¿½İ‚Ì”ï¿½ï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½ã”)ï¿½ï¿½Ô‚ï¿½ï¿½D
+	 * @return ï¿½ï¿½ï¿½İ‚Ì”ï¿½ï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½ã”)
 	 */
 	public long getIteration() {
 		return fMgg.getIteration();

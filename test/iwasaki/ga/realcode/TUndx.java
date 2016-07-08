@@ -1,68 +1,68 @@
-package ga.realcode;
+package iwasaki.ga.realcode;
 
-import ga.util.TComparator;
-import ga.util.TMyRandom;
+import iwasaki.ga.util.TComparator;
+import iwasaki.ga.util.TMyRandom;
 
 /**
- * ’P•ô«³‹K•ª•zŒğ³(UNDX)
+ * ï¿½Pï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Kï¿½ï¿½ï¿½zï¿½ï¿½ï¿½ï¿½(UNDX)
  * @since 2
  * @author isao
  */
 public class TUndx {
 
-	/** ƒ¿‚ÌƒfƒtƒHƒ‹ƒg’l */	
+	/** ï¿½ï¿½ï¿½Ìƒfï¿½tï¿½Hï¿½ï¿½ï¿½gï¿½l */	
 	public static double DEFAULT_ALPHA = 0.5;
 	
-	/** ƒx[ƒ^‚ÌƒfƒtƒHƒ‹ƒg’l */
+	/** ï¿½xï¿½[ï¿½^ï¿½Ìƒfï¿½tï¿½Hï¿½ï¿½ï¿½gï¿½l */
 	public static double DEFAULT_BETA = 0.35;
 	
-	/** ƒVƒXƒeƒ€ƒpƒ‰ƒ[ƒ^ ƒ¿ */
+	/** ï¿½Vï¿½Xï¿½eï¿½ï¿½ï¿½pï¿½ï¿½ï¿½ï¿½ï¿½[ï¿½^ ï¿½ï¿½ */
 	private double fAlpha;
 	
-	/** ƒVƒXƒeƒ€ƒpƒ‰ƒ[ƒ^ ƒÀ */
+	/** ï¿½Vï¿½Xï¿½eï¿½ï¿½ï¿½pï¿½ï¿½ï¿½ï¿½ï¿½[ï¿½^ ï¿½ï¿½ */
 	private double fBeta;
 	
-	/** e‚P‚Ö‚ÌQÆ */
+	/** ï¿½eï¿½Pï¿½Ö‚ÌQï¿½ï¿½ */
 	private TVector fParent1;
 
-	/** e‚Q‚Ö‚ÌQÆ */
+	/** ï¿½eï¿½Qï¿½Ö‚ÌQï¿½ï¿½ */
 	private TVector fParent2;
 
-	/** e‚R‚Ö‚ÌQÆ */
+	/** ï¿½eï¿½Rï¿½Ö‚ÌQï¿½ï¿½ */
 	private TVector fParent3;
 
-	/** ƒĞ‚P */
+	/** ï¿½Ğ‚P */
 	private double fSigma1;
 	
-	/** ƒĞ‚Q */
+	/** ï¿½Ğ‚Q */
 	private double fSigma2;
 	
-	/** —¼e‚Ì²‚Ì’PˆÊƒxƒNƒgƒ‹ e */
+	/** ï¿½ï¿½ï¿½eï¿½Ìï¿½ï¿½Ì’Pï¿½Êƒxï¿½Nï¿½gï¿½ï¿½ e */
 	private TVector fEVector;
 	
-	/** e‚P‚Æe‚Q‚Ì’†“_ƒxƒNƒgƒ‹ */
+	/** ï¿½eï¿½Pï¿½Æeï¿½Qï¿½Ì’ï¿½ï¿½_ï¿½xï¿½Nï¿½gï¿½ï¿½ */
 	private TVector fMean;
 	
-	/** e1‚Æe2‚Í“¯‚¶‚©H */
+	/** ï¿½e1ï¿½Æe2ï¿½Í“ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½H */
 	private boolean isParent1EqualToParent2;
 	
 	/**
-	 * ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+	 * ï¿½Rï¿½ï¿½ï¿½Xï¿½gï¿½ï¿½ï¿½Nï¿½^
 	 * @since 2
 	 * @author isao
-	 * @author hmkz À‘•‚ğTUndx(double, double)‚ÉˆÏ÷‚µ‚½
+	 * @author hmkz ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½TUndx(double, double)ï¿½ÉˆÏï¿½ï¿½ï¿½ï¿½ï¿½
 	 */
 	public TUndx() {
 		this(DEFAULT_ALPHA, DEFAULT_BETA);
 	}
 	
 	/**
-	 * ƒRƒ“ƒXƒgƒ‰ƒNƒ^
-	 * @param alpha ƒVƒXƒeƒ€ƒpƒ‰ƒ[ƒ^ƒ¿
-	 * @param beta ƒVƒXƒeƒ€ƒpƒ‰ƒ[ƒ^ƒÀ
+	 * ï¿½Rï¿½ï¿½ï¿½Xï¿½gï¿½ï¿½ï¿½Nï¿½^
+	 * @param alpha ï¿½Vï¿½Xï¿½eï¿½ï¿½ï¿½pï¿½ï¿½ï¿½ï¿½ï¿½[ï¿½^ï¿½ï¿½
+	 * @param beta ï¿½Vï¿½Xï¿½eï¿½ï¿½ï¿½pï¿½ï¿½ï¿½ï¿½ï¿½[ï¿½^ï¿½ï¿½
 	 * @since 2
 	 * @author isao
-	 * @author hmkz ‰Šú‰»‚É¶¬‚·‚éƒxƒNƒgƒ‹‚Í0ŸŒ³‚Æ‚µ‚½
+	 * @author hmkz ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Éï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½xï¿½Nï¿½gï¿½ï¿½ï¿½ï¿½0ï¿½ï¿½ï¿½ï¿½ï¿½Æ‚ï¿½ï¿½ï¿½
 	 */
 	public TUndx(double alpha, double beta) {
 		fAlpha = alpha;
@@ -72,8 +72,8 @@ public class TUndx {
 	}
 	
 	/**
-	 * ƒVƒXƒeƒ€ƒpƒ‰ƒ[ƒ^ƒ¿‚ğİ’è‚·‚é
-	 * @param alpha ƒVƒXƒeƒ€ƒpƒ‰ƒ[ƒ^ƒ¿
+	 * ï¿½Vï¿½Xï¿½eï¿½ï¿½ï¿½pï¿½ï¿½ï¿½ï¿½ï¿½[ï¿½^ï¿½ï¿½ï¿½ï¿½İ’è‚·ï¿½ï¿½
+	 * @param alpha ï¿½Vï¿½Xï¿½eï¿½ï¿½ï¿½pï¿½ï¿½ï¿½ï¿½ï¿½[ï¿½^ï¿½ï¿½
 	 * @since 2
 	 * @author isao
 	 */
@@ -82,8 +82,8 @@ public class TUndx {
 	}
 	
 	/**
-	 * ƒVƒXƒeƒ€ƒpƒ‰ƒ[ƒ^ƒ¿‚ğ•Ô‚·D
-	 * @return ƒVƒXƒeƒ€ƒpƒ‰ƒ[ƒ^ƒ¿
+	 * ï¿½Vï¿½Xï¿½eï¿½ï¿½ï¿½pï¿½ï¿½ï¿½ï¿½ï¿½[ï¿½^ï¿½ï¿½ï¿½ï¿½Ô‚ï¿½ï¿½D
+	 * @return ï¿½Vï¿½Xï¿½eï¿½ï¿½ï¿½pï¿½ï¿½ï¿½ï¿½ï¿½[ï¿½^ï¿½ï¿½
 	 * @since 2
 	 * @author isao
 	 */
@@ -92,8 +92,8 @@ public class TUndx {
 	}
 	
 	/**
-	 * ƒVƒXƒeƒ€ƒpƒ‰ƒ[ƒ^ƒÀ‚ğİ’è‚·‚éD
-	 * @param beta ƒVƒXƒeƒ€ƒpƒ‰ƒ[ƒ^ƒÀ
+	 * ï¿½Vï¿½Xï¿½eï¿½ï¿½ï¿½pï¿½ï¿½ï¿½ï¿½ï¿½[ï¿½^ï¿½ï¿½ï¿½ï¿½İ’è‚·ï¿½ï¿½D
+	 * @param beta ï¿½Vï¿½Xï¿½eï¿½ï¿½ï¿½pï¿½ï¿½ï¿½ï¿½ï¿½[ï¿½^ï¿½ï¿½
 	 * @since 2
 	 * @author isao
 	 */
@@ -102,8 +102,8 @@ public class TUndx {
 	}
 	
 	/**
-	 * ƒVƒXƒeƒ€ƒpƒ‰ƒ[ƒ^ƒÀ‚ğ•Ô‚·
-	 * @return ƒVƒXƒeƒ€ƒpƒ‰ƒ[ƒ^ƒÀ
+	 * ï¿½Vï¿½Xï¿½eï¿½ï¿½ï¿½pï¿½ï¿½ï¿½ï¿½ï¿½[ï¿½^ï¿½ï¿½ï¿½ï¿½Ô‚ï¿½
+	 * @return ï¿½Vï¿½Xï¿½eï¿½ï¿½ï¿½pï¿½ï¿½ï¿½ï¿½ï¿½[ï¿½^ï¿½ï¿½
 	 * @since 2
 	 * @author isao
 	 */
@@ -112,14 +112,14 @@ public class TUndx {
 	}
 
 	/**
-	 * e‚ğİ’è‚·‚éD
-	 * @param p1 e1Då²‚Ég‚í‚ê‚é
-	 * @param p2 e2Då²‚Ég‚í‚ê‚é
-	 * @param p3 e3D•›²‚Ég‚í‚ê‚é
-	 * @throws IllegalArgumentException e‚ÌŸŒ³”‚ª1‚Â‚Å‚àˆÙ‚È‚é‚Æ‚«
+	 * ï¿½eï¿½ï¿½İ’è‚·ï¿½ï¿½D
+	 * @param p1 ï¿½e1ï¿½Dï¿½å²ï¿½Égï¿½ï¿½ï¿½ï¿½
+	 * @param p2 ï¿½e2ï¿½Dï¿½å²ï¿½Égï¿½ï¿½ï¿½ï¿½
+	 * @param p3 ï¿½e3ï¿½Dï¿½ï¿½ï¿½ï¿½ï¿½Égï¿½ï¿½ï¿½ï¿½
+	 * @throws IllegalArgumentException ï¿½eï¿½Ìï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½1ï¿½Â‚Å‚ï¿½ï¿½Ù‚È‚ï¿½Æ‚ï¿½
 	 * @since 2
 	 * @author isao
-	 * @author hmkz ˆÙí’l‚Å‚à—áŠO‚ª“Š‚°‚ç‚ê‚È‚©‚Á‚½ƒoƒO‚ğC³
+	 * @author hmkz ï¿½Ùï¿½lï¿½Å‚ï¿½ï¿½ï¿½Oï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½oï¿½Oï¿½ï¿½ï¿½Cï¿½ï¿½
 	 */
 	public void setParents(TVector p1, TVector p2, TVector p3) {
 		fParent1 = p1;
@@ -135,9 +135,9 @@ public class TUndx {
 	}
 	
 	/**
-	 * q‚ğ¶¬‚·‚éD
-	 * @param kid1 q1D‚±‚ÌƒIƒuƒWƒFƒNƒg‚Ì’l‚ª¶¬‚³‚ê‚½q‚Ì‚à‚Ì‚É‘‚«Š·‚¦‚ç‚ê‚éD
-	 * @param kid2 q2D‚±‚ÌƒIƒuƒWƒFƒNƒg‚Ì’l‚ª¶¬‚³‚ê‚½q‚Ì‚à‚Ì‚É‘‚«Š·‚¦‚ç‚ê‚éD
+	 * ï¿½qï¿½ğ¶ï¿½ï¿½ï¿½ï¿½ï¿½D
+	 * @param kid1 ï¿½q1ï¿½Dï¿½ï¿½ï¿½ÌƒIï¿½uï¿½Wï¿½Fï¿½Nï¿½gï¿½Ì’lï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ê‚½ï¿½qï¿½Ì‚ï¿½ï¿½Ì‚Éï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½D
+	 * @param kid2 ï¿½q2ï¿½Dï¿½ï¿½ï¿½ÌƒIï¿½uï¿½Wï¿½Fï¿½Nï¿½gï¿½Ì’lï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ê‚½ï¿½qï¿½Ì‚ï¿½ï¿½Ì‚Éï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½D
 	 * @since 2
 	 * @author isao
 	 */
@@ -152,18 +152,18 @@ public class TUndx {
 		}
 		TMyRandom rand = TMyRandom.getInstance();
 		// step.1
-		// ƒxƒNƒgƒ‹ t ‚ğ¶¬
+		// ï¿½xï¿½Nï¿½gï¿½ï¿½ t ï¿½ğ¶ï¿½
 		TVector t = new TVector(dimension);
 		for (int i = 0; i < dimension; i++) {
 			t.setData(i, rand.getNormalDistributedNumber(0.0, fSigma2));
 		}
 		// step.2
-		// t © t - (tEe)e
+		// t ï¿½ï¿½ t - (tï¿½Ee)e
 		TVector tmpVector = new TVector(fEVector);
 		tmpVector.scalarProduct(t.innerProduct(fEVector));
 		t.sub(tmpVector);
 		// step.3
-		// t © t + se
+		// t ï¿½ï¿½ t + se
 		tmpVector.copyFrom(fEVector);
 		tmpVector.scalarProduct(rand.getNormalDistributedNumber(0.0, fSigma1));
 		t.add(tmpVector);
@@ -175,9 +175,9 @@ public class TUndx {
 	}
 
 	/**
-	 * e‚P‚Æe‚Q‚Ì’†“_‚ğ‹‚ß‚éD
-	 * @param v1 e‚P
-	 * @param v2 e‚Q
+	 * ï¿½eï¿½Pï¿½Æeï¿½Qï¿½Ì’ï¿½ï¿½_ï¿½ï¿½ï¿½ï¿½ï¿½ß‚ï¿½D
+	 * @param v1 ï¿½eï¿½P
+	 * @param v2 ï¿½eï¿½Q
 	 * @since 2
 	 * @author isao
 	 */
@@ -188,40 +188,40 @@ public class TUndx {
 	}
 
 	/**
-	 * å²ie‚P‚Æe‚Q‚ğŒ‹‚Ô’¼üj•ûŒü‚Ì’PˆÊƒxƒNƒgƒ‹‚Æ•W€•Î·‚ğ‹‚ß‚é
-	 * @param v1 e‚P
-	 * @param v2 e‚Q
+	 * ï¿½å²ï¿½iï¿½eï¿½Pï¿½Æeï¿½Qï¿½ï¿½ï¿½ï¿½ï¿½Ô’ï¿½ï¿½ï¿½ï¿½jï¿½ï¿½ï¿½ï¿½ï¿½Ì’Pï¿½Êƒxï¿½Nï¿½gï¿½ï¿½ï¿½Æ•Wï¿½ï¿½ï¿½Îï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß‚ï¿½
+	 * @param v1 ï¿½eï¿½P
+	 * @param v2 ï¿½eï¿½Q
 	 * @since 2
 	 * @author isao
 	 */
 	private void calcUnitVectorAndStandardDeviationForPrimaryComponent(TVector v1, TVector v2) {
 		fEVector.copyFrom(v2);
 		fEVector.sub(v1);
-		double d1 = fEVector.getLength(); // e‚P‚Æe‚Q‚ÌŠÔ‚Ì‹——£
-		fSigma1 = fAlpha * d1; //å²•ûŒü‚Ì•W€•Î·
+		double d1 = fEVector.getLength(); // ï¿½eï¿½Pï¿½Æeï¿½Qï¿½ÌŠÔ‚Ì‹ï¿½ï¿½ï¿½
+		fSigma1 = fAlpha * d1; //ï¿½å²ï¿½ï¿½ï¿½ï¿½ï¿½Ì•Wï¿½ï¿½ï¿½Îï¿½
 		if (TComparator.equals(d1, 0.0))
 			isParent1EqualToParent2 = true;
 		else
 			isParent1EqualToParent2 = false;	
-		fEVector.unitVector(); // e‚P‚Æe‚Q‚ğŒ‹‚Ô’¼ü‚Ì•ûŒü’PˆÊƒxƒNƒgƒ‹
+		fEVector.unitVector(); // ï¿½eï¿½Pï¿½Æeï¿½Qï¿½ï¿½ï¿½ï¿½ï¿½Ô’ï¿½ï¿½ï¿½ï¿½Ì•ï¿½ï¿½ï¿½ï¿½Pï¿½Êƒxï¿½Nï¿½gï¿½ï¿½
 	}
 	
 	/**
-	 * •›²•ûŒü‚Ì•W€•Î·‚ğ‹‚ß‚é
-	 * @param v1 e‚P
-	 * @param v3 e‚R
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì•Wï¿½ï¿½ï¿½Îï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß‚ï¿½
+	 * @param v1 ï¿½eï¿½P
+	 * @param v3 ï¿½eï¿½R
 	 * @since 2
 	 * @author isao
 	 */
 	private void calcUnitVectorAndStandardDeviationForSecondaryComponent(TVector v1, TVector v3) {
-		TVector v1v3 = new TVector(v3); // e‚P‚Æe‚R‚ğŒ‹‚ÔƒxƒNƒgƒ‹
+		TVector v1v3 = new TVector(v3); // ï¿½eï¿½Pï¿½Æeï¿½Rï¿½ï¿½ï¿½ï¿½ï¿½Ôƒxï¿½Nï¿½gï¿½ï¿½
 		v1v3.sub(v1);
 		TVector tmp = new TVector(fEVector);
 		tmp.scalarProduct(fEVector.innerProduct(v1v3));
-		TVector perpendicular = new TVector(v1v3); // e‚R‚©‚çe‚P‚Æe‚Q‚ğŒ‹‚Ô’¼ü‚Ö‰º‚ë‚µ‚½‚üƒxƒNƒgƒ‹
+		TVector perpendicular = new TVector(v1v3); // ï¿½eï¿½Rï¿½ï¿½ï¿½ï¿½eï¿½Pï¿½Æeï¿½Qï¿½ï¿½ï¿½ï¿½ï¿½Ô’ï¿½ï¿½ï¿½ï¿½Ö‰ï¿½ï¿½ë‚µï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½xï¿½Nï¿½gï¿½ï¿½
 		perpendicular.sub(tmp);
 		double d2 = perpendicular.getLength();
-		fSigma2 = fBeta * d2 / Math.sqrt((double)v1.getDimension()); // •›²•ûŒü‚Ì•W€•Î·		
+		fSigma2 = fBeta * d2 / Math.sqrt((double)v1.getDimension()); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì•Wï¿½ï¿½ï¿½Îï¿½		
 	}
 	
 }

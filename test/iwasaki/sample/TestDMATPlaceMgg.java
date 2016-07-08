@@ -1,10 +1,10 @@
 package iwasaki.sample;
 
-import evaluator.SphereEvaluator;
-import evaluator.DMATEvaluator;
-import ga.realcode.TRealNumberIndividual;
-import ga.realcode.TUndxMgg;
-import ga.realcode.TVector;
+import iwasaki.evaluator.SphereEvaluator;
+import iwasaki.evaluator.DMATEvaluator;
+import iwasaki.ga.realcode.TRealNumberIndividual;
+import iwasaki.ga.realcode.TUndxMgg;
+import iwasaki.ga.realcode.TVector;
 
 import java.util.List;
 import java.util.Vector;
