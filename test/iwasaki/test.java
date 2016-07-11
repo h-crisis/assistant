@@ -22,6 +22,7 @@ public class test {
             String[] pair = str.split(",");
             System.out.println(pair[2]);
             sum = sum + Integer.parseInt(pair[2]);
+
         }
         br.close();
         System.out.println("合計は" + sum + "です。");
