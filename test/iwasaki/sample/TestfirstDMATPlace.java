@@ -22,6 +22,7 @@ public class TestfirstDMATPlace {
     public static ArrayList Hospitallocationlon = new ArrayList();
     public static ArrayList DMATlocationlat = new ArrayList();
     public static ArrayList DMATlocationlon = new ArrayList();
+    public static Map<String,Map<String,Double>>  DMATtoHospital = new HashMap<String, Map<String, Double>>();
     public static int NO_OF_PARAMETERS = 20;//次元数、扱うパラメータの数
     public static final int POPULATION_SIZE = 50;//個体数
     public static final int NO_OF_CROSSOVERS = 100;//交叉回数
@@ -63,8 +64,9 @@ public class TestfirstDMATPlace {
         while ((str = br1.readLine()) != null) {
             String[] pair = str.split(",");
 
-             if(!(pair[4].equals("地震"))){
+             if(!((String) (pair[4])).equals("地震")){
                 int num = Integer.parseInt(pair[4]);
+
 
                 if (num > 4 && pair[3].equals("1")) {
                     Hospitalnumber.add(pair[0]);//コード
@@ -122,8 +124,6 @@ public class TestfirstDMATPlace {
 
         /////////派遣元と派遣先の距離の確定////////
         ////////参照ファイル１、ファイル１参照、コード、緯度、経度、災害拠点病院名、救急、被爆、DMAT////////
-        Map<String,Map<String,Double>>  DMATtoHospital = new HashMap<String, Map<String, Double>>();
-
         for (int i = 0; i < Hospitalnumber.size(); ++i)
         {
             double lat1 = Double.parseDouble((String) Hospitallocationlat.get(i));
@@ -145,26 +145,29 @@ public class TestfirstDMATPlace {
         ///////次元数（考慮するパラメーターの数）の設定//////////
         //NO_OF_PARAMETERS = Hospitalnumber.size() * DMATnumber.size();
 
+        //////GAの評価プログラムDMATfirstEVAluatorに設定した値を渡す////////
+        DMATfirstEvaluator.setdata(Hospitalnumber,DMATnumber,DMATLevel,DMATtoHospital);
+        //DMATfirstEvaluator.Hospitalprint();//値が渡せたかの確認
+        //DMATfirstEvaluator.DMATprint();//値が渡せたかの確認
+        //DMATfirstEvaluator.disprint();
+
+
         //////GAによる計算/////
         TUndxMgg ga = new TUndxMgg(true,NO_OF_PARAMETERS,POPULATION_SIZE,NO_OF_CROSSOVERS);
         List<TRealNumberIndividual> initialPopulation = ga.getInitialPopulation();
-        SphereEvaluator.evaluatePopulation(initialPopulation);
+        DMATfirstEvaluator.evaluatePoulation(initialPopulation);
 
         for(int i =0; i<1000; ++i)
         {
             List<TRealNumberIndividual> family = ga.selectParentsAndMakeKids();
-            SphereEvaluator.evaluatePopulation( family);
+            DMATfirstEvaluator.evaluatePoulation( family);
             List<TRealNumberIndividual> nextPop = ga.doSelectionForSurvival();
-            //System.out.println( ga.getIteration() + " " + ga.getBestEvaluationValue() + " " + ga.getAverageOfEvaluationValues());
+            System.out.println( ga.getIteration() + " " + ga.getBestEvaluationValue() + " " + ga.getAverageOfEvaluationValues());
         }
 
         System.out.println();
         System.out.println("Best individual");
-        SphereEvaluator.printIndividual(ga.getBestIndividual());
-
-
-
-
+        DMATfirstEvaluator.printIndividual(ga.getBestIndividual());
 
 
         ///////////情報の表示/////////////
@@ -192,15 +195,9 @@ public class TestfirstDMATPlace {
         {
             for(int j= 0; j<DMATnumber.size(); ++j)
             {
-                System.out.println("HospitalNuber:" + Hospitalnumber.get(i) + "  DMATNumber:" + DMATnumber.get(j) +"  Distance:" + DMATtoHospital.get(Hospitalnumber.get(i)).get(DMATnumber.get(j)));
+                //System.out.println("HospitalNuber:" + Hospitalnumber.get(i) + "  DMATNumber:" + DMATnumber.get(j) +"  Distance:" + DMATtoHospital.get(Hospitalnumber.get(i)).get(DMATnumber.get(j)));
             }
         }
-
-        ////////次元数の情報/////////
-        //System.out.println(NO_OF_PARAMETERS);
-
-        DMATfirstEvaluator.printreceiveHospitalNumber(Hospitalnumber);
-
 
     }
 }
