@@ -1,9 +1,8 @@
 package ichikawa.ZmapArea2;
 
 import com.vividsolutions.jts.geom.*;
-import ichikawa.assistant.CreateShape;
+import ichikawa.assist.CreateShape;
 import org.geotools.data.DataUtilities;
-import org.geotools.feature.SchemaException;
 import org.geotools.feature.simple.SimpleFeatureBuilder;
 import org.geotools.geometry.jts.JTSFactoryFinder;
 import org.opengis.feature.simple.SimpleFeature;
@@ -19,8 +18,8 @@ import java.util.List;
  */
 public class ReadTxtFiles {
     public static void main(String args[]) throws Exception {
-        File dir = new File("/Users/manabu/Dropbox/GIS/GISデータ/ゼンリン/Area Map2/OUT/TXT");
-        File outDir = new File("/Users/manabu/Dropbox/GIS/GISデータ/ゼンリン/Area Map2/OUT/SHAPE");
+        File dir = new File("/Users/manabu/Desktop/OUT/TXT");
+        File outDir = new File("/Users/manabu/Desktop/OUT/SHP");
         readFiles(dir, outDir);
     }
 
@@ -42,7 +41,7 @@ public class ReadTxtFiles {
 
 
     public static void readTxtFile(File file, File outDir) throws Exception {
-        //file.setReadOnly();
+        file.setReadOnly();
         BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file), "Shift_JIS"));
         String line;
         LinkedList<Object> featuresList = new LinkedList<Object>();

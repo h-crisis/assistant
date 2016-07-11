@@ -7,16 +7,31 @@ import java.io.*;
  */
 public class ReadDatFiles {
     public static void main(String args[]) throws IOException {
-        File jpnmapFile = new File("/Users/manabu/Dropbox/GIS/GISデータ/ゼンリン/Area Map2/ZENKOKU/MAPDAT/JPNMAP");
-        File widemapFile = new File("/Users/manabu/Dropbox/GIS/GISデータ/ゼンリン/Area Map2/ZENKOKU/MAPDAT/WIDEMAP");
-        File geograFile = new File("/Users/manabu/Dropbox/GIS/GISデータ/ゼンリン/Area Map2/ZENKOKU/MAPDAT/GEOGRA");
-        File topogrFile = new File("/Users/manabu/Dropbox/GIS/GISデータ/ゼンリン/Area Map2/ZENKOKU/MAPDAT/TOPOGR");
-        File outDir = new File("/Users/manabu/Dropbox/GIS/GISデータ/ゼンリン/Area Map2/OUT/TXT");
-        readFiles(jpnmapFile, outDir, 1);
-        readFiles(widemapFile, outDir, 2);
-        readFiles(geograFile, outDir, 3);
-        readFiles(topogrFile, outDir, 4);
+        File jpnmapFile = new File("/Volumes/My Book Pro 12TB/AreaMap2/ZENKOKU/MAPDAT/JPNMAP");
+        File widemapFile = new File("/Volumes/My Book Pro 12TB/AreaMap2/ZENKOKU/MAPDAT/WIDEMAP");
+        File geograFile = new File("/Volumes/My Book Pro 12TB/AreaMap2/ZENKOKU/MAPDAT/GEOGRA");
+        File topogrFile = new File("/Volumes/My Book Pro 12TB/AreaMap2/ZENKOKU/MAPDAT/TOPOGR");
+        File outDir = new File("/Users/manabu/Desktop/OUT/TXT");
 
+        File hokkaidoFile = new File("/Volumes/My Book Pro 12TB/AreaMap2/HOKKAIDO/MAPDAT/TOWNMP");
+        File tohokuFile = new File("/Volumes/My Book Pro 12TB/AreaMap2/TOHOKU/MAPDAT/TOWNMP");
+        File kantoFile = new File("/Volumes/My Book Pro 12TB/AreaMap2/KANTO/MAPDAT/TOWNMP");
+        File chubuFile = new File("/Volumes/My Book Pro 12TB/AreaMap2/CHUBU/MAPDAT/TOWNMP");
+        File kinkiFile = new File("/Volumes/My Book Pro 12TB/AreaMap2/KINKI/MAPDAT/TOWNMP");
+        File chugokushikokuFile = new File("/Volumes/My Book Pro 12TB/AreaMap2/CHUGOKU_SHIKOKU/MAPDAT/TOWNMP");
+        File kyushuFile = new File("/Volumes/My Book Pro 12TB/AreaMap2/KYUSHU_OKINAWA/MAPDAT/TOWNMP");
+
+        //readFiles(jpnmapFile, outDir, 1);
+        //readFiles(widemapFile, outDir, 2);
+        //readFiles(geograFile, outDir, 3);
+        //readFiles(topogrFile, outDir, 4);
+        //readFiles(hokkaidoFile, outDir, 5);
+        readFiles(tohokuFile, outDir, 5);
+        readFiles(kantoFile, outDir, 5);
+        readFiles(chubuFile, outDir, 5);
+        readFiles(kinkiFile, outDir, 5);
+        readFiles(chugokushikokuFile, outDir, 5);
+        readFiles(kyushuFile, outDir, 5);
     }
 
     public static void readFiles(File dir, File outDir, int level) throws IOException {
@@ -63,7 +78,7 @@ public class ReadDatFiles {
     }
 
     public static void readDatFile(File file, File outDir, int level) throws IOException {
-        file.setReadOnly();
+        //file.setReadOnly();
         BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file), "Shift_JIS"));
         String line;
         String figNum;
