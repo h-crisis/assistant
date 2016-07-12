@@ -16,9 +16,6 @@ lon = lon.substr(2);
 var id = href.substr(href.indexOf("ID="));
 id = id.substr(3, id.indexOf(",")-3);
 id = decodeURI(id);
-var prf = href.substr(href.indexOf("Prefecture="));
-prf = prf.substr(3, prf.indexOf(",")-2);
-prf = decodeURI(prf);
 var name = href.substr(href.indexOf("Name="));
 name = name.substr(5);
 name = decodeURI(name);
@@ -61,7 +58,7 @@ var submitOnlyOptions = {
         client.send(message);
         client.disconnect();
         alert('情報を送信しました');
-        // window.close();
+        window.close();
     },
     onFailure: function (message) {
         console.log("Connection failed: " + message.errorMessage);

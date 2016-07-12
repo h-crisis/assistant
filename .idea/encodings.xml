@@ -4,11 +4,8 @@
     <file url="file://$PROJECT_DIR$" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/files/WorkingFiles/EMIS医療機関情報20160622.csv" charset="Shift_JIS" />
     <file url="file://$PROJECT_DIR$/files/WorkingFiles/EMIS医療機関情報_kochi.csv" charset="Shift_JIS" />
-    <file url="file://$PROJECT_DIR$/files/WorkingFiles/medical_status_20160629152448.csv" charset="Shift_JIS" />
     <file url="file://$PROJECT_DIR$/files/WorkingFiles/medical_status_kochi.csv" charset="Shift_JIS" />
     <file url="file://$PROJECT_DIR$/target/test-classes/iwasaki/test.csv" charset="UTF-16" />
-    <file url="file://$PROJECT_DIR$/test/iwasaki/Medicallocation.csv" charset="Shift_JIS" />
-    <file url="file://$PROJECT_DIR$/test/iwasaki/evaluator/SphereEvaluator.java" charset="Shift_JIS" />
     <file url="file://$PROJECT_DIR$/test/iwasaki/test.csv" charset="UTF-8" />
   </component>
 </project>
