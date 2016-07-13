@@ -154,12 +154,10 @@ var layerSI = new ol.layer.Vector({
 // 震度ボタンの挙動を制御する関数
 function siButton() {
     if (layerSI.getVisible()) {
-        hybQuestLayer.setVisible(false);
         layerSI.setVisible(false);
         this.style.backgroundColor = "whitesmoke";
-        var markerA = makeMarkerOverlay('img/shelter_green.gif', [lon,lat]);
+        // var markerA = makeMarkerOverlay('img/shelter_green.gif', [lon,lat]);
     } else {
-        hybQuestLayer.setVisible(true);
         layerSI.setVisible(true);
         this.style.backgroundColor = "orange";
     }

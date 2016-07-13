@@ -25,15 +25,19 @@ var baseLayer = new ol.layer.Tile({
     source: basemap,
     opacity: 1
 });
+
+var view = new ol.View({
+    center: ol.proj.transform([140.461129, 37.787558, 13], 'EPSG:4326', 'EPSG:3857'),
+    zoom: 11,
+    minZoom: 7,
+    maxZoom: 15
+});
+
 var map = new ol.Map({
     layers: [baseLayer, osmQuestLayer, satQuestLayer,hybQuestLayer],
+    loadTilesWhileAnimating: true,
     target: 'map',
-    view: new ol.View({
-        center: ol.proj.transform([140.461129, 37.787558, 13], 'EPSG:4326', 'EPSG:3857'),
-        zoom: 11,
-        minZoom: 7,
-        maxZoom: 15
-    }),
+    view: view,
     controls: ol.control.defaults({
         attributionOptions: ({
             collapsible: false
@@ -46,7 +50,12 @@ var map = new ol.Map({
 var goHypoCenter = document.getElementById('goToHypoCenter');
 goHypoCenter.addEventListener('click', goHypoButton);
 function goHypoButton() {
-    var hypoPoint = ol.proj.transform([140.461129, 37.787558], 'EPSG:4326', 'EPSG:3857');
+    var hypoPoint = ol.proj.transform([140.461129, Math.abs(37.787558)], 'EPSG:4326', 'EPSG:3857');
+    var pan = ol.animation.pan({
+        duration: 2000,
+        source: (view.getCenter())
+    });
+    map.beforeRender(pan);
     map.getView().setCenter(hypoPoint);
     map.getView().setZoom(11);
     console.log(hypoPoint);
@@ -56,29 +65,44 @@ var goHere = document.getElementById('goToHere');
 goHere.addEventListener('click', goToHere);
 function goToHere() {
     var nowLatLon = document.getElementById('latlonCurr').value;
-    console.log(nowLatLon)
     if (nowLatLon === ""){
         alert("現在地が取得されていません。")
     } else {
         var nowLatLon = nowLatLon.split(',');;
         var latNow = nowLatLon[1].substr(0, 8);
         var lonNow = nowLatLon[0].substr(0, 8);
-        console.log(lonNow, latNow);
         nowLatLon = ol.proj.transform([lonNow, Math.abs(latNow)], 'EPSG:4326', 'EPSG:3857')
+        var start = +new Date();
+        var pan = ol.animation.pan({
+            duration: 2000,
+            source: (view.getCenter()),
+            start: start
+        });
+        var bounce = ol.animation.bounce({
+            duration: 2000,
+            resolution: 4 * view.getResolution(),
+            start: start
+        });
+        map.beforeRender(pan, bounce);
         map.getView().setCenter(nowLatLon);
-        map.getView().setZoom(12);
+        map.getView().setZoom(15);
     }
 }
 
 var flagSelected = false ;
 var lon, lat;
+
 var goFacility = document.getElementById('goToSelect');
 goFacility.addEventListener('click', function(evt) {
 
     if (flagSelected == true) {
         console.log(flagSelected);
-        map.getView().setCenter([lon,lat]);
-        map.getView().setZoom(14);
+        var pan = ol.animation.pan({
+            duration: 1000,
+            source: (view.getCenter())
+        });
+        map.beforeRender(pan);
+        map.getView().setCenter([lon,Math.abs(lat)]);
     }
 });
 
@@ -123,6 +147,9 @@ hospLayer.setVisible(false);
 
 var hospIndex   = document.getElementById('hospital-index');
 hospIndex.addEventListener('click', hoIndexButton);
+
+var visHosp   = document.getElementById('visible-hosp');
+visHosp.addEventListener('click', visHoButton);
 
 var distribOnOff   = document.getElementById('distribution-vis');
 distribOnOff.addEventListener('click', siButton);
@@ -238,8 +265,8 @@ map.on('click', function(evt) {
         labelHinan[42] = feature.get('パーキンソ');
         labelHinan[43] = feature.get('備考');
         coordinate4326 = feature.getGeometry().getExtent();
-        lon = coordinate4326[0]
-        lat = coordinate4326[1]
+        lon = coordinate4326[0];
+        lat = Math.abs(coordinate4326[1]);
     });
     if (labelSelf === "") {
         labelSelf = "noPlace";
@@ -248,6 +275,11 @@ map.on('click', function(evt) {
     if(labelSelf == "noPlace") {
         flagSelected = false;
         document.getElementById( 'info' ).style.display = 'none';
+        document.getElementById( 'tdfkinfo' ).style.display = 'none';
+        document.getElementById( 'hospinfo' ).style.display = 'none';
+        document.getElementById('vishospinfo').style.display = 'none';
+        tdfkinfo.innerHTML = "";
+        vishospinfo.innerHTML = "";
         overlayInfo.setPosition();
         map.addOverlay(overlayInfo);
     } else if(typeof labelB === "undefined" && typeof labelHosp[0] === "undefined") {
@@ -400,9 +432,15 @@ function choiceHosp(obj) {
 
         console.log(lon, lat);
         var hospPlace = ol.proj.transform([lon,Math.abs(lat)], 'EPSG:4326', 'EPSG:3857');
+        var pan = ol.animation.pan({
+            duration: 2000,
+            source: (view.getCenter()),
+        });
+        map.beforeRender(pan);
         map.getView().setCenter(hospPlace);
 
         document.getElementById( 'tdfkinfo' ).style.display = 'none';
         document.getElementById( 'hospinfo' ).style.display = 'none';
+        
     });
 }
