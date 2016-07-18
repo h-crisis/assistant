@@ -357,7 +357,7 @@ public class TestRMundxMgg {
 		String value = null;
 		//CspEvaluator.evaluatePopulation( initialPopulation, expected, coordinate, totalnumber, 1);
 		CspEvaluator.evaluatePopulation( initialPopulation, expected, distance, totalnumber, 1, ability);
-		for (int i = 0; i < 2000; ++i) {
+		for (int i = 0; i < 1; ++i) {
 			List<TRealNumberIndividual> family = ga.selectParentsAndMakeKids();
 			//CspEvaluator.evaluatePopulation( family, expected, coordinate, totalnumber, 1);
 			CspEvaluator.evaluatePopulation( family, expected, distance, totalnumber, 1, ability);
