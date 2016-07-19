@@ -154,10 +154,12 @@ var layerSI = new ol.layer.Vector({
 // 震度ボタンの挙動を制御する関数
 function siButton() {
     if (layerSI.getVisible()) {
+        hybQuestLayer.setVisible(false);
         layerSI.setVisible(false);
         this.style.backgroundColor = "whitesmoke";
     } else {
         layerSI.setVisible(true);
+        hybQuestLayer.setVisible(true);
         this.style.backgroundColor = "orange";
     }
 };
