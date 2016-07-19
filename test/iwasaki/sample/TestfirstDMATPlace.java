@@ -59,14 +59,34 @@ public class TestfirstDMATPlace {
         File Medicalfacility = new File("test/iwasaki/Medicalfacility.csv");
         File Medicallocation = new File("test/iwasaki/Medicallocation.csv");
         File DMATlevel = new File("test/iwasaki/DMATlevel.csv");
+        File HeadQuater = new File("test/iwasaki/OutHeadQuater.csv");
+        String str;
         //File Medeicalcapacity
         //File patienteNumber
+
+
+        //////災害本部の確定//////
+        BufferedReader br1 = new BufferedReader(new InputStreamReader(new FileInputStream(HeadQuater), "UTF-8"));
+        int counter=0;
+        while ((str = br1.readLine()) != null)
+        {
+            String[] pair = str.split(",");
+            if(counter>0)
+            {
+                Hospitalnumber.add(pair[1]);
+                Hospitallocationlat.add(pair[6]);
+                Hospitallocationlon.add(pair[7]);
+
+            }
+
+            counter++;
+        }
 
 
 
         /////災害拠点病院のピックアップ///////
         /////ファイル２参照,コード、緯度、経度、災害拠点病院、震度//////
-        BufferedReader br1 = new BufferedReader(new InputStreamReader(new FileInputStream(Medicallocation), "Shift_JIS"));
+        /*BufferedReader br1 = new BufferedReader(new InputStreamReader(new FileInputStream(Medicallocation), "Shift_JIS"));
 
         String str;
 
@@ -75,7 +95,6 @@ public class TestfirstDMATPlace {
 
             if(pair[3].equals("1"))
             {
-
                 Hospitalnumber.add(pair[0]);
                 Hospitallocationlat.add(pair[1]);
                 Hospitallocationlon.add(pair[2]);
@@ -98,7 +117,7 @@ public class TestfirstDMATPlace {
                Hospitallocationlat.remove(i);
                Hospitallocationlon.remove(i);
            }
-       }
+       }*/
 
 
         ////////DAMT派遣可能病院の確定///////
@@ -201,24 +220,29 @@ public class TestfirstDMATPlace {
         //////GAによる計算/////
         TUndxMgg ga = new TUndxMgg(true,NO_OF_PARAMETERS,POPULATION_SIZE,NO_OF_CROSSOVERS);
         List<TRealNumberIndividual> initialPopulation = ga.getInitialPopulation();
-        DMATfirstEvaluator.evaluatePopulationlevel(initialPopulation);
+        DMATfirstEvaluator.evaluatePopulation(initialPopulation);
 
-        for(int i =0; i<1000; ++i)
+        for(int i =0; i<500; ++i)
         {
             List<TRealNumberIndividual> family = ga.selectParentsAndMakeKids();
-            DMATfirstEvaluator.evaluatePopulationlevel(family);
+            DMATfirstEvaluator.evaluatePopulation(
+                    family);
             List<TRealNumberIndividual> nextPop = ga.doSelectionForSurvival();
             //System.out.println( ga.getIteration() + " " + ga.getBestEvaluationValue() + " " + ga.getAverageOfEvaluationValues());
         }
 
         System.out.println();
         System.out.println("Best individual");
-        DMATfirstEvaluator.printIndividualevaluateIndividuallevel(ga.getBestIndividual());
+        DMATfirstEvaluator.printIndividualevaluateIndividual(ga.getBestIndividual());
+        DMATfirstEvaluator.writeIndividualevaluateIndividual(ga.getBestIndividual());
+        DMATfirstEvaluator.writeIndividualevaluateIndividualtotallevle(ga.getBestIndividual());
         //DMATfirstEvaluator.printTotalDMATHospital(ga.getBestIndividual());
 
 
         ///////////情報の表示/////////////
         //////////病院情報///////////////
+
+
         for(int i=0; i<Hospitalnumber.size(); ++i)
         {
             //System.out.println("HospaitlNumber" + Hospitalnumber.get(i));//コード

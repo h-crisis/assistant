@@ -6,6 +6,10 @@ import iwasaki.ga.realcode.TRealNumberIndividual;
 import iwasaki.ga.realcode.TVector;
 
 import javax.measure.unit.SystemOfUnits;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
 import java.util.*;
 
 
@@ -429,6 +433,66 @@ public class DMATfirstEvaluator {
         {
             System.out.println("HospitalNumber  "+ HospitalNumber.get(i) + " Totallevel " + temp.get(i));
         }
+    }
+
+    public static void writeIndividualevaluateIndividual(TRealNumberIndividual ind) throws Exception
+    {
+        File file = new File("test/iwasaki/resultofDMATfirstplace.csv");
+
+        PrintWriter pw = new PrintWriter(new OutputStreamWriter(new FileOutputStream(file, false), "UTF-8"));
+        pw.write("DMATNumber,HospitalNumber,Distance,Distance,level,x");
+        System.out.println("result of time and level");
+        ArrayList temp = new ArrayList();
+        System.out.println("Evaluation value: " + ind.getEvaluationValue());
+        TVector v= reformat(ind).getVector();
+        double x = 0;
+
+        for(int i = 0; i<v.getDimension(); ++i)
+        {
+            x = map(v.getData(i));
+            double a = (x * (Double)EveryDMATlevel.get(i));
+            DMATtoHospitallevel.put((ArrayList)DMATHospitalcode.get(i),a);
+        }
+
+        temp = getTotaleveryHopital(DMATtoHospitallevel);
+
+        for(int i = 0; i<v.getDimension(); ++i)
+        {
+            pw.write("\n" + DMATHospital.get(i) + "," + HospitalDMAT.get(i) + "," + Distance.get(i) +  "," + EveryDMATlevel.get(i) + "," + map(v.getData(i)));
+        }
+
+        pw.close();
+    }
+
+
+    public static void writeIndividualevaluateIndividualtotallevle(TRealNumberIndividual ind) throws Exception
+    {
+        File file = new File("test/iwasaki/resultofDMATfirstplacetotallevel.csv");
+
+        PrintWriter pw = new PrintWriter(new OutputStreamWriter(new FileOutputStream(file, false), "UTF-8"));
+        pw.write("HospitalNumber,Totallevel");
+        System.out.println("result of time and level");
+        ArrayList temp = new ArrayList();
+        System.out.println("Evaluation value: " + ind.getEvaluationValue());
+        TVector v= reformat(ind).getVector();
+        double x = 0;
+
+        for(int i = 0; i<v.getDimension(); ++i)
+        {
+            x = map(v.getData(i));
+            double a = (x * (Double)EveryDMATlevel.get(i));
+            DMATtoHospitallevel.put((ArrayList)DMATHospitalcode.get(i),a);
+        }
+
+        temp = getTotaleveryHopital(DMATtoHospitallevel);
+
+        for(int i = 0; i<HospitalNumber.size(); ++i)
+        {
+            pw.write("\n"+ HospitalNumber.get(i) + "," + temp.get(i));
+        }
+
+
+        pw.close();
     }
     ////////////病院情報/////////
     public static void Hospitalprint()
