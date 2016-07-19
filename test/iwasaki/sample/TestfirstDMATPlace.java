@@ -1,10 +1,15 @@
 package iwasaki.sample;
 
+import iwasaki.evaluator.SphereEvaluator;
+import iwasaki.evaluator.DMATfirstEvaluator;
+import iwasaki.ga.realcode.TRealNumberIndividual;
+import iwasaki.ga.realcode.TUndxMgg;
 
-import java.awt.peer.SystemTrayPeer;
 import java.util.*;
 import java.io.*;
-import java.util.Map;
+import java.util.List;
+
+
 /**
  * Created by daiki on 2016/07/08.
  */
@@ -13,12 +18,14 @@ public class TestfirstDMATPlace {
     public static ArrayList Hospitalnumber = new ArrayList();
     public static ArrayList DMATnumber = new ArrayList();
     public static ArrayList DMATLevel = new ArrayList();
-    public static ArrayList Distance = new ArrayList();
     public static ArrayList Hospitallocationlat = new ArrayList();
     public static ArrayList Hospitallocationlon = new ArrayList();
     public static ArrayList DMATlocationlat = new ArrayList();
     public static ArrayList DMATlocationlon = new ArrayList();
-    public static double distance,lat1,lon1,lat2,lon2;
+    public static Map<String,Map<String,Double>>  DMATtoHospital = new HashMap<String, Map<String, Double>>();
+    public static int NO_OF_PARAMETERS = 20;//次元数、扱うパラメータの数
+    public static final int POPULATION_SIZE = 50;//個体数
+    public static final int NO_OF_CROSSOVERS = 100;//交叉回数
 
 
     ///////距離を取得する///////
@@ -38,6 +45,7 @@ public class TestfirstDMATPlace {
         return distance;
     }
 
+
     public static void main(String args[]) throws Exception {
 
         File Medicalfacility = new File("test/iwasaki/Medicalfacility.csv");
@@ -56,16 +64,16 @@ public class TestfirstDMATPlace {
         while ((str = br1.readLine()) != null) {
             String[] pair = str.split(",");
 
-            if (!(pair[4].equals("地震"))) {
+             if(!((String) (pair[4])).equals("地震")){
                 int num = Integer.parseInt(pair[4]);
 
-                if (num > 5 && pair[3].equals("1")) {
+
+                if (num > 4 && pair[3].equals("1")) {
                     Hospitalnumber.add(pair[0]);//コード
                     Hospitallocationlat.add(pair[1]);//緯度
                     Hospitallocationlon.add(pair[2]);//経度
                 }
             }
-
         }
 
         ////////DAMT派遣可能病院の確定///////
@@ -75,20 +83,32 @@ public class TestfirstDMATPlace {
         while ((str = br2.readLine()) != null) {
             String[] pair = str.split(",");
 
-            //System.out.println(pair[6]);//DMATの有無
-
             for (int i = 0; i < Hospitalnumber.size(); ++i) {
-                if (!(Hospitalnumber.get(i).equals(pair[0])) && pair[6].equals("1")) {
-                    DMATnumber.add(pair[0]);
-                    DMATlocationlat.add(pair[1]);
-                    DMATlocationlon.add(pair[2]);
+                    if (!(Hospitalnumber.get(i).equals(pair[0])) && pair[6].equals("1"))
+                    {
+                        DMATnumber.add(pair[0]);
+                        DMATlocationlat.add(pair[1]);
+                        DMATlocationlon.add(pair[2]);
 
+                        break;
+                    }
                 }
-            }
 
         }
+
+        //////////////被災病院とDMAT派遣病院の重複を削除////////////
+        for(int i = 0; i<Hospitalnumber.size(); ++i) {
+            for (int j = 0; j < DMATnumber.size(); ++j) {
+                if (Hospitalnumber.get(i).equals(DMATnumber.get(j))) {
+                    DMATnumber.remove(j);
+                    DMATlocationlat.remove(j);
+                    DMATlocationlon.remove(j);
+                }
+            }
+        }
+
         ////////派遣可能DAMTのレベルの確定///////
-        ////////ファイル3参照、コード、緯度、経度、DMA////////
+        ////////ファイル3参照、コード、緯度、経度、DMAT////////
         BufferedReader br3 = new BufferedReader(new InputStreamReader(new FileInputStream(DMATlevel), "SHIFT_JIS"));
 
         while ((str = br3.readLine()) != null) {
@@ -104,30 +124,81 @@ public class TestfirstDMATPlace {
 
         /////////派遣元と派遣先の距離の確定////////
         ////////参照ファイル１、ファイル１参照、コード、緯度、経度、災害拠点病院名、救急、被爆、DMAT////////
-        HashMap DMATtoHospaital = new HashMap();
-        List keys = new ArrayList();
-
         for (int i = 0; i < Hospitalnumber.size(); ++i)
         {
-            String str1 = (String) Hospitallocationlat.get(i);
-            String str2 = (String) Hospitallocationlon.get(i);
+            double lat1 = Double.parseDouble((String) Hospitallocationlat.get(i));
+            double lon1 = Double.parseDouble((String) Hospitallocationlon.get(i));
 
-            lat1 = Double.parseDouble(str1);
-            lon1 = Double.parseDouble(str2);
-
+            DMATtoHospital.put((String) Hospitalnumber.get(i),new HashMap<String, Double>());
             for (int j = 0; j < DMATnumber.size(); ++j)
             {
-                String str3 = (String)DMATlocationlat.get(j);
-                String str4 = (String)DMATlocationlon.get(j);
-
-                lat2 = Double.parseDouble(str3);
-                lon2 = Double.parseDouble(str4);
+                double lat2 = Double.parseDouble((String)DMATlocationlat.get(j));
+                double lon2 = Double.parseDouble((String)DMATlocationlon.get(j));
 
                 double dis = getStraightDistance(lat1,lon1,lat2,lon2);
 
+                DMATtoHospital.get(Hospitalnumber.get(i)).put((String) DMATnumber.get(j),dis);
 
             }
         }
+
+        ///////次元数（考慮するパラメーターの数）の設定//////////
+        //NO_OF_PARAMETERS = Hospitalnumber.size() * DMATnumber.size();
+
+        //////GAの評価プログラムDMATfirstEVAluatorに設定した値を渡す////////
+        DMATfirstEvaluator.setdata(Hospitalnumber,DMATnumber,DMATLevel,DMATtoHospital);
+        //DMATfirstEvaluator.Hospitalprint();//値が渡せたかの確認
+        //DMATfirstEvaluator.DMATprint();//値が渡せたかの確認
+        //DMATfirstEvaluator.disprint();
+
+
+        //////GAによる計算/////
+        TUndxMgg ga = new TUndxMgg(true,NO_OF_PARAMETERS,POPULATION_SIZE,NO_OF_CROSSOVERS);
+        List<TRealNumberIndividual> initialPopulation = ga.getInitialPopulation();
+        DMATfirstEvaluator.evaluatePoulation(initialPopulation);
+
+        for(int i =0; i<1000; ++i)
+        {
+            List<TRealNumberIndividual> family = ga.selectParentsAndMakeKids();
+            DMATfirstEvaluator.evaluatePoulation( family);
+            List<TRealNumberIndividual> nextPop = ga.doSelectionForSurvival();
+            System.out.println( ga.getIteration() + " " + ga.getBestEvaluationValue() + " " + ga.getAverageOfEvaluationValues());
+        }
+
+        System.out.println();
+        System.out.println("Best individual");
+        DMATfirstEvaluator.printIndividual(ga.getBestIndividual());
+
+
+        ///////////情報の表示/////////////
+        //////////病院情報///////////////
+        for(int i=0; i<Hospitalnumber.size(); ++i)
+        {
+            //System.out.println("HospaitlNumber" + Hospitalnumber.get(i));
+            //System.out.println("Hospitallocationlat" + Hospitallocationlat.get(i));
+            //System.out.println("Hospitallocationlon" + Hospitallocationlon.get(i));
+
+        }
+
+        //////////DMAT情報/////////////
+        for(int i = 0; i<DMATnumber.size(); ++i)
+        {
+            //System.out.println("DMATNumber:" + DMATnumber.get(i));
+            //System.out.println("DMATlocationlat:" + DMATlocationlat.get(i));
+            //System.out.println("DMATlocationlon:" + DMATlocationlon.get(i));
+            //System.out.println("DMATNumber:"+ DMATnumber.get(i)+ "  DMATLevel:" + DMATLevel.get(i));
+
+        }
+
+        /////////各DMATから病院までの距離の情報/////////////
+        for(int i= 0; i<Hospitalnumber.size(); ++i)
+        {
+            for(int j= 0; j<DMATnumber.size(); ++j)
+            {
+                //System.out.println("HospitalNuber:" + Hospitalnumber.get(i) + "  DMATNumber:" + DMATnumber.get(j) +"  Distance:" + DMATtoHospital.get(Hospitalnumber.get(i)).get(DMATnumber.get(j)));
+            }
+        }
+
     }
 }
 
