@@ -12,6 +12,8 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * Created by manabu on 2016/07/04.
@@ -19,17 +21,20 @@ import java.util.List;
 public class ReadTxtFiles {
     public static void main(String args[]) throws Exception {
         File dir = new File("/Users/manabu/Desktop/OUT/TXT");
+        //File dir = new File("C:\\Users\\manab\\Dropbox\\GIS\\GISデータ\\ゼンリン\\Area Map2\\OUT\\TXT");
         File outDir = new File("/Users/manabu/Desktop/OUT/SHP");
-        readFiles(dir, outDir);
+        //File outDir = new File("C:\\Users\\manab\\Dropbox\\GIS\\GISデータ\\ゼンリン\\Area Map2\\OUT\\SHP");
+        readFiles(dir, outDir, 4);
     }
 
-    public static void readFiles(File dir, File outDir) throws Exception {
+    public static void readFiles(File dir, File outDir, int thread) throws Exception {
+        ExecutorService executor = Executors.newFixedThreadPool(thread);
         if(dir.isDirectory()) {
             File fileList[] = dir.listFiles();
             for(int i=0; i<fileList.length;i++) {
                 if(!fileList[i].getName().startsWith(".")) {
-                    System.out.println(fileList[i].getName() + "を読み込みます。");
-                    readTxtFile(fileList[i], outDir);
+                    executor.submit(new ReadTxtFileThread(fileList[i], outDir)); // スレッドで変換
+                    //readTxtFile(fileList[i], outDir);
                 }
             }
         }
@@ -37,10 +42,12 @@ public class ReadTxtFiles {
             System.out.println("\tError: 出力パスがディレクトリではありません。");
             throw new RuntimeException("Error: 出力パスがディレクトリではありません。");
         }
+        executor.shutdown();
     }
 
 
     public static void readTxtFile(File file, File outDir) throws Exception {
+        System.out.println("[読込]" + file.getName() + "を読み込みます。");
         file.setReadOnly();
         BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file), "Shift_JIS"));
         String line;
@@ -122,7 +129,7 @@ public class ReadTxtFiles {
     }
 
     public static void createShape(File file, File outDir, int figType, int layer, LinkedList<Object> featuresList, LinkedList<String> texts) throws Exception {
-        System.out.println("\t" + file.getName() + "をShapeファイルに変換します。");
+        System.out.println("[変換]" + file.getName() + "をShapeファイルに変換します。");
         String inFileName[] = file.getName().split("\\.");
         String outFilePath = outDir.getPath() + "/" + inFileName[0] + ".shp";
         File outFile = new File(outFilePath);
@@ -183,11 +190,13 @@ public class ReadTxtFiles {
             for(int i=0; i<featuresList.size(); i++) {
                 LinkedList<Object> featureList = (LinkedList<Object>) featuresList.get(i);
                 LinkedList<LinkedList<String>> pointList = (LinkedList<LinkedList<String>>) featureList.get(5);
-                Coordinate cord[] = new Coordinate[pointList.size()];
+                Coordinate cord[] = new Coordinate[pointList.size()+1];
                 for(int j=0; j<pointList.size();j++) {
                     double lat = Double.parseDouble((pointList.get(j)).get(1))/3600000; // 緯度
                     double lon = Double.parseDouble((pointList.get(j)).get(0))/3600000; // 経度
                     cord[j] = new Coordinate(lon, lat);
+                    if(j==0)
+                        cord[pointList.size()] =  new Coordinate(lon, lat);
                 }
                 Polygon polygon = geometryFactory.createPolygon(cord);
                 featureBuilder.add(polygon);

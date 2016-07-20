@@ -14,10 +14,10 @@ import java.util.List;
 public class TTestUndxMgg {
 
 //	/** Sphere�֐��̒�`��̍ŏ��l */
-//	public static final double MIN = -5.12;
+	public static final double MIN = 0;
 //
 //	/** Sphere�֐��̒�`��̍ő�l */
-//	public static final double MAX = 5.12;
+	public static final double MAX = 1;
 
 	/** ������ */
 	public static final int NO_OF_PARAMETERS = 20;
