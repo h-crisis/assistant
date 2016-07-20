@@ -25,7 +25,7 @@ var baseLayer = new ol.layer.Tile({
     source: basemap,
     opacity: 1
 });
-// testtest
+//  test
 /*
 var basemap001 = new ol.source.TileWMS({
     url: 'http://192.168.1.100:8080/geoserver/zenrin/wms',
