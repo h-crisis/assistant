@@ -1,7 +1,7 @@
 /**
  * Created by komori on 2016/06/14.
  */
-
+/*
 var additionalmapOsm = new ol.source.MapQuest({ layer: 'osm' });
 var osmQuestLayer = new ol.layer.Tile({
     source: additionalmapOsm,
@@ -12,6 +12,7 @@ var satQuestLayer = new ol.layer.Tile({
     source: additionalmapSat,
     opacity: 1
 });
+*/
 var basemap = new ol.source.XYZ({
     url : 'http://cyberjapandata.gsi.go.jp/xyz/std/{z}/{x}/{y}.png',
     attribution  : "<a href='http://www.gsi.go.jp/kikakuchousei/kikakuchousei40182.html' target='_blank'>国土地理院</a>"
@@ -20,40 +21,57 @@ var baseLayer = new ol.layer.Tile({
     source: basemap,
     opacity: 1
 });
+var view = new ol.View({
+    center: ol.proj.transform([133.531163, 33.558829], 'EPSG:4326', 'EPSG:3857'),
+    zoom: 10,
+    minZoom: 1,
+    maxZoom: 15
+});
 var map = new ol.Map({
-    layers: [baseLayer, osmQuestLayer, satQuestLayer
-    ],
+    layers: [baseLayer],
     target: 'map',
-    view: new ol.View({
-        center: ol.proj.transform([133.511129, 33.5274460, 13], 'EPSG:4326', 'EPSG:3857'),
-        zoom: 11,
-        minZoom: 7,
-        maxZoom: 15
-    }),
+    view: view,
     controls: ol.control.defaults({
         attributionOptions: ({
             collapsible: false
         })
     }).extend([
-        new ol.control.ZoomSlider(),
         new ol.control.ScaleLine()
     ])
 });
 
+var visHosp   = document.getElementById('visible-hosp');
+visHosp.addEventListener('click', visHoButton);
+
+var visPass   = document.getElementById('visible-pass');
+visPass.addEventListener('click', visPassButton);
+
 var goHypoCenter = document.getElementById('goToHypoCenter');
 goHypoCenter.addEventListener('click', goHypoButton);
 function goHypoButton() {
-    map.getView().setCenter(ol.proj.transform([133.511129, 33.5274460], 'EPSG:4326', 'EPSG:3857'))
-    map.getView().setZoom(11);
+    var start = +new Date();
+    var pan = ol.animation.pan({
+        duration: 2000,
+        source: (view.getCenter()),
+    });
+    map.beforeRender(pan);
+    map.getView().setCenter(ol.proj.transform([133.531163, 33.558829], 'EPSG:4326', 'EPSG:3857'));
 }
 
 var flagSelected = false ;
 var lon, lat;
+
+/*
 var goFacility = document.getElementById('goToSelect');
 goFacility.addEventListener('click', function(evt) {
 
     if (flagSelected == true) {
         console.log(flagSelected);
+        var pan = ol.animation.pan({
+            duration: 2000,
+            source: (view.getCenter()),
+        });
+        map.beforeRender(pan);
         map.getView().setCenter([lon,lat]);
         map.getView().setZoom(14);
     }
@@ -85,12 +103,33 @@ function mapButton() {
         mapcount++;
     }
 };
-
+*/
 map.addLayer(hospLayer);
+map.addLayer(hospIcon);
+map.addLayer(ImpassableLayer);
+ImpassableLayer.setVisible(false);
 
 var overlayInfo = new ol.Overlay({
     element: document.getElementById('overlayInfo'),
     positioning: 'top-left'
+});
+
+map.getView().on('change:resolution', function() {
+    if(document.getElementById( 'vishospinfo' ).style.display == 'none'){}
+    else {
+        document.getElementById('vishospinfo').innerHTML = "";
+        document.getElementById('vishospinfo').style.display = 'none';
+        visHoButton()
+    }
+});
+
+map.getView().on('change:center', function() {
+    if(document.getElementById( 'vishospinfo' ).style.display == 'none'){}
+    else {
+        document.getElementById('vishospinfo').innerHTML = "";
+        document.getElementById('vishospinfo').style.display = 'none';
+        visHoButton()
+    }
 });
 
 var displayFeatureInfo = function(pixel) {
@@ -250,4 +289,32 @@ map.on('click', function(evt) {
 });
 function showHide(){
     document.getElementById('info').style.display = 'none';
+}
+
+function choiceHosp(obj) {
+    hospNum = obj.getAttribute('value');
+
+    getCSV('http://h-crisis.niph.go.jp/assistant/wp-content/uploads/sites/4/test/geojson/EMIS_Kouchi.csv', function (data) {
+        // dataを処理する
+
+        lat = data[hospNum].緯度;
+        lon = data[hospNum].経度;
+        hospLatLon = lat + "," + lon;
+        document.getElementById('latlonHosp').value = hospLatLon;
+
+        var hospPlace = ol.proj.transform([lon,Math.abs(lat)], 'EPSG:4326', 'EPSG:3857');
+        var start = +new Date();
+        var pan = ol.animation.pan({
+            duration: 2000,
+            source: (view.getCenter()),
+        });
+        map.beforeRender(pan);
+        map.getView().setCenter(hospPlace);
+        map.getView().setZoom(15);
+
+        document.getElementById( 'tdfkinfo' ).style.display = 'none';
+        document.getElementById( 'hospinfo' ).style.display = 'none';
+        document.getElementById('vishospinfo').style.display = 'none';
+
+    });
 }

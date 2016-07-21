@@ -7,12 +7,12 @@ var styleOffice = new ol.style.Style({
         font: '12px Calibri,sans-serif'
     }),
     image: new ol.style.Icon({
-        scale: 0.04,
+        scale: 0.06,
         anchor: [0.5, 1],
         anchorXUnits: 'fraction',
         anchorYUnits: 'fraction',
         opacity: 0.85,
-        src: "http://h-crisis.niph.go.jp/assistant/wp-content/uploads/sites/4/test/img/office.png"
+        src: "img/b.png"
     })
 });
 
@@ -26,6 +26,8 @@ var officeLayer = new ol.layer.Vector({
         return styleOffice;
     }
 });
+
+
 
 // 役所ボタンの挙動を制御する関数
 function officeButton() {
