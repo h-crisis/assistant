@@ -25,7 +25,33 @@ var baseLayer = new ol.layer.Tile({
     source: basemap,
     opacity: 1
 });
-
+//  test
+/*
+var basemap001 = new ol.source.TileWMS({
+    url: 'http://192.168.1.100:8080/geoserver/zenrin/wms',
+    params: {LAYERS: 'zenrin:001', VERSION: '1.3.0'}
+});
+var basemap101 = new ol.source.TileWMS({
+    url: 'http://192.168.1.100:8080/geoserver/zenrin/wms',
+    params: {LAYERS: 'zenrin:101', VERSION: '1.3.0'}
+});
+var basemap120 = new ol.source.TileWMS({
+    url: 'http://192.168.1.100:8080/geoserver/zenrin/wms',
+    params: {LAYERS: 'zenrin:120', VERSION: '1.3.0'}
+});
+var baseLayer001 = new ol.layer.Tile({
+    source: basemap001,
+    opacity: 1
+});
+var baseLayer101 = new ol.layer.Tile({
+    source: basemap101,
+    opacity: 1
+});
+var baseLayer120 = new ol.layer.Tile({
+    source: basemap120,
+    opacity: 1
+});
+*/
 var view = new ol.View({
     center: ol.proj.transform([140.461129, 37.787558, 13], 'EPSG:4326', 'EPSG:3857'),
     zoom: 11,
@@ -35,6 +61,7 @@ var view = new ol.View({
 
 var map = new ol.Map({
     layers: [baseLayer, osmQuestLayer, satQuestLayer,hybQuestLayer],
+    // layers: [baseLayer, baseLayer001, baseLayer101, baseLayer120, osmQuestLayer, satQuestLayer,hybQuestLayer],
     loadTilesWhileAnimating: true,
     target: 'map',
     view: view,
@@ -181,6 +208,24 @@ hospOnOff.addEventListener('click', hospButton);
 var overlayInfo = new ol.Overlay({
     element: document.getElementById('overlayInfo'),
     positioning: 'top-left'
+});
+
+map.getView().on('change:resolution', function() {
+    if(document.getElementById( 'vishospinfo' ).style.display == 'none'){}
+    else {
+        document.getElementById('vishospinfo').innerHTML = ""
+        document.getElementById('vishospinfo').style.display = 'none';
+        visHoButton()
+    }
+});
+
+map.getView().on('change:center', function() {
+    if(document.getElementById( 'vishospinfo' ).style.display == 'none'){}
+    else {
+        document.getElementById('vishospinfo').innerHTML = ""
+        document.getElementById('vishospinfo').style.display = 'none';
+        visHoButton()
+    }
 });
 
 var displayFeatureInfo = function(pixel) {

@@ -39,9 +39,11 @@ public class CspEvaluator {
 		
 		
 		TVector v = ind.getVector();
+
 		TRealNumberIndividual ind_new = new TRealNumberIndividual(v.getDimension());
 		
 		TVector v_new = ind_new.getVector();
+
 		
 		int temp1 = 0;
 		double sum = 0;
@@ -51,6 +53,7 @@ public class CspEvaluator {
 		for (int i = 0; i < v.getDimension(); i++) {
 			
 			x = v.getData(i);
+			System.out.println(x);
 
 			if(i != 0){
 				temp1 = ability[i-1];
@@ -60,6 +63,8 @@ public class CspEvaluator {
 			//scale the percetage to guarantee the sum of each situation is 1
 			if(temp1 != ability[i]){
 				for(int j = counter; j >= 0;j--){
+					System.out.println("test:" + i + "  temp:" + temp1);
+					System.out.println("counter:" + counter);
 					v_new.setData(i-j, v.getData(i-j)/sum);
 				}
 				sum = 0;
@@ -68,8 +73,11 @@ public class CspEvaluator {
 			
 			if( i == v.getDimension()-1){
 				sum += x;
+				System.out.println("last test:" + i + "  temp" + temp1);
+				System.out.println("lsat counter" + counter);
 				for(int j = counter; j >= 0;j--){
 					v_new.setData(i-j, v.getData(i-j)/sum);
+					System.out.println("xnumber" + (i-j) + "last value of x" + v_new.getData(i-j));
 				}
 				sum = 0;
 				counter = 0;
@@ -77,8 +85,8 @@ public class CspEvaluator {
 			sum += x;
 			counter++;
 		}
-		
-	
+
+
 		return ind_new;
 	}
 	//evaluate individuals to minimize the difference between actual allocation and expected value

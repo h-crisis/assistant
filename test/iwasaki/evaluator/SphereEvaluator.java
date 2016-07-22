@@ -16,10 +16,10 @@ import java.util.List;
 public class SphereEvaluator {
 
 	/** Sphere関数の定義域の最小値 */
-	public static final double MIN = -5.12;
+	public static final double MIN = 0;
 
 	/** Sphere関数の定義域の最大値 */
-	public static final double MAX = 5.12;
+	public static final double MAX = 1;
 
 	/**
 	 * 変数を定義域へ写像する．
@@ -40,6 +40,8 @@ public class SphereEvaluator {
 		double evaluatonValue = 0.0;
 		for (int i = 0; i < v.getDimension(); ++i) {
 			double x = map(v.getData(i));
+			System.out.println(x);
+			System.out.println(x);
 			if (x < MIN || x > MAX) {
 				ind.setStatus(IIndividual.INVALID);
 				return;
