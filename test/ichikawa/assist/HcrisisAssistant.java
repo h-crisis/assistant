@@ -5,7 +5,13 @@ package ichikawa.assist;
  */
 public class HcrisisAssistant {
     public static void main(String args[]) throws Exception {
-        doMedicalInstituteEMIS();
+        //doMedicalInstituteEMIS(args[0], args[1], args[2]);
+
+
+        doMedicalInstituteEMIS("files/WorkingFiles/EMIS医療機関情報_kochi.csv",
+                "files/WorkingFiles/medical_status_20160630143035.csv",
+                "files/WorkingFiles/outFile_201607221045.csv");
+
         // doSiCombine();
     }
 
@@ -17,10 +23,8 @@ public class HcrisisAssistant {
     }
      */
 
-    public static void doMedicalInstituteEMIS() throws Exception {
-        MedicalInstituteEMIS mie = new MedicalInstituteEMIS("files/WorkingFiles/EMIS医療機関情報_kochi.csv"
-                ,"files/WorkingFiles/medical_status_20160630143035.csv"
-                ,"files/WorkingFiles/outFile_20160630143035.csv");
+    public static void doMedicalInstituteEMIS(String path1, String path2, String path3) throws Exception {
+        MedicalInstituteEMIS mie = new MedicalInstituteEMIS(path1, path2, path3);
         mie.comineMedicalInstituteFiles();
         mie.createFeatures();
         mie.createShapeFile();
