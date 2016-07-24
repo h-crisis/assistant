@@ -3,6 +3,11 @@ package iwasaki.agent;
 import java.util.HashSet;
 import java.util.Iterator;
 
+/**
+ * @author chang
+ *
+ */
+
 public class Patient {
 
 	private int ID; //start from 0

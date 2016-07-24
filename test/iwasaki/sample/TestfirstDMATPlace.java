@@ -228,7 +228,7 @@ public class TestfirstDMATPlace {
             DMATfirstEvaluator.evaluatePopulation(
                     family);
             List<TRealNumberIndividual> nextPop = ga.doSelectionForSurvival();
-            //System.out.println( ga.getIteration() + " " + ga.getBestEvaluationValue() + " " + ga.getAverageOfEvaluationValues());
+            System.out.println( ga.getIteration() + " " + ga.getBestEvaluationValue() + " " + ga.getAverageOfEvaluationValues());
         }
 
         System.out.println();

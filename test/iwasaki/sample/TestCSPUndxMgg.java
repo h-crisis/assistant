@@ -10,6 +10,11 @@ import iwasaki.ga.util.TMyRandom;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * @author chang
+ *
+ */
+
 public class TestCSPUndxMgg {
 
 	public static final int NO_OF_PARAMETERS = 50;

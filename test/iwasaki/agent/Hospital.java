@@ -3,6 +3,11 @@ package iwasaki.agent;
 import java.util.HashMap;
 import java.util.HashSet;
 
+/**
+ * @author chang
+ *
+ */
+
 public class Hospital {
 
 	private int ID; //start from 0

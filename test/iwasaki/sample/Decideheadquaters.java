@@ -183,7 +183,7 @@ public class Decideheadquaters {
 
 
     /////////拠点本部となる病院の選定///////
-    /////////震度6以上によって災害本部の候補を決める///////
+    /////////震度5.4以上によって災害本部の候補を決める///////
     public static void getHeadquaterCandidate() {
         String temp;
         double a;
