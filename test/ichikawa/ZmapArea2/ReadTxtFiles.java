@@ -20,7 +20,7 @@ import java.util.concurrent.Executors;
  */
 public class ReadTxtFiles {
     public static void main(String args[]) throws Exception {
-        File dir = new File("/Users/manabu/Desktop/OUT/TXT");
+        File dir = new File("/Users/manabu/Desktop/OUT/TXT2");
         //File dir = new File("C:\\Users\\manab\\Dropbox\\GIS\\GISデータ\\ゼンリン\\Area Map2\\OUT\\TXT");
         File outDir = new File("/Users/manabu/Desktop/OUT/SHP");
         //File outDir = new File("C:\\Users\\manab\\Dropbox\\GIS\\GISデータ\\ゼンリン\\Area Map2\\OUT\\SHP");
@@ -236,6 +236,7 @@ public class ReadTxtFiles {
                 SimpleFeature feature = featureBuilder.buildFeature(null);
                 features.add(feature);
             }
+            
             CreateShape.createShapeFile(outFile, "UTF-8", type, features);
         }
     }
