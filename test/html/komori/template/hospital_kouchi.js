@@ -38,7 +38,7 @@ for (var i = 0; i < 17 ; i++) {
 
 var hospIcon = new ol.layer.Vector({
     source: new ol.source.Vector({
-        url: 'http://h-crisis.niph.go.jp/assistant/wp-content/uploads/sites/4/test/geojson/EMIS_Kouchi.geojson',
+        url: 'geojson/medical_status.geojson',
         format: new ol.format.GeoJSON()
     }),
     style: function(feature) {
@@ -59,7 +59,7 @@ var hospIcon = new ol.layer.Vector({
 
 var hospLayer = new ol.layer.Vector({
     source: new ol.source.Vector({
-        url: 'http://h-crisis.niph.go.jp/assistant/wp-content/uploads/sites/4/test/geojson/medical_status.geojson',
+        url: 'geojson/medical_status.geojson',
         format: new ol.format.GeoJSON()
     }),
     style: function(feature, resolution) {

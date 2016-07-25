@@ -1,4 +1,4 @@
-/**
+/*
  * Created by komori on 2016/06/14.
  */
 /*
@@ -119,7 +119,7 @@ map.getView().on('change:resolution', function() {
     else {
         document.getElementById('vishospinfo').innerHTML = "";
         document.getElementById('vishospinfo').style.display = 'none';
-        visHoButton()
+        // visHoButton()
     }
 });
 
