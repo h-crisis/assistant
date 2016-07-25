@@ -83,6 +83,7 @@ public class SettingFileCreate {
                         break;
                     }
                 }
+
                 mesh1I.close();
 
                 // 2次メッシュ絞り込み

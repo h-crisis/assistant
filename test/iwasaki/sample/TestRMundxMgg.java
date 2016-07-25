@@ -23,6 +23,11 @@ import java.util.List;
 import iwasaki.agent.*;
 
 
+/**
+ * @author chang
+ *
+ */
+
 //Developed by Shuang Chang to optimize resource allocation at post-disaster era while satisfying a set of constrains. 
 
 

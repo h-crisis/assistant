@@ -10,6 +10,11 @@ import java.util.List;
 import java.util.Properties;
 import java.util.Random;
 
+/**
+ * @author chang
+ *
+ */
+
 
 
 //Evaluator for CSP (constraint satisfactory problems)
