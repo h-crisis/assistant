@@ -4,7 +4,9 @@
 
 var styleImpassable = new ol.style.Style({
     text: new ol.style.Text({
-        font: '12px Calibri,sans-serif'
+        font: '12px Calibri,sans-serif',
+        fill: new ol.style.Fill({color: "#000000"}),
+        stroke: new ol.style.Stroke({color: "#ffff00", width: 2}),
     }),
     image: new ol.style.Icon({
         scale: 1,
@@ -22,7 +24,7 @@ var ImpassableLayer = new ol.layer.Vector({
         format: new ol.format.GeoJSON()
     }),
     style: function(feature, zoomlevel) {
-        styleImpassable.getText().setText(zoomlevel > 10 ? feature.get('name') +  ":" + feature.get('status') : '');
+        styleImpassable.getText().setText(feature.get('name') +  ":" + feature.get('status'));
         return styleImpassable;
     }
 });

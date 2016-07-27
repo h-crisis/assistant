@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>高知県 医療機関地図</title>
+    <link rel="stylesheet" href="http://openlayers.org/en/v3.15.0/css/ol.css" type="text/css">
+    <script src="http://openlayers.org/en/v3.15.0/build/ol.js"></script>
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <script src="hospital_August.js"></script>
+    <script src="pass.js"></script>
+    <script src="csvloader8.js"></script>
+</head>
+<body>
+<div id="map" class="map" style="z-index: 1;position: absolute;top: 0px;left: 0px;width: 100%;height: 100%;"></div>
+<div id="overlayInfo" style="background-color:whitesmoke; border: 1px solid black; padding: 5px 10px;"></div>
+<div id="overlayTargetTop" style="border: dotted 2px red;  padding: 0px 20px;display:block;"></div>
+<div id="overlayTargetRight" style="border: dotted 2px red;  padding: 20px 0px;display:block;"></div>
+<div id="overlayTargetBottom" style="border: dotted 2px red;  padding: 0px 20px;display:block;"></div>
+<div id="overlayTargetLeft" style="border: dotted 2px red;  padding: 20px 0px;display:block;"></div>
+<button id="goToHypoCenter" style="z-index: 3;position: absolute; bottom: 150px;left: 0px;width: 100px;height: 50px;">高知市へ<br>画面を移動</button>
+<button id="visible-hosp" style="z-index: 3;position: absolute; top: 200px;left: 0px;width: 100px;height: 50px;display: none">画面内の<br>医療機関表示</button>
+<button id="visible-pass" style="z-index: 3;position: absolute; bottom: 200px;left: 0px;width: 100px;height: 50px;">交通情報</button>
+<table id="info" style="z-index: 3;position: absolute;top: 0%;right: 0px;width: 20%;height: 90%; background-color:whitesmoke; border: 2px solid burlywood; padding: 5px 10px; table-layout: fixed; overflow:scroll; display:none; font-size:24px;">
+</table>
+<table id="tdfkinfo" style="z-index: 3;position: absolute;top: 90px;left: 50px;width: 100px;height: 90%; background-color:whitesmoke; border: 2px solid burlywood; padding: 5px 10px; table-layout: fixed; overflow:scroll; display:none; font-size:24px;">
+</table>
+<table id="hospinfo" style="z-index: 3;position: absolute;top: 90px;left: 150px;width: 250px;height: 90%; background-color:whitesmoke; border: 2px solid burlywood; padding: 5px 10px; table-layout: fixed; overflow:scroll; display:none; font-size:24px;">
+</table>
+<table id="vishospinfo" style="z-index: 3;position: absolute;top: 10px;left: 100px;width: 250px;height: 90%; background-color:whitesmoke; border: 2px solid burlywood; padding: 5px 10px; table-layout: fixed; overflow:scroll; display:none; font-size:24px;">
+</table>
+<a href='http://www.gsi.go.jp/' target='_blank' style="z-index: 2;position: absolute;bottom: 4%;left: 1%;">国土地理院</a>
+<input type="hidden" name="latlonCurr" id="latlonCurr">
+<input type="hidden" name="latlonHosp" id="latlonHosp">
+<script type="text/javascript" src="mapAugust.js">
+</script>
+</body>
+</html>
