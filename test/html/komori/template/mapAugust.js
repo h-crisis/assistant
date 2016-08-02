@@ -1,4 +1,4 @@
-/**
+/*
  * Created by komori on 2016/06/14.
  */
 /*

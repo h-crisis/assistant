@@ -12,7 +12,7 @@ var styleOffice = new ol.style.Style({
         anchorXUnits: 'fraction',
         anchorYUnits: 'fraction',
         opacity: 0.85,
-        src: "img/b.png"
+        src: "img/office.png"
     })
 });
 
