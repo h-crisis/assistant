@@ -90,33 +90,33 @@ var hospIcon = new ol.layer.Vector({
             for (var i = 0; i < 16 ; i++) {
                 if (biNum == i) {
                     styleHospR[i];
-                    styleHospR[i].getText().setText(resolution < 10 ? feature.get('name') : '');
+                    styleHospR[i].getText().setText(resolution < 50 && feature.get('prefecture') == "高知県" ? feature.get('name') : '');
                     styleHospR[i].getImage().setScale(resolution < 10 ? 0.5 : 0.4);
-                    styleHospR[i].getImage().setOpacity(feature.get('prefecture') == "高知県" ? 1 : 0);
+                    styleHospR[i].getImage().setOpacity(feature.get('prefecture') == "高知県"  ? 1 : 0);
                 // styleHospR[i].getImage().setOpacity(feature.get('prefecture') == "静岡県"|| feature.get('prefecture') == "山梨県"  ? 1 : 0);
                     return styleHospR[i];
                 }
             }
-        } else if(feature.get('assist') == "否") {
+        } else if(feature.get('assist') == "未" && feature.get('mds') == "未入力") {
             for (var i = 0; i < 16 ; i++) {
                 if (biNum == i) {
-                    styleHospB[i];
-                    styleHospB[i].getText().setText(resolution < 10 ? feature.get('name') : '');
-                    styleHospB[i].getImage().setScale(resolution < 10 ? 0.5 : 0.4);
-                    styleHospB[i].getImage().setOpacity(feature.get('prefecture') == "高知県" ? 1 : 0);
+                    styleHospG[i];
+                    styleHospG[i].getText().setText(resolution < 50 && feature.get('prefecture') == "高知県" ? feature.get('name') : '');
+                    styleHospG[i].getImage().setScale(resolution < 10 ? 0.5 : 0.4);
+                    styleHospG[i].getImage().setOpacity(feature.get('prefecture') == "高知県"  ? 1 : 0);
                     // styleHospB[i].getImage().setOpacity(feature.get('prefecture') == "静岡県"|| feature.get('prefecture') == "山梨県"  ? 1 : 0);
-                    return styleHospB[i];
+                    return styleHospG[i];
                 }
             }
         } else {
             for (var i = 0; i < 16 ; i++) {
                 if (biNum == i) {
-                    styleHospG[i];
-                    styleHospG[i].getText().setText(resolution < 10 ? feature.get('name') : '');
-                    styleHospG[i].getImage().setScale(resolution < 10 ? 0.5 : 0.4);
-                    styleHospG[i].getImage().setOpacity(feature.get('prefecture') == "高知県" ? 1 : 0);
+                    styleHospB[i];
+                    styleHospB[i].getText().setText(resolution < 50 && feature.get('prefecture') == "高知県" ? feature.get('name') : '');
+                    styleHospB[i].getImage().setScale(resolution < 10 ? 0.5 : 0.4);
+                    styleHospB[i].getImage().setOpacity(feature.get('prefecture') == "高知県"  ? 1 : 0);
                     // styleHospB[i].getImage().setOpacity(feature.get('prefecture') == "静岡県"|| feature.get('prefecture') == "山梨県"  ? 1 : 0);
-                    return styleHospG[i];
+                    return styleHospB[i];
                 }
             }
         }

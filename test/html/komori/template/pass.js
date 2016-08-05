@@ -20,11 +20,11 @@ var styleImpassable = new ol.style.Style({
 
 var ImpassableLayer = new ol.layer.Vector({
     source: new ol.source.Vector({
-        url: 'http://h-crisis.niph.go.jp/assistant/wp-content/uploads/sites/4/test/geojson/Inpassable_Kouchi.geojson',
+        url: 'http://h-crisis.niph.go.jp/assistant/wp-content/uploads/sites/4/test/geojson/road_info.geojson',
         format: new ol.format.GeoJSON()
     }),
-    style: function(feature, zoomlevel) {
-        styleImpassable.getText().setText(feature.get('name') +  ":" + feature.get('status'));
+    style: function(feature) {
+        styleImpassable.getText().setText(feature.get('路線名') +  ":" + feature.get('状態') + "(原因:" + feature.get('被災状況') + ")");
         return styleImpassable;
     }
 });

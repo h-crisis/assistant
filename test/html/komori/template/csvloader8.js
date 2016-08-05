@@ -36,7 +36,7 @@ function hoIndexButton() {
 function choiceTdfk(obj) {
     tdfkNum = obj.getAttribute('value');
 
-    getCSV('http://h-crisis.niph.go.jp/wp-content/uploads/data/medical_status/latest/hcrisis_medical_status.csv', function (data) {
+    getCSV('geojson/hcrisis_medical_status.csv', function (data) {
         // dataを処理する
         hospinfo.innerHTML = "";
         var code = "";
@@ -71,7 +71,7 @@ function visHoButton() {
         document.getElementById('tdfkinfo').style.display = 'none';
         document.getElementById('hospinfo').style.display = 'none';
         vishospinfo.innerHTML = ""
-        getCSV('http://h-crisis.niph.go.jp/wp-content/uploads/data/medical_status/latest/hcrisis_medical_status.csv', function (data) {
+        getCSV('geojson/hcrisis_medical_status.csv', function (data) {
             for (var i = 0; i < data.length; i++) {
                 var emisLat = data[i].lat;
                 var emisLon = data[i].lon;
@@ -82,7 +82,7 @@ function visHoButton() {
                     'EPSG:3857', 'EPSG:4326');
                 if (emisLat <= topRight[1] && emisLat >= bottomLeft[1]) {
                     if (emisLon <= topRight[0] && emisLon >= bottomLeft[0]) {
-                        vishospinfo.innerHTML = vishospinfo.innerHTML + "<tr><td style='font-size:24px;color:white;background-color:#888888;text-align:center' type=button id=tdkBtn value=" + i + " onclick=choiceHosp(this)>" + data[i].name1 + "</td></tr>";
+                        vishospinfo.innerHTML = vishospinfo.innerHTML + "<tr><td style='font-size:20px;color:white;background-color:#888888;text-align:left' type=button id=tdkBtn value=" + i + " onclick=choiceHosp(this)>" + data[i].name1 + "(" + data[i].city_name + ")" + "</td></tr>";
                     }
                 }
             }
