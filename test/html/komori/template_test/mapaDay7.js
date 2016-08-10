@@ -232,7 +232,7 @@ map.getView().on('change:resolution', function() {
     var topRight = ol.proj.transform(ol.extent.getTopRight(extent),
         'EPSG:3857', 'EPSG:4326');
     var lotLength = Math.abs(topRight[0] - bottomLeft[0]);
-    if (lotLength < 1 && document.getElementById('hospital-vis').style.backgroundColor == "blue"){
+    if (lotLength < 0.25 && document.getElementById('hospital-vis').style.backgroundColor == "blue"){
         document.getElementById('scrn-hosp').style.display = 'block'
         //document.getElementById('overlayTargetTop').style.display = 'block';
         //document.getElementById('overlayTargetRight').style.display = 'block';
