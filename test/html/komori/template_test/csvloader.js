@@ -99,7 +99,6 @@ function visHoButton() {
                         'EPSG:3857', 'EPSG:4326');
                     if (lat <= topRight[1] && lat >= bottomLeft[1]) {
                         if (lon <= topRight[0] && lon >= bottomLeft[0]) {
-                            console.log(i)
                             vishospinfo.innerHTML = vishospinfo.innerHTML + "<tr><td style='font-size:20px;color:white;background-color:#888888;text-align:left' type=button id=tdkBtn value=" + lat + ","+ lon + " onclick=choiceHosp(this)>" + name + "(" + city + ")" + "</td></tr>";
                         }
                     }
@@ -125,7 +124,7 @@ function visHoButton() {
             }
         });
         */
-        
+
         document.getElementById('vishospinfo').style.display = 'block';
     } else {
         document.getElementById('vishospinfo').style.display = 'none';
