@@ -31,75 +31,104 @@ function hoIndexButton() {
         cont++;
     }
 };
-
+/*
 function choiceTdfk(obj) {
     tdfkNum = obj.getAttribute('value');
 
-    getCSV('geojson/EMIS.csv', function (data) {
+    getCSV('geojson/hcrisis_medical_status.csv', function (data) {
         // dataを処理する
         hospinfo.innerHTML = "";
         var code = "";
         var aa = 0;
         var bb = 0;
         var text = "";
-        for(var i=0; i<data.length; i++) {
+        for (var i = 0; i < data.length; i++) {
             if (tdfkNum < 10) {
-                code = data[i].コード.substr(0, 3);
+                code = data[i].ecode.substr(0, 3);
                 if (code > 99) {
                     code = code.substr(0, 1);
                     if (tdfkNum == code) {
-                        hospinfo.innerHTML = hospinfo.innerHTML + "<tr><td style='font-size:24px;color:white;background-color:#888888;text-align:center' type=button id=tdkBtn value=" + i + " onclick=choiceHosp(this)>" + data[i].医療機関名 + "</td></tr>";
+                        hospinfo.innerHTML = hospinfo.innerHTML + "<tr><td style='font-size:24px;color:white;background-color:#888888;text-align:center' type=button id=tdkBtn value=" + i + " onclick=choiceHosp(this)>" + data[i].name1 + "</td></tr>";
                     }
                 }
             } else {
-                code = data[i].コード.substr(0, 3);
+                code = data[i].ecode.substr(0, 3);
                 if (code < 99) {
-                    code = data[i].コード.substr(0, 1) + data[i].コード.substr(2, 1);
+                    code = data[i].ecode.substr(0, 1) + data[i].ecode.substr(2, 1);
                     if (tdfkNum == code) {
-                        hospinfo.innerHTML = hospinfo.innerHTML + "<tr><td style='font-size:24px;color:white;background-color:#888888;text-align:center' type=button id=tdkBtn value=" + i + " onclick=choiceHosp(this)>" + data[i].医療機関名 + "</td></tr>";
+                        hospinfo.innerHTML = hospinfo.innerHTML + "<tr><td style='font-size:24px;color:white;background-color:#888888;text-align:center' type=button id=tdkBtn value=" + i + " onclick=choiceHosp(this)>" + data[i].name1 + "</td></tr>";
                     }
                 }
             }
         }
-        document.getElementById( 'hospinfo' ).style.display = 'block';
-    })
-};
+        document.getElementById('hospinfo').style.display = 'block';
+    })};
+**/
 
 function visHoButton() {
     if (document.getElementById('vishospinfo').style.display == 'none') {
-        document.getElementById( 'tdfkinfo' ).style.display = 'none';
-        document.getElementById( 'hospinfo' ).style.display = 'none';
-        var elmcount = 0;
-        var x
-        var extent = map.getView().calculateExtent(map.getSize());
-        var bottomLeft = ol.proj.transform(ol.extent.getBottomLeft(extent),
-            'EPSG:3857', 'EPSG:4326');
-        var topRight = ol.proj.transform(ol.extent.getTopRight(extent),
-            'EPSG:3857', 'EPSG:4326');
-        getCSV('geojson/EMIS.csv', function (data) {
+        document.getElementById('tdfkinfo').style.display = 'none';
+        document.getElementById('hospinfo').style.display = 'none';
+        vishospinfo.innerHTML = ""
+
+        var lat, lon, name, city;
+
+        $(document).ready(function () {
+            $.getJSON('geojson/hcrisis_medical_status.geojson', function (data) {
+                var items = [];
+                $.each(data.features, function (key, val) {
+                    $.each(val.geometry, function(g,h){
+                        if (this.length != 5) {
+                            items.push[h];
+                            lon = this[0];
+                            lat = this[1];
+                        }
+                    })
+                    $.each(val.properties, function(i,j){
+                        items.push(i,j);
+                        if (i == "name") {
+                            name = j;
+                        } else if (i == "city") {
+                            city = j;
+                        }
+                    })
+                    var extent = map.getView().calculateExtent(map.getSize());
+                    var bottomLeft = ol.proj.transform(ol.extent.getBottomLeft(extent),
+                        'EPSG:3857', 'EPSG:4326');
+                    var topRight = ol.proj.transform(ol.extent.getTopRight(extent),
+                        'EPSG:3857', 'EPSG:4326');
+                    if (lat <= topRight[1] && lat >= bottomLeft[1]) {
+                        if (lon <= topRight[0] && lon >= bottomLeft[0]) {
+                            console.log(i)
+                            vishospinfo.innerHTML = vishospinfo.innerHTML + "<tr><td style='font-size:20px;color:white;background-color:#888888;text-align:left' type=button id=tdkBtn value=" + lat + ","+ lon + " onclick=choiceHosp(this)>" + name + "(" + city + ")" + "</td></tr>";
+                        }
+                    }
+                });
+            });
+        });
+
+        /*
+        getCSV('geojson/hcrisis_medical_status.csv', function (data, feature) {
             for (var i = 0; i < data.length; i++) {
-                var emisLat = data[i].緯度;
-                var emisLon = data[i].経度;
+                var emisLat = data[i].lat;
+                var emisLon = data[i].lon;
+                var extent = map.getView().calculateExtent(map.getSize());
+                var bottomLeft = ol.proj.transform(ol.extent.getBottomLeft(extent),
+                    'EPSG:3857', 'EPSG:4326');
+                var topRight = ol.proj.transform(ol.extent.getTopRight(extent),
+                    'EPSG:3857', 'EPSG:4326');
                 if (emisLat <= topRight[1] && emisLat >= bottomLeft[1]) {
                     if (emisLon <= topRight[0] && emisLon >= bottomLeft[0]) {
-                        vishospinfo.innerHTML = vishospinfo.innerHTML + "<tr><td style='font-size:24px;color:white;background-color:#888888;text-align:center' type=button id=tdkBtn value=" + i + " onclick=choiceHosp(this)>" + data[i].医療機関名 + "</td></tr>";
-                        // var x = document.getElementById('tdkBtn').clientHeight;
-                        // console.log(x)
-                        elmcount++;
+                        vishospinfo.innerHTML = vishospinfo.innerHTML + "<tr><td style='font-size:20px;color:white;background-color:#888888;text-align:left' type=button id=tdkBtn value=" + i + " onclick=choiceHosp(this)>" + data[i].name1 + "(" + data[i].city_name + ")" + "</td></tr>";
                     }
                 }
             }
-            if (elmcount < 15) {
-                elmcount = (elmcount * 40) + "px";
-                document.getElementById('vishospinfo').style.height = elmcount;
-            }
         });
+        */
+        
         document.getElementById('vishospinfo').style.display = 'block';
-        cont++;
     } else {
         document.getElementById('vishospinfo').style.display = 'none';
         vishospinfo.innerHTML = "";
-        cont++;
     }
 }
-

@@ -3,80 +3,81 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>H-CRISIS Assistant 医療機関情報入力</title>
+    <title>H-CRISIS Assistant 医療機関情報緊急時入力</title>
     <script src="mqttws31.js"></script>
-    <script src="MQTT-Hospital.js"></script>
+    <script src="mqtthcrisis.js"></script>
 </head>
 <body>
 <form>
     <fieldset>
-        <legend>医療機関概要入力</legend>
+        <legend>医療機関情報の入力</legend>
         ※ 情報が取得できなかった場合、該当箇所は空欄のままで送信してください。
         <br>
         ※ 記録者名は入力必須です。
         <br>
-        <label>住所:<input type="text" id="inputAddress"  value=""></label>
-        <label>医療機関名:<input type="text" id="inputHospitalName"  value=""></label>
-        <label>二次医療圏:<input type="text" id="inputMedDist"  value=""></label>
-        <label>電話番号:<input type="text" id="inputTEL"  value=""></label><br>
-        <label>記録機関名:<input type="text" id="inputHuman"  value=""></label><br>
-        <label>医師出勤状況:<input type="text" id="inputNum" value=""></label><br>
+        <label>医療機関コード:<input type="text" id="inputCode"  value=""></label>
+        <label>県名:<input type="text" id="inputPrf"  value=""></label><br>
+        <label>医療機関名:<input type="text" id="inputHospital"  value=""></label><br>
+        <label>記録者:<input type="text" id="inputHuman"  value=""></label><br>
         <form width="100">支援要否：
-            <label><input type="radio" name="q0" value="要">要</label>
-            <label><input type="radio" name="q0" value="不要" checked="checked">不要</label>
+            <label><input type="radio" name="q0" value="11">要</label>
+            <label><input type="radio" name="q0" value="0" checked="checked">不要</label>
         </form>
-        <form>医療派遣ステータス：
+        <br>
+        <label>チーム数:<input type="text" id="inputTeam"  value=""></label><br>
+        <label>医師出勤状況:<input type="text" id="inputDocter"  value=""></label><br>
+        <form width="100">医師派遣ステータス：
             <label><input type="radio" name="q1" value="要手配">要手配</label>
             <label><input type="radio" name="q1" value="手配済">手配済</label>
             <label><input type="radio" name="q1" value="支援中" checked="checked">支援中</label>
         </form>
-        <HR><legend>緊急時入力(発災直後情報)</legend></HR>
-            ※ 情報が取得できなかった場合、該当箇所は空欄のままで送信してください。
-        <form>入院病棟の倒壊、または倒壊の恐れ：
+        <form>入院病棟の倒壊・倒壊の恐れ：
             <label><input type="radio" name="q2" value="11">有</label>
             <label><input type="radio" name="q2" value="0" checked="checked">無</label>
         </form>
-        <form>電気の通常の供給：
-            <label><input type="radio" name="q3" value="101">飲用可</label>
-            <label><input type="radio" name="q3" value="102">利用可</label>
+        <form>電気使用：
+            <label><input type="radio" name="q3" value="11">可</label>
             <label><input type="radio" name="q3" value="0" checked="checked">不可</label>
         </form>
-        <form>水の通常の供給：
-            <label><input type="radio" name="q4" value="11">可</label>
+        <form>水使用：
+            <label><input type="radio" name="q4" value="102">利用可</label>
             <label><input type="radio" name="q4" value="0" checked="checked">不可</label>
         </form>
-        <form>携帯電話：
+        <form>医療ガス使用：
             <label><input type="radio" name="q5" value="11">可</label>
             <label><input type="radio" name="q5" value="0" checked="checked">不可</label>
         </form>
-        <form>通信：
+        <form>医療品衛生資機材使用：
             <label><input type="radio" name="q6" value="11">可</label>
             <label><input type="radio" name="q6" value="0" checked="checked">不可</label>
         </form>
-        <form>トイレ：
-            <label><input type="radio" name="q7" value="103">使用可</label>
-            <label><input type="radio" name="q7" value="104">使用不可</label>
-            <label><input type="radio" name="q7" value="1" checked="checked">無</label>
+        <form>多数患者受信：
+            <label><input type="radio" name="q7" value="11">可</label>
+            <label><input type="radio" name="q7" value="0" checked="checked">不可</label>
         </form>
-        <form>食料：
-            <label><input type="radio" name="q8" value="12">有</label>
-            <label><input type="radio" name="q8" value="1" checked="checked">無</label>
-        </form>
+        <br>
+        <label>職員状況:<input type="text" id="inputStaff"  value=""></label><br>
+        <label>その他情報:<input type="text" id="inputOther"  value=""></label><br>
+        <label>電話番号:<input type="text" id="inputTEL"  value=""></label><br>
+        <label>メールアドレス:<input type="text" id="inputMail"  value=""></label><br>
     </fieldset>
 
     <fieldset>
         <script>
             function createMessage() {
                 //var createMsg = "test";
-                var topicMsg = "/h-crisis/shelter/emergency/" + document.getElementById('inputHospitalName').value;
-
-                var createMsg = document.getElementById('inputAddress').value +
-                        ',' + document.getElementById('inputHospitalName').value +
-                        ',' + document.getElementById('inputMedDist').value +
-                        ',' + document.getElementById('inputTEL').value +
+                var topicMsg = "/h-crisis/shelter/emergency/" + document.getElementById('inputCode').value;
+                var createMsg = document.getElementById('inputCode').value +
+                        ',' + document.getElementById('inputPrf').value +
+                        ',' + document.getElementById('inputHospital').value +
                         ',' + document.getElementById('inputHuman').value +
-                        ',' + document.getElementById('inputNum').value +
-                        "," + lat + "," + lon;
+                        ',' + document.getElementById('inputTeam').value +
+                        ',' + document.getElementById('inputDocter').value +
+                        ',' + document.getElementById('inputStaff').value +
+                        ',' + document.getElementById('inputOther').value +
+                        ',' + document.getElementById('inputTEL').value +
+                        ',' + document.getElementById('inputMail').value;
+
 
                 for(var i = 0; i < 9; i++) {
                     var arrayValue = "q" + i;
@@ -88,6 +89,7 @@
                         }
                     }
                 }
+                createMsg = createMsg + ',' + lat + ',' + lon;
                 var nowTime = new Date();
                 var nowYer = nowTime.getFullYear();
                 var nowMon = nowTime.getMonth() + 1;
@@ -115,18 +117,13 @@
                     pairUrlStr[0] = decodeURI(pairUrlStr[0]);
                     pairUrlStr[1] = pairUrlStr[1].substr(5);
                     pairUrlStr[1] = decodeURI(pairUrlStr[1]);
-                    pairUrlStr[2] = pairUrlStr[2].substr(8);
+                    pairUrlStr[2] = pairUrlStr[2].substr(11);
                     pairUrlStr[2] = decodeURI(pairUrlStr[2]);
-                    pairUrlStr[3] = pairUrlStr[3].substr(4);
-                    pairUrlStr[3] = decodeURI(pairUrlStr[3]);
-                    document.getElementById('inputAddress').value = pairUrlStr[0];
-                    document.getElementById('inputAddress').disabled = 'true';
-                    document.getElementById('inputHospitalName').value = pairUrlStr[1];
-                    document.getElementById('inputHospitalName').disabled = 'true';
-                    document.getElementById('inputMedDist').value = pairUrlStr[2];
-                    document.getElementById('inputMedDist').disabled = 'true';
-                    document.getElementById('inputTEL').value = pairUrlStr[3];
-                    document.getElementById('inputTEL').disabled = 'true';
+                    document.getElementById('inputCode').value = pairUrlStr[0];
+                    document.getElementById('inputCode').disabled = 'true';
+                    document.getElementById('inputHospital').value = pairUrlStr[1];
+                    document.getElementById('inputHospital').disabled = 'true';
+                    document.getElementById('inputPrf').value = pairUrlStr[2];
 
                 }
             }

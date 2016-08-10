@@ -4,7 +4,9 @@
 
 var styleHinan = new ol.style.Style({
     text: new ol.style.Text({
-        font: '12px Calibri,sans-serif'
+        font: '12px Calibri,sans-serif',
+        fill: new ol.style.Fill({color: "#000000"}),
+        stroke: new ol.style.Stroke({color: "#00ff00", width: 2}),
     }),
     image: new ol.style.Icon({
         scale: 0.5,
@@ -16,9 +18,10 @@ var styleHinan = new ol.style.Style({
     })
 });
 
+/*
 var shltrJPN = new ol.layer.Vector({
     source: new ol.source.Vector({
-        url: 'http://h-crisis.niph.go.jp/assistant/wp-content/uploads/sites/4/test/geojson/shelterJPN.geojson',
+        url: 'geojson/shelterJPN.geojson',
         format: new ol.format.GeoJSON(),
     }),
     style: function(feature, resolution) {
@@ -29,30 +32,32 @@ var shltrJPN = new ol.layer.Vector({
         return styleHinan;
     }
 });
+*/
+
 
 var hinanLayer1 = new ol.layer.Vector({
     source: new ol.source.Vector({
-        url: 'http://h-crisis.niph.go.jp/assistant/wp-content/uploads/sites/4/test/geojson/HinanDay1.geojson',
+        url: 'http://h-crisis.niph.go.jp/assistant/wp-content/uploads/sites/4/test/geojson/shelter.geojson',
         format: new ol.format.GeoJSON()
     }),
     style: function(feature, resolution) {
-        var hinanNum = feature.get('避難者数');
-        styleHinan.getText().setText(resolution < 10 ? feature.get('名称') + "(避難者数"　+ feature.get('避難者数') + "人)": '');
-        styleHinan.getImage().setScale(hinanNum > 300 ? 1.5 : hinanNum > 100 ? 1 : hinanNum > 20 ? 0.07 :  0.5);
-        styleHinan.getImage().setOpacity(hinanNum > 0 ? 0.85 : 0);
+        var hinanNum = Math.round(feature.get('S01'));
+        styleHinan.getText().setText(resolution < 30 && feature.get('sikuchoson') == '伊勢原市' ?  feature.get('ID') : '');
+        styleHinan.getImage().setScale(hinanNum > 1000 ? 0.7 : hinanNum > 300 ? 0.5 : hinanNum > 20 ? 0.3 :  0.1);
+        styleHinan.getImage().setOpacity(feature.get('sikuchoson') == '伊勢原市' ? 0.85 : 0);
         return styleHinan;
     }
 });
 
 var hinanLayer4 = new ol.layer.Vector({
     source: new ol.source.Vector({
-        url: 'http://h-crisis.niph.go.jp/assistant/wp-content/uploads/sites/4/test/geojson/HinanDay4.geojson',
+        url: 'http://h-crisis.niph.go.jp/assistant/wp-content/uploads/sites/4/test/geojson/shelter.geojson',
         format: new ol.format.GeoJSON()
     }),
     style: function(feature, resolution) {
-        var hinanNum = feature.get('避難者数');
-        styleHinan.getText().setText(resolution < 10 ? feature.get('名称') + "(避難者数"　+ feature.get('避難者数') + "人)": '');
-        styleHinan.getImage().setScale(hinanNum > 300 ? 1.5 : hinanNum > 100 ? 1 : hinanNum > 20 ? 0.7 : 0.5);
+        var hinanNum = Math.round(feature.get('S01'));
+        styleHinan.getText().setText(resolution < 30 && feature.get('sikuchoson') == '伊勢原市' ?  feature.get('ID') : '');
+        styleHinan.getImage().setScale(hinanNum > 1000 ? 0.7 : hinanNum > 300 ? 0.5 : hinanNum > 20 ? 0.3 : 0.1);
         styleHinan.getImage().setOpacity(hinanNum > 0 ? 0.85 : 0);
         return styleHinan;
     }
@@ -60,13 +65,13 @@ var hinanLayer4 = new ol.layer.Vector({
 
 var hinanLayer14 = new ol.layer.Vector({
     source: new ol.source.Vector({
-        url: 'http://h-crisis.niph.go.jp/assistant/wp-content/uploads/sites/4/test/geojson/HinanDay14.geojson',
+        url: 'http://h-crisis.niph.go.jp/assistant/wp-content/uploads/sites/4/test/geojson/shelter.geojson',
         format: new ol.format.GeoJSON()
     }),
     style: function(feature, resolution) {
-        var hinanNum = feature.get('避難者数');
-        styleHinan.getText().setText(resolution < 10 ? feature.get('名称') + "(避難者数"　+ feature.get('避難者数') + "人)": '');
-        styleHinan.getImage().setScale(hinanNum > 300 ? 1.5 : hinanNum > 100 ? 1 : hinanNum > 20 ? 0.7 : 0.5);
+        var hinanNum = Math.round(feature.get('S01'));
+        styleHinan.getText().setText(resolution < 30 ? "ID:" + feature.get('ID') + "(避難者数:"　+ hinanNum + "人)": '');
+        styleHinan.getImage().setScale(hinanNum > 300 ? 0.7 : hinanNum > 100 ? 0.5 : hinanNum > 20 ? 0.3 : 0.1);
         styleHinan.getImage().setOpacity(hinanNum > 0 ? 0.85 : 0);
         return styleHinan;
     }
