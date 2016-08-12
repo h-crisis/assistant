@@ -27,7 +27,7 @@ import java.util.concurrent.Future;
 public class EstimateMesh5thDamage {
 
     public static void main(String args[]) {
-        estimatingMeth5thDamage(new File("shape/mesh/Mesh5th.shp"), new File("files/CsvFiles/si_201608051200.csv"), "UTF-8", "UTF-8", 4, 4);
+        //estimatingMeth5thDamage(new File("shape/mesh/Mesh5th.shp"), new File("files/CsvFiles/si_201608051200.csv"), "UTF-8", "UTF-8", 4, 4);
     }
 
     public static void estimatingMeth5thDamage(File meshFile, File siFile, File outDir, String meshFileEncording, String siFileEncording, String outFileEncording, String outFileName, int siMeshLevel, int thread) {
