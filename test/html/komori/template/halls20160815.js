@@ -146,9 +146,12 @@ var styleSI7 = new ol.style.Style({
     })
 });
 
+var urlH = pass + 'geojson/halls.geojson';
+// var url =  'http://h-crisis.niph.go.jp/wp-content/uploads/sites/4/event/20160815/geojson/halls.geojson';
+
 var hallLayer = new ol.layer.Vector({
     source: new ol.source.Vector({
-        url: 'geojson/halls.geojson',
+        url: urlH,
         format: new ol.format.GeoJSON(),
     }),
     style: function(feature, resolution) {
@@ -181,6 +184,7 @@ var hallLayer = new ol.layer.Vector({
             styleSI7.getText().setText(resolution < 200 ? name : '');
             return styleSI7;
     }
+        console.log(url);
 }});
 
 

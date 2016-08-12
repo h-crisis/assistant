@@ -63,10 +63,12 @@ function choiceTdfk(obj) {
         }
         document.getElementById('hospinfo').style.display = 'block';
     })};
+
+
 **/
 
 function visHoButton() {
-    if (document.getElementById('vishospinfo').style.display == 'none') {
+    if (document.getElementById('vishospinfo').style.display == 'none' || document.getElementById('visshltrinfo').style.display == 'block') {
         document.getElementById('tdfkinfo').style.display = 'none';
         document.getElementById('hospinfo').style.display = 'none';
         vishospinfo.innerHTML = ""
@@ -164,5 +166,76 @@ function visHoButton() {
     } else {
         document.getElementById('vishospinfo').style.display = 'none';
         vishospinfo.innerHTML = "";
+    }
+}
+
+function visShButton() {
+    if (document.getElementById('visshltrinfo').style.display == 'none' || document.getElementById('vishospinfo').style.display == 'block') {
+        document.getElementById('tdfkinfo').style.display = 'none';
+        document.getElementById('hospinfo').style.display = 'none';
+        visshltrinfo.innerHTML = ""
+
+        var lat, lon, name, city, hospIconNum, hospIcon, iconColor;
+        var num = 0;
+
+        $(document).ready(function () {
+            $.getJSON('geojson/shelter.geojson', function (data) {
+                var items = [];
+                $.each(data.features, function (key, val) {
+                    $.each(val.geometry, function(g,h){
+                        if (this.length != 5) {
+                            items.push[h];
+                            lon = this[0];
+                            lat = this[1];
+                        }
+                    });
+                    $.each(val.properties, function(i,j){
+                        items.push(i,j);
+                        if (i == "name") {
+                            name = j;
+                        } else if (i == "sikuchoson") {
+                            city = j;
+                        }
+                        if (i == "S01") {
+                            num = Math.round(j);
+                        }
+                    });
+                    var extent = map.getView().calculateExtent(map.getSize());
+                    var bottomLeft = ol.proj.transform(ol.extent.getBottomLeft(extent),
+                        'EPSG:3857', 'EPSG:4326');
+                    var topRight = ol.proj.transform(ol.extent.getTopRight(extent),
+                        'EPSG:3857', 'EPSG:4326');
+                    if (lat <= topRight[1] && lat >= bottomLeft[1]) {
+                        if (lon <= topRight[0] && lon >= bottomLeft[0]) {
+                            visshltrinfo.innerHTML = visshltrinfo.innerHTML + "<tr><td style='font-size:20px;color:white;background-color:#888888;text-align:left' type=button id=tdkBtn value=" + lat + ","+ lon + " onclick=choiceHosp(this)>" + name + "<br>" + "(" + city + ":" + num + ")" + "</td></tr>";
+                        }
+                    }
+                });
+            });
+        });
+
+        /*
+         getCSV('geojson/hcrisis_medical_status.csv', function (data, feature) {
+         for (var i = 0; i < data.length; i++) {
+         var emisLat = data[i].lat;
+         var emisLon = data[i].lon;
+         var extent = map.getView().calculateExtent(map.getSize());
+         var bottomLeft = ol.proj.transform(ol.extent.getBottomLeft(extent),
+         'EPSG:3857', 'EPSG:4326');
+         var topRight = ol.proj.transform(ol.extent.getTopRight(extent),
+         'EPSG:3857', 'EPSG:4326');
+         if (emisLat <= topRight[1] && emisLat >= bottomLeft[1]) {
+         if (emisLon <= topRight[0] && emisLon >= bottomLeft[0]) {
+         vishospinfo.innerHTML = vishospinfo.innerHTML + "<tr><td style='font-size:20px;color:white;background-color:#888888;text-align:left' type=button id=tdkBtn value=" + i + " onclick=choiceHosp(this)>" + data[i].name1 + "(" + data[i].city_name + ")" + "</td></tr>";
+         }
+         }
+         }
+         });
+         */
+
+        document.getElementById('visshltrinfo').style.display = 'block';
+    } else {
+        document.getElementById('visshltrinfo').style.display = 'none';
+        visshltrinfo.innerHTML = "";
     }
 }

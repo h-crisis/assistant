@@ -7,12 +7,18 @@
     <script src="http://code.jquery.com/jquery.min.js"></script>
     <script src="http://d3js.org/d3.v3.min.js"></script>
 
-    <script src="shelter.js"></script>
-    <script src="hospital.js"></script>
-    <script src="hall.js"></script>
-    <script src="locationChecker.js"></script>
-    <script src="csvloader.js"></script>
-    <script src="pass.js"></script>
+    <script type="text/javascript">
+        var hypoPoint;
+        var hypoLat
+        var HypoLon
+    </script>
+    <script src="event.js"></script>
+    <script src="../../js/shelter.js"></script>
+    <script src="../../js/hospital.js"></script>
+    <script src="../../js/halls20160815.js"></script>
+    <script src="../../js/locationChecker.js"></script>
+    <script src="../../js/csvloader.js"></script>
+    <script src="../../js/pass.js"></script>
 </head>
 <body>
 <div id="map" class="map" style="z-index: 1;position: absolute;top: 0px;left: 0px;width: 100%;height: 100%;"></div>
@@ -42,9 +48,9 @@
 </table>
 <input type="hidden" name="latlonCurr" id="latlonCurr">
 <input type="hidden" name="latlonHosp" id="latlonHosp">
-<script type="text/javascript" src="mapaDay7.js">
+<script type="text/javascript" src="../../js/mapaDay7.js">
 </script>
-<script type="text/javascript" src="sizeChecker.js">
+<script type="text/javascript" src="../../js/sizeChecker.js">
 </script>
 </body>
 </html>

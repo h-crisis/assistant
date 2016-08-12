@@ -38,7 +38,7 @@ var baseLayer120 = new ol.layer.Tile({
 });
 */
 var view = new ol.View({
-    center: ol.proj.transform([139.284668, 35.373351, 13], 'EPSG:4326', 'EPSG:3857'),
+    center: hypoPoint,
     zoom: 9,
     minZoom: 5,
     maxZoom: 13
@@ -69,7 +69,6 @@ visHosp.addEventListener('click', hospButton);
 var goHypoCenter = document.getElementById('goToHypoCenter');
 goHypoCenter.addEventListener('click', goHypoButton);
 function goHypoButton() {
-    var hypoPoint = ol.proj.transform([139.284668, Math.abs(35.373351)], 'EPSG:4326', 'EPSG:3857');
     var pan = ol.animation.pan({
         duration: 2000,
         source: (view.getCenter())
@@ -235,7 +234,7 @@ map.getView().on('change:resolution', function() {
     var topRight = ol.proj.transform(ol.extent.getTopRight(extent),
         'EPSG:3857', 'EPSG:4326');
     var lotLength = Math.abs(topRight[0] - bottomLeft[0]);
-    if (lotLength < 1 && document.getElementById('hospital-vis').style.backgroundColor == "blue"){
+    if (lotLength < 0.25 && document.getElementById('hospital-vis').style.backgroundColor == "blue"){
         document.getElementById('scrn-hosp').style.display = 'block'
         //document.getElementById('overlayTargetTop').style.display = 'block';
         //document.getElementById('overlayTargetRight').style.display = 'block';
@@ -304,17 +303,17 @@ map.on('click', function(evt) {
     map.forEachFeatureAtPixel(pixel, function (feature) {
         labelB = feature.get('名称');
         labelC = feature.get('住所');
-        labelHall[0] = feature.get('SEIREI');
-        labelHall[1] = feature.get('SIKUCHOSON');
-        labelHall[2] = feature.get('KEN');
-        labelHall[3] = feature.get('P_NUM');
-        labelHall[4] = feature.get('H_NUM');
-        labelHall[5] = Math.round(feature.get('num_zenkai'));
-        labelHall[6] = Math.round(feature.get('num_zenhan'));
-        labelHall[7] = Math.round(feature.get('num_dead'));
-        labelHall[8] = Math.round(feature.get('num_injure'));
-        labelHall[9] = Math.round(feature.get('num_severe'));
-        labelHall[10] = Math.round(feature.get('num_evacue'));
+        labelHall[0] = feature.get('seirei');
+        labelHall[1] = feature.get('sikuchoson');
+        labelHall[2] = feature.get('ken');
+        labelHall[3] = feature.get('p_num');
+        labelHall[4] = feature.get('h_num');
+        labelHall[5] = Math.round(feature.get('zenkai'));
+        labelHall[6] = Math.round(feature.get('zenhankai'));
+        labelHall[7] = Math.round(feature.get('dead'));
+        labelHall[8] = Math.round(feature.get('injured'));
+        labelHall[9] = Math.round(feature.get('severe'));
+        labelHall[10] = Math.round(feature.get('evacuee'));
         labelD = feature.get('避難者数');
         labelHosp[0] = feature.get('prefecture');
         labelSelf = feature.getId();
@@ -417,9 +416,9 @@ map.on('click', function(evt) {
         hospIconNum = (labelHosp[101] * 8) + (labelHosp[102] * 4) + (labelHosp[103] * 2) + (labelHosp[104] * 1);
 
         coordinate4326 = feature.getGeometry().getExtent();
-        coordinate4326 = ol.proj.transform([coordinate4326[0],Math.abs(coordinate4326[1])], 'EPSG:4326', 'EPSG:3857');
+        coordinate4326 = ol.proj.transform([coordinate4326[0],Math.abs(coordinate4326[1])], 'EPSG:3857', 'EPSG:4326');
         lon = coordinate4326[0];
-        lon = coordinate4326[1];
+        lat = coordinate4326[1];
     });
     if (labelSelf === "") {
         labelSelf = "noPlace";
@@ -531,15 +530,15 @@ map.on('click', function(evt) {
         infoH.innerHTML = "<tr><td style='font-size:20px;background-color:#888888;color:white; text-align:center; width: 380px' type=button id=showBtn value=隠す onclick='showHide()'>閉じる</td></tr>";
         infoH.innerHTML = infoH.innerHTML + "<tr><td style='font-size:20px;background-color:whitesmoke; color:black; text-align:left; table-layout:fixed; width: 380px'>" + labelShltrJPN[1] + "</td></tr>";
         // infoH.innerHTML = infoH.innerHTML + "<tr><td style='font-size:20px;background-color:whitesmoke; color:black; text-align:left; table-layout:fixed; width: 380px'><img src=" + hospIcon + "/ width=20 height=20 >" + labelHosp[18] + "</td></tr>";
-        info.innerHTML = info.innerHTML +  "<div style='border:2px solid burlywood; background-color:#888888; text-align:center' type=button ><a href=mqtt/shelter-emergency.html style='display:block; width:100%; color:white; text-decoration:none' id=niphLonLatE target=_blank>緊急時情報入力</a></div>";
+        info.innerHTML = info.innerHTML +  "<div style='border:2px solid burlywood; background-color:#888888; text-align:center' type=button ><a href=../../html/shelter-emergency.html style='display:block; width:100%; color:white; text-decoration:none' id=niphLonLatE target=_blank>緊急時情報入力</a></div>";
         var niphAddressE=document.getElementById('niphLonLatE');
-        niphAddressE.href='mqtt/shelter-emergency_2.html' + '?' + 'ID=' + labelShltrJPN[0] + ',Name=' + labelShltrJPN[1] + ',x=' + lon + ',y=' + lat;
-        info.innerHTML = info.innerHTML +  "<div style='border:2px solid burlywood; background-color:#888888; text-align:center' type=button ><a href=mqtt/shelter-emergency.html style='display:block; width:100%; color:white; text-decoration:none' id=niphLonLatH target=_blank>避難所シート(保健師長会式)を入力</a></div>";
+        niphAddressE.href='../../html/shelter-emergency_2.html' + '?' + 'ID=' + labelShltrJPN[0] + ',Name=' + labelShltrJPN[1] + ',x=' + lon + ',y=' + lat;
+        info.innerHTML = info.innerHTML +  "<div style='border:2px solid burlywood; background-color:#888888; text-align:center' type=button ><a href=../../html/shelter-emergency.html style='display:block; width:100%; color:white; text-decoration:none' id=niphLonLatH target=_blank>避難所シート(保健師長会式)を入力</a></div>";
         var niphAddressH=document.getElementById('niphLonLatH');
-        niphAddressH.href='mqtt/shelter-hmethod.html' + '?' + 'ID=' + labelShltrJPN[0] + ',Name=' + labelShltrJPN[1] + ',x=' + lon + ',y=' + lat;
-        info.innerHTML = info.innerHTML +  "<div style='border:2px solid burlywood; background-color:#888888; text-align:center' type=button ><a href=mqtt/shelter-emergency.html style='display:block; width:100%; color:white; text-decoration:none' id=niphLonLatI target=_blank>避難所シート(石井式)を入力</a></div>";
+        niphAddressH.href='../../html/shelter-hmethod.html' + '?' + 'ID=' + labelShltrJPN[0] + ',Name=' + labelShltrJPN[1] + ',x=' + lon + ',y=' + lat;
+        info.innerHTML = info.innerHTML +  "<div style='border:2px solid burlywood; background-color:#888888; text-align:center' type=button ><a href=m../../html/shelter-emergency.html style='display:block; width:100%; color:white; text-decoration:none' id=niphLonLatI target=_blank>避難所シート(石井式)を入力</a></div>";
         var niphAddressI=document.getElementById('niphLonLatI');
-        niphAddressI.href='mqtt/shelter-imethod.html' + '?' + 'ID=' + labelShltrJPN[0] + ',Name=' + labelShltrJPN[1] + ',x=' + lon + ',y=' + lat;
+        niphAddressI.href='../../html/shelter-imethod.html' + '?' + 'ID=' + labelShltrJPN[0] + ',Name=' + labelShltrJPN[1] + ',x=' + lon + ',y=' + lat;
         while (i < 16) {
             info.innerHTML = info.innerHTML + "<tr><td style=font-size:20px;background-color:#888888;color:white></td><td style=font-size:20px;background-color:white;text-align:right;></td></tr>";
             i++
@@ -618,39 +617,32 @@ function showHide(){
 }
 
 function choiceHosp(obj) {
-    hospNum = obj.getAttribute('value');
+    hosplonlat = obj.getAttribute('value');
 
-    getCSV('http://h-crisis.niph.go.jp/wp-content/uploads/data/medical_status/latest/hcrisis_medical_status.csv', function (data) {
-        // dataを処理する
+    latlon = hosplonlat.split(",");
 
+    document.getElementById('latlonHosp').value = hospLatLon;
 
-        lat = data[hospNum].lat;
-        lon = data[hospNum].lon;
-        hospLatLon = lat + "," + lon;
-        document.getElementById('latlonHosp').value = hospLatLon;
+    var hospPlace = ol.proj.transform([latlon[1], Math.abs(latlon[0])], 'EPSG:4326', 'EPSG:3857');
 
+    var pan = ol.animation.pan({
+        duration: 2000,
+        source: (view.getCenter()),
+    });
+    map.beforeRender(pan);
+    map.getView().setCenter(hospPlace);
+    map.getView().setZoom(15);
 
-        var hospPlace = ol.proj.transform([lon,Math.abs(lat)], 'EPSG:4326', 'EPSG:3857');
+    overlayTargetTop.setPosition(hospPlace);
+    overlayTargetRight.setPosition(hospPlace);
+    overlayTargetBottom.setPosition(hospPlace);
+    overlayTargetLeft.setPosition(hospPlace);
+    map.addOverlay(overlayTargetTop);
+    map.addOverlay(overlayTargetRight);
+    map.addOverlay(overlayTargetBottom);
+    map.addOverlay(overlayTargetLeft);
 
-        var pan = ol.animation.pan({
-            duration: 2000,
-            source: (view.getCenter()),
-        });
-        map.beforeRender(pan);
-        map.getView().setCenter(hospPlace);
-        map.getView().setZoom(15);
-
-        overlayTargetTop.setPosition(hospPlace);
-        overlayTargetRight.setPosition(hospPlace);
-        overlayTargetBottom.setPosition(hospPlace);
-        overlayTargetLeft.setPosition(hospPlace);
-        map.addOverlay(overlayTargetTop);
-        map.addOverlay(overlayTargetRight);
-        map.addOverlay(overlayTargetBottom);
-        map.addOverlay(overlayTargetLeft);
-
-        document.getElementById( 'tdfkinfo' ).style.display = 'none';
-        document.getElementById( 'hospinfo' ).style.display = 'none';
-        document.getElementById('vishospinfo').style.display = 'none';
-
-    })};
+    document.getElementById('tdfkinfo').style.display = 'none';
+    document.getElementById('hospinfo').style.display = 'none';
+    document.getElementById('vishospinfo').style.display = 'none';
+};

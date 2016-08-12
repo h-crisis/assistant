@@ -2,6 +2,8 @@
  * Created by komori on 2016/07/01.
  */
 
+nowTime();
+
 var osm_source = new ol.source.OSM({
     url: 'http://{a-c}.tile.openstreetmap.org/{z}/{x}/{y}.png'
 });
@@ -38,7 +40,7 @@ var baseLayer120 = new ol.layer.Tile({
 });
 */
 var view = new ol.View({
-    center: ol.proj.transform([139.284668, 35.373351, 13], 'EPSG:4326', 'EPSG:3857'),
+    center: hypoPoint,
     zoom: 9,
     minZoom: 5,
     maxZoom: 13
@@ -69,7 +71,6 @@ visHosp.addEventListener('click', hospButton);
 var goHypoCenter = document.getElementById('goToHypoCenter');
 goHypoCenter.addEventListener('click', goHypoButton);
 function goHypoButton() {
-    var hypoPoint = ol.proj.transform([139.284668, Math.abs(35.373351)], 'EPSG:4326', 'EPSG:3857');
     var pan = ol.animation.pan({
         duration: 2000,
         source: (view.getCenter())
@@ -77,7 +78,6 @@ function goHypoButton() {
     map.beforeRender(pan);
     map.getView().setCenter(hypoPoint);
     map.getView().setZoom(11);
-    console.log(hypoPoint);
 }
 
 var goHere = document.getElementById('goToHere');
@@ -172,6 +172,9 @@ ImpassableLayer.setVisible(false);
 var visHosp   = document.getElementById('scrn-hosp');
 visHosp.addEventListener('click', visHoButton);
 
+var visShltr   = document.getElementById('shltr-hosp');
+visShltr.addEventListener('click', visShButton);
+
 var hinanOnOff   = document.getElementById('hinan-vis');
 hinanOnOff.addEventListener('click', hinanButton);
 var chs = 0;
@@ -232,32 +235,49 @@ map.getView().on('change:resolution', function() {
     var topRight = ol.proj.transform(ol.extent.getTopRight(extent),
         'EPSG:3857', 'EPSG:4326');
     var lotLength = Math.abs(topRight[0] - bottomLeft[0]);
-    if (lotLength < 0.25 && document.getElementById('hospital-vis').style.backgroundColor == "blue"){
-        document.getElementById('scrn-hosp').style.display = 'block'
+    if (lotLength < 0.5 && document.getElementById('hospital-vis').style.backgroundColor == "blue"){
+        document.getElementById('scrn-hosp').style.display = 'block';
         //document.getElementById('overlayTargetTop').style.display = 'block';
         //document.getElementById('overlayTargetRight').style.display = 'block';
         //document.getElementById('overlayTargetBottom').style.display = 'block';
         //document.getElementById('overlayTargetLeft').style.display = 'block';
     } else {
-        document.getElementById('scrn-hosp').style.display = 'none'
+        document.getElementById('scrn-hosp').style.display = 'none';
         //document.getElementById('overlayTargetTop').style.display = 'none';
         //document.getElementById('overlayTargetRight').style.display = 'none';
         //document.getElementById('overlayTargetBottom').style.display = 'none';
         //document.getElementById('overlayTargetLeft').style.display = 'none';
     }
-    if(document.getElementById( 'vishospinfo' ).style.display == 'none'){}
+    if (lotLength < 0.5 && document.getElementById('hinan-vis').style.backgroundColor == "green"){
+        document.getElementById('shltr-hosp').style.display = 'block';
+        //document.getElementById('overlayTargetTop').style.display = 'block';
+        //document.getElementById('overlayTargetRight').style.display = 'block';
+        //document.getElementById('overlayTargetBottom').style.display = 'block';
+        //document.getElementById('overlayTargetLeft').style.display = 'block';
+    } else {
+        document.getElementById('shltr-hosp').style.display = 'none';
+        //document.getElementById('overlayTargetTop').style.display = 'none';
+        //document.getElementById('overlayTargetRight').style.display = 'none';
+        //document.getElementById('overlayTargetBottom').style.display = 'none';
+        //document.getElementById('overlayTargetLeft').style.display = 'none';
+    }
+    if(document.getElementById( 'vishospinfo' ).style.display == 'none' || document.getElementById( 'visshltrinfo' ).style.display == 'block'){}
     else {
         document.getElementById('vishospinfo').innerHTML = "";
         document.getElementById('vishospinfo').style.display = 'none';
+        document.getElementById('visshltrinfo').innerHTML = "";
+        document.getElementById('visshltrinfo').style.display = 'none';
         // visHoButton()
     }
 });
 
 map.on('moveend', function() {
-    if(document.getElementById( 'vishospinfo' ).style.display == 'none'){}
+    if(document.getElementById( 'vishospinfo' ).style.display == 'none' && document.getElementById( 'visshltrinfo' ).style.display == 'block'){}
     else {
         document.getElementById('vishospinfo').innerHTML = "";
         document.getElementById('vishospinfo').style.display = 'none';
+        document.getElementById('visshltrinfo').innerHTML = "";
+        document.getElementById('visshltrinfo').style.display = 'none';
         visHoButton()
     }
 });
