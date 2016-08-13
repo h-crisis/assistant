@@ -1,3 +1,5 @@
+import org.opengis.feature.simple.SimpleFeature;
+
 /**
  * Created by manabu on 2016/08/12.
  */

@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/HcrisisCommon/HcrisisCommon.iml" filepath="$PROJECT_DIR$/HcrisisCommon/HcrisisCommon.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Webpage/Webpage.iml" filepath="$PROJECT_DIR$/Webpage/Webpage.iml" />
       <module fileurl="file://$PROJECT_DIR$/hcrisis-assistant.iml" filepath="$PROJECT_DIR$/hcrisis-assistant.iml" />
     </modules>
   </component>
