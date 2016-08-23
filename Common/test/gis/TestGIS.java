@@ -15,6 +15,6 @@ public class TestGIS {
         List<GeocoderResult> results = gis.GeoCoding.getGeocoderResult("北海道滝川保健所", "ja");
         System.out.println(results);
         */
-        gis.GeoCoding.addCoordinate(new File("/Users/manabu/Desktop/保健所一覧.csv"), new File("/Users/manabu/Desktop/保健所一覧2.csv"), "Shift_JIS", 3, true);
+        gis.GeoCoding.addCoordinate(new File("/Users/manabu/Desktop/保健所一覧.csv"), new File("/Users/manabu/Desktop/保健所一覧2.csv"), "Shift_JIS", 12, true);
     }
 }
