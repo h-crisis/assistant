@@ -26,7 +26,7 @@ public class GeoCoding {
         final Geocoder geocoder = new Geocoder();
         GeocoderRequest geocoderRequest = new GeocoderRequestBuilder().setAddress(string).setLanguage(language).getGeocoderRequest();
         try {
-            sleep(1000);
+            sleep(1000); //1秒間休む
             GeocodeResponse geocoderResponse = geocoder.geocode(geocoderRequest);
             List<GeocoderResult> results = geocoderResponse.getResults();
             return results;
