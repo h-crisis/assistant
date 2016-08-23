@@ -1,6 +1,8 @@
 package gis;
 
 import com.google.code.geocoder.model.GeocoderResult;
+
+import java.io.File;
 import java.util.List;
 
 /**
@@ -8,7 +10,11 @@ import java.util.List;
  */
 public class TestGIS {
     public static void main(String args[]) {
-        List<GeocoderResult> list = gis.GeoCoding.getGeocoderResult("所沢市東所沢2-56-5-3", "ja");
-        System.out.println(list.size() + " : " + list);
+        /*
+        List<GeocoderResult> results = gis.GeoCoding.getGeocoderResult("深川市2条18番6号", "ja");
+        List<GeocoderResult> results = gis.GeoCoding.getGeocoderResult("北海道滝川保健所", "ja");
+        System.out.println(results);
+        */
+        gis.GeoCoding.addCoordinate(new File("/Users/manabu/Desktop/保健所一覧.csv"), new File("/Users/manabu/Desktop/保健所一覧2.csv"), "Shift_JIS", 3, true);
     }
 }
