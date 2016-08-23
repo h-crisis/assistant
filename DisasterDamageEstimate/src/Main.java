@@ -8,9 +8,9 @@ public class Main {
     public static void main(String args[]) throws Exception {
         File masterFilesDir = new File("files/master");
         File shapeDir = new File("files/shape");
-        File siFile = new File("files/JSHIS/F007701/S-V2-F007701-MAP-CASE1.csv");
+        File siFile = new File("files/JSHIS/NankaiKochi/nankai_kochi.csv");
         File outDir = new File("files/out");
-        String code = "F007701";
+        String code = "NankaiKochi";
 
         new EarthquakeDamageEstimate(masterFilesDir, shapeDir, siFile, outDir, code);
     }
