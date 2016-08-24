@@ -3,6 +3,7 @@ import com.vividsolutions.jts.geom.GeometryFactory;
 import com.vividsolutions.jts.geom.Point;
 import files.FileManagement;
 import gis.CreateShape;
+import gis.Shape2GeoJson;
 import org.geotools.data.DataUtilities;
 import org.geotools.data.shapefile.ShapefileDataStore;
 import org.geotools.data.simple.SimpleFeatureCollection;
@@ -95,7 +96,8 @@ public class EarthquakeDamageEstimate {
             while((line = brSiFile.readLine()) != null) {
                 String pair[] = line.split(",");
                 if(!pair[5].equals("nan")) { // 被災地のなかで震度が入っていないところを除く
-                    disasterAreaMap.put(pair[0], Double.parseDouble(pair[5])); // J-SHISは1項目目がメッシュコード、5項目目が計測震度
+                    disasterAreaMap.put(pair[0], Double.parseDouble(pair[5])); // J-SHISは1項目目がメッシュコード、6項目目が計測震度
+                    //disasterAreaMap.put(pair[0], Double.parseDouble(pair[1])); // 1項目目がメッシュコード、2項目目が計測震度
                 }
             }
 
@@ -523,6 +525,7 @@ public class EarthquakeDamageEstimate {
             File hall = new File(outDir.getPath() + "/halls");
             hall.mkdir();
             CreateShape.createShapeFile(new File(hall.getPath() + "/halls.shp"), "UTF-8", type, features);
+            Shape2GeoJson.createGeoJson(new File(hall.getPath() + "/halls.shp"), "UTF-8", new File(hall.getPath() + "/halls.geojson"), "UTF-8");
         } catch (Exception e) {
             e.printStackTrace();
         }
