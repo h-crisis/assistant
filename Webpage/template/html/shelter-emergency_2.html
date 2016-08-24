@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>H-CRISIS Assistant 避難所情報緊急時入力</title>
+    <title>H-CRISIS Assistant 避難所必須情報入力</title>
     <script src="http://code.jquery.com/jquery.min.js"></script>
     <script src="../js/mqttws31.js"></script>
     <script src="../js/mqtthcrisis.js"></script>
@@ -12,77 +12,110 @@
 <body>
     <form>
         <fieldset>
-            <legend>避難所情報の入力</legend>
-            ※ 情報が取得できなかった場合、該当箇所は空欄のままで送信してください。
-            <br>
-            ※ 記録者名は入力必須です。
-            <br>
-            <label>避難所コード:<input type="text" id="inputCode"  value=""></label>
-            <label>避難所名:<input type="text" id="inputShelter"  value=""></label><br>
-            <label>記録者:<input type="text" id="inputHuman"  value=""></label><br>
-            <label>避難者数:<input type="text" id="inputNum" value=""></label><br>
+            <h3 style="background-color:#3cb371; border-radius:10px; text-align: center">避難所必須情報入力</h3>
+            <div class="inputbox">
+                <label>避難所コード</label>
+                <input type="text" id="inputCode" value="" style="border: 1px solid #aaaaaa;">
+                <br>
+                <label>避難所名</label>
+                <input type="text" id="inputShelter" value="" style="border: 1px solid #aaaaaa;">
+                <br>
+                <label>記録者名</label>
+                <input type="text" id="inputHuman" value="" style="border: 1px solid #aaaaaa;">
+                <br>
+                <label>避難者数</label>
+                <input type="text" id="inputNum" value="" style="border: 1px solid #aaaaaa;">
+                <br>
+                <br>
+            </div>
             <div class="radio">
                 <div class="checkbox">
-                    <label style="background-color:white;color:black">電気</label>
-                    <input type="radio" name="q0" id="OK0" value="11" checked>
-                    <label for="OK0" class="OK">可</label>
-                    <input type="radio" name="q0" id="NG0" value="0">
-                    <label for="NG0" class="NG">不可</label>
+                    <label style="background-color:white;color:black;width:85px;">電気</label>
+                    <input type="radio" name="q0" id="q0_0" value="11" checked>
+                    <label for="q0_0" class="SL">可</label>
+                    <input type="radio" name="q0" id="q0_1" value="0">
+                    <label for="q0_1" class="SR">不可</label>
                 </div>
                 <br>
                 <br>
                 <div class="checkbox">
-                    <label style="background-color:white;color:black">ガス</label>
-                    <input type="radio" name="q1" id="q0_0" value="11" checked>
-                    <label for="q0_0" class="OK">可</label>
-                    <input type="radio" name="q1" id="q0_1" value="0">
-                    <label for="q0_1" class="NG">不可</label>
+                    <label style="background-color:white;color:black;width:85px;"">ガス</label>
+                    <input type="radio" name="q1" id="q1_0" value="11" checked>
+                    <label for="q1_0" class="SL">可</label>
+                    <input type="radio" name="q1" id="q1_1" value="0">
+                    <label for="q1_1" class="SR">不可</label>
                 </div>
                 <br>
                 <br>
                 <div class="checkbox">
-                    <label style="background-color:white;color:black">水道</label>
-                    <input type="radio" name="q2" id="q1_0" value="11" checked>
-                    <label for="q1_0" class="OK">可</label>
-                    <input type="radio" name="q2" id="q1_1" value="0">
-                    <label for="q1_1" class="NG">不可</label>
+                    <label style="background-color:white;color:black;width:85px;"">水道</label>
+                    <input type="radio" name="q2" id="q2_0" value="11" checked>
+                    <label for="q2_0" class="SL">可</label>
+                    <input type="radio" name="q2" id="q2_1" value="0">
+                    <label for="q2_1" class="SR">不可</label>
                 </div>
                 <br>
                 <br>
                 <div class="checkbox">
-                    <label style="background-color:white;color:black">水道</label>
-                    <input type="radio" name="q3" id="q2_0" value="101" checked>
-                    <label for="q2_0" class="OK">飲用可</label>
-                    <input type="radio" name="q3" id="q2_1" value="102">
-                    <label for="q2_1" class="NG">利用可</label>
-                    <input type="radio" name="q3" id="q2_2" value="0">
-                    <label for="q2_2" class="NG">不可</label>
+                    <label style="background-color:white;color:black;width:85px;">飲料水</label>
+                    <input type="radio" name="q3" id="q3_0" value="101" checked>
+                    <label for="q3_0" class="SL">飲用可</label>
+                    <input type="radio" name="q3" id="q3_1" value="102">
+                    <label for="q3_1" class="MC">利用可</label>
+                    <input type="radio" name="q3" id="q3_2" value="0">
+                    <label for="q3_2" class="SR">不可</label>
+                </div>
+                <br>
+                <br>
+                <div class="checkbox">
+                    <label style="background-color:white;color:black;width:85px;">固定電話</label>
+                    <input type="radio" name="q4" id="q4_0" value="11" checked>
+                    <label for="q4_0" class="SL">可</label>
+                    <input type="radio" name="q4" id="q4_1" value="0">
+                    <label for="q4_1" class="SR">不可</label>
+                </div>
+                <br>
+                <br>
+                <div class="checkbox">
+                    <label style="background-color:white;color:black;width:85px;">携帯電話</label>
+                    <input type="radio" name="q5" id="q5_0" value="11" checked>
+                    <label for="q5_0" class="SL">可</label>
+                    <input type="radio" name="q5" id="q5_1" value="0">
+                    <label for="q5_1" class="SR">不可</label>
+                </div>
+                <br>
+                <br>
+                <div class="checkbox">
+                    <label style="background-color:white;color:black;width:85px;">通信</label>
+                    <input type="radio" name="q6" id="q6_0" value="11" checked>
+                    <label for="q6_0" class="SL">可</label>
+                    <input type="radio" name="q6" id="q6_1" value="0">
+                    <label for="q6_1" class="SR">不可</label>
+                </div>
+                <br>
+                <br>
+                <div class="checkbox">
+                    <label style="background-color:white;color:black;width:85px;">トイレ</label>
+                    <input type="radio" name="q7" id="q7_0" value="101" checked>
+                    <label for="q7_0" class="SL">使用可</label>
+                    <input type="radio" name="q7" id="q7_1" value="102">
+                    <label for="q7_1" class="MC">使用不可</label>
+                    <input type="radio" name="q7" id="q7_2" value="0">
+                    <label for="q7_2" class="SR">無</label>
+                </div>
+                <br>
+                <br>
+                <div class="checkbox">
+                    <label style="background-color:white;color:black;width:85px;">食料</label>
+                    <input type="radio" name="q8" id="q8_0" value="11" checked>
+                    <label for="q8_0" class="SL">有</label>
+                    <input type="radio" name="q8" id="q8_1" value="0">
+                    <label for="q8_1" class="SR">無</label>
                 </div>
             </div>
-
-            <form>固定電話：
-                <label><input type="radio" name="q4" value="11">可</label>
-                <label><input type="radio" name="q4" value="0" checked="checked">不可</label>
-            </form>
-            <form>携帯電話：
-                <label><input type="radio" name="q5" value="11">可</label>
-                <label><input type="radio" name="q5" value="0" checked="checked">不可</label>
-            </form>
-            <form>通信：
-                <label><input type="radio" name="q6" value="11">可</label>
-                <label><input type="radio" name="q6" value="0" checked="checked">不可</label>
-            </form>
-            <form>トイレ：
-                <label><input type="radio" name="q7" value="103">使用可</label>
-                <label><input type="radio" name="q7" value="104">使用不可</label>
-                <label><input type="radio" name="q7" value="1" checked="checked">無</label>
-            </form>
-            <form>食料：
-                <label><input type="radio" name="q8" value="12">有</label>
-                <label><input type="radio" name="q8" value="1" checked="checked">無</label>
-            </form>
         </fieldset>
 
+        <center>
         <fieldset>
             <script>
                 function createMessage() {
@@ -116,8 +149,10 @@
                     onlySubmit(topicMsg, createMsg);
                 }
             </script>
-            <input id ="closeBtn" type="button" onclick="window.close()" value="閉じる" />
-            <input id = "submitBtn" type="button" onclick="createMessage();" value="送信" />
+            <div style="box-align:center">
+            <input style="border: 0;float: inherit;width: 70px;margin: 0;background: #6d6d6d;color: #ffffff;font-size: 16px;text-align: center;" id ="closeBtn" type="button" onclick="window.close()" value="閉じる" >
+            <input style="border: 0;float: inherit;width: 70px;margin: 0;background: #228b22;color: #ffffff;font-size: 16px;text-align: center;" id = "submitBtn" type="button" onclick="createMessage();" value="送信" >
+            </div>
             <script>
                 var urlStr = location.search;
                 if(urlStr === '') {
@@ -142,6 +177,7 @@
             </script>
 
         </fieldset>
+        </center>
     </form>
 </body>
 </html>

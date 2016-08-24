@@ -57,7 +57,7 @@ var submitOnlyOptions = {
         message.destinationName = publishTopic;
         client.send(message);
         client.disconnect();
-        alert('情報を送信しました');
+        alert('情報を送信しました。画面を閉じます。');
         window.close();
     },
     onFailure: function (message) {
