@@ -1,0 +1,34 @@
+body {
+	background: #3cb371;
+}
+fieldset {
+	background: #ffffff;
+}
+
+.radio input{
+  display: none;
+}
+.checkbox input {
+  display: none;
+}
+.checkbox label{
+	display: block;
+	float: left;
+	width: 50px;
+	margin: 0;
+	padding: 15px;
+	background: #6d6d6d;
+	color: #bcbcbc;
+	font-size: 16px;
+	text-align: center;
+	line-height: 0;
+	transition: .10s;
+}
+.checkbox input[type="radio"]:checked + .OK {
+	background-color: #228b22;
+	color: #ffffff;
+}
+.checkbox input[type="radio"]:checked + .NG {
+	background-color: #ff6347;
+	color: #ffffff;
+}
