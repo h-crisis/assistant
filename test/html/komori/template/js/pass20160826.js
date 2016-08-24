@@ -26,7 +26,7 @@ var ImpassableLayer = new ol.layer.Vector({
         format: new ol.format.GeoJSON()
     }),
     style: function(feature) {
-        styleImpassable.getText().setText(feature.get('name') +  ":" + feature.get('status'));
+        styleImpassable.getText().setText(feature.get('name') +  ":" + feature.get('status') + "(理由:" +　feature.get('cause') + ")");
         return styleImpassable;
     }
 });

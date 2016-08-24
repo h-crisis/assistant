@@ -41,7 +41,7 @@ var view = new ol.View({
     center: hypoPoint,
     zoom: 9,
     minZoom: 2,
-    maxZoom: 15
+    maxZoom: 17
 });
 
 var map = new ol.Map({
