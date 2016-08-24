@@ -18,9 +18,11 @@ var styleImpassable = new ol.style.Style({
     })
 });
 
+var urlP = 'http://h-crisis.niph.go.jp/assistant/wp-content/uploads/sites/4/test/geojson/road_info.geojson';
+
 var ImpassableLayer = new ol.layer.Vector({
     source: new ol.source.Vector({
-        url: 'http://h-crisis.niph.go.jp/assistant/wp-content/uploads/sites/4/test/geojson/road_info.geojson',
+        url: urlP,
         format: new ol.format.GeoJSON()
     }),
     style: function(feature) {

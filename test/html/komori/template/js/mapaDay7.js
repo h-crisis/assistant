@@ -40,8 +40,8 @@ var baseLayer120 = new ol.layer.Tile({
 var view = new ol.View({
     center: hypoPoint,
     zoom: 9,
-    minZoom: 5,
-    maxZoom: 13
+    minZoom: 2,
+    maxZoom: 15
 });
 
 var map = new ol.Map({
@@ -76,7 +76,6 @@ function goHypoButton() {
     map.beforeRender(pan);
     map.getView().setCenter(hypoPoint);
     map.getView().setZoom(11);
-    console.log(hypoPoint);
 }
 
 var goHere = document.getElementById('goToHere');
@@ -171,8 +170,8 @@ ImpassableLayer.setVisible(false);
 var visHosp   = document.getElementById('scrn-hosp');
 visHosp.addEventListener('click', visHoButton);
 
-// var distribOnOff   = document.getElementById('distribution-vis');
-// distribOnOff.addEventListener('click', siButton);
+var visPass   = document.getElementById('pass-vis');
+visPass.addEventListener('click', visPassButton);
 
 var hinanOnOff1   = document.getElementById('hinan1-vis');
 hinanOnOff1.addEventListener('click', hinanButton1);
@@ -504,7 +503,7 @@ map.on('click', function(evt) {
         if (labelHosp[1] != "未") {
             infoH.innerHTML = infoH.innerHTML + "<tr><td style='font-size:20px; border:2px solid burlywood; background-color:#888888; text-align:center; table-layout:fixed; width: 380px' type=button ><a href=mqtt/shelter-emergency.html style='display:block; width:100%; color:white; text-decoration:none' id=hospLonLatD target=_blank>詳細情報を閲覧</a></td></tr>";
             var hospAddress = document.getElementById('hospLonLatD');
-            hospAddress.href = 'hospital-detail.html' + '?' + 'ID=' + labelHosp[21] + ',Name=' + labelHosp[18] + ',x=' + lon + ',y=' + lat;
+            hospAddress.href = '../../html/hospital-detail.html' + '?' + 'ID=' + labelHosp[21] + ',Name=' + labelHosp[18] + ',x=' + lon + ',y=' + lat;
         }
         // infoH.innerHTML = infoH.innerHTML + '<img src=' + hospIcon + '/>';
 
