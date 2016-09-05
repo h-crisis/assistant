@@ -107,7 +107,9 @@ public class EarthquakeDamageEstimate {
             while((line=brMesh5File.readLine())!=null) {
                 String pair[] = line.split(",");
                 if(disasterAreaMap.containsKey(pair[5-meshLevel])) {
-                    pw.write("\n" + line + "," + disasterAreaMap.get(pair[5-meshLevel]));
+                    if(!pair[5].equals("")) {
+                        pw.write("\n" + line + "," + disasterAreaMap.get(pair[5 - meshLevel]));
+                    }
                 }
             }
 

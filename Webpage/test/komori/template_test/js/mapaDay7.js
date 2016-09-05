@@ -565,7 +565,7 @@ map.on('click', function(evt) {
         // infoH.innerHTML = infoH.innerHTML + "<tr><td style='font-size:20px;background-color:whitesmoke; color:black; text-align:left; table-layout:fixed; width: 380px'><img src=" + hospIcon + "/ width=20 height=20 >" + labelHosp[18] + "</td></tr>";
         info.innerHTML = info.innerHTML +  "<div style='border:2px solid burlywood; background-color:#888888; text-align:center' type=button ><a href=../../html/shelter-emergency.html style='display:block; width:100%; color:white; text-decoration:none' id=niphLonLatE target=_blank>緊急時情報入力</a></div>";
         var niphAddressE=document.getElementById('niphLonLatE');
-        niphAddressE.href='../../html/shelter-emergency_2.html' + '?' + 'ID=' + labelShltrJPN[0] + ',Name=' + labelShltrJPN[1] + ',x=' + lon + ',y=' + lat;
+        niphAddressE.href='../../html/shelter-emergency.html' + '?' + 'ID=' + labelShltrJPN[0] + ',Name=' + labelShltrJPN[1] + ',x=' + lon + ',y=' + lat;
         info.innerHTML = info.innerHTML +  "<div style='border:2px solid burlywood; background-color:#888888; text-align:center' type=button ><a href=../../html/shelter-emergency.html style='display:block; width:100%; color:white; text-decoration:none' id=niphLonLatH target=_blank>避難所シート(保健師長会式)を入力</a></div>";
         var niphAddressH=document.getElementById('niphLonLatH');
         niphAddressH.href='../../html/shelter-hmethod.html' + '?' + 'ID=' + labelShltrJPN[0] + ',Name=' + labelShltrJPN[1] + ',x=' + lon + ',y=' + lat;
@@ -600,13 +600,13 @@ map.on('click', function(evt) {
         map.addOverlay(overlayInfo);
     } else if (day == 14) {
         flagSelected = true;
-        var urlInputScreen = 'mqtt/shelter-emergency_2.html' + '?' + 'ID=' + labelC + ',Name=' + labelB + ',x=' + lon + ',y=' + lat;
+        var urlInputScreen = 'mqtt/shelter-emergency.html' + '?' + 'ID=' + labelC + ',Name=' + labelB + ',x=' + lon + ',y=' + lat;
         document.getElementById( 'info' ).style.display = 'block';
         info.innerHTML = "<div style='background-color:#888888; color:white; text-align:center;' type=button id=showBtn value=隠す onclick=showHide()>閉じる</div>";
         info.innerHTML = info.innerHTML +  labelB;
         info.innerHTML = info.innerHTML +  "<div style='background-color:#888888; text-align:center' type=button ><a href=mqtt/shelter-emergency.html style='display:block; width:100%; color:white; text-decoration:none' id=niphLonLat target=_blank>緊急時入力画面を開く</a></div>";
         var niphAddress=document.getElementById('niphLonLat');
-        niphAddress.href='mqtt/shelter-emergency_2.html' + '?' + 'ID=' + labelC + ',Name=' + labelB + ',x=' + lon + ',y=' + lat;
+        niphAddress.href='mqtt/shelter-emergency.html' + '?' + 'ID=' + labelC + ',Name=' + labelB + ',x=' + lon + ',y=' + lat;
         while (i < 44) {
             info.innerHTML = info.innerHTML + "<tr><td style=font-size:24px;background-color:#888888;color:white></td><td style=font-size:24px;background-color:white;text-align:right;></td></tr>";
             i++

@@ -298,7 +298,7 @@ map.on('click', function(evt) {
         info.innerHTML = info.innerHTML +  labelB;
         info.innerHTML = info.innerHTML +  "<div style='background-color:#888888; text-align:center' type=button ><a href=../../../template/mqtt/shelter-emergency.html style='display:block; width:100%; color:white; text-decoration:none' id=niphLonLat target=_blank>入力画面を開く</a></div>";
         var niphAddress=document.getElementById('niphLonLat');
-        niphAddress.href='http://h-crisis.niph.go.jp/assistant/wp-content/uploads/sites/4/test/mqtt/shelter-emergency_2.html' + '?' + 'ID=' + labelC + ',Name=' + labelB + ',x=' + lon + ',y=' + lat;
+        niphAddress.href='http://h-crisis.niph.go.jp/assistant/wp-content/uploads/sites/4/test/mqtt/shelter-emergency.html' + '?' + 'ID=' + labelC + ',Name=' + labelB + ',x=' + lon + ',y=' + lat;
         while (i < 15) {
             info.innerHTML = info.innerHTML + "<tr><td style=font-size:24px;background-color:#888888;color:white></td><td style=font-size:24px;background-color:white;text-align:right;></td></tr>";
             i++
@@ -327,13 +327,13 @@ map.on('click', function(evt) {
         map.addOverlay(overlayInfo);
     } else if (day == 14) {
         flagSelected = true;
-        var urlInputScreen = 'mqtt/shelter-emergency_2.html' + '?' + 'ID=' + labelC + ',Name=' + labelB + ',x=' + lon + ',y=' + lat;
+        var urlInputScreen = 'mqtt/shelter-emergency.html' + '?' + 'ID=' + labelC + ',Name=' + labelB + ',x=' + lon + ',y=' + lat;
         document.getElementById( 'info' ).style.display = 'block';
         info.innerHTML = "<div style='background-color:#888888; color:white; text-align:center;' type=button id=showBtn value=隠す onclick=showHide()>閉じる</div>";
         info.innerHTML = info.innerHTML +  labelB;
         info.innerHTML = info.innerHTML +  "<div style='background-color:#888888; text-align:center' type=button ><a href=../../../template/mqtt/shelter-emergency.html style='display:block; width:100%; color:white; text-decoration:none' id=niphLonLat target=_blank>入力画面を開く</a></div>";
         var niphAddress=document.getElementById('niphLonLat');
-        niphAddress.href='http://h-crisis.niph.go.jp/assistant/wp-content/uploads/sites/4/test/mqtt/shelter-emergency_2.html' + '?' + 'ID=' + labelC + ',Name=' + labelB + ',x=' + lon + ',y=' + lat;
+        niphAddress.href='http://h-crisis.niph.go.jp/assistant/wp-content/uploads/sites/4/test/mqtt/shelter-emergency.html' + '?' + 'ID=' + labelC + ',Name=' + labelB + ',x=' + lon + ',y=' + lat;
         while (i < 44) {
             info.innerHTML = info.innerHTML + "<tr><td style=font-size:24px;background-color:#888888;color:white></td><td style=font-size:24px;background-color:white;text-align:right;></td></tr>";
             i++

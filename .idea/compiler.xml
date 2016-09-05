@@ -22,11 +22,12 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
-        <module name="hcrisis-assistant" />
+        <module name="HcrisisMQTT" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="hcrisis-assistant" target="1.5" />
+      <module name="HcrisisMQTT" target="1.5" />
     </bytecodeTargetLevel>
   </component>
 </project>
