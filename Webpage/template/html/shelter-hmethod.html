@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>H-CRISIS Assistant 避難所アセスメントシート  (共通様式)</title>
     <script src="../js/mqttws31.js"></script>
-    <script src="../js/mqtthcrisis.js"></script>
+    <script src="../js/mqtthcrisis20160905.js"></script>
 </head>
 <body>
 <form>
@@ -15,26 +15,27 @@
         <legend>避難所情報の入力：避難所の概要</legend>
         ※ 情報が取得できなかった場合、該当箇所は空欄のままで送信してください。
         <br>
-        <label>避難所コード:<input type="text" id="inputCode"  value=""></label>
-        <label>所在地(都道府県、市区町村):<input type="text" id="inputPref"  value=""></label><br>
-        <label>避難所名:<input type="text" id="inputSchelter"  value=""></label><br>
+        <label>災害コード<input type="text" id="eventCode" value=""></label>
+        <label>避難所コード:<input type="text" id="inputCode"  value=""></label><br>
+        <label>所在地(都道府県、市区町村):<input type="text" id="inputPref"  value=""></label>
+        <label>避難所名:<input type="text" id="inputShelter"  value=""></label><br>
         <hr>
         <form>避難者数:
-            <label><input type="text" id="inputSchelterNum"  value="">人</label>
-            <label>昼:<input type="text" id="inputSchelterDNum"  value="">人</label>
-            <label>夜:<input type="text" id="inputSchelterNNum"  value="">人</label>
+            <label><input type="text" id="inputShelterNum"  value="">人</label>
+            <label>昼:<input type="text" id="inputShelterDNum"  value="">人</label>
+            <label>夜:<input type="text" id="inputShelterNNum"  value="">人</label>
             <hr>
-            <label>電話:<input type="text" id="inputSchelterTEL"  value=""></label>
-            <label>FAX:<input type="text" id="inputSchelterFAX"  value=""></label>
-            <label>メールアドレス:<input type="text" id="inputSchelterEMAIL"  value=""></label>
+            <label>電話:<input type="text" id="inputShelterTEL"  value=""></label>
+            <label>FAX:<input type="text" id="inputShelterFAX"  value=""></label>
+            <label>メールアドレス:<input type="text" id="inputShelterEMAIL"  value=""></label>
             <hr>
-            <label>施設の広さ:<input type="text" id="inputSchelterAREA"  value=""></label>
+            <label>施設の広さ:<input type="text" id="inputShelterAREA"  value=""></label>
             <label>スペース密度:<input type="radio" name="q11" value="過密">過密</label>
             <label><input type="radio" name="q11" value="適度" checked="checked">適度</label>
             <label><input type="radio" name="q11" value="余裕" checked="checked">余裕</label>
             <br>
-            <label>一人当たり専有面積:<input type="text" id="inputSchelterAREAPER"  value="">m2くらい</label>
-            <label>交通機関(避難所と外との交通手段):<input type="text" id="inputSchelterTRAFFIC"  value=""></label>
+            <label>一人当たり専有面積:<input type="text" id="inputShelterAREAPER"  value="">m2くらい</label>
+            <label>交通機関(避難所と外との交通手段):<input type="text" id="inputShelterTRAFFIC"  value=""></label>
         </form>
     </fieldset>
     <fieldset>
@@ -307,75 +308,7 @@
 
     <fieldset>
         <script>
-            function createMessage() {
-                //var createMsg = "test";
-
-                var topicMsg = "/h-crisis/shelter/hokenjoChokaiMethod/" + document.getElementById('inputCode').value;
-                var createMsg = document.getElementById('inputCode').value +
-                                ',' + document.getElementById('inputHuman').value;
-                for(var i = 1; i < 5; i++) {
-                    for(var j = 1; j < 35; j++) {
-                        var arrayValue = "q" + i + j;
-                        var tmpList = document.getElementsByName(arrayValue);
-                        for (var k = 0; k < tmpList.length; k++) {
-                            if (tmpList[k].checked) {
-                                createMsg = createMsg + ',' + tmpList[k].value;
-                                continue;
-                            }
-                        }
-                    }
-                }
-
-                createMsg = createMsg +
-                        ',' + document.getElementById('inputPref').value +
-                        ',' + document.getElementById('inputSchelter').value +
-                        ',' + document.getElementById('inputSchelterNum').value +
-                        ',' + document.getElementById('inputSchelterDNum').value +
-                        ',' + document.getElementById('inputSchelterNNum').value +
-                        ',' + document.getElementById('inputSchelterTEL').value +
-                        ',' + document.getElementById('inputSchelterFAX').value +
-                        ',' + document.getElementById('inputSchelterEMAIL').value +
-                        ',' + document.getElementById('inputSchelterAREA').value +
-                        ',' + document.getElementById('inputSchelterAREAPER').value +
-                        ',' + document.getElementById('inputSchelterTRAFFIC').value +
-                        ',' + document.getElementById('inputRep').value +
-                        ',' + document.getElementById('inputRepRest').value +
-                        ',' + document.getElementById('inputCommunication').value +
-                        ',' + document.getElementById('inputSelfOrganDetail').value +
-                        ',' + document.getElementById('inputOuterOrganTeam').value +
-                        ',' + document.getElementById('inputOuterOrganNum').value +
-                        ',' + document.getElementById('inputOuterOrganJob').value +
-                        ',' + document.getElementById('inputVolunteerOrganTeam').value +
-                        ',' + document.getElementById('inputVolunteerOrganNum').value +
-                        ',' + document.getElementById('inputVolunteerOrganJob').value +
-                        ',' + document.getElementById('inputOrganOther').value +
-                        ',' + document.getElementById('inputLR1').value +
-                        ',' + document.getElementById('inputLR2').value +
-                        ',' + document.getElementById('inputToiletNum').value +
-                        ',' + document.getElementById('inputLR3').value +
-                        ',' + document.getElementById('inputBathCleanness').value +
-                        ',' + document.getElementById('inputLR4').value +
-                        ',' + document.getElementById('inputLR5').value +
-                        ',' + document.getElementById('inputFoodNum').value +
-                        ',' + document.getElementById('inputLR6').value +
-                        ',' + document.getElementById('inputOTHER').value +
-                        "," + lat + "," + lon;
-
-                var nowTime = new Date();
-                var nowYer = nowTime.getFullYear();
-                var nowMon = nowTime.getMonth() + 1;
-                var nowDay = nowTime.getDate();
-                var nowHrs = nowTime.getHours();
-                var nowMin = nowTime.getMinutes();
-                createMsg = createMsg + ',' + nowYer + "/" + nowMon + "/" + nowDay + "/" + nowHrs + ":" + nowMin + "";
-                console.log(topicMsg + " : " + createMsg);
-                onlySubmit(topicMsg, createMsg);
-            }
-        </script>
-        <input id ="closeBtn" type="button" onclick="window.close()" value="閉じる" />
-        <input id = "submitBtn" type="button" onclick="createMessage();" value="送信" />
-        <script>
-
+            var lon,lat
             function inputSELFORGAN(){
                 if (document.getElementsByName('q21')[0].checked) {
                     document.getElementById('inputSelfOrganDetail').style.display = 'block';
@@ -420,20 +353,102 @@
             else {
                 var pairUrlStr = urlStr.split(',');
                 if(pairUrlStr.length>=2) {
-                    pairUrlStr[0] = pairUrlStr[0].substr(4);
+                    pairUrlStr[0] = pairUrlStr[0].substr(7);
                     pairUrlStr[0] = decodeURI(pairUrlStr[0]);
-                    pairUrlStr[1] = pairUrlStr[1].substr(5);
+                    pairUrlStr[1] = pairUrlStr[1].substr(3);
                     pairUrlStr[1] = decodeURI(pairUrlStr[1]);
-                    document.getElementById('inputCode').value = pairUrlStr[0];
+                    pairUrlStr[2] = pairUrlStr[2].substr(5);
+                    pairUrlStr[2] = decodeURI(pairUrlStr[2]);
+                    pairUrlStr[3] = pairUrlStr[3].substr(8);
+                    pairUrlStr[3] = decodeURI(pairUrlStr[3]);
+                    pairUrlStr[4] = pairUrlStr[4].substr(2);
+                    pairUrlStr[4] = decodeURI(pairUrlStr[4]);
+                    pairUrlStr[5] = pairUrlStr[5].substr(2);
+                    pairUrlStr[5] = decodeURI(pairUrlStr[5]);
+                    document.getElementById('eventCode').value = pairUrlStr[0];
+                    document.getElementById('eventCode').disabled = 'true';
+                    document.getElementById('inputCode').value = pairUrlStr[1];
                     document.getElementById('inputCode').disabled = 'true';
-                    document.getElementById('inputPref').value = pairUrlStr[0];
+                    document.getElementById('inputPref').value = pairUrlStr[3];
                     document.getElementById('inputPref').disabled = 'true';
-                    document.getElementById('inputSchelter').value = pairUrlStr[1];
-                    document.getElementById('inputSchelter').disabled = 'true';
-
+                    document.getElementById('inputShelter').value = pairUrlStr[2];
+                    document.getElementById('inputShelter').disabled = 'true';
+                    lon = pairUrlStr[4];
+                    lat = pairUrlStr[5];
                 }
             }
+
+            function createMessage() {
+                //var createMsg = "test";
+
+                var topicMsg = "/hcrisis/assistant/event/" + document.getElementById('eventCode').value
+                        + "/shelter/" + document.getElementById('inputCode').value +　"/hokenjomethod";
+                var createMsg = document.getElementById('eventCode').value +
+                        ',' + document.getElementById('inputCode').value +
+                        ',' + document.getElementById('inputShelter').value +
+                        ',' + document.getElementById('inputHuman').value +
+                        ',' + document.getElementById('inputShelterNum').value;
+                for(var i = 1; i < 5; i++) {
+                    for(var j = 1; j < 35; j++) {
+                        var arrayValue = "q" + i + j;
+                        var tmpList = document.getElementsByName(arrayValue);
+                        for (var k = 0; k < tmpList.length; k++) {
+                            if (tmpList[k].checked) {
+                                createMsg = createMsg + ',' + tmpList[k].value;
+                                continue;
+                            }
+                        }
+                    }
+                }
+
+                createMsg = createMsg +
+                        ',' + document.getElementById('inputPref').value +
+                        ',' + document.getElementById('inputShelter').value +
+                        ',' + document.getElementById('inputShelterNum').value +
+                        ',' + document.getElementById('inputShelterDNum').value +
+                        ',' + document.getElementById('inputShelterNNum').value +
+                        ',' + document.getElementById('inputShelterTEL').value +
+                        ',' + document.getElementById('inputShelterFAX').value +
+                        ',' + document.getElementById('inputShelterEMAIL').value +
+                        ',' + document.getElementById('inputShelterAREA').value +
+                        ',' + document.getElementById('inputShelterAREAPER').value +
+                        ',' + document.getElementById('inputShelterTRAFFIC').value +
+                        ',' + document.getElementById('inputRep').value +
+                        ',' + document.getElementById('inputRepRest').value +
+                        ',' + document.getElementById('inputCommunication').value +
+                        ',' + document.getElementById('inputSelfOrganDetail').value +
+                        ',' + document.getElementById('inputOuterOrganTeam').value +
+                        ',' + document.getElementById('inputOuterOrganNum').value +
+                        ',' + document.getElementById('inputOuterOrganJob').value +
+                        ',' + document.getElementById('inputVolunteerOrganTeam').value +
+                        ',' + document.getElementById('inputVolunteerOrganNum').value +
+                        ',' + document.getElementById('inputVolunteerOrganJob').value +
+                        ',' + document.getElementById('inputOrganOther').value +
+                        ',' + document.getElementById('inputLR1').value +
+                        ',' + document.getElementById('inputLR2').value +
+                        ',' + document.getElementById('inputToiletNum').value +
+                        ',' + document.getElementById('inputLR3').value +
+                        ',' + document.getElementById('inputBathCleanness').value +
+                        ',' + document.getElementById('inputLR4').value +
+                        ',' + document.getElementById('inputLR5').value +
+                        ',' + document.getElementById('inputFoodNum').value +
+                        ',' + document.getElementById('inputLR6').value +
+                        ',' + document.getElementById('inputOTHER').value +
+                        "," + lat + "," + lon;
+
+                var nowTime = new Date();
+                var nowYer = nowTime.getFullYear();
+                var nowMon = nowTime.getMonth() + 1;
+                var nowDay = nowTime.getDate();
+                var nowHrs = nowTime.getHours();
+                var nowMin = nowTime.getMinutes();
+                createMsg = createMsg + ',' + nowYer + "/" + nowMon + "/" + nowDay + "/" + nowHrs + ":" + nowMin + "";
+                console.log(topicMsg + " : " + createMsg);
+                publishMsg(topicMsg, createMsg, true);
+            }
         </script>
+        <input id ="closeBtn" type="button" onclick="window.close()" value="閉じる" />
+        <input id = "submitBtn" type="button" onclick="createMessage();" value="送信" />
 
     </fieldset>
 </form>

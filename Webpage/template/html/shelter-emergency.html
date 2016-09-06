@@ -167,7 +167,7 @@
                     if(pairUrlStr.length>=2) {
                         console.log(pairUrlStr[0])
                         pairUrlStr[0] = decodeURI(pairUrlStr[0].substr(6)); // event=から始まる
-                        pairUrlStr[1] = decodeURI(pairUrlStr[1].substr(4)); // id=から始まる
+                        pairUrlStr[1] = decodeURI(pairUrlStr[1].substr(3)); // id=から始まる
                         pairUrlStr[2] = decodeURI(pairUrlStr[2].substr(5)); // name=から始まる
                         document.getElementById('eventCode').value = pairUrlStr[0];
                         document.getElementById('eventCode').disabled = 'true';

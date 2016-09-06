@@ -364,7 +364,7 @@ map.on('click', function(evt) {
         labelShltrJPN[0] = feature.get('ID');
         labelShltrJPN[1] = feature.get('name');
         labelShltrJPN[2] = feature.get('prefecture');
-        labelShltrJPN[3] = feature.get('shikuchoson');
+        labelShltrJPN[3] = feature.get('sikuchoson');
         labelShltrJPN[4] = feature.get('address');
         labelShltrJPN[5] = Math.round(feature.get('S05'));
         labelShltrJPN[6] = Math.round(feature.get('S07'));
@@ -412,7 +412,7 @@ map.on('click', function(evt) {
         labelHosp[102] = feature.get('kyukyu');
         labelHosp[103] = feature.get('hibaku');
         labelHosp[104] = feature.get('dmat');
-        hospIconNum = (labelHosp[101] * 8) + (labelHosp[102] * 4) + (labelHosp[103] * 2) + (labelHosp[104] * 1);
+        hospIconNum = (labelHosp[101] * 1) + (labelHosp[102] * 2) + (labelHosp[103] * 4) + (labelHosp[104] * 8);
 
         coordinate4326 = feature.getGeometry().getExtent();
         coordinate4326 = ol.proj.transform([coordinate4326[0],Math.abs(coordinate4326[1])], 'EPSG:3857', 'EPSG:4326');
@@ -531,13 +531,13 @@ map.on('click', function(evt) {
         // infoH.innerHTML = infoH.innerHTML + "<tr><td style='font-size:20px;background-color:whitesmoke; color:black; text-align:left; table-layout:fixed; width: 380px'><img src=" + hospIcon + "/ width=20 height=20 >" + labelHosp[18] + "</td></tr>";
         info.innerHTML = info.innerHTML +  "<div style='border:2px solid burlywood; background-color:#888888; text-align:center' type=button ><a href=../../html/shelter-emergency.html style='display:block; width:100%; color:white; text-decoration:none' id=niphLonLatE target=_blank>緊急時情報入力</a></div>";
         var niphAddressE=document.getElementById('niphLonLatE');
-        niphAddressE.href='../../html/shelter-emergency.html' + '?' + 'ID=' + labelShltrJPN[0] + ',Name=' + labelShltrJPN[1] + ',x=' + lon + ',y=' + lat;
+        niphAddressE.href='../../html/shelter-emergency.html' + '?' + 'ecode=' + eventCode + ',ID=' + labelShltrJPN[0] + ',Name=' + labelShltrJPN[1] + ',x=' + lon + ',y=' + lat;
         info.innerHTML = info.innerHTML +  "<div style='border:2px solid burlywood; background-color:#888888; text-align:center' type=button ><a href=../../html/shelter-emergency.html style='display:block; width:100%; color:white; text-decoration:none' id=niphLonLatH target=_blank>避難所シート(保健師長会式)を入力</a></div>";
         var niphAddressH=document.getElementById('niphLonLatH');
-        niphAddressH.href='../../html/shelter-hmethod.html' + '?' + 'ID=' + labelShltrJPN[0] + ',Name=' + labelShltrJPN[1] + ',x=' + lon + ',y=' + lat;
+        niphAddressH.href='../../html/shelter-hmethod.html' + '?' + 'ecode=' + eventCode + ',ID=' + labelShltrJPN[0] + ',Name=' + labelShltrJPN[1] + ',address=' + labelShltrJPN[2] + labelShltrJPN[3] + labelShltrJPN[4] + ',x=' + lon + ',y=' + lat;
         info.innerHTML = info.innerHTML +  "<div style='border:2px solid burlywood; background-color:#888888; text-align:center' type=button ><a href=m../../html/shelter-emergency.html style='display:block; width:100%; color:white; text-decoration:none' id=niphLonLatI target=_blank>避難所シート(石井式)を入力</a></div>";
         var niphAddressI=document.getElementById('niphLonLatI');
-        niphAddressI.href='../../html/shelter-imethod.html' + '?' + 'ID=' + labelShltrJPN[0] + ',Name=' + labelShltrJPN[1] + ',x=' + lon + ',y=' + lat;
+        niphAddressI.href='../../html/shelter-imethod.html' + '?' + 'ecode=' + eventCode + ',ID=' + labelShltrJPN[0] + ',Name=' + labelShltrJPN[1] + ',address=' + labelShltrJPN[2] + labelShltrJPN[3] + labelShltrJPN[4] + ',x=' + lon + ',y=' + lat;
         while (i < 16) {
             info.innerHTML = info.innerHTML + "<tr><td style=font-size:20px;background-color:#888888;color:white></td><td style=font-size:20px;background-color:white;text-align:right;></td></tr>";
             i++

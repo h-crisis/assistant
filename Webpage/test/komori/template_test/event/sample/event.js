@@ -2,8 +2,7 @@
  * Created by komori on 2016/08/12.
  */
 
-var eventCode = '20160826'
-var pass = 'http://h-crisis.niph.go.jp/wp-content/uploads/sites/4/event/' + eventCode + '/';
+var pass = 'http://h-crisis.niph.go.jp/wp-content/uploads/sites/4/event/20160826/'
 
 shlterFilter = '南国市';
 

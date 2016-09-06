@@ -134,7 +134,110 @@ function visHoButton() {
                             } else {
                                 hospIcon = "http://h-crisis.niph.go.jp/assistant/wp-content/uploads/sites/4/test/img/b/" + hospIconNum + ".png";
                             }
-                            vishospinfo.innerHTML = vishospinfo.innerHTML + "<tr><td style='font-size:20px;color:white;background-color:#888888;text-align:left' type=button id=tdkBtn value=" + lat + ","+ lon + " onclick=choiceHosp(this)>" + name + "<br>" + "<img src=" + hospIcon + "/ width=20 height=20 >" + "(" + city + ")" + "</td></tr>";
+                            vishospinfo.innerHTML = vishospinfo.innerHTML + "<tr><td style='font-size:20px;color:white;background-color:#888888;text-align:left' type=button id=tdkBtn value=" + lat + ","+ lon + " onclick=choiceHosp(this)>" + name + "<br>" + "(" + city + ")" + "</td></tr>";
+                        }
+                    }
+                });
+            });
+        });
+
+        /*
+         getCSV('geojson/hcrisis_medical_status.csv', function (data, feature) {
+         for (var i = 0; i < data.length; i++) {
+         var emisLat = data[i].lat;
+         var emisLon = data[i].lon;
+         var extent = map.getView().calculateExtent(map.getSize());
+         var bottomLeft = ol.proj.transform(ol.extent.getBottomLeft(extent),
+         'EPSG:3857', 'EPSG:4326');
+         var topRight = ol.proj.transform(ol.extent.getTopRight(extent),
+         'EPSG:3857', 'EPSG:4326');
+         if (emisLat <= topRight[1] && emisLat >= bottomLeft[1]) {
+         if (emisLon <= topRight[0] && emisLon >= bottomLeft[0]) {
+         vishospinfo.innerHTML = vishospinfo.innerHTML + "<tr><td style='font-size:20px;color:white;background-color:#888888;text-align:left' type=button id=tdkBtn value=" + i + " onclick=choiceHosp(this)>" + data[i].name1 + "(" + data[i].city_name + ")" + "</td></tr>";
+         }
+         }
+         }
+         });
+         */
+
+        document.getElementById('vishospinfo').style.display = 'block';
+    } else {
+        document.getElementById('vishospinfo').style.display = 'none';
+        vishospinfo.innerHTML = "";
+    }
+}
+
+
+function visShButton() {
+    if (document.getElementById('vishospinfo').style.display == 'none') {
+        vishospinfo.innerHTML = ""
+
+        var lat, lon, name, city, hospIconNum, hospIcon, iconColor;
+        var num8, num4, num2, num1 = 0;
+
+        var urlS = pass + 'geojson/shelter.geojson';
+
+        $(document).ready(function () {
+            $.getJSON(urlS, function (data) {
+                var items = [];
+                $.each(data.features, function (key, val) {
+                    $.each(val.geometry, function(g,h){
+                        if (this.length != 5) {
+                            items.push[h];
+                            lon = this[0];
+                            lat = this[1];
+                        }
+                    });
+                    $.each(val.properties, function(i,j){
+                        items.push(i,j);
+                        if (i == "name") {
+                            name = j;
+                        } else if (i == "city") {
+                            city = j;
+                        }
+                        if (i == "saigai") {
+                            num8 = j;
+                        }
+                        if (i == "kyukyu") {
+                            num4 = j;
+                        }
+                        if (i == "hibaku") {
+                            num2 = j;
+                        }
+                        if (i == "dmat") {
+                            num1 = j;
+                        }
+                        if (i == "assist") {
+                            if (j == "要") {
+                                iconColor = "r";
+                            } else if (j == "未") {
+                                iconColor = "g";
+                            } else {
+                                iconColor = "b";
+                            }
+                        }
+                        if (i == "mds"){
+                            if(j != "未入力") {
+                                iconColor = "b";
+                            }
+                        }
+                    });
+                    var extent = map.getView().calculateExtent(map.getSize());
+                    var bottomLeft = ol.proj.transform(ol.extent.getBottomLeft(extent),
+                        'EPSG:3857', 'EPSG:4326');
+                    var topRight = ol.proj.transform(ol.extent.getTopRight(extent),
+                        'EPSG:3857', 'EPSG:4326');
+                    if (lat <= topRight[1] && lat >= bottomLeft[1]) {
+                        if (lon <= topRight[0] && lon >= bottomLeft[0]) {
+                            hospIconNum = (num8 * 8) + (num4 * 4) + (num2 * 2) + (num1 * 1);
+                            if (iconColor == "r") {
+                                hospIcon = "http://h-crisis.niph.go.jp/assistant/wp-content/uploads/sites/4/test/img/r/" + hospIconNum + ".png";
+                            } else if (iconColor == "g") {
+                                hospIcon = "http://h-crisis.niph.go.jp/assistant/wp-content/uploads/sites/4/test/img/g/" + hospIconNum + ".png";
+                            } else {
+                                hospIcon = "http://h-crisis.niph.go.jp/assistant/wp-content/uploads/sites/4/test/img/b/" + hospIconNum + ".png";
+                            }
+                            vishospinfo.innerHTML = vishospinfo.innerHTML + "<tr><td style='font-size:20px;color:white;background-color:#888888;text-align:left' type=button id=tdkBtn value=" + lat + ","+ lon + " onclick=choiceHosp(this)>" + name + "<br>"  + "</td></tr>";
                         }
                     }
                 });

@@ -170,6 +170,10 @@ ImpassableLayer.setVisible(false);
 var visHosp   = document.getElementById('scrn-hosp');
 visHosp.addEventListener('click', visHoButton);
 
+var visShltr   = document.getElementById('scrn-shltr');
+visShltr.addEventListener('click', visShButton);
+document.getElementById('scrn-shltr').style.display = 'none'
+
 var visPass   = document.getElementById('pass-vis');
 visPass.addEventListener('click', visPassButton);
 
@@ -233,14 +237,16 @@ map.getView().on('change:resolution', function() {
     var topRight = ol.proj.transform(ol.extent.getTopRight(extent),
         'EPSG:3857', 'EPSG:4326');
     var lotLength = Math.abs(topRight[0] - bottomLeft[0]);
-    if (lotLength < 0.25 && document.getElementById('hospital-vis').style.backgroundColor == "blue"){
+    if (lotLength < 0.25){
         document.getElementById('scrn-hosp').style.display = 'block'
+        document.getElementById('scrn-shltr').style.display = 'block'
         //document.getElementById('overlayTargetTop').style.display = 'block';
         //document.getElementById('overlayTargetRight').style.display = 'block';
         //document.getElementById('overlayTargetBottom').style.display = 'block';
         //document.getElementById('overlayTargetLeft').style.display = 'block';
     } else {
         document.getElementById('scrn-hosp').style.display = 'none'
+        document.getElementById('scrn-shltr').style.display = 'none'
         //document.getElementById('overlayTargetTop').style.display = 'none';
         //document.getElementById('overlayTargetRight').style.display = 'none';
         //document.getElementById('overlayTargetBottom').style.display = 'none';
@@ -255,12 +261,22 @@ map.getView().on('change:resolution', function() {
 });
 
 map.on('moveend', function() {
-    if(document.getElementById( 'vishospinfo' ).style.display == 'none'){}
-    else {
+    document.getElementById('vishospinfo').innerHTML = "";
+    document.getElementById('vishospinfo').style.display = 'none';
+    /*
+    if(document.getElementById( 'vishospinfo' ).style.display != 'none' && document.getElementById( 'visshltrinfo' ).style.display == 'none')
+    {
         document.getElementById('vishospinfo').innerHTML = "";
         document.getElementById('vishospinfo').style.display = 'none';
         visHoButton()
     }
+    if(document.getElementById( 'visshltrinfo' ).style.display != 'none' && document.getElementById( 'vishospinfo' ).style.display == 'none')
+    {
+        document.getElementById('visshltrinfo').innerHTML = "";
+        document.getElementById('visshltrinfo').style.display = 'none';
+        visShButton()
+    }
+    */
 });
 
 var displayFeatureInfo = function(pixel) {
@@ -563,15 +579,20 @@ map.on('click', function(evt) {
         info.innerHTML = info.innerHTML +  "<div style='border:2px solid burlywood; background-color:#888888; text-align:center' type=button ><a href=../../html/shelter-emergency.html style='display:block; width:100%; color:white; text-decoration:none' id=niphLonLatH target=_blank>避難所シート(保健師長会式)を入力</a></div>";
         var niphAddressH=document.getElementById('niphLonLatH');
         niphAddressH.href='../../html/shelter-hmethod.html' + '?' + 'ID=' + labelShltrJPN[0] + ',Name=' + labelShltrJPN[1] + ',x=' + lon + ',y=' + lat;
+        /*
         info.innerHTML = info.innerHTML +  "<div style='border:2px solid burlywood; background-color:#888888; text-align:center' type=button ><a href=m../../html/shelter-emergency.html style='display:block; width:100%; color:white; text-decoration:none' id=niphLonLatI target=_blank>避難所シート(石井式)を入力</a></div>";
         var niphAddressI=document.getElementById('niphLonLatI');
         niphAddressI.href='../../html/shelter-imethod.html' + '?' + 'ID=' + labelShltrJPN[0] + ',Name=' + labelShltrJPN[1] + ',x=' + lon + ',y=' + lat;
-        while (i < 16) {
+        */
+        while (i < 2) {
             info.innerHTML = info.innerHTML + "<tr><td style=font-size:20px;background-color:#888888;color:white></td><td style=font-size:20px;background-color:white;text-align:right;></td></tr>";
             i++
         }
         info.rows[0].cells[0].innerHTML = "総数";
         info.rows[0].cells[1].innerHTML = labelHinan[0] + "人";
+        info.rows[1].cells[0].innerHTML = "最大避難者数";
+        info.rows[1].cells[1].innerHTML = labelHinan[1] + "人";
+        /*
         for (i = 1; i < 16; i++){
             info.rows[i].cells[0].innerHTML = arrayH7[i];
             if (labelShltrJPN[i+4] === null){
@@ -585,11 +606,17 @@ map.on('click', function(evt) {
                 }
             }
         }
+        */
         overlayInfo.setPosition(coordinate);
         var element = overlayInfo.getElement();
+        /*
         element.innerHTML =
             "名称    :" + labelShltrJPN[1] + '<br>' +
             "住所    :" + labelShltrJPN[4] + '<br>' +
+            "避難者数 :" + labelHinan[0] + "人";
+            */
+        element.innerHTML =
+            "名称    :" + labelShltrJPN[1] + '<br>' +
             "避難者数 :" + labelHinan[0] + "人";
         map.addOverlay(overlayInfo);
     } else if (day == 14) {
@@ -672,7 +699,43 @@ function choiceHosp(obj) {
     document.getElementById('tdfkinfo').style.display = 'none';
     document.getElementById('hospinfo').style.display = 'none';
     document.getElementById('vishospinfo').style.display = 'none';
+    document.getElementById('visshltrinfo').style.display = 'none';
 };
-/**
- * Created by komori on 2016/09/01.
- */
+
+function geoSearch(){
+    if (document.getElementById('address').value != "") {
+        searchPoint = document.getElementById('address').value;
+
+        var geocoder = new google.maps.Geocoder();
+
+        geocoder.geocode(
+            {
+                address: searchPoint,
+                language: 'ja'
+            },
+            function (results, status) {
+                if (status == google.maps.GeocoderStatus.OK) {
+                    lat = results[0].geometry.location.lat();
+                    lon = results[0].geometry.location.lng();
+                    console.log(lat, lon);
+                    var hospPlace = ol.proj.transform([lon, lat], 'EPSG:4326', 'EPSG:3857');
+
+                    console.log(hospPlace)
+
+                    var pan = ol.animation.pan({
+                        duration: 2000,
+                        source: (view.getCenter()),
+                    });
+                    map.beforeRender(pan);
+                    map.getView().setCenter(hospPlace);
+                    map.getView().setZoom(17);
+                }
+                else {
+                    alert('Faild：' + status);
+                }
+
+            });
+    } else {
+        alert("文字を入力してください");
+    }
+}

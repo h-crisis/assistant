@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>H-CRISIS Assistant 避難所アセスメントシート (Tadashi Ishii all rights reserved)</title>
     <script src="../js/mqttws31.js"></script>
-    <script src="../js/mqtthcrisis.js"></script>
+    <script src="../js/mqtthcrisis20160905.js"></script>
 </head>
 <body>
 <form>
@@ -15,8 +15,9 @@
         <legend>避難所情報の入力：避難所の概要</legend>
         ※ 情報が取得できなかった場合、該当箇所は空欄のままで送信してください。
         <br>
+        <label>災害コード<input type="text" id="eventCode" value=""></label>
         <label>避難所コード:<input type="text" id="inputCode"  value=""></label><br>
-        <label>避難所名:<input type="text" id="inputSchelter"  value=""></label><br>
+        <label>避難所名:<input type="text" id="inputShelter"  value=""></label><br>
         <hr>
         <form width="100">アラート情報：
             <label><input type="radio" name="q11" value="有" onclick="inputAlert()">有</label>
@@ -61,7 +62,7 @@
         ※ 情報が取得できなかった場合、該当箇所は空欄のままで送信してください。
         <br>
         <form>
-        <label>収容人数:<input type="text" id="inputSchelterCap"  value=""></label>
+        <label>収容人数:<input type="text" id="inputShelterCap"  value=""></label>
         <label>一人当たり占有面積:<input type="text" id="inputPerWide"  value="">m2くらい</label><br>
         </form>
         <hr>
@@ -223,13 +224,65 @@
     </fieldset>
 
     <fieldset>
+
         <script>
+            var lon,lat;
+            function inputAlert(){
+                if (document.getElementsByName('q11')[0].checked) {
+                    document.getElementById('inputAlertInfo').style.display = 'block';
+                } else {
+                    document.getElementById('inputAlertInfo').style.display = 'none';
+                }
+            }
+
+            function inputTELNumber(){
+                if (document.getElementsByName('q21')[0].checked) {
+                    document.getElementById('inputTELNumber').style.display = 'block';
+                } else {
+                    document.getElementById('inputTELNumber').style.display = 'none';
+                }
+            }
+
+            var urlStr = location.search;
+            if(urlStr === '') {
+                // 避難所IDと避難所名がないと送信ボタンが押せない設定
+                // document.getElementById('submitBtn').disabled = 'true';
+            }
+            else {
+                var pairUrlStr = urlStr.split(',');
+                if(pairUrlStr.length>=2) {
+
+                    pairUrlStr[0] = pairUrlStr[0].substr(7);
+                    pairUrlStr[0] = decodeURI(pairUrlStr[0]);
+                    pairUrlStr[1] = pairUrlStr[1].substr(3);
+                    pairUrlStr[1] = decodeURI(pairUrlStr[1]);
+                    pairUrlStr[2] = pairUrlStr[2].substr(5);
+                    pairUrlStr[2] = decodeURI(pairUrlStr[2]);
+                    pairUrlStr[4] = pairUrlStr[4].substr(2);
+                    pairUrlStr[4] = decodeURI(pairUrlStr[4]);
+                    pairUrlStr[5] = pairUrlStr[5].substr(2);
+                    pairUrlStr[5] = decodeURI(pairUrlStr[5]);
+                    document.getElementById('eventCode').value = pairUrlStr[0];
+                    document.getElementById('eventCode').disabled = 'true';
+                    document.getElementById('inputCode').value = pairUrlStr[1];
+                    document.getElementById('inputCode').disabled = 'true';
+                    document.getElementById('inputShelter').value = pairUrlStr[2];
+                    document.getElementById('inputShelter').disabled = 'true';
+                    lon = pairUrlStr[4];
+                    lat = pairUrlStr[5];
+                }
+            }
+
             function createMessage() {
                 //var createMsg = "test";
 
-                var topicMsg = "/h-crisis/shelter/ishiiMethod/" + document.getElementById('inputCode').value;
-                var createMsg = document.getElementById('inputCode').value +
-                        ',' + document.getElementById('inputHuman').value;
+                var topicMsg = "/hcrisis/assistant/event/" + document.getElementById('eventCode').value
+                        + "/shelter/" + document.getElementById('inputCode').value +　"/ishiimethod";
+                var createMsg = document.getElementById('eventCode').value +
+                        ',' + document.getElementById('inputCode').value +
+                        ',' + document.getElementById('inputShelter').value +
+                        ',' + document.getElementById('inputHuman').value +
+                        ',' + document.getElementById('inputShelterCap').value;
                 for(var i = 1; i < 5; i++) {
                     for(var j = 1; j < 13; j++) {
                         var arrayValue = "q" + i + j;
@@ -255,14 +308,14 @@
                 }
 
                 createMsg = createMsg +
-                        ',' + document.getElementById('inputSchelter').value +
+                        ',' + document.getElementById('inputShelter').value +
                         ',' + document.getElementById('inputAlertInfo').value +
                         ',' + document.getElementById('inputDist').value +
                         ',' + document.getElementById('inputTELNumber').value +
                         ',' + document.getElementById('inputLeaderName').value +
                         ',' + document.getElementById('inputLeaderTEL').value +
                         ',' + document.getElementById('inputLeaderMail').value +
-                        ',' + document.getElementById('inputSchelterCap').value +
+                        ',' + document.getElementById('inputShelterCap').value +
                         ',' + document.getElementById('inputPerWide').value +
                         ',' + document.getElementById('inputTotalPatient').value +
                         ',' + document.getElementById('inputP_Feaver').value +
@@ -308,48 +361,11 @@
                 var nowMin = nowTime.getMinutes();
                 createMsg = createMsg + ',' + nowYer + "/" + nowMon + "/" + nowDay + "/" + nowHrs + ":" + nowMin + "";
                 console.log(topicMsg + " : " + createMsg);
-                onlySubmit(topicMsg, createMsg);
+                publishMsg(topicMsg, createMsg, true);
             }
         </script>
         <input id ="closeBtn" type="button" onclick="window.close()" value="閉じる" />
         <input id = "submitBtn" type="button" onclick="createMessage();" value="送信" />
-        <script>
-            function inputAlert(){
-                if (document.getElementsByName('q11')[0].checked) {
-                    document.getElementById('inputAlertInfo').style.display = 'block';
-                } else {
-                    document.getElementById('inputAlertInfo').style.display = 'none';
-                }
-            }
-
-            function inputTELNumber(){
-                if (document.getElementsByName('q21')[0].checked) {
-                    document.getElementById('inputTELNumber').style.display = 'block';
-                } else {
-                    document.getElementById('inputTELNumber').style.display = 'none';
-                }
-            }
-
-            var urlStr = location.search;
-            if(urlStr === '') {
-                // 避難所IDと避難所名がないと送信ボタンが押せない設定
-                // document.getElementById('submitBtn').disabled = 'true';
-            }
-            else {
-                var pairUrlStr = urlStr.split(',');
-                if(pairUrlStr.length>=2) {
-                    pairUrlStr[0] = pairUrlStr[0].substr(4);
-                    pairUrlStr[0] = decodeURI(pairUrlStr[0]);
-                    pairUrlStr[1] = pairUrlStr[1].substr(5);
-                    pairUrlStr[1] = decodeURI(pairUrlStr[1]);
-                    document.getElementById('inputCode').value = pairUrlStr[0];
-                    document.getElementById('inputCode').disabled = 'true';
-                    document.getElementById('inputSchelter').value = pairUrlStr[1];
-                    document.getElementById('inputSchelter').disabled = 'true';
-
-                }
-            }
-        </script>
 
     </fieldset>
 </form>

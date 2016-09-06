@@ -43,12 +43,12 @@ var hinanLayer1 = new ol.layer.Vector({
     }),
     style: function(feature, resolution) {
         var hinanNum = Math.round(feature.get('S01'));
-        styleHinan.getImage().setScale(hinanNum > 1000 ? 0.7 : hinanNum > 300 ? 0.5 : hinanNum > 20 ? 0.3 :  0.1);
+        styleHinan.getImage().setScale(hinanNum > 50 ? 1 : hinanNum > 15 ? 0.7 : hinanNum > 5 ? 0.5 :  0.3);
         if (shlterFilter == '') {
-            styleHinan.getText().setText(resolution < 15 ?  feature.get('ID') : '');
+            styleHinan.getText().setText(resolution < 100 ?  feature.get('name') : '');
             styleHinan.getImage().setOpacity(0.85);
         } else {
-            styleHinan.getText().setText(resolution < 15 && feature.get('sikuchoson') == shlterFilter ?  feature.get('ID') : '');
+            styleHinan.getText().setText(resolution < 100 && feature.get('sikuchoson') == shlterFilter ?  feature.get('name') : '');
             styleHinan.getImage().setOpacity(feature.get('sikuchoson') == shlterFilter ? 0.85 : 0);
         }
         return styleHinan;
