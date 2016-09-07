@@ -1,23 +1,60 @@
 body {
-	background: #3cb371;
+	background: #1B9183;
 	font-family: Helvetica;
 }
 fieldset {
 	background: #ffffff;
 }
 
+h3 {
+	background-color:#1B9183;
+	border-radius:10px;
+	text-align: center
+}
+
 .inputbox label{
 	display: block;
 	float: left;
-	width: 100px;
-	margin: 0;
-	padding: 5px;
+	width: 110px;
+	margin: 5px 10px 5px 0px;
+	padding: 5px 0px 5px 5px;
 	background-color: white;
 	color:black;
-	text-align: center;
+	text-align: left;
+}
+.inputbox label.IMP{
+	display: block;
+	float: left;
+	margin: 5px 10px 5px 0px;
+	padding: 5px 0px 5px 5px;
+	background-color: #61B187;
+	color: #ffffff;
+	text-align: left;
+	border-radius:5px;
+}
+.inputbox label.over{
+	display: block;
+	float: left;
+	width: 110px;
+	margin: 0px 10px 5px 0px;
+	padding: 5px 0px 0px 5px;
+	background-color: white;
+	color:black;
+	text-align: left;
+}
+.inputbox label.overIMP{
+	display: block;
+	float: left;
+	margin: 0px 10px 5px 0px;
+	padding: 5px 0px 0px 5px;
+	background-color: #61B187;
+	color: #ffffff;
+	text-align: left;
+	border-radius:5px;
 }
 .inputbox input{
-	padding:5px;
+	margin: 0px 0px 10px 0px;
+	padding:10px 10px 10px 0;
 	font-size:16px;
 }
 .radio input{
@@ -26,36 +63,83 @@ fieldset {
 .checkbox input {
   display: none;
 }
+.checkbox p {
+	display: none;
+	margin: 0;
+	padding: 5px 5px 35px 5px;
+	text-align: center;
+}
 .checkbox label{
 	display: block;
 	float: left;
-	width: 70px;
-	margin: 0;
-	padding: 15px;
-	background: #6d6d6d;
+	width: 50px;
+	margin: 0 0 0 0;
+	padding: 15px 5px 15px 5px;
+	background: #8a8a8a;
 	color: #bcbcbc;
-	font-size: 16px;
+	font-size: 13px;
 	text-align: center;
 	line-height: 0;
-	transition: .10s;
+	white-space: nowrap;
 }
-.checkbox input[type="radio"]:checked + .SL {
+.checkbox label.lbl{
+	display: block;
+	float: left;
+	width: 100px;
+	margin: 0;
+	padding: 15px 15px 15px 5px;
+	background-color:white;
+	color:black;
+	font-size: 16px;
+	text-align: left;
+	line-height: 0;
+}
+.checkbox label.lblIMP{
+	display: block;
+	float: left;
+	width: 100px;
+	margin: 0;
+	padding: 15px 15px 15px 5px;
+	background-color: #61B187;
+	color: #ffffff;
+	font-size: 16px;
+	text-align: left;
+	line-height: 0;
+	border-radius:5px;
+}
+.checkbox label.lblIMPover{
+	display: block;
+	float: left;
+	width: 140px;
+	margin: 0;
+	padding: 15px 15px 15px 5px;
+	background-color: #61B187;
+	color: #ffffff;
+	font-size: 16px;
+	text-align: left;
+	border-radius:5px;
+}
+.checkbox input[type="radio"]:checked + .EX {
 	background-color: #228b22;
 	color: #ffffff;
 }
-.checkbox input[type="radio"]:checked + .ML {
-	background-color: #f0e68c;
+.checkbox input[type="radio"]:checked + .GD {
+	background-color: #758922;
 	color: #ffffff;
 }
-.checkbox input[type="radio"]:checked + .MC {
+.checkbox input[type="radio"]:checked + .NT {
 	background-color: #eea700;
 	color: #ffffff;
 }
-.checkbox input[type="radio"]:checked + .MR {
+.checkbox input[type="radio"]:checked + .BD {
 	background-color: #ff6347;
 	color: #ffffff;
 }
-.checkbox input[type="radio"]:checked + .SR {
-	background-color: #ff6347;
+.checkbox input[type="radio"]:checked + .TR {
+	background-color: #f92500;
+	color: #ffffff;
+}
+.checkbox input[type="radio"]:checked + .UK {
+	background-color: #000000;
 	color: #ffffff;
 }

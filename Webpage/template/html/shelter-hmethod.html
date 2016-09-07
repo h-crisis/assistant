@@ -6,90 +6,135 @@
     <title>H-CRISIS Assistant 避難所アセスメントシート  (共通様式)</title>
     <script src="../js/mqttws31.js"></script>
     <script src="../js/mqtthcrisis20160905.js"></script>
+    <link href="../css/shelterSurvey.css" type="text/css" rel="stylesheet" />
 </head>
-<body>
+<div>
 <form>
-    <p>避難所アセスメントシート<label style="float:right">記載者(所属・役職):<input type="text" id="inputHuman"  value=""></label></p>
-    <p>※ 右上の記載者名は入力必須です。</p>
     <fieldset>
-        <legend>避難所情報の入力：避難所の概要</legend>
-        ※ 情報が取得できなかった場合、該当箇所は空欄のままで送信してください。
-        <br>
-        <label>災害コード<input type="text" id="eventCode" value=""></label>
-        <label>避難所コード:<input type="text" id="inputCode"  value=""></label><br>
-        <label>所在地(都道府県、市区町村):<input type="text" id="inputPref"  value=""></label>
-        <label>避難所名:<input type="text" id="inputShelter"  value=""></label><br>
-        <hr>
-        <form>避難者数:
-            <label><input type="text" id="inputShelterNum"  value="">人</label>
-            <label>昼:<input type="text" id="inputShelterDNum"  value="">人</label>
-            <label>夜:<input type="text" id="inputShelterNNum"  value="">人</label>
-            <hr>
-            <label>電話:<input type="text" id="inputShelterTEL"  value=""></label>
-            <label>FAX:<input type="text" id="inputShelterFAX"  value=""></label>
-            <label>メールアドレス:<input type="text" id="inputShelterEMAIL"  value=""></label>
-            <hr>
-            <label>施設の広さ:<input type="text" id="inputShelterAREA"  value=""></label>
-            <label>スペース密度:<input type="radio" name="q11" value="過密">過密</label>
-            <label><input type="radio" name="q11" value="適度" checked="checked">適度</label>
-            <label><input type="radio" name="q11" value="余裕" checked="checked">余裕</label>
-            <br>
-            <label>一人当たり専有面積:<input type="text" id="inputShelterAREAPER"  value="">m2くらい</label>
-            <label>交通機関(避難所と外との交通手段):<input type="text" id="inputShelterTRAFFIC"  value=""></label>
-        </form>
+        <h3>避難所アセスメントシート</h3>
+        <div class="inputbox">
+            <label class="over">記載者<br>(所属・役職)</label><input type="text" id="inputHuman"  value=""><br><br>
+            ※ 白抜き文字の項目は、活動初期に重点的に把握することが求められる情報です。<br>
+            ※ 情報が取得できなかった場合、該当箇所は空欄のままで送信してください。
+        </div>
     </fieldset>
+    <br>
     <fieldset>
-        <legend>避難所情報の入力：組織や活動</legend>
-        ※ 情報が取得できなかった場合、該当箇所は空欄のままで送信してください。
+        <h3>避難所情報の入力：<br>避難所の概要</h3>
+        <div class="inputbox">
+            <label class="IMP">災害コード</label><input type="text" id="eventCode" value=""><br>
+            <label class="IMP">避難所コード</label><input type="text" id="inputCode"  value=""><br>
+            <!-- <label style="margin: 0px 10px 0px 0px; padding: 0px 15px 0px 0px;">所在地</label><input type="text" id="inputPref"  value=""><br> -->
+            <label class="IMP">所在地</label><input type="text" id="inputPref"  value=""><br>
+            <label class="IMP">避難所名</label><input type="text" id="inputShelter"  value=""><br>
+        </div>
+        <hr>
+        <div class="inputbox">
+            <label class="IMP">避難者数</label><input type="text" id="inputShelterNum"  value="">人<br>
+            <label class="IMP">避難者数(昼間)</label><input type="text" id="inputShelterDNum"  value="">人<br>
+            <label class="IMP">避難者数(夜間)</label><input type="text" id="inputShelterNNum"  value="">人<br>
+            <hr>
+            <label class="IMP">電話</label><input type="text" id="inputShelterTEL"  value=""><br>
+            <label class="IMP">FAX</label><input type="text" id="inputShelterFAX"  value=""><br>
+            <label class="overIMP">メールアドレス</label><input type="text" id="inputShelterEMAIL"  value="" style="width:260px"><br><br>
+            <hr>
+            <label>施設の広さ</label><input type="text" id="inputShelterAREA"  value=""><br>
+            <div class="checkbox">
+                <label class="lblIMP">スペース密度</label><br><br>
+                <input type="radio" name="q11" id="q11_0" value="余裕" checked>
+                <label for="q11_0" class="EX">余裕</label>
+                <input type="radio" name="q11" id="q11_1" value="適度">
+                <label for="q11_1" class="GD">適度</label>
+                <input type="radio" name="q11" id="q11_2" value="過密">
+                <label for="q11_2" class="BD">過密</label>
+            </div>
+            <br>
+            <br>
+            <br>
+            <label class="overIMP">一人当たり<br>専有面積</label><input type="text" id="inputShelterAREAPER"  value="">m2くらい<br><br>
+            <label class="over">交通機関<br>(避難所と外との交通手段)</label><input type="text" id="inputShelterTRAFFIC"  value="">
+        </div>
+    </fieldset>
+    <br>
+    <fieldset>
+        <h3>避難所情報の入力：<br>組織や活動</h3>
+        <div class="inputbox">
+            <label class="overIMP">管理統括・<br>代表者の情報</label><br><br><br><br>
+            <label class="IMP">氏名(立場)</label><input type="text" id="inputRep"  value=""><br>
+            <label>その他:</label><input type="text" id="inputRepRest"  value=""><br>
+        <hr>
+            <label class="over">連絡体制／<br>指揮命令系統</label><input type="text" id="inputCommunication"  value=""><br><br>
+        </div>
+        <div class="checkbox">
+            <label class="lbl">自主組織</label><br><br>
+            <input type="radio" name="q21" id="q21_0" value="有" onclick="inputSELFORGAN()">
+            <label for="q21_0" class="EX">有</label>
+            <input type="radio" name="q21" id="q21_1" value="無" onclick="inputSELFORGAN()" checked="checked">
+            <label for="q21_1" class="UK">無</label><br><br>
+        </div>
+        <div class="inputbox">
+            <input style="display:none;" type="text" id="inputSelfOrganDetail"  value=""><br>
+        </div>
+        <div class="checkbox">
+            <label class="lbl">外部組織</label><br><br>
+            <input type="radio" name="q22" id="q22_0" value="有" onclick="inputOUTERORGAN()">
+            <label for="q22_0" class="EX">有</label>
+            <input type="radio" name="q22" id="q22_1" value="無" onclick="inputOUTERORGAN()" checked="checked">
+            <label for="q22_1" class="UK">無</label><br><br>
+        </div>
+        <div class="inputbox">
+            <p id="inputOuterOrgan01" style="display:none">外部組織:チーム数<input style="display:none" type="text" id="inputOuterOrganTeam" value=""></p>
+            <p id="inputOuterOrgan02" style="display:none">外部組織:人数<input style="display:none" type="text" id="inputOuterOrganNum" value=""></p>
+            <p id="inputOuterOrgan03" style="display:none">外部組織:職種<input style="display:none" type="text" id="inputOuterOrganJob" value=""></p>
+        </div><br>
+        <div class="checkbox">
+            <label class="lbl">ボランティア</label><br><br>
+            <input type="radio" name="q23" id="q23_0" value="有" onclick="inputVOLUNTEER()">
+            <label for="q23_0" class="EX">有</label>
+            <input type="radio" name="q23" id="q23_1" value="無" onclick="inputVOLUNTEER()" checked="checked">
+            <label for="q23_1" class="UK">無</label><br><br>
+        </div>
+        <div class="inputbox">
+            <p id="inputOuterVolunteer01" style="display:none">ボランティア:チーム数<input style="display:none" type="text" id="inputVolunteerOrganTeam" value=""></p>
+            <p id="inputOuterVolunteer02" style="display:none">ボランティア:人数<input style="display:none" type="text" id="inputVolunteerOrganNum" value=""></p>
+            <p id="inputOuterVolunteer03" style="display:none">ボランティア:職種<input style="display:none" type="text" id="inputVolunteerOrganJob" value=""></p>
+        </div>
+        <hr>
+        <div class="inputbox">
+            <label class="overIMP">医療提供状況</label>
+        </div><br><br>
+        <div class="checkbox">
+            <label class="lblIMP">救護所</label><br><br>
+            <input type="radio" name="q24" id="q24_0" value="有" checked>
+            <label for="q24_0" class="EX">有</label>
+            <input type="radio" name="q24" id="q24_1" value="無">
+            <label for="q24_1" class="UK">無</label>
+        </div>
         <br>
-        <form>
-            管理統括・代表者の情報
-            <br>
-            <label>氏名(立場):<input type="text" id="inputRep"  value=""></label>
-            <label>その他:<input type="text" id="inputRepRest"  value=""></label>
-        </form>
+        <br>
+        <div class="checkbox">
+            <label class="lblIMP">巡回診療</label><br><br>
+            <input type="radio" name="q25" id="q25_0" value="有" checked>
+            <label for="q25_0" class="EX">有</label>
+            <input type="radio" name="q25" id="q25_1" value="無">
+            <label for="q25_1" class="UK">無</label>
+        </div>
+        <br>
+        <br>
+        <div class="checkbox">
+            <label class="lblIMPover">地域の医師との連携</label><br><br>
+            <input type="radio" name="q26" id="q26_0" value="有" checked>
+            <label for="q26_0" class="EX">有</label>
+            <input type="radio" name="q26" id="q26_1" value="無">
+            <label for="q26_1" class="UK">無</label>
+        </div>
+        <br>
+        <br>
         <hr>
-        <form>連絡体制／指揮命令系統：
-            <label><input type="text" id="inputCommunication"  value=""></label>
-            <br>
-            自主組織
-            <label><input type="radio" name="q21" value="有" onclick="inputSELFORGAN()">有</label>
-            <label><input type="radio" name="q21" value="無" onclick="inputSELFORGAN()" checked="checked">無</label>
-            <input style="display:none" type="text" id="inputSelfOrganDetail"  value="">
-        </form>
-            外部組織
-            <label><input type="radio" name="q22" value="有" onclick="inputOUTERORGAN()">有</label>
-            <label><input type="radio" name="q22" value="無" onclick="inputOUTERORGAN()" checked="checked">無</label>
-        <form>
-            <p id="inputOuterOrgan" style="display:none">チーム数/人数/職種</p>
-            <label><input style="display:none" type="text" id="inputOuterOrganTeam" value=""></label>
-            <label><input style="display:none" type="text" id="inputOuterOrganNum" value=""></label>
-            <label><input style="display:none" type="text" id="inputOuterOrganJob" value=""></label>
-        </form>
-        ボランティア
-        <label><input type="radio" name="q23" value="有" onclick="inputVOLUNTEER()">有</label>
-        <label><input type="radio" name="q23" value="無" onclick="inputVOLUNTEER()" checked="checked">無</label>
-        <form>
-            <p id="inputVolunteerOrgan" style="display:none">チーム数/人数/職種</p>
-            <label><input style="display:none" type="text" id="inputVolunteerOrganTeam" value=""></label>
-            <label><input style="display:none" type="text" id="inputVolunteerOrganNum" value=""></label>
-            <label><input style="display:none" type="text" id="inputVolunteerOrganJob" value=""></label>
-        </form>
-        <hr>
-        <form>
-            医療の提供状況
-            <label>救護所:<input type="radio" name="q24" value="有">有</label>
-            <label><input type="radio" name="q24" value="無" checked="checked">無</label>
-            <br>
-            <label>巡回診療:<input type="radio" name="q25" value="有">有</label>
-            <label><input type="radio" name="q25" value="無" checked="checked">無</label>
-            <br>
-            <label>地域の医師との連携:<input type="radio" name="q26" value="有">有</label>
-            <label><input type="radio" name="q26" value="無" checked="checked">無</label>
-        </form>
-        <hr>
-        <label>避難者への情報伝達手段(黒板・掲示板・マイク・チラシ配布など)<br>
-            <input style="width: 350px" type="text" id="inputOrganOther" value=""></label>
+        <div class="inputbox">
+        <label class="over" style="width: 280px">避難者への情報伝達手段<br>(黒板/掲示板/マイク/チラシ配布等)<br>
+            </label><input style="width: 350px" type="text" id="inputOrganOther" value="">
+        </div>
     </fieldset>
     <fieldset>
         <legend>避難所情報の入力：環境的側面</legend>
@@ -319,12 +364,16 @@
 
             function inputOUTERORGAN(){
                 if (document.getElementsByName('q22')[0].checked) {
-                    document.getElementById('inputOuterOrgan').style.display = 'block';
+                    document.getElementById('inputOuterOrgan01').style.display = 'block';
+                    document.getElementById('inputOuterOrgan02').style.display = 'block';
+                    document.getElementById('inputOuterOrgan03').style.display = 'block';
                     document.getElementById('inputOuterOrganTeam').style.display = 'block';
                     document.getElementById('inputOuterOrganNum').style.display = 'block';
                     document.getElementById('inputOuterOrganJob').style.display = 'block';
                 } else {
-                    document.getElementById('inputOuterOrgan').style.display = 'none';
+                    document.getElementById('inputOuterOrgan01').style.display = 'none';
+                    document.getElementById('inputOuterOrgan02').style.display = 'none';
+                    document.getElementById('inputOuterOrgan03').style.display = 'none';
                     document.getElementById('inputOuterOrganTeam').style.display = 'none';
                     document.getElementById('inputOuterOrganNum').style.display = 'none';
                     document.getElementById('inputOuterOrganJob').style.display = 'none';
@@ -333,12 +382,16 @@
 
             function inputVOLUNTEER(){
                 if (document.getElementsByName('q23')[0].checked) {
-                    document.getElementById('inputVolunteerOrgan').style.display = 'block';
+                    document.getElementById('inputOuterVolunteer01').style.display = 'block';
+                    document.getElementById('inputOuterVolunteer02').style.display = 'block';
+                    document.getElementById('inputOuterVolunteer03').style.display = 'block';
                     document.getElementById('inputVolunteerOrganTeam').style.display = 'block';
                     document.getElementById('inputVolunteerOrganNum').style.display = 'block';
                     document.getElementById('inputVolunteerOrganJob').style.display = 'block';
                 } else {
-                    document.getElementById('inputVolunteerOrgan').style.display = 'none';
+                    document.getElementById('inputOuterVolunteer01').style.display = 'none';
+                    document.getElementById('inputOuterVolunteer02').style.display = 'none';
+                    document.getElementById('inputOuterVolunteer03').style.display = 'none';
                     document.getElementById('inputVolunteerOrganTeam').style.display = 'none';
                     document.getElementById('inputVolunteerOrganNum').style.display = 'none';
                     document.getElementById('inputVolunteerOrganJob').style.display = 'none';
