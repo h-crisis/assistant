@@ -8,14 +8,12 @@
     <script src="../js/mqtthcrisis20160905.js"></script>
     <link href="../css/shelterSurvey.css" type="text/css" rel="stylesheet" />
 </head>
-<div>
-    <form>
         <fieldset>
             <h3>避難所アセスメントシート</h3>
             <div class="inputbox">
                 <label class="over">記載者<br>(所属・役職)</label><input type="text" id="inputHuman"  value=""><br><br>
-                ※ 白抜き文字の項目は、活動初期に重点的に把握することが求められる情報です。<br>
-                ※ 情報が取得できなかった場合、該当箇所は空欄のままで送信してください。
+                ※ 白抜文字の項目は、活動初期段階で重点的に把握がすべき情報です。<br>
+                ※ 情報が取得できなかった場合、該当箇所を空欄のまま送信してください。
             </div>
         </fieldset>
         <br>
@@ -41,9 +39,9 @@
                 <label>施設の広さ</label><input type="text" id="inputShelterAREA"  value=""><br>
                 <div class="checkbox">
                     <label class="lblIMP">スペース密度</label><br><br>
-                    <input type="radio" name="q11" id="q11_0" value="余裕" checked>
+                    <input type="radio" name="q11" id="q11_0" value="余裕">
                     <label for="q11_0" class="EX">余裕</label>
-                    <input type="radio" name="q11" id="q11_1" value="適度">
+                    <input type="radio" name="q11" id="q11_1" value="適度" checked>
                     <label for="q11_1" class="GD">適度</label>
                     <input type="radio" name="q11" id="q11_2" value="過密">
                     <label for="q11_2" class="BD">過密</label>
@@ -129,7 +127,7 @@
             <br>
             <hr>
             <div class="inputbox">
-                <label class="over" style="width: 260px">避難者への情報伝達手段<br>(黒板/掲示板/マイク/チラシ配布等)<br></label><br><br><br>
+                <label class="over" style="width: 260px">避難者への情報伝達手段<br>(黒板/掲示板/マイク/チラシ配布等)</label><br><br><br><br>
                 <textarea style="width: 260px; height: 100px;" type="text" id="inputOrganOther" value=""></textarea>
             </div>
         </fieldset>
@@ -432,9 +430,9 @@
                 <br><br>
                 <label class="lbl">粉塵</label><br><br>
                 <input type="radio" name="q326" id="q326_0" value="有">
-                <label for="q326_0" class="EX">有</label>
+                <label for="q326_0" class="UK">有</label>
                 <input type="radio" name="q326" id="q326_1" value="無">
-                <label for="q326_1" class="UK">無</label>
+                <label for="q326_1" class="EX">無</label>
                 <input type="radio" name="q326" id="q326_2" value="不明" checked>
                 <label for="q326_2" class="NT">不明</label>
                 <br><br>
@@ -625,9 +623,8 @@
                     var createMsg = document.getElementById('eventCode').value +
                             ',' + document.getElementById('inputCode').value +
                             ',' + document.getElementById('inputShelter').value +
-                            ',' + document.getElementById('inputHuman').value +
-                            ',' + document.getElementById('inputShelterNum').value;
-                    for(var i = 1; i < 5; i++) {
+                            ',' + document.getElementById('inputPref').value;
+                    for(var i = 1; i < 4; i++) {
                         for(var j = 1; j < 35; j++) {
                             var arrayValue = "q" + i + j;
                             var tmpList = document.getElementsByName(arrayValue);
@@ -641,8 +638,6 @@
                     }
 
                     createMsg = createMsg +
-                            ',' + document.getElementById('inputPref').value +
-                            ',' + document.getElementById('inputShelter').value +
                             ',' + document.getElementById('inputShelterNum').value +
                             ',' + document.getElementById('inputShelterDNum').value +
                             ',' + document.getElementById('inputShelterNNum').value +
@@ -694,6 +689,5 @@
             </center>
 
         </fieldset>
-    </form>
     </body>
 </html>
