@@ -3,10 +3,7 @@ package jp.hcrisis.assistant.mqtt;
 import org.eclipse.paho.client.mqttv3.*;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 
-import java.io.IOException;
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by manabu on 2016/08/26.
@@ -14,65 +11,48 @@ import java.util.List;
  */
 public class Subscriber implements MqttCallback {
 
-    private static int id = 1; // MQTT Client用の接続ID
     private int qos = 0;
-    private List<String> brokers;
-    private String clientID = "HcrisisAssistant-";
-    private List<MqttClient> clients;
+    private String broker;
+    private String clientID = "HcrisisAssistantSubscriber";
+    private MqttClient client;
 
     /**
      * コンストラクタ。接続IDを生成する。
      */
-    Subscriber() {
-        brokers = new ArrayList<>();
-        clients = new ArrayList<>();
-        clientID = clientID + Integer.toString(id);
-        id++;
+    Subscriber(String broker) {
+        this.broker = broker;
+    }
+
+    Subscriber(String broker, int qos) {
+        this.broker = broker;
+        this.qos = qos;
     }
 
     /**
-     * BrokerのリストにBrokerのURLを加える
-     * @param url
-     */
-    public void addBroker(String url) {
-        brokers.add(url);
-    }
-
-    /**
-     * BrokerのリストからBrokerのURLを加える
-     * @param url
-     */
-    public void removeBroker(String url) {
-        brokers.remove(url);
-    }
-
-    /**
-     * Brokerのリストに接続する
-     * @return リストの1つにでも接続できればTrue、1つも接続できない場合はfalse
+     * 指定されたBrokerに接続する
+     * @return
      */
     public boolean connectBroker() {
-        if(brokers.isEmpty()) {
-            log("There must be at least one brokerURL. Please add BrokerURL using addBroker method.");
+        if(broker==null) {
+            log("Please input Broker's URL");
+
             return false;
         } else {
             boolean connection = false;
-            for(String url : brokers) {
-                try {
-                    MqttClient client = null;
-                    client = new MqttClient(url, clientID, new MemoryPersistence());
-                    MqttConnectOptions connOpts = new MqttConnectOptions();
-                    // QoSに沿った耐障害性の高い配信を行うためには、falseにセット
-                    connOpts.setCleanSession(false);
+            try {
+                this.client = new MqttClient(broker, clientID, new MemoryPersistence());
+                this.client.setCallback(this);
+                MqttConnectOptions connOpts = new MqttConnectOptions();
+                // QoSに沿った耐障害性の高い配信を行うためには、falseにセット
+                connOpts.setCleanSession(false);
 
-                    log("Connecting to broker: " + url);
-                    client.connect(connOpts);
-                    log("Connected");
-                    clients.add(client);
-                    connection = true;
-                } catch (MqttException e) {
-                    log(url + "に接続することができませんでした。");
-                    e.printStackTrace();
-                }
+                log("Connecting to broker: " + broker);
+                client.connect(connOpts);
+                log("Connected");
+                connection = true;
+            } catch (MqttException e) {
+                log(broker + "に接続することができませんでした。");
+                e.printStackTrace();
             }
             return connection;
         }
@@ -83,29 +63,23 @@ public class Subscriber implements MqttCallback {
      * @return リストの1つにでも接続できればTrue、1つも接続できない場合はfalse
      */
     public boolean reconnectBroker() {
-        if(!clients.isEmpty()) {
-            for(MqttClient client : clients) {
-                if(client.isConnected()) {
-                    try {
-                        client.disconnect();
-                    } catch (MqttException e) {
-                        log(client + " を切断できませんでした。");
-                        e.printStackTrace();
-                    }
-                }
+        if(client.isConnected()) {
+            try {
+                client.disconnect();
+            } catch (MqttException e) {
+                log(client + " を切断できませんでした。");
+                e.printStackTrace();
             }
         }
         return connectBroker();
     }
 
-    public boolean subscribe(String topic, int qos) {
-        for(MqttClient client : clients) {
-            if(client.isConnected()) {
-                try {
-                    client.subscribe(topic, qos);
-                } catch (MqttException e) {
-                    e.printStackTrace();
-                }
+    public boolean subscribe(String topic) {
+        if(client.isConnected()) {
+            try {
+                client.subscribe(topic, qos);
+            } catch (MqttException e) {
+                e.printStackTrace();
             }
         }
         return true;
@@ -116,9 +90,7 @@ public class Subscriber implements MqttCallback {
      */
     @Override
     public void messageArrived(String topic, MqttMessage message) throws MqttException {
-        //String time = new Timestamp(System.currentTimeMillis()).toString();
-        //log(time + "\tMessage: " + new String(message.getPayload()));
-        AnalyzeMessage.test(new String(message.getPayload()));
+        AnalyzeMessage.analyze(topic, new String(message.getPayload()));
     }
 
     /**

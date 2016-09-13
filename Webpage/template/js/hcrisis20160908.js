@@ -22,8 +22,28 @@ var view = new ol.View({
     maxZoom: 17
 });
 
+
+// オーバレイの設定（ポップアップ）
+var popupCloser = document.getElementById('popup-closer');
+
+var overlayPopup = new ol.Overlay(/** @type {olx.OverlayOptions} */ ({
+    element: document.getElementById('popup'),
+    autoPan: true,
+    autoPanAnimation: {
+        duration: 250
+    }
+}));
+
+popupCloser.onclick = function() {
+    document.getElementById('info').style.display = 'none';
+    overlayPopup.setPosition(undefined);
+    popupCloser.blur();
+    return false;
+};
+
 var map = new ol.Map({
     layers: [baseLayer, shelterLayer],
+    overlays: [overlayPopup],
     target: 'map',
     view: view,
     controls: ol.control.defaults({
@@ -35,17 +55,21 @@ var map = new ol.Map({
     ])
 });
 
-// Map上のFeatureを取得する
-var displayFeatureInfo = function(pixel) {
-    var feature = map.forEachFeatureAtPixel(pixel, function(feature) {
-    })
+// Map上のFeatureを取得し表示する
+var displayFeatureInfo = function(pixel, evt) {
+    var popupHtml;
+    var displayHtml;
+
+    // 避難所レイヤーのurlを取得しpopup用のHTMLとdisplay用のHTMLを作成する
+    var urlShelter = shelterLayer.getSource().getGetFeatureInfoUrl(
+        evt.coordinate, view.getResolution(), view.getProjection(),
+        {'INFO_FORMAT': 'text/javascript'});
+
+    if(urlShelter) {
+        createShelterPopup(urlShelter, evt);
+    }
 };
 
 map.on('click', function(evt) {
-    displayFeatureInfo(evt.pixel);
-
-    map.forEachFeatureAtPixel(pixel, function (feature) {
-        createShelterPopupHTML(feature);
-    })
+    displayFeatureInfo(evt.pixel, evt);
 })
-
