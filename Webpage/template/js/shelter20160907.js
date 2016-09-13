@@ -33,10 +33,10 @@ function createShelterPopup(url, evt) {
                 for (var i = 0, ii = result.length; i < ii; ++i) {
                     if (i == 0) {
                         popupHtml = createShelterPopupHtml(result[i]);
-                        var btnCode = '?eventCode=' + eventCode + ',id=' + result[i].get('code') + ',name=' + result[i].get('name');
+                        var btnCode = '?event=' + eventCode + ',id=' + result[i].get('code') + ',name=' + result[i].get('name');
                         infoHtml = popupHtml;
 
-                        infoHtml = infoHtml + "<div style='border:2px solid burlywood; background-color:#888888; text-align:center' type=button ><a href=../../html/shelter-emergency.html" + btnCode + "style='display:block; width:100%; color:white; text-decoration:none' id=niphLonLatE target=_blank>緊急時情報入力</a></div>";
+                        infoHtml = infoHtml + "<div style='border:2px solid burlywood; background-color:#888888; text-align:center' type=button ><a href=../../html/shelter-emergency.html" + btnCode + ",style='display:block; width:100%; color:white; text-decoration:none' id=niphLonLatE target=_blank>緊急時情報入力</a></div>";
 
                     }
                     else {
