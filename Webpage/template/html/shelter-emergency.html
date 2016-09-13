@@ -10,146 +10,146 @@
     <link href="../css/shelterSurvey.css" type="text/css" rel="stylesheet" />
 </head>
 <body>
-    <form>
-        <fieldset>
-            <h3>避難所情報入力(全て必須項目)</h3>
-            <div class="inputbox">
-                <label>災害コード</label>
-                <input type="text" id="eventCode" value="" style="border: 1px solid #aaaaaa;">
-                <br>
-                <label>避難所コード</label>
-                <input type="text" id="inputCode" value="" style="border: 1px solid #aaaaaa;">
-                <br>
-                <label>避難所名</label>
-                <input type="text" id="inputShelter" value="" style="border: 1px solid #aaaaaa;">
-                <br>
-                <label>記録者名</label>
-                <input type="text" id="inputHuman" value="" style="border: 1px solid #aaaaaa;">
-                <br>
-                <label>避難者数</label>
-                <input type="text" id="inputNum" value="" style="border: 1px solid #aaaaaa;">
-                <br>
-                <br>
+<form>
+    <fieldset>
+        <h3>避難所情報入力(全て必須項目)</h3>
+        <div class="inputbox">
+            <label>災害コード</label>
+            <input type="text" id="eventCode" value="" style="border: 1px solid #aaaaaa;">
+            <br>
+            <label>避難所コード</label>
+            <input type="text" id="inputCode" value="" style="border: 1px solid #aaaaaa;">
+            <br>
+            <label>避難所名</label>
+            <input type="text" id="inputShelter" value="" style="border: 1px solid #aaaaaa;">
+            <br>
+            <label>記録者名</label>
+            <input type="text" id="inputHuman" value="" style="border: 1px solid #aaaaaa;">
+            <br>
+            <label>避難者数</label>
+            <input type="text" id="inputNum" value="" style="border: 1px solid #aaaaaa;">
+            <br>
+            <br>
+        </div>
+        <div class="radio">
+            <div class="checkbox">
+                <label class="lbl">電気</label><br><br>
+                <input type="radio" name="q0" id="q0_0" value="可">
+                <label for="q0_0" class="EX">可</label>
+                <input type="radio" name="q0" id="q0_1" value="不可">
+                <label for="q0_1" class="BD">不可</label>
+                <input type="radio" name="q0" id="q0_2" value="不明" checked>
+                <label for="q0_2" class="NT">不明</label>
+                <input type="radio" name="q0" id="q0_3" value="無し">
+                <label for="q0_3" class="UK">無</label>
             </div>
-            <div class="radio">
-                <div class="checkbox">
-                    <label class="lbl">電気</label><br><br>
-                    <input type="radio" name="q0" id="q0_0" value="可">
-                    <label for="q0_0" class="EX">可</label>
-                    <input type="radio" name="q0" id="q0_1" value="不可">
-                    <label for="q0_1" class="BD">不可</label>
-                    <input type="radio" name="q0" id="q0_2" value="不明" checked>
-                    <label for="q0_2" class="NT">不明</label>
-                    <input type="radio" name="q0" id="q0_3" value="無し">
-                    <label for="q0_3" class="UK">無</label>
-                </div>
-                <br>
-                <br>
-                <div class="checkbox">
-                    <label class="lbl">ガス</label><br><br>
-                    <input type="radio" name="q1" id="q1_0" value="可">
-                    <label for="q1_0" class="EX">可</label>
-                    <input type="radio" name="q1" id="q1_1" value="不可">
-                    <label for="q1_1" class="BD">不可</label>
-                    <input type="radio" name="q1" id="q1_2" value="不明" checked>
-                    <label for="q1_2" class="NT">不明</label>
-                    <input type="radio" name="q1" id="q1_3" value="無し">
-                    <label for="q1_3" class="UK">無</label>
-                </div>
-                <br>
-                <br>
-                <div class="checkbox">
-                    <label class="lbl">水道</label><br><br>
-                    <input type="radio" name="q2" id="q2_0" value="可">
-                    <label for="q2_0" class="EX">可</label>
-                    <input type="radio" name="q2" id="q2_1" value="不可">
-                    <label for="q2_1" class="BD">不可</label>
-                    <input type="radio" name="q2" id="q2_2" value="不明" checked>
-                    <label for="q2_2" class="NT">不明</label>
-                    <input type="radio" name="q2" id="q2_3" value="無し">
-                    <label for="q2_3" class="UK">無</label>
-                </div>
-                <br>
-                <br>
-                <div class="checkbox">
-                    <label class="lbl">飲料水</label><br><br>
-                    <input type="radio" name="q3" id="q3_0" value="飲用可">
-                    <label for="q3_0" class="EX">飲用可</label>
-                    <input type="radio" name="q3" id="q3_1" value="飲用不可">
-                    <label for="q3_1" class="BD">飲用不可</label>
-                    <input type="radio" name="q3" id="q3_2" value="不明" checked>
-                    <label for="q3_2" class="NT">不明</label>
-                    <input type="radio" name="q3" id="q3_3" value="無し">
-                    <label for="q3_3" class="UK">無</label>
-                </div>
-                <br>
-                <br>
-                <div class="checkbox">
-                    <label class="lbl">固定電話</label><br><br>
-                    <input type="radio" name="q4" id="q4_0" value="可">
-                    <label for="q4_0" class="EX">可</label>
-                    <input type="radio" name="q4" id="q4_1" value="不可">
-                    <label for="q4_1" class="BD">不可</label>
-                    <input type="radio" name="q4" id="q4_2" value="不明" checked>
-                    <label for="q4_2" class="NT">不明</label>
-                    <input type="radio" name="q4" id="q4_3" value="無し">
-                    <label for="q4_3" class="UK">無</label>
-                </div>
-                <br>
-                <br>
-                <div class="checkbox">
-                    <label class="lbl">携帯電話</label><br><br>
-                    <input type="radio" name="q5" id="q5_0" value="可">
-                    <label for="q5_0" class="EX">可</label>
-                    <input type="radio" name="q5" id="q5_1" value="不可">
-                    <label for="q5_1" class="BD">不可</label>
-                    <input type="radio" name="q5" id="q5_2" value="不明" checked>
-                    <label for="q5_2" class="NT">不明</label>
-                    <input type="radio" name="q5" id="q5_3" value="無し">
-                    <label for="q5_3" class="UK">無</label>
-                </div>
-                <br>
-                <br>
-                <div class="checkbox">
-                    <label class="lbl">通信</label><br><br>
-                    <input type="radio" name="q6" id="q6_0" value="可">
-                    <label for="q6_0" class="EX">可</label>
-                    <input type="radio" name="q6" id="q6_1" value="不可">
-                    <label for="q6_1" class="BD">不可</label>
-                    <input type="radio" name="q6" id="q6_2" value="不明" checked>
-                    <label for="q6_2" class="NT">不明</label>
-                    <input type="radio" name="q6" id="q6_3" value="無し">
-                    <label for="q6_3" class="UK">無</label>
-                </div>
-                <br>
-                <br>
-                <div class="checkbox">
-                    <label class="lbl">トイレ</label><br><br>
-                    <input type="radio" name="q7" id="q7_0" value="使用可">
-                    <label for="q7_0" class="EX">使用可</label>
-                    <input type="radio" name="q7" id="q7_1" value="使用不可">
-                    <label for="q7_1" class="BD">使用不可</label>
-                    <input type="radio" name="q7" id="q7_2" value="不明" checked>
-                    <label for="q7_2" class="NT">不明</label>
-                    <input type="radio" name="q7" id="q7_3" value="無し">
-                    <label for="q7_3" class="UK">無</label>
-                </div>
-                <br>
-                <br>
-                <div class="checkbox">
-                    <label class="lbl">食料</label><br><br>
-                    <input type="radio" name="q8" id="q8_0" value="有">
-                    <label for="q8_0" class="EX">有</label>
-                    <label style="background-color: #ffffff"></label>
-                    <input type="radio" name="q8" id="q8_2" value="不明" checked>
-                    <label for="q8_2" class="NT">不明</label>
-                    <input type="radio" name="q8" id="q8_1" value="無">
-                    <label for="q8_1" class="UK">無</label>
-                </div>
+            <br>
+            <br>
+            <div class="checkbox">
+                <label class="lbl">ガス</label><br><br>
+                <input type="radio" name="q1" id="q1_0" value="可">
+                <label for="q1_0" class="EX">可</label>
+                <input type="radio" name="q1" id="q1_1" value="不可">
+                <label for="q1_1" class="BD">不可</label>
+                <input type="radio" name="q1" id="q1_2" value="不明" checked>
+                <label for="q1_2" class="NT">不明</label>
+                <input type="radio" name="q1" id="q1_3" value="無し">
+                <label for="q1_3" class="UK">無</label>
             </div>
-        </fieldset>
+            <br>
+            <br>
+            <div class="checkbox">
+                <label class="lbl">水道</label><br><br>
+                <input type="radio" name="q2" id="q2_0" value="可">
+                <label for="q2_0" class="EX">可</label>
+                <input type="radio" name="q2" id="q2_1" value="不可">
+                <label for="q2_1" class="BD">不可</label>
+                <input type="radio" name="q2" id="q2_2" value="不明" checked>
+                <label for="q2_2" class="NT">不明</label>
+                <input type="radio" name="q2" id="q2_3" value="無し">
+                <label for="q2_3" class="UK">無</label>
+            </div>
+            <br>
+            <br>
+            <div class="checkbox">
+                <label class="lbl">飲料水</label><br><br>
+                <input type="radio" name="q3" id="q3_0" value="飲用可">
+                <label for="q3_0" class="EX">飲用可</label>
+                <input type="radio" name="q3" id="q3_1" value="飲用不可">
+                <label for="q3_1" class="BD">飲用不可</label>
+                <input type="radio" name="q3" id="q3_2" value="不明" checked>
+                <label for="q3_2" class="NT">不明</label>
+                <input type="radio" name="q3" id="q3_3" value="無し">
+                <label for="q3_3" class="UK">無</label>
+            </div>
+            <br>
+            <br>
+            <div class="checkbox">
+                <label class="lbl">固定電話</label><br><br>
+                <input type="radio" name="q4" id="q4_0" value="可">
+                <label for="q4_0" class="EX">可</label>
+                <input type="radio" name="q4" id="q4_1" value="不可">
+                <label for="q4_1" class="BD">不可</label>
+                <input type="radio" name="q4" id="q4_2" value="不明" checked>
+                <label for="q4_2" class="NT">不明</label>
+                <input type="radio" name="q4" id="q4_3" value="無し">
+                <label for="q4_3" class="UK">無</label>
+            </div>
+            <br>
+            <br>
+            <div class="checkbox">
+                <label class="lbl">携帯電話</label><br><br>
+                <input type="radio" name="q5" id="q5_0" value="可">
+                <label for="q5_0" class="EX">可</label>
+                <input type="radio" name="q5" id="q5_1" value="不可">
+                <label for="q5_1" class="BD">不可</label>
+                <input type="radio" name="q5" id="q5_2" value="不明" checked>
+                <label for="q5_2" class="NT">不明</label>
+                <input type="radio" name="q5" id="q5_3" value="無し">
+                <label for="q5_3" class="UK">無</label>
+            </div>
+            <br>
+            <br>
+            <div class="checkbox">
+                <label class="lbl">通信</label><br><br>
+                <input type="radio" name="q6" id="q6_0" value="可">
+                <label for="q6_0" class="EX">可</label>
+                <input type="radio" name="q6" id="q6_1" value="不可">
+                <label for="q6_1" class="BD">不可</label>
+                <input type="radio" name="q6" id="q6_2" value="不明" checked>
+                <label for="q6_2" class="NT">不明</label>
+                <input type="radio" name="q6" id="q6_3" value="無し">
+                <label for="q6_3" class="UK">無</label>
+            </div>
+            <br>
+            <br>
+            <div class="checkbox">
+                <label class="lbl">トイレ</label><br><br>
+                <input type="radio" name="q7" id="q7_0" value="使用可">
+                <label for="q7_0" class="EX">使用可</label>
+                <input type="radio" name="q7" id="q7_1" value="使用不可">
+                <label for="q7_1" class="BD">使用不可</label>
+                <input type="radio" name="q7" id="q7_2" value="不明" checked>
+                <label for="q7_2" class="NT">不明</label>
+                <input type="radio" name="q7" id="q7_3" value="無し">
+                <label for="q7_3" class="UK">無</label>
+            </div>
+            <br>
+            <br>
+            <div class="checkbox">
+                <label class="lbl">食料</label><br><br>
+                <input type="radio" name="q8" id="q8_0" value="有">
+                <label for="q8_0" class="EX">有</label>
+                <label style="background-color: #ffffff"></label>
+                <input type="radio" name="q8" id="q8_2" value="不明" checked>
+                <label for="q8_2" class="NT">不明</label>
+                <input type="radio" name="q8" id="q8_1" value="無">
+                <label for="q8_1" class="UK">無</label>
+            </div>
+        </div>
+    </fieldset>
 
-        <center>
+    <center>
         <fieldset>
             <script>
                 function createMessage() {
@@ -184,14 +184,14 @@
                 }
             </script>
             <div style="box-align:center">
-            <input style="border: 0;float: inherit;width: 70px;margin: 0;background: #6d6d6d;color: #ffffff;font-size: 16px;text-align: center;" id ="closeBtn" type="button" onclick="window.close()" value="閉じる" >
-            <input style="border: 0;float: inherit;width: 70px;margin: 0;background: #228b22;color: #ffffff;font-size: 16px;text-align: center;" id = "submitBtn" type="button" onclick="createMessage();" value="送信" >
+                <input style="border: 0;float: inherit;width: 70px;margin: 0;background: #6d6d6d;color: #ffffff;font-size: 16px;text-align: center;" id ="closeBtn" type="button" onclick="window.close()" value="閉じる" >
+                <input style="border: 0;float: inherit;width: 70px;margin: 0;background: #228b22;color: #ffffff;font-size: 16px;text-align: center;" id = "submitBtn" type="button" onclick="createMessage();" value="送信" >
             </div>
             <script>
                 var urlStr = location.search.substring(1);
                 if(urlStr === '') {
                     // 避難所IDと避難所名がないと送信ボタンが押せない設定
-                     document.getElementById('submitBtn').disabled = 'true';
+                    document.getElementById('submitBtn').disabled = 'true';
                 }
                 else {
                     var pairUrlStr = urlStr.split(',');
@@ -211,8 +211,7 @@
             </script>
 
         </fieldset>
-        </center>
-    </form>
+    </center>
+</form>
 </body>
 </html>
-

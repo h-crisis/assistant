@@ -58,10 +58,10 @@ h3 {
 	font-size:16px;
 }
 .radio input{
-  display: none;
+	display: none;
 }
 .checkbox input {
-  display: none;
+	display: none;
 }
 .checkbox p {
 	display: none;
