@@ -190,27 +190,27 @@ function createShelterInfoHtml(result) {
             InfoHtml = InfoHtml + "<br>固定電話: " + result.get('c01_5');
         }
 
-        if(result.get('c01_6') === null) {
+        if(result.get('c01_8') === null) {
             InfoHtml = InfoHtml + "<br>携帯電話: ";
         } else {
-            InfoHtml = InfoHtml + "<br>携帯電話: " + result.get('c01_6');
+            InfoHtml = InfoHtml + "<br>携帯電話: " + result.get('c01_8');
         }
 
-        if(result.get('c01_7') === null) {
+        if(result.get('c01_9') === null) {
             InfoHtml = InfoHtml + "<br>通信: ";
         } else {
-            InfoHtml = InfoHtml + "<br>通信: " + result.get('c01_7');
+            InfoHtml = InfoHtml + "<br>通信: " + result.get('c01_9');
         }
 
-        if(result.get('c01_8') === null) {
+        if(result.get('c02_6') === null) {
             InfoHtml = InfoHtml + "<br>トイレ: ";
         } else {
-            InfoHtml = InfoHtml + "<br>トイレ: " + result.get('c01_8');
+            InfoHtml = InfoHtml + "<br>トイレ: " + result.get('c02_6');
         }
-        if(result.get('c01_9') === null) {
+        if(result.get('c04_1') === null) {
             InfoHtml = InfoHtml + "<br>食料: ";
         } else {
-            InfoHtml = InfoHtml + "<br>食料: " + result.get('c01_9');
+            InfoHtml = InfoHtml + "<br>食料: " + result.get('c04_1');
         }
 
         return InfoHtml;
