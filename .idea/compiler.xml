@@ -26,8 +26,8 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="hcrisis-assistant" target="1.8" />
-      <module name="HcrisisMQTT" target="1.8" />
+      <module name="hcrisis-assistant" target="1.5" />
+      <module name="HcrisisMQTT" target="1.5" />
     </bytecodeTargetLevel>
   </component>
 </project>
