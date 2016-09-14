@@ -1,3 +1,5 @@
+package jp.hcrisis.assistant.disaster;
+
 import com.vividsolutions.jts.geom.Coordinate;
 import com.vividsolutions.jts.geom.GeometryFactory;
 import com.vividsolutions.jts.geom.Point;
@@ -57,7 +59,7 @@ public class EarthquakeDamageEstimate {
         File[] masterFiles = {this.meshBaseFile, this.rateFile1, this.rateFile2, this.mesh4thDataFile, this.buildingYearFile, this.siFile, outDir};
         for(File file : masterFiles) {
             if(!file.exists()) {
-                System.out.println("EarthquakeDamageEstimate: " + file.getPath() + "/" + file.getName() + " が見つかりません。");
+                System.out.println("jp.hcrisis.assistant.disaster.EarthquakeDamageEstimate: " + file.getPath() + "/" + file.getName() + " が見つかりません。");
                 System.exit(1);
             }
         }

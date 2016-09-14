@@ -1,3 +1,5 @@
+import jp.hcrisis.assistant.disaster.EarthquakeDamageEstimate;
+
 import java.io.File;
 
 /**
