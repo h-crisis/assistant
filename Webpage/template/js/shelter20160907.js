@@ -33,7 +33,7 @@ function createShelterPopup(url, evt) {
                 for (var i = 0, ii = result.length; i < ii; ++i) {
                     if (i == 0) {
                         popupHtml = createShelterPopupHtml(result[i]);
-                        var btnCode = '?event=' + eventCode + ',id=' + result[i].get('code') + ',name=' + result[i].get('name');
+                        var btnCode = '?event=' + eventCode + ',id=' + result[i].get('code') + ',name=' + result[i].get('name')　+ ',address=' + result[i].get('address');
                         infoHtml = createShelterInfoHtml(result[i]);
 
 
