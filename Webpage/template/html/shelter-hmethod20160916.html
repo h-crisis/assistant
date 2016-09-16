@@ -29,8 +29,8 @@
             <hr>
             <div class="inputbox">
                 <label class="IMP">避難者数</label><input type="text" id="A01"  value="">人<br>
-                <label class="IMP">避難者数(昼間)</label><input type="text" id="A01_1"  value="">人<br>
-                <label class="IMP">避難者数(夜間)</label><input type="text" id="A01_2"  value="">人<br>
+                <label class="IMP">避難者数(昼間)</label><input type="text" id="A01-1"  value="">人<br>
+                <label class="IMP">避難者数(夜間)</label><input type="text" id="A01-2"  value="">人<br>
                 <hr>
                 <label class="IMP">電話</label><input type="text" id="A02"  value=""><br>
                 <label class="IMP">FAX</label><input type="text" id="A03"  value=""><br>
@@ -50,7 +50,7 @@
                 <br>
                 <br>
                 <label class="overIMP">一人当たり<br>専有面積</label><input type="text" id="A07"  value="">m2くらい<br><br>
-                <label class="over">交通機関<br>(避難所と外との交通手段)</label><input type="text" id="A08"  value="">
+                <label class="over">交通機関<br>(避難所と外との交通手段)</label><input type="text" id="inputShelterTRAFFIC"  value="">
             </div>
         </fieldset>
         <br>
@@ -59,24 +59,22 @@
             <div class="inputbox">
                 <label class="overIMP">管理統括・<br>代表者の情報</label><br><br><br><br>
                 <label class="IMP">氏名(立場)</label><br><br><br>
-                <input type="text" id="B01"  value=""><br>
-                <!--
+                <input type="text" id="inputRep"  value=""><br>
                 <label>その他:</label><br><br><br>
                 <input type="text" id="inputRepRest"  value=""><br>
-                -->
                 <hr>
                 <label class="over">連絡体制／<br>指揮命令系統</label><br><br><br><br>
-                <input type="text" id="B02"  value=""><br><br><br>
+                <input type="text" id="inputCommunication"  value=""><br><br><br>
             </div>
             <div class="checkbox">
                 <label class="lbl">自主組織</label><br><br>
-                <input type="radio" name="B03" id="q21_0" value="有" onclick="inputSELFORGAN()">
+                <input type="radio" name="q21" id="q21_0" value="有" onclick="inputSELFORGAN()">
                 <label for="q21_0" class="EX">有</label>
-                <input type="radio" name="B03" id="q21_1" value="無" onclick="inputSELFORGAN()" checked="checked">
+                <input type="radio" name="q21" id="q21_1" value="無" onclick="inputSELFORGAN()" checked="checked">
                 <label for="q21_1" class="UK">無</label><br><br>
             </div>
             <div class="inputbox">
-                <input style="display:none;" type="text" id="B03_1"  value=""><br>
+                <input style="display:none;" type="text" id="inputSelfOrganDetail"  value=""><br>
             </div>
             <div class="checkbox">
                 <label class="lbl">外部組織</label><br><br>
@@ -130,7 +128,7 @@
             <hr>
             <div class="inputbox">
                 <label class="over" style="width: 260px">避難者への情報伝達手段<br>(黒板/掲示板/マイク/チラシ配布等)</label><br><br><br><br>
-                <textarea style="width: 260px; height: 100px;" type="text" id="A09" value=""></textarea>
+                <textarea style="width: 260px; height: 100px;" type="text" id="inputOrganOther" value=""></textarea>
             </div>
         </fieldset>
         <br>
@@ -541,10 +539,10 @@
             <script>
                 var lon,lat
                 function inputSELFORGAN(){
-                    if (document.getElementsByName('B03')[0].checked) {
-                        document.getElementById('B03_1').style.display = 'block';
+                    if (document.getElementsByName('q21')[0].checked) {
+                        document.getElementById('inputSelfOrganDetail').style.display = 'block';
                     } else {
-                        document.getElementById('B03_1').style.display = 'none';
+                        document.getElementById('inputSelfOrganDetail').style.display = 'none';
                     }
                 }
 
@@ -642,8 +640,8 @@
 
                     createMsg = createMsg +
                             ',a1=' + document.getElementById('A01').value +
-                            ',a1_1=' + document.getElementById('A01_1').value +
-                            ',a1_2=' + document.getElementById('A01_2').value +
+                            ',a1_1=' + document.getElementById('A01-1').value +
+                            ',a1_2=' + document.getElementById('A01-2').value +
                             ',a02=' + document.getElementById('A02').value +
                             ',a03=' + document.getElementById('A03').value +
                             ',a04=' + document.getElementById('A04').value +
@@ -652,25 +650,21 @@
                         if (document.getElementsByName('A06')[k].checked) {
                             createMsg = createMsg + ',a06=' + document.getElementsByName('A06')[k].value;
                             continue;}}
+
                     createMsg = createMsg +
-                            ',a07=' + document.getElementById('A07').value +
-                            ',a08=' + document.getElementById('A08').value +
-                            ',a09=' + document.getElementById('A09').value +
-                            ',b01=' + document.getElementById('B01').value +
-                            // ',' + document.getElementById('inputRepRest').value +
-                            ',b02=' + document.getElementById('B02').value;
-                    for (var k = 0; k < document.getElementsByName('B03').length; k++) {
-                        if (document.getElementsByName('B03')[k].checked) {
-                            createMsg = createMsg + ',b03=' + document.getElementsByName('B03')[k].value;
-                            continue;}}
-                    createMsg = createMsg +
-                            ',b03_1=' + document.getElementById('B03_1').value +
+                            ',' + document.getElementById('A07').value +
+                            ',' + document.getElementById('inputShelterTRAFFIC').value +
+                            ',' + document.getElementById('inputRep').value +
+                            ',' + document.getElementById('inputRepRest').value +
+                            ',' + document.getElementById('inputCommunication').value +
+                            ',' + document.getElementById('inputSelfOrganDetail').value +
                             ',' + document.getElementById('inputOuterOrganTeam').value +
                             ',' + document.getElementById('inputOuterOrganNum').value +
                             ',' + document.getElementById('inputOuterOrganJob').value +
                             ',' + document.getElementById('inputVolunteerOrganTeam').value +
                             ',' + document.getElementById('inputVolunteerOrganNum').value +
                             ',' + document.getElementById('inputVolunteerOrganJob').value +
+                            ',' + document.getElementById('inputOrganOther').value +
                             ',' + document.getElementById('inputLR1').value +
                             ',' + document.getElementById('inputLR2').value +
                             ',' + document.getElementById('inputToiletNum').value +

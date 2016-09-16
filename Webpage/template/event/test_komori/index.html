@@ -8,11 +8,8 @@
     <script src="http://d3js.org/d3.v3.min.js"></script>
 
     <script src="event.js"></script>
-    <script src="../../js/hospital.js"></script>
-    <script src="../../js/halls20160826.js"></script>
     <script src="../../js/locationChecker.js"></script>
     <script src="../../js/csvloader.js"></script>
-    <script src="../../js/pass20160826.js"></script>
 
     <!-- Google Analytics -->
     <script>
@@ -26,6 +23,17 @@
     </script>
 
     <style>
+        #pop {
+            position: absolute;
+            background-color: white;
+            background-image:url('http://h-crisis.niph.go.jp/assistant/wp-content/uploads/sites/4/test/img/7.png');
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid #cccccc;
+            bottom: 12px;
+            left: -50px;
+            min-width: 300px;
+        }
         .ol-popup {
             position: absolute;
             background-color: white;
@@ -76,6 +84,7 @@
 <div id="popup" class="ol-popup">
     <a href="#" id="popup-closer" class="ol-popup-closer"></a>
     <div id="popup-content"></div>
+    <div id="pop"></div>
 </div>
 
 <div id="overlayInfo" style="background-color:whitesmoke; border: 1px solid black; padding: 5px 10px;"></div>
@@ -102,8 +111,7 @@
 <input type="hidden" name="latlonHosp" id="latlonHosp">
 <script type="text/javascript" src="../../js/shelter20160907.js"></script>
 <script type="text/javascript" src="../../js/hcrisis20160908.js"></script>
-<script type="text/javascript" src="../../js/zenrin20160916.js"></script>
-<script type="text/javascript" src="../../js/location20160907.js"></script>
+<script type="text/javascript" src="../../js/location20160916.js"></script>
 <script type="text/javascript" src="../../js/sizeChecker.js"></script>
 </body>
 </html>

@@ -2,7 +2,7 @@
  * Created by komori on 2016/06/20.
  */
 
-var nowLatLon
+var nowLatLon;
 
 if (navigator.geolocation) {
     // 現在の位置情報取得を実施
@@ -11,7 +11,7 @@ if (navigator.geolocation) {
         function location(pos) {
             nowLatLon = pos.coords.longitude + "," + pos.coords.latitude
             document.getElementById('latlonCurr').value=nowLatLon;
-
+            gettableNC = true;
         },
         // 位置情報取得失敗時
         function (error) {
