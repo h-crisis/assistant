@@ -12,11 +12,11 @@
     <h3>避難所避難者の状況　日報</h3>
     <div class="inputbox">
         <label class="IMP">災害コード</label><input type="text" id="eventCode" value=""><br>
-        <label class="IMP">避難所コード</label><input type="text" id="inputCode"  value=""><br>
+        <label class="IMP">避難所コード</label><input type="text" id="Code"  value=""><br>
         <!-- <label style="margin: 0px 10px 0px 0px; padding: 0px 15px 0px 0px;">所在地</label><input type="text" id="inputPref"  value=""><br> -->
-        <label class="IMP">所在地</label><input type="text" id="inputPref"  value=""><br>
-        <label class="IMP">避難所名</label><input type="text" id="inputShelter"  value=""><br>
-        <label class="over">記載者<br>(所属・役職)</label><input type="text" id="inputHuman"  value=""><br><br>
+        <label class="IMP">所在地</label><input type="text" id="Address"  value=""><br>
+        <label class="IMP">避難所名</label><input type="text" id="Name"  value=""><br>
+        <label class="over">記載者<br>(所属・役職)</label><input type="text" id="Reporter"  value=""><br><br>
         ※ 白抜文字の項目は、活動初期段階で重点的に把握がすべき情報です。<br>
         ※ 情報が取得できなかった場合、該当箇所を空欄のまま送信してください。
     </div>
@@ -25,57 +25,57 @@
 <fieldset>
     <h3>配慮を要する人</h3>
     <div class="inputbox">
-        <label>高齢者</label><input type="text" id="e11" value="">人<br>
-        <label>うち75歳以上</label><input type="text" id="e12" value="">人<br>
-        <label>うち要介護<br>認定者数</label><input type="text" id="e13" value="">人<br>
+        <label>高齢者</label><input type="text" id="d01" value="">人<br>
+        <label>うち75歳以上</label><input type="text" id="d01_1" value="">人<br>
+        <label>うち要介護<br>認定者数</label><input type="text" id="d01_2" value="">人<br>
         <hr>
-        <label class="IMP">妊婦</label><input type="text" id="e14" value="">人<br>
-        <label class="over">うち妊婦健診<br>受診困難者数</label><input type="text" id="e15" value="">人<br><br>
-        <label class="IMP">産婦</label><input type="text" id="e16" value="">人<br>
-        <label class="IMP">乳児</label><input type="text" id="e17"  value="">人<br>
+        <label class="IMP">妊婦</label><input type="text" id="d02" value="">人<br>
+        <label class="over">うち妊婦健診<br>受診困難者数</label><input type="text" id="d02_1" value="">人<br><br>
+        <label class="IMP">産婦</label><input type="text" id="d03" value="">人<br>
+        <label class="IMP">乳児</label><input type="text" id="d04"  value="">人<br>
         <hr>
-        <label>幼児・児童</label><input type="text" id="e18" value="">人<br>
-        <label class="over">うち身体<br>障害児</label><input type="text" id="e19" value="">人<br><br>
-        <label class="over">うち知的<br>障害児</label><input type="text" id="e20" value="">人<br><br>
-        <label class="over">うち発達<br>障害児</label><input type="text" id="e21" value="">人<br><br>
+        <label>幼児・児童</label><input type="text" id="d05" value="">人<br>
+        <label class="over">うち身体<br>障害児</label><input type="text" id="d05_1" value="">人<br><br>
+        <label class="over">うち知的<br>障害児</label><input type="text" id="d05_2" value="">人<br><br>
+        <label class="over">うち発達<br>障害児</label><input type="text" id="d05_3" value="">人<br><br>
         <hr>
-        <label>障害者</label><input type="text" id="e22" value="">人<br>
-        <label class="over">うち身体<br>障害者</label><input type="text" id="e23" value="">人<br><br>
-        <label class="over">うち知的<br>障害者</label><input type="text" id="e24" value="">人<br><br>
-        <label class="over">うち精神<br>障害者</label><input type="text" id="e25" value="">人<br><br>
-        <label class="over">うち発達<br>障害者</label><input type="text" id="e26" value="">人<br><br>
+        <label>障害者</label><input type="text" id="d06" value="">人<br>
+        <label class="over">うち身体<br>障害者</label><input type="text" id="d06_1" value="">人<br><br>
+        <label class="over">うち知的<br>障害者</label><input type="text" id="d06_2" value="">人<br><br>
+        <label class="over">うち精神<br>障害者</label><input type="text" id="d06_3" value="">人<br><br>
+        <label class="over">うち発達<br>障害者</label><input type="text" id="d06_4" value="">人<br><br>
         <hr>
-        <label>難病患者</label><input type="text" id="e27" value="">人<br>
-        <label class="overIMP">在宅酸素<br>療養者</label><input type="text" id="e28" value="">人<br><br>
-        <label class="IMP">人工透析者</label><input type="text" id="e29" value="">人<br>
-        <label class="over">アレルギー<br>疾患児・者</label><input type="text" id="e30" value="">人<br><br>
+        <label>難病患者</label><input type="text" id="d07" value="">人<br>
+        <label class="overIMP">在宅酸素<br>療養者</label><input type="text" id="d08" value="">人<br><br>
+        <label class="IMP">人工透析者</label><input type="text" id="d09" value="">人<br>
+        <label class="over">アレルギー<br>疾患児・者</label><input type="text" id="d10" value="">人<br><br>
         <hr>
         <label class="overIMP">配慮を要する人の全体像</label><br><br><br><br>
-        <label class="IMP">外国人</label><input type="text" id="e35" value="">人<br>
-        <label class="IMP">要援助者数</label><input type="text" id="e31" value="">人<br>
-        <label class="IMP">うち全介助</label><input type="text" id="e32" value="">人<br>
-        <label class="IMP">うち一部介助</label><input type="text" id="e33" value="">人<br>
-        <label class="IMP">うち認知障害</label><input type="text" id="e34" value="">人<br>
+        <label class="IMP">外国人</label><input type="text" id="d12" value="">人<br>
+        <label class="IMP">要援助者数</label><input type="text" id="d11" value="">人<br>
+        <label class="IMP">うち全介助</label><input type="text" id="d11_1" value="">人<br>
+        <label class="IMP">うち一部介助</label><input type="text" id="d11_2" value="">人<br>
+        <label class="IMP">うち認知障害</label><input type="text" id="d11_3" value="">人<br>
     </div>
     <hr>
     <div class="inputbox">
         <label class="over" style="width: 260px">対応・特記事項</label><br><br>
-        <textarea style="width: 260px; height: 120px" type="text" id="e36" value=""></textarea>
+        <textarea style="width: 260px; height: 120px" type="text" id="d13" value=""></textarea>
     </div>
 </fieldset>
 <br>
 <fieldset>
     <h3>服薬者数</h3>
     <div class="inputbox">
-        <label>服薬者</label><input type="text" id="e37" value="">人<br>
-        <label class="overIMP">うち高血圧<br>治療薬</label><input type="text" id="e38" value="">人<br><br>
-        <label class="overIMP">うち糖尿病<br>治療薬</label><input type="text" id="e39" value="">人<br><br>
-        <label class="IMP">うち向精神薬</label><input type="text" id="e40" value="">人<br><br>
+        <label>服薬者</label><input type="text" id="e01" value="">人<br>
+        <label class="overIMP">うち高血圧<br>治療薬</label><input type="text" id="e01_1" value="">人<br><br>
+        <label class="overIMP">うち糖尿病<br>治療薬</label><input type="text" id="e01_2" value="">人<br><br>
+        <label class="IMP">うち向精神薬</label><input type="text" id="e01_3" value="">人<br><br>
     </div>
     <hr>
     <div class="inputbox">
         <label class="over" style="width: 260px">対応・特記事項</label><br><br>
-        <textarea style="width: 260px; height: 100px;" type="text" id="e41" value=""></textarea>
+        <textarea style="width: 260px; height: 100px;" type="text" id="e02" value=""></textarea>
     </div>
 </fieldset>
 <br>
@@ -83,98 +83,105 @@
     <h3>有症状者数</h3>
     <div class="inputbox">
         <label class="overIMP">外傷者数</label><br><br>
-        <label class="IMP">総数</label><input type="text" id="e42" value="">人<br>
-        <label class="overIMP">うち乳児<br>・幼児</label><input type="text" id="e43" value="">人<br><br>
-        <label class="IMP">うち妊婦</label><input type="text" id="e44" value="">人<br>
-        <label class="IMP">うち高齢者</label><input type="text" id="e45" value="">人<br>
+        <label class="IMP">総数</label><input type="text" id="f01" value="">人<br>
+        <label class="overIMP">うち乳児<br>・幼児</label><input type="text" id="f01_1" value="">人<br><br>
+        <label class="IMP">うち妊婦</label><input type="text" id="f01_2" value="">人<br>
+        <label class="IMP">うち高齢者</label><input type="text" id="f01_3" value="">人<br>
         <hr>
         <label class="overIMP">感染症<br>症状数：下痢</label><br><br><br><br>
-        <label class="IMP">総数</label><input type="text" id="e46" value="">人<br>
-        <label class="overIMP">うち乳児<br>・幼児</label><input type="text" id="e47" value="">人<br><br>
-        <label class="IMP">うち妊婦</label><input type="text" id="e48" value="">人<br>
-        <label class="IMP">うち高齢者</label><input type="text" id="e49" value="">人<br>
+        <label class="IMP">総数</label><input type="text" id="f02" value="">人<br>
+        <label class="overIMP">うち乳児<br>・幼児</label><input type="text" id="f02_1" value="">人<br><br>
+        <label class="IMP">うち妊婦</label><input type="text" id="f02_2" value="">人<br>
+        <label class="IMP">うち高齢者</label><input type="text" id="f02_3" value="">人<br>
         <hr>
         <label class="overIMP">感染症<br>症状数：嘔吐</label><br><br><br><br>
-        <label class="IMP">総数</label><input type="text" id="e50" value="">人<br>
-        <label class="overIMP">うち乳児<br>・幼児</label><input type="text" id="e51" value="">人<br><br>
-        <label class="IMP">うち妊婦</label><input type="text" id="e52" value="">人<br>
-        <label class="IMP">うち高齢者</label><input type="text" id="e53" value="">人<br>
+        <label class="IMP">総数</label><input type="text" id="f03" value="">人<br>
+        <label class="overIMP">うち乳児<br>・幼児</label><input type="text" id="f03_1" value="">人<br><br>
+        <label class="IMP">うち妊婦</label><input type="text" id="f03_2" value="">人<br>
+        <label class="IMP">うち高齢者</label><input type="text" id="f03_3" value="">人<br>
         <hr>
         <label class="overIMP">感染症<br>症状数：発熱</label><br><br><br><br>
-        <label class="IMP">総数</label><input type="text" id="e54" value="">人<br>
-        <label class="overIMP">うち乳児<br>・幼児</label><input type="text" id="e55" value="">人<br><br>
-        <label class="IMP">うち妊婦</label><input type="text" id="e56" value="">人<br>
-        <label class="IMP">うち高齢者</label><input type="text" id="e57" value="">人<br>
+        <label class="IMP">総数</label><input type="text" id="f04" value="">人<br>
+        <label class="overIMP">うち乳児<br>・幼児</label><input type="text" id="f04_1" value="">人<br><br>
+        <label class="IMP">うち妊婦</label><input type="text" id="f04_2" value="">人<br>
+        <label class="IMP">うち高齢者</label><input type="text" id="f04_3" value="">人<br>
         <hr>
         <label class="overIMP">感染症<br>症状数：咳</label><br><br><br><br>
-        <label class="IMP">総数</label><input type="text" id="e58" value="">人<br>
-        <label class="overIMP">うち乳児<br>・幼児</label><input type="text" id="e59" value="">人<br><br>
-        <label class="IMP">うち妊婦</label><input type="text" id="e60" value="">人<br>
-        <label class="IMP">うち高齢者</label><input type="text" id="e61" value="">人<br>
+        <label class="IMP">総数</label><input type="text" id="f05" value="">人<br>
+        <label class="overIMP">うち乳児<br>・幼児</label><input type="text" id="f05_1" value="">人<br><br>
+        <label class="IMP">うち妊婦</label><input type="text" id="f05_2" value="">人<br>
+        <label class="IMP">うち高齢者</label><input type="text" id="f05_3" value="">人<br>
         <hr>
         <label>その他：<br>便秘</label><br><br><br><br>
-        <label>総数</label><input type="text" id="e62" value="">人<br>
-        <label class="over">うち乳児<br>・幼児</label><input type="text" id="e63" value="">人<br><br>
-        <label>うち妊婦</label><input type="text" id="e64" value="">人<br>
-        <label>うち高齢者</label><input type="text" id="e65" value="">人<br>
+        <label>総数</label><input type="text" id="f06" value="">人<br>
+        <label class="over">うち乳児<br>・幼児</label><input type="text" id="f06_1" value="">人<br><br>
+        <label>うち妊婦</label><input type="text" id="f06_2" value="">人<br>
+        <label>うち高齢者</label><input type="text" id="f06_3" value="">人<br>
         <hr>
         <label>その他：<br>食欲不振</label><br><br><br><br>
-        <label>総数</label><input type="text" id="e66" value="">人<br>
-        <label class="over">うち乳児<br>・幼児</label><input type="text" id="e67" value="">人<br><br>
-        <label>うち妊婦</label><input type="text" id="e68" value="">人<br>
-        <label>うち高齢者</label><input type="text" id="e69" value="">人<br>
+        <label>総数</label><input type="text" id="f07" value="">人<br>
+        <label class="over">うち乳児<br>・幼児</label><input type="text" id="f07_1" value="">人<br><br>
+        <label>うち妊婦</label><input type="text" id="f07_2" value="">人<br>
+        <label>うち高齢者</label><input type="text" id="f07_3" value="">人<br>
         <hr>
         <label>その他：<br>頭痛</label><br><br><br><br>
-        <label>総数</label><input type="text" id="e70" value="">人<br>
-        <label class="over">うち乳児<br>・幼児</label><input type="text" id="e71" value="">人<br><br>
-        <label>うち妊婦</label><input type="text" id="e72" value="">人<br>
-        <label>うち高齢者</label><input type="text" id="e73" value="">人<br>
+        <label>総数</label><input type="text" id="f08" value="">人<br>
+        <label class="over">うち乳児<br>・幼児</label><input type="text" id="f08_1" value="">人<br><br>
+        <label>うち妊婦</label><input type="text" id="f08_2" value="">人<br>
+        <label>うち高齢者</label><input type="text" id="f08_3" value="">人<br>
         <hr>
         <label>その他：<br>不眠</label><br><br><br><br>
-        <label>総数</label><input type="text" id="e74" value="">人<br>
-        <label class="over">うち乳児<br>・幼児</label><input type="text" id="e75" value="">人<br><br>
-        <label>うち妊婦</label><input type="text" id="e76" value="">人<br>
-        <label>うち高齢者</label><input type="text" id="e77" value="">人<br>
+        <label>総数</label><input type="text" id="f09" value="">人<br>
+        <label class="over">うち乳児<br>・幼児</label><input type="text" id="f09_1" value="">人<br><br>
+        <label>うち妊婦</label><input type="text" id="f09_2" value="">人<br>
+        <label>うち高齢者</label><input type="text" id="f09_3" value="">人<br>
         <hr>
         <label>その他：<br>不安</label><br><br><br><br>
-        <label>総数</label><input type="text" id="e78" value="">人<br>
-        <label class="over">うち乳児<br>・幼児</label><input type="text" id="e79" value="">人<br><br>
-        <label>うち妊婦</label><input type="text" id="e80" value="">人<br>
-        <label>うち高齢者</label><input type="text" id="e81" value="">人<br>
+        <label>総数</label><input type="text" id="f10" value="">人<br>
+        <label class="over">うち乳児<br>・幼児</label><input type="text" id="f10_1" value="">人<br><br>
+        <label>うち妊婦</label><input type="text" id="f10_2" value="">人<br>
+        <label>うち高齢者</label><input type="text" id="f10_3" value="">人<br>
     </div>
     <hr>
     <div class="checkbox">
         <label class="lblIMPover">専門的医療ニーズ</label><br><br><br><br>
+        <input type="radio" name="f11" id="e81_0" value="緊急">
+        <label for="e81_0" class="TR">緊急</label>
+        <input type="radio" name="f11" id="e81_1" value="需要有">
+        <label for="e81_1" class="BD">需要有</label>
+        <input type="radio" name="f11" id="e81_2" value="無" checked>
+        <label for="e81_2" class="UK">無</label>
+        <br><br>
         <label class="lblIMP">小児疾患</label><br><br>
-        <input type="radio" name="e82" id="e82_0" value="緊急">
+        <input type="radio" name="f12" id="e82_0" value="緊急">
         <label for="e82_0" class="TR">緊急</label>
-        <input type="radio" name="e82" id="e82_1" value="需要有">
+        <input type="radio" name="f12" id="e82_1" value="需要有">
         <label for="e82_1" class="BD">需要有</label>
-        <input type="radio" name="e82" id="e82_2" value="無" checked>
+        <input type="radio" name="f12" id="e82_2" value="無" checked>
         <label for="e82_2" class="UK">無</label>
         <br><br>
         <label class="lblIMP">精神疾患</label><br><br>
-        <input type="radio" name="e83" id="e83_0" value="緊急">
+        <input type="radio" name="f13" id="e83_0" value="緊急">
         <label for="e83_0" class="TR">緊急</label>
-        <input type="radio" name="e83" id="e83_1" value="需要有">
+        <input type="radio" name="f13" id="e83_1" value="需要有">
         <label for="e83_1" class="BD">需要有</label>
-        <input type="radio" name="e83" id="e83_2" value="無" checked>
+        <input type="radio" name="f13" id="e83_2" value="無" checked>
         <label for="e83_2" class="UK">無</label>
         <br><br>
         <label class="lblIMP">周産期</label><br><br>
-        <input type="radio" name="e84" id="e84_0" value="緊急">
+        <input type="radio" name="f14" id="e84_0" value="緊急">
         <label for="e84_0" class="TR">緊急</label>
-        <input type="radio" name="e84" id="e84_1" value="需要有">
+        <input type="radio" name="f14" id="e84_1" value="需要有">
         <label for="e84_1" class="BD">需要有</label>
-        <input type="radio" name="e84" id="e84_2" value="無" checked>
+        <input type="radio" name="f14" id="e84_2" value="無" checked>
         <label for="e84_2" class="UK">無</label>
         <br><br>
         <label class="lblIMP">歯科</label><br><br>
-        <input type="radio" name="e85" id="e85_0" value="緊急">
+        <input type="radio" name="f15" id="e85_0" value="緊急">
         <label for="e85_0" class="TR">緊急</label>
-        <input type="radio" name="e85" id="e85_1" value="需要有">
+        <input type="radio" name="f15" id="e85_1" value="需要有">
         <label for="e85_1" class="BD">需要有</label>
-        <input type="radio" name="e85" id="e85_2" value="無" checked>
+        <input type="radio" name="f15" id="e85_2" value="無" checked>
         <label for="e85_2" class="UK">無</label>
     </div>
     <br>
@@ -182,7 +189,7 @@
     <hr>
     <div class="inputbox">
         <label class="over" style="width: 260px">対応・特記事項</label><br><br>
-        <textarea style="width: 260px; height: 60px" type="text" id="e86" value=""></textarea>
+        <textarea style="width: 260px; height: 60px" type="text" id="f16" value=""></textarea>
     </div>
 </fieldset>
 <br>
@@ -190,11 +197,13 @@
     <h3>防疫的側面</h3>
     <div class="inputbox">
         <label class="overIMP" style="width: 260px">食中毒様症状<br>(下痢、嘔吐などの動向)</label><br><br><br><br>
-        <textarea style="width: 260px; height: 40px" type="text" id="e87" value=""></textarea><br><br>
+        <textarea style="width: 260px; height: 40px" type="text" id="g01" value=""></textarea><br><br>
         <label class="overIMP" style="width: 260px">風邪様症状<br>(咳・発熱などの動向)</label><br><br><br><br>
-        <textarea style="width: 260px; height: 40px" type="text" id="e88" value=""></textarea><br><br>
+        <textarea style="width: 260px; height: 40px" type="text" id="g02" value=""></textarea><br><br>
         <label class="overIMP" style="width: 260px">感染症症状・その他</label><br><br>
-        <textarea style="width: 260px; height: 40px" type="text" id="e89" value=""></textarea><br><br>
+        <textarea style="width: 260px; height: 40px" type="text" id="g03" value=""></textarea><br><br>
+        <label class="overIMP" style="width: 260px">感染症症状・その他</label><br><br>
+        <textarea style="width: 260px; height: 40px" type="text" id="g04" value=""></textarea><br><br>
     </div>
 </fieldset>
 <br>
@@ -202,13 +211,13 @@
     <h3>まとめ</h3>
     <div class="inputbox">
         <label style="width: 260px">全体の健康状態</label><br><br><br>
-        <textarea style="width: 260px; height: 60px" type="text" id="e90" value=""></textarea><br><br>
+        <textarea style="width: 260px; height: 60px" type="text" id="h01" value=""></textarea><br><br>
         <label style="width: 260px">活動内容</label><br><br><br>
-        <textarea style="width: 260px; height: 60px" type="text" id="e91" value=""></textarea><br><br>
+        <textarea style="width: 260px; height: 60px" type="text" id="h02" value=""></textarea><br><br>
         <label style="width: 260px">アセスメント</label><br><br><br>
-        <textarea style="width: 260px; height: 60px" type="text" id="e92" value=""></textarea><br><br>
+        <textarea style="width: 260px; height: 60px" type="text" id="h03" value=""></textarea><br><br>
         <label style="width: 260px">課題／申し送り</label><br><br><br>
-        <textarea style="width: 260px; height: 120px" type="text" id="e93" value=""></textarea><br><br>
+        <textarea style="width: 260px; height: 120px" type="text" id="h04" value=""></textarea><br><br>
     </div>
 </fieldset>
 <fieldset>
@@ -249,31 +258,34 @@
         }
 
         function createMessage() {
-            //var createMsg = "test";
+            var tagId = ['d01','d01_1','d01_2','d02','d02_1','d03','d04','d05','d05_1','d05_2','d05_3','d06','d06_1','d06_2','d06_3','d06_4','d07','d08','d09','d10','d11','d11_1','d11_2','d11_3'
+                ,'d12','d13','e01','e01_1','e01_2','e01_3','e02','f01','f01_1','f01_2','f01_3','f02','f02_1','f02_2','f02_3','f03','f03_1','f03_2','f03_3','f04','f04_1','f04_2','f04_3','f05'
+                ,'f05_1','f05_2','f05_3','f06','f06_1','f06_2','f06_3','f07','f07_1','f07_2','f07_3','f08','f08_1','f08_2','f08_3','f09','f09_1','f09_2','f09_3','f10','f10_1','f10_2','f10_3'
+                ,'f16','g01','g02','g03','g04','h01','h02','h03','h04']
+
+            var tagName = ['f11','f12','f13','f14','f15']
 
             var topicMsg = "/hcrisis/assistant/event/" + document.getElementById('eventCode').value
-                    + "/shelter/" + document.getElementById('inputCode').value +　"/hokenjomethod";
-            var createMsg = document.getElementById('eventCode').value +
-                    ',' + document.getElementById('inputCode').value +
-                    ',' + document.getElementById('inputPref').value +
-                    ',' + document.getElementById('inputShelter').value +
-                    ',' + document.getElementById('inputHuman').value;
+                    + "/shelter/" + document.getElementById('Code').value +　"/nacphn02";
+            var createMsg = 'eventCode=' + document.getElementById('eventCode').value +
+                    ',code=' + document.getElementById('Code').value +
+                    ',reporter=' + document.getElementById('Reporter').value +
+                    ',name=' + document.getElementById('Name').value +
+                    ',address=' + document.getElementById('Address').value;
 
-                for(var j = 11; j < 94; j++) {
-                    var arrayValue = "e" + j;
-                    var tmpList = document.getElementById(arrayValue);
-                    if(tmpList == null){
-                        var tmpRadioList = document.getElementsByName(arrayValue);
-                        for (var k = 0; k < tmpRadioList.length; k++) {
-                            if (tmpRadioList[k].checked) {
-                                createMsg = createMsg + ',' + tmpRadioList[k].value;
-                                continue;
-                            }
-                        }
-                    } else {
-                        createMsg = createMsg + "," + tmpList.value;
+            for (var i = 0; i < tagId.length; i++) {
+                createMsg = createMsg + ',' + tagId[i] + '=' + document.getElementById(tagId[i]).value;
+
+            }
+
+            for (var i = 0; i < tagName.length; i++) {
+                for (var k = 0; k < document.getElementsByName(tagName[i]).length; k++) {
+                    if (document.getElementsByName(tagName[i])[k].checked) {
+                        createMsg = createMsg + ',' + tagName[i] + '=' + document.getElementsByName(tagName[i])[k].value;
+                        continue;
                     }
                 }
+            }
 
             createMsg = createMsg + "," + lat + "," + lon;
 
@@ -283,9 +295,9 @@
             var nowDay = nowTime.getDate();
             var nowHrs = nowTime.getHours();
             var nowMin = nowTime.getMinutes();
-            createMsg = createMsg + ',' + nowYer + "/" + nowMon + "/" + nowDay + "/" + nowHrs + ":" + nowMin + "";
+            createMsg = createMsg + ',time=' + nowYer + "/" + nowMon + "/" + nowDay + "/" + nowHrs + ":" + nowMin + "";
             console.log(topicMsg + " : " + createMsg);
-            publishMsg(topicMsg, createMsg, true);
+            // publishMsg(topicMsg, createMsg, true);
         }
     </script>
     <center>

@@ -294,6 +294,9 @@ map.on('click', function(evt) {
     var labelHosp = new Array(110);
     var arrayHosp =
         ['都道府県', '二次医療圏', '支援要請', '医療派遣ステータス', '医療機関名', 'チーム数', '最終更新日時', '医師出勤状況'];
+    var arrayRoad = ['名前', '方向', '規制開始地点', '規制終了地点', '規制延長', '規制内容', '規制原因', '規制開始日時', '規制終了予定日時', '迂回路', '備考'];
+    var labelRoad = new Array(11);
+
     var hospIcon;
     var hospIconNum;
     var i = 0;
@@ -412,7 +415,20 @@ map.on('click', function(evt) {
         labelHosp[102] = feature.get('kyukyu');
         labelHosp[103] = feature.get('hibaku');
         labelHosp[104] = feature.get('dmat');
-        hospIconNum = (labelHosp[101] * 1) + (labelHosp[102] * 2) + (labelHosp[103] * 4) + (labelHosp[104] * 8);
+        hospIconNum = (labelHosp[101] * 8) + (labelHosp[102] * 4) + (labelHosp[103] * 2) + (labelHosp[104] * 1);
+
+        labelRoad[0] = feature.get('name');
+        labelRoad[1] = feature.get('方向');
+        labelRoad[2] = feature.get('規制開始地点');
+        labelRoad[3] = feature.get('規制終了地点');
+        labelRoad[4] = feature.get('規制延長');
+        labelRoad[5] = feature.get('規制内容');
+        labelRoad[6] = feature.get('規制原因');
+        labelRoad[7] = feature.get('規制開始日時');
+        labelRoad[8] = feature.get('規制終了予定日時');
+        labelRoad[9] = feature.get('迂回路');
+        labelRoad[10] = feature.get('備考');
+
 
         coordinate4326 = feature.getGeometry().getExtent();
         coordinate4326 = ol.proj.transform([coordinate4326[0],Math.abs(coordinate4326[1])], 'EPSG:3857', 'EPSG:4326');
@@ -451,6 +467,7 @@ map.on('click', function(evt) {
         overlayInfo.setPosition(coordinate);
         var element = overlayInfo.getElement();
         if (labelHall[0] != null) {
+            console.log(labelHall[1])
             element.innerHTML =
                 labelHall[2] + labelHall[0] + labelHall[1] + '<br>' +
                 "人口    :" + labelHall[3] + "人" + '<br>' +
@@ -461,7 +478,7 @@ map.on('click', function(evt) {
                 "負傷者数    :" + labelHall[8] + "人" + '<br>' +
                 "重症者数    :" + labelHall[9] + "人" + '<br>' +
                 "避難者数    :" + labelHall[10] + "人";
-        } else {
+        } else if (labelHall[1] != null) {
             element.innerHTML =
                 labelHall[2] + labelHall[1] + '<br>' +
                 "人口    :" + labelHall[3] + "人" + '<br>' +
@@ -472,6 +489,19 @@ map.on('click', function(evt) {
                 "負傷者数    :" + labelHall[8] + "人" + '<br>' +
                 "重症者数    :" + labelHall[9] + "人" + '<br>' +
                 "避難者数    :" + labelHall[10] + "人";
+        } else if(labelRoad[0] != null) {
+            element.innerHTML =
+                '<font color="red">' +
+                labelRoad[0] + "(" + labelRoad[1] + "線)" + '</font><br>' +
+                "規制開始地点：" + labelRoad[2] + '<br>' +
+                "規制終了地点：" + labelRoad[3] + '<br>' +
+                "規制延長：" + labelRoad[4] + '<br>' +
+                "規制内容：" + labelRoad[5] + '<br>' +
+                "規制原因：" + labelRoad[6] + '<br>' +
+                "規制開始日時：" + labelRoad[7] + '<br>' +
+                "規制終了予定日時：" + labelRoad[8] + '<br>' +
+                "迂回路：" + labelRoad[9] + '<br>' +
+                "備考：" + labelRoad[10];
         }
         map.addOverlay(overlayInfo);
     } else if (typeof labelHosp[1] !== "undefined") {

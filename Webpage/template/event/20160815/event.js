@@ -2,6 +2,8 @@
  * Created by komori on 2016/08/12.
  */
 
+var eventCode = 'test';
+
 var pass = 'http://h-crisis.niph.go.jp/wp-content/uploads/sites/4/event/20160815/'
 
 hypoLat = 135.770802

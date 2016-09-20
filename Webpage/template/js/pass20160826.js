@@ -18,7 +18,7 @@ var styleImpassable = new ol.style.Style({
     })
 });
 
-var urlP = pass + 'geojson/Inpassable_Kouchi.geojson';
+var urlP = 'http://h-crisis.niph.go.jp/assistant/wp-content/uploads/data/road_info/latest/road_info.geojson';
 
 var ImpassableLayer = new ol.layer.Vector({
     source: new ol.source.Vector({
@@ -26,7 +26,7 @@ var ImpassableLayer = new ol.layer.Vector({
         format: new ol.format.GeoJSON()
     }),
     style: function(feature) {
-        styleImpassable.getText().setText(feature.get('name') +  ":" + feature.get('status') + "(理由:" +　feature.get('cause') + ")");
+        styleImpassable.getText().setText(feature.get('name') +  ":" + feature.get('規制内容') + "(理由:" +　feature.get('規制原因') + ")");
         return styleImpassable;
     }
 });
