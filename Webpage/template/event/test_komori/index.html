@@ -109,9 +109,21 @@
 <table id="vishospinfo" style="z-index: 3;position: absolute;top: 10px;left: 100px;width: 250px;height: 90%; background-color:whitesmoke; border: 2px solid burlywood; table-layout: fixed; overflow:scroll; display:none; font-size:24px;"></table>
 <input type="hidden" name="latlonCurr" id="latlonCurr">
 <input type="hidden" name="latlonHosp" id="latlonHosp">
+<a style="z-index: 4;position: absolute;" id="ss" href="#" download="ss.png" onclick="shot()">スクリーンショット</a>
 <script type="text/javascript" src="../../js/shelter20160907.js"></script>
 <script type="text/javascript" src="../../js/hcrisis20160908.js"></script>
 <script type="text/javascript" src="../../js/location20160916.js"></script>
 <script type="text/javascript" src="../../js/sizeChecker.js"></script>
+<script type="text/javascript" src="../../js/html2canvas.js"></script>
+<script>
+    function shot(){
+        html2canvas(document.body,{
+            onrendered: function(canvas){
+                //aタグのhrefにキャプチャ画像のURLを設定
+                document.getElementById("ss").href = canvas.toDataURL("image/png");
+            }
+        });
+    }
+</script>
 </body>
 </html>
