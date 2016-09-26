@@ -7,6 +7,14 @@
 var osm_source = new ol.source.OSM({
     url: 'http://{a-c}.tile.openstreetmap.org/{z}/{x}/{y}.png'
 });
+var xyz_source = new ol.source.XYZ({
+    url : 'http://cyberjapandata.gsi.go.jp/xyz/std/{z}/{x}/{y}.png'
+});
+
+var bingmaps_basemap = new ol.source.BingMaps({
+    key: 'Ak-dzM4wZjSqTlzveKz5u0d4IQ4bRzVI309GxmkgSVr1ewS6iPSrOvOKhA-CJlm3',
+    imagerySet: 'Road'
+});
 
 var baseLayer = new ol.layer.Tile({
     source: osm_source,
@@ -73,3 +81,4 @@ var displayFeatureInfo = function(pixel, evt) {
 map.on('click', function(evt) {
     displayFeatureInfo(evt.pixel, evt);
 })
+

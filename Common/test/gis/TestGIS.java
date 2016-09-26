@@ -12,7 +12,7 @@ public class TestGIS {
     public static void main(String args[]) {
 
         //List<GeocoderResult> results = gis.GeoCoding.getGeocoderResult("深川市2条18番6号", "ja");
-        List<GeocoderResult> results = gis.GeoCoding.getGeocoderResult("東京駅", "ja");
+        List<GeocoderResult> results = gis.GeoCoding.getGeocoderResult("和光市駅", "ja");
         //System.out.println(results);
         System.out.println(results.get(0).getGeometry().getLocation().getLat().toString() + ", " + results.get(0).getGeometry().getLocation().getLng().toString() );
 

@@ -1,0 +1,700 @@
+<!doctype html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>H-CRISIS Assistant 避難所アセスメントシート  (共通様式)</title>
+    <script src="../js/mqttws31.js"></script>
+    <script src="../js/mqtthcrisis20160905.js"></script>
+    <link href="../css/shelterSurvey.css" type="text/css" rel="stylesheet" />
+</head>
+        <fieldset>
+            <h3>避難所アセスメントシート</h3>
+            <div class="inputbox">
+                <label class="over">記載者<br>(所属・役職)</label><input type="text" id="Reporter"  value=""><br><br>
+                ※ 白抜文字の項目は、活動初期段階で重点的に把握がすべき情報です。<br>
+                ※ 情報が取得できなかった場合、該当箇所を空欄のまま送信してください。
+            </div>
+        </fieldset>
+        <br>
+        <fieldset>
+            <h3>避難所情報の入力：<br>避難所の概要</h3>
+            <div class="inputbox">
+                <label class="IMP">災害コード</label><input type="text" id="eventCode" value=""><br>
+                <label class="IMP">避難所コード</label><input type="text" id="Code"  value=""><br>
+                <!-- <label style="margin: 0px 10px 0px 0px; padding: 0px 15px 0px 0px;">所在地</label><input type="text" id="Address"  value=""><br> -->
+                <label class="IMP">所在地</label><input type="text" id="Address"  value=""><br>
+                <label class="IMP">避難所名</label><input type="text" id="Name"  value=""><br>
+            </div>
+            <hr>
+            <div class="inputbox">
+                <label class="IMP">避難者数</label><input type="text" id="A01"  value="">人<br>
+                <label class="IMP">避難者数(昼間)</label><input type="text" id="A01-1"  value="">人<br>
+                <label class="IMP">避難者数(夜間)</label><input type="text" id="A01-2"  value="">人<br>
+                <hr>
+                <label class="IMP">電話</label><input type="text" id="A02"  value=""><br>
+                <label class="IMP">FAX</label><input type="text" id="A03"  value=""><br>
+                <label class="overIMP">メールアドレス</label><input type="text" id="A04"  value="" style="width:260px"><br><br>
+                <hr>
+                <label>施設の広さ</label><input type="text" id="A05"  value=""><br>
+                <div class="checkbox">
+                    <label class="lblIMP">スペース密度</label><br><br>
+                    <input type="radio" name="A06" id="q11_0" value="余裕">
+                    <label for="q11_0" class="EX">余裕</label>
+                    <input type="radio" name="A06" id="q11_1" value="適度" checked>
+                    <label for="q11_1" class="GD">適度</label>
+                    <input type="radio" name="A06" id="q11_2" value="過密">
+                    <label for="q11_2" class="BD">過密</label>
+                </div>
+                <br>
+                <br>
+                <br>
+                <label class="overIMP">一人当たり<br>専有面積</label><input type="text" id="A07"  value="">m2くらい<br><br>
+                <label class="over">交通機関<br>(避難所と外との交通手段)</label><input type="text" id="inputShelterTRAFFIC"  value="">
+            </div>
+        </fieldset>
+        <br>
+        <fieldset>
+            <h3>避難所情報の入力：<br>組織や活動</h3>
+            <div class="inputbox">
+                <label class="overIMP">管理統括・<br>代表者の情報</label><br><br><br><br>
+                <label class="IMP">氏名(立場)</label><br><br><br>
+                <input type="text" id="inputRep"  value=""><br>
+                <label>その他:</label><br><br><br>
+                <input type="text" id="inputRepRest"  value=""><br>
+                <hr>
+                <label class="over">連絡体制／<br>指揮命令系統</label><br><br><br><br>
+                <input type="text" id="inputCommunication"  value=""><br><br><br>
+            </div>
+            <div class="checkbox">
+                <label class="lbl">自主組織</label><br><br>
+                <input type="radio" name="q21" id="q21_0" value="有" onclick="inputSELFORGAN()">
+                <label for="q21_0" class="EX">有</label>
+                <input type="radio" name="q21" id="q21_1" value="無" onclick="inputSELFORGAN()" checked="checked">
+                <label for="q21_1" class="UK">無</label><br><br>
+            </div>
+            <div class="inputbox">
+                <input style="display:none;" type="text" id="inputSelfOrganDetail"  value=""><br>
+            </div>
+            <div class="checkbox">
+                <label class="lbl">外部組織</label><br><br>
+                <input type="radio" name="q22" id="q22_0" value="有" onclick="inputOUTERORGAN()">
+                <label for="q22_0" class="EX">有</label>
+                <input type="radio" name="q22" id="q22_1" value="無" onclick="inputOUTERORGAN()" checked="checked">
+                <label for="q22_1" class="UK">無</label><br><br>
+            </div>
+            <div class="inputbox">
+                <p id="inputOuterOrgan01" style="display:none">外部組織:チーム数<input style="display:none" type="text" id="inputOuterOrganTeam" value=""></p>
+                <p id="inputOuterOrgan02" style="display:none">外部組織:人数<input style="display:none" type="text" id="inputOuterOrganNum" value=""></p>
+                <p id="inputOuterOrgan03" style="display:none">外部組織:職種<input style="display:none" type="text" id="inputOuterOrganJob" value=""></p>
+            </div><br>
+            <div class="checkbox">
+                <label class="lbl">ボランティア</label><br><br>
+                <input type="radio" name="q23" id="q23_0" value="有" onclick="inputVOLUNTEER()">
+                <label for="q23_0" class="EX">有</label>
+                <input type="radio" name="q23" id="q23_1" value="無" onclick="inputVOLUNTEER()" checked="checked">
+                <label for="q23_1" class="UK">無</label><br><br>
+            </div>
+            <div class="inputbox">
+                <p id="inputOuterVolunteer01" style="display:none">ボランティア:チーム数<input style="display:none" type="text" id="inputVolunteerOrganTeam" value=""></p>
+                <p id="inputOuterVolunteer02" style="display:none">ボランティア:人数<input style="display:none" type="text" id="inputVolunteerOrganNum" value=""></p>
+                <p id="inputOuterVolunteer03" style="display:none">ボランティア:職種<input style="display:none" type="text" id="inputVolunteerOrganJob" value=""></p>
+            </div>
+            <hr>
+            <div class="inputbox">
+                <label class="overIMP">医療提供状況</label>
+            </div><br><br>
+            <div class="checkbox">
+                <label class="lblIMP">救護所</label><br><br>
+                <input type="radio" name="q24" id="q24_0" value="有">
+                <label for="q24_0" class="EX">有</label>
+                <input type="radio" name="q24" id="q24_1" value="無" checked>
+                <label for="q24_1" class="UK">無</label>
+                <br><br>
+                <label class="lblIMP">巡回診療</label><br><br>
+                <input type="radio" name="q25" id="q25_0" value="有">
+                <label for="q25_0" class="EX">有</label>
+                <input type="radio" name="q25" id="q25_1" value="無" checked>
+                <label for="q25_1" class="UK">無</label>
+                <br><br>
+                <label class="lblIMPover">地域の医師との連携</label><br><br>
+                <input type="radio" name="q26" id="q26_0" value="有">
+                <label for="q26_0" class="EX">有</label>
+                <input type="radio" name="q26" id="q26_1" value="無" checked>
+                <label for="q26_1" class="UK">無</label>
+            </div>
+            <br>
+            <br>
+            <hr>
+            <div class="inputbox">
+                <label class="over" style="width: 260px">避難者への情報伝達手段<br>(黒板/掲示板/マイク/チラシ配布等)</label><br><br><br><br>
+                <textarea style="width: 260px; height: 100px;" type="text" id="inputOrganOther" value=""></textarea>
+            </div>
+        </fieldset>
+        <br>
+        <fieldset>
+            <h3>避難所情報の入力：<br>環境的側面</h3>
+            <div class="inputbox">
+                <label class="overIMP">ライフライン</label>
+            </div><br><br>
+            <div class="checkbox">
+                <label class="lblIMP">電気</label><br><br>
+                <input type="radio" name="q31" id="q31_0" value="十分">
+                <label for="q31_0" class="EX">十分</label>
+                <input type="radio" name="q31" id="q31_1" value="適度">
+                <label for="q31_1" class="GD">適度</label>
+                <input type="radio" name="q31" id="q31_2" value="不足">
+                <label for="q31_2" class="BD">不足</label>
+                <input type="radio" name="q31" id="q31_3" value="皆無" checked>
+                <label for="q31_3" class="UK">皆無</label>
+                <br><br>
+                <label class="lbl">ガス</label><br><br>
+                <input type="radio" name="q32" id="q32_0" value="十分">
+                <label for="q32_0" class="EX">十分</label>
+                <input type="radio" name="q32" id="q32_1" value="適度">
+                <label for="q32_1" class="GD">適度</label>
+                <input type="radio" name="q32" id="q32_2" value="不足">
+                <label for="q32_2" class="BD">不足</label>
+                <input type="radio" name="q32" id="q32_3" value="皆無" checked>
+                <label for="q32_3" class="UK">皆無</label>
+                <br><br>
+                <label class="lblIMP">水道</label><br><br>
+                <input type="radio" name="q33" id="q33_0" value="十分">
+                <label for="q33_0" class="EX">十分</label>
+                <input type="radio" name="q33" id="q33_1" value="適度">
+                <label for="q33_1" class="GD">適度</label>
+                <input type="radio" name="q33" id="q33_2" value="不足">
+                <label for="q33_2" class="BD">不足</label>
+                <input type="radio" name="q33" id="q33_3" value="皆無" checked>
+                <label for="q33_3" class="UK">皆無</label>
+                <br><br>
+                <label class="lblIMP">飲料水</label><br><br>
+                <input type="radio" name="q34" id="q34_0" value="十分">
+                <label for="q34_0" class="EX">十分</label>
+                <input type="radio" name="q34" id="q34_1" value="適度">
+                <label for="q34_1" class="GD">適度</label>
+                <input type="radio" name="q34" id="q34_2" value="不足">
+                <label for="q34_2" class="BD">不足</label>
+                <input type="radio" name="q34" id="q34_3" value="皆無" checked>
+                <label for="q34_3" class="UK">皆無</label>
+                <br><br>
+                <label class="lbl">固定電話</label><br><br>
+                <input type="radio" name="q35" id="q35_0" value="十分">
+                <label for="q35_0" class="EX">十分</label>
+                <input type="radio" name="q35" id="q35_1" value="適度">
+                <label for="q35_1" class="GD">適度</label>
+                <input type="radio" name="q35" id="q35_2" value="不足">
+                <label for="q35_2" class="BD">不足</label>
+                <input type="radio" name="q35" id="q35_3" value="皆無" checked>
+                <label for="q35_3" class="UK">皆無</label>
+                <br><br>
+                <label class="lbl">携帯電話</label><br><br>
+                <input type="radio" name="q36" id="q36_0" value="十分">
+                <label for="q36_0" class="EX">十分</label>
+                <input type="radio" name="q36" id="q36_1" value="適度">
+                <label for="q36_1" class="GD">適度</label>
+                <input type="radio" name="q36" id="q36_2" value="不足">
+                <label for="q36_2" class="BD">不足</label>
+                <input type="radio" name="q36" id="q36_3" value="皆無" checked>
+                <label for="q36_3" class="UK">皆無</label>
+            </div>
+            <br>
+            <br>
+            <div class="inputbox">
+                <label class="over" style="width: 260px">対応</label><br><br>
+                <textarea style="width: 260px; height: 60px" type="text" id="inputLR1" value=""></textarea>
+            </div>
+            <hr>
+            <div class="inputbox">
+                <label class="overIMP">設備状況と<br>衛生面</label>
+            </div><br><br><br>
+            <div class="checkbox">
+                <label class="lbl">洗濯機</label><br><br>
+                <input type="radio" name="q37" id="q37_0" value="十分">
+                <label for="q37_0" class="EX">十分</label>
+                <input type="radio" name="q37" id="q37_1" value="適度">
+                <label for="q37_1" class="GD">適度</label>
+                <input type="radio" name="q37" id="q37_2" value="不足">
+                <label for="q37_2" class="BD">不足</label>
+                <input type="radio" name="q37" id="q37_3" value="皆無" checked>
+                <label for="q37_3" class="UK">皆無</label>
+                <br><br>
+                <label class="lbl">冷蔵庫</label><br><br>
+                <input type="radio" name="q38" id="q38_0" value="十分">
+                <label for="q38_0" class="EX">十分</label>
+                <input type="radio" name="q38" id="q38_1" value="適度">
+                <label for="q38_1" class="GD">適度</label>
+                <input type="radio" name="q38" id="q38_2" value="不足">
+                <label for="q38_2" class="BD">不足</label>
+                <input type="radio" name="q38" id="q38_3" value="皆無" checked>
+                <label for="q38_3" class="UK">皆無</label>
+                <br><br>
+                <label class="lblIMP">冷暖房</label><br><br>
+                <input type="radio" name="q39" id="q39_0" value="十分">
+                <label for="q39_0" class="EX">十分</label>
+                <input type="radio" name="q39" id="q39_1" value="適度">
+                <label for="q39_1" class="GD">適度</label>
+                <input type="radio" name="q39" id="q39_2" value="不足">
+                <label for="q39_2" class="BD">不足</label>
+                <input type="radio" name="q39" id="q39_3" value="皆無" checked>
+                <label for="q39_3" class="UK">皆無</label>
+                <br><br>
+                <label class="lbl">照明</label><br><br>
+                <input type="radio" name="q310" id="q310_0" value="十分">
+                <label for="q310_0" class="EX">十分</label>
+                <input type="radio" name="q310" id="q310_1" value="適度">
+                <label for="q310_1" class="GD">適度</label>
+                <input type="radio" name="q310" id="q310_2" value="不足">
+                <label for="q310_2" class="BD">不足</label>
+                <input type="radio" name="q310" id="q310_3" value="皆無" checked>
+                <label for="q310_3" class="UK">皆無</label>
+                <br><br>
+                <label class="lbl">調理設備</label><br><br>
+                <input type="radio" name="q311" id="q311_0" value="十分">
+                <label for="q311_0" class="EX">十分</label>
+                <input type="radio" name="q311" id="q311_1" value="適度">
+                <label for="q311_1" class="GD">適度</label>
+                <input type="radio" name="q311" id="q311_2" value="不足">
+                <label for="q311_2" class="BD">不足</label>
+                <input type="radio" name="q311" id="q311_3" value="皆無" checked>
+                <label for="q311_3" class="UK">皆無</label>
+            </div>
+            <br>
+            <br>
+            <div class="inputbox">
+                <label class="over" style="width: 260px">対応</label><br><br>
+                <textarea style="width: 260px; height: 60px" type="text" id="inputLR2" value=""></textarea>
+            </div>
+            <hr>
+            <div class="inputbox">
+                <label class="overIMP">トイレ関連</label>
+            </div><br><br><br>
+            <div class="checkbox">
+                <label class="lblIMP">トイレ</label><br><br>
+                <input type="radio" name="q312" id="q312_0" value="十分">
+                <label for="q312_0" class="EX">十分</label>
+                <input type="radio" name="q312" id="q312_1" value="適度">
+                <label for="q312_1" class="GD">適度</label>
+                <input type="radio" name="q312" id="q312_2" value="不足">
+                <label for="q312_2" class="BD">不足</label>
+                <input type="radio" name="q312" id="q312_3" value="皆無" checked>
+                <label for="q312_3" class="UK">皆無</label>
+            </div>
+            <br>
+            <br>
+            <div class="inputbox">
+                <input type="text" id="inputToiletNum" value="">箇所
+            </div>
+            <br>
+            <div class="checkbox">
+                <label class="lblIMP">下水</label><br><br>
+                <input type="radio" name="q313" id="q313_0" value="有">
+                <label for="q313_0" class="EX">有</label>
+                <input type="radio" name="q313" id="q313_1" value="無">
+                <label for="q313_1" class="UK">無</label>
+                <input type="radio" name="q313" id="q313_2" value="不明" checked>
+                <label for="q313_2" class="NT">不明</label>
+                <br><br>
+                <label class="lblIMP">清掃</label><br><br>
+                <input type="radio" name="q314" id="q314_0" value="十分">
+                <label for="q314_0" class="EX">十分</label>
+                <input type="radio" name="q314" id="q314_1" value="適度">
+                <label for="q314_1" class="GD">適度</label>
+                <input type="radio" name="q314" id="q314_2" value="不足">
+                <label for="q314_2" class="BD">不足</label>
+                <input type="radio" name="q314" id="q314_3" value="皆無" checked>
+                <label for="q314_3" class="UK">皆無</label>
+                <br><br>
+                <label class="lblIMP">汲み取り</label><br><br>
+                <input type="radio" name="q315" id="q315_0" value="十分">
+                <label for="q315_0" class="EX">十分</label>
+                <input type="radio" name="q315" id="q315_1" value="適度">
+                <label for="q315_1" class="GD">適度</label>
+                <input type="radio" name="q315" id="q315_2" value="不足">
+                <label for="q315_2" class="BD">不足</label>
+                <input type="radio" name="q315" id="q315_3" value="皆無" checked>
+                <label for="q315_3" class="UK">皆無</label>
+                <br><br>
+                <label class="lblIMP">手洗い場</label><br><br>
+                <input type="radio" name="q316" id="q316_0" value="十分">
+                <label for="q316_0" class="EX">十分</label>
+                <input type="radio" name="q316" id="q316_1" value="適度">
+                <label for="q316_1" class="GD">適度</label>
+                <input type="radio" name="q316" id="q316_2" value="不足">
+                <label for="q316_2" class="BD">不足</label>
+                <input type="radio" name="q316" id="q316_3" value="皆無" checked>
+                <label for="q316_3" class="UK">皆無</label>
+                <br><br>
+                <label class="lblIMP">手指消毒</label><br><br>
+                <input type="radio" name="q317" id="q317_0" value="十分">
+                <label for="q317_0" class="EX">十分</label>
+                <input type="radio" name="q317" id="q317_1" value="適度">
+                <label for="q317_1" class="GD">適度</label>
+                <input type="radio" name="q317" id="q317_2" value="不足">
+                <label for="q317_2" class="BD">不足</label>
+                <input type="radio" name="q317" id="q317_3" value="皆無" checked>
+                <label for="q317_3" class="UK">皆無</label>
+            </div>
+            <br>
+            <br>
+            <div class="inputbox">
+                <label class="over" style="width: 260px">対応</label><br><br>
+                <textarea style="width: 260px; height: 60px" type="text" id="inputLR3" value=""></textarea>
+            </div>
+            <hr>
+            <div class="inputbox">
+                <label class="overIMP">風呂・喫煙所<br>について</label>
+            </div><br><br><br>
+            <div class="checkbox">
+                <label class="lbl">風呂</label><br><br>
+                <input type="radio" name="q318" id="q318_0" value="十分">
+                <label for="q318_0" class="EX">十分</label>
+                <input type="radio" name="q318" id="q318_1" value="適度">
+                <label for="q318_1" class="GD">適度</label>
+                <input type="radio" name="q318" id="q318_2" value="不足">
+                <label for="q318_2" class="BD">不足</label>
+                <input type="radio" name="q318" id="q318_3" value="皆無" checked>
+                <label for="q318_3" class="UK">皆無</label>
+            </div>
+            <br>
+            <br>
+            <div class="inputbox">
+            <label>風呂清掃状況</label><br><br><br>
+            <input type="text" id="inputBathCleanness"  value="">
+            </div>
+            <br>
+            <div class="checkbox">
+                <label class="lblIMP">喫煙所</label><br><br>
+                <input type="radio" name="q319" id="q319_0" value="十分">
+                <label for="q319_0" class="EX">十分</label>
+                <input type="radio" name="q319" id="q319_1" value="適度">
+                <label for="q319_1" class="GD">適度</label>
+                <input type="radio" name="q319" id="q319_2" value="不足">
+                <label for="q319_2" class="BD">不足</label>
+                <input type="radio" name="q319" id="q319_3" value="皆無" checked>
+                <label for="q319_3" class="UK">皆無</label>
+                <br><br>
+                <label class="lbl">分煙</label><br><br>
+                <input type="radio" name="q320" id="q320_0" value="有">
+                <label for="q320_0" class="EX">有</label>
+                <input type="radio" name="q320" id="q320_1" value="無">
+                <label for="q320_1" class="UK">無</label>
+                <input type="radio" name="q320" id="q320_2" value="不明" checked>
+                <label for="q320_2" class="NT">不明</label>
+            </div>
+            <br><br>
+            <div class="inputbox">
+                <label class="over" style="width: 260px">対応</label><br><br>
+                <textarea style="width: 260px; height: 60px" type="text" id="inputLR4" value=""></textarea>
+            </div>
+            <hr>
+            <div class="inputbox">
+                <label class="overIMP">生活環境<br>・衛生面</label>
+            </div><br><br><br>
+            <div class="checkbox">
+                <label class="lbl">清掃状況</label><br><br>
+                <input type="radio" name="q321" id="q321_0" value="良">
+                <label for="q321_0" class="EX">良</label>
+                <input type="radio" name="q321" id="q321_1" value="普">
+                <label for="q321_1" class="GD">普</label>
+                <input type="radio" name="q321" id="q321_2" value="不良">
+                <label for="q321_2" class="TR">不良</label>
+                <input type="radio" name="q321" id="q321_3" value="不明" checked>
+                <label for="q321_3" class="NT">不明</label>
+                <br><br>
+                <label class="lbl">床の清掃</label><br><br>
+                <input type="radio" name="q322" id="q322_0" value="有">
+                <label for="q322_0" class="EX">有</label>
+                <input type="radio" name="q322" id="q322_1" value="無">
+                <label for="q322_1" class="UK">無</label>
+                <input type="radio" name="q322" id="q322_2" value="不明" checked>
+                <label for="q322_2" class="NT">不明</label>
+                <br><br>
+                <label class="lblIMP">ゴミ収集場所</label><br><br>
+                <input type="radio" name="q323" id="q323_0" value="有">
+                <label for="q323_0" class="EX">有</label>
+                <input type="radio" name="q323" id="q323_1" value="無" checked>
+                <label for="q323_1" class="UK">無</label>
+                <br><br>
+                <label class="lblIMP">履き替え</label><br><br>
+                <input type="radio" name="q324" id="q324_0" value="有">
+                <label for="q324_0" class="EX">有</label>
+                <input type="radio" name="q324" id="q324_1" value="無" checked>
+                <label for="q324_1" class="UK">無</label>
+                <br><br>
+                <label class="lblIMP">空調管理</label><br><br>
+                <input type="radio" name="q325" id="q325_0" value="有">
+                <label for="q325_0" class="EX">有</label>
+                <input type="radio" name="q325" id="q325_1" value="無" checked>
+                <label for="q325_1" class="UK">無</label>
+                <br><br>
+                <label class="lbl">粉塵</label><br><br>
+                <input type="radio" name="q326" id="q326_0" value="有">
+                <label for="q326_0" class="UK">有</label>
+                <input type="radio" name="q326" id="q326_1" value="無">
+                <label for="q326_1" class="EX">無</label>
+                <input type="radio" name="q326" id="q326_2" value="不明" checked>
+                <label for="q326_2" class="NT">不明</label>
+                <br><br>
+                <label class="lbl">生活騒音</label><br><br>
+                <input type="radio" name="q327" id="q327_0" value="適">
+                <label for="q327_0" class="EX">適</label>
+                <input type="radio" name="q327" id="q327_1" value="不適">
+                <label for="q327_1" class="TR">不適</label>
+                <input type="radio" name="q327" id="q327_2" value="不明" checked>
+                <label for="q327_2" class="NT">不明</label>
+                <br><br>
+                <label class="lblIMP">寝具</label><br><br>
+                <input type="radio" name="q328" id="q328_0" value="十分">
+                <label for="q328_0" class="EX">十分</label>
+                <input type="radio" name="q328" id="q328_1" value="適度">
+                <label for="q328_1" class="GD">適度</label>
+                <input type="radio" name="q328" id="q328_2" value="不足">
+                <label for="q328_2" class="BD">不足</label>
+                <input type="radio" name="q328" id="q328_3" value="皆無" checked>
+                <label for="q328_3" class="UK">皆無</label>
+                <br><br>
+                <label class="lbl">寝具乾燥対策</label><br><br>
+                <input type="radio" name="q329" id="q329_0" value="有">
+                <label for="q329_0" class="EX">有</label>
+                <input type="radio" name="q329" id="q329_1" value="無">
+                <label for="q329_1" class="UK">無</label>
+                <input type="radio" name="q329" id="q329_2" value="不明" checked>
+                <label for="q329_2" class="NT">不明</label>
+                <br><br>
+                <label class="lbl">ペット対策</label><br><br>
+                <input type="radio" name="q330" id="q330_0" value="有">
+                <label for="q330_0" class="EX">有</label>
+                <input type="radio" name="q330" id="q330_1" value="無">
+                <label for="q330_1" class="UK">無</label>
+                <input type="radio" name="q330" id="q330_2" value="不明" checked>
+                <label for="q330_2" class="NT">不明</label>
+                <br><br>
+                <label class="lbl">ペットの収容対策</label><br><br>
+                <input type="radio" name="q331" id="q331_0" value="有">
+                <label for="q331_0" class="EX">有</label>
+                <input type="radio" name="q331" id="q331_1" value="無">
+                <label for="q331_1" class="UK">無</label>
+                <input type="radio" name="q331" id="q331_2" value="不明" checked>
+                <label for="q331_2" class="NT">不明</label>
+                </div>
+            <br><br>
+            <div class="inputbox">
+                <label class="over" style="width: 260px">対応</label><br><br>
+                <textarea style="width: 260px; height: 60px" type="text" id="inputLR5" value=""></textarea>
+            </div>
+            <hr>
+            <div class="inputbox">
+                <label class="overIMP">食事の供給</label>
+            </div><br><br><br>
+            <div class="checkbox">
+                <label class="lblIMP">食事</label><br><br>
+                <input type="radio" name="q332" id="q332_0" value="十分">
+                <label for="q332_0" class="EX">十分</label>
+                <input type="radio" name="q332" id="q332_1" value="適度">
+                <label for="q332_1" class="GD">適度</label>
+                <input type="radio" name="q332" id="q332_2" value="不足">
+                <label for="q332_2" class="BD">不足</label>
+                <input type="radio" name="q332" id="q332_3" value="皆無" checked>
+                <label for="q332_3" class="UK">皆無</label>
+                </div>
+            <br><br>
+            <div class="inputbox">
+                <label class="IMP">食事回数/日</label><br><br><br>
+                <input type="text" id="inputFoodNum"  value="">回
+            </div>
+            <br>
+            <div class="checkbox">
+                <label class="lbl">炊き出し</label><br><br>
+                <input type="radio" name="q333" id="q333_0" value="有">
+                <label for="q333_0" class="EX">有</label>
+                <input type="radio" name="q333" id="q333_1" value="無">
+                <label for="q333_1" class="UK">無</label>
+                <input type="radio" name="q333" id="q333_2" value="不明" checked>
+                <label for="q333_2" class="NT">不明</label>
+                <br><br>
+                <label class="lbl">残飯処理</label><br><br>
+                <input type="radio" name="q334" id="q334_0" value="適">
+                <label for="q334_0" class="EX">適</label>
+                <input type="radio" name="q334" id="q334_1" value="不適">
+                <label for="q334_1" class="TR">不適</label>
+                <input type="radio" name="q334" id="q334_2" value="不明" checked>
+                <label for="q334_2" class="NT">不明</label>
+            </div>
+            <br><br>
+            <div class="inputbox">
+                <label class="over" style="width: 260px">対応</label><br><br>
+                <textarea style="width: 260px; height: 60px" type="text" id="inputLR6" value=""></textarea>
+            </div>
+        </fieldset>
+        <br>
+        <fieldset>
+            <h3>その他備考</h3>
+            <div class="inputbox">
+                <textarea style="width: 260px; height: 120px" type="text" id="inputOTHER" value=""></textarea>
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <script>
+                var lon,lat
+                function inputSELFORGAN(){
+                    if (document.getElementsByName('q21')[0].checked) {
+                        document.getElementById('inputSelfOrganDetail').style.display = 'block';
+                    } else {
+                        document.getElementById('inputSelfOrganDetail').style.display = 'none';
+                    }
+                }
+
+                function inputOUTERORGAN(){
+                    if (document.getElementsByName('q22')[0].checked) {
+                        document.getElementById('inputOuterOrgan01').style.display = 'block';
+                        document.getElementById('inputOuterOrgan02').style.display = 'block';
+                        document.getElementById('inputOuterOrgan03').style.display = 'block';
+                        document.getElementById('inputOuterOrganTeam').style.display = 'block';
+                        document.getElementById('inputOuterOrganNum').style.display = 'block';
+                        document.getElementById('inputOuterOrganJob').style.display = 'block';
+                    } else {
+                        document.getElementById('inputOuterOrgan01').style.display = 'none';
+                        document.getElementById('inputOuterOrgan02').style.display = 'none';
+                        document.getElementById('inputOuterOrgan03').style.display = 'none';
+                        document.getElementById('inputOuterOrganTeam').style.display = 'none';
+                        document.getElementById('inputOuterOrganNum').style.display = 'none';
+                        document.getElementById('inputOuterOrganJob').style.display = 'none';
+                    }
+                }
+
+                function inputVOLUNTEER(){
+                    if (document.getElementsByName('q23')[0].checked) {
+                        document.getElementById('inputOuterVolunteer01').style.display = 'block';
+                        document.getElementById('inputOuterVolunteer02').style.display = 'block';
+                        document.getElementById('inputOuterVolunteer03').style.display = 'block';
+                        document.getElementById('inputVolunteerOrganTeam').style.display = 'block';
+                        document.getElementById('inputVolunteerOrganNum').style.display = 'block';
+                        document.getElementById('inputVolunteerOrganJob').style.display = 'block';
+                    } else {
+                        document.getElementById('inputOuterVolunteer01').style.display = 'none';
+                        document.getElementById('inputOuterVolunteer02').style.display = 'none';
+                        document.getElementById('inputOuterVolunteer03').style.display = 'none';
+                        document.getElementById('inputVolunteerOrganTeam').style.display = 'none';
+                        document.getElementById('inputVolunteerOrganNum').style.display = 'none';
+                        document.getElementById('inputVolunteerOrganJob').style.display = 'none';
+                    }
+                }
+
+                var urlStr = location.search;
+                if(urlStr === '') {
+                    // 避難所IDと避難所名がないと送信ボタンが押せない設定
+                    // document.getElementById('submitBtn').disabled = 'true';
+                }
+                else {
+                    var pairUrlStr = urlStr.split(',');
+                    if(pairUrlStr.length>=2) {
+                        pairUrlStr[0] = pairUrlStr[0].substr(7);
+                        pairUrlStr[0] = decodeURI(pairUrlStr[0]);
+                        pairUrlStr[1] = pairUrlStr[1].substr(3);
+                        pairUrlStr[1] = decodeURI(pairUrlStr[1]);
+                        pairUrlStr[2] = pairUrlStr[2].substr(5);
+                        pairUrlStr[2] = decodeURI(pairUrlStr[2]);
+                        pairUrlStr[3] = pairUrlStr[3].substr(8);
+                        pairUrlStr[3] = decodeURI(pairUrlStr[3]);
+                        // pairUrlStr[4] = pairUrlStr[4].substr(2);
+                        // pairUrlStr[4] = decodeURI(pairUrlStr[4]);
+                        // pairUrlStr[5] = pairUrlStr[5].substr(2);
+                        // pairUrlStr[5] = decodeURI(pairUrlStr[5]);
+                        document.getElementById('eventCode').value = pairUrlStr[0];
+                        document.getElementById('eventCode').disabled = 'true';
+                        document.getElementById('Code').value = pairUrlStr[1];
+                        document.getElementById('Code').disabled = 'true';
+                        document.getElementById('Address').value = pairUrlStr[3];
+                        document.getElementById('Address').disabled = 'true';
+                        document.getElementById('Name').value = pairUrlStr[2];
+                        document.getElementById('Name').disabled = 'true';
+                        lon = pairUrlStr[4];
+                        lat = pairUrlStr[5];
+                    }
+                }
+
+                function createMessage() {
+                    //var createMsg = "test";
+
+                    var topicMsg = "/hcrisis/assistant/event/" + document.getElementById('eventCode').value
+                            + "/shelter/" + document.getElementById('Code').value +　"/hokenjomethod";
+                    var createMsg = document.getElementById('eventCode').value +
+                            ',' + document.getElementById('Code').value +
+                            ',' + document.getElementById('Reporter').value +
+                            ',' + document.getElementById('Name').value +
+                            ',' + document.getElementById('Address').value;
+                    for(var i = 1; i < 4; i++) {
+                        for(var j = 1; j < 35; j++) {
+                            var arrayValue = "q" + i + j;
+                            var tmpList = document.getElementsByName(arrayValue);
+                            for (var k = 0; k < tmpList.length; k++) {
+                                if (tmpList[k].checked) {
+                                    createMsg = createMsg + ',' + arrayValue + '=' + tmpList[k].value;
+                                    continue;
+                                }
+                            }
+                        }
+                    }
+
+                    createMsg = createMsg +
+                            ',a1=' + document.getElementById('A01').value +
+                            ',a1_1=' + document.getElementById('A01-1').value +
+                            ',a1_2=' + document.getElementById('A01-2').value +
+                            ',a02=' + document.getElementById('A02').value +
+                            ',a03=' + document.getElementById('A03').value +
+                            ',a04=' + document.getElementById('A04').value +
+                            ',a05=' + document.getElementById('A05').value;
+                    for (var k = 0; k < document.getElementsByName('A06').length; k++) {
+                        if (document.getElementsByName('A06')[k].checked) {
+                            createMsg = createMsg + ',a06=' + document.getElementsByName('A06')[k].value;
+                            continue;}}
+
+                    createMsg = createMsg +
+                            ',' + document.getElementById('A07').value +
+                            ',' + document.getElementById('inputShelterTRAFFIC').value +
+                            ',' + document.getElementById('inputRep').value +
+                            ',' + document.getElementById('inputRepRest').value +
+                            ',' + document.getElementById('inputCommunication').value +
+                            ',' + document.getElementById('inputSelfOrganDetail').value +
+                            ',' + document.getElementById('inputOuterOrganTeam').value +
+                            ',' + document.getElementById('inputOuterOrganNum').value +
+                            ',' + document.getElementById('inputOuterOrganJob').value +
+                            ',' + document.getElementById('inputVolunteerOrganTeam').value +
+                            ',' + document.getElementById('inputVolunteerOrganNum').value +
+                            ',' + document.getElementById('inputVolunteerOrganJob').value +
+                            ',' + document.getElementById('inputOrganOther').value +
+                            ',' + document.getElementById('inputLR1').value +
+                            ',' + document.getElementById('inputLR2').value +
+                            ',' + document.getElementById('inputToiletNum').value +
+                            ',' + document.getElementById('inputLR3').value +
+                            ',' + document.getElementById('inputBathCleanness').value +
+                            ',' + document.getElementById('inputLR4').value +
+                            ',' + document.getElementById('inputLR5').value +
+                            ',' + document.getElementById('inputFoodNum').value +
+                            ',' + document.getElementById('inputLR6').value +
+                            ',' + document.getElementById('inputOTHER').value +
+                            "," + lat + "," + lon;
+
+                    var nowTime = new Date();
+                    var nowYer = nowTime.getFullYear();
+                    var nowMon = nowTime.getMonth() + 1;
+                    var nowDay = nowTime.getDate();
+                    var nowHrs = nowTime.getHours();
+                    var nowMin = nowTime.getMinutes();
+                    createMsg = createMsg + ',' + nowYer + "/" + nowMon + "/" + nowDay + "/" + nowHrs + ":" + nowMin + "";
+                    console.log(topicMsg + " : " + createMsg);
+                    // publishMsg(topicMsg, createMsg, true);
+                }
+            </script>
+            <center>
+            <div>
+                <input style="border: 0;float: inherit;width: 70px;margin: 0;background: #6d6d6d;color: #ffffff;font-size: 16px;text-align: center;" id ="closeBtn" type="button" onclick="window.close()" value="閉じる" >
+                <input style="border: 0;float: inherit;width: 70px;margin: 0;background: #228b22;color: #ffffff;font-size: 16px;text-align: center;" id = "submitBtn" type="button" onclick="createMessage();" value="送信" >
+            </div>
+            </center>
+
+        </fieldset>
+    </body>
+</html>
