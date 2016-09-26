@@ -14,6 +14,6 @@ public class Main {
         File outDir = new File("files/out");
         String code = "F014822";
 
-        new EarthquakeDamageEstimate(masterFilesDir, shapeDir, siFile, outDir, code);
+        //new EarthquakeDamageEstimate(masterFilesDir, shapeDir, siFile, outDir, code);
     }
 }

@@ -5,7 +5,9 @@
       <module fileurl="file://$PROJECT_DIR$/Common/Common.iml" filepath="$PROJECT_DIR$/Common/Common.iml" />
       <module fileurl="file://$PROJECT_DIR$/DisasterDamageEstimate/DisasterDamageEstimate.iml" filepath="$PROJECT_DIR$/DisasterDamageEstimate/DisasterDamageEstimate.iml" />
       <module fileurl="file://$PROJECT_DIR$/HcrisisMQTT/HcrisisMQTT.iml" filepath="$PROJECT_DIR$/HcrisisMQTT/HcrisisMQTT.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Modules/MasterFiles/MasterFiles.iml" filepath="$PROJECT_DIR$/Modules/MasterFiles/MasterFiles.iml" />
       <module fileurl="file://$PROJECT_DIR$/Webpage/Webpage.iml" filepath="$PROJECT_DIR$/Webpage/Webpage.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Modules/Zenrin/Zenrin.iml" filepath="$PROJECT_DIR$/Modules/Zenrin/Zenrin.iml" />
       <module fileurl="file://$PROJECT_DIR$/hcrisis-assistant.iml" filepath="$PROJECT_DIR$/hcrisis-assistant.iml" />
     </modules>
   </component>

@@ -41,6 +41,17 @@ public class AnalyzeMessage {
                         " where code = '" + pair[1] + "'";
                 updateShelterEmergency(eventCode, sql);
             }
+            else if(topic.endsWith("/nacphn01")) {
+                String pair[] = message.split(",");
+                String code[] = pair[1].split("=");
+                String sql = "update shelter set a01 = " + code[1];
+                for(String s : pair) {
+                    if(s.contains("="))
+                    sql = sql + ", '" + s + "'";
+                }
+                sql = sql + " where code = '" + code[1] + "'";
+                updateShelterEmergency(eventCode, sql);
+            }
         }
     }
 

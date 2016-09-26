@@ -94,12 +94,12 @@ public class EarthquakeDamageEstimate {
 
             // 被災メッシュと震度をデータ化する
             HashMap<String, Double> disasterAreaMap = new HashMap<>();
-            String line = brSiFile.readLine(); //J-SHISの1行目は項目名なので読み込んでおく
+            String line = brSiFile.readLine(); //1行目は項目名なので読み込んでおく
             while((line = brSiFile.readLine()) != null) {
                 String pair[] = line.split(",");
-                if(!pair[5].equals("nan")) { // 被災地のなかで震度が入っていないところを除く
-                    disasterAreaMap.put(pair[0], Double.parseDouble(pair[5])); // J-SHISは1項目目がメッシュコード、6項目目が計測震度
-                    //disasterAreaMap.put(pair[0], Double.parseDouble(pair[1])); // 1項目目がメッシュコード、2項目目が計測震度
+                if(!pair[1].equals("nan")) { // 被災地のなかで震度が入っていないところを除く
+                    //disasterAreaMap.put(pair[0], Double.parseDouble(pair[5])); // J-SHISは1項目目がメッシュコード、6項目目が計測震度
+                    disasterAreaMap.put(pair[0], Double.parseDouble(pair[1])); // 1項目目がメッシュコード、2項目目が計測震度
                 }
             }
 
