@@ -13,6 +13,7 @@ import java.io.*;
  */
 public class ShelterDownload {
 
+    // Yahoo避難所の各都道府県のページ数
     public static final int[] id = {
             183, 51, 54, 49, 48, 51, 63, 51, 29, 42,
             89, 76, 72, 64, 73, 35, 35, 42, 37, 89,
@@ -21,6 +22,7 @@ public class ShelterDownload {
             19, 65, 40, 46, 48, 44, 39
     };
 
+    // 都道府県名の配列。Yahoo避難所の順番に合わせる必要がある。
     public static final String[] prefecture_name = {
             "北海道", "青森県", "岩手県", "宮城県", "秋田県", "山形県", "福島県", "茨城県", "栃木県", "群馬県",
             "埼玉県", "千葉県", "東京都", "神奈川県", "新潟県", "富山県", "石川県", "福井県", "山形県", "長野県",
@@ -29,16 +31,33 @@ public class ShelterDownload {
             "佐賀県", "長崎県", "熊本県", "大分県", "宮崎県", "鹿児島県", "沖縄県"
     };
 
+    // 作業フォルダ
+    public static File workingDir;
 
+    /**
+     * Yahoo避難所のクローリングを行うメソッド。
+     * @param args 第1引数に作業フォルダのパス。省略するとfiles/YahooShelterフォルダで作業を行う
+     * @throws IOException
+     */
     public static void main(String args[]) throws IOException {
-        File workingDir = new File("files/YahoSshelter");
+        if(args.length>0) {
+            workingDir = new File(args[0]);
+        }
+        else {
+            workingDir = new File("files/YahoSshelter");
+        }
+        if(!workingDir.exists()) {
+            System.out.println("作業フォルダが存在しません。");
+            System.exit(1);
+        }
         createShelterMasterYahoo(workingDir, 1);
         combineShleterFiles(workingDir);
     }
 
     /**
      * Yahoo避難所から全国の避難所一覧ページを作成する
-     * @param file 出力ファイル
+     * @param dir 出力フォルダ
+     * @param start どの都道府県から始めるかの番号指定
      */
     public static void createShelterMasterYahoo(File dir, int start) {
         for(int i = start; i<=id.length; i++) {
@@ -46,6 +65,11 @@ public class ShelterDownload {
         }
     }
 
+    /**
+     * 都道府県ごとの避難所情報をクローリングするメソッド
+     * @param file 都道府県避難所情報を保存するファイル
+     * @param i 都道府県番号
+     */
     public static void readSheltersFromPrefecture(File file, int i) {
         try(PrintWriter pw = new PrintWriter(new OutputStreamWriter(new FileOutputStream(file, false), "Shift_JIS"))) {
 
@@ -82,6 +106,10 @@ public class ShelterDownload {
     }
 
 
+    /**
+     * 出力ファイル用の見出しを作るメソッド
+     * @return 見出しの文字列
+     */
     public static String getColName() {
         return "都道府県,市区町村,避難所名,住所,緯度,経度,避難所,一時避難所,広域避難所,地震,風水害,津波,収容人数,備蓄品,備考";
     }
@@ -158,6 +186,11 @@ public class ShelterDownload {
         return null;
     }
 
+    /**
+     * 文字列内のカンマをチェックするメソッド。句点に変換する
+     * @param str チェックする文字列
+     * @return チェック後の文字列
+     */
     public static String checkComma(String str) {
         if(str.contains(",")) {
             String pair[] = str.split(",");
@@ -177,6 +210,11 @@ public class ShelterDownload {
         }
     }
 
+    /**
+     * 文字列内のカンマを削除するメソッド。
+     * @param str 対象文字列
+     * @return カンマ削除後の文字列
+     */
     public static String removeComma(String str) {
         if(str.contains(",")) {
             String pair[] = str.split(",");
@@ -196,12 +234,16 @@ public class ShelterDownload {
         }
     }
 
+    /**
+     * 都道府県別の避難所情報ファイルを結合するメソッド
+     * @param dir 避難所情報ファイルが保存されているフォルダ
+     */
     public static void combineShleterFiles(File dir) {
         if(!dir.isDirectory()) {
             System.out.println("避難所ファイルが存在するディレクトリではありません");
         }
         else {
-            try(PrintWriter pw = new PrintWriter(new OutputStreamWriter(new FileOutputStream(new File(dir.getPath() + "/shelter.csv"), false), "Shift_JIS"))) {
+            try(PrintWriter pw = new PrintWriter(new OutputStreamWriter(new FileOutputStream(new File(dir.getPath() + "/0_全国.csv"), false), "Shift_JIS"))) {
                 pw.write(getColName());
                 for (int i=1; i<=id.length; i++) {
                     File file = new File(dir.getPath() + "/" + i + "_" + prefecture_name[i - 1] + ".csv");
