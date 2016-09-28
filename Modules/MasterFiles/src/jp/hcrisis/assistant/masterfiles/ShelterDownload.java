@@ -44,7 +44,7 @@ public class ShelterDownload {
             workingDir = new File(args[0]);
         }
         else {
-            workingDir = new File("files/YahoSshelter");
+            workingDir = new File("files/YahooSshelter");
         }
         if(!workingDir.exists()) {
             System.out.println("作業フォルダが存在しません。");
