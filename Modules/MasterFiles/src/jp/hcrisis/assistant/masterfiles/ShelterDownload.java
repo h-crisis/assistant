@@ -31,8 +31,9 @@ public class ShelterDownload {
 
 
     public static void main(String args[]) throws IOException {
-        createShelterMasterYahoo(new File("files/shelter"), 1);
-        combineShleterFiles(new File("files/shelter"));
+        File workingDir = new File("files/YahoSshelter");
+        createShelterMasterYahoo(workingDir, 1);
+        combineShleterFiles(workingDir);
     }
 
     /**

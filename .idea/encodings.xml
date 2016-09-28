@@ -6,9 +6,8 @@
     <file url="file://$PROJECT_DIR$/files/WorkingFiles/EMIS医療機関情報20160622.csv" charset="Shift_JIS" />
     <file url="file://$PROJECT_DIR$/files/WorkingFiles/EMIS医療機関情報_kochi.csv" charset="Shift_JIS" />
     <file url="file://$PROJECT_DIR$/files/WorkingFiles/medical_status_kochi.csv" charset="Shift_JIS" />
-    <file url="file://$PROJECT_DIR$/files/shelter.csv" charset="Shift_JIS" />
-    <file url="file://$PROJECT_DIR$/files/shelter/1_北海道.csv" charset="Shift_JIS" />
-    <file url="file://$PROJECT_DIR$/files/shelter/47_沖縄県.csv" charset="Shift_JIS" />
+    <file url="file://$PROJECT_DIR$/files/YahooShelter/1_北海道.csv" charset="Shift_JIS" />
+    <file url="file://$PROJECT_DIR$/files/YahooShelter/47_沖縄県.csv" charset="Shift_JIS" />
     <file url="file://$PROJECT_DIR$/test/iwasaki/evaluator/SphereEvaluator.java" charset="Shift_JIS" />
     <file url="file://$PROJECT_DIR$/test/iwasaki/hospital_info.csv" charset="Shift_JIS" />
     <file url="file://$PROJECT_DIR$/test/iwasaki/test.csv" charset="UTF-8" />
