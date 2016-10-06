@@ -142,8 +142,8 @@ function createShelterHeaderHtml(result) {
 
 function createShelterInfoHtml(result) {
     var InfoHtml = result.get('name');
-    var preCells = "<tr><td width='100px' style=font-size:17px;background-color:#888888;color:white>";
-    var interCells = "</td><td width='260px' style=font-size:17px;background-color:white;text-align:right;>";
+    var preCells = "<tr><td width='110px' style=font-size:17px;background-color:#888888;color:white>";
+    var interCells = "</td><td width='250px' style=font-size:17px;background-color:white;text-align:right;>";
     var subCells ="</td></tr>";
 
     if(typeof name === 'undefined') {
@@ -258,8 +258,8 @@ function createShelterInfoHtml(result) {
 
 function detailInfoHtml(result){
     var DetailHtml = result.get('name');
-    var preCells = "<tr><td width='100px' style=font-size:17px;background-color:#888888;color:white>";
-    var interCells = "</td><td width='260px' style=font-size:17px;background-color:white;text-align:right;>";
+    var preCells = "<tr><td width='110px' style=font-size:17px;background-color:#888888;color:white>";
+    var interCells = "</td><td width='250px' style=font-size:17px;background-color:white;text-align:right;>";
     var subCells ="</td></tr>";
     var tagId = ['a01','a01_1','a01_2','a02','a03','a04','a05','a06','a07','a08','a09','b01','b02','b03','b03_1','b04','b04_1',
         'b04_2','b04_3','b05','b05_1','b05_2','b05_3','b06_1','b06_2','b06_3','c01_1','c01_2','c01_3','c01_4','c01_5','c01_8',
