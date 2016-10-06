@@ -187,17 +187,15 @@ var hallLayer = new ol.layer.Vector({
         console.log(url);
 }});
 
-
-
 // 役所ボタンの挙動を制御する関数
 function hallButton() {
-    if (hallLayer.getVisible()) {
-        hallLayer.setVisible(false);
-        this.style.backgroundColor = "whitesmoke";
-        this.style.color = "black";
-    } else {
+    if (!hallLayer.getVisible()) {
         hallLayer.setVisible(true);
         this.style.backgroundColor = "orange";
+        this.style.color = "black";
+    } else {
+        hallLayer.setVisible(false);
+        this.style.backgroundColor = "whitesmoke";
         this.style.color = "black";
     }
 };

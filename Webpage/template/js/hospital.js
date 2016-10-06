@@ -81,7 +81,7 @@ for (var i = 0; i < 17 ; i++) {
  */
 var url = 'http://h-crisis.niph.go.jp/wp-content/uploads/data/medical_status/latest/hcrisis_medical_status.geojson'
 
-var hospIcon = new ol.layer.Vector({
+var hospLayer = new ol.layer.Vector({
     source: new ol.source.Vector({
         // url: 'geojson/hcrisis_medical_status.geojson',
         url: url,
@@ -145,12 +145,12 @@ var hospIcon = new ol.layer.Vector({
  */
 
 // 病院ボタンの挙動を制御する関数
-function hospButton(resolution) {
-    if (hospIcon.getVisible()) {
-        hospIcon.setVisible(false);
-        this.style.backgroundColor = "whitesmoke";
-    } else {
-        hospIcon.setVisible(true);
+function hospButton() {
+    if (!hospLayer.getVisible()) {
+        hospLayer.setVisible(true);
         this.style.backgroundColor = "blue";
+    } else {
+        hospLayer.setVisible(false);
+        this.style.backgroundColor = "whitesmoke";
     }
 };

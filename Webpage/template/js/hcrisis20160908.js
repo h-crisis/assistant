@@ -44,6 +44,7 @@ var overlayPopup = new ol.Overlay(/** @type {olx.OverlayOptions} */ ({
 
 popupCloser.onclick = function() {
     document.getElementById('info').style.display = 'none';
+    document.getElementById('infoHeader').style.display = 'none';
     overlayPopup.setPosition(undefined);
     popupCloser.blur();
     return false;
@@ -62,6 +63,32 @@ var map = new ol.Map({
         new ol.control.ScaleLine()
     ])
 });
+
+// map上に各アイコンのレイヤーを追加して、非表示にする。
+map.addLayer(shelterLayer);
+map.addLayer(hospLayer);
+map.addLayer(hallLayer);
+map.addLayer(ImpassableLayer);
+shelterLayer.setVisible(false);
+hospLayer.setVisible(false);
+hallLayer.setVisible(false);
+ImpassableLayer.setVisible(false);
+
+// 避難所のマップ表示制御ボタンを呼ぶ変数。表示制御関数はshelter~.js
+var shelterOnOff   = document.getElementById('shelter-vis');
+shelterOnOff.addEventListener('click', shelterButton);
+
+// 役所のマップ表示制御ボタンを呼ぶ変数。表示制御関数はhalls~.js
+var hallOnOff = document.getElementById('hall-vis');
+hallOnOff.addEventListener('click', hallButton);
+
+// 医療機関のマップ表示制御ボタンを呼ぶ変数。表示制御関数はhospital~.js
+var hospOnOff   = document.getElementById('hospital-vis');
+hospOnOff.addEventListener('click', hospButton);
+
+// 交通不可地点のマップ表示制御ボタンを呼ぶ変数。表示制御関数はpass~.js
+var visPass   = document.getElementById('pass-vis');
+visPass.addEventListener('click', visPassButton);
 
 // Map上のFeatureを取得し表示する
 var displayFeatureInfo = function(pixel, evt) {
