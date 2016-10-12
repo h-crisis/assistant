@@ -94,8 +94,8 @@ var hospLayer = new ol.layer.Vector({
                 if (biNum == i) {
                     styleHospR[i];
                     // styleHospR[i].getText().setText(resolution < 40 && (feature.get('prefecture') == "静岡県" || feature.get('prefecture') == "山梨県" || feature.get('prefecture') == "愛知県" || feature.get('prefecture') == "三重県" || feature.get('prefecture') == "和歌山県" ) ? feature.get('name') : '');
-                    styleHospR[i].getText().setText(resolution < 30 ? feature.get('name') : '');
-                    styleHospR[i].getImage().setScale(resolution < 10 ? 0.5 : 0.4);
+                    styleHospR[i].getText().setText(resolution < 0.0003 ? feature.get('name') : '');
+                    styleHospR[i].getImage().setScale(resolution < 0.00001 ? 0.5 : 0.4);
                     // styleHospR[i].getImage().setOpacity(feature.get('prefecture') == "静岡県" || feature.get('prefecture') == "山梨県" || feature.get('prefecture') == "愛知県" || feature.get('prefecture') == "三重県" || feature.get('prefecture') == "和歌山県" ? 1 : 0);
                     styleHospR[i].getImage().setOpacity(1);
                     return styleHospR[i];
@@ -106,8 +106,8 @@ var hospLayer = new ol.layer.Vector({
                 if (biNum == i) {
                     styleHospG[i];
                     // styleHospG[i].getText().setText(resolution < 40 && (feature.get('prefecture') == "静岡県" || feature.get('prefecture') == "山梨県" || feature.get('prefecture') == "愛知県" || feature.get('prefecture') == "三重県" || feature.get('prefecture') == "和歌山県" ) ? feature.get('name') : '');
-                    styleHospG[i].getText().setText(resolution < 30 ? feature.get('name') : '');
-                    styleHospG[i].getImage().setScale(resolution < 10 ? 0.5 : 0.4);
+                    styleHospG[i].getText().setText(resolution < 0.0003 ? feature.get('name') : '');
+                    styleHospG[i].getImage().setScale(resolution < 0.00001 ? 0.5 : 0.4);
                     // styleHospG[i].getImage().setOpacity(feature.get('prefecture') == "静岡県" || feature.get('prefecture') == "山梨県" || feature.get('prefecture') == "愛知県" || feature.get('prefecture') == "三重県" || feature.get('prefecture') == "和歌山県" ? 1 : 0);
                     styleHospG[i].getImage().setOpacity(1);
                     return styleHospG[i];
@@ -118,8 +118,8 @@ var hospLayer = new ol.layer.Vector({
                 if (biNum == i) {
                     styleHospB[i];
                     // styleHospB[i].getText().setText(resolution < 40 && (feature.get('prefecture') == "静岡県" || feature.get('prefecture') == "山梨県" || feature.get('prefecture') == "愛知県" || feature.get('prefecture') == "三重県" || feature.get('prefecture') == "和歌山県" ) ? feature.get('name') : '');
-                    styleHospB[i].getText().setText(resolution < 30 ? feature.get('name') : '');
-                    styleHospB[i].getImage().setScale(resolution < 10 ? 0.5 : 0.4);
+                    styleHospB[i].getText().setText(resolution < 0.0003 ? feature.get('name') : '');
+                    styleHospB[i].getImage().setScale(resolution < 0.00001 ? 0.5 : 0.4);
                     // styleHospB[i].getImage().setOpacity(feature.get('prefecture') == "静岡県" || feature.get('prefecture') == "山梨県" || feature.get('prefecture') == "愛知県" || feature.get('prefecture') == "三重県" || feature.get('prefecture') == "和歌山県" ? 1 : 0);
                     styleHospB[i].getImage().setOpacity(1);
                     return styleHospB[i];
@@ -154,3 +154,25 @@ function hospButton() {
         this.style.backgroundColor = "whitesmoke";
     }
 };
+
+// 医療機関のポップアップを作成する関数
+function createHtmlHospital() {
+    document.getElementById('info').innerHTML = "";
+    DetailHtml = "";
+    HeaderHtml = "<div style='border:2px solid burlywood; background-color:#888888; color:white; text-align:center' type=button id=showBtn value=隠す onclick=showHide()>閉じる</div>";
+
+    // 建築物名表示
+    if (arrayV[0] === null) {
+    } else {
+        HeaderHtml = HeaderHtml + arrayV[1];
+    }
+    HeaderHtml = HeaderHtml + "<div style='border:2px solid burlywood; background-color:#888888; color:white; text-align:center' type=button id=showBtn value=隠す onclick=showDetail()>詳細情報の表示切替</div>";
+    for (i = 0; i < arrayL.length; i++) {
+        DetailHtml = DetailHtml + preCells + arrayL[i] + interCells + arrayV[i] + subCells;
+    }
+    document.getElementById('infoHeader').style.display = 'block';
+    document.getElementById('infoHeader').innerHTML = HeaderHtml;
+    document.getElementById('info').style.display = 'block';
+    document.getElementById('info').innerHTML = DetailHtml;
+}
+

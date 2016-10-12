@@ -3,6 +3,13 @@
  * 地図表示全般のJavaScript
  */
 
+var HeaderHtml;
+var InfoHtml;
+var DetailHtml
+var preCells = "<tr><td width='110px' style=font-size:17px;background-color:#888888;color:white>";
+var interCells = "</td><td width='250px' style=font-size:17px;background-color:white;text-align:right;>";
+var subCells ="</td></tr>";
+
 // BaseLayerの設定 OpenStreetMapを設定する
 var osm_source = new ol.source.OSM({
     url: 'http://{a-c}.tile.openstreetmap.org/{z}/{x}/{y}.png'
@@ -103,9 +110,37 @@ var displayFeatureInfo = function(pixel, evt) {
     if(urlShelter) {
         createShelterPopup(urlShelter, evt);
     }
+
+    // geoJsonを用いた各レイヤーのポイントデータを取得する
+    var feature = map.forEachFeatureAtPixel(pixel, function(feature) {
+    });
+
+    // geoJsonから情報を配列に押し込み配列の項目別に各施設のポップアップを表示する関数を呼び出す
+    map.forEachFeatureAtPixel(pixel, function (feature) {
+        arrayL = [];
+        arrayV = [];
+        for (i = 1; i < (feature.getKeys().length - 1); i++) {
+            label = feature.getKeys()[i];
+            valr = feature.get(label);
+            arrayL.push(label);
+            arrayV.push(valr);
+        }
+        if(arrayL[9]=='p_num') {
+            createHtmlHall();
+        } else if(arrayL[0]=='code') {
+            createHtmlHospital();
+        } else if(arrayL[0]=='name') {
+            createHtmlPass();
+        }
+    });
 };
 
 map.on('click', function(evt) {
+    var coordinate = evt.coordinate;
+    var pixel = map.getPixelFromCoordinate(coordinate);
+    document.getElementById('infoHeader').style.display = 'none';
+    document.getElementById('info').style.display = 'none';
+    document.getElementById('popup').style.display = 'none';
     displayFeatureInfo(evt.pixel, evt);
-})
+});
 

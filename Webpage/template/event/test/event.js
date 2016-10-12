@@ -6,6 +6,8 @@
 var eventCode = 'test';
 var centerLat = 139.620707;
 var centerLon = 35.790259;
+var arrayL = new Array(0);
+var arrayV = new Array(0);
 
 var pass = './'
 //var pass = 'http://h-crisis.niph.go.jp/wp-content/uploads/sites/4/event/' + eventCode + '/';

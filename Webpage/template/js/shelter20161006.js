@@ -51,16 +51,12 @@ function createShelterPopup(url, evt) {
             }
 
             // ここから表示するしないの制御
-            if(typeof popupHtml === "undefined") {
-                content.innerHTML = '';
-                overlayPopup.setPosition(undefined);
-                document.getElementById('infoHeader').style.display = 'none';
-                document.getElementById('info').style.display = 'none';
-            } else {
+            if(typeof popupHtml !== "undefined") {
                 document.getElementById('infoHeader').style.display = 'block';
                 document.getElementById('infoHeader').innerHTML = headerHtml;
                 document.getElementById('info').style.display = 'block';
                 document.getElementById('info').innerHTML = infoHtml;
+                document.getElementById('popup').style.display = 'block';
                 content.innerHTML = popupHtml;
                 overlayPopup.setPosition(coordinate);
             }
@@ -75,7 +71,7 @@ function createShelterPopup(url, evt) {
  * @returns {*}
  */
 function createShelterPopupHtml(result) {
-    var popupHtml = result.get('name');
+    popupHtml = result.get('name');
     if(typeof name === 'undefined') {
         return popupHtml;
     } else {
@@ -123,7 +119,7 @@ function createShelterPopupHtml(result) {
 }
 
 function createShelterHeaderHtml(result) {
-    var HeaderHtml = result.get('name');
+    HeaderHtml = result.get('name');
     if (typeof name === 'undefined') {
         return HeaderHtml;
     } else {
@@ -142,9 +138,6 @@ function createShelterHeaderHtml(result) {
 
 function createShelterInfoHtml(result) {
     var InfoHtml = result.get('name');
-    var preCells = "<tr><td width='110px' style=font-size:17px;background-color:#888888;color:white>";
-    var interCells = "</td><td width='250px' style=font-size:17px;background-color:white;text-align:right;>";
-    var subCells ="</td></tr>";
 
     if(typeof name === 'undefined') {
         return InfoHtml;
@@ -257,7 +250,7 @@ function createShelterInfoHtml(result) {
 }
 
 function detailInfoHtml(result){
-    var DetailHtml = result.get('name');
+    DetailHtml = result.get('name');
     var preCells = "<tr><td width='110px' style=font-size:17px;background-color:#888888;color:white>";
     var interCells = "</td><td width='250px' style=font-size:17px;background-color:white;text-align:right;>";
     var subCells ="</td></tr>";
