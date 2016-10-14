@@ -101,5 +101,10 @@
             <artifactId>jsoup</artifactId>
             <version>1.9.2</version>
         </dependency>
+        <dependency>
+            <groupId>net.postgis</groupId>
+            <artifactId>postgis-jdbc</artifactId>
+            <version>2.1.7.2</version>
+        </dependency>
     </dependencies>
 </project>

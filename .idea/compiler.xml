@@ -27,7 +27,7 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="hcrisis-assistant" target="1.5" />
-      <module name="HcrisisMQTT" target="1.5" />
+      <module name="HcrisisMQTT" target="1.7" />
     </bytecodeTargetLevel>
   </component>
 </project>

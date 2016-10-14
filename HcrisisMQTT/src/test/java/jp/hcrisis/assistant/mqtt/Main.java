@@ -5,7 +5,7 @@ package jp.hcrisis.assistant.mqtt;
  */
 public class Main {
     public static void main(String args[]) {
-        Subscriber client = new Subscriber("tcp://broker.ichilab.org:1883");
+        Subscriber client = new Subscriber("tcp://10.0.1.14:1883");
         if(client.connectBroker()) {
             client.subscribe("/hcrisis/assistant/#");
         }
