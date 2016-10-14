@@ -156,29 +156,109 @@
                     var topicMsg = "/hcrisis/assistant/event/" + document.getElementById('eventCode').value
                             + "/shelter/" + document.getElementById('inputCode').value + "/emergency";
 
+                    /*
                     var createMsg = document.getElementById('eventCode').value +
                             ',' + document.getElementById('inputCode').value +
                             ',' + document.getElementById('inputShelter').value +
                             ',' + document.getElementById('inputHuman').value +
                             ',' + document.getElementById('inputNum').value;
 
-                    for(var i = 0; i < 9; i++) {
-                        var arrayValue = "q" + i;
-                        var tmpList = document.getElementsByName(arrayValue);
-                        for(var j=0; j<tmpList.length; j++) {
-                            if(tmpList[j].checked) {
-                                createMsg = createMsg + ',' + tmpList[j].value;
-                                continue;
-                            }
+                     for(var i = 0; i < 9; i++) {
+                     var arrayValue = "q" + i;
+                     var tmpList = document.getElementsByName(arrayValue);
+                     for(var j=0; j<tmpList.length; j++) {
+                     if(tmpList[j].checked) {
+                     createMsg = createMsg + ',' + tmpList[j].value;
+                     continue;
+                     }
+                     }
+                     }
+                    */
+
+                    var createMsg = "info_type='emergency'" +
+                            ",reporter='" + document.getElementById('inputHuman').value + "'" +
+                            ",a01=" + document.getElementById('inputNum').value;
+
+                    var tmpList = document.getElementsByName('q0'); //q0
+                    for(var j=0; j<tmpList.length; j++) {``
+                        if (tmpList[j].checked) {
+                            createMsg = createMsg + ",c01_1='" + tmpList[j].value + "'";
+                            continue;
                         }
                     }
+
+                    tmpList = document.getElementsByName('q1'); // q1
+                    for(var j=0; j<tmpList.length; j++) {
+                        if (tmpList[j].checked) {
+                            createMsg = createMsg + ",c01_2='" + tmpList[j].value + "'";
+                            continue;
+                        }
+                    }
+
+                    tmpList = document.getElementsByName('q2'); // q2
+                    for(var j=0; j<tmpList.length; j++) {
+                        if (tmpList[j].checked) {
+                            createMsg = createMsg + ",c01_3='" + tmpList[j].value + "'";
+                            continue;
+                        }
+                    }
+
+                    tmpList = document.getElementsByName('q3'); // q3
+                    for(var j=0; j<tmpList.length; j++) {
+                        if (tmpList[j].checked) {
+                            createMsg = createMsg + ",c01_4='" + tmpList[j].value + "'";
+                            continue;
+                        }
+                    }
+
+                    tmpList = document.getElementsByName('q4'); // q4
+                    for(var j=0; j<tmpList.length; j++) {
+                        if (tmpList[j].checked) {
+                            createMsg = createMsg + ",c01_5='" + tmpList[j].value + "'";
+                            continue;
+                        }
+                    }
+
+                    tmpList = document.getElementsByName('q5'); // q5
+                    for(var j=0; j<tmpList.length; j++) {
+                        if (tmpList[j].checked) {
+                            createMsg = createMsg + ",c01_8='" + tmpList[j].value + "'";
+                            continue;
+                        }
+                    }
+
+                    tmpList = document.getElementsByName('q6'); // q6
+                    for(var j=0; j<tmpList.length; j++) {
+                        if (tmpList[j].checked) {
+                            createMsg = createMsg + ",c01_9='" + tmpList[j].value + "'";
+                            continue;
+                        }
+                    }
+
+                    tmpList = document.getElementsByName('q7'); // q7
+                    for(var j=0; j<tmpList.length; j++) {
+                        if (tmpList[j].checked) {
+                            createMsg = createMsg + ",c02_6='" + tmpList[j].value + "'";
+                            continue;
+                        }
+                    }
+
+                    tmpList = document.getElementsByName('q8'); // q8
+                    for(var j=0; j<tmpList.length; j++) {
+                        if (tmpList[j].checked) {
+                            createMsg = createMsg + ",c04_1='" + tmpList[j].value + "'";
+                            continue;
+                        }
+                    }
+
                     var nowTime = new Date();
                     var nowYer = nowTime.getFullYear();
                     var nowMon = nowTime.getMonth() + 1;
                     var nowDay = nowTime.getDate();
                     var nowHrs = nowTime.getHours();
                     var nowMin = nowTime.getMinutes();
-                    createMsg = createMsg + ',' + nowYer + "/" + nowMon + "/" + nowDay + "/" + nowHrs + ":" + nowMin + "";
+                    var nowSec = nowTime.getSeconds();
+                    createMsg = createMsg + ",timestamp='" + nowYer + "-" + nowMon + "-" + nowDay + " " + nowHrs + ":" + nowMin + ":" + nowSec + "'";
                     console.log(topicMsg + " : " + createMsg);
                     publishMsg(topicMsg, createMsg, true);
                 }

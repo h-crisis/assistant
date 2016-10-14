@@ -3,7 +3,8 @@
  */
 
 // Brokerへの接続
-var wsbroker = "broker.ichilab.org";  //mqtt websocket enabled broker
+//var wsbroker = "broker.ichilab.org";  //mqtt websocket enabled broker
+var wsbroker = "broker.h-crisis.jp";  //mqtt websocket enabled broker
 var wsport = 80; // port for above
 var client = new Paho.MQTT.Client(wsbroker, wsport,
     "H-CRISIS Assistant MQTT " + parseInt(Math.random() * 100, 10));
