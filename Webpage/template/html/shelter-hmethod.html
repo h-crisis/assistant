@@ -630,27 +630,27 @@
 
                     var topicMsg = "/hcrisis/assistant/event/" + document.getElementById('eventCode').value
                             + "/shelter/" + document.getElementById('Code').value +　"/nacphn01";
-                    var createMsg = 'eventCode=' + document.getElementById('eventCode').value +
-                            ',code=' + document.getElementById('Code').value +
-                            ',reporter=' + document.getElementById('Reporter').value +
-                            ',name=' + document.getElementById('Name').value +
-                            ',address=' + document.getElementById('Address').value;
+                    var createMsg = "eventCode='" + document.getElementById('eventCode').value +
+                            "',code='" + document.getElementById('Code').value +
+                            "',reporter='" + document.getElementById('Reporter').value +
+                            "',name='" + document.getElementById('Name').value +
+                            "',address='" + document.getElementById('Address').value;
 
                     for (var i = 0; i < tagId.length; i++) {
-                        createMsg = createMsg + ',' + tagId[i] + '=' + document.getElementById(tagId[i]).value;
+                        createMsg = createMsg +  "'," + tagId[i] + "='" + document.getElementById(tagId[i]).value;
                     }
 
                     for (var i = 0; i < tagName.length; i++) {
                         for (var k = 0; k < document.getElementsByName(tagName[i]).length; k++) {
                             if (document.getElementsByName(tagName[i])[k].checked) {
-                                createMsg = createMsg + ',' + tagName[i] + '=' + document.getElementsByName(tagName[i])[k].value;
+                                createMsg = createMsg + "'," + tagName[i] + "='" + document.getElementsByName(tagName[i])[k].value;
                                 continue;
                             }
                         }
                     }
 
                     createMsg = createMsg +
-                            "," + lat + "," + lon;
+                            "',lat='" + lat + "',lon='" + lon;
 
                     var nowTime = new Date();
                     var nowYer = nowTime.getFullYear();
@@ -658,7 +658,7 @@
                     var nowDay = nowTime.getDate();
                     var nowHrs = nowTime.getHours();
                     var nowMin = nowTime.getMinutes();
-                    createMsg = createMsg + ',time=' + nowYer + "/" + nowMon + "/" + nowDay + "/" + nowHrs + ":" + nowMin + "";
+                    createMsg = createMsg + "',time='" + nowYer + "/" + nowMon + "/" + nowDay + "/" + nowHrs + ":" + nowMin + "'";
                     console.log(topicMsg + " : " + createMsg);
                     publishMsg(topicMsg, createMsg, true);
                 }

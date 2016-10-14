@@ -246,12 +246,12 @@
                 // pairUrlStr[5] = decodeURI(pairUrlStr[5]);
                 document.getElementById('eventCode').value = pairUrlStr[0];
                 document.getElementById('eventCode').disabled = 'true';
-                document.getElementById('inputCode').value = pairUrlStr[1];
-                document.getElementById('inputCode').disabled = 'true';
-                document.getElementById('inputPref').value = pairUrlStr[3];
-                document.getElementById('inputPref').disabled = 'true';
-                document.getElementById('inputShelter').value = pairUrlStr[2];
-                document.getElementById('inputShelter').disabled = 'true';
+                document.getElementById('Code').value = pairUrlStr[1];
+                document.getElementById('Code').disabled = 'true';
+                document.getElementById('Address').value = pairUrlStr[3];
+                document.getElementById('Address').disabled = 'true';
+                document.getElementById('Name').value = pairUrlStr[2];
+                document.getElementById('Name').disabled = 'true';
                 lon = pairUrlStr[4];
                 lat = pairUrlStr[5];
             }
@@ -267,27 +267,26 @@
 
             var topicMsg = "/hcrisis/assistant/event/" + document.getElementById('eventCode').value
                     + "/shelter/" + document.getElementById('Code').value +　"/nacphn02";
-            var createMsg = 'eventCode=' + document.getElementById('eventCode').value +
-                    ',code=' + document.getElementById('Code').value +
-                    ',reporter=' + document.getElementById('Reporter').value +
-                    ',name=' + document.getElementById('Name').value +
-                    ',address=' + document.getElementById('Address').value;
+            var createMsg = "eventCode='" + document.getElementById('eventCode').value +
+                    "',code='" + document.getElementById('Code').value +
+                    "',reporter='" + document.getElementById('Reporter').value +
+                    "',name='" + document.getElementById('Name').value +
+                    "',address='" + document.getElementById('Address').value;
 
             for (var i = 0; i < tagId.length; i++) {
-                createMsg = createMsg + ',' + tagId[i] + '=' + document.getElementById(tagId[i]).value;
-
+                createMsg = createMsg +  "'," + tagId[i] + "='" + document.getElementById(tagId[i]).value;
             }
 
             for (var i = 0; i < tagName.length; i++) {
                 for (var k = 0; k < document.getElementsByName(tagName[i]).length; k++) {
                     if (document.getElementsByName(tagName[i])[k].checked) {
-                        createMsg = createMsg + ',' + tagName[i] + '=' + document.getElementsByName(tagName[i])[k].value;
+                        createMsg = createMsg + "'," + tagName[i] + "='" + document.getElementsByName(tagName[i])[k].value;
                         continue;
                     }
                 }
             }
 
-            createMsg = createMsg + "," + lat + "," + lon;
+            createMsg = createMsg + "',lat='" + lat + "',lon='" + lon;
 
             var nowTime = new Date();
             var nowYer = nowTime.getFullYear();
@@ -295,7 +294,7 @@
             var nowDay = nowTime.getDate();
             var nowHrs = nowTime.getHours();
             var nowMin = nowTime.getMinutes();
-            createMsg = createMsg + ',time=' + nowYer + "/" + nowMon + "/" + nowDay + "/" + nowHrs + ":" + nowMin + "";
+            createMsg = createMsg + "',time='" + nowYer + "/" + nowMon + "/" + nowDay + "/" + nowHrs + ":" + nowMin + "'";
             console.log(topicMsg + " : " + createMsg);
             publishMsg(topicMsg, createMsg, true);
         }
