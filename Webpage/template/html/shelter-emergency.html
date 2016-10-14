@@ -153,21 +153,22 @@
         <fieldset>
             <script>
                 function createMessage() {
+                    var msgTag = ['c01_1','c01_2','c01_3','c01_4','c01_5','c01_8','c01_9','a06','c04_1'];
                     var topicMsg = "/hcrisis/assistant/event/" + document.getElementById('eventCode').value
                             + "/shelter/" + document.getElementById('inputCode').value + "/emergency";
 
-                    var createMsg = document.getElementById('eventCode').value +
-                            ',' + document.getElementById('inputCode').value +
-                            ',' + document.getElementById('inputShelter').value +
-                            ',' + document.getElementById('inputHuman').value +
-                            ',' + document.getElementById('inputNum').value;
+                    var createMsg = "eventCode='" + document.getElementById('eventCode').value +
+                            "',code='" + document.getElementById('inputCode').value +
+                            "',name='" + document.getElementById('inputShelter').value +
+                            "',reporter='" + document.getElementById('inputHuman').value +
+                            "',a01='" + document.getElementById('inputNum').value;
 
                     for(var i = 0; i < 9; i++) {
                         var arrayValue = "q" + i;
-                        var tmpList = document.getElementsByName(arrayValue);
+                        var tmpList =  document.getElementsByName(arrayValue);
                         for(var j=0; j<tmpList.length; j++) {
                             if(tmpList[j].checked) {
-                                createMsg = createMsg + ',' + tmpList[j].value;
+                                createMsg = createMsg + "'," + msgTag[j] + "='" + tmpList[j].value;
                                 continue;
                             }
                         }
@@ -178,7 +179,7 @@
                     var nowDay = nowTime.getDate();
                     var nowHrs = nowTime.getHours();
                     var nowMin = nowTime.getMinutes();
-                    createMsg = createMsg + ',' + nowYer + "/" + nowMon + "/" + nowDay + "/" + nowHrs + ":" + nowMin + "";
+                    createMsg = createMsg + "',time='" + nowYer + "/" + nowMon + "/" + nowDay + "/" + nowHrs + ":" + nowMin + "'";
                     console.log(topicMsg + " : " + createMsg);
                     publishMsg(topicMsg, createMsg, true);
                 }

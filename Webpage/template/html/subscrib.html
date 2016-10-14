@@ -1,0 +1,125 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>H-CRISIS情報集計画面</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../js/mqttws31.js" type="text/javascript"></script>
+    <script src="../js/jquery.min_.js" type="text/javascript"></script>
+    <script src="../js/mqttConfig.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        var mqtt;
+        var reconnectTimeout = 2000;
+        var contentIshi = new Array(2);
+        var contentHokenjo = new Array(2);
+        var contentEmergency = new Array(2);
+        contentIshi[0] = "避難所コード,記入救護班名,アラート情報(有or無),避難所電話(不通or開通),小児疾患,精神疾患,周産期,歯科,飲料水,食事,電気,毛布等の寝具,冷暖房,衛生環境,生活用水(手洗い等),下水,土足,トイレ,汲み取り,既医療支援,水の種類,避難所名,アラート情報の詳細,地区名,避難所電話番号,リーダー氏名,リーダー電話番号,メールアドレス,収容人数,一人当たり専有面積,有症状者総数,発熱(≧38℃),頭痛,咳,外傷,嘔吐,下痢,その他(症状),要援護,全介助,一部介助,認知障害,乳幼児,外国人,その他(要援護),↑の詳細入力,要医療,要酸素,慢性透析,インフルエンザ,その他(要医療),↑の詳細入力,小児疾患:１歳未満,小児疾患:詳細,精神疾患:不眠・不安,精神疾患:精神科疾患,精神疾患:詳細,周産期:妊婦,周産期:産褥期,周産期:詳細,歯科:歯痛,歯科:入れ歯紛失/破損,歯科:詳細,その他(最下部),経度,緯度,タイムスタンプ";
+        contentHokenjo[0] = "避難所コード,記載者(所属・役職),スペース密度,自主組織,外部組織,ボランティア,医療の提供状況,巡回診療,地域の医師との連携,電気,ガス,水道,飲料水,固定電話,携帯電話,洗濯機,冷蔵庫,冷暖房,照明,調理設備,トイレ,下水,清掃,汲み取り,手洗い場,手指消毒,風呂,喫煙所,分煙,清掃状況,床の清掃,ゴミ収集場所,履き替え,空調管理,粉塵,生活騒音,寝具,寝具乾燥対策,ペット対策,ペットの収容対策,食事,炊き出し,残飯処理,所在地(都道府県、市区町村),避難所名,避難者数,昼の避難者数,夜の避難者数,電話,FAX,メールアドレス,施設の広さ,一人当たり専有面積,交通機関,避難所代表者氏名(立場),↑その他,連絡体制/指揮命令系統,自主組織:詳細,外部組織:チーム数,外部組織:人数,外部組織:職種,ボランティア:チーム数,ボランティア:人数,ボランティア:職種,避難者への情報伝達手段,ライフラインに関する対応,設備状況と衛生面に関する対応,トイレの箇所数,トイレに関する対応,風呂の清掃状況,風呂・喫煙所に関する対応,生活環境と衛生面に関する対応,１日の食事回数,食事に関する対応,その他備考,経度,緯度,タイムスタンプ"
+        contentEmergency[0] = "避難所コード,避難所名,記録者,避難者数,経度,緯度,電気,ガス,水道,飲料水,固定電話,携帯電話,通信,トイレ,食料,タイムスタンプ"
+        function MQTTconnect() {
+            if (typeof path == "undefined") {
+                path = '/mqtt';
+            }
+            mqtt = new Paho.MQTT.Client(
+                    host,
+                    port,
+                    path,
+                    "web_" + parseInt(Math.random() * 100, 10)
+            );
+            var options = {
+                timeout: 3,
+                useSSL: useTLS,
+                cleanSession: cleansession,
+                onSuccess: onConnect,
+                onFailure: function (message) {
+                    $('#status').val("Connection failed: " + message.errorMessage + "Retrying");
+                    setTimeout(MQTTconnect, reconnectTimeout);
+                }
+            };
+            mqtt.onConnectionLost = onConnectionLost;
+            mqtt.onMessageArrived = onMessageArrived;
+            if (username != null) {
+                options.userName = username;
+                options.password = password;
+            }
+            console.log("Host="+ host + ", port=" + port + ", path=" + path + " TLS = " + useTLS + " username=" + username + " password=" + password);
+            mqtt.connect(options);
+        }
+        function onConnect() {
+            $('#status').val('Connected to ' + host + ':' + port + path);
+            // Connection succeeded; subscribe to our topic
+            mqtt.subscribe(topic, {qos: 0});
+            $('#topic').val(topic);
+        }
+        function onConnectionLost(response) {
+            setTimeout(MQTTconnect, reconnectTimeout);
+            $('#status').val("connection lost: " + ". Reconnecting");
+        };
+        function onMessageArrived(message) {
+            var topic = message.destinationName;
+            var payload = message.payloadString;
+            $('#ws').prepend('<li>' + topic + ' = ' + payload + '</li>');
+            var code = topic.split('/')
+            if (code[3] == "ishiiMethod") {
+                contentIshi.push("\r" + topic + payload);
+            } else if (code[3] == "hokenjoChokaiMethod") {
+                contentHokenjo.push("\r" + topic + payload);
+            } else if (code[3] == "emergency") {
+                contentEmergency.push("\r" + topic + payload);
+            }
+        };
+        $(document).ready(function() {
+            MQTTconnect();
+        });
+
+        function handleDownloadEmergency() {
+            var bom = new Uint8Array([0xEF, 0xBB, 0xBF]);
+            var blob = new Blob([ bom, contentEmergency ], { "type" : "text/csv" });
+            if (window.navigator.msSaveBlob) {
+                window.navigator.msSaveBlob(blob, "emergency.csv");
+                // msSaveOrOpenBlobの場合はファイルを保存せずに開ける
+                window.navigator.msSaveOrOpenBlob(blob, "emergency.csv");
+            } else {
+                document.getElementById("downloadEmergency").href = window.URL.createObjectURL(blob);
+            }
+        }
+
+
+        function handleDownloadIshii() {
+            var bom = new Uint8Array([0xEF, 0xBB, 0xBF]);
+            var blob = new Blob([ bom, contentIshi ], { "type" : "text/csv" });
+            if (window.navigator.msSaveBlob) {
+                window.navigator.msSaveBlob(blob, "ishii.csv");
+                // msSaveOrOpenBlobの場合はファイルを保存せずに開ける
+                window.navigator.msSaveOrOpenBlob(blob, "ishii.csv");
+            } else {
+                document.getElementById("downloadIshii").href = window.URL.createObjectURL(blob);
+            }
+        }
+
+        function handleDownloadHokenjo() {
+            var bom = new Uint8Array([0xEF, 0xBB, 0xBF]);
+            var blob = new Blob([ bom, contentHokenjo ], { "type" : "text/csv" });
+            if (window.navigator.msSaveBlob) {
+                window.navigator.msSaveBlob(blob, "hokenjo.csv");
+                // msSaveOrOpenBlobの場合はファイルを保存せずに開ける
+                window.navigator.msSaveOrOpenBlob(blob, "hokenjo.csv");
+            } else {
+                document.getElementById("downloadHokenjo").href = window.URL.createObjectURL(blob);
+            }
+        }
+
+    </script>
+</head>
+<body>
+<h1>H-CRISIS情報集計画面</h1>
+<div>
+    <div>Subscribed to <input type='text' id='topic' />
+        Status: <input type='text' id='status' size="80" />
+    </div>
+    <a id="downloadEmergency" href="#" download="emergency.csv" onclick="handleDownloadEmergency()">緊急時入力シートをダウンロード</a>
+    <a id="downloadIshii" href="#" download="ishii.csv" onclick="handleDownloadIshii()">石井式シートをダウンロード</a>
+    <a id="downloadHokenjo" href="#" download="hokenjo.csv" onclick="handleDownloadHokenjo()">保健師長会式シートをダウンロード</a>
+
+    <ul id='ws' style="font-family: 'Courier New', Courier, monospace;"></ul>
+</div>
+</body>
+</html>
