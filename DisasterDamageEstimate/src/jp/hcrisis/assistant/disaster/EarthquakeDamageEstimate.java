@@ -65,7 +65,6 @@ public class EarthquakeDamageEstimate {
             }
         }
 
-        FileManagement.removeFiles(outDir); // 出力フォルダを空にする
         File outFile1 = new File(outDir.getPath() + "/" + code + "_mesh_base_01_SI.csv"); // 被災地のみの5次メッシュ
         File outFile2 = new File(outDir.getPath() + "/" + code + "_municipalities_base_01_SI.csv"); // 市区町村ごとの震度分布
         File outFile3 = new File(outDir.getPath() + "/" + code + "_mesh_base_02_statical.csv"); // 被災地域に人口と世帯数を付加
