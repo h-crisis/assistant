@@ -28,7 +28,7 @@ function goToHere() {
         nowLatLon = nowLatLon.split(',');
         var latNow = nowLatLon[1].substr(0, 8);
         var lonNow = nowLatLon[0].substr(0, 8);
-        nowLatLon = ol.proj.transform([lonNow, Math.abs(latNow)], 'EPSG:4326', 'EPSG:3857');
+        // nowLatLon = ol.proj.transform([lonNow, Math.abs(latNow)], 'EPSG:4326', 'EPSG:3857');
         var start = +new Date();
         var pan = ol.animation.pan({
             duration: 2000,

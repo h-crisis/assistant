@@ -11,35 +11,32 @@ var baseLayer = new ol.layer.Tile({
     opacity: 1
 });
 //  test
-
- var basemap001 = new ol.source.TileWMS({
-    url: 'http://192.168.1.100:8080/geoserver/wms',
-    params: {LAYERS: 'hcrisis:EMIS Medical Status', Tiled: true},
-    serverType: 'geoserver'
- });
- /*
- var basemap101 = new ol.source.TileWMS({
- url: 'http://192.168.1.100:8080/geoserver/zenrin/wms',
- params: {LAYERS: 'zenrin:101', VERSION: '1.3.0'}
- });
- var basemap120 = new ol.source.TileWMS({
- url: 'http://192.168.1.100:8080/geoserver/zenrin/wms',
- params: {LAYERS: 'zenrin:120', VERSION: '1.3.0'}
- });
- var baseLayer001 = new ol.layer.Tile({
- source: basemap001,
- opacity: 1
- });
- var baseLayer101 = new ol.layer.Tile({
- source: basemap101,
- opacity: 1
- });
- var baseLayer120 = new ol.layer.Tile({
- source: basemap120,
- opacity: 1
- });
- */
-
+/*
+var basemap001 = new ol.source.TileWMS({
+    url: 'http://192.168.1.100:8080/geoserver/zenrin/wms',
+    params: {LAYERS: 'zenrin:001', VERSION: '1.3.0'}
+});
+var basemap101 = new ol.source.TileWMS({
+    url: 'http://192.168.1.100:8080/geoserver/zenrin/wms',
+    params: {LAYERS: 'zenrin:101', VERSION: '1.3.0'}
+});
+var basemap120 = new ol.source.TileWMS({
+    url: 'http://192.168.1.100:8080/geoserver/zenrin/wms',
+    params: {LAYERS: 'zenrin:120', VERSION: '1.3.0'}
+});
+var baseLayer001 = new ol.layer.Tile({
+    source: basemap001,
+    opacity: 1
+});
+var baseLayer101 = new ol.layer.Tile({
+    source: basemap101,
+    opacity: 1
+});
+var baseLayer120 = new ol.layer.Tile({
+    source: basemap120,
+    opacity: 1
+});
+*/
 var view = new ol.View({
     center: hypoPoint,
     zoom: 9,
@@ -60,15 +57,15 @@ var map = new ol.Map({
     ])
 });
 /*
- var scrnHosp   = document.getElementById('scrn-hosp');
- scrnHosp.addEventListener('click', visHoButton);
+var scrnHosp   = document.getElementById('scrn-hosp');
+scrnHosp.addEventListener('click', visHoButton);
 
- var visPass   = document.getElementById('visible-pass');
- visPass.addEventListener('click', visPassButton);
+var visPass   = document.getElementById('visible-pass');
+visPass.addEventListener('click', visPassButton);
 
- var visHosp   = document.getElementById('scrn-hosp');
- visHosp.addEventListener('click', hospButton);
- */
+var visHosp   = document.getElementById('scrn-hosp');
+visHosp.addEventListener('click', hospButton);
+*/
 var goHypoCenter = document.getElementById('goToHypoCenter');
 goHypoCenter.addEventListener('click', goHypoButton);
 function goHypoButton() {
@@ -113,57 +110,57 @@ var flagSelected = false ;
 var lon, lat;
 
 /*
- var goFacility = document.getElementById('goToSelect');
- goFacility.addEventListener('click', function(evt) {
+var goFacility = document.getElementById('goToSelect');
+goFacility.addEventListener('click', function(evt) {
 
- if (flagSelected == true) {
- console.log(flagSelected);
- var pan = ol.animation.pan({
- duration: 1000,
- source: (view.getCenter())
- });
- map.beforeRender(pan);
- map.getView().setCenter([lon,Math.abs(lat)]);
- }
- });
+    if (flagSelected == true) {
+        console.log(flagSelected);
+        var pan = ol.animation.pan({
+            duration: 1000,
+            source: (view.getCenter())
+        });
+        map.beforeRender(pan);
+        map.getView().setCenter([lon,Math.abs(lat)]);
+    }
+});
 
- var mapSwitch   = document.getElementById('map-vis');
- osmQuestLayer.setVisible(false);
- satQuestLayer.setVisible(false);
- hybQuestLayer.setVisible(false);
+var mapSwitch   = document.getElementById('map-vis');
+osmQuestLayer.setVisible(false);
+satQuestLayer.setVisible(false);
+hybQuestLayer.setVisible(false);
 
- var mapcount = 0;
- function mapButton() {
- if (mapcount%3==0) {
- osmQuestLayer.setVisible(true);
- satQuestLayer.setVisible(false);
- baseLayer.setVisible(false);
- this.style.backgroundColor = "#86B81B";
- // var aaa = map.getProperties();
- // console.log(aaa);
- mapcount++;
- } else if (mapcount%3==1) {
- osmQuestLayer.setVisible(false);
- satQuestLayer.setVisible(true);
- baseLayer.setVisible(false);
- this.style.backgroundColor = "blue";
- mapcount++;
- } else {
- osmQuestLayer.setVisible(false);
- satQuestLayer.setVisible(false);
- baseLayer.setVisible(true);
- this.style.backgroundColor = "whitesmoke";
- mapcount++;
- }
- };
- */
+var mapcount = 0;
+function mapButton() {
+    if (mapcount%3==0) {
+        osmQuestLayer.setVisible(true);
+        satQuestLayer.setVisible(false);
+        baseLayer.setVisible(false);
+        this.style.backgroundColor = "#86B81B";
+        // var aaa = map.getProperties();
+        // console.log(aaa);
+        mapcount++;
+    } else if (mapcount%3==1) {
+        osmQuestLayer.setVisible(false);
+        satQuestLayer.setVisible(true);
+        baseLayer.setVisible(false);
+        this.style.backgroundColor = "blue";
+        mapcount++;
+    } else {
+        osmQuestLayer.setVisible(false);
+        satQuestLayer.setVisible(false);
+        baseLayer.setVisible(true);
+        this.style.backgroundColor = "whitesmoke";
+        mapcount++;
+    }
+};
+*/
 
 map.addLayer(hinanLayer1);
-map.addLayer(hospIcon);
+// map.addLayer(hospIcon);
 map.addLayer(hallLayer);
 map.addLayer(ImpassableLayer);
 hinanLayer1.setVisible(false);
-hospIcon.setVisible(false);
+// hospIcon.setVisible(false);
 hallLayer.setVisible(false);
 ImpassableLayer.setVisible(false);
 
@@ -172,9 +169,6 @@ ImpassableLayer.setVisible(false);
 
 var visHosp   = document.getElementById('scrn-hosp');
 visHosp.addEventListener('click', visHoButton);
-
-var visShltr   = document.getElementById('scrn-shltr');
-visShltr.addEventListener('click', visShButton);
 
 var visPass   = document.getElementById('pass-vis');
 visPass.addEventListener('click', visPassButton);
@@ -271,6 +265,7 @@ map.on('moveend', function() {
 
 var displayFeatureInfo = function(pixel) {
     var feature = map.forEachFeatureAtPixel(pixel, function(feature) {
+        console.log(feature)
     })};
 map.on('click', function(evt) {
     displayFeatureInfo(evt.pixel);
@@ -373,7 +368,7 @@ map.on('click', function(evt) {
         labelShltrJPN[0] = feature.get('ID');
         labelShltrJPN[1] = feature.get('name');
         labelShltrJPN[2] = feature.get('prefecture');
-        labelShltrJPN[3] = feature.get('shikuchoson');
+        labelShltrJPN[3] = feature.get('sikuchoson');
         labelShltrJPN[4] = feature.get('address');
         labelShltrJPN[5] = Math.round(feature.get('S05'));
         labelShltrJPN[6] = Math.round(feature.get('S07'));
@@ -435,6 +430,7 @@ map.on('click', function(evt) {
         labelRoad[9] = feature.get('迂回路');
         labelRoad[10] = feature.get('備考');
 
+
         coordinate4326 = feature.getGeometry().getExtent();
         coordinate4326 = ol.proj.transform([coordinate4326[0],Math.abs(coordinate4326[1])], 'EPSG:3857', 'EPSG:4326');
         lon = coordinate4326[0];
@@ -472,8 +468,20 @@ map.on('click', function(evt) {
         overlayInfo.setPosition(coordinate);
         var element = overlayInfo.getElement();
         if (labelHall[0] != null) {
+            console.log(labelHall[1])
             element.innerHTML =
                 labelHall[2] + labelHall[0] + labelHall[1] + '<br>' +
+                "人口    :" + labelHall[3] + "人" + '<br>' +
+                "世帯数    :" + labelHall[4] + "世帯" + '<br>' +
+                "全壊棟数    :" + labelHall[5] + "棟" + '<br>' +
+                "半壊棟数    :" + labelHall[6] + "棟" + '<br>' +
+                "死者数    :" + labelHall[7] + "人" + '<br>' +
+                "負傷者数    :" + labelHall[8] + "人" + '<br>' +
+                "重症者数    :" + labelHall[9] + "人" + '<br>' +
+                "避難者数    :" + labelHall[10] + "人";
+        } else if (labelHall[1] != null) {
+            element.innerHTML =
+                labelHall[2] + labelHall[1] + '<br>' +
                 "人口    :" + labelHall[3] + "人" + '<br>' +
                 "世帯数    :" + labelHall[4] + "世帯" + '<br>' +
                 "全壊棟数    :" + labelHall[5] + "棟" + '<br>' +
@@ -495,17 +503,6 @@ map.on('click', function(evt) {
                 "規制終了予定日時：" + labelRoad[8] + '<br>' +
                 "迂回路：" + labelRoad[9] + '<br>' +
                 "備考：" + labelRoad[10];
-        } else {
-            element.innerHTML =
-                labelHall[2] + labelHall[1] + '<br>' +
-                "人口    :" + labelHall[3] + "人" + '<br>' +
-                "世帯数    :" + labelHall[4] + "世帯" + '<br>' +
-                "全壊棟数    :" + labelHall[5] + "棟" + '<br>' +
-                "半壊棟数    :" + labelHall[6] + "棟" + '<br>' +
-                "死者数    :" + labelHall[7] + "人" + '<br>' +
-                "負傷者数    :" + labelHall[8] + "人" + '<br>' +
-                "重症者数    :" + labelHall[9] + "人" + '<br>' +
-                "避難者数    :" + labelHall[10] + "人";
         }
         map.addOverlay(overlayInfo);
     } else if (typeof labelHosp[1] !== "undefined") {
@@ -565,13 +562,13 @@ map.on('click', function(evt) {
         // infoH.innerHTML = infoH.innerHTML + "<tr><td style='font-size:20px;background-color:whitesmoke; color:black; text-align:left; table-layout:fixed; width: 380px'><img src=" + hospIcon + "/ width=20 height=20 >" + labelHosp[18] + "</td></tr>";
         info.innerHTML = info.innerHTML +  "<div style='border:2px solid burlywood; background-color:#888888; text-align:center' type=button ><a href=../../html/shelter-emergency.html style='display:block; width:100%; color:white; text-decoration:none' id=niphLonLatE target=_blank>緊急時情報入力</a></div>";
         var niphAddressE=document.getElementById('niphLonLatE');
-        niphAddressE.href='../../html/shelter-emergency.html' + '?' + 'ID=' + labelShltrJPN[0] + ',Name=' + labelShltrJPN[1] + ',x=' + lon + ',y=' + lat;
+        niphAddressE.href='../../html/shelter-emergency.html' + '?' + 'ecode=' + eventCode + ',ID=' + labelShltrJPN[0] + ',Name=' + labelShltrJPN[1] + ',x=' + lon + ',y=' + lat;
         info.innerHTML = info.innerHTML +  "<div style='border:2px solid burlywood; background-color:#888888; text-align:center' type=button ><a href=../../html/shelter-emergency.html style='display:block; width:100%; color:white; text-decoration:none' id=niphLonLatH target=_blank>避難所シート(保健師長会式)を入力</a></div>";
         var niphAddressH=document.getElementById('niphLonLatH');
-        niphAddressH.href='../../html/shelter-hmethod.html' + '?' + 'ID=' + labelShltrJPN[0] + ',Name=' + labelShltrJPN[1] + ',x=' + lon + ',y=' + lat;
+        niphAddressH.href='../../html/shelter-hmethod.html' + '?' + 'ecode=' + eventCode + ',ID=' + labelShltrJPN[0] + ',Name=' + labelShltrJPN[1] + ',address=' + labelShltrJPN[2] + labelShltrJPN[3] + labelShltrJPN[4] + ',x=' + lon + ',y=' + lat;
         info.innerHTML = info.innerHTML +  "<div style='border:2px solid burlywood; background-color:#888888; text-align:center' type=button ><a href=m../../html/shelter-emergency.html style='display:block; width:100%; color:white; text-decoration:none' id=niphLonLatI target=_blank>避難所シート(石井式)を入力</a></div>";
         var niphAddressI=document.getElementById('niphLonLatI');
-        niphAddressI.href='../../html/shelter-imethod.html' + '?' + 'ID=' + labelShltrJPN[0] + ',Name=' + labelShltrJPN[1] + ',x=' + lon + ',y=' + lat;
+        niphAddressI.href='../../html/shelter-imethod.html' + '?' + 'ecode=' + eventCode + ',ID=' + labelShltrJPN[0] + ',Name=' + labelShltrJPN[1] + ',address=' + labelShltrJPN[2] + labelShltrJPN[3] + labelShltrJPN[4] + ',x=' + lon + ',y=' + lat;
         while (i < 16) {
             info.innerHTML = info.innerHTML + "<tr><td style=font-size:20px;background-color:#888888;color:white></td><td style=font-size:20px;background-color:white;text-align:right;></td></tr>";
             i++
@@ -679,43 +676,3 @@ function choiceHosp(obj) {
     document.getElementById('hospinfo').style.display = 'none';
     document.getElementById('vishospinfo').style.display = 'none';
 };
-
-
-
-function geoSearch(){
-    if (document.getElementById('address').value != "") {
-    searchPoint = document.getElementById('address').value;
-
-    var geocoder = new google.maps.Geocoder();
-
-    geocoder.geocode(
-        {
-            address: searchPoint,
-            language: 'ja'
-        },
-        function (results, status) {
-            if (status == google.maps.GeocoderStatus.OK) {
-                lat = results[0].geometry.location.lat();
-                lon = results[0].geometry.location.lng();
-                console.log(lat, lon);
-                var hospPlace = ol.proj.transform([lon, lat], 'EPSG:4326', 'EPSG:3857');
-
-                console.log(hospPlace)
-
-                var pan = ol.animation.pan({
-                    duration: 2000,
-                    source: (view.getCenter()),
-                });
-                map.beforeRender(pan);
-                map.getView().setCenter(hospPlace);
-                map.getView().setZoom(17);
-            }
-            else {
-                alert('Faild：' + status);
-            }
-
-        });
-} else {
-        alert("文字を入力してください");
-    }
-}

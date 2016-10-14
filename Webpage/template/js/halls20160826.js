@@ -211,7 +211,6 @@ function createHtmlHall() {
     } else {
         HeaderHtml = HeaderHtml + arrayV[4] + arrayV[8];
     }
-    HeaderHtml = HeaderHtml + "<div style='border:2px solid burlywood; background-color:#888888; color:white; text-align:center' type=button id=showBtn value=隠す onclick=showDetail()>詳細情報の表示切替</div>";
     for (i = 0; i < arrayL.length; i++) {
         DetailHtml = DetailHtml + preCells + arrayL[i] + interCells + arrayV[i] + subCells;
     }

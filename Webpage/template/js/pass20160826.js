@@ -6,7 +6,7 @@ var styleImpassable = new ol.style.Style({
     text: new ol.style.Text({
         font: '12px Calibri,sans-serif',
         fill: new ol.style.Fill({color: "#000000"}),
-        stroke: new ol.style.Stroke({color: "#ffff00", width: 2}),
+        stroke: new ol.style.Stroke({color: "#ffff00", width: 2})
     }),
     image: new ol.style.Icon({
         scale: 1,
@@ -52,7 +52,6 @@ function createHtmlPass() {
     } else {
         HeaderHtml = HeaderHtml + arrayV[0];
     }
-    HeaderHtml = HeaderHtml + "<div style='border:2px solid burlywood; background-color:#888888; color:white; text-align:center' type=button id=showBtn value=隠す onclick=showDetail()>詳細情報の表示切替</div>";
     for (i = 0; i < arrayL.length; i++) {
         DetailHtml = DetailHtml + preCells + arrayL[i] + interCells + arrayV[i] + subCells;
     }
