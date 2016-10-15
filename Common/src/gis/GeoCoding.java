@@ -5,8 +5,10 @@ import com.google.code.geocoder.GeocoderRequestBuilder;
 import com.google.code.geocoder.model.GeocodeResponse;
 import com.google.code.geocoder.model.GeocoderRequest;
 import com.google.code.geocoder.model.GeocoderResult;
+import com.google.code.geocoder.model.LatLng;
 
 import java.io.*;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +21,6 @@ public class GeoCoding {
 
     /**
      * 指定した住所、ランドマークのGeoCoding結果を返す。
-     *
      * @param string   GeoCodingしたい文字列
      * @param language GeoCodingする文字列の言語（en, jp, など）
      * @return GeoCoding結果のリストを返す
@@ -27,6 +28,32 @@ public class GeoCoding {
     public static List<GeocoderResult> getGeocoderResult(String string, String language) {
         final Geocoder geocoder = new Geocoder();
         GeocoderRequest geocoderRequest = new GeocoderRequestBuilder().setAddress(string).setLanguage(language).getGeocoderRequest();
+        try {
+            sleep(1000); //1秒間休む
+            GeocodeResponse geocoderResponse = geocoder.geocode(geocoderRequest);
+            List<GeocoderResult> results = geocoderResponse.getResults();
+            return results;
+        } catch (IOException e) {
+            System.out.println("Google GeoCoding中にエラーが生じました。");
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            System.out.println("Google GeoCoding中にエラーが生じました。");
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
+     * 緯度、経度からReverse GeoCodingの結果を返す。
+     * @param lat 緯度
+     * @param lon 経度
+     * @param language GeoCodingする文字列の言語（en, jp, など）
+     * @return GeoCoding結果のリストを返す
+     */
+    public static List<GeocoderResult> getReverseGeocoderResult(BigDecimal lat, BigDecimal lon, String language) {
+        LatLng location = new LatLng(lat, lon);
+        final Geocoder geocoder = new Geocoder();
+        GeocoderRequest geocoderRequest = new GeocoderRequestBuilder().setLocation(location).setLanguage(language).getGeocoderRequest();
         try {
             sleep(1000); //1秒間休む
             GeocodeResponse geocoderResponse = geocoder.geocode(geocoderRequest);
