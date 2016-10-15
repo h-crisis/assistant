@@ -408,9 +408,7 @@ map.on('click', function(evt) {
         labelHosp[16] = feature.get('e011');
         labelHosp[17] = feature.get('e012');
         labelHosp[18] = feature.get('name');
-
         labelHosp[21] = feature.get('code');
-
         labelHosp[101] = feature.get('saigai');
         labelHosp[102] = feature.get('kyukyu');
         labelHosp[103] = feature.get('hibaku');
