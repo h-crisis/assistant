@@ -146,8 +146,8 @@ var styleSI7 = new ol.style.Style({
     })
 });
 
-// var url = pass + 'geojson/halls.geojson';
-var url =  'http://h-crisis.niph.go.jp/wp-content/uploads/sites/4/event/20160815/geojson/halls.geojson';
+// var url = pass + 'geojson/halls.geojson.bak';
+var url =  'http://h-crisis.niph.go.jp/wp-content/uploads/sites/4/event/20160815/geojson/halls.geojson.bak';
 
 var hallLayer = new ol.layer.Vector({
     source: new ol.source.Vector({

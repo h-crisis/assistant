@@ -187,17 +187,35 @@ var hallLayer = new ol.layer.Vector({
         console.log(url);
 }});
 
-
-
 // 役所ボタンの挙動を制御する関数
 function hallButton() {
-    if (hallLayer.getVisible()) {
-        hallLayer.setVisible(false);
-        this.style.backgroundColor = "whitesmoke";
-        this.style.color = "black";
-    } else {
+    if (!hallLayer.getVisible()) {
         hallLayer.setVisible(true);
         this.style.backgroundColor = "orange";
         this.style.color = "black";
+    } else {
+        hallLayer.setVisible(false);
+        this.style.backgroundColor = "whitesmoke";
+        this.style.color = "black";
     }
 };
+
+// 震度のポップアップを作成する関数
+function createHtmlHall() {
+    document.getElementById('info').innerHTML = "";
+    DetailHtml = "";
+    HeaderHtml = "<div style='border:2px solid burlywood; background-color:#888888; color:white; text-align:center' type=button id=showBtn value=隠す onclick=showHide()>閉じる</div>";
+
+    // 建築物名表示
+    if (arrayV[0] === null) {
+    } else {
+        HeaderHtml = HeaderHtml + arrayV[4] + arrayV[8];
+    }
+    for (i = 0; i < arrayL.length; i++) {
+        DetailHtml = DetailHtml + preCells + arrayL[i] + interCells + arrayV[i] + subCells;
+    }
+    document.getElementById('infoHeader').style.display = 'block';
+    document.getElementById('infoHeader').innerHTML = HeaderHtml;
+    document.getElementById('info').style.display = 'block';
+    document.getElementById('info').innerHTML = DetailHtml;
+}
