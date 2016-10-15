@@ -165,6 +165,9 @@ function createShelterInfoHtml(result) {
             // InfoHtml = InfoHtml + '<br>住所: ' + result.get('pref') + ' ';
         }
 
+        InfoHtml = InfoHtml + preCells + "住所" + interCells + result.get('address') + subCells;
+
+        /*
         if(result.get('gun') === "") {
 
         } else {
@@ -178,7 +181,7 @@ function createShelterInfoHtml(result) {
             InfoHtml = InfoHtml + preCells + "住所" + interCells + result.get('sikuchoson')+ result.get('address') + subCells;
             // InfoHtml = InfoHtml + result.get('sikuchoson') + ' ';
         }
-        /*
+
          if(result.get('address') === null) {
 
          } else {

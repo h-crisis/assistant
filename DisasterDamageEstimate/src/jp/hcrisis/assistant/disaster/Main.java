@@ -1,5 +1,7 @@
 package jp.hcrisis.assistant.disaster;
 
+import files.FileManagement;
+
 import java.io.File;
 
 /**
@@ -7,21 +9,30 @@ import java.io.File;
  */
 public class Main {
     public static void main(String args[]) throws Exception {
-        //File dirSIP4 = new File("/Users/manabu/OneDrive - CityRiver.NET/GIS/GISデータ/SIP4_東京湾北部地震/SIP4_東京湾北部地震_日立提供");
-        //File outFileSIP4 = new File("/Users/manabu/OneDrive - CityRiver.NET/GIS/GISデータ/SIP4_東京湾北部地震/SIP4_東京湾北部地震.csv");
+        String code = args[3];
+        File inFile = new File(args[1]);
+        File dir = new File(args[2]);
+        File outDir = new File(dir.getPath() + "/out/" + code);
+        if(!outDir.exists()) {
+            outDir.mkdir();
+        }
 
-        File inFileJSHIS = new File("/Users/manabu/OneDrive - 国立保健医療科学院/GIS/GISデータ/J-SHIS_F008101_中央構造線断層帯金剛山地東縁/S-V3-F008101-MAP-CASE1.csv");
-        File outFileJSHIS = new File("/Users/manabu/OneDrive - 国立保健医療科学院/GIS/GISデータ/J-SHIS_F008101_中央構造線断層帯金剛山地東縁/J-SHIS_F008101_中央構造線断層帯金剛山地東縁.csv");
+        FileManagement.removeFiles(outDir); // 出力フォルダを空にする
 
-        //CreateMesh5Si.createMesh5SiFromSIP4(dirSIP4, outFileSIP4); // SIP4日立から受け取る震度分布データから5次メッシュの震度分布CSVを作成するメソッド
-        CreateMesh5Si.createMesh5SiFromJSHIS(inFileJSHIS, outFileJSHIS); // JSHISの震度ファイルから5次メッシュの震度分布CSVを作成するメソッドを呼び出す
+        File siFile = new File(outDir.getPath() + "/" + code + "_si.csv");
+        if(!siFile.exists()) {
+            siFile.createNewFile();
+        }
 
-        File masterFilesDir = new File("files/master");
-        File shapeDir = new File("files/shape");
-        //File siFile = new File("files/JSHIS/ShutoHokubu/shuto_hokubu.csv");
-        File siFile = new File("/Users/manabu/OneDrive - 国立保健医療科学院/GIS/GISデータ/J-SHIS_F008101_中央構造線断層帯金剛山地東縁/J-SHIS_F008101_中央構造線断層帯金剛山地東縁.csv");
-        File outDir = new File("files/out");
-        String code = "20161017_01";
+        if(args[0].equals("JSHIS")) {
+            CreateMesh5Si.createMesh5SiFromJSHIS(inFile, siFile); // JSHISの震度ファイルから5次メッシュの震度分布CSVを作成するメソッドを呼び出す
+        }
+        else if(args[0].equals("SIP4")) {
+            CreateMesh5Si.createMesh5SiFromSIP4(inFile, siFile); // SIP4日立から受け取る震度分布データから5次メッシュの震度分布CSVを作成するメソッド
+        }
+
+        File masterFilesDir = new File(dir.getPath() + "/master");
+        File shapeDir = new File(dir.getPath() + "/shape");
 
         new EarthquakeDamageEstimate(masterFilesDir, shapeDir, siFile, outDir, code);
         new EarthquakeDamageDbSet(outDir, code);

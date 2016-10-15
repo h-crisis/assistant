@@ -175,8 +175,7 @@
                      }
                     */
 
-                    var createMsg = "info_type='emergency'" +
-                            ",reporter='" + document.getElementById('inputHuman').value + "'" +
+                    var createMsg = "reporter='" + document.getElementById('inputHuman').value + "'" +
                             ",a01=" + document.getElementById('inputNum').value;
 
                     var tmpList = document.getElementsByName('q0'); //q0
@@ -258,7 +257,7 @@
                     var nowHrs = nowTime.getHours();
                     var nowMin = nowTime.getMinutes();
                     var nowSec = nowTime.getSeconds();
-                    createMsg = createMsg + ",timestamp＝'" + nowYer + "-" + nowMon + "-" + nowDay + " " + nowHrs + ":" + nowMin + ":" + nowSec + "'";
+                    //createMsg = createMsg + ",timestamp＝'" + nowYer + "-" + nowMon + "-" + nowDay + " " + nowHrs + ":" + nowMin + ":" + nowSec + "'";
                     console.log(topicMsg + " : " + createMsg);
                     publishMsg(topicMsg, createMsg, true);
                 }
