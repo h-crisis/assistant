@@ -17,7 +17,7 @@ public class Main {
             outDir.mkdir();
         }
 
-        FileManagement.removeFiles(outDir); // 出力フォルダを空にする
+        //FileManagement.removeFiles(outDir); // 出力フォルダを空にする
 
         File siFile = new File(outDir.getPath() + "/" + code + "_si.csv");
         if(!siFile.exists()) {
@@ -34,7 +34,7 @@ public class Main {
         File masterFilesDir = new File(dir.getPath() + "/master");
         File shapeDir = new File(dir.getPath() + "/shape");
 
-        new EarthquakeDamageEstimate(masterFilesDir, shapeDir, siFile, outDir, code);
+        //new EarthquakeDamageEstimate(masterFilesDir, shapeDir, siFile, outDir, code);
         new EarthquakeDamageDbSet(outDir, code);
     }
 }

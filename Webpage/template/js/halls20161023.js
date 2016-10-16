@@ -203,7 +203,6 @@ function hallButton() {
 // 震度のポップアップを作成する関数
 function createHtmlHall() {
     document.getElementById('info').innerHTML = "";
-    DetailHtml = "";
     HeaderHtml = "<div style='border:2px solid burlywood; background-color:#888888; color:white; text-align:center' type=button id=showBtn value=隠す onclick=showHide()>閉じる</div>";
 
     // 建築物名表示
@@ -216,6 +215,7 @@ function createHtmlHall() {
             HeaderHtml = HeaderHtml + arrayV[4] + arrayV[6] + arrayV[8];
         }
     }
+    DetailHtml = "";
     DetailHtml = DetailHtml + preCells + '住所' + interCells + arrayV[3] + subCells; // 住所表示
     DetailHtml = DetailHtml + preCells + '人口' + interCells + arrayV[9] + subCells; // 人口表示
     DetailHtml = DetailHtml + preCells + '世帯数' + interCells + arrayV[10] + subCells; // 世帯数表示

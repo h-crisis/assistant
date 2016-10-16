@@ -72,6 +72,8 @@ public class EarthquakeDamageEstimate {
         File outFile5 = new File(outDir.getPath() + "/" + code + "_mesh_base_03_damage_simple.csv"); // 5次メッシュの被害シンプル化
         File outFile6 = new File(outDir.getPath() + "/" + code + "_municipalities_base_02_damage.csv"); // 市区町村ごと被害値計算
         File outFile7 = new File(outDir.getPath() + "/" + code + "_shelter_01_evacuee.csv"); // 避難所ごとの避難者数を推計
+        File outFile8 = new File(outDir.getPath() + "/shelter"); // 避難所フォルダ
+        outFile8.mkdir();
 
         extractDisasterArea(this.meshBaseFile, this.siFile, outFile1, 5);
         extractDisasterMunicipalities(outFile1, outFile2);
@@ -79,7 +81,7 @@ public class EarthquakeDamageEstimate {
         estimateDamage1(outFile3, rateFile1, rateFile2, outFile4);
         estimateDamage2(outFile4, outFile5);
         estimateDamage3(outFile4, outFile2, outFile6);
-        estimateDamage4(outFile5, this.nearShelterFile, this.sheltersFile, this.siFile, outFile7);
+        estimateDamage4(outFile5, this.nearShelterFile, this.sheltersFile, this.siFile, outFile7, outFile8);
 
         createMunicipalitiesGisFiles(shapeDir, outFile6, outDir);
     }
@@ -484,12 +486,13 @@ public class EarthquakeDamageEstimate {
      * @param inFile4 震度分布ファイル
      * @param outFile
      */
-    public static void estimateDamage4(File inFile1, File inFile2, File inFile3, File inFile4, File outFile) {
+    public static void estimateDamage4(File inFile1, File inFile2, File inFile3, File inFile4, File outFile, File shelterDir) {
         try(BufferedReader brIn1 = new BufferedReader(new InputStreamReader(new FileInputStream(inFile1), "Shift_JIS"));
             BufferedReader brIn2 = new BufferedReader(new InputStreamReader(new FileInputStream(inFile2), "Shift_JIS"));
             BufferedReader brIn3 = new BufferedReader(new InputStreamReader(new FileInputStream(inFile3), "Shift_JIS"));
             BufferedReader brIn4 = new BufferedReader(new InputStreamReader(new FileInputStream(inFile4), "Shift_JIS"));
-            PrintWriter pw = new PrintWriter(new OutputStreamWriter(new FileOutputStream(outFile, false), "Shift_JIS"))) {
+            PrintWriter pw = new PrintWriter(new OutputStreamWriter(new FileOutputStream(outFile, false), "Shift_JIS"));
+            PrintWriter pw2 = new PrintWriter(new OutputStreamWriter(new FileOutputStream((new File(shelterDir.getPath() + "/shelter_latest.csv")), false), "Shift_JIS"))) {
 
             // 震度DBの作成
             HashMap<String, Double> siDB = new HashMap<>(); // mesh5thがキー、震度が値
@@ -562,15 +565,17 @@ public class EarthquakeDamageEstimate {
             while(line3!=null) {
                 String pair[] = line3.split(",");
                 if(midashi) {
-                    pw.write(pair[0] + "," + pair[5] + "," + pair[2] + "," + pair[4] + "," + pair[6] + ",si,evacuee");
+                    pw.write(pair[2] + "," + pair[7] + "," + pair[4] + "," + pair[6] + "," + pair[8] + ",si,evacuee");
+                    pw2.write(pair[2] + "," + pair[9] + "," + pair[10]);
                     midashi = false;
                 }
-                else if(shelterDB.containsKey(pair[1])) {
-                    if(siDB.get(pair[17])==null) {
-                        pw.write("\n" + pair[0] + "," + pair[5] + "," + pair[2] + "," + pair[4] + "," + pair[6] + "," + "0.0" + "," + shelterDB.get(pair[1]));
+                else if(shelterDB.containsKey(pair[2])) {
+                    pw2.write("\n" + pair[2] + "," + pair[9] + "," + pair[10]);
+                    if(siDB.get(pair[20])==null) {
+                        pw.write("\n" + pair[2] + "," + pair[7] + "," + pair[4] + "," + pair[6] + "," + pair[8] + "," + "0.0" + "," + shelterDB.get(pair[2]));
                     }
                     else {
-                        pw.write("\n" + pair[0] + "," + pair[5] + "," + pair[2] + "," + pair[4] + "," + pair[6] + "," + siDB.get(pair[18]) + "," + shelterDB.get(pair[0]));
+                        pw.write("\n" + pair[2] + "," + pair[7] + "," + pair[4] + "," + pair[6] + "," + pair[8] + "," + siDB.get(pair[20]) + "," + shelterDB.get(pair[2]));
                     }
                 }
                 line3 = brIn3.readLine();
