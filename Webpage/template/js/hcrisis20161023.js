@@ -151,8 +151,8 @@ map.on('click', function(evt) {
     console.log(map.getView().getZoom())
 });
 
-map.on('change:view', function(evt) {
-   console.log(map.getView().getZoom());
+map.getView().on('change:resolution', function(evt) {
+   zoomLevel = map.getView().getZoom();
 });
 
 
