@@ -216,7 +216,6 @@ function createHtmlHall() {
         }
     }
 
-    /*
     DetailHtml = "";
 
     DetailHtml = DetailHtml + preCells + '住所' + interCells + arrayV[3] + subCells; // 住所表示
