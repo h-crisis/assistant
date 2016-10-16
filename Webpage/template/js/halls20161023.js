@@ -215,7 +215,10 @@ function createHtmlHall() {
             HeaderHtml = HeaderHtml + arrayV[4] + arrayV[6] + arrayV[8];
         }
     }
+
+    /*
     DetailHtml = "";
+
     DetailHtml = DetailHtml + preCells + '住所' + interCells + arrayV[3] + subCells; // 住所表示
     DetailHtml = DetailHtml + preCells + '人口' + interCells + arrayV[9] + subCells; // 人口表示
     DetailHtml = DetailHtml + preCells + '世帯数' + interCells + arrayV[10] + subCells; // 世帯数表示

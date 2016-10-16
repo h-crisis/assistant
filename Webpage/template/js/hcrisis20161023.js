@@ -123,9 +123,12 @@ var displayFeatureInfo = function(pixel, evt) {
             arrayL.push(label);
             arrayV.push(valr);
         }
+
         if(arrayL[9]=='p_num') {
             createHtmlHall();
-        } else if(arrayL[0]=='code') {
+        }
+
+        else if(arrayL[0]=='code') {
             createHtmlHospital();
         } else if(arrayL[0]=='name') {
             createHtmlPass();
