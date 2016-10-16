@@ -1,8 +1,6 @@
 /**
  * Created by komori on 2016/06/14.
  */
-
-
 var styleSI1 = new ol.style.Style({
     fill: new ol.style.Fill({
         color: 'rgba(242, 242, 255, 0.5)'
@@ -169,7 +167,8 @@ var hallLayer = new ol.layer.Vector({
         } else if(feature.get('max_si')<4.5) {
             return styleSI4;
         } else if(feature.get('max_si')<5) {
-            styleSI5W.getText().setText(resolution < 200 ? name : '');
+            styleSI5W.getText().setText(resolution < 0.0001 ? name : '');
+            styleSI5W.getView().getZoom(zoomLevel < 9 ? 0.5 : 0.2);
             return styleSI5W;
         } else if(feature.get('max_si')<5.5) {
             styleSI5S.getText().setText(resolution < 200 ? name : '');
@@ -185,6 +184,7 @@ var hallLayer = new ol.layer.Vector({
             return styleSI7;
     }
         console.log(url);
+        console.log(resolution);
 }});
 
 // 役所ボタンの挙動を制御する関数

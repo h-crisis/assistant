@@ -5,7 +5,7 @@
 
 var HeaderHtml;
 var InfoHtml;
-var DetailHtml
+var DetailHtml;
 var preCells = "<tr><td width='110px' style=font-size:17px;background-color:#888888;color:white>";
 var interCells = "</td><td width='250px' style=font-size:17px;background-color:white;text-align:right;>";
 var subCells ="</td></tr>";
@@ -97,6 +97,8 @@ hospOnOff.addEventListener('click', hospButton);
 var visPass   = document.getElementById('pass-vis');
 visPass.addEventListener('click', visPassButton);
 
+var zoomLevel = map.getView().getZoom();
+
 // Map上のFeatureを取得し表示する
 var displayFeatureInfo = function(pixel, evt) {
     var popupHtml;
@@ -146,6 +148,7 @@ map.on('click', function(evt) {
     document.getElementById('info').style.display = 'none';
     document.getElementById('popup').style.display = 'none';
     displayFeatureInfo(evt.pixel, evt);
+    console.log(map.getView().getZoom())
 });
 
 map.on('change:view', function(evt) {

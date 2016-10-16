@@ -31,7 +31,60 @@ function hoIndexButton() {
         cont++;
     }
 };
-/*
+
+
+function selterSearch(){
+    if (document.getElementById('address').value != "") {
+        searchPoint = document.getElementById('address').value;
+
+        getCSV('../event/practice/shelter/shlter_location.csv', function (data) {
+            // dataを処理する
+            // hospinfo.innerHTML = "";
+            var code = "";
+            var aa = 0;
+            var bb = 0;
+            var text = "";
+            for (var i = 0; i < data.length; i++) {
+                /* if (tdfkNum < 10) {
+                    code = data[i].ecode.substr(0, 3);
+                    if (code > 99) {
+                        code = code.substr(0, 1);
+                        if (tdfkNum == code) {
+                            hospinfo.innerHTML = hospinfo.innerHTML + "<tr><td style='font-size:24px;color:white;background-color:#888888;text-align:center' type=button id=tdkBtn value=" + i + " onclick=choiceHosp(this)>" + data[i].name1 + "</td></tr>";
+                        }
+                    }
+                }}})
+
+
+
+            function aa (results, status) {
+                if (status == google.maps.GeocoderStatus.OK) {
+                    lat = results[0].geometry.location.lat();
+                    lon = results[0].geometry.location.lng();
+                    console.log(lat, lon);
+                    var hospPlace = ol.proj.transform([lon, lat], 'EPSG:4326', 'EPSG:3857');
+
+                    console.log(hospPlace)
+
+                    var pan = ol.animation.pan({
+                        duration: 2000,
+                        source: (view.getCenter()),
+                    });
+                    map.beforeRender(pan);
+                    map.getView().setCenter(hospPlace);
+                    map.getView().setZoom(17);
+                }
+                else {
+                    alert('Faild：' + status);
+                }
+
+            }}
+     else {
+        alert("文字を入力してください");
+    }
+}
+
+
 function choiceTdfk(obj) {
     tdfkNum = obj.getAttribute('value');
 
@@ -63,8 +116,8 @@ function choiceTdfk(obj) {
         }
         document.getElementById('hospinfo').style.display = 'block';
     })};
-**/
 
+/*
 function visHoButton() {
     if (document.getElementById('vishospinfo').style.display == 'none') {
         document.getElementById('tdfkinfo').style.display = 'none';
@@ -158,7 +211,7 @@ function visHoButton() {
          }
          }
          });
-         */
+
 
         document.getElementById('vishospinfo').style.display = 'block';
     } else {
@@ -166,6 +219,7 @@ function visHoButton() {
         vishospinfo.innerHTML = "";
     }
 }
+*/
 
 function visShButton() {
     if (document.getElementById('vishospinfo').style.display == 'none') {

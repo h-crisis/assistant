@@ -8,6 +8,7 @@ var centerLat = 139.620707;
 var centerLon = 35.790259;
 var arrayL = new Array(0);
 var arrayV = new Array(0);
+var zoomLevel = 2;
 
 var shelterLayer = 'event_shelter_' + eventCode;
 
