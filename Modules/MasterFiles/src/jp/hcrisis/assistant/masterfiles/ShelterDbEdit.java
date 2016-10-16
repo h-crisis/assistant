@@ -38,7 +38,6 @@ public class ShelterDbEdit {
         this.pwd = pwd;
     }
 
-
     public static void shelterUpload(File file) {
         try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file), "Shift_JIS"))) {
             Class.forName("org.postgresql.Driver");
