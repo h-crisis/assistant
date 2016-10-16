@@ -107,7 +107,7 @@ var displayFeatureInfo = function(pixel, evt) {
         evt.coordinate, view.getResolution(), view.getProjection(),
         {'INFO_FORMAT': 'text/javascript'});
 
-    if(urlShelter) {
+    if(urlShelter && shelterLayer.getVisible()) {
         createShelterPopup(urlShelter, evt);
     }
 
