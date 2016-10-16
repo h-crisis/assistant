@@ -328,7 +328,7 @@ public class ShelterDownload {
             // 見出しを「避難所コード,市区町村コード,都道府県,郡,市区町村,避難所名,住所,緯度,経度,避難所,一時避難所,広域避難所,地震,風水害,津波,収容人数,備蓄品,備考」にする。
             String line = br.readLine();
             String headline[] = line.split(",");
-            line = "避難所コード,市区町村コード," + headline[0] + ",郡,市区町村,";
+            line = "避難所コード,市区町村コード," + headline[0] + ",郡,市区町村";
             for(int i = 2; i<=14; i++) {
                 line = line + "," + headline[i];
             }
