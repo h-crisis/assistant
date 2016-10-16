@@ -208,8 +208,11 @@ function createHtmlHall() {
     // 建築物名表示
     if (arrayV[0] === null) {
     } else {
-        if(arrayV[6]===null) {
+        if(arrayV[6]===null && arrayV[7]===null) {
             HeaderHtml = HeaderHtml + arrayV[4] + arrayV[8];
+        }
+        else if(arrayV[6] === null && arrayV[7]!==null) {
+            HeaderHtml = HeaderHtml + arrayV[4] + arrayV[6] + arrayV[7] + arrayV[8];
         }
         else {
             HeaderHtml = HeaderHtml + arrayV[4] + arrayV[6] + arrayV[8];
