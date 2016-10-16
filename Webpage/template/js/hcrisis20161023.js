@@ -148,3 +148,9 @@ map.on('click', function(evt) {
     displayFeatureInfo(evt.pixel, evt);
 });
 
+map.on('change:view', function(evt) {
+   console.log(map.getView().getZoom());
+});
+
+
+
