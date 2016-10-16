@@ -1,12 +1,28 @@
 package jp.hcrisis.assistant.masterfiles;
 
+
+import com.google.code.geocoder.model.GeocoderResult;
+import com.vividsolutions.jts.geom.Coordinate;
+import com.vividsolutions.jts.geom.MultiPolygon;
+import com.vividsolutions.jts.geom.Point;
+import org.geotools.geometry.jts.JTSFactoryFinder;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.*;
+import java.math.BigDecimal;
+import java.nio.charset.Charset;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
+import org.geotools.data.shapefile.ShapefileDataStore;
+import org.geotools.data.simple.SimpleFeatureSource;
+import org.geotools.feature.FeatureIterator;
+import org.opengis.feature.Feature;
+import org.opengis.feature.simple.SimpleFeature;
 
 /**
  * Created by manabu on 2016/09/24.
@@ -15,17 +31,17 @@ public class ShelterDownload {
 
     // Yahoo避難所の各都道府県のページ数
     public static final int[] id = {
-            183, 51, 54, 49, 48, 51, 63, 51, 29, 42,
-            89, 76, 72, 64, 73, 35, 35, 42, 37, 89,
-            86, 29, 86, 77, 34, 42, 87, 94, 30, 63,
-            32, 52, 63, 71, 39, 59, 20, 59, 47, 81,
-            19, 65, 40, 46, 48, 44, 39
+            177, 45, 52, 46, 48, 51, 63, 50, 29, 41,
+            89, 73, 67, 62, 69, 32, 33, 39, 37, 87,
+            83, 29, 85, 72, 33, 42, 87, 87, 28, 63,
+            31, 51, 61, 69, 38, 57, 20, 59, 46, 78,
+            18, 64, 40, 43, 45, 43, 38
     };
 
     // 都道府県名の配列。Yahoo避難所の順番に合わせる必要がある。
     public static final String[] prefecture_name = {
             "北海道", "青森県", "岩手県", "宮城県", "秋田県", "山形県", "福島県", "茨城県", "栃木県", "群馬県",
-            "埼玉県", "千葉県", "東京都", "神奈川県", "新潟県", "富山県", "石川県", "福井県", "山形県", "長野県",
+            "埼玉県", "千葉県", "東京都", "神奈川県", "新潟県", "富山県", "石川県", "福井県", "山梨県", "長野県",
             "岐阜県", "静岡県", "愛知県", "三重県", "滋賀県", "京都府", "大阪府", "兵庫県", "奈良県", "和歌山県",
             "鳥取県", "島根県", "岡山県", "広島県", "山口県", "徳島県", "香川県", "愛媛県", "高知県", "福岡県",
             "佐賀県", "長崎県", "熊本県", "大分県", "宮崎県", "鹿児島県", "沖縄県"
@@ -44,23 +60,33 @@ public class ShelterDownload {
             workingDir = new File(args[0]);
         }
         else {
-            workingDir = new File("files/YahooSshelter");
+            workingDir = new File("files/YahooShelter");
         }
         if(!workingDir.exists()) {
             System.out.println("作業フォルダが存在しません。");
             System.exit(1);
         }
-        createShelterMasterYahoo(workingDir, 1);
+        //createShelterMasterYahoo(workingDir); // 全ての都道府県の避難所一覧を作成する場合
+        //createShelterMasterYahoo(workingDir, 1); // 指定した都道府県の避難所一覧を作成する場合
         combineShleterFiles(workingDir);
+        updateShelterFiles(new File("files/YahooShelter/0_全国.csv"), new File("files/shape/japan_ver80/japan_ver80.shp"), new File("files/YahooShelter/0_全国改.csv"));
+    }
+
+    /**
+     * Yahoo避難所から指定した都道府県の避難所一覧ページを作成する
+     * @param dir 出力フォルダ
+     * @param i 指定する都道府県番号
+     */
+    public static void createShelterMasterYahoo(File dir, int i) {
+            readSheltersFromPrefecture(new File(dir.getPath() + "/" + i + "_" + prefecture_name[i-1] + ".csv"), i);
     }
 
     /**
      * Yahoo避難所から全国の避難所一覧ページを作成する
      * @param dir 出力フォルダ
-     * @param start どの都道府県から始めるかの番号指定
      */
-    public static void createShelterMasterYahoo(File dir, int start) {
-        for(int i = start; i<=id.length; i++) {
+    public static void createShelterMasterYahoo(File dir) {
+        for(int i = 1; i<=id.length; i++) {
             readSheltersFromPrefecture(new File(dir.getPath() + "/" + i + "_" + prefecture_name[i-1] + ".csv"), i);
         }
     }
@@ -82,6 +108,7 @@ public class ShelterDownload {
 
             for (int j = 1; j <= id[i - 1]; j++) {
                 Document doc = Jsoup.connect("http://crisis.yahoo.co.jp/shelter/list/" + prefectureID + "/?p=" + j).get(); // 各都道府県の避難所一覧ページを読み込む
+                //Document doc = Jsoup.connect("http://crisis.yahoo.co.jp/shelter/list/" + prefectureID + "/?p=1000").get(); // 各都道府県の避難所一覧ページを読み込む
                 Element element = doc.getElementById("shltlst"); // id=shltlstの要素を取り出す
                 Elements tbody = element.getElementsByTag("tr");
                 for (int k = 1; k < tbody.size(); k++) {
@@ -265,6 +292,162 @@ public class ShelterDownload {
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
             }
+        }
+    }
+
+    /**
+     * 避難所の市区町村情報、住所情報を更新するプログラム（住所から市区町村情報を除くプログラム）
+     * @param shelterFile Yahooからダウンロードした避難所ファイル
+     * @param shapeFile ESRIの市区町村境界Shapeファイル
+     * @param outFile 出力ファイル
+     */
+    public static void updateShelterFiles(File shelterFile, File shapeFile, File outFile) {
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(shelterFile), "Shift_JIS")) ;
+             PrintWriter pw = new PrintWriter(new OutputStreamWriter(new FileOutputStream(outFile, false), "Shift_JIS"))) {
+
+            // 市区町村境界のFeatureを全て読み込む。また市区町村コード、郡、市区町村のDBを作成する。
+            ArrayList<SimpleFeature> municipalities = new ArrayList<>();
+            HashMap<String, String> jcodeDB = new HashMap<>(); // 都道府県郡市区町村名をキー、市区町村コードを値
+            HashMap<String, String> gunDB = new HashMap<>(); // 市区町村コードをキー、郡名を値
+            HashMap<String, String> sikuchosonDB = new HashMap<>(); // 市区町村コードをキー、市区町村名を値
+
+            ShapefileDataStore store = new ShapefileDataStore(shapeFile.toURI().toURL());
+            store.setCharset(Charset.forName("Shift_JIS"));
+            SimpleFeatureSource featureSource = store.getFeatureSource();
+            FeatureIterator iFeature = featureSource.getFeatures().features();
+            while(iFeature.hasNext()) {
+                SimpleFeature feature = (SimpleFeature)iFeature.next();
+                municipalities.add(feature);
+                jcodeDB.put(feature.getAttribute("KEN").toString() + feature.getAttribute("GUN").toString() + feature.getAttribute("SEIREI").toString() + feature.getAttribute("SIKUCHOSON").toString()
+                        ,feature.getAttribute("JCODE").toString());
+                gunDB.put(feature.getAttribute("JCODE").toString(), feature.getAttribute("GUN").toString());
+                sikuchosonDB.put(feature.getAttribute("JCODE").toString(), feature.getAttribute("SEIREI").toString() + feature.getAttribute("SIKUCHOSON").toString());
+            }
+            store.dispose();
+
+            // 見出しを「避難所コード,市区町村コード,都道府県,郡,市区町村,避難所名,住所,緯度,経度,避難所,一時避難所,広域避難所,地震,風水害,津波,収容人数,備蓄品,備考」にする。
+            String line = br.readLine();
+            String headline[] = line.split(",");
+            line = "避難所コード,市区町村コード," + headline[0] + "郡,市区町村,";
+            for(int i = 2; i<=14; i++) {
+                line = line + "," + headline[i];
+            }
+            pw.write(line);
+
+            // 1行ずつ読み込みレコードを修正していく
+            HashMap<String, Integer> idDB = new HashMap<>();
+            while((line=br.readLine())!=null) {
+                String str[] = line.split(","); // 行を分解
+
+                // 基本情報を保存する
+                double lat = Double.parseDouble(str[4]); // 緯度
+                double lon = Double.parseDouble(str[5]); // 経度
+                Coordinate latlon = new Coordinate(lat, lon);
+                Point point = JTSFactoryFinder.getGeometryFactory().createPoint(new Coordinate(lon, lat)); // ポイント
+                String scode = "SH";
+                String jcode = "";
+                String pref = "";
+                String gun = "";
+                String sikuchoson = "";
+
+                // 所在地の市区町村マッチングを行う。
+                for(SimpleFeature feature : municipalities) {
+                    MultiPolygon mp = (MultiPolygon) feature.getAttribute("the_geom");
+                    if(point.within(mp)) { // 所在する市区町村を見つけた時の処理
+                        jcode = feature.getAttribute("JCODE").toString();
+                        pref = feature.getAttribute("KEN").toString();
+                        gun = feature.getAttribute("GUN").toString();
+                        sikuchoson = feature.getAttribute("SEIREI").toString() + feature.getAttribute("SIKUCHOSON").toString();
+                        break;
+                    }
+                }
+
+                // マッチングの結果、都道府県を超えている場合
+                if(!pref.equals(str[0])) {
+                    pref = str[0];
+                    jcode = jcodeDB.get(str[0] + str[1]);
+                    gun = gunDB.get(jcode);
+                    sikuchoson = sikuchosonDB.get(jcode);
+                }
+
+                // 所在地と住所の確認
+                if(!str[3].startsWith(pref)) { // 住所に都道府県が含まれない場合 ReverseGeoCoiding
+                    if(str[3].startsWith(sikuchoson)) {
+                        str[3] = pref + str[3];
+                    }
+                    else {
+                        BigDecimal blat = new BigDecimal(lat);
+                        BigDecimal blon = new BigDecimal(lon);
+                        List<GeocoderResult> results = gis.GeoCoding.getReverseGeocoderResult(blat, blon, "ja");
+                        String address = results.get(0).getFormattedAddress();
+                        String pair[] = address.split(pref);
+                        str[3] = pref + pair[1];
+                    }
+                }
+                else if(!str[3].contains(sikuchoson)) { // 住所に設定市区町村が含まれない場合
+                    if (str[3].contains(str[1])) { // YahooDBで住所と市区町村が一致する場合
+                        jcode = jcodeDB.get(str[0] + str[1]);
+                        gun = gunDB.get(jcode);
+                        sikuchoson = sikuchosonDB.get(jcode);
+                    } else { // YahooDBで住所と市区町村が一致しない場合、ReverseGeoCooding
+                        BigDecimal blat = new BigDecimal(lat);
+                        BigDecimal blon = new BigDecimal(lon);
+                        List<GeocoderResult> results = gis.GeoCoding.getReverseGeocoderResult(blat, blon, "ja");
+                        String address = results.get(0).getFormattedAddress();
+                        String pair[] = address.split(pref);
+                        str[3] = pref + pair[1];
+                    }
+                }
+
+                if(!str[3].contains(sikuchoson)) { // 住所に市区町村がまだ含まれない場合の最終処理→住所を正とする
+                    for(String s : jcodeDB.keySet()) {
+                        if(str[3].contains(s)) {
+                            jcode = jcodeDB.get(s);
+                            gun = gunDB.get(jcode);
+                            sikuchoson = sikuchosonDB.get(jcode);
+                            break;
+                        }
+                    }
+                }
+
+                String addressPair[] = str[3].split(sikuchoson);
+                if(addressPair.length==2) {
+                    str[3] = addressPair[1];
+                }
+                else {
+                    str[3] = "";
+                }
+
+                // 避難所コードの作成
+                int id;
+                if(idDB.containsKey(jcode)) {
+                    id = idDB.get(jcode);
+                    id++;
+                }
+                else {
+                    id = 1001; // 先頭は1001からスタート
+                }
+                idDB.put(jcode, id);
+                scode = scode + jcode + Integer.toString(id); // 避難所コード決定
+
+
+
+                // 「避難所コード,市区町村コード,都道府県,郡,市区町村,避難所名,住所,緯度,経度,避難所,一時避難所,広域避難所,地震,風水害,津波,収容人数,備蓄品,備考」の作成
+                String s = scode + "," + jcode + "," + pref + "," + gun + "," + sikuchoson;
+                for(int i = 2; i<=14; i++) {
+                    if(i>(str.length-1))
+                        s = s + ",";
+                    else
+                        s = s + "," + str[i];
+                }
+                pw.write("\n" + s);
+            }
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }
