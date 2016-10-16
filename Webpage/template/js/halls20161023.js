@@ -167,20 +167,19 @@ var hallLayer = new ol.layer.Vector({
         } else if(feature.get('max_si')<4.5) {
             return styleSI4;
         } else if(feature.get('max_si')<5) {
-            styleSI5W.getText().setText(resolution < 0.0001 ? name : '');
-            styleSI5W.getView().getZoom(zoomLevel < 9 ? 0.5 : 0.2);
+            styleSI5W.getText().setText(zoomLevel > 10 ? name : '');
             return styleSI5W;
         } else if(feature.get('max_si')<5.5) {
-            styleSI5S.getText().setText(resolution < 200 ? name : '');
+            styleSI5S.getText().setText(zoomLevel > 10 ? name : '');
             return styleSI5S;
         } else if(feature.get('max_si')<6) {
-            styleSI6W.getText().setText(resolution < 200 ? name : '');
+            styleSI6W.getText().setText(zoomLevel > 10 ? name : '');
             return styleSI6W;
         } else if(feature.get('max_si')<6.5) {
-            styleSI6S.getText().setText(resolution < 200 ? name : '');
+            styleSI6S.getText().setText(zoomLevel > 10 ? name : '');
             return styleSI6S;
         } else if(feature.get('max_si')>=6.5) {
-            styleSI7.getText().setText(resolution < 200 ? name : '');
+            styleSI7.getText().setText(zoomLevel > 10 ? name : '');
             return styleSI7;
     }
         console.log(url);
