@@ -117,6 +117,8 @@ var displayFeatureInfo = function(pixel, evt) {
 
     // geoJsonから情報を配列に押し込み配列の項目別に各施設のポップアップを表示する関数を呼び出す
     map.forEachFeatureAtPixel(pixel, function (feature) {
+        arrayL = [];
+        arrayV = [];
         for (i = 1; i < (feature.getKeys().length); i++) {
             label = feature.getKeys()[i];
             valr = feature.get(label);
@@ -139,6 +141,7 @@ var displayFeatureInfo = function(pixel, evt) {
 map.on('click', function(evt) {
     var coordinate = evt.coordinate;
     var pixel = map.getPixelFromCoordinate(coordinate);
+    document.getElementById('info').innerHTML = "";
     document.getElementById('infoHeader').style.display = 'none';
     document.getElementById('info').style.display = 'none';
     document.getElementById('popup').style.display = 'none';
