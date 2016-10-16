@@ -117,9 +117,7 @@ var displayFeatureInfo = function(pixel, evt) {
 
     // geoJsonから情報を配列に押し込み配列の項目別に各施設のポップアップを表示する関数を呼び出す
     map.forEachFeatureAtPixel(pixel, function (feature) {
-        arrayL = [];
-        arrayV = [];
-        for (i = 1; i < (feature.getKeys().length - 1); i++) {
+        for (i = 1; i < (feature.getKeys().length); i++) {
             label = feature.getKeys()[i];
             valr = feature.get(label);
             arrayL.push(label);

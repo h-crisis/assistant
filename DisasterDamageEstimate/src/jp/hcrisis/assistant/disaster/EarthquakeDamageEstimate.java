@@ -479,8 +479,9 @@ public class EarthquakeDamageEstimate {
     /**
      * 避難所ごとに避難者数を集計する
      * @param inFile1 シンプル化した5次メッシュ被害ファイル
-     * @param inFile2
-     * @param inFile3
+     * @param inFile2 近傍避難所データ
+     * @param inFile3 避難所データ
+     * @param inFile4 震度分布ファイル
      * @param outFile
      */
     public static void estimateDamage4(File inFile1, File inFile2, File inFile3, File inFile4, File outFile) {
@@ -491,7 +492,7 @@ public class EarthquakeDamageEstimate {
             PrintWriter pw = new PrintWriter(new OutputStreamWriter(new FileOutputStream(outFile, false), "Shift_JIS"))) {
 
             // 震度DBの作成
-            HashMap<String, Double> siDB = new HashMap<>();
+            HashMap<String, Double> siDB = new HashMap<>(); // mesh5thがキー、震度が値
             String line4 = brIn4.readLine(); // 1行目は見出し
             while((line4 = brIn4.readLine())!=null) {
                 String pair[] = line4.split(",");
@@ -505,7 +506,7 @@ public class EarthquakeDamageEstimate {
 
             // 5次メッシュ避難者数DBの作成
             String line1 = brIn1.readLine(); // 1行目は見出し
-            HashMap<String, Double> meshDB1 = new HashMap<>();
+            HashMap<String, Double> meshDB1 = new HashMap<>(); // mesh5thがキー、避難者数が値
             while((line1 = brIn1.readLine()) != null) {
                 String pair[] = line1.split(",");
                 meshDB1.put(pair[0], Double.parseDouble(pair[7]));
@@ -513,8 +514,8 @@ public class EarthquakeDamageEstimate {
 
             // 5次メッシュと避難所DBの作成
             String line2 = brIn2.readLine(); // 1行目は見出し
-            HashMap<String, HashMap<String, Double>> meshDB2 = new HashMap<>();
-            HashSet<String> col = new HashSet();
+            HashMap<String, HashMap<String, Double>> meshDB2 = new HashMap<>(); // mesh5thがキー、（避難所コードがキー、距離の逆数が値）が値
+            HashSet<String> col = new HashSet(); // 全ての避難所をストックする
             while((line2=brIn2.readLine())!=null) {
                 String pair[] = line2.split(",");
                 if(siDB.containsKey(pair[0])) {
@@ -531,7 +532,7 @@ public class EarthquakeDamageEstimate {
             }
 
             // 避難所DBの作成
-            HashMap<String, Double> shelterDB = new HashMap<>();
+            HashMap<String, Double> shelterDB = new HashMap<>(); // 避難所コードがキー、避難者数が値
             Iterator iCol = col.iterator();
             while(iCol.hasNext()) {
                 String s = (String) iCol.next();
@@ -561,15 +562,15 @@ public class EarthquakeDamageEstimate {
             while(line3!=null) {
                 String pair[] = line3.split(",");
                 if(midashi) {
-                    pw.write(pair[1] + "," + pair[6] + "," + pair[3] + "," + pair[5] + "," + pair[7] + ",si,evacuee");
+                    pw.write(pair[0] + "," + pair[5] + "," + pair[2] + "," + pair[4] + "," + pair[6] + ",si,evacuee");
                     midashi = false;
                 }
                 else if(shelterDB.containsKey(pair[1])) {
                     if(siDB.get(pair[17])==null) {
-                        pw.write("\n" + pair[1] + "," + pair[6] + "," + pair[3] + "," + pair[5] + "," + pair[7] + "," + "0.0" + "," + shelterDB.get(pair[1]));
+                        pw.write("\n" + pair[0] + "," + pair[5] + "," + pair[2] + "," + pair[4] + "," + pair[6] + "," + "0.0" + "," + shelterDB.get(pair[1]));
                     }
                     else {
-                        pw.write("\n" + pair[1] + "," + pair[6] + "," + pair[3] + "," + pair[5] + "," + pair[7] + "," + siDB.get(pair[17]) + "," + shelterDB.get(pair[1]));
+                        pw.write("\n" + pair[0] + "," + pair[5] + "," + pair[2] + "," + pair[4] + "," + pair[6] + "," + siDB.get(pair[18]) + "," + shelterDB.get(pair[0]));
                     }
                 }
                 line3 = brIn3.readLine();

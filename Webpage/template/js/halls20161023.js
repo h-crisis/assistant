@@ -209,11 +209,31 @@ function createHtmlHall() {
     // 建築物名表示
     if (arrayV[0] === null) {
     } else {
-        HeaderHtml = HeaderHtml + arrayV[4] + arrayV[8];
+        if(arrayV[6]===null) {
+            HeaderHtml = HeaderHtml + arrayV[4] + arrayV[8];
+        }
+        else {
+            HeaderHtml = HeaderHtml + arrayV[4] + arrayV[6] + arrayV[8];
+        }
     }
-    for (i = 0; i < arrayL.length; i++) {
+    DetailHtml = DetailHtml + preCells + '住所' + interCells + arrayV[3] + subCells; // 住所表示
+    DetailHtml = DetailHtml + preCells + '人口' + interCells + arrayV[9] + subCells; // 人口表示
+    DetailHtml = DetailHtml + preCells + '世帯数' + interCells + arrayV[10] + subCells; // 世帯数表示
+    DetailHtml = DetailHtml + preCells + '最大震度' + interCells + arrayV[11] + subCells; // 最大震度表示
+    DetailHtml = DetailHtml + preCells + '最小震度' + interCells + arrayV[12] + subCells; // 最小震度表示
+    DetailHtml = DetailHtml + preCells + '平均震度' + interCells + arrayV[13] + subCells; // 平均震度表示
+    DetailHtml = DetailHtml + preCells + '全壊建物数' + interCells + arrayV[14] + subCells; // 全壊建物数表示
+    DetailHtml = DetailHtml + preCells + '半壊建物数' + interCells + arrayV[15] + subCells; // 半壊建物数表示
+    DetailHtml = DetailHtml + preCells + '死者数' + interCells + arrayV[16] + subCells; // 死者数表示
+    DetailHtml = DetailHtml + preCells + '負傷者数' + interCells + arrayV[17] + subCells; // 負傷者表示
+    DetailHtml = DetailHtml + preCells + '重傷者数' + interCells + arrayV[18] + subCells; // 重傷者数表示
+    DetailHtml = DetailHtml + preCells + '避難者数' + interCells + arrayV[19] + subCells; // 避難者数表示
+
+    /*
+    for (i = 0; i < arrayL.length; i++) { // 震度分布で表示するもの
         DetailHtml = DetailHtml + preCells + arrayL[i] + interCells + arrayV[i] + subCells;
     }
+    */
     document.getElementById('infoHeader').style.display = 'block';
     document.getElementById('infoHeader').innerHTML = HeaderHtml;
     document.getElementById('info').style.display = 'block';
