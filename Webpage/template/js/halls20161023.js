@@ -210,11 +210,11 @@ function createHtmlHall() {
         if(arrayV[6]===null && arrayV[7]===null) {
             HeaderHtml = HeaderHtml + arrayV[4] + arrayV[8];
         }
-        else if(arrayV[6] === null && arrayV[7]!==null) {
-            HeaderHtml = HeaderHtml + arrayV[4] + arrayV[6] + arrayV[7] + arrayV[8];
+        else if(arrayV[7]===null) {
+            HeaderHtml = HeaderHtml + arrayV[4] + arrayV[6] + arrayV[8];
         }
         else {
-            HeaderHtml = HeaderHtml + arrayV[4] + arrayV[6] + arrayV[8];
+            HeaderHtml = HeaderHtml + arrayV[4] + arrayV[6] + arrayV[7] + arrayV[8];
         }
     }
 
