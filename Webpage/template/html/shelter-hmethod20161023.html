@@ -630,27 +630,30 @@
 
                     var topicMsg = "/hcrisis/assistant/event/" + document.getElementById('eventCode').value
                             + "/shelter/" + document.getElementById('Code').value +　"/nacphn01";
-                    var createMsg = code='" + document.getElementById('Code').value +
-                            "',reporter='" + document.getElementById('Reporter').value +
-                            "',name='" + document.getElementById('Name').value +
-                            "',address='" + document.getElementById('Address').value;
+                    var createMsg = "reporter='" + document.getElementById('Reporter').value + "'";
 
                     for (var i = 0; i < tagId.length; i++) {
-                        createMsg = createMsg +  "'," + tagId[i] + "='" + document.getElementById(tagId[i]).value;
+                        if(document.getElementById(tagId[i]).value==='') {
+
+                        }
+                        else if(i>3 || i!=6 || i!=20 || i!=24) {
+                            createMsg = createMsg + ", " + tagId[i] + "='" + document.getElementById(tagId[i]).value + "'";
+                        }
+                        else  {
+                            createMsg = createMsg + ", " + tagId[i] + "=" + document.getElementById(tagId[i]).value;
+                        }
                     }
 
                     for (var i = 0; i < tagName.length; i++) {
                         for (var k = 0; k < document.getElementsByName(tagName[i]).length; k++) {
                             if (document.getElementsByName(tagName[i])[k].checked) {
-                                createMsg = createMsg + "'," + tagName[i] + "='" + document.getElementsByName(tagName[i])[k].value;
+                                createMsg = createMsg + "," + tagName[i] + "='" + document.getElementsByName(tagName[i])[k].value + "'";
                                 continue;
                             }
                         }
                     }
 
-                    createMsg = createMsg + "'";
-                    //createMsg = createMsg +
-                            "',lat='" + lat + "',lon='" + lon;
+                    //createMsg = createMsg +"',lat='" + lat + "',lon='" + lon;
 
                     var nowTime = new Date();
                     var nowYer = nowTime.getFullYear();
