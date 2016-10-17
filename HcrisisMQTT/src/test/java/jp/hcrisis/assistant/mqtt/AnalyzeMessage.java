@@ -52,8 +52,14 @@ public class AnalyzeMessage {
             Connection db = DriverManager.getConnection(url, usr, pwd);
             Statement st = db.createStatement();
 
-            String sql = "update event_shelter_" + eventCode + " set " + message + ", info_type='" + type + "', status='evaluated'" +
-                    " where code='" + shelterCode + "'";
+            String sql = "update event_shelter_" + eventCode + " set ";
+            if(message.equals("")) {
+                sql = sql + "info_type='" + type + "', status='evaluated' where code='" + shelterCode + "'";
+            }
+            else {
+                sql = sql + message + ", info_type='" + type + "', status='evaluated' where code='" + shelterCode + "'";
+            }
+
             System.out.println(sql);
             st.execute(sql);
 

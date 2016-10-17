@@ -270,7 +270,10 @@
             var createMsg = "reporter='" + document.getElementById('Reporter').value + "'"
 
             for (var i = 0; i < tagId.length; i++) {
-                if(i==25 || i==30 || i>=71) {
+                if(document.getElementById(tagId[i]).value==='') {
+
+                }
+                else if(i==25 || i==30 || i>=71) {
                     createMsg = createMsg + ", " + tagId[i] + "='" + document.getElementById(tagId[i]).value + "'";
                 }
                 else  {
@@ -287,7 +290,7 @@
                 }
             }
 
-            createMsg = createMsg + "',lat='" + lat + "',lon='" + lon;
+            //createMsg = createMsg + "',lat='" + lat + "',lon='" + lon;
 
             var nowTime = new Date();
             var nowYer = nowTime.getFullYear();
@@ -295,7 +298,7 @@
             var nowDay = nowTime.getDate();
             var nowHrs = nowTime.getHours();
             var nowMin = nowTime.getMinutes();
-            createMsg = createMsg + "',time='" + nowYer + "/" + nowMon + "/" + nowDay + "/" + nowHrs + ":" + nowMin + "'";
+            //createMsg = createMsg + "',time='" + nowYer + "/" + nowMon + "/" + nowDay + "/" + nowHrs + ":" + nowMin + "'";
             console.log(topicMsg + " : " + createMsg);
             publishMsg(topicMsg, createMsg, true);
 
