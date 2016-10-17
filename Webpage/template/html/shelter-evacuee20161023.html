@@ -267,9 +267,7 @@
 
             var topicMsg = "/hcrisis/assistant/event/" + document.getElementById('eventCode').value
                     + "/shelter/" + document.getElementById('Code').value +　"/nacphn02";
-            var createMsg = "',code='" + document.getElementById('Code').value +
-                    "',reporter='" + document.getElementById('Reporter').value +
-                    "',address='" + document.getElementById('Address').value + "'";
+            var createMsg = "reporter='" + document.getElementById('Reporter').value + "'"
 
             for (var i = 0; i < tagId.length; i++) {
                 if(i==25 || i==30 || i>=71) {
