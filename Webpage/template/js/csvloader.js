@@ -35,67 +35,28 @@ function hoIndexButton() {
 
 function shelterSearch(){
     // if (document.getElementById('address').value != "") {
-        searchPoint = document.getElementById('address').value;
+        searchPoint = "SH" + document.getElementById('address').value;
         // var ohg = obj.getAttribute('address');
 
     var getCSV = d3.dsv(',', 'text/csv; charset=utf-8');
 
-    getCSV('shelter_location.csv', function (data) {
+    getCSV('shelter/shelter_location.csv', function (data) {
         // dataを処理する
-        console.log(data[0].scode.substr(0,2))
-    });
-
-
-        getCSV('shelter_location.csv', function (data) {
-            // dataを処理する
-            // hospinfo.innerHTML = "";
-            // var code = data[0].ecode.substr(0, 3);
-            var aa = 0;
-            var bb = 0;
-            var text = "";
-            // for (var i = 0; i < data.length; i++) {
-
-            /* if (tdfkNum < 10) {
-             code = data[i].ecode.substr(0, 3);
-             if (code > 99) {
-             code = code.substr(0, 1);
-             if (tdfkNum == code) {
-             hospinfo.innerHTML = hospinfo.innerHTML + "<tr><td style='font-size:24px;color:white;background-color:#888888;text-align:center' type=button id=tdkBtn value=" + i + " onclick=choiceHosp(this)>" + data[i].name1 + "</td></tr>";
-             }
-             }*/
-           //  console.log(code)
-        })
-    }
-
-/*
-
-            function aa (results, status) {
-                if (status == google.maps.GeocoderStatus.OK) {
-                    lat = results[0].geometry.location.lat();
-                    lon = results[0].geometry.location.lng();
-                    console.log(lat, lon);
-                    var hospPlace = ol.proj.transform([lon, lat], 'EPSG:4326', 'EPSG:3857');
-
-                    console.log(hospPlace)
-
-                    var pan = ol.animation.pan({
-                        duration: 2000,
-                        source: (view.getCenter()),
-                    });
-                    map.beforeRender(pan);
-                    map.getView().setCenter(hospPlace);
-                    map.getView().setZoom(17);
-                }
-                else {
-                    alert('Faild：' + status);
-                }
-
-            }}
-     else {
-        alert("文字を入力してください");
-    }
-}
-*/
+        cont = 0
+        for (i = 0; i < data.length; i++) {
+            code = data[i].scode.substr(0,11);
+            if (code == searchPoint) {
+                lat = data[i].lat.substr(0,18);
+                lon = data[i].lon.substr(0,18);
+                var shelterPlace = [lon, lat];
+                console.log(shelterPlace);
+                map.getView().setCenter(shelterPlace);
+                map.getView().setZoom(15);
+                cont = 1
+            }
+            }if(cont != 1){
+            alert("該当する施設がありません！");
+        }})}
 
 
 function choiceTdfk(obj) {
