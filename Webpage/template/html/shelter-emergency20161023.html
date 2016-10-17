@@ -178,7 +178,7 @@
                     var nowDay = nowTime.getDate();
                     var nowHrs = nowTime.getHours();
                     var nowMin = nowTime.getMinutes();
-                    createMsg = createMsg + "',time='" + nowYer + "/" + nowMon + "/" + nowDay + "/" + nowHrs + ":" + nowMin + "'";
+                    //createMsg = createMsg + "',time='" + nowYer + "/" + nowMon + "/" + nowDay + "/" + nowHrs + ":" + nowMin + "'"; // 時刻入力にバグあり
                     console.log(topicMsg + " : " + createMsg);
                     publishMsg(topicMsg, createMsg, true);
                 }
