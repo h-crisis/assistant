@@ -2,6 +2,8 @@
  * Created by komori on 2016/10/06.
  */
 
+var shelterLayerWmsLayer = 'event_shelter_' + eventCode;
+
 var shelterLayer = new ol.layer.Tile({
     source: new ol.source.TileWMS({
         url: wms,
@@ -9,7 +11,7 @@ var shelterLayer = new ol.layer.Tile({
             'VERSION': '1.1.1',
             tiled: true,
             STYLES: '',
-            LAYERS: 'shelter'
+            LAYERS: shelterLayerWmsLayer
         }
     })
 });
