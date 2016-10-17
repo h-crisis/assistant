@@ -46,16 +46,16 @@ function shelterSearch(){
         for (i = 0; i < data.length; i++) {
             code = data[i].scode.substr(0,11);
             if (code == searchPoint) {
-                lat = data[i].lat.substr(0,18);
-                lon = data[i].lon.substr(0,18);
-                var shelterPlace = [lon, lat];
-                console.log(shelterPlace);
-                map.getView().setCenter(shelterPlace);
-                map.getView().setZoom(15);
+                lat = parseFloat(data[i].lat.substr(0,7));
+                lon = parseFloat(data[i].lon.substr(0,7));
+                var shelterPlace = [lon,lat];
                 cont = 1
             }
         }if(cont != 1){
             alert("該当する施設がありません！");
+        } else {
+            map.getView().setCenter(shelterPlace);
+            map.getView().setZoom(15);
         }})};
 
 
