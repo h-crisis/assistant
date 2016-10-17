@@ -54,6 +54,10 @@ function shelterSearch(){
         }if(cont != 1){
             alert("該当する施設がありません！");
         } else {
+            document.getElementById('info').innerHTML = "";
+            document.getElementById('infoHeader').style.display = 'none';
+            document.getElementById('info').style.display = 'none';
+            document.getElementById('popup').style.display = 'none';
             map.getView().setCenter(shelterPlace);
             map.getView().setZoom(15);
         }})};
