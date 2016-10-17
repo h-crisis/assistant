@@ -2,7 +2,7 @@
  * Created by komori on 2016/07/12.
  */
 
-var getCSV = d3.dsv(',', 'text/csv; charset=shift_jis');
+// var getCSV = d3.dsv(',', 'text/csv; charset=shift_jis');
 var tdfkNum;
 var lat;
 var lon;
@@ -33,29 +33,41 @@ function hoIndexButton() {
 };
 
 
-function selterSearch(){
-    if (document.getElementById('address').value != "") {
+function shelterSearch(){
+    // if (document.getElementById('address').value != "") {
         searchPoint = document.getElementById('address').value;
+        // var ohg = obj.getAttribute('address');
 
-        getCSV('../event/practice/shelter/shlter_location.csv', function (data) {
+    var getCSV = d3.dsv(',', 'text/csv; charset=utf-8');
+
+    getCSV('shelter_location.csv', function (data) {
+        // dataを処理する
+        console.log(data[0].scode.substr(0,2))
+    });
+
+
+        getCSV('shelter_location.csv', function (data) {
             // dataを処理する
             // hospinfo.innerHTML = "";
-            var code = "";
+            // var code = data[0].ecode.substr(0, 3);
             var aa = 0;
             var bb = 0;
             var text = "";
-            for (var i = 0; i < data.length; i++) {
-                /* if (tdfkNum < 10) {
-                    code = data[i].ecode.substr(0, 3);
-                    if (code > 99) {
-                        code = code.substr(0, 1);
-                        if (tdfkNum == code) {
-                            hospinfo.innerHTML = hospinfo.innerHTML + "<tr><td style='font-size:24px;color:white;background-color:#888888;text-align:center' type=button id=tdkBtn value=" + i + " onclick=choiceHosp(this)>" + data[i].name1 + "</td></tr>";
-                        }
-                    }
-                }}})
+            // for (var i = 0; i < data.length; i++) {
 
+            /* if (tdfkNum < 10) {
+             code = data[i].ecode.substr(0, 3);
+             if (code > 99) {
+             code = code.substr(0, 1);
+             if (tdfkNum == code) {
+             hospinfo.innerHTML = hospinfo.innerHTML + "<tr><td style='font-size:24px;color:white;background-color:#888888;text-align:center' type=button id=tdkBtn value=" + i + " onclick=choiceHosp(this)>" + data[i].name1 + "</td></tr>";
+             }
+             }*/
+           //  console.log(code)
+        })
+    }
 
+/*
 
             function aa (results, status) {
                 if (status == google.maps.GeocoderStatus.OK) {
@@ -83,6 +95,7 @@ function selterSearch(){
         alert("文字を入力してください");
     }
 }
+*/
 
 
 function choiceTdfk(obj) {
