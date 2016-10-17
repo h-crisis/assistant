@@ -258,83 +258,38 @@
         }
 
         function createMessage() {
+            var tagId = ['d01','d01_1','d01_2','d02','d02_1','d03','d04','d05','d05_1','d05_2','d05_3','d06','d06_1','d06_2','d06_3','d06_4','d07','d08','d09','d10','d11','d11_1','d11_2','d11_3'
+                ,'d12','d13','e01','e01_1','e01_2','e01_3','e02','f01','f01_1','f01_2','f01_3','f02','f02_1','f02_2','f02_3','f03','f03_1','f03_2','f03_3','f04','f04_1','f04_2','f04_3','f05'
+                ,'f05_1','f05_2','f05_3','f06','f06_1','f06_2','f06_3','f07','f07_1','f07_2','f07_3','f08','f08_1','f08_2','f08_3','f09','f09_1','f09_2','f09_3','f10','f10_1','f10_2','f10_3'
+                ,'f16','g01','g02','g03','g04','h01','h02','h03','h04']
+
+            var tagName = ['f11','f12','f13','f14','f15']
+
             var topicMsg = "/hcrisis/assistant/event/" + document.getElementById('eventCode').value
-                    + "/shelter/" + document.getElementById('inputCode').value + "/emergency";
+                    + "/shelter/" + document.getElementById('Code').value +　"/nacphn02";
+            var createMsg = "',code='" + document.getElementById('Code').value +
+                    "',reporter='" + document.getElementById('Reporter').value +
+                    "',address='" + document.getElementById('Address').value + "'";
 
-            var createMsg = "reporter='" + document.getElementById('inputHuman').value + "'" +
-                    ",a01=" + document.getElementById('inputNum').value;
-
-            var tmpList = document.getElementsByName('q0'); //q0
-            for(var j=0; j<tmpList.length; j++) {
-                if (tmpList[j].checked) {
-                    createMsg = createMsg + ",c01_1='" + tmpList[j].value + "'";
-                    continue;
+            for (var i = 0; i < tagId.length; i++) {
+                if(i==25 || i==30 || i>=71) {
+                    createMsg = createMsg + ", " + tagId[i] + "='" + document.getElementById(tagId[i]).value + "'";
+                }
+                else  {
+                    createMsg = createMsg + ", " + tagId[i] + "=" + document.getElementById(tagId[i]).value;
                 }
             }
 
-            tmpList = document.getElementsByName('q1'); // q1
-            for(var j=0; j<tmpList.length; j++) {
-                if (tmpList[j].checked) {
-                    createMsg = createMsg + ",c01_2='" + tmpList[j].value + "'";
-                    continue;
+            for (var i = 0; i < tagName.length; i++) {
+                for (var k = 0; k < document.getElementsByName(tagName[i]).length; k++) {
+                    if (document.getElementsByName(tagName[i])[k].checked) {
+                        createMsg = createMsg + "'," + tagName[i] + "='" + document.getElementsByName(tagName[i])[k].value;
+                        continue;
+                    }
                 }
             }
 
-            tmpList = document.getElementsByName('q2'); // q2
-            for(var j=0; j<tmpList.length; j++) {
-                if (tmpList[j].checked) {
-                    createMsg = createMsg + ",c01_3='" + tmpList[j].value + "'";
-                    continue;
-                }
-            }
-
-            tmpList = document.getElementsByName('q3'); // q3
-            for(var j=0; j<tmpList.length; j++) {
-                if (tmpList[j].checked) {
-                    createMsg = createMsg + ",c01_4='" + tmpList[j].value + "'";
-                    continue;
-                }
-            }
-
-            tmpList = document.getElementsByName('q4'); // q4
-            for(var j=0; j<tmpList.length; j++) {
-                if (tmpList[j].checked) {
-                    createMsg = createMsg + ",c01_5='" + tmpList[j].value + "'";
-                    continue;
-                }
-            }
-
-            tmpList = document.getElementsByName('q5'); // q5
-            for(var j=0; j<tmpList.length; j++) {
-                if (tmpList[j].checked) {
-                    createMsg = createMsg + ",c01_8='" + tmpList[j].value + "'";
-                    continue;
-                }
-            }
-
-            tmpList = document.getElementsByName('q6'); // q6
-            for(var j=0; j<tmpList.length; j++) {
-                if (tmpList[j].checked) {
-                    createMsg = createMsg + ",c01_9='" + tmpList[j].value + "'";
-                    continue;
-                }
-            }
-
-            tmpList = document.getElementsByName('q7'); // q7
-            for(var j=0; j<tmpList.length; j++) {
-                if (tmpList[j].checked) {
-                    createMsg = createMsg + ",c02_6='" + tmpList[j].value + "'";
-                    continue;
-                }
-            }
-
-            tmpList = document.getElementsByName('q8'); // q8
-            for(var j=0; j<tmpList.length; j++) {
-                if (tmpList[j].checked) {
-                    createMsg = createMsg + ",c04_1='" + tmpList[j].value + "'";
-                    continue;
-                }
-            }
+            createMsg = createMsg + "',lat='" + lat + "',lon='" + lon;
 
             var nowTime = new Date();
             var nowYer = nowTime.getFullYear();
@@ -342,11 +297,9 @@
             var nowDay = nowTime.getDate();
             var nowHrs = nowTime.getHours();
             var nowMin = nowTime.getMinutes();
-            var nowSec = nowTime.getSeconds();
-            //createMsg = createMsg + ",timestamp＝'" + nowYer + "-" + nowMon + "-" + nowDay + " " + nowHrs + ":" + nowMin + ":" + nowSec + "'";
+            createMsg = createMsg + "',time='" + nowYer + "/" + nowMon + "/" + nowDay + "/" + nowHrs + ":" + nowMin + "'";
             console.log(topicMsg + " : " + createMsg);
             publishMsg(topicMsg, createMsg, true);
-            //createMsg = createMsg + "',lat='" + lat + "',lon='" + lon;
 
         }
     </script>
