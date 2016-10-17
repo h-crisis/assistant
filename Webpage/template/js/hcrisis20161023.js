@@ -148,7 +148,6 @@ map.on('click', function(evt) {
     document.getElementById('info').style.display = 'none';
     document.getElementById('popup').style.display = 'none';
     displayFeatureInfo(evt.pixel, evt);
-    console.log( map.getView().getCenter());
 });
 
 map.getView().on('change:resolution', function(evt) {

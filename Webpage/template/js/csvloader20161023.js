@@ -46,8 +46,8 @@ function shelterSearch(){
         for (i = 0; i < data.length; i++) {
             code = data[i].scode.substr(0,11);
             if (code == searchPoint) {
-                lat = parseFloat(data[i].lat.substr(0,7));
-                lon = parseFloat(data[i].lon.substr(0,7));
+                lat = parseFloat(data[i].lat.substr(0,12));
+                lon = parseFloat(data[i].lon.substr(0,12));
                 var shelterPlace = [lon,lat];
                 cont = 1
             }
