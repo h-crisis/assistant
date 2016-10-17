@@ -160,6 +160,7 @@ function createShelterInfoHtml(result) {
         }
 
         // 住所の表示
+        InfoHtml = InfoHtml + preCells + "避難所コード" + interCells + result.get('code') + subCells;
         InfoHtml = InfoHtml + preCells + "都道府県" + interCells + result.get('pref') + subCells;
         InfoHtml = InfoHtml + preCells + "郡" + interCells + result.get('gun') + subCells;
         InfoHtml = InfoHtml + preCells + "市区町村" + interCells + result.get('sikuchoson')　+ subCells;
@@ -259,6 +260,7 @@ function detailInfoHtml(result){
     }
 
     // 住所の表示
+    DetailHtml = DetailHtml + preCells + "避難所コード" + interCells + result.get('code') + subCells;
     DetailHtml = DetailHtml + preCells + "都道府県" + interCells + result.get('pref') + subCells;
     DetailHtml = DetailHtml + preCells + "郡" + interCells + result.get('gun') + subCells;
     DetailHtml = DetailHtml + preCells + "市区町村" + interCells + result.get('sikuchoson')　+ subCells;
