@@ -40,12 +40,13 @@ function shelterSearch(){
 
     var getCSV = d3.dsv(',', 'text/csv; charset=utf-8');
 
-    getCSV('shelter_location.csv', function (data) {
+    getCSV('shelter/shelter_location.csv', function (data) {
         // dataを処理する
+        //console.log("TEST");
         console.log(data[0].scode.substr(0,2))
     });
 
-
+/*
         getCSV('shelter_location.csv', function (data) {
             // dataを処理する
             // hospinfo.innerHTML = "";
@@ -64,7 +65,6 @@ function shelterSearch(){
              }
              }*/
            //  console.log(code)
-        })
     }
 
 /*
