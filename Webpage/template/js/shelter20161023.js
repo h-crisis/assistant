@@ -160,6 +160,7 @@ function createShelterInfoHtml(result) {
         }
 
         // 住所の表示
+        InfoHtml = InfoHtml + preCells + "避難所コード" + interCells + result.get('code') + subCells;
         InfoHtml = InfoHtml + preCells + "都道府県" + interCells + result.get('pref') + subCells;
         InfoHtml = InfoHtml + preCells + "郡" + interCells + result.get('gun') + subCells;
         InfoHtml = InfoHtml + preCells + "市区町村" + interCells + result.get('sikuchoson')　+ subCells;
@@ -249,9 +250,9 @@ function detailInfoHtml(result){
         '寝具乾燥対策','ペット対策','ペットの収容対策','衛生面に関する対応','食事の充足度','食事回数/日','炊き出し','残飯処理','食事に関する対応',
         '高齢者数','うち75歳以上','うち要介護認定者数','妊婦','うち妊婦健康診断困難者数','産婦','乳児','幼児と児童']
     var btnCode = '?event=' + eventCode + ',id=' + result.get('code') + ',name=' + result.get('name')　+ ',address=' + result.get('address');
-    DetailHtml = "<div style='border:2px solid burlywood; background-color:#888888; text-align:center' type=button ><a href=../../html/shelter-emergency.html" + btnCode + " ,style='display:block; width:100%; color:white; text-decoration:none' id=niphLonLatE target=_blank>緊急時情報入力</a></div>"
-        + "<div style='border:2px solid burlywood; background-color:#888888; text-align:center' type=button ><a href=../../html/shelter-hmethod.html" + btnCode + " ,style='display:block; width:100%; color:white; text-decoration:none' id=niphLonLatE target=_blank>避難所シート入力</a></div>"
-        + "<div style='border:2px solid burlywood; background-color:#888888; text-align:center' type=button ><a href=../../html/shelter-evacuee.html" + btnCode + " ,style='display:block; width:100%; color:white; text-decoration:none' id=niphLonLatE target=_blank>避難所避難者シート入力</a></div>";
+    DetailHtml = "<div style='border:2px solid burlywood; background-color:#888888; text-align:center' type=button ><a href=../../html/shelter-emergency20161023.html" + btnCode + " ,style='display:block; width:100%; color:white; text-decoration:none' id=niphLonLatE target=_blank>緊急時情報入力</a></div>"
+        + "<div style='border:2px solid burlywood; background-color:#888888; text-align:center' type=button ><a href=../../html/shelter-hmethod20161023.html" + btnCode + " ,style='display:block; width:100%; color:white; text-decoration:none' id=niphLonLatE target=_blank>避難所シート入力</a></div>"
+        + "<div style='border:2px solid burlywood; background-color:#888888; text-align:center' type=button ><a href=../../html/shelter-evacuee20161023.html" + btnCode + " ,style='display:block; width:100%; color:white; text-decoration:none' id=niphLonLatE target=_blank>避難所避難者シート入力</a></div>";
 
     // 状況表示
     if(result.get('status') === null) {
@@ -261,6 +262,7 @@ function detailInfoHtml(result){
     }
 
     // 住所の表示
+    DetailHtml = DetailHtml + preCells + "避難所コード" + interCells + result.get('code') + subCells;
     DetailHtml = DetailHtml + preCells + "都道府県" + interCells + result.get('pref') + subCells;
     DetailHtml = DetailHtml + preCells + "郡" + interCells + result.get('gun') + subCells;
     DetailHtml = DetailHtml + preCells + "市区町村" + interCells + result.get('sikuchoson')　+ subCells;
