@@ -132,6 +132,7 @@ function createShelterHeaderHtml(result) {
         if (result.get('name') === null) {
         } else {
             HeaderHtml = HeaderHtml + result.get('name');
+            HeaderHtml = HeaderHtml + "<br>(" + result.get('pref') + result.get('gun') + result.get('sikuchoson') + result.get('address') + ")"
         }
         HeaderHtml = HeaderHtml + "<div style='border:2px solid burlywood; background-color:#888888; color:white; text-align:center' type=button id=showBtn value=隠す onclick=showDetail()>情報の表示切替</div>";
     }
@@ -159,34 +160,11 @@ function createShelterInfoHtml(result) {
         }
 
         // 住所の表示
-        if(result.get('pref') === null) {
-            InfoHtml = InfoHtml + preCells + "都道府県" + interCells + subCells;
-            // InfoHtml = InfoHtml + '<br>都道府県'
-        } else {
-            InfoHtml = InfoHtml + preCells + "都道府県" + interCells + result.get('pref') + subCells;
-            // InfoHtml = InfoHtml + '<br>住所: ' + result.get('pref') + ' ';
-        }
+        InfoHtml = InfoHtml + preCells + "都道府県" + interCells + result.get('pref') + subCells;
+        InfoHtml = InfoHtml + preCells + "郡" + interCells + result.get('gun') + subCells;
+        InfoHtml = InfoHtml + preCells + "市区町村" + interCells + result.get('sikuchoson')　+ subCells;
+        InfoHtml = InfoHtml + preCells + "住所" + interCells + result.get('address')　+ subCells;
 
-        if(result.get('gun') === "") {
-
-        } else {
-            InfoHtml = InfoHtml + preCells + "住所" + interCells + result.get('gun') + result.get('sikuchoson')+ result.get('address') + subCells;
-            //InfoHtml = InfoHtml + result.get('gun') + ' ';
-        }
-
-        if(result.get('sikuchoson') === null) {
-
-        } else {
-            InfoHtml = InfoHtml + preCells + "住所" + interCells + result.get('sikuchoson')+ result.get('address') + subCells;
-            // InfoHtml = InfoHtml + result.get('sikuchoson') + ' ';
-        }
-        /*
-         if(result.get('address') === null) {
-
-         } else {
-         InfoHtml = InfoHtml + result.get('address');
-         }
-         */
         // 避難者数の表示
         if(result.get('a01') === null) {
             InfoHtml = InfoHtml + preCells + "避難者数" + interCells + subCells;
@@ -268,36 +246,49 @@ function detailInfoHtml(result){
         '照明','調理設備','トイレ充足度','トイレ箇所数','下水','トイレ清掃','トイレ汲み取り','手洗い場','手指消毒','風呂の充足度','風呂清掃状況',
         '喫煙所','分煙','設備に関する対応','施設の清掃状況','床の清掃','ゴミ収集場所','靴類履き替え場所','空調管理','粉塵','生活騒音','寝具',
         '寝具乾燥対策','ペット対策','ペットの収容対策','衛生面に関する対応','食事の充足度','食事回数/日','炊き出し','残飯処理','食事に関する対応']
-        var btnCode = '?event=' + eventCode + ',id=' + result.get('code') + ',name=' + result.get('name')　+ ',address=' + result.get('address');
-        DetailHtml = "<div style='border:2px solid burlywood; background-color:#888888; text-align:center' type=button ><a href=../../html/shelter-emergency.html" + btnCode + " ,style='display:block; width:100%; color:white; text-decoration:none' id=niphLonLatE target=_blank>緊急時情報入力</a></div>"
-            + "<div style='border:2px solid burlywood; background-color:#888888; text-align:center' type=button ><a href=../../html/shelter-hmethod.html" + btnCode + " ,style='display:block; width:100%; color:white; text-decoration:none' id=niphLonLatE target=_blank>避難所シート入力</a></div>"
-            + "<div style='border:2px solid burlywood; background-color:#888888; text-align:center' type=button ><a href=../../html/shelter-evacuee.html" + btnCode + " ,style='display:block; width:100%; color:white; text-decoration:none' id=niphLonLatE target=_blank>避難所避難者シート入力</a></div>";
+    var btnCode = '?event=' + eventCode + ',id=' + result.get('code') + ',name=' + result.get('name')　+ ',address=' + result.get('address');
+    DetailHtml = "<div style='border:2px solid burlywood; background-color:#888888; text-align:center' type=button ><a href=../../html/shelter-emergency.html" + btnCode + " ,style='display:block; width:100%; color:white; text-decoration:none' id=niphLonLatE target=_blank>緊急時情報入力</a></div>"
+        + "<div style='border:2px solid burlywood; background-color:#888888; text-align:center' type=button ><a href=../../html/shelter-hmethod.html" + btnCode + " ,style='display:block; width:100%; color:white; text-decoration:none' id=niphLonLatE target=_blank>避難所シート入力</a></div>"
+        + "<div style='border:2px solid burlywood; background-color:#888888; text-align:center' type=button ><a href=../../html/shelter-evacuee.html" + btnCode + " ,style='display:block; width:100%; color:white; text-decoration:none' id=niphLonLatE target=_blank>避難所避難者シート入力</a></div>";
 
-        // 状況表示
-        if(result.get('status') === null) {
-            DetailHtml = DetailHtml + preCells + "状況" + interCells + "不明" + subCells;
-        } else {
-            DetailHtml = DetailHtml + "<br>（状況: " + result.get('status') + "）";
-        }
+    // 状況表示
+    if(result.get('status') === null) {
+        DetailHtml = DetailHtml + preCells + "状況" + interCells + "不明" + subCells;
+    } else {
+        DetailHtml = DetailHtml + "<br>（状況: " + result.get('status') + "）";
+    }
 
-        // 住所の表示
-        if(result.get('pref') === null) {
-            DetailHtml = DetailHtml + preCells + "都道府県" + interCells + subCells;
-        } else {
-            DetailHtml = DetailHtml + preCells + "都道府県" + interCells + result.get('pref') + subCells;
-        }
+    // 住所の表示
+    DetailHtml = DetailHtml + preCells + "都道府県" + interCells + result.get('pref') + subCells;
+    DetailHtml = DetailHtml + preCells + "郡" + interCells + result.get('gun') + subCells;
+    DetailHtml = DetailHtml + preCells + "市区町村" + interCells + result.get('sikuchoson')　+ subCells;
+    DetailHtml = DetailHtml + preCells + "住所" + interCells + result.get('address')　+ subCells;
 
-        if(result.get('gun') === "") {
+    /*
+    if(result.get('pref') === '') {
+        DetailHtml = DetailHtml + preCells + "都道府県" + interCells + subCells;
+    } else {
+        DetailHtml = DetailHtml + preCells + "都道府県" + interCells + result.get('pref') + subCells;
+    }
 
-        } else {
-            DetailHtml = DetailHtml + preCells + "住所" + interCells + result.get('gun') + result.get('sikuchoson')+ result.get('address') + subCells;
-        }
+    if(result.get('gun') === '') {
+        DetailHtml = DetailHtml + preCells + "郡" + interCells + subCells;
+    } else {
+        DetailHtml = DetailHtml + preCells + "郡" + interCells + result.get('gun') + subCells;
+    }
 
-        if(result.get('sikuchoson') === null) {
+    if(result.get('sikuchoson') === '') {
+        DetailHtml = DetailHtml + preCells + "市区町村" + interCells + subCells;
+    } else {
+        DetailHtml = DetailHtml + preCells + "市区町村" + interCells + result.get('sikuchoson')　+ subCells;
+    }
 
-        } else {
-            DetailHtml = DetailHtml + preCells + "住所" + interCells + result.get('sikuchoson')+ result.get('address') + subCells;
-        }
+    if(result.get('address') === '') {
+        DetailHtml = DetailHtml + preCells + "住所" + interCells + subCells;
+    } else {
+        DetailHtml = DetailHtml + preCells + "住所" + interCells + result.get('address')　+ subCells;
+    }
+    */
 
         // 詳細情報の表示
         for (var i=0; i<tagId.length; i++) {
