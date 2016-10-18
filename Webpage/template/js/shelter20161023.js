@@ -158,9 +158,12 @@ function createShelterInfoHtml(result) {
 
         // 状況表示
         if(result.get('status') === null) {
-            InfoHtml = InfoHtml + preCells + "状況" + interCells + "不明" + subCells;
-        } else {
-            InfoHtml = InfoHtml + preCells　+ "状況" + interCells + result.get('status') + subCells;
+            InfoHtml = InfoHtml + preCells + "状況" + interCells + "推計値" + subCells;
+        } else if(result.get('status') === 'evaluated') {
+            InfoHtml = InfoHtml + preCells　+ "状況" + interCells + "調査値" + subCells;
+        }
+        else {
+            InfoHtml = InfoHtml + preCells　+ "状況" + interCells + "不明" + subCells;
         }
 
         // 住所の表示
@@ -258,9 +261,12 @@ function detailInfoHtml(result){
 
     // 状況表示
     if(result.get('status') === null) {
-        DetailHtml = DetailHtml + preCells + "状況" + interCells + "不明" + subCells;
-    } else {
-        DetailHtml = DetailHtml + preCells　+ "状況" + interCells + result.get('status') + subCells;
+        DetailHtml = DetailHtml + preCells + "状況" + interCells + "推計値" + subCells;
+    } else if(result.get('status') === 'evaluated') {
+        DetailHtml = DetailHtml + preCells　+ "状況" + interCells + "調査値" + subCells;
+    }
+    else {
+        DetailHtml = DetailHtml + preCells　+ "状況" + interCells + "不明" + subCells;
     }
 
     // 住所の表示
@@ -272,7 +278,7 @@ function detailInfoHtml(result){
 
         // 詳細情報の表示
         for (var i=0; i<tagId.length; i++) {
-            if (result.get(tagId[i]) === null) {
+            if (result.get(tagId[i]) === null || result.get(tagId[i])===undefined) {
                 DetailHtml = DetailHtml + preCells + tagName[i] + interCells + subCells;
             } else {
                 DetailHtml = DetailHtml + preCells + tagName[i] + interCells + result.get(tagId[i]) + subCells;
@@ -311,9 +317,12 @@ function evacueeInfoHtml(result){
 
     // 状況表示
     if(result.get('status') === null) {
-        EvacueeHtml = EvacueeHtml + preCells + "状況" + interCells + "不明" + subCells;
-    } else {
-        EvacueeHtml = EvacueeHtml + preCells　+ "状況" + interCells + result.get('status') + subCells;
+        EvacueeHtml = EvacueeHtml + preCells + "状況" + interCells + "推計値" + subCells;
+    } else if(result.get('status') === 'evaluated') {
+        EvacueeHtml = EvacueeHtml + preCells　+ "状況" + interCells + "調査値" + subCells;
+    }
+     else {
+        EvacueeHtml = EvacueeHtml + preCells　+ "状況" + interCells + "不明" + subCells;
     }
 
     // 住所の表示
@@ -325,7 +334,7 @@ function evacueeInfoHtml(result){
 
     // 詳細情報の表示
     for (var i=0; i<tagId.length; i++) {
-        if (result.get(tagId[i]) === null) {
+        if (result.get(tagId[i]) === null || result.get(tagId[i])===undefined) {
             EvacueeHtml = EvacueeHtml + preCells + tagName[i] + interCells + subCells;
         } else {
             EvacueeHtml = EvacueeHtml + preCells + tagName[i] + interCells + result.get(tagId[i]) + subCells;
