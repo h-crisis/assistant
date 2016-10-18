@@ -13,7 +13,8 @@
             <div class="inputbox">
                 <label class="over">記載者<br>(所属・役職)</label><input type="text" id="Reporter"  value=""><br><br>
                 ※ 白抜文字の項目は、活動初期段階で重点的に把握がすべき情報です。<br>
-                ※ 情報が取得できなかった場合、該当箇所を空欄のまま送信してください。
+                ※ 情報が取得できなかった場合、該当箇所を空欄のまま送信してください。<br>
+                <strong><u>※ 入力欄にあらかじめ「0」と表示されている項目は、半角数字で入力して下さい。該当欄は半角数字以外入力できません。</u></strong><br><br>
             </div>
         </fieldset>
         <br>
@@ -28,9 +29,9 @@
             </div>
             <hr>
             <div class="inputbox">
-                <label class="IMP">避難者数</label><input type="text" id="a01"  value="">人<br>
-                <label class="IMP">避難者数(昼間)</label><input type="text" id="a01_1"  value="">人<br>
-                <label class="IMP">避難者数(夜間)</label><input type="text" id="a01_2"  value="">人<br>
+                <label class="IMP">避難者数</label><input type="text" onKeyup="this.value=this.value.replace(/[^0-9]+/,'')" id="a01" value="" placeholder="0">人<br>
+                <label class="IMP">避難者数(昼間)</label><input type="text" onKeyup="this.value=this.value.replace(/[^0-9]+/,'')" id="a01_1"  value="" placeholder="0">人<br>
+                <label class="IMP">避難者数(夜間)</label><input type="text" onKeyup="this.value=this.value.replace(/[^0-9]+/,'')" id="a01_2"  value="" placeholder="0">人<br>
                 <hr>
                 <label class="IMP">電話</label><input type="text" id="a02"  value=""><br>
                 <label class="IMP">FAX</label><input type="text" id="a03"  value=""><br>
