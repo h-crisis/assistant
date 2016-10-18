@@ -24,20 +24,20 @@
                 <label class="IMP">災害コード</label><input type="text" id="eventCode" value=""><br>
                 <label class="IMP">避難所コード</label><input type="text" id="Code"  value=""><br>
                 <!-- <label style="margin: 0px 10px 0px 0px; padding: 0px 15px 0px 0px;">所在地</label><input type="text" id="Address"  value=""><br> -->
-                <label class="IMP">所在地</label><input type="text" id="Address"  value=""><br>
-                <label class="IMP">避難所名</label><input type="text" id="Name"  value=""><br>
+                <label class="IMP">所在地</label><input type="text" id="Address" value=""><br>
+                <label class="IMP">避難所名</label><input type="text" id="Name" value=""><br>
             </div>
             <hr>
             <div class="inputbox">
                 <label class="IMP">避難者数</label><input type="text" onKeyup="this.value=this.value.replace(/[^0-9]+/,'')" id="a01" value="" placeholder="0">人<br>
-                <label class="IMP">避難者数(昼間)</label><input type="text" onKeyup="this.value=this.value.replace(/[^0-9]+/,'')" id="a01_1"  value="" placeholder="0">人<br>
-                <label class="IMP">避難者数(夜間)</label><input type="text" onKeyup="this.value=this.value.replace(/[^0-9]+/,'')" id="a01_2"  value="" placeholder="0">人<br>
+                <label class="IMP">避難者数(昼間)</label><input type="text" onKeyup="this.value=this.value.replace(/[^0-9]+/,'')" id="a01_1" value="" placeholder="0">人<br>
+                <label class="IMP">避難者数(夜間)</label><input type="text" onKeyup="this.value=this.value.replace(/[^0-9]+/,'')" id="a01_2" value="" placeholder="0">人<br>
                 <hr>
-                <label class="IMP">電話</label><input type="text" id="a02"  value=""><br>
-                <label class="IMP">FAX</label><input type="text" id="a03"  value=""><br>
-                <label class="overIMP">メールアドレス</label><input type="text" id="a04"  value="" style="width:260px"><br><br>
+                <label class="IMP">電話</label><input type="text" id="a02" value=""><br>
+                <label class="IMP">FAX</label><input type="text" id="a03" value=""><br>
+                <label class="overIMP">メールアドレス</label><input type="text" id="a04" value="" style="width:260px"><br><br>
                 <hr>
-                <label>施設の広さ</label><input type="text" id="a05"  value=""><br>
+                <label>施設の広さ</label><input type="text" onKeyup="this.value=this.value.replace(/[^0-9.]+/,'')" id="a05" value="" placeholder="0">m2くらい<br>
                 <div class="checkbox">
                     <label class="lblIMP">スペース密度</label><br><br>
                     <input type="radio" name="a06" id="q11_0" value="余裕">
@@ -50,8 +50,8 @@
                 <br>
                 <br>
                 <br>
-                <label class="overIMP">一人当たり<br>専有面積</label><input type="text" id="a07"  value="">m2くらい<br><br>
-                <label class="over">交通機関<br>(避難所と外との交通手段)</label><input type="text" id="a08"  value="">
+                <label class="overIMP">一人当たり<br>専有面積</label><input type="text" onKeyup="this.value=this.value.replace(/[^0-9.]+/,'')" id="a07" value="" placeholder="0">m2くらい<br><br>
+                <label class="over">交通機関<br>(避難所と外との交通手段)</label><input type="text" id="a08" value="">
             </div>
         </fieldset>
         <br>
@@ -60,14 +60,14 @@
             <div class="inputbox">
                 <label class="overIMP">管理統括・<br>代表者の情報</label><br><br><br><br>
                 <label class="IMP">氏名(立場)</label><br><br><br>
-                <input type="text" id="b01"  value=""><br>
+                <input type="text" id="b01" value=""><br>
                 <!--
                 <label>その他:</label><br><br><br>
                 <input type="text" id="inputRepRest"  value=""><br>
                 -->
                 <hr>
                 <label class="over">連絡体制／<br>指揮命令系統</label><br><br><br><br>
-                <input type="text" id="b02"  value=""><br><br><br>
+                <input type="text" id="b02" value=""><br><br><br>
             </div>
             <div class="checkbox">
                 <label class="lbl">自主組織</label><br><br>
@@ -87,8 +87,8 @@
                 <label for="q22_1" class="UK">無</label><br><br>
             </div>
             <div class="inputbox">
-                <p id="inputOuterOrgan01" style="display:none">外部組織:チーム数<input style="display:none" type="text" id="b04_1" value=""></p>
-                <p id="inputOuterOrgan02" style="display:none">外部組織:人数<input style="display:none" type="text" id="b04_2" value=""></p>
+                <p id="inputOuterOrgan01" style="display:none">外部組織:チーム数<input style="display:none" type="text" id="b04_1" onKeyup="this.value=this.value.replace(/[^0-9]+/,'')" value="" placeholder="0"></p>
+                <p id="inputOuterOrgan02" style="display:none">外部組織:人数<input style="display:none" type="text" id="b04_2" onKeyup="this.value=this.value.replace(/[^0-9]+/,'')" value="" placeholder="0"></p>
                 <p id="inputOuterOrgan03" style="display:none">外部組織:職種<input style="display:none" type="text" id="b04_3" value=""></p>
             </div><br>
             <div class="checkbox">
@@ -99,9 +99,9 @@
                 <label for="q23_1" class="UK">無</label><br><br>
             </div>
             <div class="inputbox">
-                <p id="inputOuterVolunteer01" style="display:none">ボランティア:チーム数<input style="display:none" type="text" id="b05_1" value=""></p>
-                <p id="inputOuterVolunteer02" style="display:none">ボランティア:人数<input style="display:none" type="text" id="b05_2" value=""></p>
-                <p id="inputOuterVolunteer03" style="display:none">ボランティア:職種<input style="display:none" type="text" id="b05_3" value=""></p>
+                <p id="inputOuterVolunteer01" style="display:none">ボランティア:チーム数<input style="display:none" type="text" onKeyup="this.value=this.value.replace(/[^0-9]+/,'')" id="b05_1" value="" placeholder="0"></p>
+                <p id="inputOuterVolunteer02" style="display:none">ボランティア:人数<input style="display:none" type="text" onKeyup="this.value=this.value.replace(/[^0-9]+/,'')" id="b05_2" value="" placeholder="0"></p>
+                <p id="inputOuterVolunteer03" style="display:none">ボランティア:職種<input style="display:none" type="text" id="b05_3"></p>
             </div>
             <hr>
             <div class="inputbox">
@@ -292,7 +292,7 @@
             <br>
             <br>
             <div class="inputbox">
-                <input type="text" id="c02_6_1" value="">箇所
+                <input type="text" onKeyup="this.value=this.value.replace(/[^0-9]+/,'')" id="c02_6_1" value="" placeholder="0">箇所
             </div>
             <br>
             <div class="checkbox">
@@ -348,7 +348,7 @@
             <hr>
             <div class="inputbox">
                 <label class="overIMP">風呂・喫煙所<br>について</label>
-            </div><br><br><br>
+            </div><br><br><br><br>
             <div class="checkbox">
                 <label class="lbl">風呂</label><br><br>
                 <input type="radio" name="c02_7" id="q318_0" value="十分">
@@ -394,7 +394,7 @@
             <hr>
             <div class="inputbox">
                 <label class="overIMP">生活環境<br>・衛生面</label>
-            </div><br><br><br>
+            </div><br><br><br><br>
             <div class="checkbox">
                 <label class="lbl">清掃状況</label><br><br>
                 <input type="radio" name="c03_1" id="q321_0" value="良">
@@ -505,7 +505,7 @@
             <br><br>
             <div class="inputbox">
                 <label class="IMP">食事回数/日</label><br><br><br>
-                <input type="text" id="c04_1_1"  value="">回
+                <input type="text"  onKeyup="this.value=this.value.replace(/[^0-9]+/,'')" id="c04_1_1" value=""  placeholder="0">回
             </div>
             <br>
             <div class="checkbox">
