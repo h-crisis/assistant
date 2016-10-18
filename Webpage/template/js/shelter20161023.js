@@ -17,6 +17,7 @@ var shelterLayer = new ol.layer.Tile({
 });
 var sInfo;
 var dInfo;
+var eInfo
 var dClick = 0;
 
 function createShelterPopup(url, evt) {
@@ -24,6 +25,7 @@ function createShelterPopup(url, evt) {
     var headerHtml;
     var infoHtml;
     var detailHtml;
+    var evacueeHtml;
     var coordinate = evt.coordinate;
 
     if (url) {
@@ -45,6 +47,8 @@ function createShelterPopup(url, evt) {
                         sInfo = infoHtml;
                         detailHtml = detailInfoHtml(result[i]);
                         dInfo = detailHtml;
+                        evacueeHtml = evacueeInfoHtml(result[i]);
+                        eInfo = evacueeHtml;
                     }
                     else {
                         popupHtml = popupHtml + '<br><hr><br>' + 'name: ' + result[i].get('name');
@@ -156,7 +160,7 @@ function createShelterInfoHtml(result) {
         if(result.get('status') === null) {
             InfoHtml = InfoHtml + preCells + "状況" + interCells + "不明" + subCells;
         } else {
-            InfoHtml = InfoHtml + "<br>（状況: " + result.get('status') + "）";
+            InfoHtml = InfoHtml + preCells　+ "状況" + interCells + result.get('status') + subCells;
         }
 
         // 住所の表示
@@ -256,7 +260,7 @@ function detailInfoHtml(result){
     if(result.get('status') === null) {
         DetailHtml = DetailHtml + preCells + "状況" + interCells + "不明" + subCells;
     } else {
-        DetailHtml = DetailHtml + "<br>（状況: " + result.get('status') + "）";
+        DetailHtml = DetailHtml + preCells　+ "状況" + interCells + result.get('status') + subCells;
     }
 
     // 住所の表示
@@ -265,32 +269,6 @@ function detailInfoHtml(result){
     DetailHtml = DetailHtml + preCells + "郡" + interCells + result.get('gun') + subCells;
     DetailHtml = DetailHtml + preCells + "市区町村" + interCells + result.get('sikuchoson')　+ subCells;
     DetailHtml = DetailHtml + preCells + "住所" + interCells + result.get('address')　+ subCells;
-
-    /*
-    if(result.get('pref') === '') {
-        DetailHtml = DetailHtml + preCells + "都道府県" + interCells + subCells;
-    } else {
-        DetailHtml = DetailHtml + preCells + "都道府県" + interCells + result.get('pref') + subCells;
-    }
-
-    if(result.get('gun') === '') {
-        DetailHtml = DetailHtml + preCells + "郡" + interCells + subCells;
-    } else {
-        DetailHtml = DetailHtml + preCells + "郡" + interCells + result.get('gun') + subCells;
-    }
-
-    if(result.get('sikuchoson') === '') {
-        DetailHtml = DetailHtml + preCells + "市区町村" + interCells + subCells;
-    } else {
-        DetailHtml = DetailHtml + preCells + "市区町村" + interCells + result.get('sikuchoson')　+ subCells;
-    }
-
-    if(result.get('address') === '') {
-        DetailHtml = DetailHtml + preCells + "住所" + interCells + subCells;
-    } else {
-        DetailHtml = DetailHtml + preCells + "住所" + interCells + result.get('address')　+ subCells;
-    }
-    */
 
         // 詳細情報の表示
         for (var i=0; i<tagId.length; i++) {
@@ -303,6 +281,59 @@ function detailInfoHtml(result){
     return DetailHtml
 }
 
+function evacueeInfoHtml(result){
+    EvacueeHtml = result.get('name');
+    var preCells = "<tr><td width='110px' style=font-size:17px;background-color:#888888;color:white>";
+    var interCells = "</td><td width='250px' style=font-size:17px;background-color:white;text-align:right;>";
+    var subCells ="</td></tr>";
+    var tagId = ['d01','d01_1','d01_2','d02','d02_1','d03','d04','d05','d05_1','d05_2','d05_3','d06','d06_1', 'd06_2',
+        'd06_3','d06_4','d07','d08','d09','d10','d12','d11','d11_1','d11_2','d11_3', 'd13','e01','e01_1','e01_2','e01_3',
+        'e02','f01','f01_1','f01_2','f01_3','f02','f02_1','f02_2','f02_3','f03','f03_1','f03_2','f03_3','f04','f04_1',
+        'f04_2','f04_3','f05','f05_1','f05_2','f05_3','f06','f06_1','f06_2','f06_3','f07','f07_1','f07_2','f07_3','f08',
+        'f08_1','f08_2','f08_3','f09','f09_1','f09_2','f09_3','f10','f10_1','f10_2','f10_3','f11','f12','f13','f14','f15',
+        'f16','g01','g02','g03','g04','h01','h02','h03','h04'];
+    var tagName = ['高齢者','75歳以上','要介護認定高齢者','妊婦','うち妊婦健診受診困難者数','産婦','乳児','幼児・児童','身体障害児',
+        '知的障害児','発達障害児','障害者','身体障害者','知的障害者','精神障害者','発達障害者','難病患者','在宅酸素療養者','人工透析者',
+        'アレルギー疾患児・者','外国人','要援助者数','要援助者の内全介助者','要援助者の内一部介助','要援助者の内認知障害',
+        '要配慮者への対応等情報','服薬者','高血圧治療薬服薬者','糖尿病治療薬服薬者','向精神薬服薬者','服薬者への対応等情報','外傷者数総数',
+        '乳児・幼児の外傷者','妊婦の外傷者','高齢者の外傷者','下痢症状者総数','乳児・幼児の下痢症状者','妊婦のの下痢症状者','高齢者の下痢症状者',
+        '嘔吐症状者総数','乳児・幼児の嘔吐症状者','妊婦の嘔吐症状者','高齢者の嘔吐症状者','発熱症状者総数','乳児・幼児の発熱症状者',
+        '妊婦の発熱症状者','高齢者の発熱症状者','咳症状者総数','乳児・幼児の咳症状者','妊婦の咳症状者','高齢者の咳症状者','便秘症状者総数',
+        '乳児・幼児の便秘症状者','妊婦の便秘症状者','高齢者の便秘症状者','食欲不振者総数','乳児・幼児の食欲不振者','妊婦の食欲不振者',
+        '高齢者の食欲不振者','頭痛症状者総数','乳児・幼児の頭痛症状者','妊婦の頭痛症状者','高齢者の頭痛症状者','不眠症状者総数',
+        '乳児・幼児の不眠症状者','妊婦の不眠症状者','高齢者の不眠症状者','不安症状者総数','乳児・幼児の不安症状者','妊婦の不安症状者',
+        '高齢者の不安症状者','専門的医療ニーズ','小児疾患','精神疾患','周産期','歯科','有症者への対応等情報','食中毒様症状(下痢、嘔吐などの動向)',
+        '風邪様症状(咳・発熱などの動向)','感染症症状・その他','防疫に関するその他情報','全体の健康状態','活動内容','アセスメント','課題・申し送り'];
+    var btnCode = '?event=' + eventCode + ',id=' + result.get('code') + ',name=' + result.get('name')　+ ',address=' + result.get('address');
+    EvacueeHtml = "<div style='border:2px solid burlywood; background-color:#888888; text-align:center' type=button ><a href=../../html/shelter-emergency20161023.html" + btnCode + " ,style='display:block; width:100%; color:white; text-decoration:none' id=niphLonLatE target=_blank>緊急時情報入力</a></div>"
+        + "<div style='border:2px solid burlywood; background-color:#888888; text-align:center' type=button ><a href=../../html/shelter-hmethod20161023.html" + btnCode + " ,style='display:block; width:100%; color:white; text-decoration:none' id=niphLonLatE target=_blank>避難所シート入力</a></div>"
+        + "<div style='border:2px solid burlywood; background-color:#888888; text-align:center' type=button ><a href=../../html/shelter-evacuee20161023.html" + btnCode + " ,style='display:block; width:100%; color:white; text-decoration:none' id=niphLonLatE target=_blank>避難所避難者シート入力</a></div>";
+
+    // 状況表示
+    if(result.get('status') === null) {
+        EvacueeHtml = EvacueeHtml + preCells + "状況" + interCells + "不明" + subCells;
+    } else {
+        EvacueeHtml = EvacueeHtml + preCells　+ "状況" + interCells + result.get('status') + subCells;
+    }
+
+    // 住所の表示
+    EvacueeHtml = EvacueeHtml + preCells + "避難所コード" + interCells + result.get('code') + subCells;
+    EvacueeHtml = EvacueeHtml + preCells + "都道府県" + interCells + result.get('pref') + subCells;
+    EvacueeHtml = EvacueeHtml + preCells + "郡" + interCells + result.get('gun') + subCells;
+    EvacueeHtml = EvacueeHtml + preCells + "市区町村" + interCells + result.get('sikuchoson')　+ subCells;
+    EvacueeHtml = EvacueeHtml + preCells + "住所" + interCells + result.get('address')　+ subCells;
+
+    // 詳細情報の表示
+    for (var i=0; i<tagId.length; i++) {
+        if (result.get(tagId[i]) === null) {
+            EvacueeHtml = EvacueeHtml + preCells + tagName[i] + interCells + subCells;
+        } else {
+            EvacueeHtml = EvacueeHtml + preCells + tagName[i] + interCells + result.get(tagId[i]) + subCells;
+        }
+    }
+    return EvacueeHtml
+}
+
 function showHide(){
     // 情報画面を非表示にする
     document.getElementById('info').style.display = 'none';
@@ -311,8 +342,11 @@ function showHide(){
 
 function showDetail(){
     // 避難所情報の概要/詳細切り替え
-    if (dClick%2 == 0) {
+    if (dClick%3 == 0) {
         document.getElementById('info').innerHTML = dInfo;
+        dClick++;
+    } else if (dClick%3 == 1) {
+        document.getElementById('info').innerHTML = eInfo;
         dClick++;
     } else {
         document.getElementById('info').innerHTML = sInfo;
