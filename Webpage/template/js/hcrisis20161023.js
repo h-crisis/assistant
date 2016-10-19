@@ -76,10 +76,14 @@ map.addLayer(shelterLayer);
 map.addLayer(hospLayer);
 map.addLayer(hallLayer);
 map.addLayer(ImpassableLayer);
-shelterLayer.setVisible(false);
-hospLayer.setVisible(false);
-hallLayer.setVisible(false);
-ImpassableLayer.setVisible(false);
+map.addLayer(ImpassableLayerNara);
+map.once('postrender', function(){
+    shelterLayer.setVisible(false);
+    hospLayer.setVisible(false);
+    hallLayer.setVisible(false);
+    ImpassableLayer.setVisible(false);
+    ImpassableLayerNara.setVisible(false);
+});
 
 // 避難所のマップ表示制御ボタンを呼ぶ変数。表示制御関数はshelter~.js
 var shelterOnOff   = document.getElementById('shelter-vis');
