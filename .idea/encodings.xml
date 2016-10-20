@@ -6,11 +6,16 @@
     <file url="file://$PROJECT_DIR$/files/WorkingFiles/EMIS医療機関情報20160622.csv" charset="Shift_JIS" />
     <file url="file://$PROJECT_DIR$/files/WorkingFiles/EMIS医療機関情報_kochi.csv" charset="Shift_JIS" />
     <file url="file://$PROJECT_DIR$/files/WorkingFiles/medical_status_kochi.csv" charset="Shift_JIS" />
-    <file url="file://$PROJECT_DIR$/files/YahooShelter/0_全国改.csv" charset="Shift_JIS" />
     <file url="file://$PROJECT_DIR$/files/YahooShelter/1_北海道.csv" charset="Shift_JIS" />
     <file url="file://$PROJECT_DIR$/files/YahooShelter/47_沖縄県.csv" charset="Shift_JIS" />
     <file url="file://$PROJECT_DIR$/test/iwasaki/evaluator/SphereEvaluator.java" charset="Shift_JIS" />
     <file url="file://$PROJECT_DIR$/test/iwasaki/hospital_info.csv" charset="Shift_JIS" />
+    <file url="file://$PROJECT_DIR$/test/iwasaki/sample/TTestUndxMgg.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/test/iwasaki/test.csv" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/test/xue/DisasterHeadquatersSelect/DecideHospital/hospital_info.csv" charset="Shift_JIS" />
+    <file url="file://$PROJECT_DIR$/test/xue/DisasterHeadquatersSelect/DecideHospital/hospital_info.csv" charset="Shift_JIS" />
+    <file url="file://$PROJECT_DIR$/test/xue/DisasterHeadquatersSelect/DecideHospital/hospital_info.csv" charset="Shift_JIS" />
+    <file url="file://$PROJECT_DIR$/test/xue/DisasterHeadquatersSelect/evaluator/SphereEvaluator.java" charset="Shift_JIS" />
+    <file url="file://$PROJECT_DIR$/test/xue/DisasterHeadquatersSelect/ga/bitstring/package.html" charset="UTF-8" />
   </component>
 </project>
