@@ -18,44 +18,45 @@
         <label class="IMP">避難所名</label><input type="text" id="Name"  value=""><br>
         <label class="over">記載者<br>(所属・役職)</label><input type="text" id="Reporter"  value=""><br><br>
         ※ 白抜文字の項目は、活動初期段階で重点的に把握がすべき情報です。<br>
-        ※ 情報が取得できなかった場合、該当箇所を空欄のまま送信してください。
+        ※ 情報が取得できなかった場合、該当箇所を空欄のまま送信してください。<br>
+        <strong><u>※ 入力欄にあらかじめ「0」と表示されている項目は、半角数字で入力して下さい。該当欄は半角数字以外入力できません。</u></strong><br><br>
     </div>
 </fieldset>
 <br>
 <fieldset>
     <h3>配慮を要する人</h3>
     <div class="inputbox">
-        <label>高齢者</label><input type="text" id="d01" value="">人<br>
-        <label>うち75歳以上</label><input type="text" id="d01_1" value="">人<br>
-        <label>うち要介護<br>認定者数</label><input type="text" id="d01_2" value="">人<br>
+        <label>高齢者</label><input type="text" onKeyup="this.value=this.value.replace(/[^0-9]+/,'')" id="d01" value="" placeholder="0">人<br>
+        <label>うち75歳以上</label><input type="text" onKeyup="this.value=this.value.replace(/[^0-9]+/,'')" id="d01_1" value="" placeholder="0">人<br>
+        <label>うち要介護<br>認定者数</label><input type="text" onKeyup="this.value=this.value.replace(/[^0-9]+/,'')" id="d01_2" value="" placeholder="0">人<br>
         <hr>
-        <label class="IMP">妊婦</label><input type="text" id="d02" value="">人<br>
-        <label class="over">うち妊婦健診<br>受診困難者数</label><input type="text" id="d02_1" value="">人<br><br>
-        <label class="IMP">産婦</label><input type="text" id="d03" value="">人<br>
-        <label class="IMP">乳児</label><input type="text" id="d04"  value="">人<br>
+        <label class="IMP">妊婦</label><input type="text" onKeyup="this.value=this.value.replace(/[^0-9]+/,'')" id="d02" value="" placeholder="0">人<br>
+        <label class="over">うち妊婦健診<br>受診困難者数</label><input type="text" onKeyup="this.value=this.value.replace(/[^0-9]+/,'')" id="d02_1" value="" placeholder="0">人<br><br>
+        <label class="IMP">産婦</label><input type="text" onKeyup="this.value=this.value.replace(/[^0-9]+/,'')" id="d03" value="" placeholder="0">人<br>
+        <label class="IMP">乳児</label><input type="text" onKeyup="this.value=this.value.replace(/[^0-9]+/,'')" id="d04"  value="" placeholder="0">人<br>
         <hr>
-        <label>幼児・児童</label><input type="text" id="d05" value="">人<br>
-        <label class="over">うち身体<br>障害児</label><input type="text" id="d05_1" value="">人<br><br>
-        <label class="over">うち知的<br>障害児</label><input type="text" id="d05_2" value="">人<br><br>
-        <label class="over">うち発達<br>障害児</label><input type="text" id="d05_3" value="">人<br><br>
+        <label>幼児・児童</label><input type="text" onKeyup="this.value=this.value.replace(/[^0-9]+/,'')" id="d05" value="" placeholder="0">人<br>
+        <label class="over">うち身体<br>障害児</label><input type="text" onKeyup="this.value=this.value.replace(/[^0-9]+/,'')" id="d05_1" value="" placeholder="0">人<br><br>
+        <label class="over">うち知的<br>障害児</label><input type="text" onKeyup="this.value=this.value.replace(/[^0-9]+/,'')" id="d05_2" value="" placeholder="0">人<br><br>
+        <label class="over">うち発達<br>障害児</label><input type="text" onKeyup="this.value=this.value.replace(/[^0-9]+/,'')" id="d05_3" value="" placeholder="0">人<br><br>
         <hr>
-        <label>障害者</label><input type="text" id="d06" value="">人<br>
-        <label class="over">うち身体<br>障害者</label><input type="text" id="d06_1" value="">人<br><br>
-        <label class="over">うち知的<br>障害者</label><input type="text" id="d06_2" value="">人<br><br>
-        <label class="over">うち精神<br>障害者</label><input type="text" id="d06_3" value="">人<br><br>
-        <label class="over">うち発達<br>障害者</label><input type="text" id="d06_4" value="">人<br><br>
+        <label>障害者</label><input type="text" id="d06" value="" placeholder="0">人<br>
+        <label class="over">うち身体<br>障害者</label><input type="text" onKeyup="this.value=this.value.replace(/[^0-9]+/,'')" id="d06_1" value="" placeholder="0">人<br><br>
+        <label class="over">うち知的<br>障害者</label><input type="text" onKeyup="this.value=this.value.replace(/[^0-9]+/,'')" id="d06_2" value="" placeholder="0">人<br><br>
+        <label class="over">うち精神<br>障害者</label><input type="text" onKeyup="this.value=this.value.replace(/[^0-9]+/,'')" id="d06_3" value="" placeholder="0">人<br><br>
+        <label class="over">うち発達<br>障害者</label><input type="text" onKeyup="this.value=this.value.replace(/[^0-9]+/,'')" id="d06_4" value="" placeholder="0">人<br><br>
         <hr>
-        <label>難病患者</label><input type="text" id="d07" value="">人<br>
-        <label class="overIMP">在宅酸素<br>療養者</label><input type="text" id="d08" value="">人<br><br>
-        <label class="IMP">人工透析者</label><input type="text" id="d09" value="">人<br>
-        <label class="over">アレルギー<br>疾患児・者</label><input type="text" id="d10" value="">人<br><br>
+        <label>難病患者</label><input type="text" onKeyup="this.value=this.value.replace(/[^0-9]+/,'')" id="d07" value="" placeholder="0">人<br>
+        <label class="overIMP">在宅酸素<br>療養者</label><input type="text" onKeyup="this.value=this.value.replace(/[^0-9]+/,'')" id="d08" value="" placeholder="0">人<br><br>
+        <label class="IMP">人工透析者</label><input type="text" onKeyup="this.value=this.value.replace(/[^0-9]+/,'')" id="d09" value="" placeholder="0">人<br>
+        <label class="over">アレルギー<br>疾患児・者</label><input type="text" onKeyup="this.value=this.value.replace(/[^0-9]+/,'')" id="d10" value="" placeholder="0">人<br><br>
         <hr>
         <label class="overIMP">配慮を要する人の全体像</label><br><br><br><br>
-        <label class="IMP">外国人</label><input type="text" id="d12" value="">人<br>
-        <label class="IMP">要援助者数</label><input type="text" id="d11" value="">人<br>
-        <label class="IMP">うち全介助</label><input type="text" id="d11_1" value="">人<br>
-        <label class="IMP">うち一部介助</label><input type="text" id="d11_2" value="">人<br>
-        <label class="IMP">うち認知障害</label><input type="text" id="d11_3" value="">人<br>
+        <label class="IMP">外国人</label><input type="text" onKeyup="this.value=this.value.replace(/[^0-9]+/,'')" id="d12" value="" placeholder="0">人<br>
+        <label class="IMP">要援助者数</label><input type="text" onKeyup="this.value=this.value.replace(/[^0-9]+/,'')" id="d11" value="" placeholder="0">人<br>
+        <label class="IMP">うち全介助</label><input type="text" onKeyup="this.value=this.value.replace(/[^0-9]+/,'')" id="d11_1" value="" placeholder="0">人<br>
+        <label class="IMP">うち一部介助</label><input type="text" onKeyup="this.value=this.value.replace(/[^0-9]+/,'')" id="d11_2" value="" placeholder="0">人<br>
+        <label class="IMP">うち認知障害</label><input type="text" onKeyup="this.value=this.value.replace(/[^0-9]+/,'')" id="d11_3" value="" placeholder="0">人<br>
     </div>
     <hr>
     <div class="inputbox">
@@ -67,10 +68,10 @@
 <fieldset>
     <h3>服薬者数</h3>
     <div class="inputbox">
-        <label>服薬者</label><input type="text" id="e01" value="">人<br>
-        <label class="overIMP">うち高血圧<br>治療薬</label><input type="text" id="e01_1" value="">人<br><br>
-        <label class="overIMP">うち糖尿病<br>治療薬</label><input type="text" id="e01_2" value="">人<br><br>
-        <label class="IMP">うち向精神薬</label><input type="text" id="e01_3" value="">人<br><br>
+        <label>服薬者</label><input type="text" onKeyup="this.value=this.value.replace(/[^0-9]+/,'')" id="e01" value="" placeholder="0">人<br>
+        <label class="overIMP">うち高血圧<br>治療薬</label><input type="text" onKeyup="this.value=this.value.replace(/[^0-9]+/,'')" id="e01_1" value="" placeholder="0">人<br><br>
+        <label class="overIMP">うち糖尿病<br>治療薬</label><input type="text" onKeyup="this.value=this.value.replace(/[^0-9]+/,'')" id="e01_2" value="" placeholder="0">人<br><br>
+        <label class="IMP">うち向精神薬</label><input type="text" id="e01_3" onKeyup="this.value=this.value.replace(/[^0-9]+/,'')" value="" placeholder="0">人<br><br>
     </div>
     <hr>
     <div class="inputbox">
@@ -83,64 +84,64 @@
     <h3>有症状者数</h3>
     <div class="inputbox">
         <label class="overIMP">外傷者数</label><br><br>
-        <label class="IMP">総数</label><input type="text" id="f01" value="">人<br>
-        <label class="overIMP">うち乳児<br>・幼児</label><input type="text" id="f01_1" value="">人<br><br>
-        <label class="IMP">うち妊婦</label><input type="text" id="f01_2" value="">人<br>
-        <label class="IMP">うち高齢者</label><input type="text" id="f01_3" value="">人<br>
+        <label class="IMP">総数</label><input type="text" onKeyup="this.value=this.value.replace(/[^0-9]+/,'')" id="f01" value="" placeholder="0">人<br>
+        <label class="overIMP">うち乳児<br>・幼児</label><input type="text" onKeyup="this.value=this.value.replace(/[^0-9]+/,'')" id="f01_1" value="" placeholder="0">人<br><br>
+        <label class="IMP">うち妊婦</label><input type="text" onKeyup="this.value=this.value.replace(/[^0-9]+/,'')" id="f01_2" value="" placeholder="0">人<br>
+        <label class="IMP">うち高齢者</label><input type="text" onKeyup="this.value=this.value.replace(/[^0-9]+/,'')" id="f01_3" value="" placeholder="0">人<br>
         <hr>
         <label class="overIMP">感染症<br>症状数：下痢</label><br><br><br><br>
-        <label class="IMP">総数</label><input type="text" id="f02" value="">人<br>
-        <label class="overIMP">うち乳児<br>・幼児</label><input type="text" id="f02_1" value="">人<br><br>
-        <label class="IMP">うち妊婦</label><input type="text" id="f02_2" value="">人<br>
-        <label class="IMP">うち高齢者</label><input type="text" id="f02_3" value="">人<br>
+        <label class="IMP">総数</label><input type="text" onKeyup="this.value=this.value.replace(/[^0-9]+/,'')" id="f02" value="" placeholder="0">人<br>
+        <label class="overIMP">うち乳児<br>・幼児</label><input type="text" onKeyup="this.value=this.value.replace(/[^0-9]+/,'')" id="f02_1" value="" placeholder="0">人<br><br>
+        <label class="IMP">うち妊婦</label><input type="text" id="f02_2" onKeyup="this.value=this.value.replace(/[^0-9]+/,'')" value="" placeholder="0">人<br>
+        <label class="IMP">うち高齢者</label><input type="text" id="f02_3" onKeyup="this.value=this.value.replace(/[^0-9]+/,'')" value="" placeholder="0">人<br>
         <hr>
         <label class="overIMP">感染症<br>症状数：嘔吐</label><br><br><br><br>
-        <label class="IMP">総数</label><input type="text" id="f03" value="">人<br>
-        <label class="overIMP">うち乳児<br>・幼児</label><input type="text" id="f03_1" value="">人<br><br>
-        <label class="IMP">うち妊婦</label><input type="text" id="f03_2" value="">人<br>
-        <label class="IMP">うち高齢者</label><input type="text" id="f03_3" value="">人<br>
+        <label class="IMP">総数</label><input type="text" onKeyup="this.value=this.value.replace(/[^0-9]+/,'')" id="f03" value="" placeholder="0">人<br>
+        <label class="overIMP">うち乳児<br>・幼児</label><input type="text" onKeyup="this.value=this.value.replace(/[^0-9]+/,'')" id="f03_1" value="" placeholder="0">人<br><br>
+        <label class="IMP">うち妊婦</label><input type="text" onKeyup="this.value=this.value.replace(/[^0-9]+/,'')" id="f03_2" value="" placeholder="0">人<br>
+        <label class="IMP">うち高齢者</label><input type="text" onKeyup="this.value=this.value.replace(/[^0-9]+/,'')" id="f03_3" value="" placeholder="0">人<br>
         <hr>
         <label class="overIMP">感染症<br>症状数：発熱</label><br><br><br><br>
-        <label class="IMP">総数</label><input type="text" id="f04" value="">人<br>
-        <label class="overIMP">うち乳児<br>・幼児</label><input type="text" id="f04_1" value="">人<br><br>
-        <label class="IMP">うち妊婦</label><input type="text" id="f04_2" value="">人<br>
-        <label class="IMP">うち高齢者</label><input type="text" id="f04_3" value="">人<br>
+        <label class="IMP">総数</label><input type="text" onKeyup="this.value=this.value.replace(/[^0-9]+/,'')" id="f04" value="" placeholder="0">人<br>
+        <label class="overIMP">うち乳児<br>・幼児</label><input type="text" onKeyup="this.value=this.value.replace(/[^0-9]+/,'')" id="f04_1" value="" placeholder="0">人<br><br>
+        <label class="IMP">うち妊婦</label><input type="text" id="f04_2" onKeyup="this.value=this.value.replace(/[^0-9]+/,'')" value="" placeholder="0">人<br>
+        <label class="IMP">うち高齢者</label><input type="text" id="f04_3" onKeyup="this.value=this.value.replace(/[^0-9]+/,'')" value="" placeholder="0">人<br>
         <hr>
         <label class="overIMP">感染症<br>症状数：咳</label><br><br><br><br>
-        <label class="IMP">総数</label><input type="text" id="f05" value="">人<br>
-        <label class="overIMP">うち乳児<br>・幼児</label><input type="text" id="f05_1" value="">人<br><br>
-        <label class="IMP">うち妊婦</label><input type="text" id="f05_2" value="">人<br>
-        <label class="IMP">うち高齢者</label><input type="text" id="f05_3" value="">人<br>
+        <label class="IMP">総数</label><input type="text" onKeyup="this.value=this.value.replace(/[^0-9]+/,'')" id="f05" value="" placeholder="0">人<br>
+        <label class="overIMP">うち乳児<br>・幼児</label><input type="text" onKeyup="this.value=this.value.replace(/[^0-9]+/,'')" id="f05_1" value="" placeholder="0">人<br><br>
+        <label class="IMP">うち妊婦</label><input type="text" onKeyup="this.value=this.value.replace(/[^0-9]+/,'')" id="f05_2" value="" placeholder="0">人<br>
+        <label class="IMP">うち高齢者</label><input type="text" onKeyup="this.value=this.value.replace(/[^0-9]+/,'')" id="f05_3" value="" placeholder="0">人<br>
         <hr>
         <label>その他：<br>便秘</label><br><br><br><br>
-        <label>総数</label><input type="text" id="f06" value="">人<br>
-        <label class="over">うち乳児<br>・幼児</label><input type="text" id="f06_1" value="">人<br><br>
-        <label>うち妊婦</label><input type="text" id="f06_2" value="">人<br>
-        <label>うち高齢者</label><input type="text" id="f06_3" value="">人<br>
+        <label>総数</label><input type="text" id="f06" onKeyup="this.value=this.value.replace(/[^0-9]+/,'')" value="" placeholder="0">人<br>
+        <label class="over">うち乳児<br>・幼児</label><input type="text" onKeyup="this.value=this.value.replace(/[^0-9]+/,'')" id="f06_1" value="" placeholder="0">人<br><br>
+        <label>うち妊婦</label><input type="text" id="f06_2" onKeyup="this.value=this.value.replace(/[^0-9]+/,'')" value="" placeholder="0">人<br>
+        <label>うち高齢者</label><input type="text" id="f06_3" onKeyup="this.value=this.value.replace(/[^0-9]+/,'')" value="" placeholder="0">人<br>
         <hr>
         <label>その他：<br>食欲不振</label><br><br><br><br>
-        <label>総数</label><input type="text" id="f07" value="">人<br>
-        <label class="over">うち乳児<br>・幼児</label><input type="text" id="f07_1" value="">人<br><br>
-        <label>うち妊婦</label><input type="text" id="f07_2" value="">人<br>
-        <label>うち高齢者</label><input type="text" id="f07_3" value="">人<br>
+        <label>総数</label><input type="text" onKeyup="this.value=this.value.replace(/[^0-9]+/,'')" id="f07" value="" placeholder="0">人<br>
+        <label class="over">うち乳児<br>・幼児</label><input type="text" onKeyup="this.value=this.value.replace(/[^0-9]+/,'')" id="f07_1" value="" placeholder="0">人<br><br>
+        <label>うち妊婦</label><input type="text" onKeyup="this.value=this.value.replace(/[^0-9]+/,'')" id="f07_2" value="" placeholder="0">人<br>
+        <label>うち高齢者</label><input type="text" onKeyup="this.value=this.value.replace(/[^0-9]+/,'')" id="f07_3" value="" placeholder="0">人<br>
         <hr>
         <label>その他：<br>頭痛</label><br><br><br><br>
-        <label>総数</label><input type="text" id="f08" value="">人<br>
-        <label class="over">うち乳児<br>・幼児</label><input type="text" id="f08_1" value="">人<br><br>
-        <label>うち妊婦</label><input type="text" id="f08_2" value="">人<br>
-        <label>うち高齢者</label><input type="text" id="f08_3" value="">人<br>
+        <label>総数</label><input type="text" onKeyup="this.value=this.value.replace(/[^0-9]+/,'')" id="f08" value="" placeholder="0">人<br>
+        <label class="over">うち乳児<br>・幼児</label><input type="text" onKeyup="this.value=this.value.replace(/[^0-9]+/,'')" id="f08_1" value="" placeholder="0">人<br><br>
+        <label>うち妊婦</label><input type="text" onKeyup="this.value=this.value.replace(/[^0-9]+/,'')" id="f08_2" value="" placeholder="0">人<br>
+        <label>うち高齢者</label><input type="text" onKeyup="this.value=this.value.replace(/[^0-9]+/,'')" id="f08_3" value="" placeholder="0">人<br>
         <hr>
         <label>その他：<br>不眠</label><br><br><br><br>
-        <label>総数</label><input type="text" id="f09" value="">人<br>
-        <label class="over">うち乳児<br>・幼児</label><input type="text" id="f09_1" value="">人<br><br>
-        <label>うち妊婦</label><input type="text" id="f09_2" value="">人<br>
-        <label>うち高齢者</label><input type="text" id="f09_3" value="">人<br>
+        <label>総数</label><input type="text" onKeyup="this.value=this.value.replace(/[^0-9]+/,'')" id="f09" value="" placeholder="0">人<br>
+        <label class="over">うち乳児<br>・幼児</label><input type="text" onKeyup="this.value=this.value.replace(/[^0-9]+/,'')" id="f09_1" value="" placeholder="0">人<br><br>
+        <label>うち妊婦</label><input type="text" onKeyup="this.value=this.value.replace(/[^0-9]+/,'')" id="f09_2" value="" placeholder="0">人<br>
+        <label>うち高齢者</label><input type="text" onKeyup="this.value=this.value.replace(/[^0-9]+/,'')" id="f09_3" value="" placeholder="0">人<br>
         <hr>
         <label>その他：<br>不安</label><br><br><br><br>
-        <label>総数</label><input type="text" id="f10" value="">人<br>
-        <label class="over">うち乳児<br>・幼児</label><input type="text" id="f10_1" value="">人<br><br>
-        <label>うち妊婦</label><input type="text" id="f10_2" value="">人<br>
-        <label>うち高齢者</label><input type="text" id="f10_3" value="">人<br>
+        <label>総数</label><input type="text" onKeyup="this.value=this.value.replace(/[^0-9]+/,'')" id="f10" value="" placeholder="0">人<br>
+        <label class="over">うち乳児<br>・幼児</label><input type="text" onKeyup="this.value=this.value.replace(/[^0-9]+/,'')" id="f10_1" value="" placeholder="0">人<br><br>
+        <label>うち妊婦</label><input type="text" id="f10_2" onKeyup="this.value=this.value.replace(/[^0-9]+/,'')" value="" placeholder="0">人<br>
+        <label>うち高齢者</label><input type="text" id="f10_3" onKeyup="this.value=this.value.replace(/[^0-9]+/,'')" value="" placeholder="0">人<br>
     </div>
     <hr>
     <div class="checkbox">
@@ -202,7 +203,7 @@
         <textarea style="width: 260px; height: 40px" type="text" id="g02" value=""></textarea><br><br>
         <label class="overIMP" style="width: 260px">感染症症状・その他</label><br><br>
         <textarea style="width: 260px; height: 40px" type="text" id="g03" value=""></textarea><br><br>
-        <label class="overIMP" style="width: 260px">感染症症状・その他</label><br><br>
+        <label class="overIMP" style="width: 260px">防疫に関するその他情報</label><br><br>
         <textarea style="width: 260px; height: 40px" type="text" id="g04" value=""></textarea><br><br>
     </div>
 </fieldset>
@@ -258,12 +259,12 @@
         }
 
         function createMessage() {
-            var tagId = ['d01','d01_1','d01_2','d02','d02_1','d03','d04','d05','d05_1','d05_2','d05_3','d06','d06_1','d06_2','d06_3','d06_4','d07','d08','d09','d10','d11','d11_1','d11_2','d11_3'
-                ,'d12','d13','e01','e01_1','e01_2','e01_3','e02','f01','f01_1','f01_2','f01_3','f02','f02_1','f02_2','f02_3','f03','f03_1','f03_2','f03_3','f04','f04_1','f04_2','f04_3','f05'
+            var tagId = ['d01','d01_1','d01_2','d02','d02_1','d03','d04','d05','d05_1','d05_2','d05_3','d06','d06_1','d06_2','d06_3','d06_4','d07','d08','d09','d10','d12','d11','d11_1','d11_2'
+                ,'d11_3','d13','e01','e01_1','e01_2','e01_3','e02','f01','f01_1','f01_2','f01_3','f02','f02_1','f02_2','f02_3','f03','f03_1','f03_2','f03_3','f04','f04_1','f04_2','f04_3','f05'
                 ,'f05_1','f05_2','f05_3','f06','f06_1','f06_2','f06_3','f07','f07_1','f07_2','f07_3','f08','f08_1','f08_2','f08_3','f09','f09_1','f09_2','f09_3','f10','f10_1','f10_2','f10_3'
-                ,'f16','g01','g02','g03','g04','h01','h02','h03','h04']
+                ,'f16','g01','g02','g03','g04','h01','h02','h03','h04'];
 
-            var tagName = ['f11','f12','f13','f14','f15']
+            var tagName = ['f11','f12','f13','f14','f15'];
 
             var topicMsg = "/hcrisis/assistant/event/" + document.getElementById('eventCode').value
                     + "/shelter/" + document.getElementById('Code').value +　"/nacphn02";

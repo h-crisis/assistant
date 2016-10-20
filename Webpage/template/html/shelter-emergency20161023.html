@@ -13,6 +13,7 @@
 <form>
     <fieldset>
         <h3>避難所情報入力(全て必須項目)</h3>
+        <strong><u>※ 入力欄にあらかじめ「0」と表示されている項目は、半角数字で入力して下さい。該当欄は半角数字以外入力できません。</u></strong><br><br>
         <div class="inputbox">
             <label>災害コード</label>
             <input type="text" id="eventCode" value="" style="border: 1px solid #aaaaaa;">
@@ -27,7 +28,7 @@
             <input type="text" id="inputHuman" value="" style="border: 1px solid #aaaaaa;">
             <br>
             <label>避難者数</label>
-            <input type="text" id="inputNum" value="" style="border: 1px solid #aaaaaa;">
+            <input type="text" onKeyup="this.value=this.value.replace(/[^0-9]+/,'')" id="inputNum" value="" placeholder="0" style="border: 1px solid #aaaaaa;">
             <br>
             <br>
         </div>

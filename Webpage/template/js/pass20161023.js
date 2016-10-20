@@ -19,6 +19,7 @@ var styleImpassable = new ol.style.Style({
 });
 
 var urlP = 'http://h-crisis.niph.go.jp/assistant/wp-content/uploads/data/road_info/latest/road_info.geojson';
+var urlNara = '../practice/geojson/nara_road_info.geojson'
 
 var ImpassableLayer = new ol.layer.Vector({
     source: new ol.source.Vector({
@@ -31,12 +32,25 @@ var ImpassableLayer = new ol.layer.Vector({
     }
 });
 
+var ImpassableLayerNara = new ol.layer.Vector({
+    source: new ol.source.Vector({
+        url: urlNara,
+        format: new ol.format.GeoJSON()
+    }),
+    style: function(feature) {
+        styleImpassable.getText().setText(feature.get('name') +  ":" + feature.get('規制内容') + "(理由:" +　feature.get('規制原因') + ")");
+        return styleImpassable;
+    }
+});
+
 function visPassButton() {
     if (ImpassableLayer.getVisible()) {
         ImpassableLayer.setVisible(false);
+        ImpassableLayerNara.setVisible(false);
         this.style.backgroundColor = "whitesmoke";
     } else {
         ImpassableLayer.setVisible(true);
+        ImpassableLayerNara.setVisible(true);
         this.style.backgroundColor = "red";
     }
 };

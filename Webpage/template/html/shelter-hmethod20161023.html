@@ -630,7 +630,7 @@
 
                     var topicMsg = "/hcrisis/assistant/event/" + document.getElementById('eventCode').value
                             + "/shelter/" + document.getElementById('Code').value +　"/nacphn01";
-                    var createMsg = "code='" + document.getElementById('Code').value +
+                    var createMsg = code='" + document.getElementById('Code').value +
                             "',reporter='" + document.getElementById('Reporter').value +
                             "',name='" + document.getElementById('Name').value +
                             "',address='" + document.getElementById('Address').value;
@@ -649,10 +649,8 @@
                     }
 
                     createMsg = createMsg + "'";
-                    /*
-                    createMsg = createMsg +
+                    //createMsg = createMsg +
                             "',lat='" + lat + "',lon='" + lon;
-                    */
 
                     var nowTime = new Date();
                     var nowYer = nowTime.getFullYear();
