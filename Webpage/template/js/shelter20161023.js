@@ -83,9 +83,9 @@ function createShelterPopupHtml(result) {
     } else {
         // 状況表示
         if(result.get('status') === null) {
-            popupHtml = popupHtml + "（状況: 不明）";
+            popupHtml = popupHtml + "（状況: 推計値）";
         } else {
-            popupHtml = popupHtml + "（状況: " + result.get('status') + "）";
+            popupHtml = popupHtml + "（状況: 調査値）";
         }
 
         // 住所の表示
@@ -118,6 +118,12 @@ function createShelterPopupHtml(result) {
             popupHtml = popupHtml + "<br>避難者数: ";
         } else {
             popupHtml = popupHtml + "<br>避難者数: " + result.get('a01');
+        }
+
+        if((result.get('timestamp') === null) || (result.get('timestamp') === undefined) ) {
+            popupHtml = popupHtml + "<br>最終情報更新時刻: ";
+        } else {
+            popupHtml = popupHtml + "<br>最終情報更新時刻: " + result.get('timestamp');
         }
 
         return popupHtml;

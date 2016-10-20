@@ -1,0 +1,30 @@
+Manifest-Version: 1.0
+Class-Path: jai_core-1.1.3.jar commons-logging-1.0.4.jar gt-opengis-15
+ .0.jar jai_imageio-1.1.jar jt-colorindexer-1.0.9.jar jt-iterators-1.0
+ .9.jar logback-core-1.1.3.jar gt-render-15.0.jar jt-buffer-1.0.9.jar 
+ json-simple-1.1.jar commons-io-2.1.jar zip4j-1.3.2.jar gt-metadata-15
+ .0.jar logback-classic-1.1.3.jar postgresql-9.4.1207.jar hsqldb-2.3.0
+ .jar jts-1.13.jar jt-nullop-1.0.9.jar slf4j-log4j12-1.7.21.jar jt-sca
+ le-1.0.9.jar jt-algebra-1.0.9.jar gt-api-15.0.jar org.eclipse.paho.cl
+ ient.mqttv3-1.0.2.jar jt-zonal-1.0.9.jar imageio-ext-utilities-1.1.13
+ .jar gt-main-15.0.jar gt-geojson-15.0.jar jt-warp-1.0.9.jar jt-utilit
+ ies-1.0.9.jar jt-errordiffusion-1.0.9.jar jt-classifier-1.0.9.jar jgr
+ idshift-1.0.jar postgresql-9.1-901-1.jdbc4.jar imageio-ext-tiff-1.1.1
+ 3.jar imageio-ext-streams-1.1.13.jar jt-mosaic-1.0.9.jar guava-17.0.j
+ ar jt-border-1.0.9.jar gt-referencing-15.0.jar commons-lang-2.6.jar j
+ t-bandcombine-1.0.9.jar jt-bandmerge-1.0.9.jar jt-orderdither-1.0.9.j
+ ar jt-lookup-1.0.9.jar imageio-ext-geocore-1.1.13.jar jt-piecewise-1.
+ 0.9.jar slf4j-api-1.7.7.jar gt-epsg-extension-15.0.jar gt-shapefile-1
+ 5.0.jar jai_codec-1.1.3.jar gt-data-15.0.jar jt-rescale-1.0.9.jar Geo
+ graphicLib-Java-1.44.jar miglayout-3.7-swing.jar gt-coverage-15.0.jar
+  jt-vectorbin-1.0.9.jar gt-cql-15.0.jar gt-epsg-hsql-15.0.jar jt-form
+ at-1.0.9.jar commons-codec-1.2.jar jt-translate-1.0.9.jar jsr-275-1.0
+ -beta-2.jar geocoder-java-0.16.jar jt-colorconvert-1.0.9.jar log4j-1.
+ 2.17.jar jsoup-1.9.2.jar jt-imagefunction-1.0.9.jar jt-rlookup-1.0.9.
+ jar commons-httpclient-3.1.jar jdom-1.1.3.jar jt-binarize-1.0.9.jar g
+ t-swing-15.0.jar jt-stats-1.0.9.jar jt-crop-1.0.9.jar gson-2.2.4.jar 
+ commons-pool-1.5.4.jar jt-utils-1.4.0.jar jt-affine-1.0.9.jar jt-band
+ select-1.0.9.jar core-0.26.jar jt-zonalstats-1.4.0.jar postgis-jdbc-2
+ .1.7.2.jar
+Main-Class: jp.hcrisis.assistant.mqtt.Main
+

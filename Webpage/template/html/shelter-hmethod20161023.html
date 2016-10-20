@@ -662,7 +662,8 @@
                     var nowDay = nowTime.getDate();
                     var nowHrs = nowTime.getHours();
                     var nowMin = nowTime.getMinutes();
-                    //createMsg = createMsg + "',time='" + nowYer + "/" + nowMon + "/" + nowDay + "/" + nowHrs + ":" + nowMin + "'";
+                    var nowSec = nowTime.getSeconds();
+                    createMsg = createMsg + ", timestamp='" + nowYer + "/" + nowMon + "/" + nowDay + " " + nowHrs + ":" + nowMin + ":" + nowSec + "'";
                     console.log(topicMsg + " : " + createMsg);
                     publishMsg(topicMsg, createMsg, true);
                 }

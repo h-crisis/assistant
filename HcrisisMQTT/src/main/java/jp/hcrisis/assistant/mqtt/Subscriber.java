@@ -3,8 +3,6 @@ package jp.hcrisis.assistant.mqtt;
 import org.eclipse.paho.client.mqttv3.*;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 
-import java.sql.Timestamp;
-
 /**
  * Created by manabu on 2016/08/26.
  * H-CRISISのサブスクライブを担うクラス
@@ -13,7 +11,7 @@ public class Subscriber implements MqttCallback {
 
     private int qos = 0;
     private String broker;
-    private String clientID = "HcrisisAssistantSubscriber";
+    private String clientID = "HcrisisAssistantSubscriber1";
     private MqttClient client;
 
     /**
