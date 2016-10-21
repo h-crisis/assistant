@@ -7,30 +7,30 @@ import iwasaki.ga.realcode.TUndxMgg;
 import java.util.List;
 
 /**
- * UNDX+MGG��20����Sphere�֐��ŏ������(y=��xi^2)�ւ̓K�p��D
+ * UNDX+MGG??20????Sphere???????????(y=??xi^2)???K?p??D
  * @author isao
  *
  */
 public class TTestUndxMgg {
 
-//	/** Sphere�֐��̒�`��̍ŏ��l */
+//	/** Sphere??????`??????l */
 	public static final double MIN = 0;
 //
-//	/** Sphere�֐��̒�`��̍ő�l */
+//	/** Sphere??????`?????l */
 	public static final double MAX = 1;
 
-	/** ������ */
+	/** ?????? */
 	public static final int NO_OF_PARAMETERS = 20;
 
-	/** �̐� */
+	/** ???? */
 	public static final int POPULATION_SIZE = 50;
 
-	/** ������ */
+	/** ?????? */
 	public static final int NO_OF_CROSSOVERS = 100;
 
 	/**
-	 * ���C�����\�b�h
-	 * @param args �Ȃ�
+	 * ???C?????\?b?h
+	 * @param args ???
 	 */
 	public static void main(String[] args) {
 		TUndxMgg ga = new TUndxMgg( true, NO_OF_PARAMETERS, POPULATION_SIZE, NO_OF_CROSSOVERS);
@@ -49,9 +49,9 @@ public class TTestUndxMgg {
 }
 
 //	/**
-//	 * �ϐ����`��֎ʑ�����D
-//	 * �����ŁC�̂��������x�N�g���́C�K�����[0.0, 1.0]�̒l�������Ƃɒ��ӂ��ꂽ���D
-//	 * @param x �ϐ�
+//	 * ??????`?????????D
+//	 * ??????C????????????x?N?g????C?K?????[0.0, 1.0]??l???????????????????D
+//	 * @param x ???
 //	 * @return
 //	 */
 //	private static double map(double x) {
@@ -59,8 +59,8 @@ public class TTestUndxMgg {
 //	}
 //
 //	/**
-//	 * �̂�]������D
-//	 * @param ind ��
+//	 * ????]??????D
+//	 * @param ind ???
 //	 */
 //	private static void evaluateIndividual(TRealNumberIndividual ind) {
 //		TVector v = ind.getVector();
@@ -78,8 +78,8 @@ public class TTestUndxMgg {
 //	}
 //
 //	/**
-//	 * �W�c���̑S�Ă̌̂�]������D
-//	 * @param pop �W�c
+//	 * ?W?c????S??????]??????D
+//	 * @param pop ?W?c
 //	 */
 //	private static void evaluatePopulation(TRealNumberIndividual[] pop) {
 //		for (int i = 0; i < pop.length; ++i) {
@@ -88,8 +88,8 @@ public class TTestUndxMgg {
 //	}
 //
 //	/**
-//	 * �̂���ʂɏo�͂���D
-//	 * @param ind ��
+//	 * ????????o?????D
+//	 * @param ind ???
 //	 */
 //	private static void printIndividual(TRealNumberIndividual ind) {
 //		System.out.println("Evaluation value: " + ind.getEvaluationValue());
