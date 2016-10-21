@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact name="NaraModule:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/NaraModule_jar</output-path>
+    <root id="root">
+      <element id="archive" name="NaraModule.jar">
+        <element id="module-output" name="NaraModule" />
+        <element id="directory" name="META-INF">
+          <element id="file-copy" path="$PROJECT_DIR$/Modules/NaraModule/src/META-INF/MANIFEST.MF" />
+        </element>
+      </element>
+      <element id="library" level="project" name="Maven: postgresql:postgresql:9.1-901-1.jdbc4" />
+    </root>
+  </artifact>
+</component>
