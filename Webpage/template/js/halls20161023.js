@@ -181,10 +181,10 @@ var hallLayer = new ol.layer.Vector({
         } else if(feature.get('max_si')>=6.5) {
             styleSI7.getText().setText(zoomLevel > 10 ? name : '');
             return styleSI7;
-    }
+        }
         console.log(url);
         console.log(resolution);
-}});
+    }});
 
 // 役所ボタンの挙動を制御する関数
 function hallButton() {
@@ -234,10 +234,10 @@ function createHtmlHall() {
     DetailHtml = DetailHtml + preCells + '避難者数' + interCells + arrayV[19] + subCells; // 避難者数表示
 
     /*
-    for (i = 0; i < arrayL.length; i++) { // 震度分布で表示するもの
-        DetailHtml = DetailHtml + preCells + arrayL[i] + interCells + arrayV[i] + subCells;
-    }
-    */
+     for (i = 0; i < arrayL.length; i++) { // 震度分布で表示するもの
+     DetailHtml = DetailHtml + preCells + arrayL[i] + interCells + arrayV[i] + subCells;
+     }
+     */
     document.getElementById('infoHeader').style.display = 'block';
     document.getElementById('infoHeader').innerHTML = HeaderHtml;
     document.getElementById('info').style.display = 'block';

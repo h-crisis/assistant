@@ -32,7 +32,7 @@ var baseLayer = new ol.layer.Tile({
 var view = new ol.View({
     projection: 'EPSG:4326',
     center: [centerLat,centerLon],
-    zoom: 9,
+    zoom: 11,
     minZoom: 2,
     maxZoom: 17
 });
@@ -157,5 +157,4 @@ map.on('click', function(evt) {
 map.getView().on('change:resolution', function(evt) {
     zoomLevel = map.getView().getZoom();
 });
-
 

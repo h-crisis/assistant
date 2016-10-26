@@ -3,9 +3,9 @@
  */
 
 // eventCodeと経度（lat)と緯度（lon）を指定する
-var eventCode = 'practice';
-var centerLat = 139.620707;
-var centerLon = 35.790259;
+var eventCode = '20161022_01';
+var centerLat = 135.572418;
+var centerLon = 34.464827;
 var arrayL = new Array(0);
 var arrayV = new Array(0);
 var zoomLevel = 2;

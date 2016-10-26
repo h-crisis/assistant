@@ -1,5 +1,5 @@
 /**
- * Created by manabu on 2016/09/07.
+ * Created by komori on 2016/10/19.
  * 位置情報全般のJavaScript
  */
 
