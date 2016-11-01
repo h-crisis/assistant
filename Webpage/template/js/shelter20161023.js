@@ -245,9 +245,6 @@ function createShelterInfoHtml(result) {
 
 function detailInfoHtml(result){
     DetailHtml = result.get('name');
-    var preCells = "<tr><td width='110px' style=font-size:17px;background-color:#888888;color:white>";
-    var interCells = "</td><td width='250px' style=font-size:17px;background-color:white;text-align:right;>";
-    var subCells ="</td></tr>";
     var tagId = ['a01','a01_1','a01_2','a02','a03','a04','a05','a06','a07','a08','a09','b01','b02','b03','b03_1','b04','b04_1',
         'b04_2','b04_3','b05','b05_1','b05_2','b05_3','b06_1','b06_2','b06_3','c01_1','c01_2','c01_3','c01_4','c01_5','c01_8',
         'c01_9','c01_7','c02_1','c02_2','c02_3','c02_4','c02_5','c02_6','c02_6_1','c02_6_2','c02_6_3','c02_6_4','c02_6_5',
@@ -295,9 +292,6 @@ function detailInfoHtml(result){
 
 function evacueeInfoHtml(result){
     EvacueeHtml = result.get('name');
-    var preCells = "<tr><td width='110px' style=font-size:17px;background-color:#888888;color:white>";
-    var interCells = "</td><td width='250px' style=font-size:17px;background-color:white;text-align:right;>";
-    var subCells ="</td></tr>";
     var tagId = ['d01','d01_1','d01_2','d02','d02_1','d03','d04','d05','d05_1','d05_2','d05_3','d06','d06_1', 'd06_2',
         'd06_3','d06_4','d07','d08','d09','d10','d12','d11','d11_1','d11_2','d11_3', 'd13','e01','e01_1','e01_2','e01_3',
         'e02','f01','f01_1','f01_2','f01_3','f02','f02_1','f02_2','f02_3','f03','f03_1','f03_2','f03_3','f04','f04_1',

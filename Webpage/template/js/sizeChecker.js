@@ -6,7 +6,7 @@ var timer = false;
 
 function sizeCheck() {
 
-    if (window.innerWidth < window.innerHeight && $(window).width() < 480){
+    if (window.innerWidth < window.innerHeight && $(window).width() < 580){
         preCells = "<tr><td width='110px' style=font-size:14px;background-color:#888888;color:white>";
         interCells = "</td><td width='250px' style=font-size:14px;background-color:white;text-align:right;>";
     } else {
@@ -21,7 +21,7 @@ $(window).resize(function () {
         clearTimeout(timer);
     }
     timer = setTimeout(function () {
-        if (window.innerWidth < window.innerHeight && $(window).width() < 480){
+        if (window.innerWidth < window.innerHeight && $(window).width() < 580){
             preCells = "<tr><td width='110px' style=font-size:4px;background-color:#888888;color:white>";
             interCells = "</td><td width='250px' style=font-size:4px;background-color:white;text-align:right;>";
             createHtmlHall();

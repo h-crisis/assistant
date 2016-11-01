@@ -37,19 +37,19 @@ menu .solid:hover {
     background-color:whitesmoke;
     top: 65px;
     right: 0;
-    width: 280px;
-    height: 160px;
+    width: 240px;
+    height: 220px;
     border: 2px solid burlywood;
     padding: 5px 10px;
     table-layout: fixed;
     position:absolute;
     overflow: scroll;
     display:none;
-    font-size:12px;
+    font-size:15px;
 }
 
 .info#info{
-    top: 174px;
+    top: 234px;
     height: 80%;
 }
 

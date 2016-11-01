@@ -6,9 +6,9 @@
 var HeaderHtml;
 var InfoHtml;
 var DetailHtml;
-var preCells = "<tr><td id='tagCell' width='110px' style=font-size:17px;background-color:#888888;color:white>";
-var interCells = "</td><td id='nameCell' width='250px' style=font-size:17px;background-color:white;text-align:right;>";
-var subCells ="</td></tr>";
+var preCells;
+var interCells;
+var subCells;
 
 // BaseLayerの設定 OpenStreetMapを設定する
 var osm_source = new ol.source.OSM({
@@ -147,6 +147,19 @@ var displayFeatureInfo = function(pixel, evt) {
 map.on('click', function(evt) {
     var coordinate = evt.coordinate;
     var pixel = map.getPixelFromCoordinate(coordinate);
+    if (window.innerWidth >= 780) {
+        preCells = "<tr><td id='tagCell' width='110px' style=font-size:17px;background-color:#888888;color:white>";
+        interCells = "</td><td id='nameCell' width='230px' style=font-size:17px;background-color:white;text-align:right;>";
+        subCells = "</td></tr>";
+    } else if (window.innerWidth >= 480) {
+        preCells = "<tr><td id='tagCell' width='110px' style=font-size:15px;background-color:#888888;color:white>";
+        interCells = "</td><td id='nameCell' width='230px' style=font-size:15px;background-color:white;text-align:right;>";
+        subCells = "</td></tr>";
+    } else {
+        preCells = "<tr><td id='tagCell' width='110px' style=font-size:12px;background-color:#888888;color:white>";
+        interCells = "</td><td id='nameCell' width='230px' style=font-size:12px;background-color:white;text-align:right;>";
+        subCells = "</td></tr>";
+    }
     document.getElementById('info').innerHTML = "";
     document.getElementById('infoHeader').style.display = 'none';
     document.getElementById('info').style.display = 'none';
