@@ -3,22 +3,33 @@
  */
 
 var timer = false;
-$(window).resize(function() {
+
+function sizeCheck() {
+
+    if (window.innerWidth < window.innerHeight && $(window).width() < 480){
+        preCells = "<tr><td width='110px' style=font-size:14px;background-color:#888888;color:white>";
+        interCells = "</td><td width='250px' style=font-size:14px;background-color:white;text-align:right;>";
+    } else {
+        preCells = "<tr><td width='110px' style=font-size:17px;background-color:#888888;color:white>";
+        interCells = "</td><td width='250px' style=font-size:17px;background-color:white;text-align:right;>";
+    }
+
+};
+
+$(window).resize(function () {
     if (timer !== false) {
         clearTimeout(timer);
     }
-    timer = setTimeout(function() {
-        if (window.innerWidth < window.innerHeight){
-            document.getElementById( 'info' ).style.width = '90%';
-            document.getElementById( 'info' ).style.height = '20%';
-            document.getElementById( 'infoHeader' ).style.width = '90%';
-            document.getElementById( 'infoHeader' ).style.height = '110px';
+    timer = setTimeout(function () {
+        if (window.innerWidth < window.innerHeight && $(window).width() < 480){
+            preCells = "<tr><td width='110px' style=font-size:4px;background-color:#888888;color:white>";
+            interCells = "</td><td width='250px' style=font-size:4px;background-color:white;text-align:right;>";
+            createHtmlHall();
+            createHtmlHospital();
+            createHtmlPass();
         } else {
-            document.getElementById( 'info' ).style.width = '380px';
-            document.getElementById( 'info' ).style.height = '90%';
-            document.getElementById( 'infoHeader' ).style.width = '380px';
-            document.getElementById( 'infoHeader' ).style.height = '110px';
+            preCells = "<tr><td width='110px' style=font-size:17px;background-color:#888888;color:white>";
+            interCells = "</td><td width='250px' style=font-size:17px;background-color:white;text-align:right;>";
         }
-
     }, 200);
-});
+})

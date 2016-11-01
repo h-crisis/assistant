@@ -17,7 +17,7 @@ var shelterLayer = new ol.layer.Tile({
 });
 var sInfo;
 var dInfo;
-var eInfo
+var eInfo;
 var dClick = 0;
 
 function createShelterPopup(url, evt) {

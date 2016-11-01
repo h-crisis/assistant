@@ -242,4 +242,5 @@ function createHtmlHall() {
     document.getElementById('infoHeader').innerHTML = HeaderHtml;
     document.getElementById('info').style.display = 'block';
     document.getElementById('info').innerHTML = DetailHtml;
+    console.log()
 }

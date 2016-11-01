@@ -6,8 +6,8 @@
 var HeaderHtml;
 var InfoHtml;
 var DetailHtml;
-var preCells = "<tr><td width='110px' style=font-size:17px;background-color:#888888;color:white>";
-var interCells = "</td><td width='250px' style=font-size:17px;background-color:white;text-align:right;>";
+var preCells = "<tr><td id='tagCell' width='110px' style=font-size:17px;background-color:#888888;color:white>";
+var interCells = "</td><td id='nameCell' width='250px' style=font-size:17px;background-color:white;text-align:right;>";
 var subCells ="</td></tr>";
 
 // BaseLayerの設定 OpenStreetMapを設定する
