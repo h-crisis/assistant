@@ -13,6 +13,19 @@
 <link rel="stylesheet" href="../../css/pc.css" type="text/css"
       media="screen and (min-width: 781px)">
 
+<!-- ヘッダー -->
+<div id="headerImage" type="button" onclick="location.href='http://h-crisis.niph.go.jp/assistant'"></div>
+<div id="menubar">
+    <ul>
+        <li><a href="http://h-crisis.niph.go.jp" title="ホーム" >ホーム</a></li>
+        <li><a href="http://csvDownload" title="csvDownload">csvダウンロード</a></li>
+        <li><a href="http://huga" title="huga">huga</a></li>
+        <li><a href="http://hoga" title="hoge">hoge</a></li>
+        <li><a href="http://huge" title="huge">huge</a></li>
+    </ul>
+</div>
+<!-- ヘッダーここまで -->
+
 <script src="event.js"></script>
 <script src="../../js/hospital20161023.js"></script>
 <script src="../../js/halls20161023.js"></script>
@@ -77,15 +90,15 @@
 
 </head>
 <body>
-<div id="map" class="map" style="z-index: 1;position: absolute;top: 0px;left: 0px;width: 100%;height: 100%;"></div>
+<div id="map" class="map" style="z-index: 1;position: absolute;top: 140px;left: 0px;width: 100%;height: 100%;"></div>
 <div id="popup" class="ol-popup">
     <a href="#" id="popup-closer" class="ol-popup-closer"></a>
     <div id="popup-content"></div>
 </div>
 
-<input id="address" style="z-index: 4;position: absolute;left: 50px;top: 10px;" placeholder="数字のみを入力(SHは不要)" onKeyup="this.value=this.value.replace(/[^0-9]+/,'')">
+<input id="address" style="z-index: 4;position: absolute;left: 50px;top: 150px;" placeholder="数字のみを入力(SHは不要)" onKeyup="this.value=this.value.replace(/[^0-9]+/,'')">
 <!--<input id="address" style="z-index: 4;position: absolute;left: 50px;top: 10px;" onkeypress="shelterSearch();">-->
-<input type="submit" style="z-index: 4;position: absolute;left: 55px;top: 40px;" onclick="shelterSearch();" value="建物の位置を検索" function>
+<input type="submit" style="z-index: 4;position: absolute;left: 60px;top: 180px;" onclick="shelterSearch();" value="建物の位置を検索" function>
 <div id="overlayInfo" style="background-color:whitesmoke; border: 1px solid black; padding: 5px 10px;"></div>
 <div id="overlayTargetTop" style="border: dotted 2px red;  padding: 0px 20px;display:block;"></div>
 <div id="overlayTargetRight" style="border: dotted 2px red;  padding: 20px 0px;display:block;"></div>

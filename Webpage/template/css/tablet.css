@@ -14,6 +14,58 @@ menu .solid:hover {
     transform: translateY(0);
 }
 */
+html,body{margin:0;padding:0;}
+div#headerImage {
+    background: url("http://h-crisis.niph.go.jp/assistant/wp-content/uploads/sites/4/2016/04/head.jpg");
+    background-size: 100% 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    color: #fff;
+    z-index: 4;
+}
+div#headerImage:hover{
+    filter:alpha(opacity=80);
+    opacity:0.8;
+}
+div#menubar{
+    position: fixed;
+    width:100%;
+    top:100px;
+    height: 40px;
+    z-index: 5;
+}
+div#menubar ul{
+    display:table;
+    width:100%;
+    top:100px;
+    z-index: 5;
+    margin: 0;
+    padding: 0;
+    background-color: #FFFFFF; }
+div#menubar li{
+    display: table-cell;
+    width:20%;
+    top:100px;
+    z-index: 5;
+    padding:0;
+    background-color: #000000; }
+div#menubar li a{
+    display: block;
+    top:100px;
+    z-index: 5;
+    margin:0 auto;
+    padding:5px;
+    border: 1px solid #FFFFFF;
+    text-decoration: none;
+    color: #FFFFFF;
+    text-align: center;
+    font-size: 18px; }
+div#menubar li a:hover{
+    background-color: #333333;
+}
 .button {
     z-index: 3;
     position: absolute;
@@ -22,7 +74,6 @@ menu .solid:hover {
     height: 30px;
     background-color: whitesmoke;
 }
-
 .buttonWide {
     z-index: 3;
     position: absolute;
@@ -31,11 +82,10 @@ menu .solid:hover {
     height: 50px;
     background-color: whitesmoke;
 }
-
 .info {
     z-index: 3;
-    background-color:whitesmoke;
-    top: 65px;
+    background-color:black;
+    top: 150px;
     right: 0;
     width: 240px;
     height: 220px;
@@ -47,12 +97,10 @@ menu .solid:hover {
     display:none;
     font-size:15px;
 }
-
 .info#info{
-    top: 234px;
+    top: 334px;
     height: 80%;
 }
-
 .cell {
     font-size: 5px;
 }
