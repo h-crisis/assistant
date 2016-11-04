@@ -167,6 +167,8 @@ map.on('click', function(evt) {
     var element = document.getElementsByClassName('infoTab');
     for (var i=0;i<element.length;i++) {
         element[i].style.display = "none";
+        element[i].style.backgroundColor = '';
+        element[i].style.color = '';
     }
     displayFeatureInfo(evt.pixel, evt);
 });
