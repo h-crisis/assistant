@@ -148,22 +148,26 @@ map.on('click', function(evt) {
     var coordinate = evt.coordinate;
     var pixel = map.getPixelFromCoordinate(coordinate);
     if (window.innerWidth >= 780) {
-        preCells = "<tr><td id='tagCell' width='110px' style=font-size:17px;background-color:#888888;color:white>";
-        interCells = "</td><td id='nameCell' width='230px' style=font-size:17px;background-color:white;text-align:right;>";
+        preCells = "<tr><td id='tagCell' width='110px' style='font-size:17px;font-family:helvetica;background-color:#ffffff;padding: 2px;'>";
+        interCells = "</td><td id='nameCell' width='230px' style='font-size:17px;font-family:helvetica;background-color:white;'>";
         subCells = "</td></tr>";
     } else if (window.innerWidth >= 480) {
-        preCells = "<tr><td id='tagCell' width='110px' style=font-size:15px;background-color:#888888;color:white>";
-        interCells = "</td><td id='nameCell' width='230px' style=font-size:15px;background-color:white;text-align:right;>";
+        preCells = "<tr><td id='tagCell' width='110px' style='font-size:15px;font-family:helvetica;background-color:#ffffff;padding: 2px;'>";
+        interCells = "</td><td id='nameCell' width='230px' style='font-size:15px;font-family:helvetica;background-color:white;'>";
         subCells = "</td></tr>";
     } else {
-        preCells = "<tr><td id='tagCell' width='110px' style=font-size:12px;background-color:#888888;color:white>";
-        interCells = "</td><td id='nameCell' width='230px' style=font-size:12px;background-color:white;text-align:right;>";
+        preCells = "<tr><td id='tagCell' width='110px' style='font-size:12px;font-family:helvetica;background-color:#ffffff;padding: 2px;'>";
+        interCells = "</td><td id='nameCell' width='230px' style='font-size:12px;font-family:helvetica;background-color:white;'>";
         subCells = "</td></tr>";
     }
     document.getElementById('info').innerHTML = "";
     document.getElementById('infoHeader').style.display = 'none';
     document.getElementById('info').style.display = 'none';
     document.getElementById('popup').style.display = 'none';
+    var element = document.getElementsByClassName('infoTab');
+    for (var i=0;i<element.length;i++) {
+        element[i].style.display = "none";
+    }
     displayFeatureInfo(evt.pixel, evt);
 });
 

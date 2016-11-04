@@ -63,12 +63,12 @@ var styleSI5W = new ol.style.Style({
         stroke: new ol.style.Stroke({color: "#ffe600", width: 2})
     }),
     image: new ol.style.Icon({
-        scale: 1.5,
+        scale: 0.25,
         anchor: [0.5, 1],
         anchorXUnits: 'fraction',
         anchorYUnits: 'fraction',
         opacity: 0.85,
-        src: "http://h-crisis.niph.go.jp/assistant/wp-content/uploads/sites/4/test/img/5w.png"
+        src: "/Users/komori/Desktop/hospital_002.png"
     })
 });
 var styleSI5S = new ol.style.Style({

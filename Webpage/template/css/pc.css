@@ -1,4 +1,10 @@
-html,body{margin:0;padding:0;}
+html,body,a{
+    margin:0;
+    padding:0;
+    :#ffffff;
+    vlink:#ffffff;
+    alink:#ffffff;
+}
 div#headerImage {
     background: url("http://h-crisis.niph.go.jp/assistant/wp-content/uploads/sites/4/2016/04/head.jpg");
     background-size: 100% 100%;
@@ -7,7 +13,7 @@ div#headerImage {
     left: 0;
     width: 100%;
     height: 100px;
-    color: #fff;
+    color: #333333;
     z-index: 4;
 }
 div#headerImage:hover{
@@ -20,6 +26,7 @@ div#menubar{
     top:100px;
     height: 40px;
     z-index: 5;
+    font-family:helvetica;
  }
 div#menubar ul{
     display:table;
@@ -35,7 +42,7 @@ div#menubar li{
     top:100px;
     z-index: 5;
     padding:0;
-    background-color: #000000; }
+    background-color: #333333; }
 div#menubar li a{
     display: block;
     top:100px;
@@ -48,7 +55,7 @@ div#menubar li a{
     text-align: center;
     font-size: 18px; }
 div#menubar li a:hover{
-    background-color: #333333;
+    background-color: #666666;
 }
 
 .button {
@@ -70,13 +77,13 @@ div#menubar li a:hover{
 
 .info {
     z-index: 3;
-    background-color:whitesmoke;
-    top: 150px;
+    background-color:#eeeeee;
+    top: 180px;
     right: 0;
     width: 380px;
     height: 170px;
-    border: 2px solid burlywood;
     padding: 5px 10px;
+    border-radius: 10px 10px 0 0;
     table-layout: fixed;
     position:absolute;
     overflow: scroll;
@@ -85,7 +92,44 @@ div#menubar li a:hover{
 }
 
 .info#info{
-    top: 334px;
+    top: 320px;
     height: 60%;
     position: absolute;
+    border-radius: 0 0 10px 10px;
+}
+
+.infoTab{
+    z-index: 3;
+    position: absolute;
+    border-radius: 10px 10px 0 0;
+    font-family:helvetica;
+    text-align: center;
+    display: none;
+}
+.infoTab:hover{
+    opacity:0.8;
+}
+.infoTab#tab001{
+    background-color:#eeeeee;
+    color: #000000;
+    top: 150px;
+    right: 270px;
+    width: 100px;
+    height: 30px;
+}
+.infoTab#tab002{
+    background-color:#333333;
+    color: #ffffff;
+    top: 150px;
+    right: 165px;
+    width: 100px;
+    height: 30px;
+}
+.infoTab#tab003{
+    background-color:#333333;
+    color: #ffffff;
+    top: 150px;
+    right: 60px;
+    width: 100px;
+    height: 30px;
 }
