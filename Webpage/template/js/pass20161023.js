@@ -47,11 +47,13 @@ function visPassButton() {
     if (ImpassableLayer.getVisible()) {
         ImpassableLayer.setVisible(false);
         ImpassableLayerNara.setVisible(false);
-        this.style.backgroundColor = "whitesmoke";
+        this.style.backgroundColor = "#eeeeee";
+        this.style.color = "#000000";
     } else {
         ImpassableLayer.setVisible(true);
         ImpassableLayerNara.setVisible(true);
-        this.style.backgroundColor = "red";
+        this.style.backgroundColor = "";
+        this.style.color = "";
     }
 };
 

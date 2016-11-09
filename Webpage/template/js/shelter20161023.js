@@ -159,7 +159,7 @@ function createShelterInfoHtml(result) {
     } else {
 
         // 避難所情報入力ボタン表示
-        var btnCode = '?event=' + eventCode + ',id=' + result.get('code') + ',name=' + result.get('name')　+ ',address=' + result.get('address');
+        var btnCode = '?event=' + eventCode + ',id=' + result.get('code') + ',name=' + result.get('name').replace(/ /g,"")　+ ',address=' + result.get('address').replace(/ /g,"");
         InfoHtml = "<div style='border-radius: 10px; margin:0 0 5px; font-family:helvetica; background-color:#333333; text-align:center; opacity:1; width:350px' type=button onmousemove='this.style.opacity=0.8' onmouseout='this.style.opacity=1'><a style='display:block; width:100%; color:white; text-decoration: none' href=../../html/shelter-emergency20161023.html" + btnCode + " id=niphLonLatE target=_blank>緊急時情報入力</a></div>";
 
         // 状況表示
@@ -245,23 +245,27 @@ function createShelterInfoHtml(result) {
 
 function detailInfoHtml(result){
     DetailHtml = result.get('name');
-    var tagId = ['a01','a01_1','a01_2','a02','a03','a04','a05','a06','a07','a08','a09','b01','b02','b03','b03_1','b04','b04_1',
+    var tagId = ['a01','a01_1','a01_2','a02','a03','a04','a05','a06','a07','a08','a09','b02','b03','b03_1','b04','b04_1',
         'b04_2','b04_3','b05','b05_1','b05_2','b05_3','b06_1','b06_2','b06_3','c01_1','c01_2','c01_3','c01_4','c01_5','c01_8',
         'c01_9','c01_7','c02_1','c02_2','c02_3','c02_4','c02_5','c02_6','c02_6_1','c02_6_2','c02_6_3','c02_6_4','c02_6_5',
         'c02_6_6','c02_7','c02_7_1','c02_8','c02_8_1','c02_9','c03_1','c03_2','c03_3','c03_4','c03_5','c03_6','c03_7',
         'c03_8','c03_9','c03_10','c03_11','c03_12','c04_1','c04_1_1','c04_2','c04_3','c04_4'];
     var tagName = ['避難者数','避難者数(昼)','避難者数(夜)','電話','FAX','メールアドレス','施設の広さ','スペース密度','一人当たり専有面積',
-        '交通機関','避難者への情報伝達手段','管理統括・代表者の氏名(立場)','連絡体制','自主組織有無','自主組織について','外部組織有無','外部組織:チーム数',
+        '交通機関','避難者への情報伝達手段','連絡体制','自主組織有無','自主組織について','外部組織有無','外部組織:チーム数',
         '外部組織:人数','外部組織:職種','ボランティア有無','ボランティア:チーム数','ボランティア:人数','ボランティア:職種','救護所','巡回診療',
         '地域の医師との連携','電気','ガス','水道','飲料水','固定電話','携帯電話','通信','ライフラインに関する対応','洗濯機','冷蔵庫','冷暖房',
         '照明','調理設備','トイレ充足度','トイレ箇所数','下水','トイレ清掃','トイレ汲み取り','手洗い場','手指消毒','風呂の充足度','風呂清掃状況',
         '喫煙所','分煙','設備に関する対応','施設の清掃状況','床の清掃','ゴミ収集場所','靴類履き替え場所','空調管理','粉塵','生活騒音','寝具',
-        '寝具乾燥対策','ペット対策','ペットの収容対策','衛生面に関する対応','食事の充足度','食事回数/日','炊き出し','残飯処理','食事に関する対応']
-    var btnCode = '?event=' + eventCode + ',id=' + result.get('code') + ',name=' + result.get('name')　+ ',address=' + result.get('address');
-    for (var i=0; i<tagId.length; i++) {
-        // if (result.get(tagIdSh[i]) === null || result.get(tagIdSh[i])===undefined) {
+        '寝具乾燥対策','ペット対策','ペットの収容対策','衛生面に関する対応','食事の充足度','食事回数/日','炊き出し','残飯処理','食事に関する対応'];
+    var btnId = ['a01','a01_1','a01_2','a02','a03','a04','a05','a07','a08','a09','b02','b03_1','b04_1','b04_2','b04_3','b05_1','b05_2','b05_3','c01_7','c02_6_1','c02_7_1','c02_9',
+        'c03_12','c04_1_1','c04_4','a06','b03','b04','b05','b06_1','b06_2','b06_3','c01_1','c01_2','c01_3','c01_4','c01_5','c01_8','c01_9','c02_1','c02_2','c02_3','c02_4','c02_5','c02_6',
+        'c02_6_2','c02_6_3','c02_6_4','c02_6_5','c02_6_6','c02_7','c02_8','c02_8_1','c03_1','c03_2','c03_3','c03_4','c03_5','c03_6','c03_7','c03_8','c03_9','c03_10','c03_11',
+        'c04_1','c04_2','c04_3'];
+    var btnCode = '?event=' + eventCode + ',id=' + result.get('code') + ',name=' + result.get('name').replace(/ /g,"")　+ ',address=' + result.get('address').replace(/ /g,"") ;
+    for (var i=0; i<btnId.length; i++) {
+        // if (result.get(btnIdSh[i]) === null || result.get(btnIdSh[i])===undefined) {
         //    EvacueeHtml = EvacueeHtml + preCells + tagName[i] + interCells + subCells;
-        btnCode = btnCode + "," + tagId[i] + "=" + result.get(tagId[i]);
+        btnCode = btnCode + "," + btnId[i] + "=" + result.get(btnId[i]);
     }
     DetailHtml = "<div style='border-radius: 10px; margin:0 0 5px; font-family:helvetica; background-color:#333333; text-align:center; opacity:1; width:350px' type=button onmousemove='this.style.opacity=0.8' onmouseout='this.style.opacity=1'><a style='display:block; width:100%; color:white; text-decoration: none' href=../../html/shelter-hmethod20161023.html" + btnCode + " id=niphLonLatE target=_blank>避難所シート入力</a></div>";
 
@@ -313,7 +317,7 @@ function evacueeInfoHtml(result){
         '乳児・幼児の不眠症状者','妊婦の不眠症状者','高齢者の不眠症状者','不安症状者総数','乳児・幼児の不安症状者','妊婦の不安症状者',
         '高齢者の不安症状者','専門的医療ニーズ','小児疾患','精神疾患','周産期','歯科','有症者への対応等情報','食中毒様症状(下痢、嘔吐などの動向)',
         '風邪様症状(咳・発熱などの動向)','感染症症状・その他','防疫に関するその他情報','全体の健康状態','活動内容','アセスメント','課題・申し送り'];
-    var btnCode = '?event=' + eventCode + ',id=' + result.get('code') + ',name=' + result.get('name')　+ ',address=' + result.get('address');
+    var btnCode = '?event=' + eventCode + ',id=' + result.get('code') + ',name=' + result.get('name').replace(/ /g,"")　+ ',address=' + result.get('address').replace(/ /g,"");
     for (var i=0; i<tagId.length; i++) {
         // if (result.get(tagIdSh[i]) === null || result.get(tagIdSh[i])===undefined) {
         //    EvacueeHtml = EvacueeHtml + preCells + tagName[i] + interCells + subCells;
@@ -405,9 +409,11 @@ function shelterButton() {
     // 避難所をマップに表示させるかどうか
     if (!shelterLayer.getVisible()) {
         shelterLayer.setVisible(true);
-        this.style.backgroundColor = "green";
+        this.style.backgroundColor = "#eeeeee";
+        this.style.color = "#000000";
     } else {
         shelterLayer.setVisible(false);
-        this.style.backgroundColor = "whitesmoke";
+        this.style.backgroundColor = "";
+        this.style.color = "";
     }
 };

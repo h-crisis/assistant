@@ -148,10 +148,12 @@ var hospLayer = new ol.layer.Vector({
 function hospButton() {
     if (!hospLayer.getVisible()) {
         hospLayer.setVisible(true);
-        this.style.backgroundColor = "blue";
+        this.style.backgroundColor = "#eeeeee";
+        this.style.color = "#000000";
     } else {
         hospLayer.setVisible(false);
-        this.style.backgroundColor = "whitesmoke";
+        this.style.backgroundColor = "";
+        this.style.color = "";
     }
 };
 

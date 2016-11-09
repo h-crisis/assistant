@@ -585,6 +585,18 @@
                     }
                 }
 
+                var tagId = ['a01','a01_1','a01_2','a02','a03','a04','a05','a07','a08','a09','b02','b03_1','b04_1','b04_2','b04_3','b05_1','b05_2','b05_3','c01_7','c02_6_1','c02_7_1','c02_9',
+                    'c03_12','c04_1_1','c04_4'];
+
+                var tagName = ['a06','b03','b04','b05','b06_1','b06_2','b06_3','c01_1','c01_2','c01_3','c01_4','c01_5','c01_8','c01_9','c02_1','c02_2','c02_3','c02_4','c02_5','c02_6',
+                    'c02_6_2','c02_6_3','c02_6_4','c02_6_5','c02_6_6','c02_7','c02_8','c02_8_1','c03_1','c03_2','c03_3','c03_4','c03_5','c03_6','c03_7','c03_8','c03_9','c03_10','c03_11',
+                    'c04_1','c04_2','c04_3'];
+
+                var btnTag = ['a01','a01_1','a01_2','a02','a03','a04','a05','a07','a08','a09','b02','b03_1','b04_1','b04_2','b04_3','b05_1','b05_2','b05_3','c01_7','c02_6_1','c02_7_1','c02_9',
+                    'c03_12','c04_1_1','c04_4','a06','b03','b04','b05','b06_1','b06_2','b06_3','c01_1','c01_2','c01_3','c01_4','c01_5','c01_8','c01_9','c02_1','c02_2','c02_3','c02_4','c02_5','c02_6',
+                    'c02_6_2','c02_6_3','c02_6_4','c02_6_5','c02_6_6','c02_7','c02_8','c02_8_1','c03_1','c03_2','c03_3','c03_4','c03_5','c03_6','c03_7','c03_8','c03_9','c03_10','c03_11',
+                    'c04_1','c04_2','c04_3'];
+
                 var urlStr = location.search;
                 if(urlStr === '') {
                     // 避難所IDと避難所名がないと送信ボタンが押せない設定
@@ -593,18 +605,13 @@
                 else {
                     var pairUrlStr = urlStr.split(',');
                     if(pairUrlStr.length>=2) {
-                        pairUrlStr[0] = pairUrlStr[0].substr(7);
-                        pairUrlStr[0] = decodeURI(pairUrlStr[0]);
-                        pairUrlStr[1] = pairUrlStr[1].substr(3);
-                        pairUrlStr[1] = decodeURI(pairUrlStr[1]);
-                        pairUrlStr[2] = pairUrlStr[2].substr(5);
-                        pairUrlStr[2] = decodeURI(pairUrlStr[2]);
-                        pairUrlStr[3] = pairUrlStr[3].substr(8);
-                        pairUrlStr[3] = decodeURI(pairUrlStr[3]);
-                        // pairUrlStr[4] = pairUrlStr[4].substr(2);
-                        // pairUrlStr[4] = decodeURI(pairUrlStr[4]);
-                        // pairUrlStr[5] = pairUrlStr[5].substr(2);
-                        // pairUrlStr[5] = decodeURI(pairUrlStr[5]);
+                        for (i=0; i<pairUrlStr.length;i++){
+                            pairUrlStr[i] = pairUrlStr[i].substr(pairUrlStr[i].indexOf("=")+1);
+                            pairUrlStr[i] = decodeURI(pairUrlStr[i]);
+                            if (pairUrlStr[i] == "null"){
+                                pairUrlStr[i] = "";
+                            }
+                        }
                         document.getElementById('eventCode').value = pairUrlStr[0];
                         document.getElementById('eventCode').disabled = 'true';
                         document.getElementById('Code').value = pairUrlStr[1];
@@ -613,8 +620,22 @@
                         document.getElementById('Address').disabled = 'true';
                         document.getElementById('Name').value = pairUrlStr[2];
                         document.getElementById('Name').disabled = 'true';
-                        lon = pairUrlStr[4];
-                        lat = pairUrlStr[5];
+                        for (i=0; i <25; i++) {
+                            document.getElementById(btnTag[i]).value = pairUrlStr[i+4];
+                        }
+                        for (i=25; i <btnTag.length; i++) {
+                            document.getElementsByName(btnTag[i]).value = pairUrlStr[i+4];
+                            // console.log(document.getElementsByName(btnTag[i]).length);
+                            for (var k = 0; k < document.getElementsByName(btnTag[i]).length; k++) {
+                                if (document.getElementsByName(btnTag[i])[k].value === document.getElementsByName(btnTag[i]).value) {
+                                    document.getElementsByName(btnTag[i])[k].checked = true;
+                                    continue;
+                                }
+                            }
+                        }
+
+                        // lon = pairUrlStr[4];
+                        // lat = pairUrlStr[5];
                     }
                 }
 

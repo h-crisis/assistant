@@ -223,7 +223,12 @@
 </fieldset>
 <fieldset>
     <script>
-        var lon,lat
+        var lon,lat;
+
+        var btnTag = ['d01','d01_1','d01_2','d02','d02_1','d03','d04','d05','d05_1','d05_2','d05_3','d06','d06_1','d06_2','d06_3','d06_4','d07','d08','d09','d10','d12','d11','d11_1','d11_2'
+            ,'d11_3','d13','e01','e01_1','e01_2','e01_3','e02','f01','f01_1','f01_2','f01_3','f02','f02_1','f02_2','f02_3','f03','f03_1','f03_2','f03_3','f04','f04_1','f04_2','f04_3','f05'
+            ,'f05_1','f05_2','f05_3','f06','f06_1','f06_2','f06_3','f07','f07_1','f07_2','f07_3','f08','f08_1','f08_2','f08_3','f09','f09_1','f09_2','f09_3','f10','f10_1','f10_2','f10_3'
+            ,'f11','f12','f13','f14','f15','f16','g01','g02','g03','g04','h01','h02','h03','h04'];
 
         var urlStr = location.search;
         if(urlStr === '') {
@@ -233,18 +238,13 @@
         else {
             var pairUrlStr = urlStr.split(',');
             if(pairUrlStr.length>=2) {
-                pairUrlStr[0] = pairUrlStr[0].substr(7);
-                pairUrlStr[0] = decodeURI(pairUrlStr[0]);
-                pairUrlStr[1] = pairUrlStr[1].substr(3);
-                pairUrlStr[1] = decodeURI(pairUrlStr[1]);
-                pairUrlStr[2] = pairUrlStr[2].substr(5);
-                pairUrlStr[2] = decodeURI(pairUrlStr[2]);
-                pairUrlStr[3] = pairUrlStr[3].substr(8);
-                pairUrlStr[3] = decodeURI(pairUrlStr[3]);
-                // pairUrlStr[4] = pairUrlStr[4].substr(2);
-                // pairUrlStr[4] = decodeURI(pairUrlStr[4]);
-                // pairUrlStr[5] = pairUrlStr[5].substr(2);
-                // pairUrlStr[5] = decodeURI(pairUrlStr[5]);
+                for (i=0; i<pairUrlStr.length;i++){
+                    pairUrlStr[i] = pairUrlStr[i].substr(pairUrlStr[i].indexOf("=")+1);
+                    pairUrlStr[i] = decodeURI(pairUrlStr[i]);
+                    if (pairUrlStr[i] == "null"){
+                        pairUrlStr[i] = "";
+                    }
+                }
                 document.getElementById('eventCode').value = pairUrlStr[0];
                 document.getElementById('eventCode').disabled = 'true';
                 document.getElementById('Code').value = pairUrlStr[1];
@@ -253,8 +253,24 @@
                 document.getElementById('Address').disabled = 'true';
                 document.getElementById('Name').value = pairUrlStr[2];
                 document.getElementById('Name').disabled = 'true';
-                lon = pairUrlStr[4];
-                lat = pairUrlStr[5];
+                for (i=0; i <71; i++) {
+                    document.getElementById(btnTag[i]).value = pairUrlStr[i+4];
+                }
+                for (i=71; i <76; i++) {
+                    document.getElementsByName(btnTag[i]).value = pairUrlStr[i+4];
+                    // console.log(document.getElementsByName(btnTag[i]).length);
+                    for (var k = 0; k < document.getElementsByName(btnTag[i]).length; k++) {
+                        if (document.getElementsByName(btnTag[i])[k].value === document.getElementsByName(btnTag[i]).value) {
+                            document.getElementsByName(btnTag[i])[k].checked = true;
+                            continue;
+                        }
+                    }
+                }
+                for (i=76; i <btnTag.length; i++) {
+                    document.getElementById(btnTag[i]).value = pairUrlStr[i+4];
+                }
+                // lon = pairUrlStr[4];
+                // lat = pairUrlStr[5];
             }
         }
 

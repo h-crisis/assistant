@@ -190,12 +190,12 @@ var hallLayer = new ol.layer.Vector({
 function hallButton() {
     if (!hallLayer.getVisible()) {
         hallLayer.setVisible(true);
-        this.style.backgroundColor = "orange";
-        this.style.color = "black";
+        this.style.backgroundColor = "#eeeeee";
+        this.style.color = "#000000";
     } else {
         hallLayer.setVisible(false);
-        this.style.backgroundColor = "whitesmoke";
-        this.style.color = "black";
+        this.style.backgroundColor = "";
+        this.style.color = "";
     }
 };
 
