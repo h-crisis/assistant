@@ -10,6 +10,8 @@ var preCells;
 var interCells;
 var subCells;
 
+
+
 // BaseLayerの設定 OpenStreetMapを設定する
 var osm_source = new ol.source.OSM({
     url: 'http://{a-c}.tile.openstreetmap.org/{z}/{x}/{y}.png'
@@ -28,14 +30,29 @@ var baseLayer = new ol.layer.Tile({
     opacity: 1
 });
 
-// 地図の設定
+// 地図の設定。リロードした場合はlocationo.jsで設定したurlから座標取得
 var view = new ol.View({
     projection: 'EPSG:4326',
-    center: [centerLat,centerLon],
+    center: [centerLat, centerLon],
     zoom: 11,
     minZoom: 2,
     maxZoom: 17
 });
+if (document.URL.indexOf("?") > 0){
+    reURL = document.URL.split(',');
+    if (isFinite(reURL[1].substr(4)) && isFinite(reURL[2].substr(4)) && isFinite(reURL[3].substr(4))) {
+
+        var centerLatLon = [parseFloat(reURL[1].substr(4)),parseFloat(reURL[2].substr(4))];
+        var centerZoom =  parseFloat(reURL[3].substr(4));
+        view = new ol.View({
+            projection: 'EPSG:4326',
+            center: centerLatLon,
+            zoom: centerZoom,
+            minZoom: 2,
+            maxZoom: 17
+        })
+    }
+}
 
 
 // オーバレイの設定（ポップアップ）
@@ -177,3 +194,20 @@ map.getView().on('change:resolution', function(evt) {
     zoomLevel = map.getView().getZoom();
 });
 
+// 画面移動時点の中心座標を拾う
+map.on('moveend', function() {
+    userLat = map.getView().getCenter()[0];
+    userLon = map.getView().getCenter()[1];
+    userZoom = map.getView().getZoom();
+});
+
+// 15分毎にリロードする
+function reflash(){
+    var mesag = "情報が更新されました。画面を更新しますか？";
+    if (window.confirm(mesag)) {
+        relocateCenter();
+        document.location.href = reURL;
+    } else {
+    }
+}
+setInterval(reflash,900000);

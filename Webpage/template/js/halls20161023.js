@@ -202,19 +202,19 @@ function hallButton() {
 // 震度のポップアップを作成する関数
 function createHtmlHall() {
     document.getElementById('info').innerHTML = "";
-    HeaderHtml = "<div style='border:2px solid burlywood; background-color:#888888; color:white; text-align:center' type=button id=showBtn value=隠す onclick=showHide()>閉じる</div>";
+    HeaderHtml = "<div style='border-radius:10px; margin:0 0 5px; font-family:helvetica; background-color:#333333; color:white; text-align:center; opacity: 1; width:350px' type=button id=showBtn value=隠す onclick=showHide() onmousemove='this.style.opacity=0.8' onmouseout='this.style.opacity=1'>閉じる</div>";
 
     // 建築物名表示
     if (arrayV[0] === null) {
     } else {
         if(arrayV[6]===null && arrayV[7]===null) {
-            HeaderHtml = HeaderHtml + arrayV[4] + arrayV[8];
+            HeaderHtml = HeaderHtml + "<a style='font-family: Helvetica'>" + arrayV[4] + arrayV[8] + "</a>";
         }
         else if(arrayV[7]===null) {
-            HeaderHtml = HeaderHtml + arrayV[4] + arrayV[6] + arrayV[8];
+            HeaderHtml = HeaderHtml + "<a style='font-family: Helvetica'>" + arrayV[4] + arrayV[6] + arrayV[8] + "</a>";
         }
         else {
-            HeaderHtml = HeaderHtml + arrayV[4] + arrayV[6] + arrayV[7] + arrayV[8];
+            HeaderHtml = HeaderHtml + "<a style='font-family: Helvetica'>" + arrayV[4] + arrayV[6] + arrayV[7] + arrayV[8] + "</a>";
         }
     }
 

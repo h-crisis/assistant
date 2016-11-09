@@ -3,20 +3,8 @@
  * 位置情報全般のJavaScript
  */
 
-
-// デフォルトの中心に移動する
-var goCenter = document.getElementById('goToHypoCenter');
-goCenter.addEventListener('click', goHypoButton);
-function goHypoButton() {
-    var pan = ol.animation.pan({
-        duration: 2000,
-        source: (view.getCenter())
-    });
-    map.beforeRender(pan);
-    map.getView().setCenter(hypoPoint);
-    map.getView().setZoom(11);
-}
-
+//
+    
 // Webブラウザから取得した現在地に移動する
 var goHere = document.getElementById('goToHere');
 goHere.addEventListener('click', goToHere);
@@ -65,4 +53,13 @@ function goToHypo() {
     map.beforeRender(pan, bounce);
     map.getView().setCenter(centerLatLon);
     map.getView().setZoom(15);
+}
+
+// リロード時に中心座標をリロード前のものと同一にするためurlに座標を渡す
+function relocateCenter(){
+    if (reURL.indexOf("?")) {
+        reURL = document.URL.substr( 0, document.URL.indexOf("?")) + "?,lat=" + userLat +",lon=" + userLon + ",zom=" +userZoom;
+    } else {
+        reURL = document.URL + "?,lat=" + userLat + ",lon=" + userLon + ",zom=" + userZoom;
+    }
 }

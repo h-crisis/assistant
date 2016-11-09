@@ -47,13 +47,13 @@ function visPassButton() {
     if (ImpassableLayer.getVisible()) {
         ImpassableLayer.setVisible(false);
         ImpassableLayerNara.setVisible(false);
-        this.style.backgroundColor = "#eeeeee";
-        this.style.color = "#000000";
+        this.style.backgroundColor = "";
+        this.style.color = "";
     } else {
         ImpassableLayer.setVisible(true);
         ImpassableLayerNara.setVisible(true);
-        this.style.backgroundColor = "";
-        this.style.color = "";
+        this.style.backgroundColor = "#eeeeee";
+        this.style.color = "#000000";
     }
 };
 
@@ -61,12 +61,12 @@ function visPassButton() {
 function createHtmlPass() {
     document.getElementById('info').innerHTML = "";
     DetailHtml = "";
-    HeaderHtml = "<div style='border:2px solid burlywood; background-color:#888888; color:white; text-align:center' type=button id=showBtn value=隠す onclick=showHide()>閉じる</div>";
+    HeaderHtml = "<div style='border-radius:10px; margin:0 0 5px; font-family:helvetica; background-color:#333333; color:white; text-align:center; opacity: 1; width:350px' type=button id=showBtn value=隠す onclick=showHide() onmousemove='this.style.opacity=0.8' onmouseout='this.style.opacity=1'>閉じる</div>";
 
     // 建築物名表示
     if (arrayV[0] === null) {
     } else {
-        HeaderHtml = HeaderHtml + arrayV[0];
+        HeaderHtml = HeaderHtml + "<a style='font-family: Helvetica'>" + arrayV[0] + "</a>";
     }
     for (i = 0; i < arrayL.length; i++) {
         DetailHtml = DetailHtml + preCells + arrayL[i] + interCells + arrayV[i] + subCells;
