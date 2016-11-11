@@ -69,6 +69,9 @@ var overlayPopup = new ol.Overlay(/** @type {olx.OverlayOptions} */ ({
 popupCloser.onclick = function() {
     document.getElementById('info').style.display = 'none';
     document.getElementById('infoHeader').style.display = 'none';
+    document.getElementById('tab001').style.display = 'none';
+    document.getElementById('tab002').style.display = 'none';
+    document.getElementById('tab003').style.display = 'none';
     overlayPopup.setPosition(undefined);
     popupCloser.blur();
     return false;
@@ -93,13 +96,13 @@ map.addLayer(shelterLayer);
 map.addLayer(hospLayer);
 map.addLayer(hallLayer);
 map.addLayer(ImpassableLayer);
-map.addLayer(ImpassableLayerNara);
+map.addLayer(ImpassableLayerAdd);
 map.once('postrender', function(){
     shelterLayer.setVisible(false);
     hospLayer.setVisible(false);
     hallLayer.setVisible(false);
     ImpassableLayer.setVisible(false);
-    ImpassableLayerNara.setVisible(false);
+    ImpassableLayerAdd.setVisible(false);
 });
 
 // 避難所のマップ表示制御ボタンを呼ぶ変数。表示制御関数はshelter~.js
@@ -199,6 +202,24 @@ map.on('moveend', function() {
     userLat = map.getView().getCenter()[0];
     userLon = map.getView().getCenter()[1];
     userZoom = map.getView().getZoom();
+
+    var format = "a1"
+
+    var dims = {
+        a0: [1189, 841],
+        a1: [841, 594],
+        a2: [594, 420],
+        a3: [420, 297],
+        a4: [297, 210],
+        a5: [210, 148]
+    };
+
+    var dim = dims[format];
+
+    var size = /** @type {ol.Size} */ (map.getSize());
+    var extent = map.getView().calculateExtent(size);
+
+    console.log(map.getView().fit(extent,size))
 });
 
 // 15分毎にリロードする

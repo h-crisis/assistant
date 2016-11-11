@@ -19,7 +19,8 @@ var styleImpassable = new ol.style.Style({
 });
 
 var urlP = 'http://h-crisis.niph.go.jp/assistant/wp-content/uploads/data/road_info/latest/road_info.geojson';
-var urlNara = '../practice/geojson/nara_road_info.geojson'
+// urlCustomRoadは、event.jsで定義する
+//var urlCustomRoad = '../practice/geojson/custom_road_info.geojson'
 
 var ImpassableLayer = new ol.layer.Vector({
     source: new ol.source.Vector({
@@ -32,9 +33,9 @@ var ImpassableLayer = new ol.layer.Vector({
     }
 });
 
-var ImpassableLayerNara = new ol.layer.Vector({
+var ImpassableLayerAdd = new ol.layer.Vector({
     source: new ol.source.Vector({
-        url: urlNara,
+        url: urlCustomRoad,
         format: new ol.format.GeoJSON()
     }),
     style: function(feature) {
@@ -46,12 +47,12 @@ var ImpassableLayerNara = new ol.layer.Vector({
 function visPassButton() {
     if (ImpassableLayer.getVisible()) {
         ImpassableLayer.setVisible(false);
-        ImpassableLayerNara.setVisible(false);
+        ImpassableLayerAdd.setVisible(false);
         this.style.backgroundColor = "";
         this.style.color = "";
     } else {
         ImpassableLayer.setVisible(true);
-        ImpassableLayerNara.setVisible(true);
+        ImpassableLayerAdd.setVisible(true);
         this.style.backgroundColor = "#eeeeee";
         this.style.color = "#000000";
     }

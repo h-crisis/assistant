@@ -2,10 +2,12 @@
 <html lang="ja">
 <meta charset="UTF-8">
 <title>【訓練】奈良県防災訓練20161023</title>
-<link rel="stylesheet" href="http://openlayers.org/en/v3.18.0/css/ol.css" type="text/css">
-<script src="http://openlayers.org/en/v3.18.0/build/ol.js"></script>
+<link rel="stylesheet" href="http://openlayers.org/en/v3.19.1/css/ol.css" type="text/css">
+<script src="http://openlayers.org/en/v3.19.1/build/ol.js"></script>
 <script src="http://code.jquery.com/jquery-3.1.0.js"></script>
 <script src="http://d3js.org/d3.v3.min.js"></script>
+<script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList,URL"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.2.61/jspdf.min.js"></script>
 <link rel="stylesheet" href="../../css/phone.css" type="text/css"
       media="screen and (max-width: 480px)">
 <link rel="stylesheet" href="../../css/tablet.css" type="text/css"
@@ -17,11 +19,11 @@
 <div id="headerImage" type="button" onclick="location.href='http://h-crisis.niph.go.jp/assistant'"></div>
 <div id="menubar">
     <ul>
-        <li><a href="http://h-crisis.niph.go.jp" title="ホーム" >ホーム</a></li>
-        <li><a href="http://csvDownload" title="csvDownload">csvダウンロード</a></li>
-        <li><a href="http://huga" title="huga">サンプル</a></li>
-        <li><a href="http://hoga" title="hoge">サンプル</a></li>
-        <li><a href="http://huge" title="huge">サンプル</a></li>
+        <li><a href="http://h-crisis.niph.go.jp/assistant" title="ホーム" >ホーム</a></li>
+        <li><a href="http://csvDownload" title="csvDownload">データ</a></li>
+        <li><a title="huga" id="export-pdf">地図印刷</a></li>
+        <li><a href="http://hoga" title="hoge">掲示板</a></li>
+        <li><a href="http://www.wds.emis.go.jp/" title="huge">ＥＭＩＳ</a></li>
     </ul>
 </div>
 <!-- ヘッダーここまで -->
@@ -31,6 +33,24 @@
 <script src="../../js/halls20161023.js"></script>
 <script src="../../js/pass20161023.js"></script>
 <script src="../../js/locationChecker.js"></script>
+
+<form class="form">
+    <label>Page size </label>
+    <select id="format">
+        <option value="a0">A0 (slow)</option>
+        <option value="a1">A1</option>
+        <option value="a2">A2</option>
+        <option value="a3">A3</option>
+        <option value="a4" selected>A4</option>
+        <option value="a5">A5 (fast)</option>
+    </select>
+    <label>Resolution </label>
+    <select id="resolution">
+        <option value="72">72 dpi (fast)</option>
+        <option value="150">150 dpi</option>
+        <option value="300">300 dpi (slow)</option>
+    </select>
+</form>
 
 <!-- Google Analytics -->
 <!-- <script>
@@ -44,56 +64,15 @@
 </script> -->
 
 <style>
-    .ol-popup {
-        position: absolute;
-        background-color: white;
-        -webkit-filter: drop-shadow(0 1px 4px rgba(0,0,0,0.2));
-        filter: drop-shadow(0 1px 4px rgba(0,0,0,0.2));
-        padding: 15px;
-        border-radius: 10px;
-        border: 1px solid #cccccc;
-        bottom: 12px;
-        left: -50px;
-        min-width: 300px;
-    }
-    .ol-popup:after, .ol-popup:before {
-        top: 100%;
-        border: solid transparent;
-        content: " ";
-        height: 0;
-        width: 0;
-        position: absolute;
-        pointer-events: none;
-    }
-    .ol-popup:after {
-        border-top-color: white;
-        border-width: 10px;
-        left: 48px;
-        margin-left: -10px;
-    }
-    .ol-popup:before {
-        border-top-color: #cccccc;
-        border-width: 11px;
-        left: 48px;
-        margin-left: -11px;
-    }
-    .ol-popup-closer {
-        text-decoration: none;
-        position: absolute;
-        top: 2px;
-        right: 8px;
-    }
-    .ol-popup-closer:after {
-        content: "✖";
-    }
+
 </style>
 
 </head>
 <body>
 <div id="map" class="map" style="z-index: 1;position: absolute;top: 140px;left: 0px;width: 100%;height: 100%;"></div>
 <div id="popup" class="ol-popup">
-    <a href="#" id="popup-closer" class="ol-popup-closer"></a>
-    <div id="popup-content"></div>
+    <a hidden href="#" id="popup-closer" class="ol-popup-closer"></a>
+    <div hidden id="popup-content"></div>
 </div>
 
 <input id="address" style="z-index: 4;position: absolute;right: 110px;top: 30px; wide: 70px; height: 20px;" placeholder="数字のみを入力(SHは不要)" onKeyup="this.value=this.value.replace(/[^0-9]+/,'')">
@@ -129,6 +108,7 @@
 <!--<script type="text/javascript" src="../../js/zenrin20160916.js"></script>-->
 <script type="text/javascript" src="../../js/location20161023.js"></script>
 <script type="text/javascript" src="../../js/csvloader20161023.js"></script>
+<script type="text/javascript" src="../../js/print.js"></script>
 </body>
 </html>
 
