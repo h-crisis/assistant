@@ -21,7 +21,7 @@
     <ul>
         <li><a href="http://h-crisis.niph.go.jp/assistant" title="ホーム" >ホーム</a></li>
         <li><a href="http://csvDownload" title="csvDownload">データ</a></li>
-        <li><a title="huga" id="export-pdf">地図印刷</a></li>
+        <li><a title="huga" onclick="fade()">地図印刷</a></li>
         <li><a href="http://hoga" title="hoge">掲示板</a></li>
         <li><a href="http://www.wds.emis.go.jp/" title="huge">ＥＭＩＳ</a></li>
     </ul>
@@ -34,8 +34,11 @@
 <script src="../../js/pass20161023.js"></script>
 <script src="../../js/locationChecker.js"></script>
 
+<div id="fadeLayer" onclick="fade()"></div>
+<div id="printSetting" >
+    <br><br>
 <form class="form">
-    <label>Page size </label>
+    <label>ページサイズ</label>
     <select id="format">
         <option value="a0">A0 (slow)</option>
         <option value="a1">A1</option>
@@ -44,13 +47,18 @@
         <option value="a4" selected>A4</option>
         <option value="a5">A5 (fast)</option>
     </select>
-    <label>Resolution </label>
+    <br>
+    <label>印刷解像度 </label>
     <select id="resolution">
         <option value="72">72 dpi (fast)</option>
         <option value="150">150 dpi</option>
         <option value="300">300 dpi (slow)</option>
     </select>
 </form>
+    <br>
+    <button class="printButton" onclick="fade()">キャンセル</button>
+    <button class="printButton" id="export-pdf">印刷</button>
+</div>
 
 <!-- Google Analytics -->
 <!-- <script>

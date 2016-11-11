@@ -2,6 +2,21 @@
  * Created by komori on 2016/11/11.
  */
 
+var count = 0;
+
+function fade() {
+    if (count%2 == 0) {
+        document.getElementById("fadeLayer").style.display = 'block';
+        document.getElementById("printSetting").style.display = 'block';
+        count++;
+    } else {
+        document.getElementById("fadeLayer").style.display = 'none';
+        document.getElementById("printSetting").style.display = 'none';
+        count++
+    }
+}
+
+
 var dims = {
     a0: [1189, 841],
     a1: [841, 594],

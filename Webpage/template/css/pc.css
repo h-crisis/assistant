@@ -37,6 +37,37 @@ html,body,a{
     margin-left: -11px;
 }
 
+#fadeLayer {
+    position:absolute;
+    top:0px;
+    left:0px;
+
+    width:100%;
+    height:100%;
+
+    background-color:#000000;
+    opacity:0.5;
+    display:none;
+    z-index:6;
+}
+
+#printSetting{
+    position:absolute;
+    top:35%;
+    left:35%;
+
+    width:30%;
+    height:30%;
+
+    background-color:#ffffff;
+    text-align: center;
+    display:none;
+    border-radius: 10px;
+    z-index:6;
+}
+
+
+
 div#headerImage {
     background: url("http://h-crisis.niph.go.jp/assistant/wp-content/uploads/sites/4/2016/04/head.jpg");
     background-size: 100% 100%;
@@ -109,6 +140,14 @@ div#menubar li a:hover{
     background-color:#333333;
     color: #ffffff;
     border-radius: 0 10px 10px 0;
+}
+.printButton {
+    z-index: 3;
+    width: 80px;
+    height: 30px;
+    background-color:#333333;
+    color: #ffffff;
+    border-radius: 10px;
 }
 
 .info {
