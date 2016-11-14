@@ -80,8 +80,7 @@ div#headerImage {
     z-index: 4;
 }
 div#headerImage:hover{
-    filter:alpha(opacity=80);
-    opacity:0.8;
+    cursor: pointer;
 }
 div#menubar{
     position: fixed;
@@ -119,6 +118,7 @@ div#menubar li a{
     font-size: 18px; }
 div#menubar li a:hover{
     background-color: #666666;
+    cursor: pointer;
 }
 
 .button {
@@ -150,6 +150,7 @@ div#menubar li a:hover{
     background-color:#333333;
     color: #ffffff;
     border-radius: 10px;
+    font-size: 12px;
 }
 
 .info {
