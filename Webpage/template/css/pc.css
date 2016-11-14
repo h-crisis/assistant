@@ -130,6 +130,7 @@ div#menubar li a:hover{
     background-color:#333333;
     color: #ffffff;
     border-radius: 0 10px 10px 0;
+    font-size: 12px;
 }
 .buttonWide {
     z-index: 3;
@@ -140,6 +141,7 @@ div#menubar li a:hover{
     background-color:#333333;
     color: #ffffff;
     border-radius: 0 10px 10px 0;
+    font-size: 12px;
 }
 .printButton {
     z-index: 3;

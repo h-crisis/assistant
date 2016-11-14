@@ -12,10 +12,9 @@
     <file url="file://$PROJECT_DIR$/test/iwasaki/hospital_info.csv" charset="Shift_JIS" />
     <file url="file://$PROJECT_DIR$/test/iwasaki/sample/TTestUndxMgg.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/test/iwasaki/test.csv" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/test/komori/test/ga/evaluator/SphereEvaluator.java" charset="Shift_JIS" />
+    <file url="file://$PROJECT_DIR$/test/komori/test/ga/hospital_info.csv" charset="Shift_JIS" />
     <file url="file://$PROJECT_DIR$/test/xue/DisasterHeadquatersSelect/DecideHospital/hospital_info.csv" charset="Shift_JIS" />
-    <file url="file://$PROJECT_DIR$/test/xue/DisasterHeadquatersSelect/DecideHospital/hospital_info.csv" charset="Shift_JIS" />
-    <file url="file://$PROJECT_DIR$/test/xue/DisasterHeadquatersSelect/DecideHospital/hospital_info.csv" charset="Shift_JIS" />
-    <file url="file://$PROJECT_DIR$/test/xue/DisasterHeadquatersSelect/evaluator/SphereEvaluator.java" charset="Shift_JIS" />
     <file url="file://$PROJECT_DIR$/test/xue/DisasterHeadquatersSelect/ga/bitstring/package.html" charset="UTF-8" />
   </component>
 </project>
