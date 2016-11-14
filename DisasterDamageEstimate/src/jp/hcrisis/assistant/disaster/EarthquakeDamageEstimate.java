@@ -492,7 +492,8 @@ public class EarthquakeDamageEstimate {
             BufferedReader brIn3 = new BufferedReader(new InputStreamReader(new FileInputStream(inFile3), "Shift_JIS"));
             BufferedReader brIn4 = new BufferedReader(new InputStreamReader(new FileInputStream(inFile4), "Shift_JIS"));
             PrintWriter pw = new PrintWriter(new OutputStreamWriter(new FileOutputStream(outFile, false), "Shift_JIS"));
-            PrintWriter pw2 = new PrintWriter(new OutputStreamWriter(new FileOutputStream((new File(shelterDir.getPath() + "/shelter_latest.csv")), false), "Shift_JIS"))) {
+            PrintWriter pw2 = new PrintWriter(new OutputStreamWriter(new FileOutputStream((new File(shelterDir.getPath() + "/shelter_location.csv")), false), "Shift_JIS"));
+            PrintWriter pw3 = new PrintWriter(new OutputStreamWriter(new FileOutputStream((new File(shelterDir.getPath() + "/shelter_list.csv")), false), "Shift_JIS"))) {
 
             // 震度DBの作成
             HashMap<String, Double> siDB = new HashMap<>(); // mesh5thがキー、震度が値
@@ -567,10 +568,12 @@ public class EarthquakeDamageEstimate {
                 if(midashi) {
                     pw.write(pair[2] + "," + pair[7] + "," + pair[4] + "," + pair[6] + "," + pair[8] + ",si,evacuee");
                     pw2.write(pair[2] + "," + pair[9] + "," + pair[10]);
+                    pw3.write(pair[2] + "," + pair[7] + "," + pair[4] + "," + pair[6] + "," + pair[8]);
                     midashi = false;
                 }
                 else if(shelterDB.containsKey(pair[2])) {
                     pw2.write("\n" + pair[2] + "," + pair[9] + "," + pair[10]);
+                    pw3.write("\n" + pair[2] + "," + pair[7] + "," + pair[4] + "," + pair[6] + "," + pair[8]);
                     if(siDB.get(pair[20])==null) {
                         pw.write("\n" + pair[2] + "," + pair[7] + "," + pair[4] + "," + pair[6] + "," + pair[8] + "," + "0.0" + "," + shelterDB.get(pair[2]));
                     }
