@@ -203,23 +203,8 @@ map.on('moveend', function() {
     userLon = map.getView().getCenter()[1];
     userZoom = map.getView().getZoom();
 
-    var format = "a1"
-
-    var dims = {
-        a0: [1189, 841],
-        a1: [841, 594],
-        a2: [594, 420],
-        a3: [420, 297],
-        a4: [297, 210],
-        a5: [210, 148]
-    };
-
-    var dim = dims[format];
-
     var size = /** @type {ol.Size} */ (map.getSize());
     var extent = map.getView().calculateExtent(size);
-
-    console.log(map.getView().fit(extent,size))
 });
 
 // 15分毎にリロードする
