@@ -140,7 +140,12 @@ function createShelterHeaderHtml(result) {
         return HeaderHtml;
     } else {
         // 閉じるボタン表示
-        HeaderHtml = "<div style='border-radius:10px; margin:0 0 5px; font-family:helvetica; background-color:#333333; color:white; text-align:center; opacity: 1; width:350px' type=button id=showBtn value=隠す onclick=showHide() onmousemove='this.style.opacity=0.8' onmouseout='this.style.opacity=1'>閉じる</div>";
+            if (window.innerWidth >= 780) {
+                HeaderHtml = "<div style='border-radius:10px; margin:0 0 5px; font-family:helvetica; background-color:#333333; color:white; text-align:center; opacity: 1; width:350px' type=button id=showBtn value=隠す onclick=showHide() onmousemove='this.style.opacity=0.8' onmouseout='this.style.opacity=1'>閉じる</div>";
+            } else if (window.innerWidth >= 480) {
+                HeaderHtml = "<div style='border-radius:10px; margin:0 0 5px; font-family:helvetica; background-color:#333333; color:white; text-align:center; opacity: 1; width:220px' type=button id=showBtn value=隠す onclick=showHide() onmousemove='this.style.opacity=0.8' onmouseout='this.style.opacity=1'>閉じる</div>";
+            } else {
+            }
     }
         // 建築物名表示
         if (result.get('name') === null) {
@@ -160,7 +165,13 @@ function createShelterInfoHtml(result) {
 
         // 避難所情報入力ボタン表示
         var btnCode = '?event=' + eventCode + ',id=' + result.get('code') + ',name=' + result.get('name').replace(/ /g,"")　+ ',address=' + result.get('address').replace(/ /g,"");
-        InfoHtml = "<div style='border-radius: 10px; margin:0 0 5px; font-family:helvetica; background-color:#333333; text-align:center; opacity:1; width:350px' type=button onmousemove='this.style.opacity=0.8' onmouseout='this.style.opacity=1'><a style='display:block; width:100%; color:white; text-decoration: none' href=../../html/shelter-emergency20161023.html" + btnCode + " id=niphLonLatE target=_blank>緊急時情報入力</a></div>";
+        if (window.innerWidth >= 780) {
+            InfoHtml = "<div style='border-radius: 10px; margin:0 0 5px; font-family:helvetica; background-color:#333333; text-align:center; opacity:1; width:350px' type=button onmousemove='this.style.opacity=0.8' onmouseout='this.style.opacity=1'><a style='display:block; width:100%; color:white; text-decoration: none' href=../../html/shelter-emergency20161023.html" + btnCode + " id=niphLonLatE target=_blank>緊急時情報入力</a></div>";
+        } else if (window.innerWidth >= 480) {
+            InfoHtml = "<div style='border-radius: 10px; margin:0 0 5px; font-family:helvetica; background-color:#333333; text-align:center; opacity:1; width:220px' type=button onmousemove='this.style.opacity=0.8' onmouseout='this.style.opacity=1'><a style='display:block; width:100%; color:white; text-decoration: none' href=../../html/shelter-emergency20161023.html" + btnCode + " id=niphLonLatE target=_blank>緊急時情報入力</a></div>";
+        } else {
+            InfoHtml = "<div style='border-radius: 10px; margin:0 0 5px; font-family:helvetica; background-color:#333333; text-align:center; opacity:1; width:220px' type=button onmousemove='this.style.opacity=0.8' onmouseout='this.style.opacity=1'><a style='display:block; width:100%; color:white; text-decoration: none' href=../../html/shelter-emergency20161023.html" + btnCode + " id=niphLonLatE target=_blank>緊急時情報入力</a></div>";
+        }
 
         // 状況表示
         if(result.get('status') === null) {
@@ -267,7 +278,13 @@ function detailInfoHtml(result){
         //    EvacueeHtml = EvacueeHtml + preCells + tagName[i] + interCells + subCells;
         btnCode = btnCode + "," + btnId[i] + "=" + result.get(btnId[i]);
     }
-    DetailHtml = "<div style='border-radius: 10px; margin:0 0 5px; font-family:helvetica; background-color:#333333; text-align:center; opacity:1; width:350px' type=button onmousemove='this.style.opacity=0.8' onmouseout='this.style.opacity=1'><a style='display:block; width:100%; color:white; text-decoration: none' href=../../html/shelter-hmethod20161023.html" + btnCode + " id=niphLonLatE target=_blank>避難所シート入力</a></div>";
+    if (window.innerWidth >= 780) {
+        DetailHtml = "<div style='border-radius: 10px; margin:0 0 5px; font-family:helvetica; background-color:#333333; text-align:center; opacity:1; width:350px' type=button onmousemove='this.style.opacity=0.8' onmouseout='this.style.opacity=1'><a style='display:block; width:100%; color:white; text-decoration: none' href=../../html/shelter-hmethod20161023.html" + btnCode + " id=niphLonLatE target=_blank>避難所シート入力</a></div>";
+    } else if (window.innerWidth >= 480) {
+        DetailHtml = "<div style='border-radius: 10px; margin:0 0 5px; font-family:helvetica; background-color:#333333; text-align:center; opacity:1; width:220px' type=button onmousemove='this.style.opacity=0.8' onmouseout='this.style.opacity=1'><a style='display:block; width:100%; color:white; text-decoration: none' href=../../html/shelter-hmethod20161023.html" + btnCode + " id=niphLonLatE target=_blank>避難所シート入力</a></div>";
+    } else {
+        DetailHtml = "<div style='border-radius: 10px; margin:0 0 5px; font-family:helvetica; background-color:#333333; text-align:center; opacity:1; width:220px' type=button onmousemove='this.style.opacity=0.8' onmouseout='this.style.opacity=1'><a style='display:block; width:100%; color:white; text-decoration: none' href=../../html/shelter-hmethod20161023.html" + btnCode + " id=niphLonLatE target=_blank>避難所シート入力</a></div>";
+    }
 
     // 状況表示
     if(result.get('status') === null) {
@@ -323,7 +340,13 @@ function evacueeInfoHtml(result){
         //    EvacueeHtml = EvacueeHtml + preCells + tagName[i] + interCells + subCells;
         btnCode = btnCode + "," + tagId[i] + "=" + result.get(tagId[i]);
     }
-    EvacueeHtml = "<div style='border-radius: 10px; margin:0 0 5px; font-family:helvetica; background-color:#333333; text-align:center; opacity:1; width:350px' type=button onmousemove='this.style.opacity=0.8' onmouseout='this.style.opacity=1'><a style='display:block; width:100%; color:white; text-decoration: none' href=../../html/shelter-evacuee20161023.html" + btnCode + " id=niphLonLatE target=_blank>避難所避難者シート入力</a></div>";
+    if (window.innerWidth >= 780) {
+        EvacueeHtml = "<div style='border-radius: 10px; margin:0 0 5px; font-family:helvetica; background-color:#333333; text-align:center; opacity:1; width:350px' type=button onmousemove='this.style.opacity=0.8' onmouseout='this.style.opacity=1'><a style='display:block; width:100%; color:white; text-decoration: none' href=../../html/shelter-evacuee20161023.html" + btnCode + " id=niphLonLatE target=_blank>避難所避難者シート入力</a></div>";
+    } else if (window.innerWidth >= 480) {
+        EvacueeHtml = "<div style='border-radius: 10px; margin:0 0 5px; font-family:helvetica; background-color:#333333; text-align:center; opacity:1; width:220px' type=button onmousemove='this.style.opacity=0.8' onmouseout='this.style.opacity=1'><a style='display:block; width:100%; color:white; text-decoration: none' href=../../html/shelter-evacuee20161023.html" + btnCode + " id=niphLonLatE target=_blank>避難所避難者シート入力</a></div>";
+    } else {
+        EvacueeHtml = "<div style='border-radius: 10px; margin:0 0 5px; font-family:helvetica; background-color:#333333; text-align:center; opacity:1; width:220px' type=button onmousemove='this.style.opacity=0.8' onmouseout='this.style.opacity=1'><a style='display:block; width:100%; color:white; text-decoration: none' href=../../html/shelter-evacuee20161023.html" + btnCode + " id=niphLonLatE target=_blank>避難所避難者シート入力</a></div>";
+    }
 
     // 状況表示
     if(result.get('status') === null) {

@@ -202,8 +202,13 @@ function hallButton() {
 // 震度のポップアップを作成する関数
 function createHtmlHall() {
     document.getElementById('info').innerHTML = "";
-    HeaderHtml = "<div style='border-radius:10px; margin:0 0 5px; font-family:helvetica; background-color:#333333; color:white; text-align:center; opacity: 1; width:350px' type=button id=showBtn value=隠す onclick=showHide() onmousemove='this.style.opacity=0.8' onmouseout='this.style.opacity=1'>閉じる</div>";
-
+    if (window.innerWidth >= 780) {
+        HeaderHtml = "<div style='border-radius:10px; margin:0 0 5px; font-family:helvetica; background-color:#333333; color:white; text-align:center; opacity: 1; width:350px' type=button id=showBtn value=隠す onclick=showHide() onmousemove='this.style.opacity=0.8' onmouseout='this.style.opacity=1'>閉じる</div>";
+    } else if (window.innerWidth >= 480) {
+        HeaderHtml = "<div style='border-radius:10px; margin:0 0 5px; font-family:helvetica; background-color:#333333; color:white; text-align:center; opacity: 1; width:220px' type=button id=showBtn value=隠す onclick=showHide() onmousemove='this.style.opacity=0.8' onmouseout='this.style.opacity=1'>閉じる</div>";
+    } else {
+        HeaderHtml = "<div style='border-radius:10px; margin:0 0 5px; font-family:helvetica; background-color:#333333; color:white; text-align:center; opacity: 1; width:220px' type=button id=showBtn value=隠す onclick=showHide() onmousemove='this.style.opacity=0.8' onmouseout='this.style.opacity=1'>閉じる</div>";
+    }
     // 建築物名表示
     if (arrayV[0] === null) {
     } else {
@@ -242,5 +247,4 @@ function createHtmlHall() {
     document.getElementById('infoHeader').innerHTML = HeaderHtml;
     document.getElementById('info').style.display = 'block';
     document.getElementById('info').innerHTML = DetailHtml;
-    console.log()
 }

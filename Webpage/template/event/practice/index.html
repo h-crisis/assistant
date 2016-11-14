@@ -9,9 +9,9 @@
 <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList,URL"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.2.61/jspdf.min.js"></script>
 <link rel="stylesheet" href="../../css/phone.css" type="text/css"
-      media="screen and (max-width: 480px)">
+      media="screen and (min-width: 0px) and (max-width: 470px)">
 <link rel="stylesheet" href="../../css/tablet.css" type="text/css"
-      media="screen and (max-width: 780px)">
+      media="screen and (min-width: 471px) and (max-width: 780px)">
 <link rel="stylesheet" href="../../css/pc.css" type="text/css"
       media="screen and (min-width: 781px)">
 
@@ -77,15 +77,15 @@
 
 </head>
 <body>
-<div id="map" class="map" style="z-index: 1;position: absolute;top: 140px;left: 0px;width: 100%;height: 100%;"></div>
+<div id="map" class="map"></div>
 <div id="popup" class="ol-popup">
     <a hidden href="#" id="popup-closer" class="ol-popup-closer"></a>
     <div hidden id="popup-content"></div>
 </div>
 
-<input id="address" style="z-index: 4;position: absolute;right: 110px;top: 30px; wide: 70px; height: 20px;" placeholder="数字のみを入力(SHは不要)" onKeyup="this.value=this.value.replace(/[^0-9]+/,'')">
+<input id="address"  placeholder="数字のみを入力(SHは不要)" onKeyup="this.value=this.value.replace(/[^0-9]+/,'')">
 <!--<input id="address" style="z-index: 4;position: absolute;left: 50px;top: 10px;" onkeypress="shelterSearch();">-->
-<input type="submit" style="z-index: 5;position: absolute; right: 50px; top: 30px; wide: 30px; height: 25px; background-color:#333333; color: #ffffff;" onclick="shelterSearch();" value="建物検索" function>
+<input id="submit" type="submit" onclick="shelterSearch();" value="建物検索" >
 <div id="overlayInfo" style="background-color:whitesmoke; border: 1px solid black; padding: 5px 10px;"></div>
 <div id="overlayTargetTop" style="border: dotted 2px red;  padding: 0px 20px;display:block;"></div>
 <div id="overlayTargetRight" style="border: dotted 2px red;  padding: 20px 0px;display:block;"></div>
@@ -94,12 +94,12 @@
 <!--- <div class="button" id="menu" style="z-index: 3;position: absolute; top: 70px;left: 0px;width: 100px;bottom: 320px;background-color: #66BBFF; opacity: 0.7; border: solid; border-width: 2px 2px 2px 0;border-color: #3388FF"></div> -->
 <!--- <button class="button" id="hospital-index" style="z-index: 3;position: absolute; top: 90px;left: 0px;width: 50px;height: 7%;">医療機関<br>検索</button> -->
 <button class="button" id="scrn-hosp" style="bottom: 330px;display: none">画面内の<br>医療機関</button>
-<button class="button" id="hall-vis" style="bottom: 270px;">震度分布</button>
-<button class="button" id="hospital-vis" style="bottom: 240px;" >病院</button>
-<button class="button" id="shelter-vis" style="bottom: 210px;">避難所</button>
-<button class="button" id="pass-vis" style="bottom: 180px;">交通情報</button>
-<button class="buttonWide" id="goToHypoCenter" style="bottom: 100px;">初期位置<br>に移動</button>
-<button class="buttonWide" id="goToHere" style="bottom: 50px;">現在地へ移動</button>
+<div class="button" id="hall-vis">震度<br>分布</div>
+<div class="button" id="hospital-vis">病院</div>
+<div class="button" id="shelter-vis">避難所</div>
+<div class="button" id="pass-vis">交通<br>情報</div>
+<div class="buttonWide" id="goToHypoCenter">初期位<br>置移動</div>
+<div class="buttonWide" id="goToHere">現在地へ移動</div>
 <!-- <button class="button" id="goToSelect" style="bottom: 6%;left: 0px;width: 5%;height: 5%;">選択施設へ 拡大移動</button> -->
 <table class="info" id="infoHeader"></table>
 <table class="info" id="info"></table>

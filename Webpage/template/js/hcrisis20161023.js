@@ -91,6 +91,10 @@ var map = new ol.Map({
     ])
 });
 
+map.addControl(new ol.control.Zoom({
+    className: 'custom-zoom'
+}));
+
 // map上に各アイコンのレイヤーを追加して、非表示にする。
 map.addLayer(shelterLayer);
 map.addLayer(hospLayer);
@@ -172,12 +176,12 @@ map.on('click', function(evt) {
         interCells = "</td><td id='nameCell' width='230px' style='font-size:17px;font-family:helvetica;background-color:white;'>";
         subCells = "</td></tr>";
     } else if (window.innerWidth >= 480) {
-        preCells = "<tr><td id='tagCell' width='110px' style='font-size:15px;font-family:helvetica;background-color:#ffffff;padding: 2px;'>";
-        interCells = "</td><td id='nameCell' width='230px' style='font-size:15px;font-family:helvetica;background-color:white;'>";
+        preCells = "<tr><td id='tagCell' width='130px' style='font-size:14px;font-family:helvetica;background-color:#ffffff;padding: 2px;'>";
+        interCells = "</td><td id='nameCell' width='120px' style='font-size:14px;font-family:helvetica;background-color:white;'>";
         subCells = "</td></tr>";
     } else {
-        preCells = "<tr><td id='tagCell' width='110px' style='font-size:12px;font-family:helvetica;background-color:#ffffff;padding: 2px;'>";
-        interCells = "</td><td id='nameCell' width='230px' style='font-size:12px;font-family:helvetica;background-color:white;'>";
+        preCells = "<tr><td id='tagCell' width='130px' style='font-size:10px;font-family:helvetica;background-color:#ffffff;padding: 2px;'>";
+        interCells = "</td><td id='nameCell' width='120px' style='font-size:10px;font-family:helvetica;background-color:white;'>";
         subCells = "</td></tr>";
     }
     document.getElementById('info').innerHTML = "";
