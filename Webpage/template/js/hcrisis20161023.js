@@ -209,6 +209,8 @@ map.on('moveend', function() {
 
     var size = /** @type {ol.Size} */ (map.getSize());
     var extent = map.getView().calculateExtent(size);
+
+    console.log(document.getElementById('phone'))
 });
 
 // 15分毎にリロードする

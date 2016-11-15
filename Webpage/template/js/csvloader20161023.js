@@ -56,6 +56,9 @@ function shelterSearch(){
             document.getElementById('infoHeader').style.display = 'none';
             document.getElementById('info').style.display = 'none';
             document.getElementById('popup').style.display = 'none';
+            document.getElementById('tab001').style.display = 'none';
+            document.getElementById('tab002').style.display = 'none';
+            document.getElementById('tab003').style.display = 'none';
             map.getView().setCenter(shelterPlace);
             map.getView().setZoom(15);
             cont = 0;

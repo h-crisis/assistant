@@ -8,12 +8,7 @@
 <script src="http://d3js.org/d3.v3.min.js"></script>
 <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList,URL"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.2.61/jspdf.min.js"></script>
-<link rel="stylesheet" href="../../css/phone.css" type="text/css"
-      media="screen and (min-width: 0px) and (max-width: 470px)">
-<link rel="stylesheet" href="../../css/tablet.css" type="text/css"
-      media="screen and (min-width: 471px) and (max-width: 780px)">
-<link rel="stylesheet" href="../../css/pc.css" type="text/css"
-      media="screen and (min-width: 781px)">
+<script type="text/javascript"  src="../../js/osChecker.js"></script>
 
 <!-- ヘッダー -->
 <div id="headerImage" type="button" onclick="location.href='http://h-crisis.niph.go.jp/assistant'"></div>
@@ -23,7 +18,7 @@
         <li><a href="http://gis.h-crisis.jp/data/practice/shelter_info_latest.csv" title="避難所情報">避難所情報DL</a></li>
         <li><a title="地図印刷" onclick="fade()">地図印刷（準備中）</a></li>
         <li><a href="#" title="掲示板">掲示板(準備中)</a></li>
-        <li><a href="http://www.wds.emis.go.jp/" title="EMIS" target="_blank">EMIS</a></li>
+        <li><a href="http://www.wds.emis.go.jp/" title="EMIS" target="_blank">ＥＭＩＳ</a></li>
     </ul>
 </div>
 <!-- ヘッダーここまで -->
@@ -94,10 +89,10 @@
 <!--- <div class="button" id="menu" style="z-index: 3;position: absolute; top: 70px;left: 0px;width: 100px;bottom: 320px;background-color: #66BBFF; opacity: 0.7; border: solid; border-width: 2px 2px 2px 0;border-color: #3388FF"></div> -->
 <!--- <button class="button" id="hospital-index" style="z-index: 3;position: absolute; top: 90px;left: 0px;width: 50px;height: 7%;">医療機関<br>検索</button> -->
 <button class="button" id="scrn-hosp" style="bottom: 330px;display: none">画面内の<br>医療機関</button>
-<div class="button" id="hall-vis">震度<br>分布</div>
+<div class="button" id="hall-vis">震度分布</div>
 <div class="button" id="hospital-vis">病院</div>
 <div class="button" id="shelter-vis">避難所</div>
-<div class="button" id="pass-vis">交通<br>情報</div>
+<div class="button" id="pass-vis">交通情報</div>
 <div class="buttonWide" id="goToHypoCenter">初期位<br>置移動</div>
 <div class="buttonWide" id="goToHere">現在地へ移動</div>
 <!-- <button class="button" id="goToSelect" style="bottom: 6%;left: 0px;width: 5%;height: 5%;">選択施設へ 拡大移動</button> -->
