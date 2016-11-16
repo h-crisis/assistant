@@ -6,7 +6,7 @@ var styleSI1 = new ol.style.Style({
         color: 'rgba(242, 242, 255, 0.5)'
     }),
     image: new ol.style.Icon({
-        scale: 1.5,
+        scale: 1,
         anchor: [0.5, 1],
         anchorXUnits: 'fraction',
         anchorYUnits: 'fraction',
@@ -19,7 +19,7 @@ var styleSI2 = new ol.style.Style({
         color: 'rgba(0, 170, 255, 0.5)'
     }),
     image: new ol.style.Icon({
-        scale: 1.5,
+        scale: 1,
         anchor: [0.5, 1],
         anchorXUnits: 'fraction',
         anchorYUnits: 'fraction',
@@ -32,7 +32,7 @@ var styleSI3 = new ol.style.Style({
         color: 'rgba(0, 65, 255, 0.5)'
     }),
     image: new ol.style.Icon({
-        scale: 1.5,
+        scale: 1,
         anchor: [0.5, 1],
         anchorXUnits: 'fraction',
         anchorYUnits: 'fraction',
@@ -45,7 +45,7 @@ var styleSI4 = new ol.style.Style({
         color: 'rgba(255, 230, 150, 0.5)'
     }),
     image: new ol.style.Icon({
-        scale: 1.5,
+        scale: 1,
         anchor: [0.5, 1],
         anchorXUnits: 'fraction',
         anchorYUnits: 'fraction',
@@ -63,7 +63,7 @@ var styleSI5W = new ol.style.Style({
         stroke: new ol.style.Stroke({color: "#ffe600", width: 2})
     }),
     image: new ol.style.Icon({
-        scale: 0.25,
+        scale: 1,
         anchor: [0.5, 1],
         anchorXUnits: 'fraction',
         anchorYUnits: 'fraction',
@@ -81,7 +81,7 @@ var styleSI5S = new ol.style.Style({
         stroke: new ol.style.Stroke({color: "#ff9900", width: 2})
     }),
     image: new ol.style.Icon({
-        scale: 1.5,
+        scale: 1,
         anchor: [0.5, 1],
         anchorXUnits: 'fraction',
         anchorYUnits: 'fraction',
@@ -99,7 +99,7 @@ var styleSI6W = new ol.style.Style({
         stroke: new ol.style.Stroke({color: "#ff2800", width: 2})
     }),
     image: new ol.style.Icon({
-        scale: 1.5,
+        scale: 1,
         anchor: [0.5, 1],
         anchorXUnits: 'fraction',
         anchorYUnits: 'fraction',
@@ -117,7 +117,7 @@ var styleSI6S = new ol.style.Style({
         stroke: new ol.style.Stroke({color: "#a50021", width: 2})
     }),
     image: new ol.style.Icon({
-        scale: 1.5,
+        scale: 1,
         anchor: [0.5, 1],
         anchorXUnits: 'fraction',
         anchorYUnits: 'fraction',
@@ -135,7 +135,7 @@ var styleSI7 = new ol.style.Style({
         stroke: new ol.style.Stroke({color: "#b40068", width: 2})
     }),
     image: new ol.style.Icon({
-        scale: 1.5,
+        scale: 1,
         anchor: [0.5, 1],
         anchorXUnits: 'fraction',
         anchorYUnits: 'fraction',
@@ -200,8 +200,9 @@ function hallButton() {
 };
 
 // 震度のポップアップを作成する関数
-function createHtmlHall() {
+function createHtmlHall(evt,feature) {
     document.getElementById('info').innerHTML = "";
+    var coordinate = feature.T.geometry.A;
     if (window.innerWidth >= 780) {
         HeaderHtml = "<div style='border-radius:10px; margin:0 0 5px; font-family:helvetica; background-color:#333333; color:white; text-align:center; opacity: 1; width:350px' type=button id=showBtn value=隠す onclick=showHide() onmousemove='this.style.opacity=0.8' onmouseout='this.style.opacity=1'>閉じる</div>";
     } else if (window.innerWidth >= 480) {
@@ -242,8 +243,11 @@ function createHtmlHall() {
      DetailHtml = DetailHtml + preCells + arrayL[i] + interCells + arrayV[i] + subCells;
      }
      */
+    
     document.getElementById('infoHeader').style.display = 'block';
     document.getElementById('infoHeader').innerHTML = HeaderHtml;
     document.getElementById('info').style.display = 'block';
     document.getElementById('info').innerHTML = DetailHtml;
+    document.getElementById('popup').style.display = 'block';
+    overlayPopup.setPosition(coordinate);
 }

@@ -59,9 +59,13 @@ function visPassButton() {
 };
 
 // 交通規制のポップアップを作成する関数
-function createHtmlPass() {
+function createHtmlPass(evt) {
     document.getElementById('info').innerHTML = "";
     DetailHtml = "";
+    latNow = parseFloat(arrayV[12]);
+    lonNow = parseFloat(arrayV[11]);
+    nowLatLon = [latNow, lonNow];
+    var coordinate = nowLatLon;
     if (window.innerWidth >= 780) {
         HeaderHtml = "<div style='border-radius:10px; margin:0 0 5px; font-family:helvetica; background-color:#333333; color:white; text-align:center; opacity: 1; width:350px' type=button id=showBtn value=隠す onclick=showHide() onmousemove='this.style.opacity=0.8' onmouseout='this.style.opacity=1'>閉じる</div>";
     } else if (window.innerWidth >= 480) {
@@ -77,8 +81,11 @@ function createHtmlPass() {
     for (i = 0; i < arrayL.length; i++) {
         DetailHtml = DetailHtml + preCells + arrayL[i] + interCells + arrayV[i] + subCells;
     }
+    console.log(arrayV)
     document.getElementById('infoHeader').style.display = 'block';
     document.getElementById('infoHeader').innerHTML = HeaderHtml;
     document.getElementById('info').style.display = 'block';
     document.getElementById('info').innerHTML = DetailHtml;
+    document.getElementById('popup').style.display = 'block';
+    overlayPopup.setPosition(coordinate);
 }

@@ -127,8 +127,6 @@ var zoomLevel = map.getView().getZoom();
 
 // Map上のFeatureを取得し表示する
 var displayFeatureInfo = function(pixel, evt) {
-    var popupHtml;
-    var displayHtml;
 
     // 避難所レイヤーのurlを取得しpopup用のHTMLとdisplay用のHTMLを作成する
     var urlShelter = shelterLayer.getSource().getGetFeatureInfoUrl(
@@ -141,6 +139,7 @@ var displayFeatureInfo = function(pixel, evt) {
 
     // geoJsonを用いた各レイヤーのポイントデータを取得する
     var feature = map.forEachFeatureAtPixel(pixel, function(feature) {
+        return feature;
     });
 
     // geoJsonから情報を配列に押し込み配列の項目別に各施設のポップアップを表示する関数を呼び出す
@@ -153,22 +152,22 @@ var displayFeatureInfo = function(pixel, evt) {
             arrayL.push(label);
             arrayV.push(valr);
         }
-
+        
         if(arrayL[9]=='p_num') {
-            createHtmlHall();
+            createHtmlHall(evt, feature);
         }
-
         else if(arrayL[0]=='code') {
-            createHtmlHospital();
+            createHtmlHospital(evt, feature);
         } else if(arrayL[0]=='name') {
-            createHtmlPass();
+            createHtmlPass(evt);
         }
     });
 };
 
-map.on('click', function(evt) {
+map.on('click', function(evt,feature) {
     var coordinate = evt.coordinate;
     var pixel = map.getPixelFromCoordinate(coordinate);
+
     if (window.innerWidth >= 780) {
         preCells = "<tr><td id='tagCell' width='110px' style='font-size:17px;font-family:helvetica;background-color:#ffffff;padding: 2px;'>";
         interCells = "</td><td id='nameCell' width='230px' style='font-size:17px;font-family:helvetica;background-color:white;'>";

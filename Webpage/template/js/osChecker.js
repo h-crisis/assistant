@@ -12,8 +12,8 @@ if(userAgent.indexOf('win') > -1){
     osCss = 'win';
 }else if(userAgent.indexOf('mac') > -1){
     osCss = 'mac';
-}else if(userAgent.indexOf('x11') > -1){
-    osCss = 'x11';
+}else if(userAgent.indexOf('android') > -1){
+    osCss = 'adr';
 }
 
 //ブラウザの判定

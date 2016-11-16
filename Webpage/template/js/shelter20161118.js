@@ -19,6 +19,7 @@ var sInfo;
 var dInfo;
 var eInfo;
 var dClick = 0;
+var coordinate;
 
 function createShelterPopup(url, evt) {
     var popupHtml;
@@ -26,7 +27,6 @@ function createShelterPopup(url, evt) {
     var infoHtml;
     var detailHtml;
     var evacueeHtml;
-    var coordinate = evt.coordinate;
 
     if (url) {
         var parser = new ol.format.GeoJSON();
@@ -41,7 +41,6 @@ function createShelterPopup(url, evt) {
             if (result.length) {
                 for (var i = 0, ii = result.length; i < ii; ++i) {
                     if (i == 0) {
-                        popupHtml = createShelterPopupHtml(result[i]);
                         headerHtml = createShelterHeaderHtml(result[i]);
                         infoHtml = createShelterInfoHtml(result[i]);
                         sInfo = infoHtml;
@@ -51,13 +50,12 @@ function createShelterPopup(url, evt) {
                         eInfo = evacueeHtml;
                     }
                     else {
-                        popupHtml = popupHtml + '<br><hr><br>' + 'name: ' + result[i].get('name');
                     }
                 }
             }
 
             // ここから表示するしないの制御
-            if(typeof popupHtml !== "undefined") {
+            if(typeof headerHtml !== "undefined") {
                 document.getElementById('infoHeader').style.display = 'block';
                 document.getElementById('infoHeader').innerHTML = headerHtml;
                 document.getElementById('info').style.display = 'block';
@@ -80,59 +78,6 @@ function createShelterPopup(url, evt) {
  * @param result 地図上の選択したFeature
  * @returns {*}
  */
-function createShelterPopupHtml(result) {
-    popupHtml = result.get('name');
-    if(typeof name === 'undefined') {
-        return popupHtml;
-    } else {
-        // 状況表示
-        if(result.get('status') === null) {
-            popupHtml = popupHtml + "（状況: 推計値）";
-        } else {
-            popupHtml = popupHtml + "（状況: 調査値）";
-        }
-
-        // 住所の表示
-        if(result.get('pref') === null) {
-            popupHtml = popupHtml + '<br>住所: '
-        } else {
-            popupHtml = popupHtml + '<br>住所: ' + result.get('pref') + ' ';
-        }
-
-        if(result.get('gun') === null) {
-
-        } else {
-            popupHtml = popupHtml + result.get('gun') + ' ';
-        }
-
-        if(result.get('sikuchoson') === null) {
-
-        } else {
-            popupHtml = popupHtml + result.get('sikuchoson') + ' ';
-        }
-
-        if(result.get('address') === null) {
-
-        } else {
-            popupHtml = popupHtml + result.get('address');
-        }
-
-        // 避難者数の表示
-        if(result.get('a01') === null) {
-            popupHtml = popupHtml + "<br>避難者数: ";
-        } else {
-            popupHtml = popupHtml + "<br>避難者数: " + result.get('a01');
-        }
-
-        if((result.get('timestamp') === null) || (result.get('timestamp') === undefined) ) {
-            popupHtml = popupHtml + "<br>最終情報更新時刻: ";
-        } else {
-            popupHtml = popupHtml + "<br>最終情報更新時刻: " + result.get('timestamp');
-        }
-
-        return popupHtml;
-    }
-}
 
 function createShelterHeaderHtml(result) {
     HeaderHtml = result.get('name');
@@ -153,6 +98,7 @@ function createShelterHeaderHtml(result) {
             HeaderHtml = HeaderHtml + "<a style='font-family: Helvetica'>" + result.get('name') + "</a>";
             HeaderHtml = HeaderHtml + "<br><a style='font-family: Helvetica'>(" + result.get('pref') + result.get('gun') + result.get('sikuchoson') + result.get('address') + ")</a>"
         }
+    coordinate = result.get('geometry').A;
     return HeaderHtml;
 }
 

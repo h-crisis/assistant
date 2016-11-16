@@ -160,9 +160,10 @@ function hospButton() {
 };
 
 // 医療機関のポップアップを作成する関数
-function createHtmlHospital() {
+function createHtmlHospital(evt,feature) {
     document.getElementById('info').innerHTML = "";
     DetailHtml = "";
+    var coordinate = feature.T.geometry.A;
     if (window.innerWidth >= 780) {
         HeaderHtml = "<div style='border-radius:10px; margin:0 0 5px; font-family:helvetica; background-color:#333333; color:white; text-align:center; opacity: 1; width:350px' type=button id=showBtn value=隠す onclick=showHide() onmousemove='this.style.opacity=0.8' onmouseout='this.style.opacity=1'>閉じる</div>";
     } else if (window.innerWidth >= 480) {
@@ -208,8 +209,11 @@ function createHtmlHospital() {
         }
         DetailHtml = DetailHtml + preCells + tagName[i] + interCells + arrayV[i] + subCells;
     }
+    console.log(feature.get('name'))
     document.getElementById('infoHeader').style.display = 'block';
     document.getElementById('infoHeader').innerHTML = HeaderHtml;
     document.getElementById('info').style.display = 'block';
     document.getElementById('info').innerHTML = DetailHtml;
+    document.getElementById('popup').style.display = 'block';
+    overlayPopup.setPosition(coordinate);
 }
