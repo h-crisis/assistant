@@ -16,8 +16,8 @@ import java.util.List;
 public class OneMaxEvaluator {
 
 	/**
-	 * �̂�]������D
-	 * @param ind ��
+	 * ????]??????D
+	 * @param ind ???
 	 */
 	private static void evaluateIndividual(TBitStringIndividual ind) {
 		TBitString str = ind.getBitString();
@@ -30,8 +30,8 @@ public class OneMaxEvaluator {
 	}
 
 	/**
-	 * �W�c���̑S�Ă̌̂�]������D
-	 * @param pop �W�c
+	 * ?W?c????S??????]??????D
+	 * @param pop ?W?c
 	 */
 	public static void evaluatePopulation(List<TBitStringIndividual> pop) {
 		for (int i = 0; i < pop.size(); ++i) {
@@ -40,8 +40,8 @@ public class OneMaxEvaluator {
 	}
 
 	/**
-	 * �̂���ʂɏo�͂���D
-	 * @param ind ��
+	 * ????????o?????D
+	 * @param ind ???
 	 */
 	public static void printIndividual(TBitStringIndividual ind) {
 		System.out.println("Evaluation value: " + ind.getEvaluationValue());

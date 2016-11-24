@@ -125,7 +125,7 @@ public class CspEvaluator {
 	}
 	
 	//evaluate individuals to minimize the difference between actual allocation and expected value, as well as the time cost
-	//private static void evaluateIndividualDistance(TRealNumberIndividual ind, TRealNumberIndividual expected, LinkedList<String> coordinate, int[] totalnumber) throws NumberFormatException, Exception {
+	////private static void evaluateIndividualDistance(TRealNumberIndividual ind, TRealNumberIndividual expected, LinkedList<String> coordinate, int[] totalnumber) throws NumberFormatException, Exception {
 	private static void evaluateIndividualDistance(TRealNumberIndividual ind, TRealNumberIndividual expected, double[] dis, int[] totalnumber, int[] ability) throws NumberFormatException, Exception {			
 		TVector v = reformat(ind, ability).getVector();
 	//	TVector v = ind.getVector();

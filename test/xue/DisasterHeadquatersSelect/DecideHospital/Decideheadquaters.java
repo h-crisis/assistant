@@ -203,7 +203,7 @@ public class Decideheadquaters {
             d = HospitalCapacity.get(rengeHopitalcapacity.get(i));
             int counter = 0;
 
-            if (a > 5.5) {
+            if (a > 5.5) {//震度5.5
 
                 HeadquaterCandidateTotalNumberofpatientinrenge.add(Numberofpatieninrenge.get(rengecode.get(i)));
                 HeadquaterCandidaterenge.add(rengecode.get(i));

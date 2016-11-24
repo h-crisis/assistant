@@ -440,7 +440,7 @@ public class DMATfirstEvaluator {
         File file = new File("test/xue/DisasterHeadquatersSelect/resultofDMATfirstplace.csv");
 
         PrintWriter pw = new PrintWriter(new OutputStreamWriter(new FileOutputStream(file, false), "UTF-8"));
-        pw.write("DMATNumber,HospitalNumber,Distance,Distance,level,x");
+        pw.write("DMATNumber,HospitalNumber,Distance,evel,p");
         System.out.println("result of time and level");
         ArrayList temp = new ArrayList();
         System.out.println("Evaluation value: " + ind.getEvaluationValue());
