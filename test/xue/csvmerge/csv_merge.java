@@ -26,7 +26,7 @@ import java.util.HashMap;
 
                 BufferedReader input1 = new BufferedReader(new InputStreamReader(new FileInputStream(m_i_master), "Shift_JIS"));
                 BufferedReader input2 = new BufferedReader(new InputStreamReader(new FileInputStream(base_SI), "Shift_JIS"));
-               // File file = new File("/Users/jiao/IdeaProjects/2/assistant/test/xue/csvmerge/output.csv");
+               // File file = new File("/Users/jiao/IdeaProjects/2/assistant/test/xue/csvmerge/out.csv");
                 //PrintWriter output = new PrintWriter(new OutputStreamWriter(new FileOutputStream(file, false), "SHIFT_JIS"));
                 //PrintWriter output = new PrintWriter(new OutputStreamWriter(new FileOutputStream(m_i_master, false), "Shift_JIS")); //結合した結果をm_i_master.csvに保存する
                  PrintWriter output = new PrintWriter(new OutputStreamWriter(new FileOutputStream(out, false), "Shift_JIS"));//結合した結果を新しいファイル'out'に保存する
