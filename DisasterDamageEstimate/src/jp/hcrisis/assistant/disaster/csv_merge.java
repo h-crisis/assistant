@@ -69,7 +69,7 @@ import java.util.HashMap;
                             output.write("\n" + line + ", ");
                         }
                     }
-                    else{// 第２０列目は空欄
+                    else{// 第２０列目は空欄なら
                         output.write("\n" + line + ", ");
                     }
 
