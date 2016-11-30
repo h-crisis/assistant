@@ -702,8 +702,8 @@ public class EarthquakeDamageEstimate {
                         lineL = lineL + ",0.0";
                         lineS = lineS + ",0.0";
                     }
-                    pw1.write(lineL);
-                    pw2.write(lineS);
+                    pw1.write("\n" + lineL);
+                    pw2.write("\n" + lineS);
                 }
             }
         } catch (IOException e) {
