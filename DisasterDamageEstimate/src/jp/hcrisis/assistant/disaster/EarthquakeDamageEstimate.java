@@ -36,6 +36,8 @@ public class EarthquakeDamageEstimate {
     private static File buildingYearFile;
     private static File sheltersFile;
     private static File nearShelterFile;
+    private static File hospitalsFile;
+    private static File nearHospitalFile;
     private static File siFile;
     private static File shapeDir;
 
@@ -55,6 +57,8 @@ public class EarthquakeDamageEstimate {
         buildingYearFile = new File(masterDir.getPath() + "/building_year.csv"); // 市町村別築年数データ
         sheltersFile = new File(masterDir.getPath() + "/shelters.csv"); // 避難所データ
         nearShelterFile = new File(masterDir.getPath() + "/near_shelters.csv"); // 近傍避難所データ
+        hospitalsFile = new File(masterDir.getPath() + "/hospitals.csv"); // 避難所データ
+        nearHospitalFile = new File(masterDir.getPath() + "/near_hospital.csv"); // 近傍医療機関データ
         this.siFile = siFile; // 震度分布ファイル
 
         File[] masterFiles = {this.meshBaseFile, this.rateFile1, this.rateFile2, this.mesh4thDataFile, this.buildingYearFile, this.sheltersFile, this.nearShelterFile, this.siFile, outDir};
@@ -74,6 +78,8 @@ public class EarthquakeDamageEstimate {
         File outFile7 = new File(outDir.getPath() + "/" + code + "_shelter_01_evacuee.csv"); // 避難所ごとの避難者数を推計
         File outFile8 = new File(outDir.getPath() + "/shelter"); // 避難所フォルダ
         outFile8.mkdir();
+        File outFile9 = new File(outDir.getPath() + "/" + code + "_hospital_01_patient.csv"); // 避難所ごとの避難者数を推計
+        File outFile10 = new File(outDir.getPath() + "/" + code + "_hospital_01_patient_simple.csv"); // 避難所ごとの避難者数を推計
 
         extractDisasterArea(this.meshBaseFile, this.siFile, outFile1, 5);
         extractDisasterMunicipalities(outFile1, outFile2);
@@ -82,6 +88,7 @@ public class EarthquakeDamageEstimate {
         estimateDamage2(outFile4, outFile5);
         estimateDamage3(outFile4, outFile2, outFile6);
         estimateDamage4(outFile5, this.nearShelterFile, this.sheltersFile, this.siFile, outFile7, outFile8);
+        estimateDamage5(outFile5, this.nearHospitalFile, this.hospitalsFile, outFile9, outFile10);
 
         createMunicipalitiesGisFiles(shapeDir, outFile6, outDir);
     }
@@ -588,98 +595,116 @@ public class EarthquakeDamageEstimate {
         }
     }
 
-    public static void estimateDamage5(File inFile1, File inFile2, File inFile3, File inFile4, File outFile) {
-        try{BufferedReader brIn1 = new BufferedReader(new InputStreamReader(new FileInputStream(inFile1), "Shift_JIS"));
+    public static void estimateDamage5(File inFile1, File inFile2, File inFile3, File outFile1, File outFile2) {
+        try(
+            BufferedReader brIn1 = new BufferedReader(new InputStreamReader(new FileInputStream(inFile1), "Shift_JIS"));
             BufferedReader brIn2 = new BufferedReader(new InputStreamReader(new FileInputStream(inFile2), "Shift_JIS"));
             BufferedReader brIn3 = new BufferedReader(new InputStreamReader(new FileInputStream(inFile3), "Shift_JIS"));
-            BufferedReader brIn4 = new BufferedReader(new InputStreamReader(new FileInputStream(inFile4), "Shift_JIS"));
-            PrintWriter pw = new PrintWriter(new OutputStreamWriter(new FileOutputStream(outFile, false), "Shift_JIS"));
+            PrintWriter pw1 = new PrintWriter(new OutputStreamWriter(new FileOutputStream(outFile1, false), "Shift_JIS"));
+            PrintWriter pw2 = new PrintWriter(new OutputStreamWriter(new FileOutputStream(outFile2, false), "Shift_JIS"))
+        ) {
 
             // 震度DBの作成
             HashMap<String, Double> siDB = new HashMap<>(); // mesh5thがキー、震度が値
-            String line4 = brIn4.readLine(); // 1行目は見出し
-            while((line4 = brIn4.readLine())!=null) {
-                String pair[] = line4.split(",");
+            HashMap<String, Double> meshDB1 = new HashMap<>(); // mesh5thがキー、患者数が値
+            HashMap<String, Double> meshDB2 = new HashMap<>(); // mesh5thがキー、重症患者数が値
+            String line1 = brIn1.readLine(); // 1行目は見出し
+            while((line1 = brIn1.readLine())!=null) {
+                String pair[] = line1.split(",");
                 if(pair[1].equals("nan")) {
                     siDB.put(pair[0], 0.0);
+                    meshDB1.put(pair[0], 0.0);
+                    meshDB2.put(pair[0], 0.0);
                 }
                 else {
                     siDB.put(pair[0], Double.parseDouble(pair[1]));
+                    meshDB1.put(pair[0], Double.parseDouble(pair[5]));
+                    meshDB2.put(pair[0], Double.parseDouble(pair[6]));
                 }
-            }
-
-            // 5次メッシュ患者数DBの作成
-            String line1 = brIn1.readLine(); // 1行目は見出し
-            HashMap<String, Double> meshDB1 = new HashMap<>(); // mesh5thがキー、患者数が値
-            while((line1 = brIn1.readLine()) != null) {
-                String pair[] = line1.split(",");
-                meshDB1.put(pair[0], Double.parseDouble(pair[7]));
             }
 
             // 5次メッシュと病院DBの作成
             String line2 = brIn2.readLine(); // 1行目は見出し
-            HashMap<String, HashMap<String, Double>> meshDB2 = new HashMap<>(); // mesh5thがキー、（病院コードがキー、距離の逆数が値）が値
-            HashSet<String> col = new HashSet(); // 全ての病院をストックする
+            HashMap<String, String> meshDB3 = new HashMap<>(); // mesh5thがキー、病院コードがキー
             while((line2=brIn2.readLine())!=null) {
                 String pair[] = line2.split(",");
-                if(siDB.containsKey(pair[0])) {
-                    HashMap<String, Double> map;
-                    if (meshDB2.containsKey(pair[0])) {
-                        map = meshDB2.get(pair[0]);
-                    } else {
-                        map = new HashMap<>();
-                    }
-                    map.put(pair[1], 1 / Double.parseDouble(pair[2]));
-                    meshDB2.put(pair[0], map);
-                    col.add(pair[1]);
-                }
+                meshDB3.put(pair[0],pair[1]);
             }
 
             // 病院DBの作成
-            HashMap<String, Double> hospitalDB = new HashMap<>(); // 病院コードがキー、患者数が値
-            Iterator iCol = col.iterator();
-            while(iCol.hasNext()) {
-                String s = (String) iCol.next();
-                hospitalDB.put(s, 0.0);
+            HashMap<String, String> hospitalDB1 = new HashMap<>();
+            ArrayList<String> hospitalList = new ArrayList<>();
+            String line3;
+            while((line3=brIn3.readLine())!=null) {
+                String pair[] = line3.split(",");
+                hospitalDB1.put(pair[1],line3);
+                hospitalList.add(pair[1]);
             }
 
+            HashMap<String, Double> hospitalDB2 = new HashMap<>(); // 患者の集計
+            HashMap<String, Double> hospitalDB3 = new HashMap<>(); // 重症患者の集計
             // 患者推計
+            for(String key : meshDB1.keySet()) {
+                String hospitalKey = hospitalDB1.get(key);
+                double d = 0;
+                if (hospitalDB2.containsKey(hospitalKey)) {
+                    d = hospitalDB2.get(hospitalKey);
+                }
+                d = d + meshDB1.get(key);
+                hospitalDB2.put(hospitalKey, d);
+            }
+            // 重症患者推計
             for(String key : meshDB2.keySet()) {
-                HashMap<String, Double> map = meshDB2.get(key);
-                double d = 0.0; // 距離の総和
-                for(String s : map.keySet()) {
-                    d = d + map.get(s);
+                String hospitalKey = hospitalDB1.get(key);
+                double d = 0;
+                if (hospitalDB2.containsKey(hospitalKey)) {
+                    d = hospitalDB2.get(hospitalKey);
                 }
-
-                for(String s : map.keySet()) {
-                    double patinet_num = hospitalDB.get(s);
-                    if(d > 0 && meshDB1.containsKey(key)) {
-                        patinet_num = patinet_num + meshDB1.get(key) * (map.get(s) / d);
-                        hospitalDB.put(s, patinet_num);
-                    }
-                }
+                d = d + meshDB2.get(key);
+                hospitalDB2.put(hospitalKey, d);
             }
 
             // ファイル出力
-            String line3 = brIn3.readLine(); // 1行目は見出し
             boolean midashi = true;
 
-            while(line3!=null) {
-                String pair[] = line3.split(",");
+            for(int i=0; i<hospitalList.size(); i++) {
+                String code = hospitalList.get(i);
+                String lineL = hospitalDB1.get(code);
+                String lineS = code;
+                String pair[] = lineL.split(",");
+                double si = 0;
+                if(siDB.containsKey(pair[19])) {
+                    si = siDB.get(pair[19]).doubleValue();
+                }
+
                 if(midashi) {
-                    pw.write(pair[1] + "," + pair[2] + "," + pair[6] + "," + pair[8] + "," + pair[10] + ",si,eva_patient");
+                    pw1.write(lineL + ",si,num_injured,num_severe");
+                    pw2.write(lineS + ",si,num_injured,num_severe");
                     midashi = false;
                 }
-                else if(hospitalDB.containsKey(pair[2])) {
-
-                    if(siDB.get(pair[19])==null) {
-                        pw.write("\n" + pair[1] + "," + pair[2] + "," + pair[6] + "," + pair[8] + "," + pair[10] + "," + "0.0" + "," + hospitalDB.get(pair[1]));
+                else {
+                    lineL = lineL + "," + si;
+                    lineS = lineS + "," + si;
+                    if(hospitalDB2.containsKey(code)) {
+                        lineL = lineL + "," + hospitalDB2.get(code);
+                        lineS = lineS + "," + hospitalDB2.get(code);
                     }
                     else {
-                        pw.write("\n" + pair[1] + "," + pair[2] + "," + pair[6] + "," + pair[8] + "," + pair[10] + "," + siDB.get(pair[19]) + "," + hospitalDB.get(pair[1]));
+                        lineL = lineL + ",0.0";
+                        lineS = lineS + ",0.0";
                     }
+
+                    if(hospitalDB3.containsKey(code)) {
+                        lineL = lineL + "," + hospitalDB3.get(code);
+                        lineS = lineS + "," + hospitalDB3.get(code);
+                    }
+                    else {
+                        lineL = lineL + ",0.0";
+                        lineS = lineS + ",0.0";
+                    }
+                    pw1.write(lineL);
+                    pw2.write(lineS);
                 }
-                line3 = brIn3.readLine();
             }
         } catch (IOException e) {
             e.printStackTrace();
