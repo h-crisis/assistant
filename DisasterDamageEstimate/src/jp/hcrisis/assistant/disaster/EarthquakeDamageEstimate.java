@@ -645,7 +645,7 @@ public class EarthquakeDamageEstimate {
             HashMap<String, Double> hospitalDB3 = new HashMap<>(); // 重症患者の集計
             // 患者推計
             for(String key : meshDB1.keySet()) {
-                String hospitalKey = hospitalDB1.get(key);
+                String hospitalKey = meshDB3.get(key);
                 double d = 0;
                 if (hospitalDB2.containsKey(hospitalKey)) {
                     d = hospitalDB2.get(hospitalKey);
