@@ -679,12 +679,12 @@ public class EarthquakeDamageEstimate {
 
                 if(midashi) {
                     pw1.write(lineL + ",si,num_injured,num_severe");
-                    pw2.write(lineS + ",si,num_injured,num_severe");
+                    pw2.write(lineS + ",name,prefecture,sikuchoson,address,saigai,kyukyu,hibaku,dmat,marea_name,si,num_injured,num_severe");
                     midashi = false;
                 }
                 else {
                     lineL = lineL + "," + si;
-                    lineS = lineS + "," + si;
+                    lineS = lineS + "," + pair[2] + "," + pair[6] + "," + pair[8] + "," + pair[10] + "," + pair[13] + "," + pair[14] + "," + pair[15] + "," + pair[16] +  "," +  pair[17] + "," + si;
                     if(hospitalDB2.containsKey(code)) {
                         lineL = lineL + "," + hospitalDB2.get(code);
                         lineS = lineS + "," + hospitalDB2.get(code);
