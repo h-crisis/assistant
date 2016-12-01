@@ -684,7 +684,7 @@ public class EarthquakeDamageEstimate {
                 }
                 else {
                     lineL = lineL + "," + si;
-                    lineS = lineS + "," + pair[2] + "," + pair[6] + "," + pair[8] + "," + pair[10] + "," + pair[13] + "," + pair[14] + "," + pair[15] + "," + pair[16] +  "," +  pair[17] + "," + si;
+                    lineS = lineS + "," + pair[2] + "," + pair[6] + "," + pair[8] + "," + pair[10] + "," + pair[13] + "," + pair[14] + "," + pair[15] + "," + pair[16] +  "," +  pair[18] + "," + si;
                     if(hospitalDB2.containsKey(code)) {
                         lineL = lineL + "," + hospitalDB2.get(code);
                         lineS = lineS + "," + hospitalDB2.get(code);
