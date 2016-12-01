@@ -655,13 +655,13 @@ public class EarthquakeDamageEstimate {
             }
             // 重症患者推計
             for(String key : meshDB2.keySet()) {
-                String hospitalKey = hospitalDB1.get(key);
+                String hospitalKey = meshDB3.get(key);
                 double d = 0;
-                if (hospitalDB2.containsKey(hospitalKey)) {
-                    d = hospitalDB2.get(hospitalKey);
+                if (hospitalDB3.containsKey(hospitalKey)) {
+                    d = hospitalDB3.get(hospitalKey);
                 }
                 d = d + meshDB2.get(key);
-                hospitalDB2.put(hospitalKey, d);
+                hospitalDB3.put(hospitalKey, d);
             }
 
             // ファイル出力
