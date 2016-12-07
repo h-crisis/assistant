@@ -164,13 +164,7 @@ function createHtmlHospital(evt,feature) {
     document.getElementById('info').innerHTML = "";
     DetailHtml = "";
     var coordinate = feature.T.geometry.A;
-    if (window.innerWidth >= 780) {
-        HeaderHtml = "<div style='border-radius:10px; margin:0 0 5px; font-family:helvetica; background-color:#333333; color:white; text-align:center; opacity: 1; width:350px' type=button id=showBtn value=隠す onclick=showHide() onmousemove='this.style.opacity=0.8' onmouseout='this.style.opacity=1'>閉じる</div>";
-    } else if (window.innerWidth >= 480) {
-        HeaderHtml = "<div style='border-radius:10px; margin:0 0 5px; font-family:helvetica; background-color:#333333; color:white; text-align:center; opacity: 1; width:220px' type=button id=showBtn value=隠す onclick=showHide() onmousemove='this.style.opacity=0.8' onmouseout='this.style.opacity=1'>閉じる</div>";
-    } else {
-        HeaderHtml = "<div style='border-radius:10px; margin:0 0 5px; font-family:helvetica; background-color:#333333; color:white; text-align:center; opacity: 1; width:220px' type=button id=showBtn value=隠す onclick=showHide() onmousemove='this.style.opacity=0.8' onmouseout='this.style.opacity=1'>閉じる</div>";
-    }
+
     var tagName = ['医療機関コード', '名称', '都道府県名', '二次医療圏', '市区町村', '住所', '災害拠点医療機関', '救急指定医療機関',
         '被爆対応医療機関', 'DMAT配置医療機関', '支援要否', '医療派遣ステータス',
         'チーム数', '更新日時', '医師出勤状況', '緊急時入力/入院病棟倒壊・倒壊の恐れ', '緊急時入力/ライフライン・サプライ状況/電気使用不可',
@@ -198,7 +192,7 @@ function createHtmlHospital(evt,feature) {
     // 建築物名表示
     if (arrayV[0] === null) {
     } else {
-        HeaderHtml = HeaderHtml + "<a style='font-family: Helvetica'>" + arrayV[1] + "</a>";
+        DetailHtml = DetailHtml + "<a style='font-family: Helvetica'>" + arrayV[1] + "</a>";
     }
     // HeaderHtml = HeaderHtml + "<div style='border:2px solid burlywood; background-color:#888888; color:white; text-align:center' type=button id=showBtn value=隠す onclick=showDetail()>詳細情報の表示切替</div>";
     for (i = 0; i < tagName.length; i++) {
@@ -210,10 +204,10 @@ function createHtmlHospital(evt,feature) {
         DetailHtml = DetailHtml + preCells + tagName[i] + interCells + arrayV[i] + subCells;
     }
     console.log(feature.get('name'))
-    document.getElementById('infoHeader').style.display = 'block';
-    document.getElementById('infoHeader').innerHTML = HeaderHtml;
     document.getElementById('info').style.display = 'block';
     document.getElementById('info').innerHTML = DetailHtml;
+    document.getElementById('infoWrapV').style.display = 'block';
+    document.getElementById('infoWrapH').style.display = 'block';
     document.getElementById('popup').style.display = 'block';
     overlayPopup.setPosition(coordinate);
 }
