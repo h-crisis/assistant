@@ -1,6 +1,8 @@
-html,body,a{
+html,body{
     margin:0;
     padding:0;
+    overflow-y: hidden;
+    height: 100%;
 }
 
 .ol-popup {
@@ -171,22 +173,32 @@ div#submit{
 }
 
 .panel{
-    z-index: 5;
+    z-index: 6;
     position: absolute;
     left: 0;
     top: 0;
     width: 250px;
     height: 100%;
     background-color: #ffffff;
-    display: none;
-    transition: all 300ms 0s ease;
+    transition:all 0.5s;
 }
+.hidden {
+    z-index: 6;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 0px;
+    visibility: hidden;
+    height: 100%;
+    background-color: #ffffff;
+}
+
 
 
 div#map{
     z-index: 1;
     position: absolute;
-    bottom: 0;
+    top: 0;
     left: 0;
     width: 100%;
     height: 100%;
@@ -194,40 +206,47 @@ div#map{
 
 
 .button#hall-vis{
-    height: 25px;
-    padding-top: 5px;
-    bottom: 270px;
+
 }
 .button#hospital-vis{
-    bottom: 240px;
+
 }
 .button#shelter-vis{
-    bottom: 210px;
+
 }
 .button#pass-vis{
-    height: 25px;
-    padding-top: 5px;
-    bottom: 180px;
+
 }
 .buttonWide#goToHypoCenter{
-    bottom: 100px;
+
 }
 .buttonWide#goToHere{
-    bottom: 50px;
+
 }
-.button {
-    z-index: 3;
-    position: absolute;
+nav .button {
+    z-index: 7;
+    position: relative;
     left : 0;
-    width: 60px;
-    height: 25px;
     padding-top: 5px;
     border: 1px outset #000000;
     background-color:#333333;
     color: #ffffff;
-    border-radius: 0 10px 10px 0;
     font-size: 13px;
     text-align: center;
+    font-family: Noteworthy;
+    display: block;
+}
+.hidden + .button {
+    z-index: 7;
+    position: absolute;
+    left : 0;
+    padding-top: 5px;
+    border: 1px outset #000000;
+    background-color:#333333;
+    color: #ffffff;
+    font-size: 13px;
+    text-align: center;
+    display: block;
 }
 .button:hover{
     opacity:0.8;
@@ -266,28 +285,42 @@ div#map{
 .info {
     z-index: 3;
     background-color:#eeeeee;
-    top: 180px;
-    right: 0;
+    top: 0;
+    left: 0;
     width: 380px;
-    height: 170px;
+    height: 320px;
     padding: 5px 10px;
-    border-radius: 10px 10px 0 0;
     table-layout: fixed;
     position:absolute;
-    overflow: scroll;
+    overflow: auto;
     display:none;
     font-size:18px;
+    overflow-y: hidden;
 }
 
 .info#info{
-    top: 320px;
-    height: 60%;
+    height: 100%;
     position: absolute;
-    border-radius: 0 0 10px 10px;
+    overflow:scroll;
+}
+.info#infoWrapV{
+    height: 100%;
+    left: 377px;
+    width: 3px;
+    position: absolute;
+    overflow:hidden;
+}
+.info#infoWrapH{
+    top: 99.5%;
+    width: 380px;
+    height: 5px;
+    position: absolute;
+    overflow:hidden;
 }
 .info div{
     cursor: pointer;
 }
+
 
 .infoTab{
     z-index: 3;
@@ -305,7 +338,7 @@ div#map{
     background-color:#eeeeee;
     color: #000000;
     top: 150px;
-    right: 270px;
+    left: 270px;
     width: 100px;
     height: 30px;
 }
@@ -313,7 +346,7 @@ div#map{
     background-color:#333333;
     color: #ffffff;
     top: 150px;
-    right: 165px;
+    left: 165px;
     width: 100px;
     height: 30px;
 }
@@ -321,7 +354,7 @@ div#map{
     background-color:#333333;
     color: #ffffff;
     top: 150px;
-    right: 60px;
+    left: 60px;
     width: 100px;
     height: 30px;
 }

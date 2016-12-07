@@ -4,7 +4,7 @@
 
 var count = 0;
 
-function fade() {
+function fadeP() {
     if (count%2 == 0) {
         document.getElementById("fadeLayer").style.display = 'block';
         document.getElementById("printSetting").style.display = 'block';
@@ -15,7 +15,6 @@ function fade() {
         count++
     }
 }
-
 
 var dims = {
     a0: [1189, 841],

@@ -67,6 +67,8 @@ var overlayPopup = new ol.Overlay(/** @type {olx.OverlayOptions} */ ({
 popupCloser.onclick = function() {
     document.getElementById('info').style.display = 'none';
     document.getElementById('infoHeader').style.display = 'none';
+    document.getElementById('infoWrapV').style.display = 'none';
+    document.getElementById('infoWrapH').style.display = 'none';
     document.getElementById('tab001').style.display = 'none';
     document.getElementById('tab002').style.display = 'none';
     document.getElementById('tab003').style.display = 'none';
@@ -85,7 +87,8 @@ var map = new ol.Map({
             collapsible: false
         })
     }).extend([
-        new ol.control.ScaleLine()
+        new ol.control.ScaleLine(),
+        new ol.control.OverviewMap()
     ])
 });
 
@@ -184,6 +187,8 @@ map.on('click', function(evt,feature) {
     document.getElementById('info').innerHTML = "";
     document.getElementById('infoHeader').style.display = 'none';
     document.getElementById('info').style.display = 'none';
+    document.getElementById('infoWrapV').style.display = 'none';
+    document.getElementById('infoWrapH').style.display = 'none';
     document.getElementById('popup').style.display = 'none';
     var element = document.getElementsByClassName('infoTab');
     for (var i=0;i<element.length;i++) {

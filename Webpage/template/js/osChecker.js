@@ -36,6 +36,3 @@ document.write('<link id="tablet" rel="stylesheet" href="../../css/' + osCss + '
 document.write('<link id="pc" rel="stylesheet" href="../../css/' + osCss + '/' + brwCss + 'Pc.css" type="text/css" media="screen and (min-width: 781px)">');
 
 
-
-
-
