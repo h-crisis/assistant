@@ -134,8 +134,9 @@ public class EarthquakeDamageDbSet {
                 String pair[] = line.split(",");
                 String code = pair[0];
                 double si = Double.parseDouble(pair[5]);
-                double evacuee = Double.parseDouble(pair[6]);
-                String sql = "update event_shelter_" + eventCode + " set info_type='estimate',a01=" + evacuee + " where code='" + code + "'";
+                double evacuee = Double.parseDouble(pair[6])*0.8;
+                int ievacuee = (int) evacuee;
+                String sql = "update event_shelter_" + eventCode + " set info_type='estimate',a01=" + ievacuee + " where code='" + code + "'";
                 i++;
                 System.out.println(i + " : " + sql);
                 st.execute(sql);

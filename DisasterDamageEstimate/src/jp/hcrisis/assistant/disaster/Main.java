@@ -17,7 +17,7 @@ public class Main {
             outDir.mkdir();
         }
 
-        FileManagement.removeFiles(outDir); // 出力フォルダを空にする
+        //FileManagement.removeFiles(outDir); // 出力フォルダを空にする
 
         File siFile = new File(outDir.getPath() + "/" + code + "_si.csv");
         if(!siFile.exists()) {

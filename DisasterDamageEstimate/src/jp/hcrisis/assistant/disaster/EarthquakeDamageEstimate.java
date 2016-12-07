@@ -645,7 +645,7 @@ public class EarthquakeDamageEstimate {
             HashMap<String, Double> hospitalDB3 = new HashMap<>(); // 重症患者の集計
             // 患者推計
             for(String key : meshDB1.keySet()) {
-                String hospitalKey = hospitalDB1.get(key);
+                String hospitalKey = meshDB3.get(key);
                 double d = 0;
                 if (hospitalDB2.containsKey(hospitalKey)) {
                     d = hospitalDB2.get(hospitalKey);
@@ -655,13 +655,13 @@ public class EarthquakeDamageEstimate {
             }
             // 重症患者推計
             for(String key : meshDB2.keySet()) {
-                String hospitalKey = hospitalDB1.get(key);
+                String hospitalKey = meshDB3.get(key);
                 double d = 0;
-                if (hospitalDB2.containsKey(hospitalKey)) {
-                    d = hospitalDB2.get(hospitalKey);
+                if (hospitalDB3.containsKey(hospitalKey)) {
+                    d = hospitalDB3.get(hospitalKey);
                 }
                 d = d + meshDB2.get(key);
-                hospitalDB2.put(hospitalKey, d);
+                hospitalDB3.put(hospitalKey, d);
             }
 
             // ファイル出力
@@ -679,12 +679,12 @@ public class EarthquakeDamageEstimate {
 
                 if(midashi) {
                     pw1.write(lineL + ",si,num_injured,num_severe");
-                    pw2.write(lineS + ",si,num_injured,num_severe");
+                    pw2.write(lineS + ",name,prefecture,sikuchoson,address,saigai,kyukyu,hibaku,dmat,marea_name,si,num_injured,num_severe");
                     midashi = false;
                 }
                 else {
                     lineL = lineL + "," + si;
-                    lineS = lineS + "," + si;
+                    lineS = lineS + "," + pair[2] + "," + pair[6] + "," + pair[8] + "," + pair[10] + "," + pair[13] + "," + pair[14] + "," + pair[15] + "," + pair[16] +  "," +  pair[18] + "," + si;
                     if(hospitalDB2.containsKey(code)) {
                         lineL = lineL + "," + hospitalDB2.get(code);
                         lineS = lineS + "," + hospitalDB2.get(code);
