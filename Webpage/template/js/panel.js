@@ -5,15 +5,18 @@
 
 $("div#option").click(function(){
     $(".panel").toggleClass("hidden");
-    $(".button").toggleClass("hidden")
+    $(".button").toggleClass("hidden");
+    $(".logo").toggleClass("hidden");
 });
 $("#fadeLayer").click(function(){
     $(".panel").toggleClass("hidden");
-    $(".button").toggleClass("hidden")
+    $(".button").toggleClass("hidden");
+    $(".logo").toggleClass("hidden");
 });
 $(".button").click(function(){
     $(".panel").toggleClass("hidden");
-    $(".button").toggleClass("hidden")
+    $(".button").toggleClass("hidden");
+    $(".logo").toggleClass("hidden");
 });
 
 function fade() {

@@ -87,14 +87,14 @@ var map = new ol.Map({
             collapsible: false
         })
     }).extend([
-        new ol.control.ScaleLine(),
-        new ol.control.OverviewMap()
+        new ol.control.ScaleLine()
     ])
 });
 
 map.addControl(new ol.control.Zoom({
     className: 'custom-zoom'
 }));
+
 
 // map上に各アイコンのレイヤーを追加して、非表示にする。
 map.addLayer(shelterLayer);

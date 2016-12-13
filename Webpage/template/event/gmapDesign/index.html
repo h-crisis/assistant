@@ -68,22 +68,23 @@
 </div>
 
 <nav class="panel hidden">
-
+    <img class="logo hidden" id="assistant">
+<hr>
     <a class="button hidden" href="./shelter/shelter_list.csv" title="避難所リスト" target="_blank" onclick="fade()">避難所リストDL</a>
     <a class="button hidden" href="http://gis.h-crisis.jp/data/practice/shelter_info_latest.csv" title="避難所情報" target="_blank" onclick="fade()">避難所情報DL</a>
     <a class="button hidden" title="地図印刷" onclick="fadeP()">地図印刷（準備中）</a>
     <a class="button hidden" href="#" title="掲示板" target="_blank" onclick="fade()">掲示板(準備中)</a>
     <a class="button hidden" href="http://www.wds.emis.go.jp/" title="EMIS" target="_blank" onclick="fade()">ＥＭＩＳ</a>
-
+<hr>
     <a class="button hidden" id="hall-vis" onclick="fade()">震度分布</a>
     <a class="button hidden" id="hospital-vis" onclick="fade()">病院</a>
     <a class="button hidden" id="shelter-vis" onclick="fade()">避難所</a>
     <a class="button hidden" id="pass-vis" onclick="fade()">交通情報</a>
-    <a class="button hidden" id="goToHypoCenter" onclick="fade()">初期位<br>置移動</a>
-    <a class="button hidden" id="goToHere" onclick="fade()">現在地へ移動</a>
-
+<hr>
 </nav>
 
+<div id="goToHere" title="現在地へ移動"></div>
+<div id="goToHypoCenter" title="初期位置へ移動"></div>
 <!--- <div class="button" id="menu" style="z-index: 3;position: absolute; top: 70px;left: 0px;width: 100px;bottom: 320px;background-color: #66BBFF; opacity: 0.7; border: solid; border-width: 2px 2px 2px 0;border-color: #3388FF"></div> -->
 <!--- <button class="button" id="hospital-index" style="z-index: 3;position: absolute; top: 90px;left: 0px;width: 50px;height: 7%;">医療機関<br>検索</button> -->
 <button class="button" id="scrn-hosp" style="bottom: 330px;display: none">画面内の<br>医療機関</button>
