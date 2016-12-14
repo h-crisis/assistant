@@ -6,12 +6,12 @@ var styleSI1 = new ol.style.Style({
         color: 'rgba(242, 242, 255, 0.5)'
     }),
     image: new ol.style.Icon({
-        scale: 1,
+        scale: 0.075,
         anchor: [0.5, 1],
         anchorXUnits: 'fraction',
         anchorYUnits: 'fraction',
         opacity: 0.85,
-        src: "http://h-crisis.niph.go.jp/assistant/wp-content/uploads/sites/4/test/img/1.png"
+        src: "/Users/komori/IdeaProjects/assistant/Webpage/template/img/dist/1.png"
     })
 });
 var styleSI2 = new ol.style.Style({
@@ -19,12 +19,12 @@ var styleSI2 = new ol.style.Style({
         color: 'rgba(0, 170, 255, 0.5)'
     }),
     image: new ol.style.Icon({
-        scale: 1,
+        scale: 0.075,
         anchor: [0.5, 1],
         anchorXUnits: 'fraction',
         anchorYUnits: 'fraction',
         opacity: 0.85,
-        src: "http://h-crisis.niph.go.jp/assistant/wp-content/uploads/sites/4/test/img/2.png"
+        src: "/Users/komori/IdeaProjects/assistant/Webpage/template/img/dist/2.png"
     })
 });
 var styleSI3 = new ol.style.Style({
@@ -32,12 +32,12 @@ var styleSI3 = new ol.style.Style({
         color: 'rgba(0, 65, 255, 0.5)'
     }),
     image: new ol.style.Icon({
-        scale: 1,
+        scale: 0.075,
         anchor: [0.5, 1],
         anchorXUnits: 'fraction',
         anchorYUnits: 'fraction',
         opacity: 0.85,
-        src: "http://h-crisis.niph.go.jp/assistant/wp-content/uploads/sites/4/test/img/3.png"
+        src: "/Users/komori/IdeaProjects/assistant/Webpage/template/img/dist/3.png"
     })
 });
 var styleSI4 = new ol.style.Style({
@@ -45,12 +45,12 @@ var styleSI4 = new ol.style.Style({
         color: 'rgba(255, 230, 150, 0.5)'
     }),
     image: new ol.style.Icon({
-        scale: 1,
+        scale: 0.075,
         anchor: [0.5, 1],
         anchorXUnits: 'fraction',
         anchorYUnits: 'fraction',
         opacity: 0.85,
-        src: "http://h-crisis.niph.go.jp/assistant/wp-content/uploads/sites/4/test/img/4.png"
+        src: "/Users/komori/IdeaProjects/assistant/Webpage/template/img/dist/4.png"
     })
 });
 var styleSI5W = new ol.style.Style({
@@ -58,17 +58,18 @@ var styleSI5W = new ol.style.Style({
         color: 'rgba(255, 230, 0, 0.5)'
     }),
     text: new ol.style.Text({
+        offsetY: 8,
         font: '12px Calibri,sans-serif',
         fill: new ol.style.Fill({color: "#0019ff"}),
         stroke: new ol.style.Stroke({color: "#ffe600", width: 2})
     }),
     image: new ol.style.Icon({
-        scale: 1,
+        scale: 0.075,
         anchor: [0.5, 1],
         anchorXUnits: 'fraction',
         anchorYUnits: 'fraction',
         opacity: 0.85,
-        src: "/Users/komori/Desktop/hospital_002.png"
+        src: "/Users/komori/IdeaProjects/assistant/Webpage/template/img/dist/5-1.png"
     })
 });
 var styleSI5S = new ol.style.Style({
@@ -76,17 +77,18 @@ var styleSI5S = new ol.style.Style({
         color: 'rgba(255, 153, 0, 0.5)'
     }),
     text: new ol.style.Text({
+        offsetY: 8,
         font: '12px Calibri,sans-serif',
         fill: new ol.style.Fill({color: "#0066ff"}),
         stroke: new ol.style.Stroke({color: "#ff9900", width: 2})
     }),
     image: new ol.style.Icon({
-        scale: 1,
+        scale: 0.075,
         anchor: [0.5, 1],
         anchorXUnits: 'fraction',
         anchorYUnits: 'fraction',
         opacity: 0.85,
-        src: "http://h-crisis.niph.go.jp/assistant/wp-content/uploads/sites/4/test/img/5s.png"
+        src: "/Users/komori/IdeaProjects/assistant/Webpage/template/img/dist/5-2.png"
     })
 });
 var styleSI6W = new ol.style.Style({
@@ -94,17 +96,18 @@ var styleSI6W = new ol.style.Style({
         color: 'rgba(255, 40, 0, 0.5)'
     }),
     text: new ol.style.Text({
+        offsetY: 8,
         font: '12px Calibri,sans-serif',
         fill: new ol.style.Fill({color: "#00d7ff"}),
         stroke: new ol.style.Stroke({color: "#ff2800", width: 2})
     }),
     image: new ol.style.Icon({
-        scale: 1,
+        scale: 0.075,
         anchor: [0.5, 1],
         anchorXUnits: 'fraction',
         anchorYUnits: 'fraction',
         opacity: 0.85,
-        src: "http://h-crisis.niph.go.jp/assistant/wp-content/uploads/sites/4/test/img/6w.png"
+        src: "/Users/komori/IdeaProjects/assistant/Webpage/template/img/dist/6-1.png"
     })
 });
 var styleSI6S = new ol.style.Style({
@@ -112,17 +115,18 @@ var styleSI6S = new ol.style.Style({
         color: 'rgba(165, 0, 33, 0.5)'
     }),
     text: new ol.style.Text({
+        offsetY: 8,
         font: '12px Calibri,sans-serif',
         fill: new ol.style.Fill({color: "#00a584"}),
         stroke: new ol.style.Stroke({color: "#a50021", width: 2})
     }),
     image: new ol.style.Icon({
-        scale: 1,
+        scale: 0.075,
         anchor: [0.5, 1],
         anchorXUnits: 'fraction',
         anchorYUnits: 'fraction',
         opacity: 0.85,
-        src: "http://h-crisis.niph.go.jp/assistant/wp-content/uploads/sites/4/test/img/6s.png"
+        src: "/Users/komori/IdeaProjects/assistant/Webpage/template/img/dist/6-2.png"
     })
 });
 var styleSI7 = new ol.style.Style({
@@ -130,17 +134,18 @@ var styleSI7 = new ol.style.Style({
         color: 'rgba(180, 0, 104, 0.5)'
     }),
     text: new ol.style.Text({
+        offsetY: 8,
         font: '12px Calibri,sans-serif',
         fill: new ol.style.Fill({color: "#00b44c"}),
         stroke: new ol.style.Stroke({color: "#b40068", width: 2})
     }),
     image: new ol.style.Icon({
-        scale: 1,
+        scale: 0.075,
         anchor: [0.5, 1],
         anchorXUnits: 'fraction',
         anchorYUnits: 'fraction',
         opacity: 0.85,
-        src: "http://h-crisis.niph.go.jp/assistant/wp-content/uploads/sites/4/test/img/7.png"
+        src: "/Users/komori/IdeaProjects/assistant/Webpage/template/img/dist/7.png"
     })
 });
 
@@ -161,6 +166,7 @@ var hallLayer = new ol.layer.Vector({
         if(feature.get('max_si')<1.5) {
             return styleSI1;
         } else if(feature.get('max_si')<2.5) {
+
             return styleSI2;
         } else if(feature.get('max_si')<3.5) {
             return styleSI3;
@@ -182,8 +188,6 @@ var hallLayer = new ol.layer.Vector({
             styleSI7.getText().setText(zoomLevel > 10 ? name : '');
             return styleSI7;
         }
-        console.log(url);
-        console.log(resolution);
     }});
 
 // 役所ボタンの挙動を制御する関数
@@ -203,7 +207,32 @@ function hallButton() {
 function createHtmlHall(evt,feature) {
     document.getElementById('info').innerHTML = "";
     var coordinate = feature.T.geometry.A;
-    
+    DetailHtml = "";
+
+    // 適切なアイコンurlを取得する
+    var iconUrl;
+    if(feature.get('max_si')<1.5) {
+        iconUrl = '/Users/komori/IdeaProjects/assistant/Webpage/template/img/dist/1.png';
+    } else if(feature.get('max_si')<2.5) {
+        iconUrl = '/Users/komori/IdeaProjects/assistant/Webpage/template/img/dist/2.png';
+    } else if(feature.get('max_si')<3.5) {
+        iconUrl = '/Users/komori/IdeaProjects/assistant/Webpage/template/img/dist/3.png';
+    } else if(feature.get('max_si')<4.5) {
+        iconUrl = '/Users/komori/IdeaProjects/assistant/Webpage/template/img/dist/4.png';
+    } else if(feature.get('max_si')<5) {
+        iconUrl = '/Users/komori/IdeaProjects/assistant/Webpage/template/img/dist/5-1.png';
+    } else if(feature.get('max_si')<5.5) {
+        iconUrl = '/Users/komori/IdeaProjects/assistant/Webpage/template/img/dist/5-2.png';
+    } else if(feature.get('max_si')<6) {
+        iconUrl = '/Users/komori/IdeaProjects/assistant/Webpage/template/img/dist/6-1.png';
+    } else if(feature.get('max_si')<6.5) {
+        iconUrl = '/Users/komori/IdeaProjects/assistant/Webpage/template/img/dist/6-2.png';
+    } else if(feature.get('max_si')>=6.5) {
+        iconUrl = '/Users/komori/IdeaProjects/assistant/Webpage/template/img/dist/7.png';
+    }
+
+    DetailHtml = "<div id='landscape'><img id='landIcon' src=" + iconUrl + "></div>";
+
     // 建築物名表示
     if (arrayV[0] === null) {
     } else {
@@ -218,7 +247,6 @@ function createHtmlHall(evt,feature) {
         }
     }
 
-    DetailHtml = "";
     DetailHtml = DetailHtml + preCells + '住所' + interCells + arrayV[3] + subCells; // 住所表示
     DetailHtml = DetailHtml + preCells + '人口' + interCells + arrayV[9] + subCells; // 人口表示
     DetailHtml = DetailHtml + preCells + '世帯数' + interCells + arrayV[10] + subCells; // 世帯数表示

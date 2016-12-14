@@ -6,10 +6,11 @@ var src;
 var biNum;
 
 var styleHospR = new Array(16);
-for (var i = 0; i < 17 ; i++) {
+for (var i = 0; i < 16 ; i++) {
     src = "http://h-crisis.niph.go.jp/assistant/wp-content/uploads/sites/4/test/img/r/" + i + ".png";
     styleHospR[i] = new ol.style.Style({
         text: new ol.style.Text({
+            offsetY: 8,
             font: '12px Calibri,sans-serif',
             fill: new ol.style.Fill({color: "#0000bb"}),
             stroke: new ol.style.Stroke({color: "#ffffff", width: 2}),
@@ -26,10 +27,11 @@ for (var i = 0; i < 17 ; i++) {
 }
 
 var styleHospB = new Array(16);
-for (var i = 0; i < 17 ; i++) {
+for (var i = 0; i < 16 ; i++) {
     src = "http://h-crisis.niph.go.jp/assistant/wp-content/uploads/sites/4/test/img/b/" + i + ".png";
     styleHospB[i] = new ol.style.Style({
         text: new ol.style.Text({
+            offsetY: 8,
             font: '12px Calibri,sans-serif',
             fill: new ol.style.Fill({color: "#0000bb"}),
             stroke: new ol.style.Stroke({color: "#ffffff", width: 2}),
@@ -46,10 +48,11 @@ for (var i = 0; i < 17 ; i++) {
 }
 
 var styleHospG = new Array(16);
-for (var i = 0; i < 17 ; i++) {
+for (var i = 0; i < 16 ; i++) {
     src = "http://h-crisis.niph.go.jp/assistant/wp-content/uploads/sites/4/test/img/g/" + i + ".png";
     styleHospG[i] = new ol.style.Style({
         text: new ol.style.Text({
+            offsetY: 8,
             font: '12px Calibri,sans-serif',
             fill: new ol.style.Fill({color: "#0000bb"}),
             stroke: new ol.style.Stroke({color: "#ffffff", width: 2})
@@ -64,6 +67,29 @@ for (var i = 0; i < 17 ; i++) {
         })
     })
 }
+
+/*
+var styleHospG = new Array(16);
+for (var i = 0; i < 16 ; i++) {
+    src = "/Users/komori/IdeaProjects/assistant/Webpage/template/img/hospital/" + i + ".png";
+    styleHospG[i] = new ol.style.Style({
+        text: new ol.style.Text({
+            offsetY: 8,
+            font: '12px Calibri,sans-serif',
+            fill: new ol.style.Fill({color: "#0000bb"}),
+            stroke: new ol.style.Stroke({color: "#ffffff", width: 2})
+        }),
+        image: new ol.style.Icon({
+            scale: 0.075,
+            anchor: [0.5, 1],
+            anchorXUnits: 'fraction',
+            anchorYUnits: 'fraction',
+            opacity: 0.85,
+            src: src
+        })
+    })
+}
+*/
 
 /*
  var styleWhite = new ol.style.Style({
@@ -188,6 +214,31 @@ function createHtmlHospital(evt,feature) {
         '詳細入力/職員数/出勤医師数 内DMAT', '詳細入力/職員数/出勤看護師数', '詳細入力/職員数/出勤看護師数 内DMAT',
         '詳細入力/職員数/その他出勤人数', '詳細入力/職員数/その他出勤人数 内DMAT', '詳細入力/その他/その他',
         '詳細入力/情報取得日時', '詳細入力/更新日時', '救護所有無', '所属本部'];
+
+    // 適切なアイコンurlを取得する
+    var iconUrl;
+    biNum = (feature.get('saigai') * 8) + (feature.get('kyukyu') * 4) + (feature.get('hibaku') * 2) + (feature.get('dmat') * 1);
+    if (feature.get('assist') == "要"){
+        for (var i = 0; i < 16 ; i++) {
+            if (biNum == i) {
+               iconUrl = 'http://h-crisis.niph.go.jp/assistant/wp-content/uploads/sites/4/test/img/r/' + i + '.png'
+            }
+        }
+    } else if(feature.get('assist') == "未" && feature.get('mds') == "未入力") {
+        for (var i = 0; i < 16 ; i++) {
+            if (biNum == i) {
+                iconUrl = 'http://h-crisis.niph.go.jp/assistant/wp-content/uploads/sites/4/test/img/g/' + i + '.png'
+            }
+        }
+    } else {
+        for (var i = 0; i < 16 ; i++) {
+            if (biNum == i) {
+                iconUrl = 'http://h-crisis.niph.go.jp/assistant/wp-content/uploads/sites/4/test/img/b/' + i + '.png'
+            }
+        }
+    }
+
+    DetailHtml = "<div id='landscape'><img id='landIcon' src=" + iconUrl + "></div>";
 
     // 建築物名表示
     if (arrayV[0] === null) {
