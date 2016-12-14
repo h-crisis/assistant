@@ -24,11 +24,17 @@ public class CreateMesh5Si {
                     while(line != null) {
                         if(line.startsWith("2,")) {
                             String pair[] = line.split(",");
-                            if (pair.length != 11) {
-                                System.out.println("入力ファイル " + file.getName() + " の列数が11ではありません。");
-                                System.exit(1);
-                            } else {
+                            if (pair.length == 8) {
+                                pw.print("\n" + pair[7] + "," + pair[5] + ",,,");
+                            } else if(pair.length == 9) {
+                                pw.print("\n" + pair[7] + "," + pair[5] + "," + pair[8] + ",,");
+                            } else if(pair.length == 10) {
+                                pw.print("\n" + pair[7] + "," + pair[5] + "," + pair[8] + "," + pair[9] + ",");
+                            } else if(pair.length == 11) {
                                 pw.print("\n" + pair[7] + "," + pair[5] + "," + pair[8] + "," + pair[9] + "," + pair[10]);
+                            } else {
+                                System.out.println("項目数が足りていません。");
+                                System.exit(1);
                             }
                         }
                         line = br.readLine();
