@@ -1,7 +1,8 @@
 package distance_calculation;
 
-
+import java.io.PrintWriter;
 import java.io.*;
+
 
 /**
  * Created by jiao on 2016/12/19.
@@ -26,7 +27,7 @@ public class MAIN {
         String value;
         String line;
         line = distance_info.readLine();//第一行を飛ばす
-       /* while ((line = distance_info.readLine()) != null) {
+       while ((line = distance_info.readLine()) != null) {
             String pair[] = line.split(",");
             value=pair[0];
             File destfilepath= new File("/Users/jiao/Desktop/split_map/test.shp");//全道路の2次メッシュコードによる分割
@@ -43,13 +44,10 @@ public class MAIN {
             refile.add(out_temp2,out);//outファイルを書き出す
 
         }
-        */
-       // ="523644";
 
-        ////find_nearest_top3.build(destfilepath); // build graph
-        ////find_nearest_top3.find_nearest(shelter,hospital,out);
-        //File distance = new File("/Users/jiao/Desktop/shortestpath_test/output.csv");
-       // find_nearest_top3.find_top3(distance,out);
+       // value="523644";
+
+
 
     }
 }

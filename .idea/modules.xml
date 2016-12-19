@@ -10,7 +10,6 @@
       <module fileurl="file://$PROJECT_DIR$/Modules/NaraModule/NaraModule.iml" filepath="$PROJECT_DIR$/Modules/NaraModule/NaraModule.iml" />
       <module fileurl="file://$PROJECT_DIR$/Webpage/Webpage.iml" filepath="$PROJECT_DIR$/Webpage/Webpage.iml" />
       <module fileurl="file://$PROJECT_DIR$/Modules/Zenrin/Zenrin.iml" filepath="$PROJECT_DIR$/Modules/Zenrin/Zenrin.iml" />
-      <module fileurl="file://$PROJECT_DIR$/test/xue/distance_calculation/distance_calculation.iml" filepath="$PROJECT_DIR$/test/xue/distance_calculation/distance_calculation.iml" />
       <module fileurl="file://$PROJECT_DIR$/hcrisis-assistant.iml" filepath="$PROJECT_DIR$/hcrisis-assistant.iml" />
       <module fileurl="file://$PROJECT_DIR$/../../private/jiao/newga/newga.iml" filepath="$PROJECT_DIR$/../../private/jiao/newga/newga.iml" />
     </modules>
