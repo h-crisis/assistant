@@ -1,0 +1,361 @@
+package distance_calculation;
+
+/**
+ * Created by jiao on 2016/12/19.
+ */
+
+import com.vividsolutions.jts.geom.Coordinate;
+import com.vividsolutions.jts.geom.Geometry;
+import com.vividsolutions.jts.geom.GeometryFactory;
+import com.vividsolutions.jts.geom.Point;
+import org.geotools.data.FileDataStore;
+import org.geotools.data.FileDataStoreFinder;
+import org.geotools.data.simple.SimpleFeatureSource;
+import org.geotools.factory.CommonFactoryFinder;
+import org.geotools.feature.FeatureCollection;
+import org.geotools.feature.FeatureIterator;
+import org.geotools.graph.build.feature.FeatureGraphGenerator;
+import org.geotools.graph.build.line.LineStringGraphGenerator;
+import org.geotools.graph.path.DijkstraShortestPathFinder;
+import org.geotools.graph.path.Path;
+import org.geotools.graph.structure.Edge;
+import org.geotools.graph.structure.Graph;
+import org.geotools.graph.structure.Node;
+import org.geotools.graph.structure.basic.BasicNode;
+import org.geotools.graph.traverse.standard.DijkstraIterator.EdgeWeighter;
+import org.geotools.styling.StyleFactory;
+import org.opengis.feature.simple.SimpleFeature;
+import org.opengis.filter.FilterFactory2;
+
+import java.awt.*;
+import java.util.List;
+import java.io.*;
+import java.util.*;
+
+
+public class find_nearest_top3 {
+
+    private static StyleFactory sf = CommonFactoryFinder.getStyleFactory();
+    private static FilterFactory2 ff = CommonFactoryFinder.getFilterFactory2();
+    private static String geometryAttributeName;
+    public enum GeomType {POINT, LINE, POLYGON};
+    //private static org.geotools.routing.GeoRouting.GeomType geometryType;
+    private static final Color LINE_COLOUR = Color.RED;
+    private static final Color FILL_COLOUR = Color.RED;
+    private static final Color destinationfillColor = Color.GREEN;
+    private static final Color destinationoutlineColor = Color.GREEN;
+    private static final float OPACITY = 1.0f;
+    private static final float LINE_WIDTH = 5.0f;
+    private static final float POINT_SIZE = 3.0f;
+
+    private static Graph graph;
+    public static LineStringGraphGenerator lineStringGen;
+    private static Node nearestNode = null;
+    private static Double distanceFromGraphNode = 0.0;
+
+    private static File file;
+
+    private static File inFile1;
+    private static File inFile2;
+    private static File Shape;
+
+    find_nearest_top3(File Shape, File inFile1, File inFile2, File out) throws Exception {
+        build(Shape); // build graph
+        //File out = new File("/Users/jiao/Desktop/shortestpath_test/output.csv");
+        //if(!out.exists()) {
+          //  out.createNewFile();
+        //}
+        find_nearest(inFile1, inFile2, out);
+
+    }
+
+
+
+        private static Graph buildGraph(FeatureCollection fc) throws IOException {
+
+        lineStringGen = new LineStringGraphGenerator();
+        FeatureGraphGenerator featureGen = new FeatureGraphGenerator(
+                lineStringGen);
+        FeatureIterator iter = fc.features();
+
+        while (iter.hasNext()) {
+            featureGen.add(iter.next());
+        }
+
+        iter.close();
+
+        return featureGen.getGraph();
+    }
+
+    //Build a graph network from the routable shapefile for further routing services shpからgraphの変換
+    public static void build(File file) throws Exception {
+       // file = JFileDataStoreChooser.showOpenFile("shp", null);//shpを読み込む
+
+        FileDataStore filestore = FileDataStoreFinder.getDataStore(file);//shpのデータを取り出す
+        SimpleFeatureSource featureSource = filestore.getFeatureSource();//access all the features using a single method call:
+
+        graph = buildGraph(featureSource.getFeatures());
+
+        Collection nodes = graph.getNodes();//ノードの
+        Collection edges = graph.getEdges();//辺のセット
+
+        //検証
+        Iterator iterator = edges.iterator();
+        while (iterator.hasNext()) {//全ての辺の端点をとる
+            Edge edge = (Edge) iterator.next();
+            // Node node_test = (Node) iterator.next();//
+            // Point p = (Point) node_test.getObject();//
+            Point start = (Point) edge.getNodeA().getObject();
+            Point end = (Point) edge.getNodeB().getObject();
+            //System.out.println(start.getX() + " " + start.getY() + "to"
+            //		+ end.getX() + " " + end.getY());
+
+        }
+
+    }
+
+
+    public static Path dijkstraShortestPath(Node from, Node to) {//ノードの間のpathを
+
+        DijkstraShortestPathFinder pf;
+        EdgeWeighter weighter = new EdgeWeighter() {
+            public double getWeight(org.geotools.graph.structure.Edge e) {
+                SimpleFeature aLineString = (SimpleFeature) e.getObject();
+                Geometry geom = (Geometry) aLineString.getDefaultGeometry();
+                return geom.getLength();
+            }
+        };
+
+        pf = new DijkstraShortestPathFinder(graph, from, weighter);
+        pf.calculate();
+        // double cost;
+        //cost=pf.getCost(to);
+        //System.out.print(cost);
+        //System.out.print('\n');
+        return pf.getPath(to);
+    }
+    /////////////pathの長さを求める
+    //////////
+
+    public static double dijkstraShortestPathCost(Node from, Node to) {//ノードの間のpathを
+
+        DijkstraShortestPathFinder pf;
+        EdgeWeighter weighter = new EdgeWeighter() {
+            public double getWeight(org.geotools.graph.structure.Edge e) {
+                SimpleFeature aLineString = (SimpleFeature) e.getObject();
+                Geometry geom = (Geometry) aLineString.getDefaultGeometry();
+                return geom.getLength();
+            }
+        };
+
+        pf = new DijkstraShortestPathFinder(graph, from, weighter);
+        pf.calculate();
+        //cost
+        double cost;
+        cost=pf.getCost(to);
+        Path path = pf.getPath(to);
+        //cost=getPathLength(path);
+        //System.out.print(cost);
+        //System.out.print('\n');
+        return cost;
+    }
+
+
+    // Get nearest graph node
+
+    public static Node getNearestGraphNode(LineStringGraphGenerator lsgg,
+                                           Graph g, Point pointy) {//pointyはinterest point
+        // initiliase the distance
+        Node nearestNode = null;
+        Double distanceFromGraphNode;
+        double dist = 999999999;
+
+        // loops through the nodes of the graph and finds the node closest to
+        // the point of interest
+        for (Object o : g.getNodes()) {
+            Node n = (Node) o;
+            Point p = ((Point) n.getObject());
+            double newdist = CalculateEuclideanDistance(pointy.getX(),
+                    pointy.getY(), p.getCoordinate().x, p.getCoordinate().y);
+
+            if (newdist < dist) {
+                dist = newdist;
+                nearestNode = n;
+            }
+        }
+
+        // returns the node closest to the locaiton of interest
+        Node source = (BasicNode) lsgg.getNode(new Coordinate(
+                ((Point) nearestNode.getObject()).getCoordinate().x,
+                ((Point) nearestNode.getObject()).getCoordinate().y));
+
+        // stores the distance between node and location of interest, can be
+        // accessed by calling the getDistanceFromGraphNode() function
+        ///////////
+        distanceFromGraphNode = dist;
+
+        return nearestNode;
+    }
+
+
+
+
+
+    private static double CalculateEuclideanDistance(double xOrig,
+                                                     double yOrig, double xDest, double yDest) {
+        // calculates traight lne distance
+        double distance = Math.sqrt((xDest - xOrig) * (xDest - xOrig)
+                + (yDest - yOrig) * (yDest - yOrig));
+        return distance;
+
+    }
+
+
+    //public static void main(String[] args) throws Exception {
+        public static void find_nearest(File inFile1, File inFile2, File out){
+
+      //  build(); // build graph
+
+//shelterとhospitalの経路を探す
+       // File shelter = new File("/Users/jiao/Desktop/shortestpath_test/shelter_latitude_longtitude_test.csv");
+       // File hospital = new File("/Users/jiao/Desktop/shortestpath_test/hospital_latitude_longtitude_test.csv");
+       try {
+           BufferedReader shelter_info = new BufferedReader(new InputStreamReader(new FileInputStream(inFile1), "SHIFT_JIS"));
+
+           //File file = new File("/Users/jiao/Desktop/shortestpath_test/output.csv");
+           PrintWriter output = new PrintWriter(new OutputStreamWriter(new FileOutputStream(out, false), "SHIFT_JIS"));
+
+
+           String line1, line2;
+           double lon1, la1, lon2, la2;
+           boolean midashi1 = true;
+           boolean midashi2 = true;
+           Node starts;
+           Node ends;
+           Point startPoints;
+           Point endPoints;
+           Double pathcosts;
+           GeometryFactory gfs = new GeometryFactory();
+           while ((line1 = shelter_info.readLine()) != null) {
+
+               String pair1[] = line1.split(",");
+               BufferedReader hospital_info = new BufferedReader(new InputStreamReader(new FileInputStream(inFile2), "SHIFT_JIS"));
+               while ((line2 = hospital_info.readLine()) != null) {
+                   if (midashi1 == true && midashi2 == true) {
+                       String pair2[] = line2.split(",");
+                       output.write(pair1[2] + "," + pair2[2] + "," + "distance");
+                       midashi1 = false;
+                       break;
+                   } else {
+                       if (midashi2 == true) {
+                           String pair2[] = line2.split(",");
+
+                           lon1 = Double.parseDouble(pair1[0]);
+                           la1 = Double.parseDouble(pair1[1]);
+                           lon2 = Double.parseDouble(pair2[0]);
+                           la2 = Double.parseDouble(pair2[1]);
+
+                           // GeometryFactory gf = new GeometryFactory();
+                           startPoints = gfs
+                                   .createPoint(new Coordinate(lon1, la1));
+
+                           endPoints = gfs.createPoint(new Coordinate(lon2, la2));
+
+                           starts = getNearestGraphNode(lineStringGen, graph, startPoints);
+                           ends = getNearestGraphNode(lineStringGen, graph, endPoints);
+
+                           pathcosts = dijkstraShortestPathCost(starts, ends);//ノードの最短距離
+
+                           output.write("\n" + pair1[2] + "," + pair2[2] + "," + pathcosts);
+                       } else {
+                           String pair2[] = line2.split(",");
+                           midashi2 = true;
+                       }
+
+                   }
+               }
+               hospital_info.close();
+               midashi2 = false;
+
+           }
+           output.close();
+       }
+       catch (IOException e) {
+           e.printStackTrace();
+       }
+
+
+    }
+
+    public static void find_top3(File inFile1, File out) {
+        try {
+            BufferedReader distance_info = new BufferedReader(new InputStreamReader(new FileInputStream(inFile1), "SHIFT_JIS"));
+            PrintWriter output = new PrintWriter(new OutputStreamWriter(new FileOutputStream(out, false), "SHIFT_JIS"));
+
+            String line1 = distance_info.readLine(); // 1行目は見出し
+            output.write(line1);//表の第一行目コピー
+            int count=0;
+            String data1="dame";
+
+            Map<String,Double> map = new HashMap<String, Double>();// 病院がキー、距離が値
+
+
+            while((line1 = distance_info.readLine()) != null) {
+                String pair2[] = line1.split(",");
+                if(data1.equals(pair2[0])){
+                    map.put(pair2[1], Double.parseDouble(pair2[2]));
+                }
+                else{
+                    List<Map.Entry<String, Double>> list =
+                            new ArrayList<Map.Entry<String, Double>>(map.entrySet());
+                    Collections.sort(list,new Comparator<Map.Entry<String,Double>>() {
+                        //sorting
+                        public int compare(Map.Entry<String, Double> o1,
+                                           Map.Entry<String, Double> o2) {
+                            return o1.getValue().compareTo(o2.getValue());
+                        }
+
+                    });
+                    for(Map.Entry<String,Double> mapping:list){
+                        if(count<3) {
+                            output.write("\n" + data1 + "," + mapping.getKey() + "," + mapping.getValue());//
+                            count++;
+                        }
+                        // System.out.println(mapping.getKey()+":"+mapping.getValue());
+                    }
+                    count=0;
+                    map.clear();
+                    data1 = pair2[0];
+                    map.put(pair2[1], Double.parseDouble(pair2[2]));
+
+                }
+            }
+            // 循環終わり
+            //最後の一行の処理
+            List<Map.Entry<String, Double>> list =
+                    new ArrayList<Map.Entry<String, Double>>(map.entrySet());
+            Collections.sort(list,new Comparator<Map.Entry<String,Double>>() {
+                //sorting
+                public int compare(Map.Entry<String, Double> o1,
+                                   Map.Entry<String, Double> o2) {
+                    return o1.getValue().compareTo(o2.getValue());
+                }
+
+            });
+            for(Map.Entry<String,Double> mapping:list){
+                if(count<3) {
+                    output.write("\n" + data1 + "," + mapping.getKey() + "," + mapping.getValue());//
+                    count++;
+                }
+            }
+            map.clear();
+            output.close();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+}
+

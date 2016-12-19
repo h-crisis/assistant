@@ -1,5 +1,4 @@
-package newga;
-
+package newga
 /**
  * Created by jiao on 2016/11/22.
  */
