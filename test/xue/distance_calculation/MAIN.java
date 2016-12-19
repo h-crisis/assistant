@@ -26,7 +26,7 @@ public class MAIN {
         BufferedReader distance_info = new BufferedReader(new InputStreamReader(new FileInputStream(Mesh2nd), "SHIFT_JIS"));
         String value;
         String line;
-        line = distance_info.readLine();//第一行を飛ばす
+        line = distance_info.readLine();//1行目は見出し
        while ((line = distance_info.readLine()) != null) {
             String pair[] = line.split(",");
             value=pair[0];
