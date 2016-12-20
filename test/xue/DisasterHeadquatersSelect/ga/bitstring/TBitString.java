@@ -32,8 +32,8 @@ public class TBitString {
 	}
 	
 	/**
-	 * �R���X�g���N�^
-	 * @param str 0��1����Ȃ镶����
+	 *
+	 * @param str
 	 * @since 2
 	 */
 	public TBitString(String str) {
