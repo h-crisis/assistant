@@ -114,11 +114,11 @@ public class ReadTxtFileThread extends Thread {
         String name = "Layer " + Integer.toString(layer);
         String geom = "the_geom:";
         if(figType==1)
-            geom = geom + "LineString:srid=4612,";
+            geom = geom + "LineString:srid=4301,";
         else if(figType==2)
-            geom = geom + "Polygon:srid=4612,";
+            geom = geom + "Polygon:srid=4301,";
         else
-            geom = geom + "Point:srid=4612,";
+            geom = geom + "Point:srid=4301,";
 
         String text = "";
         if(texts.size()>0) {
