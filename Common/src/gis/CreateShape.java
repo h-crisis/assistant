@@ -68,5 +68,6 @@ public class CreateShape {
         else  {
             System.out.println(typeName + " does not support read/write access");
         }
+        newDataStore.dispose();
     }
 }

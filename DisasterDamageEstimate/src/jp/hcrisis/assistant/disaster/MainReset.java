@@ -5,7 +5,7 @@ import java.io.File;
 /**
  * Created by manabu on 2016/12/01.
  */
-public class ResetMain {
+public class MainReset {
     public static void main(String args[]) throws Exception {
         String code = args[1];
         File dir = new File(args[0]);

@@ -23,9 +23,9 @@ import java.util.concurrent.Executors;
  */
 public class ReadTxtFiles {
     public static void main(String args[]) throws Exception {
-        File dir = new File("/Users/manabu/Desktop/OUT/TXT2");
+        File dir = new File("/Users/manabu/Desktop/ZenrinOUT/TEST");
         //File dir = new File("C:\\Users\\manab\\Dropbox\\GIS\\GISデータ\\ゼンリン\\Area Map2\\OUT\\TXT");
-        File outDir = new File("/Users/manabu/Desktop/OUT/SHP2");
+        File outDir = new File("/Users/manabu/Desktop/ZenrinOUT/SHP");
         //File outDir = new File("C:\\Users\\manab\\Dropbox\\GIS\\GISデータ\\ゼンリン\\Area Map2\\OUT\\SHP");
         readFiles(dir, outDir, 4);
     }
@@ -139,11 +139,11 @@ public class ReadTxtFiles {
         String name = "Layer " + Integer.toString(layer);
         String geom = "the_geom:";
         if(figType==1)
-            geom = geom + "LineString:srid=4612,";
+            geom = geom + "LineString:srid=4301,";
         else if(figType==2)
-            geom = geom + "Polygon:srid=4612,";
+            geom = geom + "Polygon:srid=4301,";
         else
-            geom = geom + "Point:srid=4612,";
+            geom = geom + "Point:srid=4301,";
 
         String text = "";
         if(texts.size()>0) {
