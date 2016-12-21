@@ -41,18 +41,18 @@ a {
 }
 .custom-zoom{
     bottom: 30px;
-    right: 2%;
+    right: 30px;
     padding-top: 52px;
 }
 #goToHere{
     z-index: 4;
     position: absolute;
-    bottom: 85px;
-    right: 2.25%;
-    background: url("../../css/target.png");
+    bottom: 110px;
+    right: 33.5px;
+    background: url("../../img/target.png");
     background-color: #7394bb;
-    width: 24px;
-    height: 24px;
+    width: 40px;
+    height: 40px;
     clip: rect(0,36px,36px,0);
     border-radius: 2px;
     background-size: cover;
@@ -64,12 +64,12 @@ a {
 #goToHypoCenter{
     z-index: 4;
     position: absolute;
-    bottom: 110px;
-    right: 2.25%;
-    background: url("../../css/syokiichi.png");
+    bottom: 152px;
+    right: 33.5px;
+    background: url("../../img/syokiichi.png");
     background-color: #7394bb;
-    width: 24px;
-    height: 24px;
+    width: 40px;
+    height: 40px;
     border-radius: 2px;
     background-size: cover;
 }
@@ -181,7 +181,7 @@ div#option{
     top: 3px;
     width: 36px;
     height: 36px;
-    background-image: url("../../css/3bar.png");
+    background-image: url("../../img/3bar.png");
 }
 #address{
     z-index: 4;
@@ -207,7 +207,7 @@ div#submit{
     top: 8px;
     width: 24px;
     height: 24px;
-    background-image: url("../../css/loope.png");
+    background-image: url("../../img/loope.png");
 }
 
 .panel{
@@ -215,7 +215,7 @@ div#submit{
     position: absolute;
     left: 0;
     top: 0;
-    width: 250px;
+    width: 235px;
     height: 100%;
     background-color: #ffffff;
     transition:all 0.5s;
@@ -237,7 +237,7 @@ div#option{
     top: 3px;
     width: 36px;
     height: 36px;
-    background-image: url("../../css/3bar.png");
+    background-image: url("../../img/3bar.png");
 }
 
 
@@ -259,7 +259,7 @@ img#assistant{
     position: relative;
     left: 0;
     top: 0;
-    background: url("../../css/assistant.png");
+    background: url("../../img/assistant.png");
     width: 220px;
     height: 65px;
     background-size: cover;
@@ -341,7 +341,7 @@ div#map{
     background-color:#ffffff;
     top: 0;
     left: 0;
-    width: 380px;
+    width: 280px;
     height: 320px;
     table-layout: fixed;
     position:absolute;
@@ -358,14 +358,14 @@ div#map{
 }
 .info#infoWrapV{
     height: 100%;
-    left: 365px;
+    left: 265px;
     width: 15px;
     position: absolute;
     overflow:hidden;
 }
 .info#infoWrapH{
     top: 98.25%;
-    width: 380px;
+    width: 280px;
     height: 15px;
     position: absolute;
     overflow:hidden;
@@ -429,14 +429,14 @@ div#map{
 }
 
 #landscape{
-    width: 380px;
+    width: 265px;
     height: 200px;
     background:url('../../img/gradient.png');
     overflow:hidden
 }
 #landIcon{
     position:relative;
-    right: -18px;
-    bottom:30px;
-    zoom: 1.5;
+    right: -4px;
+    bottom:15px;
+    zoom: 1.25;
 }

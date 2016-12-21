@@ -8,15 +8,15 @@
 <script src="http://d3js.org/d3.v3.min.js"></script>
 <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList,URL"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.2.61/jspdf.min.js"></script>
-<script type="text/javascript"  src="../../js/osChecker.js"></script>
+<script type="text/javascript"  src="../../js/osChecker20161228.js"></script>
 
 <script src="event.js"></script>
-<script src="../../js/hospital20161118.js"></script>
-<script src="../../js/halls20161118.js"></script>
-<script src="../../js/pass20161118.js"></script>
+<script src="../../js/hospital20161228.js"></script>
+<script src="../../js/halls20161228.js"></script>
+<script src="../../js/pass20161228.js"></script>
 <script src="../../js/locationChecker.js"></script>
 
-<div id="fadeLayer" onclick="fadeP()"></div>
+<div id="fadeLayer" onclick="fade()"></div>
 <div id="printSetting" >
     <br><br>
 <form class="form">
@@ -28,8 +28,6 @@
         <option value="a3">A3</option>
         <option value="a4" selected>A4</option>
         <option value="a5">A5 (fast)</option>
-    </select>
-    <br>
     <label>印刷解像度 </label>
     <select id="resolution">
         <option value="72">72 dpi (fast)</option>
@@ -102,13 +100,12 @@
 <table id="vishospinfo" style="z-index: 3;position: absolute;top: 10px;left: 100px;width: 250px;height: 90%; background-color:whitesmoke; border: 2px solid burlywood; table-layout: fixed; overflow:scroll; display:none; font-size:24px;"></table>
 <input type="hidden" name="latlonCurr" id="latlonCurr">
 <input type="hidden" name="latlonHosp" id="latlonHosp">
-<script type="text/javascript" src="../../js/shelter20161118.js"></script>
-<script type="text/javascript" src="../../js/hcrisis20161118.js"></script>
+<script type="text/javascript" src="../../js/shelter20161228.js"></script>
+<script type="text/javascript" src="../../js/hcrisis20161228.js"></script>
 <!--<script type="text/javascript" src="../../js/zenrin20160916.js"></script>-->
-<script type="text/javascript" src="../../js/location20161118.js"></script>
+<script type="text/javascript" src="../../js/location20161228.js"></script>
 <script type="text/javascript" src="../../js/csvloader20161118.js"></script>
 <script type="text/javascript" src="../../js/panel.js"></script>
-<script type="text/javascript" src="../../js/print.js"></script>
 </body>
 </html>
 

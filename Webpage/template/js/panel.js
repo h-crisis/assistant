@@ -2,6 +2,7 @@
  * Created by komori on 2016/12/06.
  */
 
+var count = 0;
 
 $("div#option").click(function(){
     $(".panel").toggleClass("hidden");

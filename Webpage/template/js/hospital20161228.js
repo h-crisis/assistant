@@ -268,7 +268,7 @@ function createHtmlHospital(evt,feature) {
         if(i == 1 || i == 5 || i == 10 || i == 11 || i == 15 || i == 16 || i == 17 || i == 18 || i == 19 || i == 20 || i == 21 || i == 13)
         DetailHtml = DetailHtml + preCells + '../../img/img/' + (i + 1) + '.png' + interCells + arrayV[i] + subCells;
     }
-
+    console.log(feature.get('name'))
     document.getElementById('info').style.display = 'block';
     document.getElementById('info').innerHTML = DetailHtml;
     document.getElementById('infoWrapV').style.display = 'block';

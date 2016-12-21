@@ -15,7 +15,7 @@ var styleImpassable = new ol.style.Style({
         anchorXUnits: 'fraction',
         anchorYUnits: 'fraction',
         opacity: 1,
-        src: '/Users/komori/IdeaProjects/assistant/Webpage/template/img/impassable/1.png'
+        src: '../../img/impassable/1.png'
     })
 });
 

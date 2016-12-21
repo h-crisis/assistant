@@ -36,7 +36,7 @@ var view = new ol.View({
     minZoom: 2,
     maxZoom: 17
 });
-if (document.URL.indexOf("?") > 0){
+if (document.URL.indexOf("?_") > 0){
     reURL = document.URL.split(',');
     if (isFinite(reURL[1].substr(4)) && isFinite(reURL[2].substr(4)) && isFinite(reURL[3].substr(4))) {
 
@@ -181,13 +181,13 @@ map.on('click', function(evt,feature) {
         interCells = "</td><td id='nameCell' width='230px' style='font-size:17px;font-family:helvetica;background-color:white;'>";
         subCells = "</td></tr>";
         */
-        preCells = "<p><img src='"
+        preCells = "<p><img src='";
         interCells = "'><a>";
-        subCells = "</a></p>"
+        subCells = "</a></p>";
     } else if (window.innerWidth >= 480) {
-        preCells = "<tr><td id='tagCell' width='130px' style='font-size:14px;font-family:helvetica;background-color:#ffffff;padding: 2px;'>";
-        interCells = "</td><td id='nameCell' width='120px' style='font-size:14px;font-family:helvetica;background-color:white;'>";
-        subCells = "</td></tr>";
+        preCells = "<p><img src='";
+        interCells = "'><a>";
+        subCells = "</a></p>";
     } else {
         preCells = "<tr><td id='tagCell' width='130px' style='font-size:10px;font-family:helvetica;background-color:#ffffff;padding: 2px;'>";
         interCells = "</td><td id='nameCell' width='120px' style='font-size:10px;font-family:helvetica;background-color:white;'>";

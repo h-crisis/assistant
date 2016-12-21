@@ -41,18 +41,18 @@ a {
 }
 .custom-zoom{
     bottom: 30px;
-    right: 2%;
+    right: 30px;
     padding-top: 52px;
 }
 #goToHere{
     z-index: 4;
     position: absolute;
     bottom: 85px;
-    right: 2.25%;
-    background: url("../../css/target.png");
+    right: 33.5px;
+    background: url("../../img/target.png");
     background-color: #7394bb;
-    width: 24px;
-    height: 24px;
+    width: 25px;
+    height: 25px;
     clip: rect(0,36px,36px,0);
     border-radius: 2px;
     background-size: cover;
@@ -64,12 +64,12 @@ a {
 #goToHypoCenter{
     z-index: 4;
     position: absolute;
-    bottom: 110px;
-    right: 2.25%;
-    background: url("../../css/syokiichi.png");
+    bottom: 111px;
+    right: 33.5px;
+    background: url("../../img/syokiichi.png");
     background-color: #7394bb;
-    width: 24px;
-    height: 24px;
+    width: 25px;
+    height: 25px;
     border-radius: 2px;
     background-size: cover;
 }
@@ -181,7 +181,7 @@ div#option{
     top: 3px;
     width: 36px;
     height: 36px;
-    background-image: url("../../css/3bar.png");
+    background-image: url("../../img/3bar.png");
 }
 #address{
     z-index: 4;
@@ -207,7 +207,7 @@ div#submit{
     top: 8px;
     width: 24px;
     height: 24px;
-    background-image: url("../../css/loope.png");
+    background-image: url("../../img/loope.png");
 }
 
 .panel{
@@ -237,7 +237,7 @@ div#option{
     top: 3px;
     width: 36px;
     height: 36px;
-    background-image: url("../../css/3bar.png");
+    background-image: url("../../img/3bar.png");
 }
 
 
@@ -259,7 +259,7 @@ img#assistant{
     position: relative;
     left: 0;
     top: 0;
-    background: url("../../css/assistant.png");
+    background: url("../../img/assistant.png");
     width: 220px;
     height: 65px;
     background-size: cover;

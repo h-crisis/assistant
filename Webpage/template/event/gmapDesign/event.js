@@ -14,8 +14,8 @@ var reURL = "url";
 
 var shelterLayer = 'event_shelter_' + eventCode;
 
-var pass = './';
+var pass = '../gmapDesign/';
 //var pass = 'http://h-crisis.niph.go.jp/wp-content/uploads/sites/4/event/' + eventCode + '/';
 var wms = 'http://gis.h-crisis.jp/geoserver/wms';
 //var wms = 'http://map.ichilab.org:80/geoserver/wms';
-var urlCustomRoad = '../20161118/geojson/custom_road_info.geojson';
+var urlCustomRoad = 'geojson/custom_road_info.geojson';

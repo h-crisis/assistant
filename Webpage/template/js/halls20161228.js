@@ -11,7 +11,7 @@ var styleSI1 = new ol.style.Style({
         anchorXUnits: 'fraction',
         anchorYUnits: 'fraction',
         opacity: 0.85,
-        src: "/Users/komori/IdeaProjects/assistant/Webpage/template/img/dist/1.png"
+        src: "../../img/dist/1.png"
     })
 });
 var styleSI2 = new ol.style.Style({
@@ -24,7 +24,7 @@ var styleSI2 = new ol.style.Style({
         anchorXUnits: 'fraction',
         anchorYUnits: 'fraction',
         opacity: 0.85,
-        src: "/Users/komori/IdeaProjects/assistant/Webpage/template/img/dist/2.png"
+        src: "../../img/dist/2.png"
     })
 });
 var styleSI3 = new ol.style.Style({
@@ -37,7 +37,7 @@ var styleSI3 = new ol.style.Style({
         anchorXUnits: 'fraction',
         anchorYUnits: 'fraction',
         opacity: 0.85,
-        src: "/Users/komori/IdeaProjects/assistant/Webpage/template/img/dist/3.png"
+        src: "../../img/dist/3.png"
     })
 });
 var styleSI4 = new ol.style.Style({
@@ -50,7 +50,7 @@ var styleSI4 = new ol.style.Style({
         anchorXUnits: 'fraction',
         anchorYUnits: 'fraction',
         opacity: 0.85,
-        src: "/Users/komori/IdeaProjects/assistant/Webpage/template/img/dist/4.png"
+        src: "../../img/dist/4.png"
     })
 });
 var styleSI5W = new ol.style.Style({
@@ -69,7 +69,7 @@ var styleSI5W = new ol.style.Style({
         anchorXUnits: 'fraction',
         anchorYUnits: 'fraction',
         opacity: 0.85,
-        src: "/Users/komori/IdeaProjects/assistant/Webpage/template/img/dist/5-1.png"
+        src: "../../img/dist/5-1.png"
     })
 });
 var styleSI5S = new ol.style.Style({
@@ -88,7 +88,7 @@ var styleSI5S = new ol.style.Style({
         anchorXUnits: 'fraction',
         anchorYUnits: 'fraction',
         opacity: 0.85,
-        src: "/Users/komori/IdeaProjects/assistant/Webpage/template/img/dist/5-2.png"
+        src: "../../img/dist/5-2.png"
     })
 });
 var styleSI6W = new ol.style.Style({
@@ -107,7 +107,7 @@ var styleSI6W = new ol.style.Style({
         anchorXUnits: 'fraction',
         anchorYUnits: 'fraction',
         opacity: 0.85,
-        src: "/Users/komori/IdeaProjects/assistant/Webpage/template/img/dist/6-1.png"
+        src: "../../img/dist/6-1.png"
     })
 });
 var styleSI6S = new ol.style.Style({
@@ -126,7 +126,7 @@ var styleSI6S = new ol.style.Style({
         anchorXUnits: 'fraction',
         anchorYUnits: 'fraction',
         opacity: 0.85,
-        src: "/Users/komori/IdeaProjects/assistant/Webpage/template/img/dist/6-2.png"
+        src: "../../img/dist/6-2.png"
     })
 });
 var styleSI7 = new ol.style.Style({
@@ -145,7 +145,7 @@ var styleSI7 = new ol.style.Style({
         anchorXUnits: 'fraction',
         anchorYUnits: 'fraction',
         opacity: 0.85,
-        src: "/Users/komori/IdeaProjects/assistant/Webpage/template/img/dist/7.png"
+        src: "../../img/dist/7.png"
     })
 });
 
@@ -212,23 +212,23 @@ function createHtmlHall(evt,feature) {
     // 適切なアイコンurlを取得する
     var iconUrl;
     if(feature.get('max_si')<1.5) {
-        iconUrl = '/Users/komori/IdeaProjects/assistant/Webpage/template/img/dist/1.png';
+        iconUrl = '../../img/dist/1.png';
     } else if(feature.get('max_si')<2.5) {
-        iconUrl = '/Users/komori/IdeaProjects/assistant/Webpage/template/img/dist/2.png';
+        iconUrl = '../../img/dist/2.png';
     } else if(feature.get('max_si')<3.5) {
-        iconUrl = '/Users/komori/IdeaProjects/assistant/Webpage/template/img/dist/3.png';
+        iconUrl = '../../img/dist/3.png';
     } else if(feature.get('max_si')<4.5) {
-        iconUrl = '/Users/komori/IdeaProjects/assistant/Webpage/template/img/dist/4.png';
+        iconUrl = '../../img/dist/4.png';
     } else if(feature.get('max_si')<5) {
-        iconUrl = '/Users/komori/IdeaProjects/assistant/Webpage/template/img/dist/5-1.png';
+        iconUrl = '../../img/dist/5-1.png';
     } else if(feature.get('max_si')<5.5) {
-        iconUrl = '/Users/komori/IdeaProjects/assistant/Webpage/template/img/dist/5-2.png';
+        iconUrl = '../../img/dist/5-2.png';
     } else if(feature.get('max_si')<6) {
-        iconUrl = '/Users/komori/IdeaProjects/assistant/Webpage/template/img/dist/6-1.png';
+        iconUrl = '../../img/dist/6-1.png';
     } else if(feature.get('max_si')<6.5) {
-        iconUrl = '/Users/komori/IdeaProjects/assistant/Webpage/template/img/dist/6-2.png';
+        iconUrl = '../../img/dist/6-2.png';
     } else if(feature.get('max_si')>=6.5) {
-        iconUrl = '/Users/komori/IdeaProjects/assistant/Webpage/template/img/dist/7.png';
+        iconUrl = '../../img/dist/7.png';
     }
 
     DetailHtml = "<div id='landscape'><img id='landIcon' src=" + iconUrl + "></div>";
