@@ -47,9 +47,6 @@ public class CreateShape {
 
         String typeName = newDataStore.getTypeNames()[0];
         SimpleFeatureSource featureSource = newDataStore.getFeatureSource(typeName);
-        //SimpleFeatureType shapeType = featureSource.getSchema();
-
-        //System.out.println("\tSHAPE: " + shapeType);
 
         if(featureSource instanceof SimpleFeatureStore) {
             SimpleFeatureStore featureStore = (SimpleFeatureStore) featureSource;

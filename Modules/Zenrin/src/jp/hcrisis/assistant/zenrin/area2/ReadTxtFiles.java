@@ -25,7 +25,7 @@ public class ReadTxtFiles {
     public static void main(String args[]) throws Exception {
         File dir = new File("/Users/manabu/Desktop/ZenrinOUT/TXT");
         File outDir = new File("/Users/manabu/Desktop/ZenrinOUT/SHP");
-        readFiles(dir, outDir, 4);
+        readFiles(dir, outDir, 1);
     }
 
     public static void readFiles(File dir, File outDir, int thread) throws Exception {
