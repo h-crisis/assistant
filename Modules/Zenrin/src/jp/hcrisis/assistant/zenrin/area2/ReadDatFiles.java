@@ -1,31 +1,77 @@
 package jp.hcrisis.assistant.zenrin.area2;
 
 import java.io.*;
+import java.util.ArrayList;
 
 /**
  * Created by manabu on 2016/06/27.
  */
 public class ReadDatFiles {
-    public static void main(String args[]) throws IOException {
-        File jpnmapFile = new File("/Volumes/My Book Pro 12TB/AreaMap2/ZENKOKU/MAPDAT/JPNMAP");
-        File widemapFile = new File("/Volumes/My Book Pro 12TB/AreaMap2/ZENKOKU/MAPDAT/WIDEMAP");
-        File geograFile = new File("/Volumes/My Book Pro 12TB/AreaMap2/ZENKOKU/MAPDAT/GEOGRA");
-        File topogrFile = new File("/Volumes/My Book Pro 12TB/AreaMap2/ZENKOKU/MAPDAT/TOPOGR");
-        File outDir = new File("/Users/manabu/Desktop/OUT/TXT");
+    private File outDir;
+    private int threadNum;
 
-        File hokkaidoFile = new File("/Volumes/My Book Pro 12TB/AreaMap2/HOKKAIDO/MAPDAT/TOWNMP");
-        File tohokuFile = new File("/Volumes/My Book Pro 12TB/AreaMap2/TOHOKU/MAPDAT/TOWNMP");
-        File kantoFile = new File("/Volumes/My Book Pro 12TB/AreaMap2/KANTO/MAPDAT/TOWNMP");
-        File chubuFile = new File("/Volumes/My Book Pro 12TB/AreaMap2/CHUBU/MAPDAT/TOWNMP");
-        File kinkiFile = new File("/Volumes/My Book Pro 12TB/AreaMap2/KINKI/MAPDAT/TOWNMP");
-        File chugokushikokuFile = new File("/Volumes/My Book Pro 12TB/AreaMap2/CHUGOKU_SHIKOKU/MAPDAT/TOWNMP");
-        File kyushuFile = new File("/Volumes/My Book Pro 12TB/AreaMap2/KYUSHU_OKINAWA/MAPDAT/TOWNMP");
+    private File jpnmapFile;
+    private File widemapFile;
+    private File geograFile;
+    private File topogrFile;
 
-        //readFiles(jpnmapFile, outDir, 1);
-        //readFiles(widemapFile, outDir, 2);
-        //readFiles(geograFile, outDir, 3);
-        //readFiles(topogrFile, outDir, 4);
-        //readFiles(hokkaidoFile, outDir, 5);
+    private File hokkaidoFile;
+    private File tohokuFile;
+    private File kantoFile;
+    private File chubuFile;
+    private File kinkiFile;
+    private File chugokushikokuFile;
+    private File kyushuFile;
+
+    private ArrayList<File> files;
+
+    public ReadDatFiles(File dataDir, File outDir, int threadNum) {
+        this.outDir = outDir;
+        this.threadNum = threadNum;
+
+        jpnmapFile = new File(dataDir.getPath() + "/" + dataDir.getName() + "/ZENKOKU/MAPDAT/JPNMAP");
+        files.add(jpnmapFile);
+        widemapFile = new File(dataDir.getPath() + "/" + dataDir.getName() + "/ZENKOKU/MAPDAT/WIDEMAP");
+        files.add(widemapFile);
+        geograFile = new File(dataDir.getPath() + "/" + dataDir.getName() + "/ZENKOKU/MAPDAT/GEOGRA");
+        files.add(geograFile);
+        topogrFile = new File(dataDir.getPath() + "/" + dataDir.getName() + "/ZENKOKU/MAPDAT/TOPOGR");
+        files.add(topogrFile);
+
+        hokkaidoFile = new File(dataDir.getPath() + "/" + dataDir.getName() + "/HOKKAIDO/MAPDAT/TOWNMP");
+        files.add(hokkaidoFile);
+        tohokuFile = new File(dataDir.getPath() + "/" + dataDir.getName() + "/TOHOKU/MAPDAT/TOWNMP");
+        files.add(tohokuFile);
+        kantoFile = new File(dataDir.getPath() + "/" + dataDir.getName() + "/KANTO/MAPDAT/TOWNMP");
+        files.add(kantoFile);
+        chubuFile = new File(dataDir.getPath() + "/" + dataDir.getName() + "/CHUBU/MAPDAT/TOWNMP");
+        files.add(chubuFile);
+        kinkiFile = new File(dataDir.getPath() + "/" + dataDir.getName() + "/KINKI/MAPDAT/TOWNMP");
+        files.add(kinkiFile);
+        chugokushikokuFile = new File(dataDir.getPath() + "/" + dataDir.getName() + "/CHUGOKU_SHIKOKU/MAPDAT/TOWNMP");
+        files.add(chugokushikokuFile);
+        kyushuFile = new File(dataDir.getPath() + "/" + dataDir.getName() + "/KYUSHU_OKINAWA/MAPDAT/TOWNMP");
+        files.add(kyushuFile);
+
+        dataFileCheck();
+    }
+
+    private void dataFileCheck() {
+        for(File file : files) {
+            if(!file.exists()) {
+                System.out.println("Zenrin AreaMap2 Converter Error: ゼンリン地図データファイルが存在しません。"
+                        + file.getPath() + "/" + file.getName());
+                System.exit(1);
+            }
+        }
+    }
+
+    public void readDataFiles() throws IOException {
+        readFiles(jpnmapFile, outDir, 1);
+        readFiles(widemapFile, outDir, 2);
+        readFiles(geograFile, outDir, 3);
+        readFiles(topogrFile, outDir, 4);
+        readFiles(hokkaidoFile, outDir, 5);
         readFiles(tohokuFile, outDir, 5);
         readFiles(kantoFile, outDir, 5);
         readFiles(chubuFile, outDir, 5);
@@ -34,7 +80,7 @@ public class ReadDatFiles {
         readFiles(kyushuFile, outDir, 5);
     }
 
-    public static void readFiles(File dir, File outDir, int level) throws IOException {
+    private static void readFiles(File dir, File outDir, int level) throws IOException {
         System.out.println(dir + "を探索します。");
         if(dir.isDirectory()) {
             File fileList[] = dir.listFiles();
@@ -53,7 +99,7 @@ public class ReadDatFiles {
         }
     }
 
-    public static void readDir(File dir, File outDir, int level) throws IOException {
+    private static void readDir(File dir, File outDir, int level) throws IOException {
         System.out.println("\t" + dir + "を探索します。");
         if(dir.listFiles()!=null) {
             File fileList[] = dir.listFiles();
@@ -70,14 +116,14 @@ public class ReadDatFiles {
             System.out.println("\t" + dir + "はNULLでした。");
     }
 
-    public static boolean isDatFile(File file) {
+    private static boolean isDatFile(File file) {
         if(file.getName().endsWith("DAT"))
             return true;
         else
             return false;
     }
 
-    public static void readDatFile(File file, File outDir, int level) throws IOException {
+    private static void readDatFile(File file, File outDir, int level) throws IOException {
         //file.setReadOnly();
         BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file), "Shift_JIS"));
         String line;
