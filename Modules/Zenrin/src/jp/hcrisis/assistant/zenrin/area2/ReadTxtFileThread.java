@@ -105,7 +105,9 @@ public class ReadTxtFileThread extends Thread {
         } catch (Exception e) {
             System.out.println(e);
         }
+        System.out.println("[読込]" + file.getName() + "の読み込みが完了しました。: " + Thread.currentThread().getId());
     }
+
     public static void createShape(File file, File outDir, int figType, int layer, LinkedList<Object> featuresList, LinkedList<String> texts) throws Exception {
         System.out.println("[変換]" + file.getName() + "をShapeファイルに変換します。: " + Thread.currentThread().getId());
         String inFileName[] = file.getName().split("\\.");
@@ -219,6 +221,6 @@ public class ReadTxtFileThread extends Thread {
             System.out.println("[変換中]" + file.getName() + "をShapeファイルに変換中です。: " + Thread.currentThread().getId());
             CreateShape.createShapeFile(outFile, "UTF-8", type, features);
         }
-        System.out.println("[完了]" + file.getName() + "をShapeファイルに変換が完了しました。: " + Thread.currentThread().getId());
+        System.out.println("[完了]" + file.getName() + "のShapeファイル変換が完了しました。: " + Thread.currentThread().getId());
     }
 }
