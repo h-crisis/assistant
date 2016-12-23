@@ -103,9 +103,9 @@ public class ReadTxtFileThread extends Thread {
             br.close();
             createShape(file, outDir, figTypeI, layerI, featuresList, textName);
         } catch (Exception e) {
-            System.out.println(e);
+            System.out.print(e);
         }
-        System.out.println("[読込]" + file.getName() + "の読み込みが完了しました。: " + Thread.currentThread().getId());
+        System.out.printf("[読込]%sの読み込みが完了しました。: %d%n", file.getName(), Thread.currentThread().getId());
     }
 
     public static void createShape(File file, File outDir, int figType, int layer, LinkedList<Object> featuresList, LinkedList<String> texts) throws Exception {
