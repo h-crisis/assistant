@@ -138,6 +138,9 @@ public class ReadTxtFileThread extends Thread {
         SimpleFeatureBuilder featureBuilder = new SimpleFeatureBuilder(type);
 
         List<SimpleFeature> features = new ArrayList<SimpleFeature>();
+        int counter = 0;
+        int count = 0;
+        System.out.println("[変換]" + file.getName() + "の" + featuresList.size() + "Featuresを変換します。: " + Thread.currentThread().getId());
 
         if(figType==1) {
             for(int i=0; i<featuresList.size(); i++) {
@@ -163,9 +166,16 @@ public class ReadTxtFileThread extends Thread {
                 }
                 SimpleFeature feature = featureBuilder.buildFeature(null);
                 features.add(feature);
+
+                if(count > (featuresList.size()/100)) {
+                    count = 0;
+                    counter++;
+                    System.out.println("[変換]" + file.getName() + "の" + counter + "%を読み込みました。: " + Thread.currentThread().getId());
+                }
+                else {
+                    count++;
+                }
             }
-            System.out.println("[変換中]" + file.getName() + "をShapeファイルに変換中です。: " + Thread.currentThread().getId());
-            CreateShape.createShapeFile(outFile, "UTF-8", type, features);
         }
         else if(figType==2) {
             for(int i=0; i<featuresList.size(); i++) {
@@ -193,9 +203,16 @@ public class ReadTxtFileThread extends Thread {
                 }
                 SimpleFeature feature = featureBuilder.buildFeature(null);
                 features.add(feature);
+
+                if(count > (featuresList.size()/100)) {
+                    count = 0;
+                    counter++;
+                    System.out.println("[変換]" + file.getName() + "の" + counter + "%を読み込みました。: " + Thread.currentThread().getId());
+                }
+                else {
+                    count++;
+                }
             }
-            System.out.println("[変換中]" + file.getName() + "をShapeファイルに変換中です。: " + Thread.currentThread().getId());
-            CreateShape.createShapeFile(outFile, "UTF-8", type, features);
         }
         else {
             for(int i=0; i<featuresList.size(); i++) {
@@ -217,10 +234,19 @@ public class ReadTxtFileThread extends Thread {
                 }
                 SimpleFeature feature = featureBuilder.buildFeature(null);
                 features.add(feature);
+
+                if(count > (featuresList.size()/100)) {
+                    count = 0;
+                    counter++;
+                    System.out.println("[変換]" + file.getName() + "の" + counter + "%を読み込みました。: " + Thread.currentThread().getId());
+                }
+                else {
+                    count++;
+                }
             }
-            System.out.println("[変換中]" + file.getName() + "をShapeファイルに変換中です。: " + Thread.currentThread().getId());
-            CreateShape.createShapeFile(outFile, "UTF-8", type, features);
         }
+        System.out.println("[変換]" + file.getName() + "をShapeファイルに変換中です。: " + Thread.currentThread().getId());
+        CreateShape.createShapeFile(outFile, "UTF-8", type, features);
         System.out.println("[完了]" + file.getName() + "のShapeファイル変換が完了しました。: " + Thread.currentThread().getId());
     }
 }
