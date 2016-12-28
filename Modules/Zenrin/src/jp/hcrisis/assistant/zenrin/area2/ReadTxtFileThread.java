@@ -248,5 +248,6 @@ public class ReadTxtFileThread extends Thread {
         System.out.println("[変換]" + file.getName() + "をShapeファイルに変換中です。: " + Thread.currentThread().getId());
         CreateShape.createShapeFile(outFile, "UTF-8", type, features);
         System.out.println("[完了]" + file.getName() + "のShapeファイル変換が完了しました。: " + Thread.currentThread().getId());
+        features.clear();
     }
 }
