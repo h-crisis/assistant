@@ -30,10 +30,25 @@ if (userAgent.indexOf('msie') > -1) {
 }else {
 }
 
+if ((userAgent.indexOf("windows") != -1 && userAgent.indexOf("touch") != -1 && userAgent.indexOf("tablet pc") == -1)
+    || userAgent.indexOf("ipad") != -1
+    || (userAgent.indexOf("android") != -1 && userAgent.indexOf("mobile") == -1)
+    || (userAgent.indexOf("firefox") != -1 && userAgent.indexOf("tablet") != -1)
+    || userAgent.indexOf("kindle") != -1
+    || userAgent.indexOf("silk") != -1
+    || userAgent.indexOf("playbook") != -1){
+    document.write('<link id="tablet" rel="stylesheet" href="../../css/' + osCss + '/' + brwCss + '_Tab.css" type="text/css">');
+} else if ((userAgent.indexOf("windows") != -1 && userAgent.indexOf("phone") != -1)
+    || userAgent.indexOf("iphone") != -1
+    || userAgent.indexOf("ipod") != -1
+    || (userAgent.indexOf("android") != -1 && userAgent.indexOf("mobile") != -1)
+    || (userAgent.indexOf("firefox") != -1 && userAgent.indexOf("mobile") != -1)
+    || userAgent.indexOf("blackberry") != -1) {
+    document.write('<link id="phone" rel="stylesheet" href="../../css/' + osCss + '/' + brwCss +'_Mob.css" type="text/css">');
+} else {
+    document.write('<link id="pc" rel="stylesheet" href="../../css/' + osCss + '/' + brwCss + '_PC.css" type="text/css">');
+}
+
 //CSSの設定
-document.write('<link id="phone" rel="stylesheet" href="../../css/' + osCss + '/' + brwCss +'_Mob.css" type="text/css" media="screen and (min-width: 0px) and (max-width: 470px)">');
-document.write('<link id="tablet" rel="stylesheet" href="../../css/' + osCss + '/' + brwCss + '_Tab.css" type="text/css" media="screen and (min-width: 471px) and (max-width: 780px)">');
-document.write('<link id="pc" rel="stylesheet" href="../../css/' + osCss + '/' + brwCss + '_PC.css" type="text/css" media="screen and (min-width: 781px)">');
-
-
+console.log(navigator.userAgent.toLowerCase());
 
