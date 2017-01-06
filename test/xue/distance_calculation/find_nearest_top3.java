@@ -40,7 +40,7 @@ public class find_nearest_top3 {
     public enum GeomType {POINT, LINE, POLYGON}
 
     ;
-    // private static org.geotools.routing.GeoRouting.GeomType geometryType;
+    ///private static org.geotools.routing.GeoRouting.GeomType geometryType;
     private static final Color LINE_COLOUR = Color.RED;
     private static final Color FILL_COLOUR = Color.RED;
     private static final Color destinationfillColor = Color.GREEN;
