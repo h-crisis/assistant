@@ -29,7 +29,6 @@ import org.opengis.filter.FilterFactory2;
 
 import java.util.List;
 
-import static org.geotools.routing.GeoRouting.rescalePath;
 
 
 public class find_nearest_top3 {
@@ -115,6 +114,106 @@ public class find_nearest_top3 {
 
     }
 
+    //同じ間隔でpathの分割した点を元のpathに記録する　
+    public static Path rescalePath(Path p, double interval) {
+        Path newpath = new Path();
+        int counter = 0;
+        double dist = 0;//dist between two nodes
+        double numerator = 0;
+        double denominator = 0;
+        double ratio = 0;
+        double tempdist = 0;
+        Node previous = null,current = null;
+        GeometryFactory gf = new GeometryFactory();
+        Point point;
+
+
+        double dist_prev_point = 0; //distance between previous and point p
+        double dist_prev_cur = 0; //distance between previous and current
+        double dist_cur_point = 0;
+        double x =0, y = 0;
+        if(p!=null){
+            //System.out.println(p.size());
+            current = (Node)p.get(0);
+            point = gf.createPoint(new Coordinate(((Point) current
+                    .getObject()).getY(), ((Point) current.getObject()).getX())); //Reverse the X axis and Y axis for map display purposes
+
+            //include the start point
+            newpath.add(counter++,point);
+
+            previous = current;
+
+            for(int i = 1; i<p.size();i++){
+
+                previous = current;
+                current = (Node)p.get(i);
+
+                if(current != null){
+
+                    //after move update the distance
+                    dist_prev_point = CalculateEuclideanDistance(((Point)previous.getObject()).getY(),((Point)previous.getObject()).getX(), point.getX(),point.getY());
+                    dist_prev_cur = CalculateEuclideanDistance(((Point)previous.getObject()).getY(),((Point)previous.getObject()).getX(), ((Point)current.getObject()).getY(),((Point)current.getObject()).getX());
+                    dist_cur_point = CalculateEuclideanDistance(((Point)current.getObject()).getY(),((Point)current.getObject()).getX(), point.getX(),point.getY());
+
+                    if(dist_prev_cur < dist_cur_point && dist_prev_point < dist_cur_point){ // Position: point -> previous -> current
+
+                        dist = CalculateEuclideanDistance(point.getX(),point.getY(), ((Point)previous.getObject()).getY(),((Point)previous.getObject()).getX());
+                        numerator = interval;
+                        denominator = dist;
+                        ratio = numerator/denominator;
+
+                        x = point.getX() + ratio*(((Point)previous.getObject()).getY()-point.getX());
+                        y = point.getY() + ratio*(((Point)previous.getObject()).getX()-point.getY());
+                        point = gf.createPoint(new Coordinate(x,y));
+                        newpath.add(counter++,point);
+
+                    }
+                    else if(dist_prev_cur < dist_prev_point && dist_prev_point > dist_cur_point) // Position: previous -> current -> point
+                    {
+                        i++;
+                    }
+                    else{ // Position: all the others
+                        dist = CalculateEuclideanDistance(point.getX(),point.getY(), ((Point)current.getObject()).getY(),((Point)current.getObject()).getX());
+                        numerator = interval;
+                        denominator = dist;
+                        ratio = numerator/denominator;
+
+                        x = point.getX() + ratio*(((Point)current.getObject()).getY()-point.getX());
+                        y = point.getY() + ratio*(((Point)current.getObject()).getX()-point.getY());
+                        point = gf.createPoint(new Coordinate(x,y));
+                        newpath.add(counter++,point);
+                    }
+
+                }
+
+
+
+                //include the destination point
+                if(i == p.size()-1){
+
+                    Point finalpoint = gf.createPoint(new Coordinate(((Point) current
+                            .getObject()).getY(), ((Point) current.getObject()).getX()));
+                    while ((dist = CalculateEuclideanDistance(point.getX(),point.getY(), finalpoint.getX(),finalpoint.getY())) > interval)
+                    {
+                        numerator = interval;
+                        denominator = dist;
+                        ratio = numerator/denominator;
+
+                        x = point.getX() + ratio*(finalpoint.getX()-point.getX());
+                        y = point.getY() + ratio*(finalpoint.getY()-point.getY());
+                        point = gf.createPoint(new Coordinate(x,y));
+                        newpath.add(counter++,point);
+                    }
+                    newpath.add(counter,finalpoint);
+                }
+
+            }
+        }
+        else
+            System.out.println("There is no such route");
+        return newpath;
+
+    }
 
     public static Path dijkstraShortestPath(Node from, Node to) {//ノードの間のpathを
 
