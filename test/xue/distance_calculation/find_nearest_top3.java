@@ -5,34 +5,31 @@ package distance_calculation;
  */
 
         import com.vividsolutions.jts.geom.Coordinate;
-        import com.vividsolutions.jts.geom.Geometry;
-        import com.vividsolutions.jts.geom.GeometryFactory;
-        import com.vividsolutions.jts.geom.Point;
-        import org.geotools.data.FileDataStore;
-        import org.geotools.data.FileDataStoreFinder;
-        import org.geotools.data.simple.SimpleFeatureSource;
-        import org.geotools.factory.CommonFactoryFinder;
-        import org.geotools.feature.FeatureCollection;
-        import org.geotools.feature.FeatureIterator;
-        import org.geotools.graph.build.feature.FeatureGraphGenerator;
-        import org.geotools.graph.build.line.LineStringGraphGenerator;
-        import org.geotools.graph.path.DijkstraShortestPathFinder;
-        import org.geotools.graph.path.Path;
-        import org.geotools.graph.structure.Edge;
-        import org.geotools.graph.structure.Graph;
-        import org.geotools.graph.structure.Node;
-        import org.geotools.graph.structure.basic.BasicNode;
-        import org.geotools.graph.traverse.standard.DijkstraIterator.EdgeWeighter;
-        import org.geotools.styling.StyleFactory;
-        import org.opengis.feature.simple.SimpleFeature;
-        import org.opengis.filter.FilterFactory2;
+import com.vividsolutions.jts.geom.Geometry;
+import com.vividsolutions.jts.geom.GeometryFactory;
+import com.vividsolutions.jts.geom.Point;
+import org.geotools.data.FileDataStore;
+import org.geotools.data.FileDataStoreFinder;
+import org.geotools.data.simple.SimpleFeatureSource;
+import org.geotools.factory.CommonFactoryFinder;
+import org.geotools.feature.FeatureCollection;
+import org.geotools.feature.FeatureIterator;
+import org.geotools.graph.build.feature.FeatureGraphGenerator;
+import org.geotools.graph.build.line.LineStringGraphGenerator;
+import org.geotools.graph.path.DijkstraShortestPathFinder;
+import org.geotools.graph.path.Path;
+import org.geotools.graph.structure.Edge;
+import org.geotools.graph.structure.Graph;
+import org.geotools.graph.structure.Node;
+import org.geotools.graph.structure.basic.BasicNode;
+import org.geotools.graph.traverse.standard.DijkstraIterator.EdgeWeighter;
+import org.geotools.styling.StyleFactory;
+import org.opengis.feature.simple.SimpleFeature;
+import org.opengis.filter.FilterFactory2;
 
-        import java.awt.*;
-        import java.io.*;
-        import java.util.*;
-        import java.util.List;
+import java.util.List;
 
-        import static org.geotools.routing.GeoRouting.rescalePath;
+import static org.geotools.routing.GeoRouting.rescalePath;
 
 
 public class find_nearest_top3 {
@@ -269,7 +266,7 @@ public class find_nearest_top3 {
     //public static void main(String[] args) throws Exception {
     public static void find_nearest(File inFile1, File inFile2, File out){
 
-        //  build(); // build graph
+
 
 //shelterとhospitalの経路を探す
         // File shelter = new File("/Users/jiao/Desktop/shortestpath_test/shelter_latitude_longtitude_test.csv");

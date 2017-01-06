@@ -1,9 +1,5 @@
 package distance_calculation;
 
-import java.io.PrintWriter;
-import java.io.*;
-
-
 /**
  * Created by jiao on 2016/12/19.
  * 避難所の近くの病院３つを選びます
@@ -49,6 +45,7 @@ public class MAIN {
         }
 
        // ="523644";
+       /
         */
 
         //root_findプログラムのテスト

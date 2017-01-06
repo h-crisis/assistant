@@ -25,7 +25,6 @@ import java.util.Map;
 /**
  * Created by jiao on 2017/01/06.
  * 地図をstart end点による分割するプログラム
- *
  */
 public class split_map {
 

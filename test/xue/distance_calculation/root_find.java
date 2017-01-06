@@ -4,8 +4,6 @@ import org.geotools.graph.structure.Graph;
 
 import java.io.File;
 import java.util.LinkedList;
-//import static org.geotools.routing.GeoRouting.rescalePath;
-//import static org.geotools.routing.GeoRouting.rescalePath;
 
 /**
  * Created by jiao on 2017/01/05.
