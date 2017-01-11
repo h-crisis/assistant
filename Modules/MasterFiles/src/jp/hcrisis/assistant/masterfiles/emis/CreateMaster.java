@@ -95,9 +95,9 @@ public class CreateMaster {
             System.exit(1);
         }
 
-        createMedicalInstituteMaster(outDir, emisMedicalInstituteMaster, emisMedicalInstituteInfoMaster);
-        updateCities2MedicalInstiuteMaster(outDir, municipalitiesShapeFile, municipalitiesShapeFileEncode);
-        updateMedicalArea2MedicalInstiuteMaster(outDir, medicalAreaShapeFile, medicalAreaShapeFileEncode);
+        //createMedicalInstituteMaster(outDir, emisMedicalInstituteMaster, emisMedicalInstituteInfoMaster);
+        //updateCities2MedicalInstiuteMaster(outDir, municipalitiesShapeFile, municipalitiesShapeFileEncode);
+        //updateMedicalArea2MedicalInstiuteMaster(outDir, medicalAreaShapeFile, medicalAreaShapeFileEncode);
         updateMesh2MedicalInstiuteMaster(outDir, meshShapeFileDir, meshShapeFileDirEncoding);
         createMedicalInstituteMasterShape(outDir, "Shift_JIS");
     }
