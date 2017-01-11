@@ -99,6 +99,7 @@ public class CreateMaster {
         updateCities2MedicalInstiuteMaster(outDir, municipalitiesShapeFile, municipalitiesShapeFileEncode);
         updateMedicalArea2MedicalInstiuteMaster(outDir, medicalAreaShapeFile, medicalAreaShapeFileEncode);
         updateMesh2MedicalInstiuteMaster(outDir, meshShapeFileDir, meshShapeFileDirEncoding);
+        createMedicalInstituteMasterShape(outDir);
     }
 
     /**
@@ -632,7 +633,9 @@ public class CreateMaster {
         }
     }
 
-    public static void createMedicalInstituteMasterShape(File hcrisisMedicalInstituteMasterFileFull) {
+    public static void createMedicalInstituteMasterShape(File outDir) {
+        File hcrisisMedicalInstituteMasterFileFull = new File(outDir.getPath() + "/h-crisis_emis_medical_institute_master_full.csv");
+
         String name = "EMIS Medical Institute";
         String geom = "the_geom:Point:srid=4326,";
 
@@ -690,8 +693,8 @@ public class CreateMaster {
             System.exit(1);
         }
 
-        File outFile1 = new File(hcrisisMedicalInstituteMasterFileFull.getPath() + "/h-crisis_emis_medical_institute_master_full_general.shp");
-        File outFile2 = new File(hcrisisMedicalInstituteMasterFileFull.getPath() + "/h-crisis_emis_medical_institute_master_full_crisis.shp");
+        File outFile1 = new File(outDir.getPath() + "/h-crisis_emis_medical_institute_master_full_general.shp");
+        File outFile2 = new File(outDir.getPath() + "/h-crisis_emis_medical_institute_master_full_crisis.shp");
 
         try {
             CreateShape.createShapeFile(outFile1, "UTF-8", type1, features1);
