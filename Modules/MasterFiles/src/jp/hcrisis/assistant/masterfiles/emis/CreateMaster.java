@@ -5,18 +5,24 @@ import com.vividsolutions.jts.geom.Coordinate;
 import com.vividsolutions.jts.geom.GeometryFactory;
 import com.vividsolutions.jts.geom.MultiPolygon;
 import com.vividsolutions.jts.geom.Point;
+import gis.CreateShape;
 import gis.GeoCoding;
 import gis.MeshMap;
+import org.geotools.data.DataUtilities;
 import org.geotools.data.shapefile.ShapefileDataStore;
 import org.geotools.data.simple.SimpleFeatureCollection;
 import org.geotools.data.simple.SimpleFeatureSource;
 import org.geotools.feature.FeatureIterator;
+import org.geotools.feature.SchemaException;
+import org.geotools.feature.simple.SimpleFeatureBuilder;
 import org.geotools.geometry.jts.JTSFactoryFinder;
 import org.opengis.feature.simple.SimpleFeature;
+import org.opengis.feature.simple.SimpleFeatureType;
 
 import java.io.*;
 import java.net.MalformedURLException;
 import java.nio.charset.Charset;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -25,21 +31,22 @@ import java.util.List;
  * Created by manab on 2016/07/22.
  */
 public class CreateMaster {
+
+    private static File outDir = null;
+    private static File emisMedicalInstituteMaster = null;
+    private static File emisMedicalInstituteInfoMaster = null;
+    private static File municipalitiesShapeFile = null;
+    private static String municipalitiesShapeFileEncode = null;
+    private static File medicalAreaShapeFile = null;
+    private static String medicalAreaShapeFileEncode = null;
+    private static File meshShapeFileDir = null;
+    private static String meshShapeFileDirEncoding = null;
+
     /**
      * EMISから提供された医療機関csvを用いてH-CRISIS用のマスターファイルを作成するプログラム
      * @param args
      */
     public static void main(String args[]) {
-
-        File outDir = null;
-        File emisMedicalInstituteMaster = null;
-        File emisMedicalInstituteInfoMaster = null;
-        File municipalitiesShapeFile = null;
-        String municipalitiesShapeFileEncode = null;
-        File medicalAreaShapeFile = null;
-        String medicalAreaShapeFileEncode = null;
-        File meshShapeFileDir = null;
-        String meshShapeFileDirEncoding = null;
 
         if(args.length==1) { // 引数1つの場合
             outDir = new File("files/OutFiles/EmisOutFiles/");
@@ -622,6 +629,80 @@ public class CreateMaster {
             }
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    public static void createMedicalInstituteMasterShape(File hcrisisMedicalInstituteMasterFileFull) {
+        String name = "EMIS Medical Institute";
+        String geom = "the_geom:Point:srid=4326,";
+
+        String textA = "code:String,name:String,pref:String,gun:String,city:String,address:String,saigai:int,kyukyu:int,hibaku:int,dmat:int";
+        String textB = "hd01:int,hd02:int,hd03:int,hd04:int,hd05:int,hd06:int,hd07:int,hd08:int,hd09:int," +
+                "hd10:int,hd11:int,hd12:int,hd13:int,hd14:int,hd15:int,hd16:int,hd17:int,hd18:int,hd19:int,hd20:int," +
+                "hd21:int,hd22:int,rd:date";
+        String text1 = textA + textB;
+        String text2 = text1 + ",mds:String,e001:String,e002:String,e003:String,e004:String,e005:String,e006:String,e007:String,clr:int";
+
+        // FeatureTypeを生成する。
+        SimpleFeatureType type1 = null;
+        SimpleFeatureType type2 = null;
+
+        try {
+            type1 = DataUtilities.createType(name, geom + text1);
+            type2 = DataUtilities.createType(name, geom + text2);
+        } catch (SchemaException e) {
+            e.printStackTrace();
+            System.out.println("jp.hcrisis.assistant.masterfiles.emis.CreateMaster.createMedicalInstituteMasterShape Error: FeatureTypeの生成エラー");
+            System.exit(1);
+        }
+
+        // Featureを生成する準備
+        GeometryFactory geometryFactory = JTSFactoryFinder.getGeometryFactory();
+        SimpleFeatureBuilder featureBuilder1 = new SimpleFeatureBuilder(type1);
+        SimpleFeatureBuilder featureBuilder2 = new SimpleFeatureBuilder(type2);
+
+        List<SimpleFeature> features1 = new ArrayList<SimpleFeature>();
+        List<SimpleFeature> features2 = new ArrayList<SimpleFeature>();
+
+        try(BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(hcrisisMedicalInstituteMasterFileFull), "Shift_JIS"))) {
+            String line = br.readLine(); // 1行目は見出し
+            while((line = br.readLine())!=null) {
+                String pair[] = line.split(",");
+                double lat = Double.parseDouble(pair[11]); // 緯度
+                double lon = Double.parseDouble(pair[12]); // 経度
+                Point point = geometryFactory.createPoint(new Coordinate(lon, lat));
+                featureBuilder1.add(point);
+                featureBuilder2.add(point);
+
+                int index[] = {1,2,6,7,8,10,13,14,15,16,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73};
+                for(int i : index) {
+                    featureBuilder1.add(pair[i]);
+                    featureBuilder2.add(pair[i]);
+                }
+                SimpleFeature feature1 = featureBuilder1.buildFeature(null);
+                SimpleFeature feature2 = featureBuilder2.buildFeature(null);
+                features1.add(feature1);
+                features2.add(feature2);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("jp.hcrisis.assistant.masterfiles.emis.CreateMaster.createMedicalInstituteMasterShape Error: 読み込みファイルの生成エラー");
+            System.exit(1);
+        }
+
+        File outFile1 = new File(hcrisisMedicalInstituteMasterFileFull.getPath() + "/h-crisis_emis_medical_institute_master_full_general.shp");
+        File outFile2 = new File(hcrisisMedicalInstituteMasterFileFull.getPath() + "/h-crisis_emis_medical_institute_master_full_crisis.shp");
+
+        try {
+            CreateShape.createShapeFile(outFile1, "UTF-8", type1, features1);
+            features1.clear();
+
+            CreateShape.createShapeFile(outFile2, "UTF-8", type2, features2);
+            features2.clear();
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("jp.hcrisis.assistant.masterfiles.emis.CreateMaster.createMedicalInstituteMasterShape Error: 出力ファイルの生成エラー");
+            System.exit(1);
         }
     }
 }
