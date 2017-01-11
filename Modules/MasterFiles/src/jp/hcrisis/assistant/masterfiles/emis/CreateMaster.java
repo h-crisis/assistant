@@ -99,7 +99,7 @@ public class CreateMaster {
         updateCities2MedicalInstiuteMaster(outDir, municipalitiesShapeFile, municipalitiesShapeFileEncode);
         updateMedicalArea2MedicalInstiuteMaster(outDir, medicalAreaShapeFile, medicalAreaShapeFileEncode);
         updateMesh2MedicalInstiuteMaster(outDir, meshShapeFileDir, meshShapeFileDirEncoding);
-        createMedicalInstituteMasterShape(outDir);
+        createMedicalInstituteMasterShape(outDir, "Shift_JIS");
     }
 
     /**
@@ -633,7 +633,7 @@ public class CreateMaster {
         }
     }
 
-    public static void createMedicalInstituteMasterShape(File outDir) {
+    public static void createMedicalInstituteMasterShape(File outDir, String shapeFileEncoding) {
         File hcrisisMedicalInstituteMasterFileFull = new File(outDir.getPath() + "/h-crisis_emis_medical_institute_master_full.csv");
 
         String name = "EMIS Medical Institute";
@@ -697,10 +697,10 @@ public class CreateMaster {
         File outFile2 = new File(outDir.getPath() + "/h-crisis_emis_medical_institute_master_full_crisis.shp");
 
         try {
-            CreateShape.createShapeFile(outFile1, "UTF-8", type1, features1);
+            CreateShape.createShapeFile(outFile1, shapeFileEncoding, type1, features1);
             features1.clear();
 
-            CreateShape.createShapeFile(outFile2, "UTF-8", type2, features2);
+            CreateShape.createShapeFile(outFile2, shapeFileEncoding, type2, features2);
             features2.clear();
         } catch (Exception e) {
             e.printStackTrace();
