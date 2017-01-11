@@ -4,7 +4,7 @@ package distance_calculation;
  * Created by jiao on 2016/12/19.
  */
 
-import com.vividsolutions.jts.geom.Coordinate;
+        import com.vividsolutions.jts.geom.Coordinate;
 import com.vividsolutions.jts.geom.Geometry;
 import com.vividsolutions.jts.geom.GeometryFactory;
 import com.vividsolutions.jts.geom.Point;
@@ -27,10 +27,8 @@ import org.geotools.styling.StyleFactory;
 import org.opengis.feature.simple.SimpleFeature;
 import org.opengis.filter.FilterFactory2;
 
-import java.awt.*;
 import java.util.List;
-import java.io.*;
-import java.util.*;
+
 
 
 public class find_nearest_top3 {
@@ -38,8 +36,11 @@ public class find_nearest_top3 {
     private static StyleFactory sf = CommonFactoryFinder.getStyleFactory();
     private static FilterFactory2 ff = CommonFactoryFinder.getFilterFactory2();
     private static String geometryAttributeName;
-    public enum GeomType {POINT, LINE, POLYGON};
-    //private static org.geotools.routing.GeoRouting.GeomType geometryType;
+
+    public enum GeomType {POINT, LINE, POLYGON}
+
+    ;
+    ///private static org.geotools.routing.GeoRouting.GeomType geometryType;
     private static final Color LINE_COLOUR = Color.RED;
     private static final Color FILL_COLOUR = Color.RED;
     private static final Color destinationfillColor = Color.GREEN;
@@ -63,15 +64,14 @@ public class find_nearest_top3 {
         build(Shape); // build graph
         //File out = new File("/Users/jiao/Desktop/shortestpath_test/output.csv");
         //if(!out.exists()) {
-          //  out.createNewFile();
+        //  out.createNewFile();
         //}
         find_nearest(inFile1, inFile2, out);
 
     }
 
 
-
-        private static Graph buildGraph(FeatureCollection fc) throws IOException {
+    private static Graph buildGraph(FeatureCollection fc) throws IOException {
 
         lineStringGen = new LineStringGraphGenerator();
         FeatureGraphGenerator featureGen = new FeatureGraphGenerator(
@@ -89,7 +89,7 @@ public class find_nearest_top3 {
 
     //Build a graph network from the routable shapefile for further routing services shpからgraphの変換
     public static void build(File file) throws Exception {
-       // file = JFileDataStoreChooser.showOpenFile("shp", null);//shpを読み込む
+        // file = JFileDataStoreChooser.showOpenFile("shp", null);//shpを読み込む
 
         FileDataStore filestore = FileDataStoreFinder.getDataStore(file);//shpのデータを取り出す
         SimpleFeatureSource featureSource = filestore.getFeatureSource();//access all the features using a single method call:
@@ -114,6 +114,106 @@ public class find_nearest_top3 {
 
     }
 
+    //同じ間隔でpathの分割した点を元のpathに記録する　
+    public static Path rescalePath(Path p, double interval) {
+        Path newpath = new Path();
+        int counter = 0;
+        double dist = 0;//dist between two nodes
+        double numerator = 0;
+        double denominator = 0;
+        double ratio = 0;
+        double tempdist = 0;
+        Node previous = null,current = null;
+        GeometryFactory gf = new GeometryFactory();
+        Point point;
+
+
+        double dist_prev_point = 0; //distance between previous and point p
+        double dist_prev_cur = 0; //distance between previous and current
+        double dist_cur_point = 0;
+        double x =0, y = 0;
+        if(p!=null){
+            //System.out.println(p.size());
+            current = (Node)p.get(0);
+            point = gf.createPoint(new Coordinate(((Point) current
+                    .getObject()).getY(), ((Point) current.getObject()).getX())); //Reverse the X axis and Y axis for map display purposes
+
+            //include the start point
+            newpath.add(counter++,point);
+
+            previous = current;
+
+            for(int i = 1; i<p.size();i++){
+
+                previous = current;
+                current = (Node)p.get(i);
+
+                if(current != null){
+
+                    //after move update the distance
+                    dist_prev_point = CalculateEuclideanDistance(((Point)previous.getObject()).getY(),((Point)previous.getObject()).getX(), point.getX(),point.getY());
+                    dist_prev_cur = CalculateEuclideanDistance(((Point)previous.getObject()).getY(),((Point)previous.getObject()).getX(), ((Point)current.getObject()).getY(),((Point)current.getObject()).getX());
+                    dist_cur_point = CalculateEuclideanDistance(((Point)current.getObject()).getY(),((Point)current.getObject()).getX(), point.getX(),point.getY());
+
+                    if(dist_prev_cur < dist_cur_point && dist_prev_point < dist_cur_point){ // Position: point -> previous -> current
+
+                        dist = CalculateEuclideanDistance(point.getX(),point.getY(), ((Point)previous.getObject()).getY(),((Point)previous.getObject()).getX());
+                        numerator = interval;
+                        denominator = dist;
+                        ratio = numerator/denominator;
+
+                        x = point.getX() + ratio*(((Point)previous.getObject()).getY()-point.getX());
+                        y = point.getY() + ratio*(((Point)previous.getObject()).getX()-point.getY());
+                        point = gf.createPoint(new Coordinate(x,y));
+                        newpath.add(counter++,point);
+
+                    }
+                    else if(dist_prev_cur < dist_prev_point && dist_prev_point > dist_cur_point) // Position: previous -> current -> point
+                    {
+                        i++;
+                    }
+                    else{ // Position: all the others
+                        dist = CalculateEuclideanDistance(point.getX(),point.getY(), ((Point)current.getObject()).getY(),((Point)current.getObject()).getX());
+                        numerator = interval;
+                        denominator = dist;
+                        ratio = numerator/denominator;
+
+                        x = point.getX() + ratio*(((Point)current.getObject()).getY()-point.getX());
+                        y = point.getY() + ratio*(((Point)current.getObject()).getX()-point.getY());
+                        point = gf.createPoint(new Coordinate(x,y));
+                        newpath.add(counter++,point);
+                    }
+
+                }
+
+
+
+                //include the destination point
+                if(i == p.size()-1){
+
+                    Point finalpoint = gf.createPoint(new Coordinate(((Point) current
+                            .getObject()).getY(), ((Point) current.getObject()).getX()));
+                    while ((dist = CalculateEuclideanDistance(point.getX(),point.getY(), finalpoint.getX(),finalpoint.getY())) > interval)
+                    {
+                        numerator = interval;
+                        denominator = dist;
+                        ratio = numerator/denominator;
+
+                        x = point.getX() + ratio*(finalpoint.getX()-point.getX());
+                        y = point.getY() + ratio*(finalpoint.getY()-point.getY());
+                        point = gf.createPoint(new Coordinate(x,y));
+                        newpath.add(counter++,point);
+                    }
+                    newpath.add(counter,finalpoint);
+                }
+
+            }
+        }
+        else
+            System.out.println("There is no such route");
+        return newpath;
+
+    }
 
     public static Path dijkstraShortestPath(Node from, Node to) {//ノードの間のpathを
 
@@ -152,11 +252,8 @@ public class find_nearest_top3 {
         pf.calculate();
         //cost
         double cost;
-        cost=pf.getCost(to);
+        cost = pf.getCost(to);
         Path path = pf.getPath(to);
-        //cost=getPathLength(path);
-        //System.out.print(cost);
-        //System.out.print('\n');
         return cost;
     }
 
@@ -198,9 +295,6 @@ public class find_nearest_top3 {
     }
 
 
-
-
-
     private static double CalculateEuclideanDistance(double xOrig,
                                                      double yOrig, double xDest, double yDest) {
         // calculates traight lne distance
@@ -210,79 +304,136 @@ public class find_nearest_top3 {
 
     }
 
+    public static LinkedList<String> search_path(double start_lat, double start_lon, double end_lat, double end_lon, File shape) throws Exception {
+        build(shape);
+        LinkedList<String> path = new LinkedList<String>();
+        // set start point and end point
+        GeometryFactory gf = new GeometryFactory();
+        Point startPoint = gf
+                .createPoint(new Coordinate(start_lat, start_lon));
+
+        Point endPoint = gf.createPoint(new Coordinate(end_lat, end_lon));
+
+        Node start = getNearestGraphNode(lineStringGen, graph, startPoint);
+        Node end = getNearestGraphNode(lineStringGen, graph, endPoint);
+        // Find path
+        Path p = dijkstraShortestPath(start, end);
+        Path p_average = rescalePath(p, 0.0018);
+        Node previous = null, node = null;
+
+        Iterator iterator = p_average.riterator();
+        int i = 0;
+        Point point;
+        while (iterator.hasNext()) {
+
+            point = (Point) iterator.next();
+            Point displaypoint = gf.createPoint(new Coordinate(point.getX(), point.getY()));
+            // System.out.println(displaypoint.getX() + " " +displaypoint.getY());
+            //System.out.println(i+displaypoint.getX()+ " " + displaypoint.getY());
+
+            path.add(i, displaypoint.getY() + ";" + displaypoint.getX());
+            i++;
+
+            //System.out.println(path);
+        }
+
+        return path;
+
+    }
+    //////////////////////////////////
+    public static double search_distance(double start_lat, double start_lon, double end_lat, double end_lon, File shape) throws Exception {
+        build(shape);
+        LinkedList<String> path = new LinkedList<String>();
+        // set start point and end point
+        GeometryFactory gf = new GeometryFactory();
+        Point startPoint = gf
+                .createPoint(new Coordinate(start_lat, start_lon));
+
+        Point endPoint = gf.createPoint(new Coordinate(end_lat, end_lon));
+
+        Node start = getNearestGraphNode(lineStringGen, graph, startPoint);
+        Node end = getNearestGraphNode(lineStringGen, graph, endPoint);
+
+        double pathcosts = dijkstraShortestPathCost(start, end);//ノードの最短距離
+
+        return pathcosts;
+
+    }
+    //////////////////////////////////
+
 
     //public static void main(String[] args) throws Exception {
-        public static void find_nearest(File inFile1, File inFile2, File out){
+    public static void find_nearest(File inFile1, File inFile2, File out){
 
-      //  build(); // build graph
+
 
 //shelterとhospitalの経路を探す
-       // File shelter = new File("/Users/jiao/Desktop/shortestpath_test/shelter_latitude_longtitude_test.csv");
-       // File hospital = new File("/Users/jiao/Desktop/shortestpath_test/hospital_latitude_longtitude_test.csv");
-       try {
-           BufferedReader shelter_info = new BufferedReader(new InputStreamReader(new FileInputStream(inFile1), "SHIFT_JIS"));
+        // File shelter = new File("/Users/jiao/Desktop/shortestpath_test/shelter_latitude_longtitude_test.csv");
+        // File hospital = new File("/Users/jiao/Desktop/shortestpath_test/hospital_latitude_longtitude_test.csv");
+        try {
+            BufferedReader shelter_info = new BufferedReader(new InputStreamReader(new FileInputStream(inFile1), "SHIFT_JIS"));
 
-           //File file = new File("/Users/jiao/Desktop/shortestpath_test/output.csv");
-           PrintWriter output = new PrintWriter(new OutputStreamWriter(new FileOutputStream(out, false), "SHIFT_JIS"));
+            //File file = new File("/Users/jiao/Desktop/shortestpath_test/output.csv");
+            PrintWriter output = new PrintWriter(new OutputStreamWriter(new FileOutputStream(out, false), "SHIFT_JIS"));
 
 
-           String line1, line2;
-           double lon1, la1, lon2, la2;
-           boolean midashi1 = true;
-           boolean midashi2 = true;
-           Node starts;
-           Node ends;
-           Point startPoints;
-           Point endPoints;
-           Double pathcosts;
-           GeometryFactory gfs = new GeometryFactory();
-           while ((line1 = shelter_info.readLine()) != null) {
+            String line1, line2;
+            double lon1, la1, lon2, la2;
+            boolean midashi1 = true;
+            boolean midashi2 = true;
+            Node starts;
+            Node ends;
+            Point startPoints;
+            Point endPoints;
+            Double pathcosts;
+            GeometryFactory gfs = new GeometryFactory();
+            while ((line1 = shelter_info.readLine()) != null) {
 
-               String pair1[] = line1.split(",");
-               BufferedReader hospital_info = new BufferedReader(new InputStreamReader(new FileInputStream(inFile2), "SHIFT_JIS"));
-               while ((line2 = hospital_info.readLine()) != null) {
-                   if (midashi1 == true && midashi2 == true) {
-                       String pair2[] = line2.split(",");
-                       output.write(pair1[2] + "," + pair2[2] + "," + "distance");
-                       midashi1 = false;
-                       break;
-                   } else {
-                       if (midashi2 == true) {
-                           String pair2[] = line2.split(",");
+                String pair1[] = line1.split(",");
+                BufferedReader hospital_info = new BufferedReader(new InputStreamReader(new FileInputStream(inFile2), "SHIFT_JIS"));
+                while ((line2 = hospital_info.readLine()) != null) {
+                    if (midashi1 == true && midashi2 == true) {
+                        String pair2[] = line2.split(",");
+                        output.write(pair1[2] + "," + pair2[2] + "," + "distance");
+                        midashi1 = false;
+                        break;
+                    } else {
+                        if (midashi2 == true) {
+                            String pair2[] = line2.split(",");
 
-                           lon1 = Double.parseDouble(pair1[0]);
-                           la1 = Double.parseDouble(pair1[1]);
-                           lon2 = Double.parseDouble(pair2[0]);
-                           la2 = Double.parseDouble(pair2[1]);
+                            lon1 = Double.parseDouble(pair1[0]);
+                            la1 = Double.parseDouble(pair1[1]);
+                            lon2 = Double.parseDouble(pair2[0]);
+                            la2 = Double.parseDouble(pair2[1]);
 
-                           // GeometryFactory gf = new GeometryFactory();
-                           startPoints = gfs
-                                   .createPoint(new Coordinate(lon1, la1));
+                            // GeometryFactory gf = new GeometryFactory();
+                            startPoints = gfs
+                                    .createPoint(new Coordinate(lon1, la1));
 
-                           endPoints = gfs.createPoint(new Coordinate(lon2, la2));
+                            endPoints = gfs.createPoint(new Coordinate(lon2, la2));
 
-                           starts = getNearestGraphNode(lineStringGen, graph, startPoints);
-                           ends = getNearestGraphNode(lineStringGen, graph, endPoints);
+                            starts = getNearestGraphNode(lineStringGen, graph, startPoints);
+                            ends = getNearestGraphNode(lineStringGen, graph, endPoints);
 
-                           pathcosts = dijkstraShortestPathCost(starts, ends);//ノードの最短距離
+                            pathcosts = dijkstraShortestPathCost(starts, ends);//ノードの最短距離
 
-                           output.write("\n" + pair1[2] + "," + pair2[2] + "," + pathcosts);
-                       } else {
-                           String pair2[] = line2.split(",");
-                           midashi2 = true;
-                       }
+                            output.write("\n" + pair1[2] + "," + pair2[2] + "," + pathcosts);
+                        } else {
+                            String pair2[] = line2.split(",");
+                            midashi2 = true;
+                        }
 
-                   }
-               }
-               hospital_info.close();
-               midashi2 = false;
+                    }
+                }
+                hospital_info.close();
+                midashi2 = false;
 
-           }
-           output.close();
-       }
-       catch (IOException e) {
-           e.printStackTrace();
-       }
+            }
+            output.close();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
 
 
     }
@@ -358,4 +509,5 @@ public class find_nearest_top3 {
 
 
 }
+
 
