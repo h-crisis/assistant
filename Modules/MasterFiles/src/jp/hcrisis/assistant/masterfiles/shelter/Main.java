@@ -1,4 +1,4 @@
-package jp.hcrisis.assistant.masterfiles;
+package jp.hcrisis.assistant.masterfiles.shelter;
 
 import java.io.File;
 

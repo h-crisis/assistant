@@ -210,7 +210,6 @@ public class CreateMaster {
                         GeocoderResult result = results.get(0);
                         str[11] = result.getGeometry().getLocation().getLat().toString();
                         str[12] = result.getGeometry().getLocation().getLng().toString();
-                        //System.out.println(" " + str[11] + " " + str[12]);
                     }
                 }
 
