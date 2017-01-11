@@ -25,6 +25,10 @@ import java.util.List;
  * Created by manab on 2016/07/22.
  */
 public class CreateMaster {
+    /**
+     * EMISから提供された医療機関csvを用いてH-CRISIS用のマスターファイルを作成するプログラム
+     * @param args
+     */
     public static void main(String args[]) {
 
         File outDir = null;
@@ -37,13 +41,10 @@ public class CreateMaster {
         File meshShapeFileDir = null;
         String meshShapeFileDirEncoding = null;
 
-        if(args.length==0) { // 引数がない場合
-            // System.out.println("jp.hcrisis.assistant.masterfiles.emis.CreateMaster Error: 引数の数が違います");
-            // System.exit(1);
-
-            outDir = new File("/Users/manabu/Desktop/EMIS/out");
-            emisMedicalInstituteMaster = new File("/Users/manabu/Desktop/EMIS/master/emis_master_20160729.csv");
-            emisMedicalInstituteInfoMaster = new File("/Users/manabu/Desktop/EMIS/master/saigai_kihon_20160729.csv");
+        if(args.length==1) { // 引数1つの場合
+            outDir = new File("files/OutFiles/EmisOutFiles/");
+            emisMedicalInstituteMaster = new File("files/MasterFiles/EmisMasterFiles/20160729_emis_master.csv");
+            emisMedicalInstituteInfoMaster = new File("files/MasterFiles/EmisMasterFiles/20160729_saigai_kihon.csv");
             municipalitiesShapeFile = new File("files/shape/municipalities/municipalities.shp");
             municipalitiesShapeFileEncode = "UTF-8";
             medicalAreaShapeFile = new File("files/shape/medical_area/medical_area.shp");
