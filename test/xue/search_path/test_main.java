@@ -18,7 +18,7 @@ public class test_main {
         File outDir= new File("/Users/jiao/Desktop/split_map");//
         double lat1 = 24.36525965, lon1 = 124.2353145, lat2 = 24.361194, lon2 = 124.141777;//test
         double path_unit=0.0018;//どういう距離でrootを表現するか　test:180m
-        // new split_map(outDir, outDir, lat1, lon1, lat2,lon2);
+         new split_map(outDir, outDir, lat1, lon1, lat2,lon2);
 
 
 

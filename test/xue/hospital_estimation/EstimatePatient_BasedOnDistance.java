@@ -1,11 +1,8 @@
 
 
-import java.io.*;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
-
-import java.util.Set;
 
 /**
  * 災害発生した際に、病院ごとに患者数を集計する

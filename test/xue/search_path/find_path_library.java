@@ -27,9 +27,6 @@ import org.geotools.styling.StyleFactory;
 import org.opengis.feature.simple.SimpleFeature;
 import org.opengis.filter.FilterFactory2;
 
-import java.awt.*;
-import java.io.*;
-import java.util.*;
 import java.util.List;
 
 
