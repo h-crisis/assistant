@@ -639,11 +639,11 @@ public class CreateMaster {
         String name = "EMIS Medical Institute";
         String geom = "the_geom:Point:srid=4326,";
 
-        String textA = "code:String,name:String,pref:String,gun:String,city:String,address:String,saigai:int,kyukyu:int,hibaku:int,dmat:int";
-        String textB = "hd01:int,hd02:int,hd03:int,hd04:int,hd05:int,hd06:int,hd07:int,hd08:int,hd09:int," +
+        String text = "code:String,name:String,pref:String,gun:String,city:String,address:String,saigai:int,kyukyu:int,hibaku:int,dmat:int," +
+                "hd01:int,hd02:int,hd03:int,hd04:int,hd05:int,hd06:int,hd07:int,hd08:int,hd09:int," +
                 "hd10:int,hd11:int,hd12:int,hd13:int,hd14:int,hd15:int,hd16:int,hd17:int,hd18:int,hd19:int,hd20:int," +
-                "hd21:int,hd22:int,rd:date";
-        String text1 = textA + textB;
+                "hd21:int,hd22:int,rd:String";
+        String text1 = text;
         String text2 = text1 + ",mds:String,e001:String,e002:String,e003:String,e004:String,e005:String,e006:String,e007:String,clr:int";
 
         // FeatureTypeを生成する。
