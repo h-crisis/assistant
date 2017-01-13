@@ -341,34 +341,25 @@ div#map{
     background-color:#ffffff;
     top: 0;
     left: 0;
-    width: 380px;
+    width: 360px;
     height: 320px;
     table-layout: fixed;
     position:absolute;
     overflow: auto;
     display:none;
     font-size:18px;
-    overflow-y: hidden;
 }
-
 .info#info{
     height: 100%;
     position: absolute;
-    overflow:scroll;
+    overflow:hidden;
+    overflow-x: hidden;
 }
-.info#infoWrapV{
+.info#info:hover{
     height: 100%;
-    left: 365px;
-    width: 15px;
     position: absolute;
-    overflow:hidden;
-}
-.info#infoWrapH{
-    top: 98.25%;
-    width: 380px;
-    height: 15px;
-    position: absolute;
-    overflow:hidden;
+    overflow:scroll;
+    overflow-x: hidden;
 }
 .info div{
     cursor: pointer;
@@ -382,13 +373,94 @@ div#map{
     padding-bottom: -20px;
 }
 .info a{
-    padding-left: 25px;
-    line-height: 25px;
-    vertical-align: top;
+    padding-left: 2px;
+    margin-right: 15px;
+    padding-top: 2px;
+    line-height: 10px;
 }
 .info a#title{
     font-family: Helvetica;
+    line-height: 25px;
+    padding-left: 25px;
     font-size: 18px;
+    color: white;
+}
+.info a#titleTooLong{
+    font-family: Helvetica;
+    line-height: 25px;
+    padding-left: 25px;
+    font-size: 12px;
+    white-space: nowrap;
+    overflow: hidden;
+    color: white;
+}
+.info a#EX{
+    background-color: #228b22;
+    color: #ffffff;
+    width: 60px;
+    height: 12px;
+    display:inline-block;
+    text-align: center;
+    border-radius: 2px;
+}
+.info a#GD{
+    background-color: #758922;
+    color: #ffffff;
+    width: 60px;
+    height: 12px;
+    display:inline-block;
+    text-align: center;
+    border-radius: 2px;
+}
+.info a#NT {
+    background-color: #eea700;
+    color: #ffffff;
+    width: 60px;
+    height: 12px;
+    display:inline-block;
+    text-align: center;
+    border-radius: 2px;
+}
+.info a#BD {
+    background-color: #ff6347;
+    color: #ffffff;
+    width: 60px;
+    height: 12px;
+    display:inline-block;
+    text-align: center;
+    border-radius: 2px;
+}
+.info a#TR {
+    background-color: #f92500;
+    color: #ffffff;
+    width: 60px;
+    height: 12px;
+    display:inline-block;
+    text-align: center;
+    border-radius: 2px;
+}
+.info a#UK {
+    background-color: #000000;
+    color: #ffffff;
+    width: 60px;
+    height: 12px;
+    display:inline-block;
+    text-align: center;
+    border-radius: 2px;
+}
+.info a#NOCLRShelter {
+    width: 60px;
+    height: 12px;
+    display:inline-block;
+    text-align: center;
+    border-radius: 2px;
+}
+.info a#NOCLR {
+    width: 120px;
+    height: 12px;
+    display:inline-block;
+    text-align: left;
+    border-radius: 2px;
 }
 
 .infoTab{
@@ -428,11 +500,13 @@ div#map{
     height: 30px;
 }
 
+
 #landscape{
-    width: 380px;
+    width: 360px;
     height: 200px;
     background:url('../../img/gradient.png');
-    overflow:hidden
+    overflow:hidden;
+    z-index: 9;
 }
 #landIcon{
     position:relative;
@@ -440,3 +514,11 @@ div#map{
     bottom:30px;
     zoom: 1.5;
 }
+#blueback{
+    top: 200px;
+    width: 360px;
+    height: 60px;
+    background-color: #3399FF;
+    z-index: 9;
+}
+

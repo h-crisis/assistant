@@ -58,8 +58,6 @@ function createShelterPopup(url, evt) {
             if(typeof infoHtml !== "undefined") {
                 document.getElementById('info').style.display = 'block';
                 document.getElementById('info').innerHTML = infoHtml;
-                document.getElementById('infoWrapV').style.display = 'block';
-                document.getElementById('infoWrapH').style.display = 'block';
                 document.getElementById('popup').style.display = 'block';
                 /*
                 var element = document.getElementsByClassName('infoTab');
@@ -108,78 +106,137 @@ function createShelterInfoHtml(result) {
         // 建築物名表示
         if (result.get('name') === null) {
         } else {
-            InfoHtml = InfoHtml + "<a id='title'>" + result.get('name') + "</a>";
-            // InfoHtml = InfoHtml + "<br><a style='font-family: Helvetica'>(" + result.get('pref') + result.get('gun') + result.get('sikuchoson') + result.get('address') + ")</a>"
-        }
-
-        InfoHtml = InfoHtml + '<hr>';
+            if(result.get('name').length < 17) {
+                InfoHtml = InfoHtml + "<div id='blueback'><a id='title'>" + result.get('name') + "</a>";
+                // InfoHtml = InfoHtml + "<br><a style='font-family: Helvetica'>(" + result.get('pref') + result.get('gun') + result.get('sikuchoson') + result.get('address') + ")</a>"
+            } else {
+                InfoHtml = InfoHtml + "<div id='blueback'><a id='titleTooLong'>" + result.get('name') + "</a>";
+                // InfoHtml = InfoHtml + "<br><a style='font-family: Helvetica'>(" + result.get('pref') + result.get('gun') + result.get('sikuchoson') + result.get('address') + ")</a>"
+            }
+        } 
 
         // 状況表示
 
         // 住所の表示
-        InfoHtml = InfoHtml + preCells + '../../img/img/1.png' + interCells + result.get('code') + subCells;
-        InfoHtml = InfoHtml + preCells + '../../img/img/2.png' + interCells + result.get('pref') + result.get('gun') + result.get('sikuchoson') + result.get('address') + subCells;
+        InfoHtml = InfoHtml + preCells + "style='color:white;'" + interCells + "ID:"　+ result.get('code') + subCells + "</div>";
+        InfoHtml = InfoHtml + preCells + interCells + "&nbsp;&nbsp;" +  result.get('pref') + result.get('gun') + result.get('sikuchoson') + result.get('address') + subCells;
 
         // 避難者数の表示
-        if(result.get('a01') === null) {
-            InfoHtml = InfoHtml + preCells + '../../img/img/3.png' + interCells + subCells;
+        if(result.get('a01') === null || result.get('a01') === "不明") {
+            InfoHtml = InfoHtml + preCells + "id=NOCLRShelter>避難者数</a><a" + interCells + "不明" + subCells;
         } else {
-            InfoHtml = InfoHtml + preCells + '../../img/img/3.png' + interCells +  result.get('a01') + subCells;
+            InfoHtml = InfoHtml + preCells + "id=NOCLRShelter>避難者数</a><a" + interCells + result.get('a01') + subCells;
         }
+
+        InfoHtml = InfoHtml + "<hr>";
 
         // 以下緊急時入力で表示される情報の表示
-        if(result.get('c01_1') === null) {
-            InfoHtml = InfoHtml + preCells + '../../img/img/4.png' + interCells + subCells;
+        if(result.get('c01_1') === null || result.get('c01_1') === "不明") {
+            InfoHtml = InfoHtml + preCells + "id=NT>電　　気</a><a" + interCells + "不明" + subCells;
         } else {
-            InfoHtml = InfoHtml + preCells + '../../img/img/4.png' + interCells +  result.get('c01_1') + subCells;
+            if(result.get('c01_1') === "可") {
+                InfoHtml = InfoHtml + preCells + "id=EX>電　　気</a><a" + interCells + result.get('c01_1') + subCells;
+            } else if(result.get('c01_1') === "不可") {
+                InfoHtml = InfoHtml + preCells + "id=TR>電　　気</a><a" + interCells + result.get('c01_1') + subCells;
+            } else if(result.get('c01_1') === "無し") {
+                InfoHtml = InfoHtml + preCells + "id=UK>電　　気</a><a" + interCells + result.get('c01_1') + subCells;
+            }
         }
 
-        if(result.get('c01_2') === null) {
-            InfoHtml = InfoHtml + preCells + '../../img/img/5.png' + interCells + subCells;
+        if(result.get('c01_2') === null || result.get('c01_2') === "不明") {
+            InfoHtml = InfoHtml + preCells + "id=NT>ガ　　ス</a><a" + interCells + "不明" + subCells;
         } else {
-            InfoHtml = InfoHtml + preCells + '../../img/img/5.png' + interCells +  result.get('c01_2') + subCells;
+            if(result.get('c01_2') === "可") {
+                InfoHtml = InfoHtml + preCells + "id=EX>ガ　　ス</a><a" + interCells + result.get('c01_2') + subCells;
+            } else if(result.get('c01_2') === "不可") {
+                InfoHtml = InfoHtml + preCells + "id=TR>ガ　　ス</a><a" + interCells + result.get('c01_2') + subCells;
+            } else if (result.get('c01_2') === "無し") {
+                InfoHtml = InfoHtml + preCells + "id=UK>ガ　　ス</a><a" + interCells + result.get('c01_2') + subCells;
+            }
         }
 
-        if(result.get('c01_3') === null) {
-            InfoHtml = InfoHtml + preCells + '../../img/img/6.png' + interCells + subCells;
+        if(result.get('c01_3') === null || result.get('c01_3') === "不明") {
+            InfoHtml = InfoHtml + preCells + "id=NT>水　　道</a><a " + interCells + "不明" + subCells;
         } else {
-            InfoHtml = InfoHtml + preCells + '../../img/img/6.png' + interCells +  result.get('c01_3') + subCells;
+            if(result.get('c01_3') === "可") {
+                InfoHtml = InfoHtml + preCells + "id=EX>水　　道</a><a" + interCells + result.get('c01_3') + subCells;
+            } else if(result.get('c01_3') === "不可") {
+                InfoHtml = InfoHtml + preCells + "id=TR>水　　道</a><a" + interCells + result.get('c01_3') + subCells;
+            } else if(result.get('c01_3') === "無し") {
+                InfoHtml = InfoHtml + preCells + "id=UK>水　　道</a><a" + interCells + result.get('c01_3') + subCells;
+            }
         }
 
-        if(result.get('c01_4') === null) {
-            InfoHtml = InfoHtml + preCells + '../../img/img/7.png' + interCells + subCells;
+        if(result.get('c01_4') === null || result.get('c01_4') === "不明") {
+            InfoHtml = InfoHtml + preCells + "id=NT>飲 料 水</a><a" + interCells + "不明" + subCells;
         } else {
-            InfoHtml = InfoHtml + preCells + '../../img/img/7.png' + interCells +  result.get('c01_4') + subCells;
+            if(result.get('c01_4') === "飲用可") {
+                InfoHtml = InfoHtml + preCells + "id=EX>飲 料 水</a><a" + interCells + result.get('c01_4') + subCells;
+            } else if(result.get('c01_4') === "飲用不可") {
+                InfoHtml = InfoHtml + preCells + "id=TR>飲 料 水</a><a" + interCells + result.get('c01_4') + subCells;
+            } else if(result.get('c01_4') === "無し") {
+                InfoHtml = InfoHtml + preCells + "id=UK>飲 料 水</a><a" + interCells + result.get('c01_4') + subCells;
+            }
         }
 
-        if(result.get('c01_5') === null) {
-            InfoHtml = InfoHtml + preCells + '../../img/img/8.png' + interCells + subCells;
+        if(result.get('c01_5') === null || result.get('c01_5') === "不明") {
+            InfoHtml = InfoHtml + preCells + "id=NT>固定電話</a><a" + interCells + "不明" + subCells;
         } else {
-            InfoHtml = InfoHtml + preCells + '../../img/img/8.png' + interCells +  result.get('c01_5') + subCells;
+            if(result.get('c01_5') === "可") {
+                InfoHtml = InfoHtml + preCells + "id=EX>固定電話</a><a" + interCells + result.get('c01_5') + subCells;
+            } else if(result.get('c01_5') === "不可") {
+                InfoHtml = InfoHtml + preCells + "id=TR>固定電話</a><a" + interCells + result.get('c01_5') + subCells;
+            } else if(result.get('c01_5') === "無し") {
+                InfoHtml = InfoHtml + preCells + "id=UK>固定電話</a><a" + interCells + result.get('c01_5') + subCells;
+            }
         }
 
-        if(result.get('c01_8') === null) {
-            InfoHtml = InfoHtml + preCells + '../../img/img/9.png' + interCells + subCells;
+        if(result.get('c01_8') === null || result.get('c01_8') === "不明") {
+            InfoHtml = InfoHtml + preCells + "id=NT>携帯電話</a><a" + interCells + "不明" + subCells;
         } else {
-            InfoHtml = InfoHtml + preCells + '../../img/img/9.png' + interCells +  result.get('c01_8') + subCells;
+            if(result.get('c01_8') === "可") {
+                InfoHtml = InfoHtml + preCells + "id=EX>携帯電話</a><a" + interCells + result.get('c01_8') + subCells;
+            } else if(result.get('c01_8') === "不可") {
+                InfoHtml = InfoHtml + preCells + "id=TR>携帯電話</a><a" + interCells + result.get('c01_8') + subCells;
+            } else if(result.get('c01_8') === "無し") {
+                InfoHtml = InfoHtml + preCells + "id=UK>携帯電話</a><a" + interCells + result.get('c01_8') + subCells;
+            }
         }
 
-        if(result.get('c01_9') === null) {
-            InfoHtml = InfoHtml + preCells + '../../img/img/10.png' + interCells + subCells;
+        if(result.get('c01_9') === null || result.get('c01_9') === "不明") {
+            InfoHtml = InfoHtml + preCells + "id=NT>通　　信</a><a" + interCells + "不明" + subCells;
         } else {
-            InfoHtml = InfoHtml + preCells + '../../img/img/10.png' + interCells +  result.get('c01_9') + subCells;
+            if(result.get('c01_9') === "可") {
+                InfoHtml = InfoHtml + preCells + "id=EX'>通　　信</a><a" + interCells + result.get('c01_9') + subCells;
+            } else if(result.get('c01_9') === "不可") {
+                InfoHtml = InfoHtml + preCells + "id=TR'>通　　信</a><a" + interCells + result.get('c01_9') + subCells;
+            } else if(result.get('c01_9') === "無し") {
+                InfoHtml = InfoHtml + preCells + "id=UK>通　　信</a><a" + interCells + result.get('c01_9') + subCells;
+            }
         }
 
-        if(result.get('c02_6') === null) {
-            InfoHtml = InfoHtml + preCells + '../../img/img/11.png' + interCells + subCells;
+        if(result.get('c02_6') === null || result.get('c02_6') === "不明") {
+            InfoHtml = InfoHtml + preCells + "id=NT>ト イ レ</a><a" + interCells + "不明" + subCells;
         } else {
-            InfoHtml = InfoHtml + preCells + '../../img/img/11.png' + interCells +  result.get('c02_6') + subCells;
+            if(result.get('c02_6') === "使用可") {
+                InfoHtml = InfoHtml + preCells + "id=EX>ト イ レ</a><a" + interCells + result.get('c02_6') + subCells;
+            } else if(result.get('c02_6') === "使用不可") {
+                InfoHtml = InfoHtml + preCells + "id=TR>ト イ レ</a><a" + interCells + result.get('c02_6') + subCells;
+            } else if(result.get('c02_6') === "無し") {
+                InfoHtml = InfoHtml + preCells + "id=UK>ト イ レ</a><a" + interCells + result.get('c02_6') + subCells;
+            }
         }
-        if(result.get('c04_1') === null) {
-            InfoHtml = InfoHtml + preCells + '../../img/img/12.png' + interCells + subCells;
+
+        if(result.get('c04_1') === null || result.get('c04_1') === "不明") {
+            InfoHtml = InfoHtml + preCells + "id=NT>食　　料</a><a" + interCells + "不明" + subCells;
         } else {
-            InfoHtml = InfoHtml + preCells + '../../img/img/12.png' + interCells +  result.get('c04_1') + subCells;
+            if(result.get('c04_1') === "有") {
+                InfoHtml = InfoHtml + preCells + "id=EX>食　　料</a><a" + interCells + result.get('c04_1') + subCells;
+            } else if(result.get('c04_1') === "無し") {
+                InfoHtml = InfoHtml + preCells + "id=UK>食　　料</a><a" + interCells + result.get('c04_1') + subCells;
+            }
         }
+
         return InfoHtml;
     }
 }
@@ -332,8 +389,6 @@ function evacueeInfoHtml(result){
 function showHide(){
     // 情報画面を非表示にする
     document.getElementById('info').style.display = 'none';
-    document.getElementById('infoWrapV').style.display = 'none';
-    document.getElementById('infoWrapH').style.display = 'none';
     var element = document.getElementsByClassName('infoTab');
     for (var i=0;i<element.length;i++) {
         element[i].style.display = "none";

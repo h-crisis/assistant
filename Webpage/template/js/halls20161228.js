@@ -237,26 +237,29 @@ function createHtmlHall(evt,feature) {
     if (arrayV[0] === null) {
     } else {
         if(arrayV[6] == 0 && arrayV[7] == 0) {
-            DetailHtml = DetailHtml + "<a id='title'>" + arrayV[4] + arrayV[8] + "</a>";
+            DetailHtml = DetailHtml + "<div id='blueback'><a id='title'>" + arrayV[4] + arrayV[8] + "</a></div>";
         }
         else if(arrayV[7] == 0) {
-            DetailHtml = DetailHtml + "<a id='title'>" + arrayV[4] + arrayV[6] + arrayV[8] + "</a>";
+            DetailHtml = DetailHtml + "<div id='blueback'><a id='title'>" + arrayV[4] + arrayV[6] + arrayV[8] + "</a></div>";
         }
         else {
-            DetailHtml = DetailHtml + "<a id='title'>" + arrayV[4] + arrayV[7] + arrayV[8] + "</a>";
+            DetailHtml = DetailHtml + "<div id='blueback'><a id='title'>" + arrayV[4] + arrayV[7] + arrayV[8] + "</a></div>";
         }
     }
 
-    DetailHtml = DetailHtml + '<hr>';
-    DetailHtml = DetailHtml + preCells + '../../img/img/1.png' + interCells + arrayV[3] + subCells; // 住所表示
-    DetailHtml = DetailHtml + preCells + '../../img/img/2.png' + interCells + arrayV[9] + subCells; // 人口表示
-    DetailHtml = DetailHtml + preCells + '../../img/img/3.png' + interCells + arrayV[10] + subCells; // 世帯数表示
-    DetailHtml = DetailHtml + preCells + '../../img/img/4.png' + interCells + arrayV[14] + subCells; // 全壊建物数表示
-    DetailHtml = DetailHtml + preCells + '../../img/img/5.png' + interCells + arrayV[15] + subCells; // 半壊建物数表示
-    DetailHtml = DetailHtml + preCells + '../../img/img/6.png' + interCells + arrayV[16] + subCells; // 死者数表示
-    DetailHtml = DetailHtml + preCells + '../../img/img/7.png' + interCells + arrayV[17] + subCells; // 負傷者表示
-    DetailHtml = DetailHtml + preCells + '../../img/img/8.png' + interCells + arrayV[18] + subCells; // 重傷者数表示
-    DetailHtml = DetailHtml + preCells + '../../img/img/9.png' + interCells + arrayV[19] + subCells; // 避難者数表示
+    var tagName = ['人口','世帯数','全壊建物数','半壊建物数','死者数','負傷者数','重傷者数','避難者数'];
+    // var tagNameI = ['人','世','全','半','死','負傷','重傷','避難者'];
+    // var tagName = ['口','帯数','壊建物数','壊建物数','者数','者数','者数','数'];
+
+    // DetailHtml = DetailHtml + preCells + "id=NOCLR>" + 住所 + "</a><a" + interCells + arrayV[3] + subCells; // 住所表示
+    DetailHtml = DetailHtml + preCells + "id=NOCLR>" + tagName[0] + "</a><a" + interCells + arrayV[9] + "人" + subCells; // 人口表示
+    DetailHtml = DetailHtml + preCells + "id=NOCLR>" + tagName[1] + "</a><a" + interCells + arrayV[10] + subCells; // 世帯数表示
+    DetailHtml = DetailHtml + preCells + "id=NOCLR>" + tagName[2] + "</a><a" + interCells + arrayV[14] + subCells; // 全壊建物数表示
+    DetailHtml = DetailHtml + preCells + "id=NOCLR>" + tagName[3] + "</a><a" + interCells + arrayV[15] + subCells; // 半壊建物数表示
+    DetailHtml = DetailHtml + preCells + "id=NOCLR>" + tagName[4] + "</a><a" + interCells + arrayV[16] + subCells; // 死者数表示
+    DetailHtml = DetailHtml + preCells + "id=NOCLR>" + tagName[5] + "</a><a" + interCells + arrayV[17] + subCells; // 負傷者表示
+    DetailHtml = DetailHtml + preCells + "id=NOCLR>" + tagName[6] + "</a><a" + interCells + arrayV[18] + subCells; // 重傷者数表示
+    DetailHtml = DetailHtml + preCells + "id=NOCLR>" + tagName[7] + "</a><a" + interCells + arrayV[19] + subCells; // 避難者数表示
     /*
     DetailHtml = DetailHtml + preCells + '最大震度' + interCells + arrayV[11] + subCells; // 最大震度表示
     DetailHtml = DetailHtml + preCells + '最小震度' + interCells + arrayV[12] + subCells; // 最小震度表示
@@ -269,8 +272,6 @@ function createHtmlHall(evt,feature) {
     
     document.getElementById('info').style.display = 'block';
     document.getElementById('info').innerHTML = DetailHtml;
-    document.getElementById('infoWrapV').style.display = 'block';
-    document.getElementById('infoWrapH').style.display = 'block';
     document.getElementById('popup').style.display = 'block';
     overlayPopup.setPosition(coordinate);
 }
