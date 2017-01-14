@@ -56,8 +56,10 @@ if (document.URL.indexOf("?_") > 0){
 // オーバレイの設定（ポップアップ）
 var popupCloser = document.getElementById('popup-closer');
 
+var markerElement = document.getElementById('popup');
+
 var overlayPopup = new ol.Overlay(/** @type {olx.OverlayOptions} */ ({
-    element: document.getElementById('popup'),
+    element: markerElement,
     autoPan: true,
     autoPanAnimation: {
         duration: 250
