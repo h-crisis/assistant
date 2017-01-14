@@ -151,10 +151,14 @@ var displayFeatureInfo = function(pixel, evt) {
             label = feature.getKeys()[i];
             valr = feature.get(label);
             arrayL.push(label);
-            if (isFinite(valr) && (arrayL[i] === "longtitude" || arrayL[i] === "latitude")) {
-                arrayV.push(Math.round(valr))
-            } else {
+            if (label == "latitude" || label == "longitude") {
                 arrayV.push(valr)
+            } else {
+                if (isFinite(valr)) {
+                    arrayV.push(Math.round(valr))
+                } else {
+                    arrayV.push(valr)
+                }
             }
         }
 
