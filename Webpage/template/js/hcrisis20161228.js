@@ -151,13 +151,14 @@ var displayFeatureInfo = function(pixel, evt) {
             label = feature.getKeys()[i];
             valr = feature.get(label);
             arrayL.push(label);
-            if (isFinite(valr)) {
+            if (isFinite(valr) && (arrayL[i] === "longtitude" || arrayL[i] === "latitude")) {
                 arrayV.push(Math.round(valr))
             } else {
                 arrayV.push(valr)
             }
         }
-        
+
+
         if(arrayL[9]=='p_num') {
             createHtmlHall(evt, feature);
         }
