@@ -69,19 +69,17 @@ function createHtmlPass(evt) {
     var coordinate = nowLatLon;
     DetailHtml = "<div id='landscape'><img id='landIcon' src='../../img/impassable/1.png'></div>";
     // 建築物名表示
-    if (arrayV[0] === null) {
+    if (arrayV[0].length < 18) {
+        DetailHtml = DetailHtml + "<div id='blueback'><a id='title'>" + arrayV[0] + "</a>";
     } else {
-        DetailHtml = DetailHtml + "<a id='title'>" + arrayV[0] + "</a>";
+        DetailHtml = DetailHtml + "<div id='blueback'><a id='titleTooLong'>" + arrayV[0] + "</a>";
     }
-    DetailHtml = DetailHtml + "<hr>";
-    for (i = 0; i < arrayL.length; i++) {
-        DetailHtml = DetailHtml + preCells + '../../img/img/' + (i + 1) + '.png' + interCells + arrayV[i] + subCells;
-        console.log(preCells + '../../img/img/' + (i + 1) + '.png' + interCells + arrayV[i] + subCells)
+    DetailHtml = DetailHtml + preCells + "style='color:white;'" + interCells + arrayV[5] + subCells + "</div>";
+    for (i = 1; i < arrayL.length-2; i++) {
+        DetailHtml = DetailHtml + preCells + "id=NOCLR>" + arrayL[i] + "</a><a" + interCells + arrayV[i] + subCells;
     }
     document.getElementById('info').style.display = 'block';
     document.getElementById('info').innerHTML = DetailHtml;
-    document.getElementById('infoWrapV').style.display = 'block';
-    document.getElementById('infoWrapH').style.display = 'block';
     document.getElementById('popup').style.display = 'block';
     overlayPopup.setPosition(coordinate);
 }

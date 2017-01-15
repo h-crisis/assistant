@@ -56,8 +56,10 @@ if (document.URL.indexOf("?_") > 0){
 // オーバレイの設定（ポップアップ）
 var popupCloser = document.getElementById('popup-closer');
 
+var markerElement = document.getElementById('popup');
+
 var overlayPopup = new ol.Overlay(/** @type {olx.OverlayOptions} */ ({
-    element: document.getElementById('popup'),
+    element: markerElement,
     autoPan: true,
     autoPanAnimation: {
         duration: 250
@@ -67,8 +69,6 @@ var overlayPopup = new ol.Overlay(/** @type {olx.OverlayOptions} */ ({
 popupCloser.onclick = function() {
     document.getElementById('info').style.display = 'none';
     document.getElementById('infoHeader').style.display = 'none';
-    document.getElementById('infoWrapV').style.display = 'none';
-    document.getElementById('infoWrapH').style.display = 'none';
     document.getElementById('tab001').style.display = 'none';
     document.getElementById('tab002').style.display = 'none';
     document.getElementById('tab003').style.display = 'none';
@@ -153,13 +153,18 @@ var displayFeatureInfo = function(pixel, evt) {
             label = feature.getKeys()[i];
             valr = feature.get(label);
             arrayL.push(label);
-            if (isFinite(valr)) {
-                arrayV.push(Math.round(valr))
-            } else {
+            if (label == "latitude" || label == "longitude") {
                 arrayV.push(valr)
+            } else {
+                if (isFinite(valr)) {
+                    arrayV.push(Math.round(valr))
+                } else {
+                    arrayV.push(valr)
+                }
             }
         }
-        
+
+
         if(arrayL[9]=='p_num') {
             createHtmlHall(evt, feature);
         }
@@ -181,12 +186,12 @@ map.on('click', function(evt,feature) {
         interCells = "</td><td id='nameCell' width='230px' style='font-size:17px;font-family:helvetica;background-color:white;'>";
         subCells = "</td></tr>";
         */
-        preCells = "<p><img src='";
-        interCells = "'><a>";
+        preCells = "<p><a ";
+        interCells = ">";
         subCells = "</a></p>";
     } else if (window.innerWidth >= 480) {
-        preCells = "<p><img src='";
-        interCells = "'><a>";
+        preCells = "<p><a>";
+        interCells = "<a>";
         subCells = "</a></p>";
     } else {
         preCells = "<tr><td id='tagCell' width='130px' style='font-size:10px;font-family:helvetica;background-color:#ffffff;padding: 2px;'>";
@@ -196,8 +201,6 @@ map.on('click', function(evt,feature) {
     document.getElementById('info').innerHTML = "";
     document.getElementById('infoHeader').style.display = 'none';
     document.getElementById('info').style.display = 'none';
-    document.getElementById('infoWrapV').style.display = 'none';
-    document.getElementById('infoWrapH').style.display = 'none';
     document.getElementById('popup').style.display = 'none';
     var element = document.getElementsByClassName('infoTab');
     for (var i=0;i<element.length;i++) {

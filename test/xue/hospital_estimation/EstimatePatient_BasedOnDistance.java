@@ -9,7 +9,7 @@ import java.util.Iterator;
  * Created by jiao on 2016/11/29.
  * 病院との距離情報ファイルを"near_hospital.csv"に入ってます。ファイル名とルートは後で要チェック
  */
-public class EstimatePatient {
+public class EstimatePatient_BasedOnDistance {
 
     // private static File m_i_master; //病院情報が入ってます
     //private static File siFile;// 震度分布ファイル
@@ -23,11 +23,10 @@ public class EstimatePatient {
         try {
             File m_i_master = new File("/Users/jiao/IdeaProjects/2/assistant/files/master/h-crisis_emis_medical_institute_master.csv");
 
-            File siFile = new File("/Users/jiao/IdeaProjects/2/assistant/files/out/test1/test1_si.csv");
-            File simple_mesh_base_damage = new File("/Users/jiao/IdeaProjects/2/assistant/files/out/test1/test1_mesh_base_03_damage_simple.csv");
+            File siFile = new File("/Users/jiao/IdeaProjects/2/assistant/files/out/tests/tests_si.csv");
+            File simple_mesh_base_damage = new File("/Users/jiao/IdeaProjects/2/assistant/files/out/tests/tests_mesh_base_03_damage_simple.csv");
             File nearHospitalFile = new File("/Users/jiao/IdeaProjects/2/assistant/files/master/near_hospital.csv");/////ファイル名はチェック
-
-            File file = new File("/Users/jiao/IdeaProjects/2/assistant/files/out/test1/test1_hospital_01_eva_patient.csv");
+            File file = new File("/Users/jiao/IdeaProjects/2/assistant/files/out/tests/tests_hospital_01_eva_patient.csv");
 
 
             BufferedReader brIn3 = new BufferedReader(new InputStreamReader(new FileInputStream(m_i_master), "Shift_JIS"));
