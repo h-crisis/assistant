@@ -1,7 +1,3 @@
-import java.io.*;
-import java.util.*;
-
-
 /**
  * 災害発生した際に、各外科病院、整形外科形成外科にいる患者数を集計するプログラム
  * Created by jiao on 2017/01/13.
