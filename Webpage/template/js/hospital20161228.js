@@ -111,8 +111,8 @@ var url = 'http://h-crisis.niph.go.jp/wp-content/uploads/data/medical_status/lat
 
 var hospLayer = new ol.layer.Vector({
     source: new ol.source.Vector({
-        // url: 'geojson/hcrisis_medical_status.geojson',
-        url: url,
+        url: 'geojson/hcrisis_medical_status.geojson',
+        // url: url,
         format: new ol.format.GeoJSON()
     }),
     style: function(feature, resolution) {
