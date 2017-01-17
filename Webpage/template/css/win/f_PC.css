@@ -48,11 +48,10 @@ a {
     position: absolute;
     bottom: 85px;
     right: 33.5px;
-    background: url("../../img/target.png");
+    background: url("../../img/img/target.png");
     background-color: #7394bb;
     width: 25px;
     height: 25px;
-    clip: rect(0,36px,36px,0);
     border-radius: 2px;
     background-size: cover;
 }
@@ -65,7 +64,7 @@ a {
     position: absolute;
     bottom: 111px;
     right: 33.5px;
-    background: url("../../img/syokiichi.png");
+    background: url("../../img/img/syokiichi.png");
     background-color: #7394bb;
     width: 25px;
     height: 25px;
@@ -180,7 +179,7 @@ div#option{
     top: 3px;
     width: 36px;
     height: 36px;
-    background-image: url("../../img/3bar.png");
+    background-image: url("../../img/img/3bar.png");
 }
 #address{
     z-index: 4;
@@ -206,7 +205,7 @@ div#submit{
     top: 8px;
     width: 24px;
     height: 24px;
-    background-image: url("../../img/loope.png");
+    background-image: url("../../img/img/loope.png");
 }
 
 .panel{
@@ -236,7 +235,7 @@ div#option{
     top: 3px;
     width: 36px;
     height: 36px;
-    background-image: url("../../img/3bar.png");
+    background-image: url("../../img/img/3bar.png");
 }
 
 
@@ -258,7 +257,7 @@ img#assistant{
     position: relative;
     left: 0;
     top: 0;
-    background: url("../../img/assistant.png");
+    background: url("../../img/img/assistant.png");
     width: 220px;
     height: 65px;
     background-size: cover;
@@ -503,7 +502,7 @@ div#map{
 #landscape{
     width: 360px;
     height: 200px;
-    background:url('../../img/gradient.png');
+    background:url('../../img/img/gradient.png');
     overflow:hidden;
     z-index: 9;
 }
