@@ -11,7 +11,7 @@ var styleImpassable = new ol.style.Style({
     }),
     image: new ol.style.Icon({
         scale: 0.075,
-        anchor: [0.5, 0.5],
+        anchor: [0.5, 1],
         anchorXUnits: 'fraction',
         anchorYUnits: 'fraction',
         opacity: 1,
