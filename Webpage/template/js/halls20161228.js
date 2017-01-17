@@ -237,15 +237,18 @@ function createHtmlHall(evt,feature) {
     if (arrayV[0] === null) {
     } else {
         if(arrayV[6] == 0 && arrayV[7] == 0) {
-            DetailHtml = DetailHtml + "<div id='blueback'><a id='title'>" + arrayV[4] + arrayV[8] + "</a></div>";
+            DetailHtml = DetailHtml + "<div id='blueback'><a id='title'>" + arrayV[4] + arrayV[8] + "</a>";
         }
         else if(arrayV[7] == 0) {
-            DetailHtml = DetailHtml + "<div id='blueback'><a id='title'>" + arrayV[4] + arrayV[6] + arrayV[8] + "</a></div>";
+            DetailHtml = DetailHtml + "<div id='blueback'><a id='title'>" + arrayV[4] + arrayV[6] + arrayV[8] + "</a>";
         }
         else {
-            DetailHtml = DetailHtml + "<div id='blueback'><a id='title'>" + arrayV[4] + arrayV[7] + arrayV[8] + "</a></div>";
+            DetailHtml = DetailHtml + "<div id='blueback'><a id='title'>" + arrayV[4] + arrayV[7] + arrayV[8] + "</a>";
         }
     }
+
+    DetailHtml = DetailHtml + preCells + "style='color:white;'" + interCells + "震度情報" + subCells;
+    DetailHtml = DetailHtml + preCells + "style='color:white;'" + interCells + "市区町村庁舎所在地:" + arrayV[3] + subCells + "</div>";
 
     var tagName = ['人口','世帯数','全壊建物数','半壊建物数','死者数','負傷者数','重傷者数','避難者数'];
     // var tagNameI = ['人','世','全','半','死','負傷','重傷','避難者'];

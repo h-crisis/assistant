@@ -118,6 +118,7 @@ function createShelterInfoHtml(result) {
         // 状況表示
 
         // 住所の表示
+        InfoHtml = InfoHtml + preCells + "style='color:white;'" + interCells + "避難所" + subCells;
         InfoHtml = InfoHtml + preCells + "style='color:white;'" + interCells + "ID:"　+ result.get('code') + subCells + "</div>";
         InfoHtml = InfoHtml + preCells + interCells + "&nbsp;&nbsp;" +  result.get('pref') + result.get('gun') + result.get('sikuchoson') + result.get('address') + subCells;
 

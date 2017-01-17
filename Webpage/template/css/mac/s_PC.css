@@ -515,7 +515,7 @@ div#map{
 #blueback{
     top: 200px;
     width: 360px;
-    height: 60px;
+    height: 90px;
     background-color: #3399FF;
     z-index: 9;
 }

@@ -120,7 +120,7 @@ var url = 'http://h-crisis.niph.go.jp/wp-content/uploads/data/medical_status/lat
 
 var hospLayer = new ol.layer.Vector({
     source: new ol.source.Vector({
-        // url: 'geojson/hcrisis_medical_status.geojson',
+        //url: 'geojson/hcrisis_medical_status.geojson',
         url: url,
         format: new ol.format.GeoJSON()
     }),
@@ -254,6 +254,7 @@ function createHtmlHospital(evt,feature) {
     } else {
         DetailHtml = DetailHtml + "<div id='blueback'><a id='titleTooLong'>" + arrayV[1] + "</a>";
     }
+    DetailHtml = DetailHtml + preCells + "style='color:white;'" + interCells + "医療機関" + subCells
     DetailHtml = DetailHtml + preCells + "style='color:white;'" + interCells + arrayV[5] + subCells + "</div>";
     // HeaderHtml = HeaderHtml + "<div style='border:2px solid burlywood; background-color:#888888; color:white; text-align:center' type=button id=showBtn value=隠す onclick=showDetail()>詳細情報の表示切替</div>";
     for (i = 0; i < tagName.length; i++) {
