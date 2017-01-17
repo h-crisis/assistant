@@ -252,7 +252,7 @@ div#option{
 
 }
 
-img#assistant{
+div#assistant{
     z-index: 9;
     position: relative;
     left: 0;
