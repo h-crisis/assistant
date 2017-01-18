@@ -26,7 +26,7 @@ var styleHospR;
             opacity: 0.85,
             src: src
         })
-    })
+    });
 //}
 
 //var styleHospB = new Array(16);
@@ -50,7 +50,7 @@ var styleHospB;
             opacity: 0.85,
             src: src
         })
-    })
+    });
 //}
 
 //var styleHospG = new Array(16);
@@ -74,8 +74,20 @@ var styleHospG;
             opacity: 0.85,
             src: src
         })
-    })
+    });
 //}
+
+var styleBack = new ol.style.Style({
+    image: new ol.style.Icon({
+        scale: 0.075,
+        anchor: [0.5, 1],
+        anchorXUnits: 'fraction',
+        anchorYUnits: 'fraction',
+        opacity: 0.001,
+        src: src
+    })
+});
+
 
 /*
 var styleHospG = new Array(16);
@@ -152,7 +164,15 @@ var hospLayer = new ol.layer.Vector({
 
     }
 });
-
+/*
+var clinicDep = new ol.layer.Vector({
+    source: new ol.source.Vector({
+        url: 'geojson/clinical_departments.geojson',
+        format: new ol.format.GeoJSON()
+    }),
+    style: styleBack
+});
+*/
 /*
  var hospLayer = new ol.layer.Vector({
  source: new ol.source.Vector({
@@ -234,15 +254,19 @@ function createHtmlHospital(evt,feature) {
 
     // 適切なアイコンurlを取得する
     var iconUrl;
+    var tagColor;
     biNum = (feature.get('saigai') * 8) + (feature.get('kyukyu') * 4) + (feature.get('hibaku') * 2) + (feature.get('dmat') * 1);
     if (feature.get('assist') == "要"){
                 iconUrl = '../../img/hospital/hspt_red.png' ;
+                tagColor = "red";
                // iconUrl = 'http://h-crisis.niph.go.jp/assistant/wp-content/uploads/sites/4/test/img/r/' + i + '.png'
     } else if(feature.get('assist') == "未" && feature.get('mds') == "未入力") {
                 iconUrl = '../../img/hospital/hspt_grey.png';
+                tagColor = "grey";
                 // iconUrl = 'http://h-crisis.niph.go.jp/assistant/wp-content/uploads/sites/4/test/img/g/' + i + '.png'
     } else {
                 iconUrl = '../../img/hospital/hspt_blue.png';
+                tagColor = "blue";
                 // iconUrl = 'http://h-crisis.niph.go.jp/assistant/wp-content/uploads/sites/4/test/img/b/' + i + '.png'
     }
 
@@ -254,7 +278,7 @@ function createHtmlHospital(evt,feature) {
     } else {
         DetailHtml = DetailHtml + "<div id='blueback'><a id='titleTooLong'>" + arrayV[1] + "</a>";
     }
-    DetailHtml = DetailHtml + preCells + "style='color:white;'" + interCells + "医療機関" + subCells
+    DetailHtml = DetailHtml + preCells + "style='color:white;'" + interCells + "医療機関" + subCells;
     DetailHtml = DetailHtml + preCells + "style='color:white;'" + interCells + arrayV[5] + subCells + "</div>";
     // HeaderHtml = HeaderHtml + "<div style='border:2px solid burlywood; background-color:#888888; color:white; text-align:center' type=button id=showBtn value=隠す onclick=showDetail()>詳細情報の表示切替</div>";
     for (i = 0; i < tagName.length; i++) {
@@ -272,9 +296,23 @@ function createHtmlHospital(evt,feature) {
         // 名称,住所,支援要否,医療派遣ステータス,緊急時入力/入院病棟倒壊・倒壊の恐れ,緊急時入力/ライフライン・サプライ状況/電気使用不可,
         // 緊急時入力/ライフライン・サプライ状況/水使用不可,緊急時入力/ライフライン・サプライ状況/医療ガス使用不可,
         // 緊急時入力/ライフライン・サプライ状況/医薬品衛生資器材使用不可,緊急時入力/多数患者受診,緊急時入力/職員状況,更新日時
-        if(i == 10 || i == 11 || i == 15 || i == 16 || i == 17 || i == 18 || i == 19 || i == 20 || i == 21 || i == 13)
-        DetailHtml = DetailHtml + preCells + "id=NOCLR>" + tagName[i] + "</a><a" + interCells + arrayV[i] + subCells;
+
+        if (i == 10 && tagColor == "red") {
+            DetailHtml = DetailHtml + preCells + "id=RED style='width:50px; margin-right:85px;'>" + "支援要否" + "</a><a" + interCells + arrayV[i] + subCells;
+            DetailHtml = DetailHtml + preCells + "id=RED>" + tagName[i + 1] + "</a><a" + interCells + arrayV[i + 1] + subCells;
+        } else if (i == 10 && tagColor == "grey"){
+            DetailHtml = DetailHtml + preCells + "id=YELO style='width:50px; margin-right:85px;'>" + tagName[i] + "</a><a" + interCells + arrayV[i] + subCells;
+            DetailHtml = DetailHtml + preCells + "id=YELO>" + tagName[i + 1] + "</a><a" + interCells + arrayV[i + 1] + subCells;
+        } else if (i == 10 && tagColor == "blue"){
+            DetailHtml = DetailHtml + preCells + "id=NOCLR>" + tagName[i] + "</a><a" + interCells + arrayV[i] + subCells;
+            DetailHtml = DetailHtml + preCells + "id=NOCLR>" + tagName[i + 1] + "</a><a" + interCells + arrayV[i + 1] + subCells;
+        }
+
+        if(i == 15 || i == 16 || i == 17 || i == 18 || i == 19 || i == 20 || i == 21 || i == 13) {
+            DetailHtml = DetailHtml + preCells + "id=NOCLR>" + tagName[i] + "</a><a" + interCells + arrayV[i] + subCells;
+        }
     }
+
     document.getElementById('info').style.display = 'block';
     document.getElementById('info').innerHTML = DetailHtml;
     document.getElementById('popup').style.display = 'block';

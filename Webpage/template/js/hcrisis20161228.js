@@ -99,12 +99,14 @@ map.addControl(new ol.control.Zoom({
 // map上に各アイコンのレイヤーを追加して、非表示にする。
 map.addLayer(shelterLayer);
 map.addLayer(hospLayer);
+//map.addLayer(clinicDep);
 map.addLayer(hallLayer);
 map.addLayer(ImpassableLayer);
 map.addLayer(ImpassableLayerAdd);
 map.once('postrender', function(){
     shelterLayer.setVisible(false);
     hospLayer.setVisible(false);
+    //clinicDep.setVisible(false);
     hallLayer.setVisible(false);
     ImpassableLayer.setVisible(false);
     ImpassableLayerAdd.setVisible(false);

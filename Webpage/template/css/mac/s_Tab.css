@@ -460,6 +460,24 @@ div#map{
     text-align: left;
     border-radius: 2px;
 }
+.info a#RED {
+    width: 120px;
+    height: 12px;
+    display:inline-block;
+    text-align: left;
+    border-radius: 2px;
+    background-color: red;
+    color: #ffffff;
+}
+.info a#YELO {
+    width: 120px;
+    height: 12px;
+    display:inline-block;
+    text-align: left;
+    border-radius: 2px;
+    background-color: #eea700;
+    color: #ffffff;
+}
 
 .infoTab{
     z-index: 3;
