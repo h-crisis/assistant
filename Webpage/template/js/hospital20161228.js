@@ -127,14 +127,14 @@ var hospLayer = new ol.layer.Vector({
     style: function(feature, resolution) {
         biNum = (feature.get('saigai') * 8) + (feature.get('kyukyu') * 4) + (feature.get('hibaku') * 2) + (feature.get('dmat') * 1);
         if (feature.get('assist') == "要"){
-                styleHospR.getText().setText(resolution < 0.0003 ? feature.get('name') : '');
-                return styleHospR;
+                    styleHospR.getText().setText(resolution < 0.0003 ? feature.get('name') : '');
+                    return styleHospR;
         } else if(feature.get('assist') == "未" && feature.get('mds') == "未入力") {
-                styleHospG.getText().setText(resolution < 0.0003 ? feature.get('name') : '');
-                return styleHospG;
+                    styleHospG.getText().setText(resolution < 0.0003 ? feature.get('name') : '');
+                    return styleHospG;
         } else {
-                styleHospB.getText().setText(resolution < 0.0003 ? feature.get('name') : '');
-                return styleHospB;
+                    styleHospB.getText().setText(resolution < 0.0003 ? feature.get('name') : '');
+                    return styleHospB;
                 /*
                  for (var i = 0; i < 16 ; i++) {
                 if (biNum == i) {

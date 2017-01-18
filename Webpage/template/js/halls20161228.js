@@ -255,7 +255,7 @@ function createHtmlHall(evt,feature) {
     // var tagName = ['口','帯数','壊建物数','壊建物数','者数','者数','者数','数'];
 
     // DetailHtml = DetailHtml + preCells + "id=NOCLR>" + 住所 + "</a><a" + interCells + arrayV[3] + subCells; // 住所表示
-    DetailHtml = DetailHtml + preCells + "id=NOCLR>" + tagName[0] + "</a><a" + interCells + arrayV[9]  + subCells; // 人口表示
+    DetailHtml = DetailHtml + preCells + "id=NOCLR>" + tagName[0] + "</a><a" + interCells + arrayV[9] + "人" + subCells; // 人口表示
     DetailHtml = DetailHtml + preCells + "id=NOCLR>" + tagName[1] + "</a><a" + interCells + arrayV[10] + subCells; // 世帯数表示
     DetailHtml = DetailHtml + preCells + "id=NOCLR>" + tagName[2] + "</a><a" + interCells + arrayV[14] + subCells; // 全壊建物数表示
     DetailHtml = DetailHtml + preCells + "id=NOCLR>" + tagName[3] + "</a><a" + interCells + arrayV[15] + subCells; // 半壊建物数表示

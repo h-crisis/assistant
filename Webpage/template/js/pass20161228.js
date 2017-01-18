@@ -59,6 +59,7 @@ function visPassButton() {
     }
 };
 
+
 // 交通規制のポップアップを作成する関数
 function createHtmlPass(evt) {
     document.getElementById('info').innerHTML = "";

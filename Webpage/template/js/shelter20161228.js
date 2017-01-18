@@ -438,6 +438,7 @@ function showDetail(id){
     }
 }
 
+
 function shelterButton() {
     // 避難所をマップに表示させるかどうか
     if (!shelterLayer.getVisible()) {
