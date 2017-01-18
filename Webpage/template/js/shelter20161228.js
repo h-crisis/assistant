@@ -113,7 +113,7 @@ function createShelterInfoHtml(result) {
                 InfoHtml = InfoHtml + "<div id='blueback'><a id='titleTooLong'>" + result.get('name') + "</a>";
                 // InfoHtml = InfoHtml + "<br><a style='font-family: Helvetica'>(" + result.get('pref') + result.get('gun') + result.get('sikuchoson') + result.get('address') + ")</a>"
             }
-        } 
+        }
 
         // 状況表示
 
@@ -237,7 +237,8 @@ function createShelterInfoHtml(result) {
                 InfoHtml = InfoHtml + preCells + "id=UK>食　　料</a><a" + interCells + result.get('c04_1') + subCells;
             }
         }
-
+        var inputCode = '?event=' + eventCode + ',id=' + result.get('code') + ',name=' + result.get('name')　+ ',address=' + result.get('address');
+        InfoHtml = InfoHtml + "<div id='inputShelter' onclick=window.open('../../html/shelter-emergency.html" + inputCode +  "','_blank')><img id='inputIcon' src='../../img/img/document.png '></div>";
         return InfoHtml;
     }
 }
@@ -450,4 +451,11 @@ function shelterButton() {
         this.style.backgroundColor = "";
         this.style.color = "";
     }
+}
+
+function openShelterInput() {
+    // 避難所をマップに表示させるかどうか
+    var btnCode = '?event=' + eventCode + ',id=' + result.get('code') + ',name=' + result.get('name')　+ ',address=' + result.get('address');
+    DetailHtml = "<div style='border:2px solid burlywood; background-color:#888888; text-align:center' type=button ><a href=../../html/shelter-emergency.html" + btnCode + " ,style='display:block; width:100%; color:white; text-decoration:none' id=niphLonLatE target=_blank>緊急時情報入力</a></div>"
+
 }

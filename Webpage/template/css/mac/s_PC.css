@@ -539,3 +539,16 @@ div#map{
     background-color: #3399FF;
     z-index: 9;
 }
+#inputShelter{
+    top: 10px;
+    left: 10px;
+}
+#inputIcon{
+    position:relative;
+    left: 285px;
+    top: -305px;
+    background: url("../../img/img/document.png");
+    height: 50px;
+    width: auto;
+    z-index: 9;
+}
