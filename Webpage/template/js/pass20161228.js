@@ -74,7 +74,9 @@ function createHtmlPass(evt) {
     } else {
         DetailHtml = DetailHtml + "<div id='blueback'><a id='titleTooLong'>" + arrayV[0] + "</a>";
     }
+
     DetailHtml = DetailHtml + preCells + "style='color:white;'" + interCells + "交通情報:" + arrayV[5] + subCells + "</div>";
+
     for (i = 1; i < arrayL.length-2; i++) {
         DetailHtml = DetailHtml + preCells + "id=NOCLR>" + arrayL[i] + "</a><a" + interCells + arrayV[i] + subCells;
     }

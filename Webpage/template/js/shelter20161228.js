@@ -449,4 +449,4 @@ function shelterButton() {
         this.style.backgroundColor = "";
         this.style.color = "";
     }
-};
+}
