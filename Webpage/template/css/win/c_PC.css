@@ -41,17 +41,17 @@ a {
 .custom-zoom{
     bottom: 30px;
     right: 30px;
-    padding-top: 52px;
+    padding-top: 69px;
 }
 #goToHere{
     z-index: 4;
     position: absolute;
-    bottom: 85px;
+    bottom: 101px;
     right: 33.5px;
     background: url("../../img/img/target.png");
     background-color: #7394bb;
-    width: 25px;
-    height: 25px;
+    width: 32px;
+    height: 32px;
     border-radius: 2px;
     background-size: cover;
 }
@@ -62,12 +62,12 @@ a {
 #goToHypoCenter{
     z-index: 4;
     position: absolute;
-    bottom: 111px;
+    bottom: 134px;
     right: 33.5px;
     background: url("../../img/img/syokiichi.png");
     background-color: #7394bb;
-    width: 25px;
-    height: 25px;
+    width: 32px;
+    height: 32px;
     border-radius: 2px;
     background-size: cover;
 }
