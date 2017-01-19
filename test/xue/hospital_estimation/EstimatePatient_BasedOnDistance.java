@@ -93,7 +93,7 @@ public static void Estimate_patient(File inFile1, File inFile2, File inFile3, Fi
 
             //外科病院リストSurgery_list
             //整形外科形成外科病院リストOrthopedics_list
-            brIn3.mark((int)m_i_master.length());//現在位置(初期位置)をマークする
+            brIn3.mark((int)inFile3.length());//現在位置(初期位置)をマークする
 
             line1 = brIn3.readLine(); //
             String pair1[] = line1.split(",");
