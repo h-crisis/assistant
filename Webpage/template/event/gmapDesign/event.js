@@ -8,6 +8,7 @@ var centerLat = 135.572418;
 var centerLon = 34.464827;
 var arrayL = new Array(0);
 var arrayV = new Array(0);
+var arrayH = new Array(0);
 var zoomLevel = 2;
 var userLat,userLon,userZoom;
 var reURL = "url";

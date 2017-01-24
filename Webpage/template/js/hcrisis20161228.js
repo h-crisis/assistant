@@ -99,14 +99,14 @@ map.addControl(new ol.control.Zoom({
 // map上に各アイコンのレイヤーを追加して、非表示にする。
 map.addLayer(shelterLayer);
 map.addLayer(hospLayer);
-//map.addLayer(clinicDep);
+map.addLayer(clinicDep);
 map.addLayer(hallLayer);
 map.addLayer(ImpassableLayer);
 map.addLayer(ImpassableLayerAdd);
 map.once('postrender', function(){
     shelterLayer.setVisible(false);
     hospLayer.setVisible(false);
-    //clinicDep.setVisible(false);
+    clinicDep.setVisible(false);
     hallLayer.setVisible(false);
     ImpassableLayer.setVisible(false);
     ImpassableLayerAdd.setVisible(false);
@@ -166,6 +166,15 @@ var displayFeatureInfo = function(pixel, evt) {
             }
         }
 
+
+        if(typeof(feature.T.dep1) == "undefined"){}
+        else {
+            arrayH = [];
+            arrayH.push(feature.T.dep1,feature.T.dep2,feature.T.dep3,feature.T.dep4,feature.T.dep5,feature.T.dep6);
+            arrayH.push(feature.T.dep7,feature.T.dep8,feature.T.dep9,feature.T.dep10,feature.T.dep11,feature.T.dep12);
+            arrayH.push(feature.T.dep13,feature.T.dep14,feature.T.dep15,feature.T.dep16,feature.T.dep17,feature.T.dep18);
+            arrayH.push(feature.T.dep19,feature.T.dep20,feature.T.dep21,feature.T.dep22);
+        }
 
         if(arrayL[9]=='p_num') {
             createHtmlHall(evt, feature);

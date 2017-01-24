@@ -164,7 +164,7 @@ var hospLayer = new ol.layer.Vector({
 
     }
 });
-/*
+
 var clinicDep = new ol.layer.Vector({
     source: new ol.source.Vector({
         url: 'geojson/clinical_departments.geojson',
@@ -172,7 +172,9 @@ var clinicDep = new ol.layer.Vector({
     }),
     style: styleBack
 });
-*/
+
+
+
 /*
  var hospLayer = new ol.layer.Vector({
  source: new ol.source.Vector({
@@ -191,10 +193,12 @@ var clinicDep = new ol.layer.Vector({
 function hospButton() {
     if (!hospLayer.getVisible()) {
         hospLayer.setVisible(true);
+        clinicDep.setVisible(true);
         this.style.backgroundColor = "#eeeeee";
         this.style.color = "#000000";
     } else {
         hospLayer.setVisible(false);
+        clinicDep.setVisible(false);
         this.style.backgroundColor = "";
         this.style.color = "";
     }
@@ -202,6 +206,7 @@ function hospButton() {
 
 // 医療機関のポップアップを作成する関数
 function createHtmlHospital(evt,feature) {
+
     document.getElementById('info').innerHTML = "";
     DetailHtml = "";
     var coordinate = feature.T.geometry.A;
@@ -232,7 +237,7 @@ function createHtmlHospital(evt,feature) {
 
     var tagName = ['医療機関コード', '名称', '都道府県名', '二次医療圏', '市区町村', '住所', '災害拠点医療機関', '救急指定医療機関',
         '被爆対応医療機関', 'DMAT配置医療機関', '支援要否', '医療派遣ステータス', 'チーム数', '更新日時', '医師出勤状況', '病棟倒壊・倒壊の恐れ',
-        '電気', '水', '医療ガス', '医薬品衛生資器材', '多数患者受診', '職員状況',
+        '電気不足', '水不足', '医療ガス不足', '医薬品衛生資器材不足', '多数患者受診', '職員不足',
         '緊急時入力/その他', '緊急時入力/情報取得日時', '緊急時入力/緊急連絡先/電話番号', '緊急時入力/緊急連絡先/メールアドレス', '緊急時入力/更新日時',
         '詳細入力/施設の倒壊・倒壊の恐れ/入院病棟', '詳細入力/施設の倒壊・倒壊の恐れ/救急外来', '詳細入力/施設の倒壊・倒壊の恐れ/一般外来',
         '詳細入力/施設の倒壊・倒壊の恐れ/手術室', '詳細入力/施設の倒壊・倒壊の恐れ/その他', '詳細入力/ライフライン・サプライ状況/電気使用不可',
@@ -251,6 +256,9 @@ function createHtmlHospital(evt,feature) {
         '詳細入力/職員数/出勤医師数 内DMAT', '詳細入力/職員数/出勤看護師数', '詳細入力/職員数/出勤看護師数 内DMAT',
         '詳細入力/職員数/その他出勤人数', '詳細入力/職員数/その他出勤人数 内DMAT', '詳細入力/その他/その他',
         '詳細入力/情報取得日時', '詳細入力/更新日時', '救護所有無', '所属本部'];
+
+    var tagClnc = ['救急科','呼吸器科','消化器科(胃腸科)','循環器科','小児科','精神科','神経科(神経内科)','外科','整形外科', '形成外科',
+        '脳神経外科','心臓血管外科','産婦人科','眼科','耳鼻咽喉科','皮膚科','泌尿器科','放射線科', '麻酔科','歯科','内科'];
 
     // 適切なアイコンurlを取得する
     var iconUrl;
@@ -282,11 +290,6 @@ function createHtmlHospital(evt,feature) {
     DetailHtml = DetailHtml + preCells + "style='color:white;'" + interCells + arrayV[5] + subCells + "</div>";
     // HeaderHtml = HeaderHtml + "<div style='border:2px solid burlywood; background-color:#888888; color:white; text-align:center' type=button id=showBtn value=隠す onclick=showDetail()>詳細情報の表示切替</div>";
     for (i = 0; i < tagName.length; i++) {
-        if(arrayV[i] == 0) {
-            arrayV[i] = "NO"
-        } else if(arrayV[i] == 1) {
-            arrayV[i] = "YES"
-        }
 
         // 名称,住所,支援要否,医療派遣ステータス,詳細入力/機能/手術不可,詳細入力/機能/人工透析不可,緊急時入力/入院病棟倒壊・倒壊の恐れ,
         // 緊急時入力/ライフライン・サプライ状況/電気使用不可,緊急時入力/ライフライン・サプライ状況/水使用不可,
@@ -309,9 +312,44 @@ function createHtmlHospital(evt,feature) {
         }
 
         if(i == 15 || i == 16 || i == 17 || i == 18 || i == 19 || i == 20 || i == 21 || i == 13) {
-            DetailHtml = DetailHtml + preCells + "id=NOCLR>" + tagName[i] + "</a><a" + interCells + arrayV[i] + subCells;
+            if(arrayV[i] == 0) {
+                arrayV[i] = "NO";
+                DetailHtml = DetailHtml + preCells + "id=NOCLR>" + tagName[i] + "</a><a" + interCells + arrayV[i] + subCells;
+            } else if(arrayV[i] == 1) {
+                arrayV[i] = "YES";
+                DetailHtml = DetailHtml + preCells + "id=RED>" + tagName[i] + "</a><a" + interCells + arrayV[i] + subCells;
+            } else {
+                DetailHtml = DetailHtml + preCells + "id=NOCLR>" + tagName[i] + "</a><a" + interCells + arrayV[i] + subCells;
+            }
         }
     }
+
+    DetailHtml = DetailHtml + "<hr>";
+    DetailHtml = DetailHtml + preCells + "id=NOCLR>診療科情報 </a>";
+
+    var totalvalue = arrayH.reduce(function(x, y) {
+        return x + y;
+    });
+
+    if (totalvalue > 0) {
+        for (i = 0;i < tagClnc.length; i++) {
+            console.log(arrayH[i]);
+            if(i % 3 == 0){
+                etailHtml = DetailHtml + "<tr>"
+            }
+            if (arrayH[i] == "0"){
+                DetailHtml = DetailHtml + "<td id='clinicNO'>" + tagClnc[i] + "</td>";
+            } else if (arrayH[i] == "1") {
+                DetailHtml = DetailHtml + "<td id='clinicON'>" + tagClnc[i] + "</td>";
+            }
+            if(i % 3 == 2){
+                DetailHtml = DetailHtml + "</tr>"
+            }
+        }
+    } else {
+        DetailHtml = DetailHtml + "情報が取得できませんでした"
+    }
+
 
     document.getElementById('info').style.display = 'block';
     document.getElementById('info').innerHTML = DetailHtml;

@@ -550,3 +550,21 @@ div#map{
     width: auto;
     z-index: 9;
 }
+
+#clinicON{
+    width:110px;
+    font-size:12px;
+    text-align: center;
+    background-color:white;
+    color:black;
+    border: 1px #000000 solid;
+}
+
+#clinicNO{
+    width:110px;
+    font-size:12px;
+    text-align: center;
+    background-color:#888888;
+    color:#aaaaaa;
+    border: 1px #000000 solid;
+}
