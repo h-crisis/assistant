@@ -558,13 +558,15 @@ div#map{
     background-color:white;
     color:black;
     border: 1px #000000 solid;
+    font-family:helvetica;
 }
 
 #clinicNO{
     width:110px;
     font-size:12px;
     text-align: center;
-    background-color:#888888;
+    background-color:#aaaaaa;
     color:#aaaaaa;
     border: 1px #000000 solid;
+    font-family:helvetica;
 }

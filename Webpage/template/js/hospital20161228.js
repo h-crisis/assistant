@@ -83,7 +83,7 @@ var styleBack = new ol.style.Style({
         anchor: [0.5, 1],
         anchorXUnits: 'fraction',
         anchorYUnits: 'fraction',
-        opacity: 0.001,
+        opacity: 0.1,
         src: src
     })
 });
@@ -139,14 +139,17 @@ var hospLayer = new ol.layer.Vector({
     style: function(feature, resolution) {
         biNum = (feature.get('saigai') * 8) + (feature.get('kyukyu') * 4) + (feature.get('hibaku') * 2) + (feature.get('dmat') * 1);
         if (feature.get('assist') == "要"){
-                    styleHospR.getText().setText(resolution < 0.0003 ? feature.get('name') : '');
-                    return styleHospR;
+            styleHospR.getText().setText(resolution < 0.0003 ? feature.get('name') : '')
+            styleHospR.getImage().setOpacity(resolution < 0.0009 ? 0.85 : 0);
+            return styleHospR;
         } else if(feature.get('assist') == "未" && feature.get('mds') == "未入力") {
-                    styleHospG.getText().setText(resolution < 0.0003 ? feature.get('name') : '');
-                    return styleHospG;
+            styleHospG.getImage().setOpacity(resolution < 0.0009 ? 0.85 : 0)
+            styleHospG.getText().setText(resolution < 0.0003 ? feature.get('name') : '');
+            return styleHospG;
         } else {
-                    styleHospB.getText().setText(resolution < 0.0003 ? feature.get('name') : '');
-                    return styleHospB;
+            styleHospB.getImage().setOpacity(resolution < 0.0009 ? 0.85 : 0)
+            styleHospB.getText().setText(resolution < 0.0003 ? feature.get('name') : '');
+            return styleHospB;
                 /*
                  for (var i = 0; i < 16 ; i++) {
                 if (biNum == i) {
@@ -170,10 +173,11 @@ var clinicDep = new ol.layer.Vector({
         url: 'geojson/clinical_departments.geojson',
         format: new ol.format.GeoJSON()
     }),
-    style: styleBack
+    style: function(feature, resolution) {
+        styleBack.getImage().setOpacity(resolution < 0.0009 ? 0.85 : 0);
+        return styleBack;
+    }
 });
-
-
 
 /*
  var hospLayer = new ol.layer.Vector({
@@ -327,9 +331,13 @@ function createHtmlHospital(evt,feature) {
     DetailHtml = DetailHtml + "<hr>";
     DetailHtml = DetailHtml + preCells + "id=NOCLR>診療科情報 </a>";
 
-    var totalvalue = arrayH.reduce(function(x, y) {
-        return x + y;
-    });
+    if (arrayH.length > 0) {
+        var totalvalue = arrayH.reduce(function (x, y) {
+            return x + y;
+        })
+    } else {
+        var totalvalue = 0
+    }
 
     if (totalvalue > 0) {
         for (i = 0;i < tagClnc.length; i++) {

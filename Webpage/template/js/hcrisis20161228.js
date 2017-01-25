@@ -166,7 +166,6 @@ var displayFeatureInfo = function(pixel, evt) {
             }
         }
 
-
         if(typeof(feature.T.dep1) == "undefined"){}
         else {
             arrayH = [];
