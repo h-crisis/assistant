@@ -32,13 +32,22 @@ function hoIndexButton() {
     }
 };
 
+// enterキー以外ではsubmitさせない
+function onlyEnter(){
+    //Enterキー以外なら何もしない
+    if(window.event.keyCode!=13) {
+        return false
+    } else {
+        shelterSearch()
+    }
+}
+
 function shelterSearch(){
     // if (document.getElementById('address').value != "") {
-    searchPoint = "SH" + document.getElementById('address').value;
+    searchPoint = document.getElementById('address').value;
     // var ohg = obj.getAttribute('address');
 
     var getCSV = d3.dsv(',', 'text/csv; charset=utf-8');
-
     getCSV('shelter/shelter_location.csv', function (data) {
         // dataを処理する
 
@@ -61,6 +70,8 @@ function shelterSearch(){
             map.getView().setCenter(shelterPlace);
             map.getView().setZoom(15);
             cont = 0;
+            document.getElementById('popup').style.display = 'block';
+            overlayPopup.setPosition(shelterPlace);
         } else if (cont == 0) {
             alert("該当する施設がありません！");
         } else {

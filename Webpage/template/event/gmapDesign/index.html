@@ -14,7 +14,7 @@
 <script src="../../js/hospital20161228.js"></script>
 <script src="../../js/halls20161228.js"></script>
 <script src="../../js/pass20161228.js"></script>
-<script src="../../js/locationChecker.js"></script>
+<!--<script src="../../js/locationChecker.js"></script>-->
 
 <div id="fadeLayer" onclick="fade()"></div>
 <div id="printSetting" >
@@ -38,6 +38,11 @@
     <br>
     <button class="printButton" onclick="fade()">キャンセル</button>
     <button class="printButton" id="export-pdf">印刷</button>
+</div>
+
+<div id="fadeLayerDetail" onclick="detailInfoOnOff()">
+<div id="fadeLayerDetailInfo" onclick="detailInfoOnOff()">
+</div>
 </div>
 
 <!-- Google Analytics -->
@@ -64,8 +69,9 @@
     <div id="option" onclick="fade()"></div>
     <!--<input id="address"  placeholder="数字のみ入力(SH不要)" onKeyup="this.value=this.value.replace(/[^0-9]+/,'')">
     <div id="submit" onclick="shelterSearch()"></div>-->
-    <input id="address"  placeholder="調整中のため使用不可" onKeyup="this.value=this.value.replace(/[^0-9]+/,'')">
-    <div id="submit"></div>
+    <!--<input id="address"  placeholder="" onKeyup="this.value=this.value.replace(/[^0-9]+[^A-Z]/,'')">-->
+    <input id="address"  placeholder="" onKeyup="this.value=this.value.toUpperCase()" onkeypress="onlyEnter()">
+    <div id="submit" onclick="shelterSearch();"></div>
 </div>
 
 <nav class="panel hidden" style="border-style: none">

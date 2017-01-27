@@ -6,9 +6,17 @@
 var HeaderHtml;
 var InfoHtml;
 var DetailHtml;
+var poppedHtml;
 var preCells;
 var interCells;
 var subCells;
+
+//  Enterキーでsubmitされるのを防ぐ
+$(function() {
+    $(document).on("keypress", "input:not(.allow_submit)", function(event) {
+        return event.which !== 13;
+    });
+});
 
 // BaseLayerの設定 OpenStreetMapを設定する
 var osm_source = new ol.source.OSM({

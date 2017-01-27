@@ -23,7 +23,7 @@ var styleHospR;
             anchor: [0.5, 1],
             anchorXUnits: 'fraction',
             anchorYUnits: 'fraction',
-            opacity: 0.85,
+            opacity: 1,
             src: src
         })
     });
@@ -47,7 +47,7 @@ var styleHospB;
             anchor: [0.5, 1],
             anchorXUnits: 'fraction',
             anchorYUnits: 'fraction',
-            opacity: 0.85,
+            opacity: 1,
             src: src
         })
     });
@@ -71,7 +71,7 @@ var styleHospG;
             anchor: [0.5, 1],
             anchorXUnits: 'fraction',
             anchorYUnits: 'fraction',
-            opacity: 0.85,
+            opacity: 1,
             src: src
         })
     });
@@ -140,14 +140,14 @@ var hospLayer = new ol.layer.Vector({
         biNum = (feature.get('saigai') * 8) + (feature.get('kyukyu') * 4) + (feature.get('hibaku') * 2) + (feature.get('dmat') * 1);
         if (feature.get('assist') == "要"){
             styleHospR.getText().setText(resolution < 0.0003 ? feature.get('name') : '')
-            styleHospR.getImage().setOpacity(resolution < 0.0009 ? 0.85 : 0);
+            styleHospR.getImage().setOpacity(resolution < 0.0009 ? 1 : 0);
             return styleHospR;
         } else if(feature.get('assist') == "未" && feature.get('mds') == "未入力") {
-            styleHospG.getImage().setOpacity(resolution < 0.0009 ? 0.85 : 0)
+            styleHospG.getImage().setOpacity(resolution < 0.0009 ? 1 : 0)
             styleHospG.getText().setText(resolution < 0.0003 ? feature.get('name') : '');
             return styleHospG;
         } else {
-            styleHospB.getImage().setOpacity(resolution < 0.0009 ? 0.85 : 0)
+            styleHospB.getImage().setOpacity(resolution < 0.0009 ? 1 : 0)
             styleHospB.getText().setText(resolution < 0.0003 ? feature.get('name') : '');
             return styleHospB;
                 /*
@@ -174,7 +174,7 @@ var clinicDep = new ol.layer.Vector({
         format: new ol.format.GeoJSON()
     }),
     style: function(feature, resolution) {
-        styleBack.getImage().setOpacity(resolution < 0.0009 ? 0.85 : 0);
+        styleBack.getImage().setOpacity(resolution < 0.0009 ? 0.1 : 0);
         return styleBack;
     }
 });
@@ -358,9 +358,22 @@ function createHtmlHospital(evt,feature) {
         DetailHtml = DetailHtml + "情報が取得できませんでした"
     }
 
+    DetailHtml = DetailHtml + "<div onclick='detailInfoOnOff()'><img id='inputIcon' src='../../img/img/detail.png '></div>"
+
+    // ポップアップで表示する部分の入力
+    poppedHtml = "<table class='fadeLayerDI'>";
+    for (i = 0; i < tagName.length; i = i + 2) {
+        poppedHtml = poppedHtml +  "<tr><th scope='row'>" + tagName[i] + "</th><td>" + arrayV[i] + "</td></tr>";
+        if (i + 1 < tagName.length) {
+            poppedHtml = poppedHtml +  "<tr><th scope='row' class='even'>" + tagName[i + 1] + "</th><td class='even'>" + arrayV[i + 1] + "</td></tr>"
+        }
+    }
+    poppedHtml = poppedHtml + "</table>";
+    document.getElementById('fadeLayerDetailInfo').innerHTML = poppedHtml;
 
     document.getElementById('info').style.display = 'block';
     document.getElementById('info').innerHTML = DetailHtml;
     document.getElementById('popup').style.display = 'block';
     overlayPopup.setPosition(coordinate);
 }
+

@@ -130,28 +130,28 @@ a {
     font-family:helvetica;
 }
 
-table.fadeLayerDI {
+table.type06 {
     border-collapse: collapse;
     text-align: left;
     line-height: 1.5;
     border-top: 1px solid #ccc;
     border-bottom: 1px solid #ccc;
 }
-table.fadeLayerDI th {
+table.type06 th {
     width: 420px;
     padding: 10px;
     font-weight: bold;
     vertical-align: top;
     font-family:helvetica;
 }
-table.fadeLayerDI td {
+table.type06 td {
     width: 180px;
     padding: 10px;
     vertical-align: top;
     font-family:helvetica;
 }
 .even {
-    background-color: #afafaf;
+    background-color: #efefef;
 }
 
 
@@ -610,15 +610,6 @@ div#map{
     left: 285px;
     top: -305px;
     background: url("../../img/img/document.png");
-    height: 50px;
-    width: auto;
-    z-index: 9;
-}
-#detailIcon{
-    position:relative;
-    left: 235px;
-    top: -305px;
-    background: url("../../img/img/detail.png");
     height: 50px;
     width: auto;
     z-index: 9;

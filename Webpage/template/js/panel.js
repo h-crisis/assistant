@@ -3,6 +3,7 @@
  */
 
 var count = 0;
+var fadeDisp = document.getElementById("fadeLayer").style.display;
 
 $("div#option").click(function(){
     $(".panel").toggleClass("hidden");
@@ -21,11 +22,21 @@ $(".button").click(function(){
 });
 
 function fade() {
-    if (count%2 == 0) {
-        document.getElementById("fadeLayer").style.display = 'block';
-        count++;
-    } else {
+    if (document.getElementById("fadeLayer").style.display == "block") {
         document.getElementById("fadeLayer").style.display = 'none';
-        count++
+    } else {
+        document.getElementById("fadeLayer").style.display = 'block';
     }
+}
+
+function detailInfoOnOff() {
+    if (document.getElementById("fadeLayerDetail").style.display == "block") {
+        document.getElementById("fadeLayerDetail").style.display = 'none';
+    } else {
+        document.getElementById("fadeLayerDetail").style.display = 'block';
+    }
+}
+
+function detailInfoOff() {
+   
 }
