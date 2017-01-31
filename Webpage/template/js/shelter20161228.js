@@ -276,6 +276,7 @@ function createShelterInfoHtml(result) {
         var inputCode = '?event=' + eventCode + ',id=' + result.get('code') + ',name=' + result.get('name')　+ ',address=' + result.get('address');
         InfoHtml = InfoHtml + "<div onclick='detailInfoOnOff()'><img id='inputIcon' src='../../img/img/detail.png '></div>"
         InfoHtml = InfoHtml + "<div id='inputShelter' onclick=window.open('../../html/shelter-emergency.html" + inputCode +  "','_blank')><img id='inputIcon' src='../../img/img/document.png '></div>";
+        InfoHtml = InfoHtml + "<div id='inputShelterDental' onclick=window.open('../../html/shelter-dental01.html" + inputCode +  "','_blank')><img id='inputIcon' src='../../img/img/document.png '></div>";
 
         // ポップアップで表示する部分の入力
         poppedHtml = "<table class='fadeLayerDI'>";

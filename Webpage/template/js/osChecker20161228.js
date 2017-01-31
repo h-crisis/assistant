@@ -14,6 +14,8 @@ if(userAgent.indexOf('win') > -1){
     osCss = 'mac';
 }else if(userAgent.indexOf('android') > -1){
     osCss = 'adr';
+} else {
+    osCss = 'win';
 }
 
 //ブラウザの判定
@@ -28,6 +30,7 @@ if (userAgent.indexOf('msie') > -1) {
 }else if (userAgent.indexOf('safari') > -1) {
     brwCss = 's';
 }else {
+    brwCss = 'f';
 }
 
 if ((userAgent.indexOf("windows") != -1 && userAgent.indexOf("touch") != -1 && userAgent.indexOf("tablet pc") == -1)
