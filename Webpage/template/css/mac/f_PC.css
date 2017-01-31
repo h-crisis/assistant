@@ -606,21 +606,30 @@ div#map{
     left: 10px;
 }
 #inputShelterDental{
-    top: 60px;
+    top: 10px;
     left: 10px;
 }
-#inputIcon{
+#inputEmergencyIcon{
     position:relative;
-    left: 285px;
-    top: -305px;
-    background: url("../../img/img/document.png");
+    left: 5px;
+    top: -58px;
+    background: url("../../img/img/emergency.png");
+    height: 50px;
+    width: auto;
+    z-index: 9;
+}
+#inputDentalIcon{
+    position:relative;
+    left: 85px;
+    top: -115px;
+    background: url("../../img/img/dental.png");
     height: 50px;
     width: auto;
     z-index: 9;
 }
 #detailIcon{
     position:relative;
-    left: 235px;
+    left: 295px;
     top: -305px;
     background: url("../../img/img/detail.png");
     height: 50px;
