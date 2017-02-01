@@ -273,7 +273,14 @@ function createShelterInfoHtml(result) {
                 InfoHtml = InfoHtml + preCells + "id=UK>食　　料</a><a" + interCells + result.get('c04_1') + subCells;
             }
         }
+
+        InfoHtml = InfoHtml + "<hr>";
+        for (i = 0;i < 7; i++) {
+            InfoHtml = InfoHtml + "<tr><td id='clinicON' width:110px; style='border:1px #ffffff solid;'>　</td></tr>";
+        }
+
         var inputCode = '?event=' + eventCode + ',id=' + result.get('code') + ',name=' + result.get('name')　+ ',address=' + result.get('address');
+
         InfoHtml = InfoHtml + "<div id='inputIcon' onclick='detailInfoOnOff()'><img id='detailIcon' src='../../img/img/detail.png '></div>"
         InfoHtml = InfoHtml + "<div id='inputIcon' onclick=window.open('../../html/shelter-emergency.html" + inputCode +  "','_blank')><img id='inputEmergencyIcon' src='../../img/img/emergency.png '></div>";
         InfoHtml = InfoHtml + "<div id='inputIcon' onclick=window.open('../../html/shelter-dental01.html" + inputCode +  "','_blank')><img id='inputDentalIcon' src='../../img/img/dental.png '></div>";

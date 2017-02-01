@@ -613,7 +613,7 @@ div#map{
 #inputEmergencyIcon{
     position:relative;
     left: 5px;
-    top: -198px;
+    top: -58px;
     background: url("../../img/img/emergency.png");
     height: 50px;
     width: auto;
@@ -622,7 +622,7 @@ div#map{
 #inputDentalIcon{
     position:relative;
     left: 85px;
-    top: -255px;
+    top: -115px;
     background: url("../../img/img/dental.png");
     height: 50px;
     width: auto;
@@ -631,7 +631,7 @@ div#map{
 #detailIcon{
     position:relative;
     left: 295px;
-    top: -455px;
+    top: -485px;
     background: url("../../img/img/detail.png");
     height: 50px;
     width: auto;
@@ -639,7 +639,7 @@ div#map{
 }
 
 #clinicON{
-    width:105px;
+    width:110px;
     font-size:12px;
     text-align: center;
     background-color:white;
@@ -649,7 +649,7 @@ div#map{
 }
 
 #clinicNO{
-    width:105px;
+    width:110px;
     font-size:12px;
     text-align: center;
     background-color:#aaaaaa;

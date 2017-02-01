@@ -91,6 +91,70 @@ a {
     z-index:6;
 }
 
+#fadeLayerDetail {
+    position:absolute;
+    top:0px;
+    left:0px;
+
+    width:100%;
+    height:100%;
+
+    background-color: rgba(0,0,0, 0.5);
+    display:none;
+    z-index:6;
+}
+#fadeLayerDetailInfo{
+    z-index: 10;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 600px;
+    width: 600px;
+    margin: auto;
+    text-align: left;
+    background-color: #eeeeee;
+    border-radius: 5px;
+    opacity: 1;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+#fadeLayerDetailInfo:hover{
+    overflow-y: scroll;
+}
+#fadeLayerDetailInfo td{
+    width:300px;
+    font-size:17px;
+    color:#000000;
+    font-family:helvetica;
+}
+
+table.fadeLayerDI {
+    border-collapse: collapse;
+    text-align: left;
+    line-height: 1.5;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+}
+table.fadeLayerDI th {
+    width: 420px;
+    padding: 10px;
+    font-weight: bold;
+    vertical-align: top;
+    font-family:helvetica;
+}
+table.fadeLayerDI td {
+    width: 180px;
+    padding: 10px;
+    vertical-align: top;
+    font-family:helvetica;
+}
+.even {
+    background-color: #afafaf;
+}
+
+
 #printSetting{
     position:absolute;
     top:35%;
@@ -345,19 +409,19 @@ div#map{
     position:absolute;
     overflow: auto;
     display:none;
-    font-size:18px;
+    font-size:12px;
 }
 .info#info{
-    height: 100%;
     position: absolute;
     overflow:hidden;
     overflow-x: hidden;
+    height: 100%;
 }
 .info#info:hover{
-    height: 100%;
     position: absolute;
-    overflow:scroll;
+    overflow-y: scroll;
     overflow-x: hidden;
+    height: 100%;
 }
 .info div{
     cursor: pointer;
@@ -541,18 +605,40 @@ div#map{
     top: 10px;
     left: 10px;
 }
-#inputIcon{
+#inputShelterDental{
+    top: 10px;
+    left: 10px;
+}
+#inputEmergencyIcon{
     position:relative;
-    left: 285px;
-    top: -305px;
-    background: url("../../img/img/document.png");
+    left: 5px;
+    top: -198px;
+    background: url("../../img/img/emergency.png");
+    height: 50px;
+    width: auto;
+    z-index: 9;
+}
+#inputDentalIcon{
+    position:relative;
+    left: 85px;
+    top: -255px;
+    background: url("../../img/img/dental.png");
+    height: 50px;
+    width: auto;
+    z-index: 9;
+}
+#detailIcon{
+    position:relative;
+    left: 295px;
+    top: -455px;
+    background: url("../../img/img/detail.png");
     height: 50px;
     width: auto;
     z-index: 9;
 }
 
 #clinicON{
-    width:110px;
+    width:105px;
     font-size:12px;
     text-align: center;
     background-color:white;
@@ -562,7 +648,7 @@ div#map{
 }
 
 #clinicNO{
-    width:110px;
+    width:105px;
     font-size:12px;
     text-align: center;
     background-color:#aaaaaa;

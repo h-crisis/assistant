@@ -355,10 +355,13 @@ function createHtmlHospital(evt,feature) {
             }
         }
     } else {
-        DetailHtml = DetailHtml + "情報が取得できませんでした"
+        DetailHtml = DetailHtml + "<tr><td id='clinicON' width:110px; style='border:1px #ffffff solid;'>情報がありません</td></tr>";
+        for (i = 0;i < 6; i++) {
+                DetailHtml = DetailHtml + "<tr><td id='clinicON' width:110px; style='border:1px #ffffff solid;'>　</td></tr>";
+        }
     }
 
-    DetailHtml = DetailHtml + "<div onclick='detailInfoOnOff()'><img id='inputIcon' src='../../img/img/detail.png '></div>"
+    DetailHtml = DetailHtml + "<div id='inputIcon' onclick='detailInfoOnOff()'><img id='detailIcon' src='../../img/img/detail.png'></div>"
 
     // ポップアップで表示する部分の入力
     poppedHtml = "<table class='fadeLayerDI'>";

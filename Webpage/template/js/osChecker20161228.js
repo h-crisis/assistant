@@ -21,15 +21,13 @@ if(userAgent.indexOf('win') > -1){
 //ブラウザの判定
 if (userAgent.indexOf('msie') > -1) {
     brwCss = 'm';
-}else if (userAgent.indexOf('edge') || userAgent.indexOf('firefox') > -1) {
-    brwCss = 'f';
-}else if (userAgent.indexOf('opera') > -1) {
-    brwCss = 'o';
-}else if (userAgent.indexOf('chrome') > -1) {
-    brwCss = 'c';
-}else if (userAgent.indexOf('safari') > -1) {
+} else if (userAgent.indexOf('safari') > -1) {
     brwCss = 's';
-}else {
+} else if (userAgent.indexOf('chrome') > -1) {
+    brwCss = 'c';
+} else if (userAgent.indexOf('opera') > -1) {
+    brwCss = 'o';
+} else {
     brwCss = 'f';
 }
 
