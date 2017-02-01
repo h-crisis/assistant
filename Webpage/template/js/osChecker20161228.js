@@ -21,6 +21,8 @@ if(userAgent.indexOf('win') > -1){
 //ブラウザの判定
 if (userAgent.indexOf('msie') > -1) {
     brwCss = 'm';
+} else if (userAgent.indexOf('edge') > -1) {
+    brwCss = 'f';
 } else if (userAgent.indexOf('safari') > -1) {
     brwCss = 's';
 } else if (userAgent.indexOf('chrome') > -1) {
