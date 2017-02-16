@@ -53,7 +53,6 @@ public class EarthquakeDamageEstimate {
         this.shapeDir = shapeDir; // Shapeファイルがあるフォルダ
         rateFile1 = new File(masterDir.getPath() + "/rate_zenkai.csv"); // 全壊率テーブル
         rateFile2 = new File(masterDir.getPath() + "/rate_zenhankai.csv"); // 全半壊率テーブル
-        mesh4thDataFile = new File(masterDir.getPath() + "/mesh4th_data.csv"); // 4次メッシュの統計データ
         buildingYearFile = new File(masterDir.getPath() + "/building_year.csv"); // 市町村別築年数データ
         sheltersFile = new File(masterDir.getPath() + "/shelters.csv"); // 避難所データ
         nearShelterFile = new File(masterDir.getPath() + "/near_shelters.csv"); // 近傍避難所データ
@@ -61,7 +60,7 @@ public class EarthquakeDamageEstimate {
         nearHospitalFile = new File(masterDir.getPath() + "/near_hospital.csv"); // 近傍医療機関データ
         this.siFile = siFile; // 震度分布ファイル
 
-        File[] masterFiles = {this.meshBaseFile, this.rateFile1, this.rateFile2, this.mesh4thDataFile, this.buildingYearFile, this.sheltersFile, this.nearShelterFile, this.siFile, outDir};
+        File[] masterFiles = {this.meshBaseFile, this.rateFile1, this.rateFile2, this.buildingYearFile, this.sheltersFile, this.nearShelterFile, this.siFile, outDir};
         for(File file : masterFiles) {
             if(!file.exists()) {
                 System.out.println("jp.hcrisis.assistant.disaster.EarthquakeDamageEstimate: " + file.getPath() + "/" + file.getName() + " が見つかりません。");
@@ -70,9 +69,27 @@ public class EarthquakeDamageEstimate {
         }
 
         File outFile1 = new File(outDir.getPath() + "/" + code + "_mesh_base_01_SI.csv"); // 被災地のみの5次メッシュ
+        File outFile2 = new File(outDir.getPath() + "/" + code + "_mesh_base_02_damage.csv"); // 5次メッシュ被害推計
+        File outFile3 = new File(outDir.getPath() + "/" + code + "_mesh_base_03_damage_simple.csv"); // 5次メッシュの被害シンプル化
+        File outFile4 = new File(outDir.getPath() + "/" + code + "_hospital_01_damage.csv"); // 医療機関ごとの被害を推計
+        File outFile5 = new File(outDir.getPath() + "/" + code + "_hospital_01_damage_simple.csv"); // 医療機関ごとの被害を推計
+        File outFile6 = new File(outDir.getPath() + "/" + code + "_shelter_01_evacuee.csv"); // 避難所ごとの避難者数を推計
+        File outFile7 = new File(outDir.getPath() + "/shelter"); // 避難所フォルダ
+        outFile7.mkdir();
+
+        // 5次メッシュ被害ファイルの作成
+        extractDisasterArea(this.meshBaseFile, this.siFile, outFile1, 5); // 被災地5次メッシュの抽出
+        estimateDamageMesh(outFile1, this.buildingYearFile, this.rateFile1, this.rateFile2, outFile2);
+        estimateDamageMeshSimple(outFile2, outFile3); // シンプル化した被害ファイル
+
+        // 医療機関・避難所の被害ファイル作成
+        calcHospitalDamage(outFile3, this.nearHospitalFile, this.hospitalsFile, outFile4, outFile5);
+        calcShelterDamage(outFile3, this.nearShelterFile, this.sheltersFile, this.siFile, outFile6, outFile7);
+
+        //createMunicipalitiesGisFiles(shapeDir, outFile6, outDir);
+
+        /*
         File outFile2 = new File(outDir.getPath() + "/" + code + "_municipalities_base_01_SI.csv"); // 市区町村ごとの震度分布
-        File outFile3 = new File(outDir.getPath() + "/" + code + "_mesh_base_02_statical.csv"); // 被災地域に人口と世帯数を付加
-        File outFile4 = new File(outDir.getPath() + "/" + code + "_mesh_base_03_damage.csv"); // 被害値の計算
         File outFile5 = new File(outDir.getPath() + "/" + code + "_mesh_base_03_damage_simple.csv"); // 5次メッシュの被害シンプル化
         File outFile6 = new File(outDir.getPath() + "/" + code + "_municipalities_base_02_damage.csv"); // 市区町村ごと被害値計算
         File outFile7 = new File(outDir.getPath() + "/" + code + "_shelter_01_evacuee.csv"); // 避難所ごとの避難者数を推計
@@ -80,17 +97,18 @@ public class EarthquakeDamageEstimate {
         outFile8.mkdir();
         File outFile9 = new File(outDir.getPath() + "/" + code + "_hospital_01_patient.csv"); // 避難所ごとの避難者数を推計
         File outFile10 = new File(outDir.getPath() + "/" + code + "_hospital_01_patient_simple.csv"); // 避難所ごとの避難者数を推計
+        */
 
-        extractDisasterArea(this.meshBaseFile, this.siFile, outFile1, 5);
+        /*
+        combineData(outFile1, this.mesh4thDataFile, this.buildingYearFile, outFile3); // 被災地5次メッシュに人口・世帯・建築年分布を追記
+        estimateDamage5mesh1(outFile3, rateFile1, rateFile2, outFile4); // 被害ファイルの作成
+        estimateDamage5mesh2(outFile4, outFile5); // シンプル化した被害ファイル
         extractDisasterMunicipalities(outFile1, outFile2);
-        combineData(outFile1, this.mesh4thDataFile, this.buildingYearFile, outFile3);
-        estimateDamage1(outFile3, rateFile1, rateFile2, outFile4);
-        estimateDamage2(outFile4, outFile5);
         estimateDamage3(outFile4, outFile2, outFile6);
         estimateDamage4(outFile5, this.nearShelterFile, this.sheltersFile, this.siFile, outFile7, outFile8);
         estimateDamage5(outFile5, this.nearHospitalFile, this.hospitalsFile, outFile9, outFile10);
-
         createMunicipalitiesGisFiles(shapeDir, outFile6, outDir);
+        */
     }
 
     /**
@@ -101,6 +119,8 @@ public class EarthquakeDamageEstimate {
      * @param meshLevel 震度のメッシュレベル（1-5）
      */
     public static void extractDisasterArea(File meshBaseFile, File siFile, File outFile, int meshLevel) {
+        System.out.println("5次メッシュのなかで被災地だけを抽出します（震度０より大きいメッシュ）。");
+        int count = 0;
         try(BufferedReader brMesh5File = new BufferedReader(new InputStreamReader(new FileInputStream(meshBaseFile), "Shift_JIS"));
             BufferedReader brSiFile = new BufferedReader(new InputStreamReader(new FileInputStream(siFile), "Shift_JIS"));
             PrintWriter pw = new PrintWriter(new OutputStreamWriter(new FileOutputStream(outFile, false), "Shift_JIS"))) {
@@ -122,285 +142,155 @@ public class EarthquakeDamageEstimate {
             while((line=brMesh5File.readLine())!=null) {
                 String pair[] = line.split(",");
                 if(disasterAreaMap.containsKey(pair[5-meshLevel])) {
-                    if(!pair[5].equals("")) {
-                        pw.write("\n" + line + "," + disasterAreaMap.get(pair[5 - meshLevel]));
-                    }
+                    count++;
+                    pw.write("\n" + line + "," + disasterAreaMap.get(pair[5 - meshLevel]));
                 }
             }
 
         } catch (IOException e) {
             e.printStackTrace();
         }
+        System.out.println("5次メッシュのなかで被災地だけを抽出しました。被災5次メッシュは " + count + " メッシュです。");
     }
 
     /**
-     * 5次メッシュの震度情報を用いて市区町村別の最大、最小、平均の震度を求める
-     * @param inFile 震度情報の付いた5次メッシュファイル（被災地のみ）
-     * @param outFile 市区町村別の震度分布ファイル
-     */
-    public static void extractDisasterMunicipalities(File inFile, File outFile) {
-        // 被災市区町村の最大震度、平均震度、最小震度を求める
-        HashMap<String, LinkedList<Double>> municipalitiesMap = new HashMap<>(); // 市区町村コードをキーに、市区町村内の震度をリストに持つマップ変数
-        LinkedList<String> municipalitiesList = new LinkedList<>(); // 市区町村コードを保持する
-        try(BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(inFile), "Shift_JIS"));
-            PrintWriter pw = new PrintWriter(new OutputStreamWriter(new FileOutputStream(outFile, false), "Shift_JIS"))) {
-
-            String line = br.readLine(); // 一行目は項目名
-            pw.write("JCODE,KEN,SICHO,GUN,SEIREI,SIKUCHOSON,P_NUM,H_NUM,MAX_SI,MIN_SI,AVE_SI"); // *注意
-            while((line = br.readLine()) != null) {
-                String pair[] = line.split(",");
-                LinkedList<Double> list;
-                if(municipalitiesMap.containsKey(pair[5])) { // すでに市区町村コードをキーとする震度リストがある場合
-                    list = municipalitiesMap.get(pair[5]); // 震度リストを取得
-                }
-                else { // 市区町村コードをキーとする震度リストがない場合
-                    municipalitiesList.addLast(pair[5] + "," + pair[6] + "," + pair[7] + "," + pair[8] + "," + pair[9]
-                            + "," + pair[10] + "," + pair[11] + "," + pair[12]); // 出力ファイルに必須事項を抜き出す（＊注意の震度以外の項目を抜き出す）
-                    list = new LinkedList<>(); // 震度リストを作成する
-                }
-                list.addLast(Double.parseDouble(pair[13]));
-                municipalitiesMap.put(pair[5], list);
-            }
-
-            // 市区町村の最大、最小、平均震度を求める
-            for(int i=0; i<municipalitiesList.size(); i++) {
-                String municipality = municipalitiesList.get(i);
-                String pair[] = municipality.split(",");
-                LinkedList<Double> list = municipalitiesMap.get(pair[0]);
-                double min = Double.MAX_VALUE;
-                double max = 0.0;
-                double ave = 0.0;
-                for(double d : list) {
-                    if(d >= max) {
-                        max = d;
-                    }
-                    if(d <= min) {
-                        min = d;
-                    }
-                    ave = ave + d;
-                }
-                ave = ave / list.size();
-
-                pw.write("\n" + municipality + "," + max + "," + min + "," + ave);
-             }
-
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * 5次メッシュに4次メッシュの人口、世帯数および市区町村ごとの築年数データを用いて、5次メッシュごとの築年数別世帯数ファイルを作成する
+     *
      * @param meshFile 5次メッシュファイル（震度つき）
-     * @param staticalDataFile 4次メッシュデータファイル（人口・世帯数）
      * @param buildingYearFile 市区町村ごと築年数ファイル
-     * @param outFile 5次メッシュごとの築年数別世帯数ファイル
-     */
-    public static void combineData(File meshFile, File staticalDataFile, File buildingYearFile, File outFile) {
-        try(BufferedReader brMesh = new BufferedReader(new InputStreamReader(new FileInputStream(meshFile), "Shift_JIS"));
-            BufferedReader brStaticalData = new BufferedReader(new InputStreamReader(new FileInputStream(staticalDataFile), "Shift_JIS"));
-            BufferedReader brBuildingYear = new BufferedReader(new InputStreamReader(new FileInputStream(buildingYearFile), "Shift_JIS"));
-            PrintWriter pw = new PrintWriter(new OutputStreamWriter(new FileOutputStream(outFile, false), "Shift_JIS"))) {
-
-            String line = brStaticalData.readLine();
-            // 人口と世帯数のデータ作成、4次メッシュコードをキーに、その行を値に持つマップ変数を作る
-            HashMap<String, String> staticalDataMap = new HashMap<>();
-            while((line = brStaticalData.readLine()) != null) {
-                String pair[] = line.split(",");
-                staticalDataMap.put(pair[0], line);
-            }
-
-            line = brBuildingYear.readLine();
-            // 市区町村ごとのデータ作成、市区町村コードをキーに、その行を値に持つマップ変数を作る
-            HashMap<String, String> buildingYearMap = new HashMap<>();
-            while((line = brBuildingYear.readLine()) != null) {
-                String pair[] = line.split(",");
-                buildingYearMap.put(pair[0], line);
-            }
-
-            line = brMesh.readLine(); // 1行目は項目名
-            pw.write(line + ",POP,POP_M,POP_F,HOUSE,w1,w2,w3,w4,w5,w6,nw1,nw2,nw3"); // 築年数ごとの世帯数を保持する項目名の準備
-            while((line = brMesh.readLine()) != null) {
-                String pair[] = line.split(",");
-                String code = pair[5];
-                Double house = 0.0;
-                if(staticalDataMap.containsKey(pair[1])) {
-                    String data[] = staticalDataMap.get(pair[1]).split(","); // 4次メッシュの人口を取得
-                    for (int i = 1; i < data.length; i++) {
-                        line = line + "," + (Double.parseDouble(data[i])/4);
-                        house = (Double.parseDouble(data[i])/4);
-                    }
-                }
-                else {
-                    line = line + ",0,0,0,0"; // 4次メッシュ人口がない場合は0
-                }
-                if(code.startsWith("0")) { // 市区町村コードが0から始まる場合、最初の1桁を取り除く処理
-                    code = code.substring(1);
-                }
-                if(buildingYearMap.containsKey(code)) { // 築年数の計算
-                    String data[] = buildingYearMap.get(code).split(",");
-                    for (int i = 3; i < data.length; i++) {
-                        line = line + "," + (house * Double.parseDouble(data[i]));
-                    }
-                }
-                pw.write("\n" + line);
-            }
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * 全壊棟数、全半壊棟数を計算する
-     * @param inFile 築年別建物数が保持される5次メッシュファイル
      * @param rateFile1 全壊率テーブル
      * @param rateFile2 全半壊率テーブル
-     * @param outFile 出力ファイル
+     * @param outFile
      */
-    public static void estimateDamage1(File inFile, File rateFile1, File rateFile2, File outFile) {
-        try(BufferedReader brIn = new BufferedReader(new InputStreamReader(new FileInputStream(inFile), "Shift_JIS"));
+    public static void estimateDamageMesh(File meshFile, File buildingYearFile, File rateFile1, File rateFile2, File outFile) {
+        System.out.println("5次メッシュ被災地の被害を計算します。");
+        try(BufferedReader brMesh = new BufferedReader(new InputStreamReader(new FileInputStream(meshFile), "Shift_JIS"));
+            BufferedReader brBuildingYear = new BufferedReader(new InputStreamReader(new FileInputStream(buildingYearFile), "Shift_JIS"));
             BufferedReader brRate1 = new BufferedReader(new InputStreamReader(new FileInputStream(rateFile1), "Shift_JIS"));
             BufferedReader brRate2 = new BufferedReader(new InputStreamReader(new FileInputStream(rateFile2), "Shift_JIS"));
             PrintWriter pw = new PrintWriter(new OutputStreamWriter(new FileOutputStream(outFile, false), "Shift_JIS"))) {
 
+            // 市区町村ごと築年数ファイルのDB化
+            String buildingYearline = brBuildingYear.readLine();
+            HashMap<String, String> buildingYearMap = new HashMap<>(); // 市区町村ごとのデータ作成、市区町村コードをキーに、その行を値に持つマップ変数を作る
+            while((buildingYearline = brBuildingYear.readLine()) != null) {
+                String pair[] = buildingYearline.split(",");
+                buildingYearMap.put(pair[0], buildingYearline);
+            }
+
             // 全壊率テーブルを作成する
-            HashMap<String, List<Double>> zenkaiMap = new HashMap<String, List<Double>>();
-            String line = brRate1.readLine();
-            while((line = brRate1.readLine()) != null) {
-                String pair[] = line.split(",");
-                List<Double> list = new ArrayList<>();
-                for(int i = 1; i<pair.length; i++) {
-                    list.add(Double.parseDouble(pair[i]));
-                }
-                zenkaiMap.put(pair[0], list);
+            HashMap<String, String> zenkaiMap = new HashMap<String, String>();
+            String zenkaiLine = brRate1.readLine();
+            while((zenkaiLine = brRate1.readLine()) != null) {
+                String pair[] = zenkaiLine.split(",");
+                zenkaiMap.put(pair[0], zenkaiLine);
             }
 
             // 全半壊率テーブルを作成する
-            HashMap<String, List<Double>> zenhankaiMap = new HashMap<String, List<Double>>();
-            line = brRate2.readLine();
-            while((line = brRate2.readLine()) != null) {
-                String pair[] = line.split(",");
-                List<Double> list = new ArrayList<>();
-                for(int i = 1; i<pair.length; i++) {
-                    list.add(Double.parseDouble(pair[i]));
-                }
-                zenhankaiMap.put(pair[0], list);
+            HashMap<String, String> zenhankaiMap = new HashMap<String, String>();
+            String zenhankaiLine = brRate2.readLine();
+            while((zenhankaiLine = brRate2.readLine()) != null) {
+                String pair[] = zenhankaiLine.split(",");
+                zenhankaiMap.put(pair[0], zenhankaiLine);
             }
 
-            line = brIn.readLine();
-            pw.write(line + ",pa_w1,pa_w2,pa_w3,pa_w4,pa_w5,pa_w6,pa_nw1,pa_nw2,pa_nw3," +
-                    "ph_w1,ph_w2,ph_w3,ph_w4,ph_w5,ph_w6,ph_nw1,ph_nw2,ph_nw3," +
-                    "a_w1,a_w2,a_w3,a_w4,a_w5,a_w6,a_nw1,a_nw2,a_nw3," +
-                    "h_w1,h_w2,h_w3,h_w4,h_w5,h_w6,h_nw1,h_nw2,h_nw3," +
-                    "num_a,num_h,num_dead,num_injured,num_severe,num_evacuee1"); // 項目名の準備
-            while((line = brIn.readLine()) != null) {
-                String pair[] = line.split(",");
-                // 震度を小数点第2位で四捨五入
-                BigDecimal bi = new BigDecimal(String.valueOf(Double.parseDouble(pair[13])));
-                Double si = bi.setScale(1,BigDecimal.ROUND_HALF_UP).doubleValue();
+            String meshLine = brMesh.readLine(); // 1行目は見出し
+            pw.print(meshLine + ",num_a,num_h,num_dead,num_injured,num_severe,num_evacuee");
+            while((meshLine = brMesh.readLine())!=null) {
+                String pair[] = meshLine.split(",");
+                String code = pair[0];
+                String jcode = pair[7];
+                if(jcode.startsWith("0")) {
+                    jcode = jcode.substring(1);
+                }
+                BigDecimal bi = new BigDecimal(String.valueOf(Double.parseDouble(pair[16]))); // 震度を小数点第2位で四捨五入
+                double si = bi.setScale(1,BigDecimal.ROUND_HALF_UP).doubleValue();
                 if(si>7.0) // 震度7以上は７に丸め込み
-                    si = 7.0;
-
-                // 全壊率の追加
-                List<Double> zenkaiP = zenkaiMap.get(Double.toString(si));
-                for(int i=0; i<zenkaiP.size(); i++) {
-                    line = line + "," + zenkaiP.get(i);
+                    si = 7;
+                if(!buildingYearMap.containsKey(jcode)) {
+                    System.out.println(meshLine);
+                    System.exit(1);
                 }
-
-                // 全半壊率の追加
-                List<Double> zenhankaiP = zenhankaiMap.get(Double.toString(si));
-                for(int i=0; i<zenhankaiP.size(); i++) {
-                    line = line + "," + zenhankaiP.get(i);
+                double damage[] = calcDamage(Double.parseDouble(pair[10]), Double.parseDouble(pair[13]), buildingYearMap.get(jcode),
+                        zenkaiMap.get(Double.toString(si)), zenhankaiMap.get(Double.toString(si)));
+                for(double d : damage) {
+                    meshLine = meshLine + "," + d;
                 }
-
-                double num_a = 0.0; // 全壊棟数
-                double num_h = 0.0; // 全半壊棟数
-
-                for(int i=18; i<pair.length; i++) { // 築年別全壊数の計算
-                    line = line + "," + Double.parseDouble(pair[i]) * zenkaiP.get(i - 18);
-                    num_a = num_a + Double.parseDouble(pair[i]) * zenkaiP.get(i - 18);
-                }
-                for(int i=18; i<pair.length; i++) {  // 築年別全半壊数の計算
-                        line = line + "," + Double.parseDouble(pair[i]) * zenhankaiP.get(i-18);
-                        num_h = num_h + Double.parseDouble(pair[i]) * zenhankaiP.get(i-18);
-                }
-                line = line + "," + num_a + "," + num_h;
-
-                // 死者数の計算
-                String str[] = line.split(",");
-                double num_dead = (Double.parseDouble(str[45]) + Double.parseDouble(str[46]) + Double.parseDouble(str[47]) + Double.parseDouble(str[48])
-                        + Double.parseDouble(str[49]) + Double.parseDouble(str[50])) * 0.0676 + (Double.parseDouble(str[51]) + Double.parseDouble(str[52]) + Double.parseDouble(str[53])) * 0.0240;
-
-                // 負傷者の計算
-                LinkedList<Double> injuredRateList = new LinkedList<>();
-                injuredRateList.addLast(Double.parseDouble(str[27]) + 0.5 * Double.parseDouble(str[36]));
-                injuredRateList.addLast(Double.parseDouble(str[28]) + 0.5 * Double.parseDouble(str[37]));
-                injuredRateList.addLast(Double.parseDouble(str[29]) + 0.5 * Double.parseDouble(str[38]));
-                injuredRateList.addLast(Double.parseDouble(str[30]) + 0.5 * Double.parseDouble(str[39]));
-                injuredRateList.addLast(Double.parseDouble(str[31]) + 0.5 * Double.parseDouble(str[40]));
-                injuredRateList.addLast(Double.parseDouble(str[32]) + 0.5 * Double.parseDouble(str[41]));
-                injuredRateList.addLast(Double.parseDouble(str[33]) + 0.5 * Double.parseDouble(str[42]));
-                injuredRateList.addLast(Double.parseDouble(str[34]) + 0.5 * Double.parseDouble(str[43]));
-                injuredRateList.addLast(Double.parseDouble(str[35]) + 0.5 * Double.parseDouble(str[44]));
-
-                // 負傷者率の計算（建物崩壊率に依存する）
-                for(int i =0 ; i < injuredRateList.size(); i++) {
-                    double d = injuredRateList.get(i);
-                    if(d < 0.25) {
-                        injuredRateList.add(i, 0.12 * d);
-                    }
-                    else if(d < 0.375) {
-                        injuredRateList.add(i, 0.07 - 0.16 * d);
-                    }
-                    else {
-                        injuredRateList.add(i, 0.01);
-                    }
-                    injuredRateList.remove(i+1);
-                }
-
-                // 平均住民数を計算
-                double pop_house = 0.0;
-                if(Double.parseDouble(str[17])!=0) { // [14] / [17]
-                    pop_house = Double.parseDouble(str[14]) / Double.parseDouble(str[17]);
-                }
-
-                // 負傷者の計算
-                double num_injured = 0.0;
-                for(int i=0; i < injuredRateList.size(); i++) {
-                    num_injured = num_injured + pop_house * Double.parseDouble(str[i+18]) * injuredRateList.get(i);
-                }
-
-                // 重傷者の計算
-                double num_severe = 0.0;
-                for(int i=0; i < 9; i++) {
-                    num_severe = num_severe + pop_house * Double.parseDouble(str[i+18]) * 0.0309 * Double.parseDouble(str[i+27]);
-                }
-
-                // 避難者の計算
-                double num_evacuee0 = 0.0;
-                for(int i=0; i< 9; i++) {
-                    num_evacuee0 = num_evacuee0 + pop_house * Double.parseDouble(str[i+45]) + pop_house * Double.parseDouble(str[i+54]) * 0.503;
-                }
-
-                line = line + "," + num_dead + "," + num_injured + "," + num_severe + "," + num_evacuee0;
-                pw.write("\n" + line);
+                pw.print("\n" + meshLine);
             }
 
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
+        System.out.println("5次メッシュ被災地の被害を計算しました。");
+    }
+
+    /**
+     * メッシュの被害計算メソッド
+     * @param pop
+     * @param house
+     * @param buildingYearLine
+     * @param rate1Line
+     * @param rate2Line
+     * @return
+     */
+    public static double[] calcDamage(double pop, double house, String buildingYearLine,
+                                      String rate1Line, String rate2Line) {
+        double pop_rate = 0.0;
+        if(house>0)
+            pop_rate = pop / house;
+
+        // 築年数別世帯数の取得
+        String building[] = buildingYearLine.split(",");
+        double w1 = house * Double.parseDouble(building[3]); // 木造旧築年
+        double w2 = house * Double.parseDouble(building[4]); // 木造中築年1
+        double w3 = house * Double.parseDouble(building[5]); // 木造中築年2
+        double w4 = house * Double.parseDouble(building[6]); // 木造新築年1
+        double w5 = house * Double.parseDouble(building[7]); // 木造新築年2
+        double w6 = house * Double.parseDouble(building[8]); // 木造新築年3
+        double nw1 = house * Double.parseDouble(building[9]); // 非木造旧築年
+        double nw2 = house * Double.parseDouble(building[10]); // 非木造中築年
+        double nw3 = house * Double.parseDouble(building[11]); // 非木造真築年
+
+        // 全壊建物数の計算
+        String rate1[] = rate1Line.split(",");
+        double a_w1 = w1 * Double.parseDouble(rate1[1]); // 木造旧築年
+        double a_w2 = w2 * Double.parseDouble(rate1[2]); // 木造中築年1
+        double a_w3 = w3 * Double.parseDouble(rate1[3]); // 木造中築年2
+        double a_w4 = w4 * Double.parseDouble(rate1[4]); // 木造新築年1
+        double a_w5 = w5 * Double.parseDouble(rate1[5]); // 木造新築年2
+        double a_w6 = w6 * Double.parseDouble(rate1[6]); // 木造新築年3
+        double a_nw1 = nw1 * Double.parseDouble(rate1[7]); // 非木造旧築年
+        double a_nw2 = nw2 * Double.parseDouble(rate1[8]); // 非木造中築年
+        double a_nw3 = nw3 * Double.parseDouble(rate1[9]); // 非木造真築年
+        double sum_a = a_w1 + a_w2 + a_w3 + a_w4 + a_w5 + a_w6 + a_nw1 + a_nw2 + a_nw3;
+
+        // 半壊建物数の計算
+        String rate2[] = rate2Line.split(",");
+        double h_w1 = w1 * Double.parseDouble(rate2[1]) - a_w1; // 木造旧築年
+        double h_w2 = w2 * Double.parseDouble(rate2[2]) - a_w2; // 木造中築年1
+        double h_w3 = w3 * Double.parseDouble(rate2[3]) - a_w3; // 木造中築年2
+        double h_w4 = w4 * Double.parseDouble(rate2[4]) - a_w4; // 木造新築年1
+        double h_w5 = w5 * Double.parseDouble(rate2[5]) - a_w5; // 木造新築年2
+        double h_w6 = w6 * Double.parseDouble(rate2[6]) - a_w6; // 木造新築年3
+        double h_nw1 = nw1 * Double.parseDouble(rate2[7]) - a_nw1; // 非木造旧築年
+        double h_nw2 = nw2 * Double.parseDouble(rate2[8]) - a_nw2; // 非木造中築年
+        double h_nw3 = nw3 * Double.parseDouble(rate2[9]) - a_nw3; // 非木造真築年
+        double sum_h = h_w1 + h_w2 + h_w3 + h_w4 + h_w5 + h_w6 + h_nw1 + h_nw2 + h_nw3;
+
+        // 死者数の計算
+        double num_dead = (a_w1 + a_w2 + a_w3 + a_w4 + a_w5 + a_w6) * 0.0676 + (a_nw1 + a_nw2 + a_nw3) * 0.00840;
+
+        // 負傷者の計算
+        double num_injured = (sum_a + sum_h) * 0.177;
+
+        // 重傷者の計算
+        double num_severe = sum_a * 0.1;
+
+        // 避難者の計算
+        double num_evacuee = pop_rate * (sum_a + sum_h * 0.13);
+
+        double num[] = {sum_a, sum_h, num_dead, num_injured, num_severe, num_evacuee};
+        return num;
     }
 
     /**
@@ -408,16 +298,16 @@ public class EarthquakeDamageEstimate {
      * @param inFile 5次メッシュ被害推計ファイル
      * @param outFile シンプル化した5次メッシュ被害ファイル
      */
-    public static void estimateDamage2(File inFile, File outFile) {
+    public static void estimateDamageMeshSimple(File inFile, File outFile) {
         try(BufferedReader brIn = new BufferedReader(new InputStreamReader(new FileInputStream(inFile), "Shift_JIS"));
             PrintWriter pw = new PrintWriter(new OutputStreamWriter(new FileOutputStream(outFile, false), "Shift_JIS"))) {
 
             String line = brIn.readLine(); // 1行目は見出し
             String pair[] = line.split(",");
-            pw.write(pair[0] + "," + pair[13] + "," + pair[63] + "," + pair[64] + "," + pair[65] + "," + pair[66] + "," + pair[67] + "," + pair[68]);
+            pw.write(pair[0] + "," + pair[16] + "," + pair[17] + "," + pair[18] + "," + pair[19] + "," + pair[20] + "," + pair[21] + "," + pair[22]);
             while((line = brIn.readLine()) != null) {
                 String tmp[] = line.split(",");
-                pw.write("\n" + tmp[0] + "," + tmp[13] + "," + tmp[63] + "," + tmp[64] + "," + tmp[65] + "," + tmp[66] + "," + tmp[67] + "," + tmp[68]);
+                pw.write("\n" + tmp[0] + "," + tmp[16] + "," + tmp[17] + "," + tmp[18] + "," + tmp[19] + "," + tmp[20] + "," + tmp[21] + "," + tmp[22]);
             }
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
@@ -493,7 +383,7 @@ public class EarthquakeDamageEstimate {
      * @param inFile4 震度分布ファイル
      * @param outFile
      */
-    public static void estimateDamage4(File inFile1, File inFile2, File inFile3, File inFile4, File outFile, File shelterDir) {
+    public static void calcShelterDamage(File inFile1, File inFile2, File inFile3, File inFile4, File outFile, File shelterDir) {
         try(BufferedReader brIn1 = new BufferedReader(new InputStreamReader(new FileInputStream(inFile1), "Shift_JIS"));
             BufferedReader brIn2 = new BufferedReader(new InputStreamReader(new FileInputStream(inFile2), "Shift_JIS"));
             BufferedReader brIn3 = new BufferedReader(new InputStreamReader(new FileInputStream(inFile3), "Shift_JIS"));
@@ -595,11 +485,11 @@ public class EarthquakeDamageEstimate {
         }
     }
 
-    public static void estimateDamage5(File inFile1, File inFile2, File inFile3, File outFile1, File outFile2) {
+    public static void calcHospitalDamage(File meshDamageFile, File nearHospitalFile, File hospitalsFile, File outFile1, File outFile2) {
         try(
-            BufferedReader brIn1 = new BufferedReader(new InputStreamReader(new FileInputStream(inFile1), "Shift_JIS"));
-            BufferedReader brIn2 = new BufferedReader(new InputStreamReader(new FileInputStream(inFile2), "Shift_JIS"));
-            BufferedReader brIn3 = new BufferedReader(new InputStreamReader(new FileInputStream(inFile3), "Shift_JIS"));
+            BufferedReader brMeshDamage = new BufferedReader(new InputStreamReader(new FileInputStream(meshDamageFile), "Shift_JIS"));
+            BufferedReader brNearHospital = new BufferedReader(new InputStreamReader(new FileInputStream(nearHospitalFile), "Shift_JIS"));
+            BufferedReader brHospitals = new BufferedReader(new InputStreamReader(new FileInputStream(hospitalsFile), "Shift_JIS"));
             PrintWriter pw1 = new PrintWriter(new OutputStreamWriter(new FileOutputStream(outFile1, false), "Shift_JIS"));
             PrintWriter pw2 = new PrintWriter(new OutputStreamWriter(new FileOutputStream(outFile2, false), "Shift_JIS"))
         ) {
@@ -608,8 +498,8 @@ public class EarthquakeDamageEstimate {
             HashMap<String, Double> siDB = new HashMap<>(); // mesh5thがキー、震度が値
             HashMap<String, Double> meshDB1 = new HashMap<>(); // mesh5thがキー、患者数が値
             HashMap<String, Double> meshDB2 = new HashMap<>(); // mesh5thがキー、重症患者数が値
-            String line1 = brIn1.readLine(); // 1行目は見出し
-            while((line1 = brIn1.readLine())!=null) {
+            String line1 = brMeshDamage.readLine(); // 1行目は見出し
+            while((line1 = brMeshDamage.readLine())!=null) {
                 String pair[] = line1.split(",");
                 if(pair[1].equals("nan")) {
                     siDB.put(pair[0], 0.0);
@@ -624,9 +514,9 @@ public class EarthquakeDamageEstimate {
             }
 
             // 5次メッシュと病院DBの作成
-            String line2 = brIn2.readLine(); // 1行目は見出し
-            HashMap<String, String> meshDB3 = new HashMap<>(); // mesh5thがキー、病院コードがキー
-            while((line2=brIn2.readLine())!=null) {
+            String line2 = brNearHospital.readLine(); // 1行目は見出し
+            HashMap<String, String> meshDB3 = new HashMap<>(); // mesh5thがキー、病院コードが値
+            while((line2=brNearHospital.readLine())!=null) {
                 String pair[] = line2.split(",");
                 meshDB3.put(pair[0],pair[1]);
             }
@@ -635,7 +525,7 @@ public class EarthquakeDamageEstimate {
             HashMap<String, String> hospitalDB1 = new HashMap<>();
             ArrayList<String> hospitalList = new ArrayList<>();
             String line3;
-            while((line3=brIn3.readLine())!=null) {
+            while((line3=brHospitals.readLine())!=null) {
                 String pair[] = line3.split(",");
                 hospitalDB1.put(pair[1],line3);
                 hospitalList.add(pair[1]);
@@ -795,6 +685,66 @@ public class EarthquakeDamageEstimate {
             CreateShape.createShapeFile(new File(hall.getPath() + "/halls.shp"), "UTF-8", type, features);
             Shape2GeoJson.createGeoJson(new File(hall.getPath() + "/halls.shp"), "UTF-8", new File(hall.getPath() + "/halls.geojson"), "UTF-8");
         } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 5次メッシュの震度情報を用いて市区町村別の最大、最小、平均の震度を求める
+     * @param inFile 震度情報の付いた5次メッシュファイル（被災地のみ）
+     * @param outFile 市区町村別の震度分布ファイル
+     */
+    public static void extractDisasterMunicipalities(File inFile, File outFile) {
+        // 被災市区町村の最大震度、平均震度、最小震度を求める
+        HashMap<String, LinkedList<Double>> municipalitiesMap = new HashMap<>(); // 市区町村コードをキーに、市区町村内の震度をリストに持つマップ変数
+        LinkedList<String> municipalitiesList = new LinkedList<>(); // 市区町村コードを保持する
+        try(BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(inFile), "Shift_JIS"));
+            PrintWriter pw = new PrintWriter(new OutputStreamWriter(new FileOutputStream(outFile, false), "Shift_JIS"))) {
+
+            String line = br.readLine(); // 一行目は項目名
+            pw.write("JCODE,KEN,SICHO,GUN,SEIREI,SIKUCHOSON,P_NUM,H_NUM,MAX_SI,MIN_SI,AVE_SI"); // *注意
+            while((line = br.readLine()) != null) {
+                String pair[] = line.split(",");
+                LinkedList<Double> list;
+                if(municipalitiesMap.containsKey(pair[5])) { // すでに市区町村コードをキーとする震度リストがある場合
+                    list = municipalitiesMap.get(pair[5]); // 震度リストを取得
+                }
+                else { // 市区町村コードをキーとする震度リストがない場合
+                    municipalitiesList.addLast(pair[5] + "," + pair[6] + "," + pair[7] + "," + pair[8] + "," + pair[9]
+                            + "," + pair[10] + "," + pair[11] + "," + pair[12]); // 出力ファイルに必須事項を抜き出す（＊注意の震度以外の項目を抜き出す）
+                    list = new LinkedList<>(); // 震度リストを作成する
+                }
+                list.addLast(Double.parseDouble(pair[13]));
+                municipalitiesMap.put(pair[5], list);
+            }
+
+            // 市区町村の最大、最小、平均震度を求める
+            for(int i=0; i<municipalitiesList.size(); i++) {
+                String municipality = municipalitiesList.get(i);
+                String pair[] = municipality.split(",");
+                LinkedList<Double> list = municipalitiesMap.get(pair[0]);
+                double min = Double.MAX_VALUE;
+                double max = 0.0;
+                double ave = 0.0;
+                for(double d : list) {
+                    if(d >= max) {
+                        max = d;
+                    }
+                    if(d <= min) {
+                        min = d;
+                    }
+                    ave = ave + d;
+                }
+                ave = ave / list.size();
+
+                pw.write("\n" + municipality + "," + max + "," + min + "," + ave);
+            }
+
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
