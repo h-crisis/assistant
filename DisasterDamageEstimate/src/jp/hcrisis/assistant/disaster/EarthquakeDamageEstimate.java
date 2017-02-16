@@ -1,9 +1,8 @@
 package jp.hcrisis.assistant.disaster;
 
-import com.vividsolutions.jts.geom.Coordinate;
+import com.vividsolutions.jts.geom.*;
 import com.vividsolutions.jts.geom.GeometryFactory;
-import com.vividsolutions.jts.geom.Point;
-import files.FileManagement;
+import com.vividsolutions.jts.geom.Polygon;
 import gis.CreateShape;
 import gis.Shape2GeoJson;
 import org.geotools.data.DataUtilities;
@@ -16,6 +15,7 @@ import org.geotools.feature.simple.SimpleFeatureBuilder;
 import org.geotools.geometry.jts.JTSFactoryFinder;
 import org.opengis.feature.simple.SimpleFeature;
 import org.opengis.feature.simple.SimpleFeatureType;
+import org.opengis.geometry.coordinate.*;
 
 import java.io.*;
 import java.math.BigDecimal;
@@ -41,6 +41,9 @@ public class EarthquakeDamageEstimate {
     private static File siFile;
     private static File shapeDir;
 
+    private static File mesh5thShapeFile;
+    private static File mesh5thShapeCenterFile;
+
     /**
      * EarthquakeDamageEstimateのコンストラクタ。各ファイルの設定を行う。
      * @param masterDir マスターファイルのフォルダ
@@ -49,6 +52,7 @@ public class EarthquakeDamageEstimate {
      * @param code 災害コード
      */
     EarthquakeDamageEstimate(File masterDir, File shapeDir, File siFile, File outDir, String code) throws Exception {
+        // csvファイルの定義
         meshBaseFile = new File(masterDir.getPath() + "/mesh_base.csv");
         this.shapeDir = shapeDir; // Shapeファイルがあるフォルダ
         rateFile1 = new File(masterDir.getPath() + "/rate_zenkai.csv"); // 全壊率テーブル
@@ -59,6 +63,11 @@ public class EarthquakeDamageEstimate {
         hospitalsFile = new File(masterDir.getPath() + "/hospitals.csv"); // 避難所データ
         nearHospitalFile = new File(masterDir.getPath() + "/near_hospital.csv"); // 近傍医療機関データ
         this.siFile = siFile; // 震度分布ファイル
+
+
+        // Shapeファイルの定義
+        mesh5thShapeFile = new File(shapeDir.getPath() + "/mesh/Mesh5th.shp"); // 5次メッシュポリゴンファイル
+        mesh5thShapeCenterFile = new File(shapeDir.getPath() + "/mesh/Mesh5_Center.shp"); // 5次メッシュポイントファイル
 
         File[] masterFiles = {this.meshBaseFile, this.rateFile1, this.rateFile2, this.buildingYearFile, this.sheltersFile, this.nearShelterFile, this.siFile, outDir};
         for(File file : masterFiles) {
@@ -81,6 +90,7 @@ public class EarthquakeDamageEstimate {
         extractDisasterArea(this.meshBaseFile, this.siFile, outFile1, 5); // 被災地5次メッシュの抽出
         estimateDamageMesh(outFile1, this.buildingYearFile, this.rateFile1, this.rateFile2, outFile2);
         estimateDamageMeshSimple(outFile2, outFile3); // シンプル化した被害ファイル
+        createMesh5Shapes(mesh5thShapeFile, mesh5thShapeCenterFile, outFile2, outDir);
 
         // 医療機関・避難所の被害ファイル作成
         calcHospitalDamage(outFile3, this.nearHospitalFile, this.hospitalsFile, outFile4, outFile5);
@@ -316,6 +326,159 @@ public class EarthquakeDamageEstimate {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     *
+     * @param inFile1 5次メッシュポリゴンファイル
+     * @param inFile2 5次メッシュ重心ポイントファイル
+     * @param inFile3 5次メッシュ被害ファイル
+     * @param outDir 出力フォルダ
+     */
+    public static void createMesh5Shapes(File inFile1, File inFile2, File inFile3, File outDir) throws SchemaException {
+        System.out.println("5次メッシュ被災地のShapeファイルを作成します。");
+        // 被災地5次メッシュDBを作る
+        HashMap<String, String> mesh5DB = new HashMap<>();
+        try(BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(inFile3), "Shift_JIS"))) {
+            String line = br.readLine(); // 1行目は項目名
+            while((line = br.readLine()) != null) {
+                String pair[] = line.split(",");
+                mesh5DB.put(pair[0], line);
+            }
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // ここから5次メッシュポリゴンの被害ファイル作成
+        File mesh5Shape = inFile1;
+        ShapefileDataStore mesh5Store = null;
+        SimpleFeatureSource mesh5FeatureSource;
+        SimpleFeatureCollection mesh5C;
+        FeatureIterator mesh5I;
+
+        // 5次メッシュFeatureを生成する準備
+        System.out.println("5次メッシュ被災地のShapeファイルのFeatureを作成します。");
+        String namePolygon = "Mesh5th Damage";
+        String geomPolygon = "the_geom:Polygon:srid=4612,";
+        SimpleFeatureType typePolygon = DataUtilities.createType(namePolygon, geomPolygon +
+                "mesh5th:String,block:String,ken:string,city:string,es:string,area:string,si:double,zenkai:double,hankai:double,dead:double,injured:double,severe:double,evacuee:double");
+        GeometryFactory geometryFactoryPolygon = (GeometryFactory) JTSFactoryFinder.getGeometryFactory();
+        SimpleFeatureBuilder featureBuilderPolygon = new SimpleFeatureBuilder(typePolygon);
+        List<SimpleFeature> featuresPolygon = new ArrayList<SimpleFeature>();
+
+        try {
+            mesh5Store = new ShapefileDataStore(mesh5Shape.toURI().toURL());
+            mesh5Store.setCharset(Charset.forName("UTF-8"));
+            mesh5FeatureSource = mesh5Store.getFeatureSource();
+            mesh5C = mesh5FeatureSource.getFeatures();
+            mesh5I = mesh5C.features();
+            while(mesh5I.hasNext()) {
+                SimpleFeature feature = (SimpleFeature)mesh5I.next();
+                MultiPolygon polygon = (MultiPolygon)feature.getDefaultGeometry();
+                String code = (String)feature.getAttribute("MESH5TH");
+                if(mesh5DB.containsKey(code)) {
+                    String pair[] = mesh5DB.get(code).split(",");
+                    featureBuilderPolygon.add(polygon);
+                    featureBuilderPolygon.add(pair[0]); // mesh5
+                    featureBuilderPolygon.add(pair[5]); // block
+                    featureBuilderPolygon.add(pair[6]); // ken
+                    featureBuilderPolygon.add(pair[7]); // city
+                    featureBuilderPolygon.add(pair[8]); // es
+                    featureBuilderPolygon.add(pair[9]); // area
+                    for(int i=16; i<23; i++) {
+                        featureBuilderPolygon.add(Double.parseDouble(pair[i]));
+                    }
+                    SimpleFeature f = featureBuilderPolygon.buildFeature(null);
+                    featuresPolygon.add(f);
+                }
+            }
+            mesh5I.close();
+            mesh5Store.dispose();
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            mesh5Store.dispose();
+        }
+        System.out.println("5次メッシュ被災地のShapeファイルのFeatureを作成しました。");
+
+
+        // ここから5次メッシュポイントの被害ファイル作成
+        File mesh5CenterShape = inFile2;
+        ShapefileDataStore mesh5CenterStore = null;
+        SimpleFeatureSource mesh5CenterFeatureSource;
+        SimpleFeatureCollection mesh5CenterC;
+        FeatureIterator mesh5CenterI;
+
+        // 5次メッシュ重心Featureを生成する準備
+        System.out.println("5次メッシュ被災地重心のShapeファイルのFeatureを作成します。");
+        String namePoint = "Mesh5thCenter Damage";
+        String geomPoint = "the_geom:Point:srid=4612,";
+        SimpleFeatureType typePoint = DataUtilities.createType(namePoint, geomPoint +
+                "mesh5th:String,block:String,ken:string,city:string,es:string,area:string,si:double,zenkai:double,hankai:double,dead:double,injured:double,severe:double,evacuee:double");
+        GeometryFactory geometryFactoryPoint = (GeometryFactory) JTSFactoryFinder.getGeometryFactory();
+        SimpleFeatureBuilder featureBuilderPoint = new SimpleFeatureBuilder(typePoint);
+        List<SimpleFeature> featuresPoint = new ArrayList<SimpleFeature>();
+
+        try {
+            mesh5CenterStore = new ShapefileDataStore(mesh5CenterShape.toURI().toURL());
+            mesh5CenterStore.setCharset(Charset.forName("UTF-8"));
+            mesh5CenterFeatureSource = mesh5CenterStore.getFeatureSource();
+            mesh5CenterC = mesh5CenterFeatureSource.getFeatures();
+            mesh5CenterI = mesh5CenterC.features();
+            while(mesh5CenterI.hasNext()) {
+                SimpleFeature feature = (SimpleFeature)mesh5CenterI.next();
+                Point point = geometryFactoryPoint.createPoint(((Point) feature.getAttribute("the_geom")).getCoordinate());
+                String code = (String)feature.getAttribute("MESH5TH");
+                if(mesh5DB.containsKey(code)) {
+                    String pair[] = mesh5DB.get(code).split(",");
+                    featureBuilderPoint.add(point);
+                    featureBuilderPoint.add(pair[0]); // mesh5
+                    featureBuilderPoint.add(pair[5]); // block
+                    featureBuilderPoint.add(pair[6]); // ken
+                    featureBuilderPoint.add(pair[7]); // city
+                    featureBuilderPoint.add(pair[8]); // es
+                    featureBuilderPoint.add(pair[9]); // area
+                    for(int i=16; i<23; i++) {
+                        featureBuilderPoint.add(Double.parseDouble(pair[i]));
+                    }
+                    SimpleFeature f = featureBuilderPoint.buildFeature(null);
+                    featuresPoint.add(f);
+                }
+            }
+            mesh5CenterI.close();
+            mesh5CenterStore.dispose();
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            mesh5CenterStore.dispose();
+        }
+        System.out.println("5次メッシュ被災地重心のShapeファイルのFeatureを作成しました。");
+
+        // Shapeファイルの吐き出し
+        System.out.println("5次メッシュShapeファイルを作成します");
+        try {
+            File mesh = new File(outDir.getPath() + "/mesh");
+            mesh.mkdir();
+            CreateShape.createShapeFile(new File(mesh.getPath() + "/mesh5.shp"), "UTF-8", typePolygon, featuresPolygon);
+            System.out.println("5次メッシュ被災地ポリゴンのShapeファイルを作成しました。");
+            CreateShape.createShapeFile(new File(mesh.getPath() + "/mesh5Center.shp"), "UTF-8", typePoint, featuresPoint);
+            System.out.println("5次メッシュ被災地ポイントのShapeファイルを作成しました。");
+            Shape2GeoJson.createGeoJson(new File(mesh.getPath() + "/mesh5.shp"), "UTF-8", new File(mesh.getPath() + "/mesh5.geojson"), "UTF-8");
+            System.out.println("5次メッシュ被災地ポリゴンのGeoJsonファイルを作成しました。");
+            Shape2GeoJson.createGeoJson(new File(mesh.getPath() + "/mesh5Center.shp"), "UTF-8", new File(mesh.getPath() + "/mesh5Center.geojson"), "UTF-8");
+            System.out.println("5次メッシュ被災地ポイントのGeoJsonファイルを作成しました。");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        System.out.println("5次メッシュShapeファイルを作成しました。");
     }
 
     /**
@@ -601,6 +764,7 @@ public class EarthquakeDamageEstimate {
         }
     }
 
+    /**
     public static void createMunicipalitiesGisFiles(File shapeDir, File inFile, File outDir) throws SchemaException {
         // 市区町村の被害DBを作る
         HashMap<String, String> municipalitiesMap = new HashMap<>();
@@ -688,6 +852,7 @@ public class EarthquakeDamageEstimate {
             e.printStackTrace();
         }
     }
+     */
 
     /**
      * 5次メッシュの震度情報を用いて市区町村別の最大、最小、平均の震度を求める

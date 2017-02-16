@@ -10,6 +10,7 @@
     <file url="file://$PROJECT_DIR$/files/YahooShelter/1_北海道.csv" charset="Shift_JIS" />
     <file url="file://$PROJECT_DIR$/files/YahooShelter/47_沖縄県.csv" charset="Shift_JIS" />
     <file url="file://$PROJECT_DIR$/files/master/building_year.csv" charset="Shift_JIS" />
+    <file url="file://$PROJECT_DIR$/files/master/hospitals.csv" charset="Shift_JIS" />
     <file url="file://$PROJECT_DIR$/files/out/20170113_01/20170113_01_shelter_01_evacuee.csv" charset="Shift_JIS" />
     <file url="file://$PROJECT_DIR$/test/iwasaki/evaluator/SphereEvaluator.java" charset="Shift_JIS" />
     <file url="file://$PROJECT_DIR$/test/iwasaki/hospital_info.csv" charset="Shift_JIS" />
