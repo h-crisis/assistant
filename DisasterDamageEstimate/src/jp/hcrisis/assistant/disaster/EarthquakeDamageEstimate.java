@@ -366,7 +366,6 @@ public class EarthquakeDamageEstimate {
         String geomPolygon = "the_geom:Polygon:srid=4612,";
         SimpleFeatureType typePolygon = DataUtilities.createType(namePolygon, geomPolygon +
                 "mesh5th:String,block:String,ken:string,city:string,es:string,area:string,si:double,zenkai:double,hankai:double,dead:double,injured:double,severe:double,evacuee:double");
-        GeometryFactory geometryFactoryPolygon = (GeometryFactory) JTSFactoryFinder.getGeometryFactory();
         SimpleFeatureBuilder featureBuilderPolygon = new SimpleFeatureBuilder(typePolygon);
         List<SimpleFeature> featuresPolygon = new ArrayList<SimpleFeature>();
 
