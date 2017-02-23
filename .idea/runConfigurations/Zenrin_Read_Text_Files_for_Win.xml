@@ -1,9 +1,9 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Zenrin Read Text Files" type="Application" factoryName="Application">
+  <configuration default="false" name="Zenrin Read Text Files for Win" type="Application" factoryName="Application">
     <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
     <option name="MAIN_CLASS_NAME" value="jp.hcrisis.assistant.zenrin.area2.ReadTxtFiles" />
-    <option name="VM_PARAMETERS" value="-Xms16000m -Xmx16000m" />
-    <option name="PROGRAM_PARAMETERS" value="" />
+    <option name="VM_PARAMETERS" value="-Xms100000m -Xmx100000m" />
+    <option name="PROGRAM_PARAMETERS" value="C:\Users\manabu\Desktop\ZenrinOUT\TXT C:\Users\manabu\Desktop\ZenrinOUT\SHP \" />
     <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
     <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
     <option name="ALTERNATIVE_JRE_PATH" value="1.8" />

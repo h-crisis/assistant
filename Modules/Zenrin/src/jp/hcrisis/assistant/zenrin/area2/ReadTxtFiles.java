@@ -23,12 +23,13 @@ import java.util.concurrent.Executors;
  */
 public class ReadTxtFiles {
     public static void main(String args[]) throws Exception {
-        File dir = new File("/Users/manabu/Desktop/ZenrinOUT/TXT");
-        File outDir = new File("/Users/manabu/Desktop/ZenrinOUT/SHP");
-        readFiles(dir, outDir, 1);
+        // args[0] : txtファイルフォルダへのパス　args[1] : shapeファイルフォルダへのパス　args[2] : / or \
+        File dir = new File(args[0]);
+        File outDir = new File(args[1]);
+        readFiles(dir, outDir, 1, args[2]);
     }
 
-    public static void readFiles(File dir, File outDir, int thread) throws Exception {
+    public static void readFiles(File dir, File outDir, int thread, String separator) throws Exception {
         ExecutorService executor = Executors.newFixedThreadPool(thread);
         if(dir.isDirectory()) {
             File fileList[] = dir.listFiles();
@@ -36,9 +37,9 @@ public class ReadTxtFiles {
                 if(!fileList[i].getName().startsWith(".")) {
                     String textFileName = fileList[i].getName();
                     String fileNamePair[] = textFileName.split("\\.");
-                    File shapeFile = new File(outDir.getPath() + "/" + fileNamePair[0] + ".shp");
+                    File shapeFile = new File(outDir.getPath() + separator + fileNamePair[0] + ".shp");
                     if(!shapeFile.exists()) {
-                        executor.submit(new ReadTxtFileThread(fileList[i], outDir)); // スレッドで変換
+                        executor.submit(new ReadTxtFileThread(fileList[i], outDir, separator)); // スレッドで変換
                     }
                 }
             }

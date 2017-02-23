@@ -23,10 +23,12 @@ public class ReadTxtFileThread extends Thread {
 
     private File file;
     private File outDir;
+    private String separator;
 
-    public ReadTxtFileThread(File file1, File file2) {
+    public ReadTxtFileThread(File file1, File file2, String separator) {
         this.file = file1;
         this.outDir = file2;
+        this.separator = separator;
     }
 
     public void run() {
@@ -101,17 +103,17 @@ public class ReadTxtFileThread extends Thread {
                 }
             }
             br.close();
-            createShape(file, outDir, figTypeI, layerI, featuresList, textName);
+            createShape(file, outDir, figTypeI, layerI, featuresList, textName, separator);
         } catch (Exception e) {
             System.out.print(e);
         }
         System.out.printf("[読込]%sの読み込みが完了しました。: %d%n", file.getName(), Thread.currentThread().getId());
     }
 
-    public static void createShape(File file, File outDir, int figType, int layer, LinkedList<Object> featuresList, LinkedList<String> texts) throws Exception {
+    public static void createShape(File file, File outDir, int figType, int layer, LinkedList<Object> featuresList, LinkedList<String> texts, String separator) throws Exception {
         System.out.println("[変換]" + file.getName() + "をShapeファイルに変換します。: " + Thread.currentThread().getId());
         String inFileName[] = file.getName().split("\\.");
-        String outFilePath = outDir.getPath() + "/" + inFileName[0] + ".shp";
+        String outFilePath = outDir.getPath() + separator + inFileName[0] + ".shp";
         File outFile = new File(outFilePath);
         String name = "Layer " + Integer.toString(layer);
         String geom = "the_geom:";

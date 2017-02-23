@@ -14,6 +14,10 @@ public class Main {
      * @param args ゼンリンAreaMap2のルートフォルダ、出力先フォルダ、マルチスレッド数
      */
     public static void main(String args[]) throws IOException {
+
+        //String separator = "/";
+        String separator = "\\";
+
         if(args.length!=4) { // 引数が4つ以外の場合はエラー処理
             System.out.println("Error: Zenrin Area2 Converter needs at least four arguments. ");
             System.exit(1);
@@ -39,7 +43,7 @@ public class Main {
             File dataDir = new File(args[0]);
             if(!dataDir.exists()) {
                 System.out.println("Zenrin AreaMap2 Converter Error: ゼンリン地図データフォルダが存在しません。"
-                        + dataDir.getPath() + "/" + dataDir.getName());
+                        + dataDir.getPath() + separator + dataDir.getName());
                 System.exit(1);
             }
 
