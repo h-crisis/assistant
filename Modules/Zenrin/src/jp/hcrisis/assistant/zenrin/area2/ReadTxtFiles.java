@@ -23,10 +23,13 @@ import java.util.concurrent.Executors;
  */
 public class ReadTxtFiles {
     public static void main(String args[]) throws Exception {
-        // args[0] : txtファイルフォルダへのパス　args[1] : shapeファイルフォルダへのパス　args[2] : / or \
+        // args[0] : txtファイルフォルダへのパス　args[1] : shapeファイルフォルダへのパス　args[2] : スレッド数　args[3] : / or \
         File dir = new File(args[0]);
+
         File outDir = new File(args[1]);
-        readFiles(dir, outDir, 1, args[2]);
+        int thread = Integer.parseInt(args[2]);
+        String separator = args[3];
+        readFiles(dir, outDir, thread, separator);
     }
 
     public static void readFiles(File dir, File outDir, int thread, String separator) throws Exception {

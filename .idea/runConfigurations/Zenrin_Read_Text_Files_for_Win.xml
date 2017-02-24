@@ -2,7 +2,7 @@
   <configuration default="false" name="Zenrin Read Text Files for Win" type="Application" factoryName="Application">
     <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
     <option name="MAIN_CLASS_NAME" value="jp.hcrisis.assistant.zenrin.area2.ReadTxtFiles" />
-    <option name="VM_PARAMETERS" value="-Xms100000m -Xmx100000m" />
+    <option name="VM_PARAMETERS" value="-Xms50000m -Xmx50000m" />
     <option name="PROGRAM_PARAMETERS" value="C:\Users\manabu\Desktop\ZenrinOUT\TXT C:\Users\manabu\Desktop\ZenrinOUT\SHP \" />
     <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
     <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
