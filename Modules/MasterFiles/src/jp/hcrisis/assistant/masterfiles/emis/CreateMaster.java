@@ -96,10 +96,10 @@ public class CreateMaster {
         }
 
         //createMedicalInstituteMaster(outDir, emisMedicalInstituteMaster, emisMedicalInstituteInfoMaster);
-        //updateCities2MedicalInstiuteMaster(outDir, municipalitiesShapeFile, municipalitiesShapeFileEncode);
+        updateCities2MedicalInstiuteMaster(outDir, municipalitiesShapeFile, municipalitiesShapeFileEncode);
         //updateMedicalArea2MedicalInstiuteMaster(outDir, medicalAreaShapeFile, medicalAreaShapeFileEncode);
-        updateMesh2MedicalInstiuteMaster(outDir, meshShapeFileDir, meshShapeFileDirEncoding);
-        createMedicalInstituteMasterShape(outDir, "Shift_JIS");
+        //updateMesh2MedicalInstiuteMaster(outDir, meshShapeFileDir, meshShapeFileDirEncoding);
+        //createMedicalInstituteMasterShape(outDir, "Shift_JIS");
     }
 
     /**
@@ -148,7 +148,7 @@ public class CreateMaster {
 
             while ((line1 = br1.readLine()) != null) {
                 String pair[] = line1.split(",");
-                String[] str = {"h0000000000", "e0000000000", "自動入力医療機関名1", "", "00", "00000", "都道府県", "郡", "市区町村", "0000000", "住所未入力",
+                String[] str = {"h0000000000", "e000000000000", "自動入力医療機関名1", "", "00", "00000", "都道府県", "郡", "市区町村", "0000000", "住所未入力",
                         "0.00", "0.00", "0", "0", "0", "0"};
 
                 if (pair.length >= 1) { // 項目1(都道府県コード)の変換
@@ -164,8 +164,8 @@ public class CreateMaster {
                     str[6] = pair[1];
                 }
 
-                if (pair.length >= 3) { // 項目3(EMIS医療機関コード)の変換
-                    str[1] = "e" + pair[2];
+                if (pair.length >= 3) { // 項目3(EMIS医療機関コード 都道府県でユニークなので都道府県コードを追加)の変換
+                    str[1] = "e" + str[4] + pair[2];
                 }
 
                 if (pair.length >= 4) { // 項目4(医療機関名)の変換
@@ -312,7 +312,7 @@ public class CreateMaster {
                         String code = feature.getAttribute("code").toString();
                         String prefcture = feature.getAttribute("prefecture").toString();
                         String gun = feature.getAttribute("name1").toString();
-                        String sikuchoson = "";
+                        String sikuchoson = feature.getAttribute("name2").toString();
                         if(gun.endsWith("市")) {
                             gun = "";
                             sikuchoson = feature.getAttribute("name1").toString() + feature.getAttribute("name2").toString();
@@ -336,44 +336,48 @@ public class CreateMaster {
 
                 // 市区町村が見つからなかったときの処理
                 if(pair[8].equals("市区町村")) {
-                    List<GeocoderResult> results = null;
-                    results = GeoCoding.getGeocoderResult(pair[6] + " " + pair[2], "jp");
-                    if(results.size()<1)
-                        results = GeoCoding.getGeocoderResult(pair[10], "jp");
+                    try {
+                        List<GeocoderResult> results = null;
+                        results = GeoCoding.getGeocoderResult(pair[6] + " " + pair[2], "jp");
+                        if (results.size() < 1)
+                            results = GeoCoding.getGeocoderResult(pair[10], "jp");
 
-                    if (results.size() > 0) {
-                        GeocoderResult result = results.get(0);
-                        pair[11] = result.getGeometry().getLocation().getLat().toString();
-                        pair[12] = result.getGeometry().getLocation().getLng().toString();
-                    }
-                    FeatureIterator iterator2 = c.features();
-                    while (iterator2.hasNext()) {
-                        SimpleFeature feature = (SimpleFeature) iterator2.next();
-                        if (point.within((MultiPolygon) feature.getAttribute("the_geom")) || point.touches((MultiPolygon) feature.getAttribute("the_geom"))) {
-                            String code = feature.getAttribute("code").toString();
-                            String prefcture = feature.getAttribute("prefecture").toString();
-                            String gun = feature.getAttribute("name1").toString();
-                            String sikuchoson = "";
-                            if(gun.endsWith("市")) {
-                                gun = "";
-                                sikuchoson = feature.getAttribute("name1").toString() + feature.getAttribute("name2").toString();
-                            }
-                            else if(gun.endsWith("区")) {
-                                gun = "";
-                                sikuchoson = feature.getAttribute("name1").toString();
-                            }
-                            else if(gun.endsWith("郡")) {
-                                sikuchoson = feature.getAttribute("name2").toString();
-                            }
-
-                            pair[5] = code;
-                            pair[6] = prefcture;
-                            pair[7] = gun;
-                            pair[8] = sikuchoson;
-                            break;
+                        if (results.size() > 0) {
+                            GeocoderResult result = results.get(0);
+                            pair[11] = result.getGeometry().getLocation().getLat().toString();
+                            pair[12] = result.getGeometry().getLocation().getLng().toString();
                         }
+                        FeatureIterator iterator2 = c.features();
+                        while (iterator2.hasNext()) {
+                            SimpleFeature feature = (SimpleFeature) iterator2.next();
+                            if (point.within((MultiPolygon) feature.getAttribute("the_geom")) || point.touches((MultiPolygon) feature.getAttribute("the_geom"))) {
+                                String code = feature.getAttribute("code").toString();
+                                String prefcture = feature.getAttribute("prefecture").toString();
+                                String gun = feature.getAttribute("name1").toString();
+                                String sikuchoson = "";
+                                if (gun.endsWith("市")) {
+                                    gun = "";
+                                    sikuchoson = feature.getAttribute("name1").toString() + feature.getAttribute("name2").toString();
+                                } else if (gun.endsWith("区")) {
+                                    gun = "";
+                                    sikuchoson = feature.getAttribute("name1").toString();
+                                } else if (gun.endsWith("郡")) {
+                                    sikuchoson = feature.getAttribute("name2").toString();
+                                }
+
+                                pair[5] = code;
+                                pair[6] = prefcture;
+                                pair[7] = gun;
+                                pair[8] = sikuchoson;
+                                break;
+                            }
+                        }
+                        iterator2.close();
                     }
-                    iterator2.close();
+                    catch(Exception e) {
+                        System.out.println(list);
+                        System.exit(1);
+                    }
                 }
 
                 // 住所から市区町村を取り除く
