@@ -16,30 +16,30 @@
 <div id="fadeLayer" onclick="fade()"></div>
 <div id="printSetting" >
     <br><br>
-<form class="form">
-    <label>ページサイズ</label>
-    <select id="format">
-        <option value="a0">A0 (slow)</option>
-        <option value="a1">A1</option>
-        <option value="a2">A2</option>
-        <option value="a3">A3</option>
-        <option value="a4" selected>A4</option>
-        <option value="a5">A5 (fast)</option>
-    <label>印刷解像度 </label>
-    <select id="resolution">
-        <option value="72">72 dpi (fast)</option>
-        <option value="150">150 dpi</option>
-        <option value="300">300 dpi (slow)</option>
-    </select>
-</form>
+    <form class="form">
+        <label>ページサイズ</label>
+        <select id="format">
+            <option value="a0">A0 (slow)</option>
+            <option value="a1">A1</option>
+            <option value="a2">A2</option>
+            <option value="a3">A3</option>
+            <option value="a4" selected>A4</option>
+            <option value="a5">A5 (fast)</option>
+            <label>印刷解像度 </label>
+            <select id="resolution">
+                <option value="72">72 dpi (fast)</option>
+                <option value="150">150 dpi</option>
+                <option value="300">300 dpi (slow)</option>
+            </select>
+    </form>
     <br>
     <button class="printButton" onclick="fade()">キャンセル</button>
     <button class="printButton" id="export-pdf">印刷</button>
 </div>
 
 <div id="fadeLayerDetail" onclick="detailInfoOnOff()">
-<div id="fadeLayerDetailInfo" onclick="detailInfoOnOff()">
-</div>
+    <div id="fadeLayerDetailInfo" onclick="detailInfoOnOff()">
+    </div>
 </div>
 
 <!-- Google Analytics -->
@@ -71,17 +71,20 @@
     <div id="submit" onclick="HCSearch();"></div>
 </div>
 
+<div id="ninedot" style="bottom: 10px" onclick="ninedot();"><img src="../../img/img/9dot.png"></div>
+
 <nav class="panel hidden" style="border-style: none">
     <div class="logo hidden" id="assistant"></div>
-<hr>
+    <hr>
     <a class="button hidden" href="./healthcenter/shelter_list.csv" title="避難所リスト" target="_blank" onclick="fade()">避難所リストDL</a>
     <a class="button hidden" href="http://gis.h-crisis.jp/data/practice/shelter_info_latest.csv" title="避難所情報" target="_blank" onclick="fade()">避難所情報DL</a>
     <a class="button hidden" title="地図印刷" onclick="fadeP()">地図印刷（準備中）</a>
     <a class="button hidden" href="#" title="掲示板" target="_blank" onclick="fade()">掲示板(準備中)</a>
     <a class="button hidden" href="http://www.wds.emis.go.jp/" title="EMIS" target="_blank" onclick="fade()">ＥＭＩＳ</a>
-<hr>
+    <hr>
+    <a>建造物</a>
     <a class="button hidden" id="healthcenter-vis" onclick="fade()">保健所情報表示</a>
-<hr>
+    <hr>
 </nav>
 
 <div id="goToHere" title="現在地へ移動"></div>

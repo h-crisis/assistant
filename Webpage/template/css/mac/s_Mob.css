@@ -43,17 +43,21 @@ a {
     right: 30px;
     padding-top: 70px;
 }
+.custom-zoom button{
+    visibility: hidden;
+}
 #goToHere{
     z-index: 4;
     position: absolute;
-    bottom: 102px;
-    right: 33px;
+    bottom: 10px;
+    right: 3px;
     background: url("../../img/img/target.png");
     background-color: #7394bb;
     width: 32.5px;
     height: 32.5px;
     border-radius: 2px;
     background-size: cover;
+    zoom: 3.5;
 }
 #goToHere:hover{
     background-color: #4471a1;
@@ -62,14 +66,15 @@ a {
 #goToHypoCenter{
     z-index: 4;
     position: absolute;
-    bottom: 136px;
-    right: 33px;
+    bottom: 44px;
+    right: 3px;
     background: url("../../img/img/syokiichi.png");
     background-color: #7394bb;
     width: 32.5px;
     height: 32.5px;
     border-radius: 2px;
     background-size: cover;
+    zoom: 3.5;
 }
 #goToHypoCenter:hover{
     background-color: #4471a1;
@@ -227,46 +232,48 @@ div#menubar li a:hover{
 .interface{
     z-index: 4;
     position: absolute;
-    left: 30px;
+    left: 0px;
     top: 10px;
-    width: 290px;
-    height: 40px;
+    width: 100%;
+    height: 100px;
     background-color: #ffffff;
 }
 div#option{
     z-index: 4;
     position: absolute;
     left: 10px;
-    top: 3px;
+    top: 27px;
     width: 36px;
     height: 36px;
     background-image: url("../../img/img/3bar.png");
+    zoom: 2.5;
 }
 #address{
     z-index: 4;
     position: absolute;
-    left: 55px;
-    top: 10px;
+    left: 10%;
+    top: 0px;
     border:none;
     background:none;
-    width: 190px;
-    height: 20px;
-    font-size: large;
+    width: 80%;
+    height: 80px;
+    font-size: 72px;
     font-family: Helvetica;
 }
 #address:focus{
     outline: 0;
-    font-size: large;
+    font-size: 72px;
     font-family: Helvetica;
 }
 div#submit{
     z-index: 4;
     position: absolute;
-    left: 260px;
-    top: 8px;
+    background-image: url("../../img/img/loope.png");
+    right: 10px;
+    top: 3px;
     width: 24px;
     height: 24px;
-    background-image: url("../../img/img/loope.png");
+    zoom: 3;
 }
 
 .panel{
@@ -274,9 +281,10 @@ div#submit{
     position: absolute;
     left: 0;
     top: 0;
-    width: 235px;
-    height: 100%;
-    overflow: hidden;
+    width: 100%;
+    height: 40%;
+    overflow: scroll;
+    overflow-x: hidden;
     background-color: #ffffff;
     transition:all 0.5s;
 }
@@ -321,9 +329,9 @@ div#assistant{
     left: 0;
     top: 0;
     background: url("../../img/img/assistant.png");
-    width: 220px;
+    width: 100%;
     height: 65px;
-    background-size: cover;
+    background-size: contain;
 }
 
 nav .logo {
@@ -338,7 +346,7 @@ nav .button {
     position: relative;
     left : 0;
     color: #aaaaaa;
-    font-size: 13px;
+    font-size: 72px;
     text-align: left;
     padding: 10px 10px 10px 10px;
     font-family: Helvetica;
@@ -349,7 +357,7 @@ nav .button {
     position: relative;
     left : 0;
     color: #aaaaaa;
-    font-size: 13px;
+    font-size: 72px;
     text-align: left;
     display: block;
 }
@@ -368,7 +376,7 @@ nav .button {
     background-color:#333333;
     color: #ffffff;
     border-radius: 0 10px 10px 0;
-    font-size: 13px;
+    font-size: 72px;
     text-align: center;
 }
 .buttonWide:hover{
