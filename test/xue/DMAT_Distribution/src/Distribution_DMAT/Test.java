@@ -8,10 +8,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Test {
-    private static char[] is = new char[] { '1', '2', '4', '5', '6', '7', '8', '9','2'};
+    private static int a=3;
+    public static char[] is=new char[a*3];
+
+
+    //private static char[] is = new char[] { '1', '2', '4', '5', '6', '7', '8', '9','2'};
+
     private static int total;
-    private static int m = 6;
+    private static int m = 4;
     public static void main(String[] args) {
+
+
+        for(int i=0;i<a*3;a++){
+            is[i]=(char)('0'+i%(a*3)+1);
+
+        }
+
+
         List<Integer> iL = new ArrayList<Integer>();
         new Test().plzh("", iL,  m);
         System.out.println("total : " + total);
