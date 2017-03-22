@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>H-CRISIS Assistant 予定確認ページ</title>
+    <script src="http://code.jquery.com/jquery.min.js"></script>
+    <script src="../js/mqttws31.js"></script>
+    <script src="../js/mqtthcrisis20160905.js"></script>
+    <link href="../css/shelterSurvey.css" type="text/css" rel="stylesheet" />
+</head>
+<body>
+<form>
+    <fieldset>
+        <h3>災害時派遣に関する予定確認</h3>
+        <strong><u>※ </u></strong><br><br>
+        <div class="radio">
+            <div class="checkbox">
+                <label class="lbl">第1週目派遣に同意しますか？</label><br><br>
+                <input type="radio" name="q0" id="q0_0" value="はい" checked>
+                <label for="q0_0" class="EX">はい</label>
+                <input type="radio" name="q0" id="q0_1" value="いいえ">
+                <label for="q0_1" class="UK">いいえ</label>
+            </div>
+        </div>
+    </fieldset>
+
+    <center>
+        <fieldset>
+            <script>
+                function createMessage() {
+                    var topicMsg = "/hcrisis/assistant/event/" + document.getElementById('eventCode').value
+                            + "/shelter/" + document.getElementById('inputCode').value + "/dental01";
+
+                    /*
+                     var createMsg = document.getElementById('eventCode').value +
+                     ',' + document.getElementById('inputCode').value +
+                     ',' + document.getElementById('inputShelter').value +
+                     ',' + document.getElementById('inputHuman').value +
+                     ',' + document.getElementById('inputNum').value;
+
+                     for(var i = 0; i < 9; i++) {
+                     var arrayValue = "q" + i;
+                     var tmpList = document.getElementsByName(arrayValue);
+                     for(var j=0; j<tmpList.length; j++) {
+                     if(tmpList[j].checked) {
+                     createMsg = createMsg + ',' + tmpList[j].value;
+                     continue;
+                     }
+                     }
+                     }
+                     */
+
+                    var createMsg = "reporter='" + document.getElementById('inputHuman').value + "'";
+                    if(document.getElementById('inputNum').value!=='') {
+                        createMsg = createMsg + ",a01=" + document.getElementById('inputNum').value;
+                    }
+                    if(document.getElementById('inputDentalPatient').value!=='') {
+                        createMsg = createMsg + ",dental001=" + document.getElementById('inputDentalPatient').value;
+                    }
+
+                    var tmpList = document.getElementsByName('q0'); //q0
+                    for(var j=0; j<tmpList.length; j++) {
+                        if (tmpList[j].checked) {
+                            createMsg = createMsg + ",dental002='" + tmpList[j].value + "'";
+                            continue;
+                        }
+                    }
+
+
+
+                    createMsg = createMsg + ",dental007='" + document.getElementById('q5_0').value + "'";
+
+                    var nowTime = new Date();
+                    var nowYer = nowTime.getFullYear();
+                    var nowMon = nowTime.getMonth() + 1;
+                    var nowDay = nowTime.getDate();
+                    var nowHrs = nowTime.getHours();
+                    var nowMin = nowTime.getMinutes();
+                    var nowSec = nowTime.getSeconds();
+                    createMsg = createMsg + ", timestamp='" + nowYer + "/" + nowMon + "/" + nowDay + " " + nowHrs + ":" + nowMin + ":" + nowSec + "'";
+                    console.log(topicMsg + " : " + createMsg);
+                    publishMsg(topicMsg, createMsg, true);
+                }
+            </script>
+            <div>
+                <input style="border: 0;float: inherit;width: 70px;margin: 0;background: #6d6d6d;color: #ffffff;font-size: 16px;text-align: center;" id ="closeBtn" type="button" onclick="window.close()" value="閉じる" >
+                <input style="border: 0;float: inherit;width: 70px;margin: 0;background: #228b22;color: #ffffff;font-size: 16px;text-align: center;" id = "submitBtn" type="button" onclick="createMessage();" value="送信" >
+            </div>
+            <script>
+                var urlStr = location.search.substring(1);
+                if(urlStr === '') {
+                    // 避難所IDと避難所名がないと送信ボタンが押せない設定
+                    document.getElementById('submitBtn').disabled = 'true';
+                }
+                else {
+                    var pairUrlStr = urlStr.split(',');
+                    if(pairUrlStr.length>=2) {
+                        console.log(pairUrlStr[0])
+                        pairUrlStr[0] = decodeURI(pairUrlStr[0].substr(6)); // event=から始まる
+                        pairUrlStr[1] = decodeURI(pairUrlStr[1].substr(3)); // id=から始まる
+                        pairUrlStr[2] = decodeURI(pairUrlStr[2].substr(5)); // name=から始まる
+                        document.getElementById('eventCode').value = pairUrlStr[0];
+                        document.getElementById('eventCode').disabled = 'true';
+                        document.getElementById('inputCode').value = pairUrlStr[1];
+                        document.getElementById('inputCode').disabled = 'true';
+                        document.getElementById('inputShelter').value = pairUrlStr[2];
+                        document.getElementById('inputShelter').disabled = 'true';
+                    }
+                }
+            </script>
+
+        </fieldset>
+    </center>
+</form>
+</body>
+</html>

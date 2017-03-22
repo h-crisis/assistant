@@ -4,7 +4,7 @@
 
 //OS、ブラウザの情報を取得
 var userAgent = window.navigator.userAgent.toLowerCase();
-var ieVersion = window.navigator.appVersion.toLowerCase();
+var deviceIs;
 var osCss, brwCss;
 
 //OSの判定
@@ -41,6 +41,7 @@ if ((userAgent.indexOf("windows") != -1 && userAgent.indexOf("touch") != -1 && u
     || userAgent.indexOf("silk") != -1
     || userAgent.indexOf("playbook") != -1){
     document.write('<link id="tablet" rel="stylesheet" href="../../css/' + osCss + '/' + brwCss + '_Tab.css" type="text/css">');
+    deviceIs = "TAB";
 } else if ((userAgent.indexOf("windows") != -1 && userAgent.indexOf("phone") != -1)
     || userAgent.indexOf("iphone") != -1
     || userAgent.indexOf("ipod") != -1
@@ -48,8 +49,10 @@ if ((userAgent.indexOf("windows") != -1 && userAgent.indexOf("touch") != -1 && u
     || (userAgent.indexOf("firefox") != -1 && userAgent.indexOf("mobile") != -1)
     || userAgent.indexOf("blackberry") != -1) {
     document.write('<link id="phone" rel="stylesheet" href="../../css/' + osCss + '/' + brwCss +'_Mob.css" type="text/css">');
+    deviceIs = "MOB";
 } else {
     document.write('<link id="pc" rel="stylesheet" href="../../css/' + osCss + '/' + brwCss + '_PC.css" type="text/css">');
+    deviceIs = "PC";
 }
 
 //CSSの設定

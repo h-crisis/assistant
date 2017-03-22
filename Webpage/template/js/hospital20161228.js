@@ -138,16 +138,29 @@ var hospLayer = new ol.layer.Vector({
     }),
     style: function(feature, resolution) {
         biNum = (feature.get('saigai') * 8) + (feature.get('kyukyu') * 4) + (feature.get('hibaku') * 2) + (feature.get('dmat') * 1);
+
+        if(deviceIs == "MOB") {
+            styleHospR.getImage().setScale(0.25);
+            styleHospG.getImage().setScale(0.25);
+            styleHospB.getImage().setScale(0.25);
+            styleHospR.getText().setScale(2.5);
+            styleHospG.getText().setScale(2.5);
+            styleHospB.getText().setScale(2.5);
+            styleHospR.getText().setOffsetY(18);
+            styleHospG.getText().setOffsetY(18);
+            styleHospB.getText().setOffsetY(18);
+        }
+
         if (feature.get('assist') == "要"){
             styleHospR.getText().setText(resolution < 0.0003 ? feature.get('name') : '')
             styleHospR.getImage().setOpacity(resolution < 0.0009 ? 1 : 0);
             return styleHospR;
         } else if(feature.get('assist') == "未" && feature.get('mds') == "未入力") {
-            styleHospG.getImage().setOpacity(resolution < 0.0009 ? 1 : 0)
+            styleHospG.getImage().setOpacity(resolution < 0.0009 ? 1 : 0);
             styleHospG.getText().setText(resolution < 0.0003 ? feature.get('name') : '');
             return styleHospG;
         } else {
-            styleHospB.getImage().setOpacity(resolution < 0.0009 ? 1 : 0)
+            styleHospB.getImage().setOpacity(resolution < 0.0009 ? 1 : 0);
             styleHospB.getText().setText(resolution < 0.0003 ? feature.get('name') : '');
             return styleHospB;
                 /*

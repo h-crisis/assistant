@@ -15,7 +15,7 @@ var styleHC = new ol.style.Style({
         anchorXUnits: 'fraction',
         anchorYUnits: 'fraction',
         opacity: 1,
-        src: '../../img/impassable/1.png'
+        src: '../../img/HC/HC_blue.png'
     })
 });
 
@@ -38,7 +38,7 @@ function createHtmlHC(evt) {
     lonNow = parseFloat(arrayV[4]);
     nowLatLon = [lonNow, latNow];
     var coordinate = nowLatLon;
-    DetailHtml = "<div id='landscape'><img id='landIcon' src='../../img/impassable/1.png'></div>";
+    DetailHtml = "<div id='landscape'><img id='landIcon' src='../../img/HC/HC_blue.png'></div>";
     // 建築物名表示
     if (arrayV[0].length < 18) {
         DetailHtml = DetailHtml + "<div id='blueback'><a id='title'>" + arrayV[2] + "</a>";

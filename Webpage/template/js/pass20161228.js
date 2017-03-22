@@ -29,6 +29,13 @@ var ImpassableLayer = new ol.layer.Vector({
         format: new ol.format.GeoJSON()
     }),
     style: function(feature, resolution) {
+
+        if(deviceIs == "MOB") {
+            styleImpassable.getImage().setScale(0.25);
+            styleImpassable.getText().setScale(2.5);
+            styleImpassable.getText().setOffsetY(18);
+        }
+
         styleImpassable.getText().setText(resolution < 0.0003 ?  feature.get('name') +  ":" + feature.get('規制内容') + "(理由:" +　feature.get('規制原因') + ")" : '');
         return styleImpassable;
     }
@@ -40,6 +47,13 @@ var ImpassableLayerAdd = new ol.layer.Vector({
         format: new ol.format.GeoJSON()
     }),
     style: function(feature, resolution) {
+
+        if(deviceIs == "MOB") {
+            styleImpassable.getImage().setScale(0.25);
+            styleImpassable.getText().setScale(2.5);
+            styleImpassable.getText().setOffsetY(18);
+        }
+
         styleImpassable.getText().setText(resolution < 0.0003 ? feature.get('name') +  ":" + feature.get('規制内容') + "(理由:" +　feature.get('規制原因') + ")" : '');
         return styleImpassable;
     }
