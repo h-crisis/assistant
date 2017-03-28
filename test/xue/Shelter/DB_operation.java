@@ -4,8 +4,6 @@ package org.geotools.Shelter;
  * Created by jiao.xue on 2017/02/08.
  */
 
-import java.sql.*;
-
 /**
  * Created by jiao on 2017/02/07.
  */

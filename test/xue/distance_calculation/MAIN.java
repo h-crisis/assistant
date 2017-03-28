@@ -2,7 +2,7 @@ package distance_calculation;
 
 /**
  * Created by jiao on 2016/12/19.
- * 避難所の近くの病院３つを選びます
+ * 二つ点の移動経度から距離とルートを求める
  */
 
 public class MAIN {

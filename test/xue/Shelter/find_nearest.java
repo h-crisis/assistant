@@ -19,8 +19,6 @@ import org.geotools.styling.StyleFactory;
 import org.opengis.feature.simple.SimpleFeature;
 import org.opengis.filter.FilterFactory2;
 
-import java.awt.*;
-
 /**
  * Created by jiao.xue on 2017/02/08.
  */
