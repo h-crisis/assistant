@@ -9,8 +9,8 @@ import java.util.ArrayList;
 public class Main_Thread_Test extends Thread {
     private int num;
     private File Id_list;
-    public static File roadDir= new File("/Users/jiao.xue/Desktop/shelter_neccesary_file/split_map");//
-    public static File Dir=new File("/Users/jiao.xue/Desktop/shelter_neccesary_file/shelter");
+    public static File roadDir= new File("/Users/jiao.xue/Desktop/shelter_neccesary_file 2/split_map");//
+    public static File Dir=new File("/Users/jiao.xue/Desktop/shelter_neccesary_file 2/shelter");
 
     public Main_Thread_Test(){}
 
@@ -108,8 +108,8 @@ public class Main_Thread_Test extends Thread {
 */
 
 // 　
+        File outfile = new File(Dir.getPath()+"/output_Thread"+m+".csv");//結果を記録します
 
-        File outfile = new File(Dir.getPath()+"/output.csv");//結果を記録します
         PrintWriter out = new PrintWriter(new OutputStreamWriter(new FileOutputStream(outfile, false), "SHIFT_JIS"));
         out.write("5thmesh"+","+"ecode"+","+"distance");
         out.close();

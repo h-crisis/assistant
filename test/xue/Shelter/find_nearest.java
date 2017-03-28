@@ -433,7 +433,7 @@ public class find_nearest {
             Node ends;
             com.vividsolutions.jts.geom.Point startPoints;
             com.vividsolutions.jts.geom.Point endPoints;
-            Double pathcosts;
+            Double pathcosts=9999.0;
             GeometryFactory gfs = new GeometryFactory();
             while ((line1 = shelter_info.readLine()) != null) {
 
@@ -462,9 +462,10 @@ public class find_nearest {
 
                             starts = getNearestGraphNode(lineStringGen, graph, startPoints);
                             ends = getNearestGraphNode(lineStringGen, graph, endPoints);
+                            if(starts!=null && ends!=null) {//
 
-                            pathcosts = dijkstraShortestPathCost(starts, ends);//ノードの最短距離
-
+                                pathcosts = dijkstraShortestPathCost(starts, ends);//ノードの最短距離
+                            }//
                             output.write("\n" + pair1[1] + "," + pair2[1] + "," + pathcosts);
                         } else {
                             String pair2[] = line2.split(",");
