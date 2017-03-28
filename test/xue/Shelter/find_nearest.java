@@ -1,6 +1,5 @@
 package org.geotools.Shelter;
 
-import com.vividsolutions.jts.geom.*;
 import org.geotools.data.FileDataStore;
 import org.geotools.data.FileDataStoreFinder;
 import org.geotools.data.simple.SimpleFeatureSource;
@@ -21,10 +20,6 @@ import org.opengis.feature.simple.SimpleFeature;
 import org.opengis.filter.FilterFactory2;
 
 import java.awt.*;
-import java.awt.List;
-import java.awt.Point;
-import java.io.*;
-import java.util.*;
 
 /**
  * Created by jiao.xue on 2017/02/08.

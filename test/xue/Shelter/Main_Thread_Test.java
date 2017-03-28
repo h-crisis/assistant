@@ -1,6 +1,5 @@
 package org.geotools.Shelter;
 
-import java.io.*;
 import java.util.ArrayList;
 
 /**

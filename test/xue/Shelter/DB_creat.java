@@ -13,7 +13,6 @@ import org.opengis.feature.Property;
 import org.opengis.feature.simple.SimpleFeature;
 import org.opengis.feature.simple.SimpleFeatureType;
 
-import java.io.*;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
