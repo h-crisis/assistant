@@ -1,6 +1,5 @@
 package org.geotools.Shelter;
 
-import com.vividsolutions.jts.geom.*;
 import org.geotools.data.FileDataStore;
 import org.geotools.data.FileDataStoreFinder;
 import org.geotools.data.simple.SimpleFeatureSource;
@@ -19,12 +18,6 @@ import org.geotools.graph.traverse.standard.DijkstraIterator;
 import org.geotools.styling.StyleFactory;
 import org.opengis.feature.simple.SimpleFeature;
 import org.opengis.filter.FilterFactory2;
-
-import java.awt.*;
-import java.awt.List;
-import java.awt.Point;
-import java.io.*;
-import java.util.*;
 
 /**
  * Created by jiao.xue on 2017/02/08.
@@ -433,7 +426,7 @@ public class find_nearest {
             Node ends;
             com.vividsolutions.jts.geom.Point startPoints;
             com.vividsolutions.jts.geom.Point endPoints;
-            Double pathcosts;
+            Double pathcosts=9999.0;
             GeometryFactory gfs = new GeometryFactory();
             while ((line1 = shelter_info.readLine()) != null) {
 
@@ -462,9 +455,10 @@ public class find_nearest {
 
                             starts = getNearestGraphNode(lineStringGen, graph, startPoints);
                             ends = getNearestGraphNode(lineStringGen, graph, endPoints);
+                            if(starts!=null && ends!=null) {//
 
-                            pathcosts = dijkstraShortestPathCost(starts, ends);//ノードの最短距離
-
+                                pathcosts = dijkstraShortestPathCost(starts, ends);//ノードの最短距離
+                            }//
                             output.write("\n" + pair1[1] + "," + pair2[1] + "," + pathcosts);
                         } else {
                             String pair2[] = line2.split(",");

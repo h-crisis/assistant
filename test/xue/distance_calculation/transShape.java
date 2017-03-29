@@ -2,7 +2,7 @@ package distance_calculation;
 
 /**
  * Created by jiao on 2016/12/19.
- * 一つのshapeファイルのを2次メッシュによる分割します。
+ * 一つのshapeファイルを2次メッシュによる分割します。
  */
 
 import org.geotools.data.FeatureWriter;
