@@ -2,8 +2,8 @@ package Nan_disease;
 
 import java.io.IOException;
 
-import static Nan_disease.FitnessCalc.solution;
 import static Nan_disease.FitnessCalc.condition_pro;
+import static Nan_disease.FitnessCalc.solution;
 
 /**
  * Created by jiao on 2017/03/29.
@@ -17,7 +17,8 @@ public class APP {
     public static void main(String args[]) throws IOException {
         FitnessCalc.calculation();
 //1は症状あり、2は症状なし、不明と空欄のデータを除く
-        int illness[]={1,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+
+        int illness[]={1,2,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
         double pro=0;//症状から病気を判断できる確率
         if(illness.length!=defaultGeneLength){
             System.out.println("input error");

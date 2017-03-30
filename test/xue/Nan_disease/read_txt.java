@@ -1,8 +1,6 @@
 package Nan_disease;
 
 
-import java.io.*;
-
 /**
  * Created by jiao.xue on 2017/02/23.
  * ファイルの中の難病主症状、副症状、検査所見の項目を抽出、結合する

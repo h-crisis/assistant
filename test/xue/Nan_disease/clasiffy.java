@@ -1,6 +1,5 @@
 package Nan_disease;
 
-import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
 
