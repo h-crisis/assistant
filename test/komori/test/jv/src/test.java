@@ -4,6 +4,7 @@
 import java.io.*;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
+import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,15 +22,27 @@ public class test {
                 "滋賀県", "京都府", "大阪府", "兵庫県", "奈良県", "和歌山県", "鳥取県", "島根県", "岡山県", "広島県", "山口県",
                 "徳島県", "香川県", "愛媛県", "高知県", "福岡県", "佐賀県", "長崎県", "熊本県", "大分県", "宮崎県", "鹿児島県", "沖縄県"};
 
-        int lNum = 0;
-        int i = 0;
+        HashMap<String, String> prefectureDB = new HashMap<>();
+        int j = 1;
+        for(String prefecture : tdfk) {
+            if(j<10) {
+                prefectureDB.put(prefecture, "0" + Integer.toString(j));
+            }
+            else {
+                prefectureDB.put(prefecture, Integer.toString(j));
+            }
+            j++;
+        }
+
+        int lNum = 1;
         //Path rPath = Paths.get(args[0]);
         //Path wPath = Paths.get(args[1]);
 
         List<String> textList = new ArrayList<String>();
 
-        File inf = new File(args[0]);
-        File ouf = new File(args[1]);
+        File inf = new File("/Users/komori/Downloads/master.csv");
+        File ouf = new File("/Users/komori/Downloads/new_hospital_master.csv");
+        String text = "";
         try {
             InputStream is = new FileInputStream(inf);
             OutputStream os = new FileOutputStream(ouf);
@@ -37,27 +50,26 @@ public class test {
             Writer w = new OutputStreamWriter(os, "SJIS");
             BufferedReader br = new BufferedReader(r);
             BufferedWriter bw = new BufferedWriter(w);
-            for (;;) {
-                String text = br.readLine();
-                if (text == null) break;
+
+            while((text=br.readLine())!=null) {
                 String array[] = text.split("\",\"");
                 array[1] = array[1].replace(",","");
-                if(lNum != 0) {
-                    if (array[6].equals(tdfk[i])) {
-                        text = "\"" + (i+1) + "1" + array[1] + "\"," + text;
-                        textList.add(text);
-                        System.out.println(text);
-                        bw.write(text);
-                        bw.newLine();
-                    } else {
-                        i++;
-                    }
+                if(lNum==1) {
+                    bw.write(text);
+                }
+                else {
+                    text = "\"" + prefectureDB.get(array[6]) + "1" + array[1] + "\"," + text;
+                    bw.write("¥n" + text);
+                    System.out.println(text);
                 }
                 lNum++;
             }
         } catch (Exception e) {
+            System.out.println(text);
             throw new RuntimeException(e);
+        } finally {
+
         }
     }
-    }
+}
 
