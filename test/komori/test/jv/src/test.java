@@ -1,15 +1,20 @@
 /**
  * Created by komori on 2017/04/12.
  */
-import sun.nio.cs.ext.SJIS;
-import sun.nio.cs.ext.SJIS_0213;
-
-import java.nio.charset.StandardCharsets;
-import java.nio.file.*;
 import java.io.*;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class test {
-    public static void main(String args[])throws Exception {
+    public static void main(String args[]){
 
         String tdfk[] = {"北海道", "青森県", "岩手県", "宮城県", "秋田県", "山形県", "福島県", "茨城県", "栃木県", "群馬県", "埼玉県",
                 "千葉県", "東京都", "神奈川県", "新潟県", "富山県", "石川県", "福井県", "山梨県", "長野県", "岐阜県", "静岡県", "愛知県", "三重県",
@@ -18,30 +23,41 @@ public class test {
 
         int lNum = 0;
         int i = 0;
-        Path rPath = Paths.get("/Users/komori/Downloads/hospital_master.csv");
-        Path wPath = Paths.get("/Users/komori/Downloads/new_hospital_master.csv");
-        BufferedReader br = Files.newBufferedReader(rPath, StandardCharsets.UTF_8);
-        BufferedWriter bw = Files.newBufferedWriter(wPath, StandardCharsets.UTF_8);
-            while (true) {
-                String line = br.readLine();
-                if (line == null) {
-                    break;
-                }
-                String array[] = line.split("\",\"");
+        //Path rPath = Paths.get(args[0]);
+        //Path wPath = Paths.get(args[1]);
+
+        List<String> textList = new ArrayList<String>();
+
+        File inf = new File(args[0]);
+        File ouf = new File(args[1]);
+        try {
+            InputStream is = new FileInputStream(inf);
+            OutputStream os = new FileOutputStream(ouf);
+            Reader r  = new InputStreamReader(is, "SJIS");
+            Writer w = new OutputStreamWriter(os, "SJIS");
+            BufferedReader br = new BufferedReader(r);
+            BufferedWriter bw = new BufferedWriter(w);
+            for (;;) {
+                String text = br.readLine();
+                if (text == null) break;
+                String array[] = text.split("\",\"");
                 array[1] = array[1].replace(",","");
                 if(lNum != 0) {
                     if (array[6].equals(tdfk[i])) {
-                        line = "\"" + (i+1) + "1" + array[1] + "\"," + line;
-                        bw.write(line);
+                        text = "\"" + (i+1) + "1" + array[1] + "\"," + text;
+                        textList.add(text);
+                        System.out.println(text);
+                        bw.write(text);
                         bw.newLine();
-                        System.out.println(line);
-                    }
-                    else {
+                    } else {
                         i++;
                     }
                 }
                 lNum++;
             }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
+    }
     }
 
