@@ -21,7 +21,7 @@ public class csv2csv {
         converter(inf,ouf);
     }
 
-    public static HashMap<String, String> prefectureDB = new HashMap<>();
+    public static HashMap<String, String> prefectureDB = new HashMap();
 
     public static HashMap<String, String> getPefectureDB(){
 
