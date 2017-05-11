@@ -34,7 +34,7 @@ public class Main {
         File masterFilesDir = new File(dir.getPath() + "/master");
         File shapeDir = new File(dir.getPath() + "/shape");
 
-        new EarthquakeDamageEstimate(masterFilesDir, shapeDir, siFile, outDir, code);
+        //new EarthquakeDamageEstimate(masterFilesDir, shapeDir, siFile, outDir, code);
         //new EarthquakeDamageDbSet(outDir, code);
         //new csv_merge(masterFilesDir,outDir, code);
         //new EstimatePatient(masterFilesDir,outDir, code);

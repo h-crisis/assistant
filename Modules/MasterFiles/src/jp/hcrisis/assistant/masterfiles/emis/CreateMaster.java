@@ -50,8 +50,8 @@ public class CreateMaster {
 
         if(args.length==1) { // 引数1つの場合
             outDir = new File("files/OutFiles/EmisOutFiles/");
-            emisMedicalInstituteMaster = new File("files/MasterFiles/EmisMasterFiles/20160729_emis_master.csv");
-            emisMedicalInstituteInfoMaster = new File("files/MasterFiles/EmisMasterFiles/20160729_saigai_kihon.csv");
+            emisMedicalInstituteMaster = new File("files/MasterFiles/EmisMasterFiles/20170309_emis_master.csv");
+            emisMedicalInstituteInfoMaster = new File("files/MasterFiles/EmisMasterFiles/20170309_saigai_kihon.csv");
             municipalitiesShapeFile = new File("files/shape/municipalities/municipalities.shp");
             municipalitiesShapeFileEncode = "UTF-8";
             medicalAreaShapeFile = new File("files/shape/medical_area/medical_area.shp");
@@ -95,8 +95,8 @@ public class CreateMaster {
             System.exit(1);
         }
 
-        //createMedicalInstituteMaster(outDir, emisMedicalInstituteMaster, emisMedicalInstituteInfoMaster);
-        updateCities2MedicalInstiuteMaster(outDir, municipalitiesShapeFile, municipalitiesShapeFileEncode);
+        createMedicalInstituteMaster(outDir, emisMedicalInstituteMaster, emisMedicalInstituteInfoMaster);
+        //updateCities2MedicalInstiuteMaster(outDir, municipalitiesShapeFile, municipalitiesShapeFileEncode);
         //updateMedicalArea2MedicalInstiuteMaster(outDir, medicalAreaShapeFile, medicalAreaShapeFileEncode);
         //updateMesh2MedicalInstiuteMaster(outDir, meshShapeFileDir, meshShapeFileDirEncoding);
         //createMedicalInstituteMasterShape(outDir, "Shift_JIS");
@@ -143,7 +143,7 @@ public class CreateMaster {
                 for(int i=10; i<pair.length; i++) {
                     str = str + "," + pair[i];
                 }
-                medicalInstituteBaseDB.put("e" + pair[1], str);
+                medicalInstituteBaseDB.put(pair[0] + pair[1], str);
             }
 
             while ((line1 = br1.readLine()) != null) {
@@ -227,7 +227,7 @@ public class CreateMaster {
                     write = write + "," + str[j];
 
                 pw1.write("\n" + write);
-                pw2.write("\n" + write + medicalInstituteBaseDB.get(str[1]));
+                pw2.write("\n" + write + medicalInstituteBaseDB.get(pair[1] + pair[2]));
             }
             System.out.println("jp.hcrisis.assistant.masterfiles.emis.CreateMaster: HCRISIS全医療機関マスターファイルを作成しました。");
 

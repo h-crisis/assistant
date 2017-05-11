@@ -17,21 +17,28 @@ public class CreateMesh5Si {
         File[] files = dir.listFiles(); // データファイルを取得する
 
         try(PrintWriter pw = new PrintWriter(new OutputStreamWriter(new FileOutputStream(outFile, false), "Shift_JIS"))) {
-            pw.print("5次メッシュコード,震度,全壊建物数,全半壊建物数,重傷者数"); // 出力ファイルの見出しを記入する
+            pw.print("5次メッシュコード,震度,全壊建物数,全半壊建物数,死者数,重傷者数,負傷者数,避難者数"); // 出力ファイルの見出しを記入する
             for(File file : files) {
                 try(BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file), "Shift_JIS"))) {
                     String line = br.readLine(); // 1行目は見出しなので無視
                     while(line != null) {
                         if(line.startsWith("2,")) {
                             String pair[] = line.split(",");
+                            System.out.println(pair.length + " " + line);
                             if (pair.length == 8) {
                                 pw.print("\n" + pair[7] + "," + pair[5] + ",,,");
                             } else if(pair.length == 9) {
-                                pw.print("\n" + pair[7] + "," + pair[5] + "," + pair[8] + ",,");
+                                pw.print("\n" + pair[7] + "," + pair[5] + "," + pair[8] + ",,,,,");
                             } else if(pair.length == 10) {
-                                pw.print("\n" + pair[7] + "," + pair[5] + "," + pair[8] + "," + pair[9] + ",");
+                                pw.print("\n" + pair[7] + "," + pair[5] + "," + pair[8] + "," + pair[9] + ",,,,");
                             } else if(pair.length == 11) {
-                                pw.print("\n" + pair[7] + "," + pair[5] + "," + pair[8] + "," + pair[9] + "," + pair[10]);
+                                pw.print("\n" + pair[7] + "," + pair[5] + "," + pair[8] + "," + pair[9] + "," + pair[10] + ",,,");
+                            } else if(pair.length == 12) {
+                                pw.print("\n" + pair[7] + "," + pair[5] + "," + pair[8] + "," + pair[9] + "," + pair[10] + "," + pair[11] + ",,");
+                            } else if(pair.length == 13) {
+                                pw.print("\n" + pair[7] + "," + pair[5] + "," + pair[8] + "," + pair[9] + "," + pair[10] + "," + pair[11] + "," + pair[12] + ",");
+                            } else if(pair.length == 14) {
+                                pw.print("\n" + pair[7] + "," + pair[5] + "," + pair[8] + "," + pair[9] + "," + pair[10] + "," + pair[11] + "," + pair[12] + "," + pair[13]);
                             } else {
                                 System.out.println("項目数が足りていません。");
                                 System.exit(1);
