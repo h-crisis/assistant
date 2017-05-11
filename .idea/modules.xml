@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Common/Common.iml" filepath="$PROJECT_DIR$/Common/Common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/test/xue/DMAT_Distribution/DMAT_Distribution.iml" filepath="$PROJECT_DIR$/test/xue/DMAT_Distribution/DMAT_Distribution.iml" />
       <module fileurl="file://$PROJECT_DIR$/DisasterDamageEstimate/DisasterDamageEstimate.iml" filepath="$PROJECT_DIR$/DisasterDamageEstimate/DisasterDamageEstimate.iml" />
       <module fileurl="file://$PROJECT_DIR$/test/setsu/DisasterHeadquartersSelect.iml" filepath="$PROJECT_DIR$/test/setsu/DisasterHeadquartersSelect.iml" />
       <module fileurl="file://$PROJECT_DIR$/HcrisisMQTT/HcrisisMQTT.iml" filepath="$PROJECT_DIR$/HcrisisMQTT/HcrisisMQTT.iml" />
@@ -11,6 +11,9 @@
       <module fileurl="file://$PROJECT_DIR$/Webpage/Webpage.iml" filepath="$PROJECT_DIR$/Webpage/Webpage.iml" />
       <module fileurl="file://$PROJECT_DIR$/Modules/Zenrin/Zenrin.iml" filepath="$PROJECT_DIR$/Modules/Zenrin/Zenrin.iml" />
       <module fileurl="file://$PROJECT_DIR$/hcrisis-assistant.iml" filepath="$PROJECT_DIR$/hcrisis-assistant.iml" />
+      <module fileurl="file://$PROJECT_DIR$/test/komori/test/java/java.iml" filepath="$PROJECT_DIR$/test/komori/test/java/java.iml" />
+      <module fileurl="file://$PROJECT_DIR$/test/komori/test/java/java.iml" filepath="$PROJECT_DIR$/test/komori/test/java/java.iml" />
+      <module fileurl="file://$PROJECT_DIR$/test/komori/test/jv/jv.iml" filepath="$PROJECT_DIR$/test/komori/test/jv/jv.iml" />
       <module fileurl="file://$USER_HOME$/private/jiao/newga/newga.iml" filepath="$USER_HOME$/private/jiao/newga/newga.iml" />
     </modules>
   </component>

@@ -124,21 +124,21 @@ var zoomLevel = map.getView().getZoom();
 
 // Map上のFeatureを取得し表示する
 var displayFeatureInfo = function(pixel, evt) {
-/*
-    // 避難所レイヤーのurlを取得しpopup用のHTMLとdisplay用のHTMLを作成する
-    var urlShelter = shelterLayer.getSource().getGetFeatureInfoUrl(
-        evt.coordinate, view.getResolution(), view.getProjection(),
-        {'INFO_FORMAT': 'text/javascript'});
+    /*
+     // 避難所レイヤーのurlを取得しpopup用のHTMLとdisplay用のHTMLを作成する
+     var urlShelter = shelterLayer.getSource().getGetFeatureInfoUrl(
+     evt.coordinate, view.getResolution(), view.getProjection(),
+     {'INFO_FORMAT': 'text/javascript'});
 
-    if(urlShelter && shelterLayer.getVisible()) {
-        createShelterPopup(urlShelter, evt);
-    }
+     if(urlShelter && shelterLayer.getVisible()) {
+     createShelterPopup(urlShelter, evt);
+     }
 
-    // geoJsonを用いた各レイヤーのポイントデータを取得する
-    var feature = map.forEachFeatureAtPixel(pixel, function(feature) {
-        return feature;
-    });
-*/
+     // geoJsonを用いた各レイヤーのポイントデータを取得する
+     var feature = map.forEachFeatureAtPixel(pixel, function(feature) {
+     return feature;
+     });
+     */
     // geoJsonから情報を配列に押し込み配列の項目別に各施設のポップアップを表示する関数を呼び出す
     map.forEachFeatureAtPixel(pixel, function (feature) {
         arrayL = [];
@@ -147,7 +147,7 @@ var displayFeatureInfo = function(pixel, evt) {
             label = feature.getKeys()[i];
             valr = feature.get(label);
             arrayL.push(label);
-            if (label == "latitude" || label == "longitude") {
+            if (label == "lat" || label == "lon") {
                 arrayV.push(valr)
             } else {
                 if (isFinite(valr)) {
@@ -167,15 +167,15 @@ var displayFeatureInfo = function(pixel, evt) {
             arrayH.push(feature.T.dep19,feature.T.dep20,feature.T.dep21,feature.T.dep22);
         }
 
-            createHtmlHC(evt, feature);
+        createHtmlHC(evt, feature);
         /*
-        else if(arrayL[0]=='code') {
-            createHtmlHospital(evt, feature);
-        } else if(arrayL[0]=='name') {
-            createHtmlPass(evt);
-        }
-        */
-        
+         else if(arrayL[0]=='code') {
+         createHtmlHospital(evt, feature);
+         } else if(arrayL[0]=='name') {
+         createHtmlPass(evt);
+         }
+         */
+
     });
 };
 

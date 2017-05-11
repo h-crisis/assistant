@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>H-CRISIS Assistant 予定確認ページ</title>
+    <script src="http://code.jquery.com/jquery.min.js"></script>
+    <script src="../js/mqttws31.js"></script>
+    <script src="../js/mqtthcrisis20160905.js"></script>
+    <link href="../css/shelterSurvey.css" type="text/css" rel="stylesheet" />
+</head>
+<body>
+
+    <center>
+
+            <script>
+
+                // mqtt pub/sub関連の変数
+                var topicMsg =  "/hcrisis/assistant/schedule/";
+                var createMsg;
+                var tmpList; // 択一式の回答項目からチェック項目を拾い上げる際に使う変数
+
+                // タイムスタンプ関連の変数
+                var nowTime = new Date();
+                var nowYer = nowTime.getFullYear();
+                var nowMon = nowTime.getMonth() + 1;
+                var nowDay = nowTime.getDate();
+                var nowHrs = nowTime.getHours();
+                var nowMin = nowTime.getMinutes();
+                var nowSec = nowTime.getSeconds();
+
+                // urlから情報取得
+                if (document.URL.indexOf("?") > 0) {
+                    reURL = document.URL.split(',');
+                    var gDate = reURL[0].slice(reURL[0].indexOf("?date=") + 6);
+                    var year = +(gDate.slice(0, 4));
+                    var month = (gDate.slice(4, 6)) - 1;
+                    var day = +(gDate.slice(6, 8));
+                    var firstDate = new Date(year, month, day);
+                    var period = new Array(0);
+                    var dCode,dName,id,name;
+
+                    for (var i = 0; i < 18; i++) {
+                        period.push(firstDate.getFullYear(), firstDate.getMonth() + 1, firstDate.getDate());
+                        firstDate.setDate(firstDate.getDate() + 7)
+                    }
+                    if (!(isNaN(period[0]))) {
+                        dCode = reURL[1].slice(5);
+                        id = +(reURL[2].slice(3));
+
+                        // 仮の災害名・人名取得プログラム
+                        dName= "南海トラフを震源とする大震災";
+
+                        console.log(id);
+
+                        switch (id){
+                            case 53610:
+                                name = '金谷';
+                                break;
+                            case 53611:
+                                name = '市川';
+                                break;
+                            case 53612:
+                                name = '田中';
+                                break;
+                            case 53613:
+                                name = '小森';
+                                break;
+                            case 53614:
+                                name = '林原';
+                                break;
+                            case 53615:
+                                name = '山路';
+                                break;
+                        }
+
+                        document.body.innerHTML += "<form><fieldset><h3>DHEAT派遣調整 参加確認</h3>"
+                                + "<strong>災害コード : </strong>" + dCode + "<br>"
+                                + "<strong>派遣開始日 : </strong>" + period[0] + "年" + period[1] + "月" + period[2] + "日" + "<br><div class='radio'><br>" + name + "様<br><br>"
+                                + dName + "が発生しました。被災地よりDHEATの派遣要請が届いたため、DHEAT派遣に向けたスケジュール調整を行います。DHEAT隊員であられる" + name + "様におかれましては、第1期から第5期にDHEAT派遣チームとして参加可能かの返答をお願いいたします。"
+                                +　"<u>一度アンケートを送信すると、アンケートの再送信などによる、このページからのスケジュール変更申請はできません。</u><br><br>"
+                                + "厚生労働省健康局健康課　課長<br><br><hr>"
+                                + "<div class='checkbox'>第1期 : <br>" + period[0] + "年" + period[1] + "月" + period[2] + "日から" + period[3] + "年" + period[4] + "月" + (period[5] - 1) + "日" + "に派遣するチームへ参加可能ですか？<br><br>"
+                                + "<input type='radio' name='q0' id='q0_0' value='1' checked><label for='q0_0' class='EX'>はい</label>"
+                                + "<input type='radio' name='q0' id='q0_1' value='0' checked><label for='q0_1' class='TR'>いいえ</label>"
+                                + "</div><br><br>"
+                                + "<div class='checkbox'>第2期 : <br>" + period[3] + "年" + period[4] + "月" + period[5] + "日から" + period[6] + "年" + period[7] + "月" + (period[8] - 1) + "日" + "に派遣するチームへ参加可能ですか？<br><br>"
+                                + "<input type='radio' name='q1' id='q1_0' value='1' checked><label for='q1_0' class='EX'>はい</label>"
+                                + "<input type='radio' name='q1' id='q1_1' value='0' checked><label for='q1_1' class='TR'>いいえ</label>"
+                                + "</div><br><br>"
+                                + "<div class='checkbox'>第3期 : <br>" + period[6] + "年" + period[7] + "月" + period[8] + "日から" + period[9] + "年" + period[10] + "月" + (period[11] - 1) + "日" + "に派遣するチームへ参加可能ですか？<br><br>"
+                                + "<input type='radio' name='q2' id='q2_0' value='1' checked><label for='q2_0' class='EX'>はい</label>"
+                                + "<input type='radio' name='q2' id='q2_1' value='0' checked><label for='q2_1' class='TR'>いいえ</label>"
+                                + "</div><br><br>"
+                                + "<div class='checkbox'>第4期 : <br>" + period[9] + "年" + period[10] + "月" + period[11] + "日から" + period[12] + "年" + period[13] + "月" + (period[14] - 1) + "日" + "に派遣するチームへ参加可能ですか？<br><br>"
+                                + "<input type='radio' name='q3' id='q3_0' value='1' checked><label for='q3_0' class='EX'>はい</label>"
+                                + "<input type='radio' name='q3' id='q3_1' value='0' checked><label for='q3_1' class='TR'>いいえ</label>"
+                                + "</div><br><br>"
+                                + "<div class='checkbox'>第5期 : <br>" + period[12] + "年" + period[13] + "月" + period[14] + "日から" + period[15] + "年" + period[16] + "月" + (period[17] - 1) + "日" + "に派遣するチームへ参加可能ですか？<br><br>"
+                                + "<input type='radio' name='q4' id='q4_0' value='1' checked><label for='q4_0' class='EX'>はい</label>"
+                                + "<input type='radio' name='q4' id='q4_1' value='0' checked><label for='q4_1' class='TR'>いいえ</label>"
+                                + "</div></div></fieldset></form>";
+
+                        function createMessage() {
+                            topicMsg += dCode + "/" + gDate + "/" + id;
+
+                            createMsg = dCode + "," + id;
+                            // 択一式の回答項目からチェック項目を拾い上げる
+                            tmpList = document.getElementsByName('q0'); //q0
+                            for (var j = 0; j < tmpList.length; j++) {
+                                if (tmpList[j].checked) {
+                                    createMsg += "," + tmpList[j].value;
+                                    continue;
+                                }
+                            }
+
+                            tmpList = document.getElementsByName('q1'); // q1
+                            for (var j = 0; j < tmpList.length; j++) {
+                                if (tmpList[j].checked) {
+                                    createMsg += "," + tmpList[j].value;
+                                    continue;
+                                }
+                            }
+
+                            tmpList = document.getElementsByName('q2'); // q1
+                            for (var j = 0; j < tmpList.length; j++) {
+                                if (tmpList[j].checked) {
+                                    createMsg += "," + tmpList[j].value;
+                                    continue;
+                                }
+                            }
+
+                            tmpList = document.getElementsByName('q3'); // q1
+                            for (var j = 0; j < tmpList.length; j++) {
+                                if (tmpList[j].checked) {
+                                    createMsg += "," + tmpList[j].value;
+                                    continue;
+                                }
+                            }
+
+                            tmpList = document.getElementsByName('q4'); // q1
+                            for (var j = 0; j < tmpList.length; j++) {
+                                if (tmpList[j].checked) {
+                                    createMsg += "," + tmpList[j].value;
+                                    continue;
+                                }
+                            }
+
+                            createMsg = createMsg + "," + nowYer + "/" + nowMon + "/" + nowDay + " " + nowHrs + ":" + nowMin + ":" + nowSec;
+                            console.log(topicMsg + " : " + createMsg);
+                            publishMsg(topicMsg, createMsg, true);
+                        }
+
+                        document.body.innerHTML += "<fieldset>一度送信すると変更できません。よろしいですか？<div><input style='border: 0;float: inherit;width: 70px;margin: 0;background: #228b22;color: #ffffff;font-size: 16px;text-align: center;' id = 'submitBtn' type='button' onclick='createMessage();' value='送信' ></div></fieldset>";
+
+                    } else {
+                        // urlから日付情報が取得できなかった場合
+                        document.body.innerHTML += "<form><fieldset><strong>必要な情報が取得できませんでした。</strong></fieldset></form>"
+                    }
+
+                } else {
+                    // urlが要求フォーマットと異なった場合
+                    document.body.innerHTML += "<form><fieldset><strong>必要な情報が取得できませんでした。</strong></fieldset></form>"
+                }
+
+            </script>
+
+        </fieldset>
+    </center>
+</form>
+</body>
+</html>

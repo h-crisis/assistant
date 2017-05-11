@@ -1,9 +1,14 @@
 /**
  * Created by komori on 2016/06/14.
  */
+
 var styleSI1 = new ol.style.Style({
     fill: new ol.style.Fill({
         color: 'rgba(242, 242, 255, 0.5)'
+    }),
+    text: new ol.style.Text({
+        offsetY: 8,
+        font: '12px Calibri,sans-serif',
     }),
     image: new ol.style.Icon({
         scale: 0.075,
@@ -18,6 +23,10 @@ var styleSI2 = new ol.style.Style({
     fill: new ol.style.Fill({
         color: 'rgba(0, 170, 255, 0.5)'
     }),
+    text: new ol.style.Text({
+        offsetY: 8,
+        font: '12px Calibri,sans-serif',
+    }),
     image: new ol.style.Icon({
         scale: 0.075,
         anchor: [0.5, 1],
@@ -31,6 +40,10 @@ var styleSI3 = new ol.style.Style({
     fill: new ol.style.Fill({
         color: 'rgba(0, 65, 255, 0.5)'
     }),
+    text: new ol.style.Text({
+        offsetY: 8,
+        font: '12px Calibri,sans-serif',
+    }),
     image: new ol.style.Icon({
         scale: 0.075,
         anchor: [0.5, 1],
@@ -43,6 +56,10 @@ var styleSI3 = new ol.style.Style({
 var styleSI4 = new ol.style.Style({
     fill: new ol.style.Fill({
         color: 'rgba(255, 230, 150, 0.5)'
+    }),
+    text: new ol.style.Text({
+        offsetY: 8,
+        font: '12px Calibri,sans-serif',
     }),
     image: new ol.style.Icon({
         scale: 0.075,
@@ -149,6 +166,8 @@ var styleSI7 = new ol.style.Style({
     })
 });
 
+var styleSI = [styleSI1,styleSI2,styleSI3,styleSI4,styleSI5W,styleSI5S,styleSI6W,styleSI6S,styleSI7];
+
 var urlH = pass + 'geojson/halls.geojson';
 // var url =  'http://h-crisis.niph.go.jp/wp-content/uploads/sites/4/event/20160815/geojson/halls.geojson';
 
@@ -163,10 +182,18 @@ var hallLayer = new ol.layer.Vector({
         } else {
             var name = feature.get('sikuchoson')
         }
+
+        if(deviceIs == "MOB") {
+            for (i = 0; i < styleSI.length; i++) {
+                styleSI[i].getImage().setScale(0.25);
+                styleSI[i].getText().setScale(2.5);
+                styleSI[i].getText().setOffsetY(18);
+            }
+        }
+
         if(feature.get('max_si')<1.5) {
             return styleSI1;
         } else if(feature.get('max_si')<2.5) {
-
             return styleSI2;
         } else if(feature.get('max_si')<3.5) {
             return styleSI3;
@@ -188,6 +215,7 @@ var hallLayer = new ol.layer.Vector({
             styleSI7.getText().setText(zoomLevel > 10 ? name : '');
             return styleSI7;
         }
+
     }});
 
 // 役所ボタンの挙動を制御する関数

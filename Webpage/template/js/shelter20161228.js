@@ -40,6 +40,17 @@ var evacueeTagName = ['高齢者','75歳以上','要介護認定高齢者','妊�
 
 var shelterLayerWmsLayer = 'event_shelter_' + eventCode;
 
+var shelterStyle = new ol.style.Style({
+    image: new ol.style.Icon({
+        scale: 0.75,
+        anchor: [0.5, 1],
+        anchorXUnits: 'fraction',
+        anchorYUnits: 'fraction',
+        opacity: 1,
+        src: '../../img/shelter/grey.png'
+    })
+});
+
 var shelterLayer = new ol.layer.Tile({
     source: new ol.source.TileWMS({
         url: wms,
@@ -49,7 +60,8 @@ var shelterLayer = new ol.layer.Tile({
             STYLES: '',
             LAYERS: shelterLayerWmsLayer
         }
-    })
+    }),
+    style: shelterStyle
 });
 var sInfo;
 var dInfo;

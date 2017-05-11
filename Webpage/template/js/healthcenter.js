@@ -15,7 +15,7 @@ var styleHC = new ol.style.Style({
         anchorXUnits: 'fraction',
         anchorYUnits: 'fraction',
         opacity: 1,
-        src: '../../img/impassable/1.png'
+        src: '../../img/HC/HC_blue.png'
     })
 });
 
@@ -34,19 +34,19 @@ var HCLayer = new ol.layer.Vector({
 function createHtmlHC(evt) {
     document.getElementById('info').innerHTML = "";
     DetailHtml = "";
-    latNow = parseFloat(arrayV[12]);
-    lonNow = parseFloat(arrayV[11]);
-    nowLatLon = [latNow, lonNow];
+    latNow = parseFloat(arrayV[3]);
+    lonNow = parseFloat(arrayV[4]);
+    nowLatLon = [lonNow, latNow];
     var coordinate = nowLatLon;
-    DetailHtml = "<div id='landscape'><img id='landIcon' src='../../img/impassable/1.png'></div>";
+    DetailHtml = "<div id='landscape'><img id='landIcon' src='../../img/HC/HC_blue.png'></div>";
     // 建築物名表示
     if (arrayV[0].length < 18) {
-        DetailHtml = DetailHtml + "<div id='blueback'><a id='title'>" + arrayV[0] + "</a>";
+        DetailHtml = DetailHtml + "<div id='blueback'><a id='title'>" + arrayV[2] + "</a>";
     } else {
-        DetailHtml = DetailHtml + "<div id='blueback'><a id='titleTooLong'>" + arrayV[0] + "</a>";
+        DetailHtml = DetailHtml + "<div id='blueback'><a id='titleTooLong'>" + arrayV[2] + "</a>";
     }
 
-    DetailHtml = DetailHtml + preCells + "style='color:white;'" + interCells + "交通情報:" + arrayV[5] + subCells + "</div>";
+    DetailHtml = DetailHtml + preCells + "style='color:white;'" + interCells + "住所:" + arrayV[6] + subCells + "</div>";
 
     for (i = 1; i < arrayL.length-2; i++) {
         DetailHtml = DetailHtml + preCells + "id=NOCLR>" + arrayL[i] + "</a><a" + interCells + arrayV[i] + subCells;
@@ -54,6 +54,7 @@ function createHtmlHC(evt) {
     document.getElementById('info').style.display = 'block';
     document.getElementById('info').innerHTML = DetailHtml;
     document.getElementById('popup').style.display = 'block';
+    console.log(coordinate)
     overlayPopup.setPosition(coordinate);
 }
 

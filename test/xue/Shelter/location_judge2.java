@@ -21,9 +21,6 @@ import org.opengis.feature.Property;
 import org.opengis.feature.simple.SimpleFeature;
 import org.opengis.feature.simple.SimpleFeatureType;
 
-import java.io.*;
-import java.util.*;
-
 
 public class location_judge2 {
 
