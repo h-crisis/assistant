@@ -1,7 +1,5 @@
 package jp.hcrisis.assistant.disaster;
 
-import files.FileManagement;
-
 import java.io.File;
 
 /**
@@ -17,9 +15,15 @@ public class Main {
             outDir.mkdir();
         }
 
+        File masterFilesDir = new File(dir.getPath() + "/master");
+        File shapeDir = new File(dir.getPath() + "/shape");
+        File meshFile = new File(dir.getPath() + "/shape/mesh5th/Mesh5.shp");
+        File dataFile = new File(dir.getPath() + "/master/mesh4th_data.csv");
+
         //FileManagement.removeFiles(outDir); // 出力フォルダを空にする
 
         File siFile = new File(outDir.getPath() + "/" + code + "_si.csv");
+        File shpFile = new File(outDir.getPath() + "/" + code + "_si.shp");
         if(!siFile.exists()) {
             siFile.createNewFile();
         }
@@ -31,8 +35,7 @@ public class Main {
             CreateMesh5Si.createMesh5SiFromSIP4(inFile, siFile); // SIP4日立から受け取る震度分布データから5次メッシュの震度分布CSVを作成するメソッド
         }
 
-        File masterFilesDir = new File(dir.getPath() + "/master");
-        File shapeDir = new File(dir.getPath() + "/shape");
+        CreateMesh5Si.createMesh5SiShape(meshFile, siFile, dataFile, shpFile);
 
         //new EarthquakeDamageEstimate(masterFilesDir, shapeDir, siFile, outDir, code);
         //new EarthquakeDamageDbSet(outDir, code);
