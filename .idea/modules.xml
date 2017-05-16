@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/Common/Common.iml" filepath="$PROJECT_DIR$/Common/Common.iml" />
       <module fileurl="file://$PROJECT_DIR$/test/xue/DMAT_Distribution/DMAT_Distribution.iml" filepath="$PROJECT_DIR$/test/xue/DMAT_Distribution/DMAT_Distribution.iml" />
       <module fileurl="file://$PROJECT_DIR$/DisasterDamageEstimate/DisasterDamageEstimate.iml" filepath="$PROJECT_DIR$/DisasterDamageEstimate/DisasterDamageEstimate.iml" />
       <module fileurl="file://$PROJECT_DIR$/test/setsu/DisasterHeadquartersSelect.iml" filepath="$PROJECT_DIR$/test/setsu/DisasterHeadquartersSelect.iml" />
