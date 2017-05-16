@@ -82,6 +82,19 @@ h3 {
 	line-height: 0;
 	white-space: nowrap;
 }
+.checkbox label.large{
+	display: block;
+	float: left;
+	width: 78px;
+	margin: 0 0 0 0;
+	padding: 15px 5px 15px 5px;
+	background: #8a8a8a;
+	color: #bcbcbc;
+	font-size: 13px;
+	text-align: center;
+	line-height: 0;
+	white-space: nowrap;
+}
 .checkbox label.lbl{
 	display: block;
 	float: left;
@@ -141,5 +154,9 @@ h3 {
 }
 .checkbox input[type="radio"]:checked + .UK {
 	background-color: #000000;
+	color: #ffffff;
+}
+.checkbox input[type="checkbox"]:checked + .EX {
+	background-color: #228b22;
 	color: #ffffff;
 }

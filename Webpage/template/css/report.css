@@ -1,0 +1,102 @@
+@page{
+    margin: 0;
+}
+body {
+    margin: 0;
+    background: #1B9183;
+    font-family: Helvetica;
+    font-size: 16px;
+    width: 210mm;
+    margin-left: auto;
+    margin-right: auto;
+}
+.sheet {
+    margin: 0;
+    overflow: hidden;
+    position: relative;
+    box-sizing: border-box;
+    page-break-after: always;
+}
+
+/** 印刷サイズ **/
+body.A3.sheet{ width: 297mm; height: 419mm;}
+body.A3.landscape.sheet{ width: 420mm; height: 296mm;}
+body.A4.sheet{ width: 210mm; height: 296mm;}
+body.A4.landscape.sheet{ width: 297mm; height: 209mm;}
+body.A5.sheet{ width: 148mm; height: 209mm;}
+body.A5.landscape.sheet{ width: 210mm; height: 147mm;}
+
+.sheet.padding10mm{padding: 10mm}
+
+@media screen{
+    .sheet{
+        box-shadow: 0.5mm 2mm rgba(0,0,0,0.3);
+        margin: 5mm;
+    }
+}
+
+/** Fix for Chrome issue #273306 **/
+@media print {
+    body {background: #ffffff}
+    body.A3.landscape { width: 420mm }
+    body.A3, body.A4.landscape { width: 297mm }
+    body.A4, body.A5.landscape { width: 210mm }
+    body.A5                    { width: 148mm }
+    fieldset {border: 0}
+    #closeBtn {visibility: hidden}
+    #pdfOpen {visibility: hidden}
+    #submitBtn {visibility: hidden}
+}
+
+fieldset {
+    background: #ffffff;
+}
+h3 {
+    text-align: center
+}
+input {
+    border: 1px solid #aaaaaa;
+    font-size: 16px;
+}
+input.short {
+    width: 20mm;
+}
+textarea.INP {
+    resize: none;
+    width: 100%;
+    height: 26mm;
+    overflow: hidden;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+select {
+    font-size: 16px;
+}
+ul.tag {
+    display: table;
+    width: 180mm;
+    horiz-align: center;
+    margin: 0;
+}
+ul.tag li {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: left;
+    border: 1px solid;
+    flex-wrap: nowrap;
+    width: 100mm;
+    border-right-style: none;
+    border-bottom-style: none;
+}
+ul.tag li.leftLI {
+    width: 20mm;
+}
+ul.tag li.centerLI {
+    width: 80mm;
+}
+ul.tag li.rightLI {
+    width: 80mm;
+    border-right: solid 1px;
+}

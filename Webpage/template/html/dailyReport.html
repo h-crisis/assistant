@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+<script src="http://code.jquery.com/jquery.min.js"></script>
+<script src="../js/mqttws31.js"></script>
+<script src="../js/mqtthcrisis20160905.js"></script>
+    <script src="../js/mqtthcrisis20160905.js"></script>
+    <link href="../css/report.css" type="text/css" rel="stylesheet" />
+    <link href="../css/report.css" rel="stylesheet" type="text/css" media="print" />
+    <style>@page {size: A4}</style>
+</head>
+<body class="A4">
+<fieldset><form>
+
+    <img src="../img/img/assistant.png">
+
+    <h3>DHEAT 活動日報</h3>
+            <ul class="tag">
+                <li >グループ名
+                    <select name="pref" id="id_pref" value=""></select>
+                    <input id="id_name" style="width: 23mm" value=""> 班</li>
+                <li>活動日
+                    <select name="year" id="id_year" value=""></select>年
+                    <select name="month" id="id_month" value=""></select>月
+                    <select name="year" id="id_day" value=""></select>日
+                </li>
+                <li style="border-right: solid 1px; width: 35mm; ">記録者<input id="id_reporter" style="width: 14mm" value=""></li>
+            </ul>
+
+    <ul class="tag">
+        <li class="leftLI"></li>
+        <li class="centerLI" style="text-align: center">チェック項目・記入事項</li>
+        <li class="rightLI" style="text-align: center">状況・対応</li>
+    </ul>
+
+    <ul class="tag">
+        <li class="leftLI">班集合・<br>活動拠点への移動<br>
+        </li>
+        <li class="centerLI">
+            ※活動初日のみ記載<br>
+            □地域防災拠点までのルート・手段<br>
+            (道程での交通規制・トラブルなどを記入)<br>
+            □目視などにより確認した被災状況<br>
+        <li class="rightLI"><textarea id="1" class="INP"></textarea></li>
+    </ul>
+
+    <ul class="tag">
+        <li class="leftLI">活動拠点到着時</li>
+        <li class="centerLI">
+            □拠点責任者へDHEAT班の到着を伝える<br>
+            □前任グループ・拠点との情報共有<br>
+            ・要救護者の避難状況<br>
+            ・避難所で体調不良を訴る人の状況<br>
+            ・拠点に来られない要支援者の情報<br>
+            ・避難所の可動状況<br>
+            ・急患対応など他機関との調整が<br>
+            　必要な場合の手順確認<br>
+        <li class="rightLI"><textarea id="2" class="INP" style="height: 50mm"></textarea></li>
+    </ul>
+
+    <ul class="tag">
+        <li class="leftLI"></li>
+        <li class="centerLI">
+            □各避難所での健康調査の実施<br>
+            ・体調不良や要配慮者などケア必要者<br>
+            　→健康相談やトリアージの実施<br>
+        <li class="rightLI"><textarea id="3" class="INP" style="height:20mm"></textarea></li>
+    </ul>
+
+    <ul class="tag">
+        <li class="leftLI" style="border-top-style: none">各避難所<br>での活動</li>
+        <li class="centerLI" style="border-top-style: dashed">
+            □避難所の衛生管理・健康管理の実施<br>
+            ・避難所特有の症状に関する予防啓発<br>
+            ・感染症予防啓発(具体的啓発内容を記載)<br>
+            ・食中毒予防啓発(具体的啓発内容を記載)<br>
+            ・室内換気の実施<br>
+        <li class="rightLI" style="border-top-style: dashed"><textarea id="4" class="INP" style="height: 31mm"></textarea></li>
+    </ul>
+
+    <ul class="tag">
+        <li class="leftLI" style="border-top-style: none"></li>
+        <li class="centerLI" style="border-top-style: dashed">
+            □環境整備の実施<br>
+            ・要配慮者の避難スペース確認<br>
+            ・睡眠を阻害しない環境整備<br>
+            ・衛生用品や介護用品の配布状況確認<br>
+            ・その他快適さを維持するための対応<br>
+        <li class="rightLI" style="border-top-style: dashed"><textarea id="5" class="INP" style="height: 31mm"></textarea></li>
+    </ul>
+
+    <ul class="tag">
+        <li class="leftLI"></li>
+        <li class="centerLI">
+            □拠点への報告・情報共有<br>
+            (活動報告<br>・感染症の流行など重要情報の共有)<br>
+        <li class="rightLI"><textarea id="6" class="INP" style="height:18mm"></textarea></li>
+    </ul>
+
+    <ul class="tag">
+        <li class="leftLI" style="border-top-style: none; border-bottom: 1px solid">活動報告<br><br><br><br></li>
+        <li class="centerLI" style="border-top-style: dashed; border-bottom: 1px solid">
+            ※活動最終日のみ記載<br>
+            □引継ぎ班への報告・共有事項の確認<br>
+            (各避難所の概況・被災状況<br>
+             ・滞在中の生活ノウハウ・その他)<br>
+            □派遣元への報告内容の確認<br>
+        <li class="rightLI" style="border-top-style: dashed; border-bottom: 1px solid"><textarea id="7" class="INP" style="height: 31mm"></textarea></li>
+    </ul>
+    <br>
+    <center>
+    <div>
+        <input style="border: 0;float: inherit;width: 70px;margin: 0;background: #6d6d6d;color: #ffffff;font-size: 16px;text-align: center;" id ="closeBtn" type="button" onclick="window.close()" value="閉じる" >
+        <input style="border: 0;float: inherit;width: 70px;margin: 0;background: #228b22;color: #ffffff;font-size: 16px;text-align: center;" id ="submitBtn" type="button" onclick="createMessage();" value="送信" >
+        <input style="border: 0;float: inherit;width: 70px;margin: 0;background: #228b22;color: #ffffff;font-size: 16px;text-align: center;" id ="pdfOpen" type="submit" value="pdfを開く" >
+    </div>
+    </center>
+
+</form></fieldset>
+
+<script src="../js/timestamp.js"></script>
+<script>
+
+    // mqtt pub/sub関連の変数
+    var topicMsg =  "/hcrisis/assistant/schedule/";
+    var createMsg;
+    var tmpList; // 択一式の回答項目からチェック項目を拾い上げる際に使う変数
+
+    // タイムスタンプ関連の変数
+    var nowTime = new Date();
+    var nowYer = nowTime.getFullYear();
+    var nowMon = nowTime.getMonth() + 1;
+    var nowDay = nowTime.getDate();
+    var nowHrs = nowTime.getHours();
+    var nowMin = nowTime.getMinutes();
+    var nowSec = nowTime.getSeconds();
+
+    function createMessage() {
+        var topicMsg = "/hcrisis/assistant/event/" + document.getElementById('id_pref').value
+                + "/" + document.getElementById('id_name').value;
+        var createMsg = document.getElementById('id_pref').value +
+                "," + document.getElementById('id_name').value +
+                "," + document.getElementById('id_reporter').value;
+
+        for (var i = 1; i < 8; i++) {
+            createMsg += "," + document.getElementById(i).value;
+        }
+
+        createMsg += "," + document.getElementById('id_year').value + "/"
+                + document.getElementById('id_month').value + "/"
+                + document.getElementById('id_day').value;
+
+        createMsg += "," + nowYer + "/" + nowMon + "/" + nowDay + " " + nowHrs + ":" + nowMin + ":" + nowSec;
+        console.log(topicMsg + " : " + createMsg);
+        publishMsg(topicMsg, createMsg, true);
+    }
+
+</script>
+
+</body>
+</html>
