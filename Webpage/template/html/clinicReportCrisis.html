@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>医療機関情報入力(緊急時)</title>
+    <script src="http://code.jquery.com/jquery.min.js"></script>
+    <script src="../js/mqttws31.js"></script>
+    <script src="../js/mqtthcrisis20160905.js"></script>
+    <link href="../css/shelterSurvey.css" type="text/css" rel="stylesheet" />
+</head>
+<body>
+<fieldset><form>
+
+    <img src="../img/img/assistant.png">
+
+    <h3>緊急時医療機関情報入力</h3>
+    <ul class="inputbox">
+        <label class="over">医療機関ID<br>(処方戦発行医療機関コード10桁を入力)</label><br>
+        <input id="id_clinicID" maxlength='10' value="" pattern="[0-9]"><br><br><br>
+
+        <label>医療機関名称(30文字以内)</label>
+        <input id="id_name" maxlength='30' value="" placeholder=''><br><br>
+
+        <div class='checkbox'>病棟倒壊・倒壊の恐れ<br>
+            <input type='radio' name='q0' id='q0_0' value='1' checked><label for='q0_0' class='EX'>あり</label>
+            <input type='radio' name='q0' id='q0_1' value='0' checked><label for='q0_1' class='TR'>なし</label>
+        </div><br><br><br>
+
+        <div class='checkbox'>電気の供給<br>
+            <input type='radio' name='q1' id='q1_0' value='1' checked><label for='q1_0' class='EX'>あり</label>
+            <input type='radio' name='q1' id='q1_1' value='0' checked><label for='q1_1' class='TR'>なし</label>
+        </div><br><br><br>
+
+        <div class='checkbox'>水の供給<br>
+            <input type='radio' name='q2' id='q2_0' value='1' checked><label for='q2_0' class='EX'>あり</label>
+            <input type='radio' name='q2' id='q2_1' value='0' checked><label for='q2_1' class='TR'>なし</label>
+        </div><br><br><br>
+
+        <div class='checkbox'>医療用ガス在庫<br>
+            <input type='radio' name='q3' id='q3_0' value='1' checked><label for='q3_0' class='EX'>あり</label>
+            <input type='radio' name='q3' id='q3_1' value='0' checked><label for='q3_1' class='TR'>なし</label>
+        </div><br><br><br>
+
+        <div class='checkbox'>医薬品医療資材在庫<br>
+            <input type='radio' name='q4' id='q4_0' value='1' checked><label for='q4_0' class='EX'>あり</label>
+            <input type='radio' name='q4' id='q4_1' value='0' checked><label for='q4_1' class='TR'>なし</label>
+        </div><br><br><br>
+
+        <div class='checkbox'>受診患者<br>
+            <input type='radio' name='q5' id='q5_0' value='1' checked><label for='q5_0' class='EX'>通常</label>
+            <input type='radio' name='q5' id='q5_1' value='0' checked><label for='q5_1' class='TR'>多数</label>
+        </div><br><br><br>
+
+        <div class='checkbox'>職員<br>
+            <input type='radio' name='q6' id='q6_0' value='1' checked><label for='q6_0' class='EX'>充足</label>
+            <input type='radio' name='q6' id='q6_1' value='0' checked><label for='q6_1' class='TR'>不足</label>
+        </div><br><br><br>
+        </ul>
+
+    <br>
+    <center>
+        <div>
+            <input style="border: 0;float: inherit;width: 70px;margin: 0;background: #6d6d6d;color: #ffffff;font-size: 16px;text-align: center;" id ="closeBtn" type="button" onclick="window.close()" value="閉じる" >
+            <input style="border: 0;float: inherit;width: 70px;margin: 0;background: #228b22;color: #ffffff;font-size: 16px;text-align: center;" id ="submitBtn" type="button" onclick="createMessage();" value="送信" >
+        </div>
+    </center>
+
+</form></fieldset>
+
+<!--<script src="../js/timestamp.js"></script>-->
+<script>
+
+    // mqtt pub/sub関連の変数
+    var topicMsg =  "/hcrisis/assistant/schedule/";
+    var createMsg;
+    var tmpList; // 択一式の回答項目からチェック項目を拾い上げる際に使う変数
+
+    // タイムスタンプ関連の変数
+    var nowTime = new Date();
+    var nowYer = nowTime.getFullYear();
+    var nowMon = nowTime.getMonth() + 1;
+    var nowDay = nowTime.getDate();
+    var nowHrs = nowTime.getHours();
+    var nowMin = nowTime.getMinutes();
+    var nowSec = nowTime.getSeconds();
+
+    function createMessage() {
+        var topicMsg = "/hcrisis/assistant/clinic/crisis/" + document.getElementById('id_clinicID').value;
+        var createMsg = document.getElementById('id_name').value;
+
+        var tmpList = document.getElementsByName('q0'); //q0
+        for(var j=0; j<tmpList.length; j++) {
+            if (tmpList[j].checked) {
+                createMsg = createMsg + "," + tmpList[j].value;
+                continue;
+            }
+        }
+
+        tmpList = document.getElementsByName('q1'); // q1
+        for(var j=0; j<tmpList.length; j++) {
+            if (tmpList[j].checked) {
+                createMsg = createMsg + "," + tmpList[j].value;
+                continue;
+            }
+        }
+
+        tmpList = document.getElementsByName('q2'); // q1
+        for(var j=0; j<tmpList.length; j++) {
+            if (tmpList[j].checked) {
+                createMsg = createMsg + "," + tmpList[j].value;
+                continue;
+            }
+        }
+
+        tmpList = document.getElementsByName('q3'); // q1
+        for(var j=0; j<tmpList.length; j++) {
+            if (tmpList[j].checked) {
+                createMsg = createMsg + "," + tmpList[j].value;
+                continue;
+            }
+        }
+
+        tmpList = document.getElementsByName('q4'); // q1
+        for(var j=0; j<tmpList.length; j++) {
+            if (tmpList[j].checked) {
+                createMsg = createMsg + "," + tmpList[j].value;
+                continue;
+            }
+        }
+
+        tmpList = document.getElementsByName('q5'); // q1
+        for(var j=0; j<tmpList.length; j++) {
+            if (tmpList[j].checked) {
+                createMsg = createMsg + "," + tmpList[j].value;
+                continue;
+            }
+        }
+
+        tmpList = document.getElementsByName('q6'); // q1
+        for(var j=0; j<tmpList.length; j++) {
+            if (tmpList[j].checked) {
+                createMsg = createMsg + "," + tmpList[j].value;
+                continue;
+            }
+        }
+
+        createMsg += "," + nowYer + "/" + nowMon + "/" + nowDay + " " + nowHrs + ":" + nowMin + ":" + nowSec;
+        console.log(topicMsg + " : " + createMsg);
+        publishMsg(topicMsg, createMsg, true);
+    }
+
+</script>
+</body>
+</html>
