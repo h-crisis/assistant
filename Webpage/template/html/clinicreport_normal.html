@@ -6,19 +6,22 @@
     <script src="http://code.jquery.com/jquery.min.js"></script>
     <script src="../js/mqttws31.js"></script>
     <script src="../js/mqtthcrisis20160905.js"></script>
-    <link href="../css/shelterSurvey.css" type="text/css" rel="stylesheet" />
+    <link href="../css/enquete.css" type="text/css" rel="stylesheet" />
 </head>
 <body>
 <fieldset><form>
+
+    <center>
 
     <img src="../img/img/assistant.png">
 
     <h3>医療機関情報入力</h3>
     <ul class="inputbox">
-        <label class="over">医療機関ID<br>(処方戦発行医療機関コード10桁を入力)</label><br>
-        <input id="id_clinicID" maxlength='10' value="" pattern="[0-9]"><br><br><br>
+        <li>
+        <label class="over">医療機関ID(処方戦発行医療機関コード10桁を入力)</label><br>
+            <input id="id_clinicID" maxlength='10' value="" pattern="[0-9]"><br><br><br>
 
-        <label>医療機関名称(30文字以内)</label>
+        <label class="over">医療機関名称(30文字以内)</label>
         <input id="id_name" maxlength='30' value="" placeholder=''><br><br>
 
         <label>都道府県</label>
@@ -38,22 +41,21 @@
             <input type='checkbox' name="dep" class='q1' id='q0_1' value='0'><label for='q0_1' class='EX large'>呼吸器内科</label>
             <input type='checkbox' name="dep" class='q2' id='q0_2' value='0'><label for='q0_2' class='EX large'>胃腸内科</label>
             <input type='checkbox' name="dep" class='q3' id='q0_3' value='0'><label for='q0_3' class='EX large'>循環器内科</label>
-            <br><br>
             <input type='checkbox' name="dep" class='q4' id='q0_4' value='0'><label for='q0_4' class='EX large'>消化器内科</label>
+            <br><br>
             <input type='checkbox' name="dep" class='q5' id='q0_5' value='0'><label for='q0_5' class='EX large'>胃腸内科</label>
             <input type='checkbox' name="dep" class='q6' id='q0_6' value='0'><label for='q0_6' class='EX large'>神経内科</label>
             <input type='checkbox' name="dep" class='q7' id='q0_7' value='0'><label for='q0_7' class='EX large'>精神科</label>
-            <br><br>
             <input type='checkbox' name="dep" class='q8' id='q0_8' value='0'><label for='q0_8' class='EX large'>心療内科</label>
             <input type='checkbox' name="dep" class='q9' id='q0_9' value='0'><label for='q0_9' class='EX large'>小児科</label>
+            <br><br>
             <input type='checkbox' name="dep" class='q10' id='q0_10' value='0'><label for='q0_10' class='EX large'>人工透析内科</label>
             <input type='checkbox' name="dep" class='q11' id='q0_11' value='0'><label for='q0_11' class='EX large'>外科</label>
-            <br><br>
             <input type='checkbox' name="dep" class='q12' id='q0_12' value='0'><label for='q0_12' class='EX large'>形成外科</label>
             <input type='checkbox' name="dep" class='q13' id='q0_13' value='0'><label for='q0_13' class='EX large'>整形外科</label>
             <input type='checkbox' name="dep" class='q14' id='q0_14' value='0'><label for='q0_14' class='EX large'>呼吸器外科</label>
-            <input type='checkbox' name="dep" class='q15' id='q0_15' value='0'><label for='q0_15' class='EX large'>小児外科</label>
             <br><br>
+            <input type='checkbox' name="dep" class='q15' id='q0_15' value='0'><label for='q0_15' class='EX large'>小児外科</label>
             <input type='checkbox' name="dep" class='q16' id='q0_16' value='0'><label for='q0_16' class='EX large'>脳外科</label>
             <input type='checkbox' name="dep" class='q17' id='q0_17' value='0'><label for='q0_17' class='EX large'>心臓外科</label>
             <input type='checkbox' name="dep" class='q18' id='q0_18' value='0'><label for='q0_18' class='EX large'>肛門外科</label>
@@ -63,22 +65,21 @@
             <input type='checkbox' name="dep" class='q21' id='q0_21' value='0'><label for='q0_21' class='EX large'>産科</label>
             <input type='checkbox' name="dep" class='q22' id='q0_22' value='0'><label for='q0_22' class='EX large'>婦人科</label>
             <input type='checkbox' name="dep" class='q23' id='q0_23' value='0'><label for='q0_23' class='EX large'>眼科</label>
-            <br><br>
             <input type='checkbox' name="dep" class='q24' id='q0_24' value='0'><label for='q0_24' class='EX large'>耳鼻咽喉科</label>
+            <br><br>
             <input type='checkbox' name="dep" class='q25' id='q0_25' value='0'><label for='q0_25' class='EX large'>気管食道科</label>
             <input type='checkbox' name="dep" class='q26' id='q0_26' value='0'><label for='q0_26' class='EX large'>皮膚科</label>
             <input type='checkbox' name="dep" class='q27' id='q0_27' value='0'><label for='q0_27' class='EX large'>皮膚泌尿器科</label>
-            <br><br>
             <input type='checkbox' name="dep" class='q28' id='q0_28' value='0'><label for='q0_28' class='EX large'>泌尿器科</label>
             <input type='checkbox' name="dep" class='q29' id='q0_29' value='0'><label for='q0_29' class='EX large'>性病科</label>
+            <br><br>
             <input type='checkbox' name="dep" class='q30' id='q0_30' value='0'><label for='q0_30' class='EX large'>歯科</label>
             <input type='checkbox' name="dep" class='q31' id='q0_31' value='0'><label for='q0_31' class='EX large'>矯正歯科</label>
-            <br><br>
             <input type='checkbox' name="dep" class='q32' id='q0_32' value='0'><label for='q0_32' class='EX large'>歯科口腔外科</label>
             <input type='checkbox' name="dep" class='q33' id='q0_33' value='0'><label for='q0_33' class='EX large'>麻酔科</label>
             <input type='checkbox' name="dep" class='q34' id='q0_34' value='0'><label for='q0_34' class='EX large'>病理診断科</label>
-            <input type='checkbox' name="dep" class='q35' id='q0_35' value='0'><label for='q0_35' class='EX large'>臨床検査科</label>
             <br><br>
+            <input type='checkbox' name="dep" class='q35' id='q0_35' value='0'><label for='q0_35' class='EX large'>臨床検査科</label>
             <input type='checkbox' name="dep" class='q36' id='q0_36' value='0'><label for='q0_36' class='EX large'>救急科</label>
             <input type='checkbox' name="dep" class='q37' id='q0_37' value='0'><label for='q0_37' class='EX large'>放射線科</label>
             <input type='checkbox' name="dep" class='q38' id='q0_38' value='0'><label for='q0_38' class='EX large'>リウマチ科</label>
@@ -87,10 +88,14 @@
             <input type='checkbox' name="dep" class='q40' id='q0_40' value='0'><label for='q0_40' class='EX large'>アレルギー科</label>
         </div><br><br><br>
 
+        <label class="over">該当する診療科が存在しない場合、ここに入力してください。(20文字以内)</label><br>
+        <input id="clinic_other" maxlength='20' value="" placeholder=''><br><br>
+
+        </li>
     </ul>
 
     <br>
-    <center>
+
         <div>
             <input style="border: 0;float: inherit;width: 70px;margin: 0;background: #6d6d6d;color: #ffffff;font-size: 16px;text-align: center;" id ="closeBtn" type="button" onclick="window.close()" value="閉じる" >
             <input style="border: 0;float: inherit;width: 70px;margin: 0;background: #228b22;color: #ffffff;font-size: 16px;text-align: center;" id ="submitBtn" type="button" onclick="createMessage();" value="送信" >
@@ -118,7 +123,8 @@
 
     function createMessage() {
         var topicMsg = "/hcrisis/assistant/clinic/crisis/" + document.getElementById('id_clinicID').value;
-        var createMsg = document.getElementById('id_name').value +
+        var createMsg = document.getElementById('id_clinicID').value +
+                "," + document.getElementById('id_name').value +
                 "," + document.getElementById('id_prefecture').value +
                 "," + document.getElementById('id_city').value +
         "," + document.getElementById('id_local').value +
@@ -136,6 +142,7 @@
             Q = ".q";
         }
 
+        createMsg +=　"," + document.getElementById('clinic_other').value;
 
         createMsg += "," + nowYer + "/" + nowMon + "/" + nowDay + " " + nowHrs + ":" + nowMin + ":" + nowSec;
         console.log(topicMsg + " : " + createMsg);

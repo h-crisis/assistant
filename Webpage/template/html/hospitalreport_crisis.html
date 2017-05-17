@@ -13,14 +13,14 @@
 
     <img src="../img/img/assistant.png">
 
-    <h3>緊急時医療機関情報入力</h3>
+        <h3>緊急時医療機関情報入力</h3>
         <ul class="inputbox">
             <li>
-        <label class="over">医療機関ID(処方箋発行医療機関コード10桁を入力)</label><br>
-        <input id="id_clinicID" maxlength='10' value="" pattern="[0-9]"><br><br><br>
+                <label class="over">医療機関ID(処方箋発行医療機関コード10桁を入力)</label><br>
+                <input id="id_clinicID" maxlength='10' value="" pattern="[0-9]"><br><br><br>
 
-        <label>医療機関名称(30文字以内)</label>
-        <input id="id_name" maxlength='30' value="" placeholder=''><br><br>
+                <label>医療機関名称(30文字以内)</label>
+                <input id="id_name" maxlength='30' value="" placeholder=''><br><br>
 
                 <label>建物倒壊・倒壊の恐れ</label>
                 <div class='checkbox'>
@@ -30,22 +30,41 @@
 
                 <label>電気の供給</label>
                 <div class='checkbox'>
-                    <input type='radio' name='q1' id='q1_0' value='1' checked><label for='q1_0' class='EX'>あり</label>
-                    <input type='radio' name='q1' id='q1_1' value='0' checked><label for='q1_1' class='TR'>なし</label>
+                    <input type='radio' name='q1' id='q1_0' value='1' checked><label for='q1_0' class='EX'>通常電源あり</label>
+                    <input type='radio' name='q1' id='q1_1' value='0' checked><label for='q1_1' class='TR'>通常電源なし</label>
+                    <input type='radio' name='q1' id='q1_2' value='0' checked><label for='q1_2' class='UK'>非常用電源</label>
                 </div><br><br><br>
 
                 <label>水の供給</label>
                 <div class='checkbox'>
-                    <input type='radio' name='q2' id='q2_0' value='1' checked><label for='q2_0' class='EX'>あり</label>
-                    <input type='radio' name='q2' id='q2_1' value='0' checked><label for='q2_1' class='TR'>なし</label>
+                    <input type='radio' name='q2' id='q2_0' value='1' checked><label for='q2_0' class='EX'>水道供給あり</label>
+                    <input type='radio' name='q2' id='q2_1' value='0' checked><label for='q2_1' class='TR'>水道供給なし</label>
                 </div><br><br><br>
 
-                <label>診療</label>
+                <label>医療用ガス在庫</label>
                 <div class='checkbox'>
-                    <input type='radio' name='q5' id='q3_0' value='1' checked><label for='q3_0' class='EX'>可能</label>
-                    <input type='radio' name='q5' id='q3_1' value='0' checked><label for='q3_1' class='TR'>不可</label>
+                    <input type='radio' name='q3' id='q3_0' value='1' checked><label for='q3_0' class='EX'>あり</label>
+                    <input type='radio' name='q3' id='q3_1' value='0' checked><label for='q3_1' class='TR'>なし</label>
+                    <input type='radio' name='q3' id='q3_2' value='0' checked><label for='q3_2' class='UK'>不要</label>
                 </div><br><br><br>
 
+                <label>医薬品医療資材在庫</label>
+                <div class='checkbox'>
+                    <input type='radio' name='q4' id='q4_0' value='1' checked><label for='q4_0' class='EX'>あり</label>
+                    <input type='radio' name='q4' id='q4_1' value='0' checked><label for='q4_1' class='TR'>なし</label>
+                </div><br><br><br>
+
+                <label>受診患者</label>
+                <div class='checkbox'>
+                    <input type='radio' name='q5' id='q5_0' value='1' checked><label for='q5_0' class='EX'>通常</label>
+                    <input type='radio' name='q5' id='q5_1' value='0' checked><label for='q5_1' class='TR'>多数</label>
+                </div><br><br><br>
+
+                <label>職員</label>
+                <div class='checkbox'>
+                    <input type='radio' name='q6' id='q6_0' value='1' checked><label for='q6_0' class='EX'>充足</label>
+                    <input type='radio' name='q6' id='q6_1' value='0' checked><label for='q6_1' class='TR'>不足</label>
+                </div><br><br><br>
             </li></ul>
         <br>
 
@@ -75,8 +94,7 @@
 
     function createMessage() {
         var topicMsg = "/hcrisis/assistant/clinic/crisis/" + document.getElementById('id_clinicID').value;
-        var createMsg = document.getElementById('id_clinicID').value +
-                "," + document.getElementById('id_name').value;
+        var createMsg = document.getElementById('id_name').value;
 
         var tmpList = document.getElementsByName('q0'); //q0
         for(var j=0; j<tmpList.length; j++) {

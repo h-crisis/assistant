@@ -101,7 +101,7 @@ public class csv2csv {
                     sinryoukaDB.put(i,"dum");
                 }
             }
-            //System.out.println(item);
+            System.out.println(item);
             br.close();
             return item;
         } catch (Exception e) {
