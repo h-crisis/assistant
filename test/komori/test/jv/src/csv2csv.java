@@ -19,8 +19,8 @@ import java.io.File;
 public class csv2csv {
 
     public static void main(String args[]) {
+        // infに入力ファイルパスを、oufに出力ファイルパスを、それぞれ指定。
         File inf = new File("/Users/komori/Downloads/master.csv");
-        File duf = new File("/Users/komori/Downloads/dummy.csv");
         File ouf = new File("/Users/komori/Downloads/new_hospital_master.csv");
         converter(inf,ouf);
     }
@@ -50,11 +50,14 @@ public class csv2csv {
         return prefectureDB;
     }
 
-    public static String getItem(File inf, File ouf){
+    public static String getItem(File inf){
+
+        // 診療科の取得
+
         int lNum = 1;
         int k=0,fNum,dummyNum;
 
-        // ある診療科がlevelの値未満しか存在しない場合、その診療科はその他に丸め込まれる
+        // ある診療科がlevelの値未満しか存在しない場合、その診療科は除外される
         int level = 2;
 
         String text="",copy="",dummy="";
@@ -87,19 +90,18 @@ public class csv2csv {
                 if (br.readLine()==null) {
 
                 }
-
             }
+
             dummyNum = sinryoukaDB.size();
             for(int i=0;i < dummyNum;i++) {
                 dummy = sinryoukaDB.get(i);
-                if (frequencyDB.get(dummy) > level) {
+                if (frequencyDB.get(dummy) > level && dummy.length() != 0) {
                     item += "," + dummy;
-                    //System.out.println(item);
                 }else{
-                    //item += "," + dummy;
                     sinryoukaDB.put(i,"dum");
                 }
             }
+            //System.out.println(item);
             br.close();
             return item;
         } catch (Exception e) {
@@ -111,11 +113,13 @@ public class csv2csv {
     }
 
     public static void converter(File inf, File ouf){
+
+        // ファイルの書き換え。医療機関番号からidを生成し、医療機関の開設診療科情報を分解。1.開設、0.未開設
+
         int lNum = 1;
         String text="",copy="",dummy="";
 
-        getItem(inf,ouf);
-
+        getItem(inf);
 
         try {
             InputStream is = new FileInputStream(inf);
@@ -133,22 +137,16 @@ public class csv2csv {
                 String sinryou[] = tex[15].split(" ");
                 ArrayList<String> sinryouList = new ArrayList<String>(Arrays.asList(sinryou));
                 ArrayList<String> sinryouDummy = new ArrayList<String>();
-                /*
-                for (int l=0;l<(sinryoukaDB.size() - sinryou.length);l++){
-                    sinryouList.add("dum");
-                }
-                */
+
                 for (int l=0;l<  sinryoukaDB.size();l++){
                     sinryouDummy.add("0");
                 }
-
 
                 if(lNum==1) {
                     bw.write(item);
                 }
                 else {
                     text = "\"" + prefectureDB.get(tex[6]) + "1" + tex[1] + "\"," + text;
-
 
                     for (int l=0; l < sinryouList.size();l++){
                         if (sinryoukaDB.containsValue(sinryouList.get(l))){
@@ -157,8 +155,6 @@ public class csv2csv {
                         }
                     }
 
-
-
                     for (int l=0; l < sinryouDummy.size();l++) {
                         if (sinryoukaDB.get(l)=="dum") {}
                         else {
@@ -166,29 +162,17 @@ public class csv2csv {
                         }
                     }
 
-
-                    System.out.println(sinryouList);
-                    System.out.println(sinryouDummy);
-                    System.out.println(sinryoukaDB);
-                    System.out.println(sinryoukaRDB);
+                    //System.out.println(sinryouList);
+                    //System.out.println(sinryouDummy);
+                    //System.out.println(sinryoukaDB);
+                    //System.out.println(sinryoukaRDB);
+                    System.out.println(text);
                     bw.write("\n" + text);
                 }
                 lNum++;
             }
             br.close();
             bw.close();
-
-/*
-            is = new FileInputStream(opf);
-            os = new FileOutputStream(opf);
-            r  = new InputStreamReader(is, "SJIS");
-            w = new OutputStreamWriter(os, "SJIS");
-            br = new BufferedReader(r);
-            bw = new BufferedWriter(w);
-
-            bw.write("\n" + copy);
-    //System.out.println(br.readLine());
-    */
 
 } catch (Exception e) {
         System.out.println(text);
