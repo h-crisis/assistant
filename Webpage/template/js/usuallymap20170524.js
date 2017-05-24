@@ -118,7 +118,7 @@ map.once('postrender', function(){
     HCLayer.setVisible(false);
 });
 
-// map上に各アイコンのレイヤーを追加して、非表示にする。
+// zip.jsを利用してzipファイルからレイヤー作成。
 zipBlob("", blob, function(zippedBlob) {
     // unzip the first file from zipped data stored in zippedBlob
     unzipBlob(zippedBlob, function(unzippedBlob) {
