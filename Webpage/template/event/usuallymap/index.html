@@ -9,8 +9,13 @@
 <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList,URL"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.2.61/jspdf.min.js"></script>
 <script type="text/javascript"  src="../../js/osChecker20161228.js"></script>
-<script type="text/javascript" src="../../js/healthcenter.js"></script>
-<script src="event.js"></script>
+<script type="text/javascript" src="event.js"></script>
+<script type="text/javascript" src="../../js/zip.js"></script>
+<script type="text/javascript" src="../../js/zip-ext.js"></script>
+<script type="text/javascript" src="../../js/zip-fs.js"></script>
+<script type="text/javascript" src="../../js/z-worker.js"></script>
+<script type="text/javascript"  src="../../js/zipreader.js"></script>
+<script type="text/javascript" src="../../js/healthcenter20170524.js"></script>
 <!--<script src="../../js/locationChecker.js"></script>-->
 
 <div id="fadeLayer" onclick="fade()"></div>
@@ -104,7 +109,8 @@
 <table id="vishospinfo" style="z-index: 3;position: absolute;top: 10px;left: 100px;width: 250px;height: 90%; background-color:whitesmoke; border: 2px solid burlywood; table-layout: fixed; overflow:scroll; display:none; font-size:24px;"></table>
 <input type="hidden" name="latlonCurr" id="latlonCurr">
 <input type="hidden" name="latlonHosp" id="latlonHosp">
-<script type="text/javascript" src="../../js/usuallymap.js"></script>
+<a type="hidden" id="geojson" value=""></a>
+<script type="text/javascript" src="../../js/usuallymap20170524.js"></script>
 <!--<script type="text/javascript" src="../../js/zenrin20160916.js"></script>-->
 <script type="text/javascript" src="../../js/location20161228.js"></script>
 <script type="text/javascript" src="../../js/usuallyloader.js"></script>

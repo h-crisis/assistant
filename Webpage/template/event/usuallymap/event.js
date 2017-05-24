@@ -20,3 +20,6 @@ var pass = '../gmapDesign/';
 var wms = 'http://gis.h-crisis.jp/geoserver/wms';
 //var wms = 'http://map.ichilab.org:80/geoserver/wms';
 var urlCustomRoad = 'geojson/custom_road_info.geojson';
+
+var geojsonObjectUrl = 'http://h-crisis.niph.go.jp/assistant/wp-content/uploads/sites/4/data/hcrisis_medical_status.geojson.zip';
+var geoF;
