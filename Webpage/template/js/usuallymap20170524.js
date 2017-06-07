@@ -113,33 +113,77 @@ map.addControl(new ol.control.Zoom({
 
 
 // map上に各アイコンのレイヤーを追加して、非表示にする。
-map.addLayer(HCLayer);
-map.once('postrender', function(){
-    HCLayer.setVisible(false);
-});
 
 // zip.jsを利用してzipファイルからレイヤー作成。
 zipBlob("", blob, function(zippedBlob) {
     // unzip the first file from zipped data stored in zippedBlob
-    unzipBlob(zippedBlob, function(unzippedBlob) {
+    hospitalUnzipBlob(zippedBlob, function(unzippedBlob) {
         // logs the uncompressed Blob
-        var HospLayer = new ol.layer.Vector({
+        hospLayer = new ol.layer.Vector({
             source: new ol.source.Vector({
                 features:  (new ol.format.GeoJSON()).readFeatures(unzippedBlob),
                 format: new ol.format.GeoJSON()
             }),
-            style: styleCL
+            style: function(feature, resolution) {
+                styleCL.getImage().setOpacity(resolution < 0.0009 ? 1 : 0);
+                return styleCL;
+            }
         });
-        map.addLayer(HospLayer);
+        map.addLayer(hospLayer);
+        map.once('postrender', function(){
+            hospLayer.setVisible(false);
+        });
     });
+
+    hcUnzipBlob(zippedBlob, function(unzippedBlob) {
+        // logs the uncompressed Blob
+        HCLayer = new ol.layer.Vector({
+            source: new ol.source.Vector({
+                features:  (new ol.format.GeoJSON()).readFeatures(unzippedBlob),
+                format: new ol.format.GeoJSON()
+            }),
+            style: function(feature, resolution) {
+                styleHC.getImage().setOpacity(resolution < 0.0009 ? 1 : 0);
+                return styleHC;
+            }
+        });
+        map.addLayer(HCLayer);
+        map.once('postrender', function(){
+            HCLayer.setVisible(false);
+        });
+    });
+
+    shelterUnzipBlob(zippedBlob, function(unzippedBlob) {
+        // logs the uncompressed Blob
+        shelterLayer = new ol.layer.Vector({
+            source: new ol.source.Vector({
+                features:  (new ol.format.GeoJSON()).readFeatures(unzippedBlob),
+                format: new ol.format.GeoJSON()
+            }),
+            style: function(feature, resolution) {
+                styleSH.getImage().setOpacity(resolution < 0.0009 ? 1 : 0);
+                return styleSH;
+            }
+        });
+        map.addLayer(shelterLayer);
+        map.once('postrender', function(){
+            shelterLayer.setVisible(false);
+        });
+    });
+
 });
 
 // 避難所のマップ表示制御ボタンを呼ぶ変数。表示制御関数はshelter~.js
-var shelterOnOff   = document.getElementById('healthcenter-vis');
-shelterOnOff.addEventListener('click', HCButton);
+var hcOnOff   = document.getElementById('healthcenter-vis');
+hcOnOff.addEventListener('click', HCButton);
+
+var hospitalOnOff   = document.getElementById('hospital-vis');
+hospitalOnOff.addEventListener('click', hospButton);
+
+var shelterOnOff   = document.getElementById('shelter-vis');
+shelterOnOff.addEventListener('click', shelterButton);
 
 var zoomLevel = map.getView().getZoom();
-
 
 
 // Map上のFeatureを取得し表示する
@@ -167,7 +211,7 @@ var displayFeatureInfo = function(pixel, evt) {
             label = feature.getKeys()[i];
             valr = feature.get(label);
             arrayL.push(label);
-            if (label == "lat" || label == "lon") {
+            if (label == "lat" || label == "lon" || label == "LAT" || label == "LON") {
                 arrayV.push(valr)
             } else {
                 if (isFinite(valr)) {
@@ -178,7 +222,8 @@ var displayFeatureInfo = function(pixel, evt) {
             }
         }
 
-        if(typeof(feature.T.dep1) == "undefined"){}
+        if(typeof(feature.T.dep1) == "undefined"){
+        }
         else {
             arrayH = [];
             arrayH.push(feature.T.dep1,feature.T.dep2,feature.T.dep3,feature.T.dep4,feature.T.dep5,feature.T.dep6);
@@ -187,7 +232,13 @@ var displayFeatureInfo = function(pixel, evt) {
             arrayH.push(feature.T.dep19,feature.T.dep20,feature.T.dep21,feature.T.dep22);
         }
 
-        createHtmlHC(evt, feature);
+        if (arrayV[0].length == 7) {
+            createHtmlHC(evt, feature);
+        } else if (arrayL[0] == "CODE") {
+            createHtmlshelter(evt, feature);
+        } else if (arrayV[0].length == 11) {
+            createHtmlhosp(evt, feature);
+        }
         /*
          else if(arrayL[0]=='code') {
          createHtmlHospital(evt, feature);

@@ -1,12 +1,8 @@
 /**
- * Created by komori on 2017/05/24.
+ * Created by komori on 2017/06/07.
  */
 
-/**
- * Created by komori on 2017/02/07.
- */
-
-var styleHC = new ol.style.Style({
+var styleSH = new ol.style.Style({
     text: new ol.style.Text({
         offsetY: 8,
         font: '12px Calibri,sans-serif',
@@ -19,30 +15,26 @@ var styleHC = new ol.style.Style({
         anchorXUnits: 'fraction',
         anchorYUnits: 'fraction',
         opacity: 1,
-        src: '../../img/HC/HC_blue.png'
+        src: '../../img/shelter/green.png'
     })
 });
 
-// urlCustomRoadは、event.jsで定義する
-//var urlCustomRoad = '../practice/geojson/custom_road_info.geojson'
-
-// 保健所のポップアップを作成する関数
-function createHtmlHC(evt) {
+function createHtmlshelter(evt) {
     document.getElementById('info').innerHTML = "";
     DetailHtml = "";
-    latNow = parseFloat(arrayV[3]);
-    lonNow = parseFloat(arrayV[4]);
+    latNow = parseFloat(arrayV[7]);
+    lonNow = parseFloat(arrayV[8]);
     nowLatLon = [lonNow, latNow];
     var coordinate = nowLatLon;
-    DetailHtml = "<div id='landscape'><img id='landIcon' src='../../img/HC/HC_blue.png'></div>";
+    DetailHtml = "<div id='landscape'><img id='landIcon' src='../../img/shelter/green.png'></div>";
     // 建築物名表示
-    if (arrayV[0].length < 18) {
-        DetailHtml = DetailHtml + "<div id='blueback'><a id='title'>" + arrayV[2] + "</a>";
+    if (arrayV[3].length < 18) {
+        DetailHtml = DetailHtml + "<div id='blueback'><a id='title'>" + arrayV[3] + "</a>";
     } else {
-        DetailHtml = DetailHtml + "<div id='blueback'><a id='titleTooLong'>" + arrayV[2] + "</a>";
+        DetailHtml = DetailHtml + "<div id='blueback'><a id='titleTooLong'>" + arrayV[3] + "</a>";
     }
 
-    DetailHtml = DetailHtml + preCells + "style='color:white;'" + interCells + "住所:" + arrayV[6] + subCells + "</div>";
+    DetailHtml = DetailHtml + preCells + "style='color:white;'" + interCells + "住所:" + arrayV[4] + arrayV[5] + arrayV[6] + subCells + "</div>";
 
     for (i = 1; i < arrayL.length-2; i++) {
         DetailHtml = DetailHtml + preCells + "id=NOCLR>" + arrayL[i] + "</a><a" + interCells + arrayV[i] + subCells;
@@ -55,14 +47,14 @@ function createHtmlHC(evt) {
 }
 
 
-function HCButton() {
-    // 保健所をマップに表示させるかどうか
-    if (!HCLayer.getVisible()) {
-        HCLayer.setVisible(true);
+function shelterButton() {
+    // 医療機関をマップに表示させるかどうか
+    if (!shelterLayer.getVisible()) {
+        shelterLayer.setVisible(true);
         this.style.backgroundColor = "#eeeeee";
         this.style.color = "#000000";
     } else {
-        HCLayer.setVisible(false);
+        shelterLayer.setVisible(false);
         this.style.backgroundColor = "";
         this.style.color = "";
     }

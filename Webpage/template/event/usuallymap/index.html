@@ -7,7 +7,6 @@
 <script src="http://code.jquery.com/jquery-3.1.0.js"></script>
 <script src="http://d3js.org/d3.v3.min.js"></script>
 <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList,URL"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.2.61/jspdf.min.js"></script>
 <script type="text/javascript"  src="../../js/osChecker20161228.js"></script>
 <script type="text/javascript" src="event.js"></script>
 <script type="text/javascript" src="../../js/zip.js"></script>
@@ -16,6 +15,8 @@
 <script type="text/javascript" src="../../js/z-worker.js"></script>
 <script type="text/javascript"  src="../../js/zipreader.js"></script>
 <script type="text/javascript" src="../../js/healthcenter20170524.js"></script>
+<script type="text/javascript" src="../../js/hospital20170524.js"></script>
+<script type="text/javascript" src="../../js/shelter20170524.js"></script>
 <!--<script src="../../js/locationChecker.js"></script>-->
 
 <div id="fadeLayer" onclick="fade()"></div>
@@ -89,6 +90,8 @@
     <hr>
     <a>建造物</a>
     <a class="button hidden" id="healthcenter-vis" onclick="fade()">保健所情報表示</a>
+    <a class="button hidden" id="hospital-vis" onclick="fade()">医療機関情報表示</a>
+    <a class="button hidden" id="shelter-vis" onclick="fade()">避難所情報表示</a>
     <hr>
 </nav>
 

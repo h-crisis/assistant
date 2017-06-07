@@ -21,5 +21,6 @@ var wms = 'http://gis.h-crisis.jp/geoserver/wms';
 //var wms = 'http://map.ichilab.org:80/geoserver/wms';
 var urlCustomRoad = 'geojson/custom_road_info.geojson';
 
-var geojsonObjectUrl = 'http://h-crisis.niph.go.jp/assistant/wp-content/uploads/sites/4/data/hcrisis_medical_status.geojson.zip';
-var geoF;
+var hospitalGeojsonUrl = 'http://h-crisis.niph.go.jp/assistant/wp-content/uploads/sites/4/data/hcrisis_medical_status.geojson.zip';
+var hcGeojsonUrl = 'http://h-crisis.niph.go.jp/assistant/wp-content/uploads/sites/4/event/usuallymap/geojson/HCList.geojson.zip';
+var shelterGeojsonUrl = 'http://h-crisis.niph.go.jp/assistant/wp-content/uploads/sites/4/event/usuallymap/geojson/shelterJPN.geojson.zip';

@@ -5,8 +5,8 @@
 
 //work directory
 zip.workerScriptsPath = "../../js/";
-//server address.(example)
-var url = 'http://h-crisis.niph.go.jp/assistant/wp-content/uploads/sites/4/data/hcrisis_medical_status.geojson.zip';
+//server address.(example) 
+var url = '';
 //start zip read.
 
 // create the blob object storing the data to compress
@@ -25,15 +25,47 @@ function zipBlob(filename, blob, callback) {
     }, onerror);
 }
 
-function unzipBlob(blob, callback) {
+function hospitalUnzipBlob(blob, callback) {
     // use a zip.BlobReader object to read zipped data stored into blob variable
-    zip.createReader(new zip.HttpReader(url), function(zipReader) {
+    zip.createReader(new zip.HttpReader(hospitalGeojsonUrl), function(zipReader) {
         // get entries from the zip file
         zipReader.getEntries(function(entries) {
             // get data from the first file
-            entries[0].getData(new zip.TextWriter(), function(data) {
+            entries[0].getData(new zip.TextWriter(
+            ), function(data) {
                 // close the reader and calls callback function with uncompressed data as parameter
-                //console.log(data);
+                zipReader.close();
+                callback(data);
+            });
+        });
+    }, onerror);
+}
+
+function hcUnzipBlob(blob, callback) {
+    // use a zip.BlobReader object to read zipped data stored into blob variable
+    zip.createReader(new zip.HttpReader(hcGeojsonUrl), function(zipReader) {
+        // get entries from the zip file
+        zipReader.getEntries(function(entries) {
+            // get data from the first file
+            entries[0].getData(new zip.TextWriter(
+            ), function(data) {
+                // close the reader and calls callback function with uncompressed data as parameter
+                zipReader.close();
+                callback(data);
+            });
+        });
+    }, onerror);
+}
+
+function shelterUnzipBlob(blob, callback) {
+    // use a zip.BlobReader object to read zipped data stored into blob variable
+    zip.createReader(new zip.HttpReader(shelterGeojsonUrl), function(zipReader) {
+        // get entries from the zip file
+        zipReader.getEntries(function(entries) {
+            // get data from the first file
+            entries[0].getData(new zip.TextWriter(
+            ), function(data) {
+                // close the reader and calls callback function with uncompressed data as parameter
                 zipReader.close();
                 callback(data);
             });

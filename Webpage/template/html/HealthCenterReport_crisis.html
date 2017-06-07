@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>災害時保健所情報入力</title>
+    <script src="http://code.jquery.com/jquery.min.js"></script>
+    <script src="../js/mqttws31.js"></script>
+    <script src="../js/mqtthcrisis20160905.js"></script>
+    <link href="../css/enquete.css" type="text/css" rel="stylesheet" />
+</head>
+<body>
+<fieldset><form>
+
+    <img src="../img/img/assistant.png">
+
+    <h3>災害時保健所情報入力</h3>
+    <ul class="inputbox">
+        <li>
+            <label class="over">保健所ID</label>
+            <input id="id_hcID" maxlength='10' value="" pattern="[0-9]"><br><br>
+
+            <label>保健所名称(30文字以内)</label>
+            <input id="id_name" maxlength='30' value="" placeholder=''><br><br>
+
+            <label>建物倒壊・倒壊の恐れ</label>
+            <div class='checkbox'>
+                <input type='radio' name='q0' id='q0_0' value='1' ><label for='q0_0' class='TR'>あり</label>
+                <input type='radio' name='q0' id='q0_1' value='0' checked><label for='q0_1' class='EX'>なし</label>
+            </div><br><br><br>
+
+            <label>電気の供給</label>
+            <div class='checkbox'>
+                <input type='radio' name='q1' id='q1_0' value='1' ><label for='q1_0' class='EX'>あり</label>
+                <input type='radio' name='q1' id='q1_1' value='0' checked><label for='q1_1' class='TR'>なし</label>
+            </div><br><br><br>
+
+            <label>水の供給</label>
+            <div class='checkbox'>
+                <input type='radio' name='q2' id='q2_0' value='1' ><label for='q2_0' class='EX'>あり</label>
+                <input type='radio' name='q2' id='q2_1' value='0' checked><label for='q2_1' class='TR'>なし</label>
+            </div><br><br><br>
+
+            <label>ガス使用</label>
+            <div class='checkbox'>
+                <input type='radio' name='q3' id='q3_0' value='1' ><label for='q3_0' class='EX'>可能</label>
+                <input type='radio' name='q3' id='q3_1' value='0' checked><label for='q3_1' class='TR'>不可</label>
+            </div><br><br><br>
+
+            <label>固定電話</label>
+            <div class='checkbox'>
+                <input type='radio' name='q4' id='q4_0' value='1' ><label for='q4_0' class='EX'>通話可能</label>
+                <input type='radio' name='q4' id='q4_1' value='0' checked><label for='q4_1' class='TR'>通話不可</label>
+            </div><br><br><br>
+
+            <label>携帯電話</label>
+            <div class='checkbox'>
+                <input type='radio' name='q5' id='q5_0' value='1' ><label for='q5_0' class='EX'>通信可能</label>
+                <input type='radio' name='q5' id='q5_1' value='0' checked><label for='q5_1' class='TR'>通信不可</label>
+            </div><br><br><br>
+
+            <label>職員の充足</label>
+            <div class='checkbox'>
+                <input type='radio' name='q6' id='q6_0' value='1' ><label for='q6_0' class='EX'>充足</label>
+                <input type='radio' name='q6' id='q6_1' value='0' checked><label for='q6_1' class='TR'>不足</label>
+            </div><br><br><br>
+
+            <label>DHEAT派遣要請</label>
+            <div class='checkbox'>
+                <input type='radio' name='q7' id='q7_0' value='1' onclick="dheatChecked()"><label for='q7_0' class='TR'>要請する</label>
+                <input type='radio' name='q7' id='q7_1' value='0' onclick="dheatChecked()" checked><label for='q7_1' class='EX'>要請しない</label>
+            </div><br><br><br>
+
+            <label>DHEAT派遣要請理由<br>(60文字まで)</label><br><br><br>
+            <textarea id="id_dheat" maxlength='100' value="" placeholder='' style="width: 80%; height: 60px; font-size: 18px;" disabled></textarea><br><br>
+
+            <label>備考(60文字まで)</label><br><br>
+            <textarea id="id_other" maxlength='100' value="" placeholder='' style="width: 80%; height: 60px; font-size: 18px"></textarea><br><br>
+            <br>
+
+        </li></ul>
+    <br>
+
+    <div>
+        <input style="border: 0;float: inherit;width: 70px;margin: 0;background: #6d6d6d;color: #ffffff;font-size: 16px;text-align: center;" id ="closeBtn" type="button" onclick="window.close()" value="閉じる" >
+        <input style="border: 0;float: inherit;width: 70px;margin: 0;background: #228b22;color: #ffffff;font-size: 16px;text-align: center;" id ="submitBtn" type="button" onclick="createMessage();" value="送信" >
+    </div>
+
+</form></fieldset>
+
+<!--<script src="../js/timestamp.js"></script>-->
+<script>
+
+    if (document.URL.indexOf("?_") > 0) {
+        reURL = document.URL.split(',');
+        var hcID = reURL[1].slice(reURL[1].indexOf("?id=") + 4);
+        var hcName = decodeURI(reURL[2].slice(reURL[2].indexOf("?id=") + 6));
+        document.getElementById('id_hcID').value = hcID;
+        document.getElementById('id_name').value = hcName;
+    }
+
+    function dheatChecked(){
+        if (document.getElementById('q7_0').checked){
+            document.getElementById('id_dheat').disabled = false;
+        } else {
+            document.getElementById('id_dheat').value = "";
+            document.getElementById('id_dheat').disabled = true;
+        }
+    }
+
+    // mqtt pub/sub関連の変数
+    var topicMsg =  "/hcrisis/assistant/schedule/";
+    var createMsg;
+    var tmpList; // 択一式の回答項目からチェック項目を拾い上げる際に使う変数
+
+    // タイムスタンプ関連の変数
+    var nowTime = new Date();
+    var nowYer = nowTime.getFullYear();
+    var nowMon = nowTime.getMonth() + 1;
+    var nowDay = nowTime.getDate();
+    var nowHrs = nowTime.getHours();
+    var nowMin = nowTime.getMinutes();
+    var nowSec = nowTime.getSeconds();
+
+    function createMessage() {
+        var topicMsg = "/hcrisis/assistant/clinic/crisis/" + document.getElementById('id_hcID').value;
+        var createMsg = document.getElementById('id_hcID').value +
+                "," + document.getElementById('id_name').value;
+
+        var tmpList = document.getElementsByName('q0'); //q0
+        for(var j=0; j<tmpList.length; j++) {
+            if (tmpList[j].checked) {
+                createMsg = createMsg + "," + tmpList[j].value;
+                continue;
+            }
+        }
+
+        tmpList = document.getElementsByName('q1'); // q1
+        for(var j=0; j<tmpList.length; j++) {
+            if (tmpList[j].checked) {
+                createMsg = createMsg + "," + tmpList[j].value;
+                continue;
+            }
+        }
+
+        tmpList = document.getElementsByName('q2'); // q1
+        for(var j=0; j<tmpList.length; j++) {
+            if (tmpList[j].checked) {
+                createMsg = createMsg + "," + tmpList[j].value;
+                continue;
+            }
+        }
+
+        tmpList = document.getElementsByName('q3'); // q1
+        for(var j=0; j<tmpList.length; j++) {
+            if (tmpList[j].checked) {
+                createMsg = createMsg + "," + tmpList[j].value;
+                continue;
+            }
+        }
+
+        tmpList = document.getElementsByName('q4'); // q1
+        for(var j=0; j<tmpList.length; j++) {
+            if (tmpList[j].checked) {
+                createMsg = createMsg + "," + tmpList[j].value;
+                continue;
+            }
+        }
+
+        tmpList = document.getElementsByName('q5'); // q1
+        for(var j=0; j<tmpList.length; j++) {
+            if (tmpList[j].checked) {
+                createMsg = createMsg + "," + tmpList[j].value;
+                continue;
+            }
+        }
+
+        tmpList = document.getElementsByName('q6'); // q1
+        for(var j=0; j<tmpList.length; j++) {
+            if (tmpList[j].checked) {
+                createMsg = createMsg + "," + tmpList[j].value;
+                continue;
+            }
+        }
+
+        tmpList = document.getElementsByName('q7'); // q1
+        for(var j=0; j<tmpList.length; j++) {
+            if (tmpList[j].checked) {
+                createMsg = createMsg + "," + tmpList[j].value;
+                continue;
+            }
+        }
+
+        createMsg += "," + document.getElementById('id_dheat').value + "," + document.getElementById('id_other').value;
+
+        createMsg += "," + nowYer + "/" + nowMon + "/" + nowDay + " " + nowHrs + ":" + nowMin + ":" + nowSec;
+        console.log(topicMsg + " : " + createMsg);
+        publishMsg(topicMsg, createMsg, true);
+    }
+
+</script>
+</body>
+</html>
