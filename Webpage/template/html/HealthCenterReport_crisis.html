@@ -64,17 +64,33 @@
                 <input type='radio' name='q6' id='q6_1' value='0' checked><label for='q6_1' class='TR'>不足</label>
             </div><br><br><br>
 
+            <label>地域災害医療対策会議<br>の立ち上げ</label>
+            <div class='checkbox'>
+                <input type='radio' name='q7' id='q7_0' value='1' onclick="dheatChecked()"><label for='q7_0' class='EX'>有</label>
+                <input type='radio' name='q7' id='q7_1' value='0' onclick="dheatChecked()" checked><label for='q7_1' class='TR'>無</label>
+            </div><br><br><br><br>
+
+            <label>既支援チーム</label>
+            <div class='checkbox'>
+                <input type='checkbox' name="sup" class='q0' id='q8_0' value='0' onclick="dheatSupportedChecked()"><label for='q8_0' class='EX large'>DHEAT</label>
+                <input type='checkbox' name="sup" class='q1' id='q8_1' value='0'><label for='q8_1' class='EX large'>DMAT</label>
+                <input type='checkbox' name="sup" class='q2' id='q8_2' value='0' onclick="otherSupporterChecked()"><label for='q8_2' class='EX large'>その他</label>
+            </div><br><br><br>
+
+            <label>既支援チーム詳細<br>(20文字まで)</label><br><br><br>
+            <input id="id_supporter" maxlength='30' value="" placeholder='' style="width: 80%; height: 15px; font-size: 18px;" disabled><br><br>
+
             <label>DHEAT派遣要請</label>
             <div class='checkbox'>
-                <input type='radio' name='q7' id='q7_0' value='1' onclick="dheatChecked()"><label for='q7_0' class='TR'>要請する</label>
-                <input type='radio' name='q7' id='q7_1' value='0' onclick="dheatChecked()" checked><label for='q7_1' class='EX'>要請しない</label>
+                <input type='radio' name='q9' id='q9_0' value='1' onclick="dheatRequestChecked()"><label for='q9_0' class='TR'>要請する</label>
+                <input type='radio' name='q9' id='q9_1' value='0' onclick="dheatRequestChecked()" checked><label for='q9_1' class='EX'>要請しない</label>
             </div><br><br><br>
 
             <label>DHEAT派遣要請理由<br>(60文字まで)</label><br><br><br>
-            <textarea id="id_dheat" maxlength='100' value="" placeholder='' style="width: 80%; height: 60px; font-size: 18px;" disabled></textarea><br><br>
+            <textarea id="id_dheat" maxlength='60' value="" placeholder='' style="width: 80%; height: 60px; font-size: 18px;" disabled></textarea><br><br>
 
             <label>備考(60文字まで)</label><br><br>
-            <textarea id="id_other" maxlength='100' value="" placeholder='' style="width: 80%; height: 60px; font-size: 18px"></textarea><br><br>
+            <textarea id="id_other" maxlength='60' value="" placeholder='' style="width: 80%; height: 60px; font-size: 18px"></textarea><br><br>
             <br>
 
         </li></ul>
@@ -90,22 +106,103 @@
 <!--<script src="../js/timestamp.js"></script>-->
 <script>
 
+    var hcList = ['HC10101','HC10102', 'HC10103','HC10104','HC10105','HC10106','HC10107','HC10108','HC10109',
+        'HC10110','HC10111','HC10112','HC10113','HC10114','HC10115','HC10116','HC10117','HC10118','HC10119',
+        'HC10120','HC10121','HC10122','HC10123','HC10124','HC10125','HC10126','HC10127','HC10128','HC10129',
+        'HC10130','HC10131','HC10132','HC10133','HC10134','HC10135','HC10136','HC10137','HC10138','HC10139',
+        'HC10140','HC10141','HC10142','HC10143','HC10144','HC20201','HC20202','HC20203','HC20204','HC20205',
+        'HC20206','HC20207','HC20301','HC20302','HC20303','HC20304','HC20305','HC20306','HC20307','HC20308',
+        'HC20309','HC20310','HC20401','HC20402','HC20403','HC20404','HC20405','HC20406','HC20407','HC20408',
+        'HC20409','HC20410','HC20411','HC20412','HC20413','HC20414','HC20415','HC20501','HC20502','HC20503',
+        'HC20504','HC20505','HC20506','HC20507','HC20508','HC20509','HC20601','HC20602','HC20603','HC20604',
+        'HC20701','HC20702','HC20703','HC20704','HC20705','HC20706','HC20707','HC20708','HC31501','HC31502',
+        'HC31503','HC31504','HC31505','HC31506','HC31507','HC31508','HC31509','HC31510','HC31511','HC31512',
+        'HC31513','HC30801','HC30802','HC30803','HC30804','HC30805','HC30806','HC30807','HC30808','HC30809',
+        'HC30810','HC30811','HC30812','HC30901','HC30902','HC30903','HC30904','HC30905','HC30906','HC30907',
+        'HC30908','HC30909','HC30910','HC31001','HC31002','HC31003','HC31004','HC31005','HC31006','HC31007',
+        'HC31008','HC31009','HC31010','HC31011','HC31012','HC31101','HC31102','HC31103','HC31104','HC31105',
+        'HC31106','HC31107','HC31108','HC31109','HC31110','HC31111','HC31112','HC31113','HC31114','HC31115',
+        'HC31116','HC31201','HC31202','HC31203','HC31204','HC31205','HC31206','HC31207','HC31208','HC31209',
+        'HC31210','HC31211','HC31212','HC31213','HC31214','HC31215','HC31216','HC31217','HC31401','HC31402',
+        'HC31403','HC31404','HC31405','HC31406','HC31407','HC31408','HC31409','HC31410','HC31411','HC31412',
+        'HC31413','HC31414','HC31415','HC31416','HC31417','HC31418','HC31419','HC31420','HC31421','HC31901',
+        'HC31902','HC31903','HC31904','HC31905','HC32001','HC32002','HC32003','HC32004','HC32005','HC32006',
+        'HC32007','HC32008','HC32009','HC32010','HC32011','HC32012','HC32201','HC32202','HC32203','HC32204',
+        'HC32205','HC32206','HC32207','HC32208','HC32209','HC32210','HC32211','HC41301','HC41302','HC41303',
+        'HC41304','HC41305','HC41306','HC41307','HC41308','HC41309','HC41310','HC41311','HC41312','HC41313',
+        'HC41314','HC41315','HC41316','HC41317','HC41318','HC41319','HC41320','HC41321','HC41322','HC41323',
+        'HC41324','HC41325','HC41326','HC41327','HC41328','HC41329','HC41330','HC41331','HC51601','HC51602',
+        'HC51603','HC51604','HC51605','HC51606','HC51607','HC51608','HC51609','HC51701','HC51702','HC51703',
+        'HC51704','HC51705','HC51706','HC51707','HC51708','HC51709','HC51801','HC51802','HC51803','HC51804',
+        'HC51805','HC51806','HC52101','HC52102','HC52103','HC52104','HC52105','HC52106','HC52107','HC52108',
+        'HC52109','HC52110','HC52111','HC52112','HC52301','HC52302','HC52303','HC52304','HC52305','HC52306',
+        'HC52307','HC52308','HC52309','HC52310','HC52311','HC52312','HC52313','HC52314','HC52315','HC52316',
+        'HC52317','HC52318','HC52319','HC52320','HC52321','HC52322','HC52323','HC52324','HC52325','HC52326',
+        'HC52327','HC52328','HC52329','HC52330','HC52331','HC52332','HC52333','HC52334','HC52335','HC52336',
+        'HC52337','HC52338','HC52339','HC52340','HC52401','HC52402','HC52403','HC52404','HC52405','HC52406',
+        'HC52407','HC52408','HC52409','HC62501','HC62502','HC62503','HC62504','HC62505','HC62506','HC62507',
+        'HC62601','HC62602','HC62603','HC62604','HC62605','HC62606','HC62607','HC62608','HC62609','HC62701',
+        'HC62702','HC62703','HC62704','HC62705','HC62706','HC62707','HC62708','HC62709','HC62710','HC62711',
+        'HC62712','HC62713','HC62714','HC62715','HC62716','HC62717','HC62718','HC62802','HC62806','HC62804',
+        'HC62805','HC62806','HC62807','HC62808','HC62809','HC62810','HC62811','HC62812','HC62813','HC62814',
+        'HC62815','HC62816','HC62817','HC62901','HC62902','HC62903','HC62904','HC62905','HC63001','HC63002',
+        'HC63003','HC63004','HC63005','HC63006','HC63007','HC63008','HC63009','HC73101','HC73102','HC73103',
+        'HC73201','HC73202','HC73203','HC73204','HC73205','HC73206','HC73207','HC73301','HC73302','HC73303',
+        'HC73304','HC73305','HC73306','HC73307','HC73308','HC73309','HC73310','HC73311','HC73401','HC73402',
+        'HC73403','HC73404','HC73405','HC73406','HC73407','HC73408','HC73409','HC73410','HC73501','HC73502',
+        'HC73503','HC73504','HC73505','HC73506','HC73507','HC73508','HC73601','HC73602','HC73603','HC73604',
+        'HC73605','HC73606','HC73701','HC73702','HC73703','HC73704','HC73705','HC73801','HC73802','HC73803',
+        'HC73804','HC73805','HC73806','HC73807','HC73901','HC73902','HC73903','HC73904','HC73905','HC73906',
+        'HC84001','HC84002','HC84003','HC84004','HC84005','HC84006','HC84007','HC84008','HC84009','HC84010',
+        'HC84011','HC84012','HC84013','HC84014','HC84015','HC84016','HC84017','HC84018','HC84019','HC84101',
+        'HC84102','HC84103','HC84104','HC84105','HC84201','HC84202','HC84203','HC84204','HC84205','HC84206',
+        'HC84207','HC84208','HC84209','HC84210','HC84301','HC84302','HC84303','HC84304','HC84305','HC84306',
+        'HC84307','HC84308','HC84309','HC84310','HC84311','HC84401','HC84402','HC84403','HC84404','HC84405',
+        'HC84406','HC84407','HC84501','HC84502','HC84503','HC84504','HC84505','HC84506','HC84507','HC84508',
+        'HC84509','HC84601','HC84602','HC84603','HC84604','HC84605','HC84606','HC84607','HC84608','HC84609',
+        'HC84610','HC84611','HC84612','HC84613','HC84614','HC84701','HC84702','HC84703','HC84704','HC84705',
+        'HC84706','HC62818','HC62819','HC84020'];
+
     if (document.URL.indexOf("?_") > 0) {
         reURL = document.URL.split(',');
         var hcID = reURL[1].slice(reURL[1].indexOf("?id=") + 4);
-        var hcName = decodeURI(reURL[2].slice(reURL[2].indexOf("?id=") + 6));
+        var hcName = decodeURI(reURL[2].slice(reURL[2].indexOf("?name=") + 6));
         document.getElementById('id_hcID').value = hcID;
         document.getElementById('id_name').value = hcName;
     }
 
-    function dheatChecked(){
-        if (document.getElementById('q7_0').checked){
+    function dheatSupportedChecked(){
+        if (document.getElementById('q8_0').checked){
+            document.getElementById('q9_1').checked = true;
+            document.getElementById('q9_0').disabled = true;
+            document.getElementById('q9_1').disabled = true;
+            document.getElementById('id_dheat').value = "";
+            document.getElementById('id_dheat').disabled = true;
+        } else {
+            document.getElementById('q9_0').disabled = false;
+            document.getElementById('q9_1').disabled = false;
+            document.getElementById('id_dheat').disabled = false;
+        }
+    }
+
+    function otherSupporterChecked(){
+        if (document.getElementById('q8_2').checked){
+            document.getElementById('id_supporter').disabled = false;
+        } else {
+            document.getElementById('id_supporter').value = "";
+            document.getElementById('id_supporter').disabled = true;
+        }
+    }
+
+    function dheatRequestChecked(){
+        if (document.getElementById('q9_0').checked){
             document.getElementById('id_dheat').disabled = false;
         } else {
             document.getElementById('id_dheat').value = "";
             document.getElementById('id_dheat').disabled = true;
         }
     }
+
 
     // mqtt pub/sub関連の変数
     var topicMsg =  "/hcrisis/assistant/schedule/";
@@ -122,9 +219,18 @@
     var nowSec = nowTime.getSeconds();
 
     function createMessage() {
-        var topicMsg = "/hcrisis/assistant/clinic/crisis/" + document.getElementById('id_hcID').value;
-        var createMsg = document.getElementById('id_hcID').value +
-                "," + document.getElementById('id_name').value;
+        var topicMsg = "/hcrisis/assistant/healthcenter/crisis/" + document.getElementById('id_hcID').value;
+        if (document.getElementById('id_hcID').value.length == 0){
+            var createMsg = "noEntry"
+        } else {
+            var createMsg = document.getElementById('id_hcID').value
+        }
+
+        if (document.getElementById('id_name').value.length == 0){
+            createMsg += ",noEntry"
+        } else {
+            "," + document.getElementById('id_name').value;
+        }
 
         var tmpList = document.getElementsByName('q0'); //q0
         for(var j=0; j<tmpList.length; j++) {
@@ -190,7 +296,45 @@
             }
         }
 
-        createMsg += "," + document.getElementById('id_dheat').value + "," + document.getElementById('id_other').value;
+        var Q = ".q";
+        var depList = document.getElementsByName("sup");
+        for(var j=0; j<depList.length; j++) {
+            Q += j;
+            if ($(Q).prop('checked')) {
+                createMsg += ",1"
+            } else {
+                createMsg += ",0"
+            }
+            Q = ".q";
+        }
+
+        if (document.getElementById('id_supporter').value.length == 0){
+            createMsg += ",noEntry"
+        } else {
+            createMsg += "," + document.getElementById('id_supporter').value;
+        }
+
+        tmpList = document.getElementsByName('q9'); // q1
+        for(var j=0; j<tmpList.length; j++) {
+            if (tmpList[j].checked) {
+                createMsg = createMsg + "," + tmpList[j].value;
+                continue;
+            }
+        }
+
+        if (document.getElementById('id_dheat').value.length == 0){
+            createMsg += ",noEntry";
+        } else {
+            createMsg += "," + document.getElementById('id_dheat').value
+        }
+
+        if (document.getElementById('id_other').value.length == 0) {
+            createMsg += ",noEntry";
+        } else {
+            createMsg += "," + document.getElementById('id_other').value;
+        }
+
+        createMsg += "," + hcList.indexOf(document.getElementById('id_hcID').value);
 
         createMsg += "," + nowYer + "/" + nowMon + "/" + nowDay + " " + nowHrs + ":" + nowMin + ":" + nowSec;
         console.log(topicMsg + " : " + createMsg);
