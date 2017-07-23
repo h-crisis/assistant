@@ -20,7 +20,7 @@ public class csv2csv {
 
     public static void main(String args[]) {
         // infに入力ファイルパスを、oufに出力ファイルパスを、それぞれ指定。
-        File inf = new File("/Users/komori/Downloads/master.csv");
+        File inf = new File("/Users/komori/Downloads/zenkoku_master.csv");
         File ouf = new File("/Users/komori/Downloads/new_hospital_master.csv");
         converter(inf,ouf);
     }

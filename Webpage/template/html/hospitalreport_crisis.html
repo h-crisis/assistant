@@ -16,55 +16,86 @@
         <h3>緊急時医療機関情報入力</h3>
         <ul class="inputbox">
             <li>
-                <label class="over">医療機関ID(処方箋発行医療機関コード10桁を入力)</label><br>
+                <label>医療機関ID</label>
                 <input id="id_clinicID" maxlength='10' value="" pattern="[0-9]"><br><br><br>
 
-                <label>医療機関名称(30文字以内)</label>
+                <label>医療機関名称</label>
                 <input id="id_name" maxlength='30' value="" placeholder=''><br><br>
+            </li>
 
+            <li style="text-align: left">情報取得日時
+                <select name="year" id="id_year" value=""></select>年
+                <select name="month" id="id_month" value=""></select>月
+                <select name="day" id="id_day" value=""></select>日
+                <select name="hour" id="id_hour" value=""></select>時
+                <select name="minute" id="id_minute" value=""></select>分
+            </li><br>
+
+            <li>
                 <label>建物倒壊・倒壊の恐れ</label>
                 <div class='checkbox'>
-                    <input type='radio' name='q0' id='q0_0' value='1' checked><label for='q0_0' class='EX'>あり</label>
-                    <input type='radio' name='q0' id='q0_1' value='0' checked><label for='q0_1' class='TR'>なし</label>
+                    <input type='radio' name='q0' id='q0_0' value='無し' checked><label for='q0_0' class='EX'>無し</label>
+                    <input type='radio' name='q0' id='q0_1' value='あり' checked><label for='q0_1' class='TR'>あり</label>
                 </div><br><br><br>
 
                 <label>電気の供給</label>
                 <div class='checkbox'>
-                    <input type='radio' name='q1' id='q1_0' value='1' checked><label for='q1_0' class='EX'>通常電源あり</label>
-                    <input type='radio' name='q1' id='q1_1' value='0' checked><label for='q1_1' class='TR'>通常電源なし</label>
-                    <input type='radio' name='q1' id='q1_2' value='0' checked><label for='q1_2' class='UK'>非常用電源</label>
+                    <input type='radio' name='q1' id='q1_0' value='通常電源あり' checked><label for='q1_0' class='EX'>通常電源あり</label>
+                    <input type='radio' name='q1' id='q1_1' value='通常電源無し' checked><label for='q1_1' class='TR'>通常電源無し</label>
+                    <input type='radio' name='q1' id='q1_2' value='非常用電源' checked><label for='q1_2' class='UK'>非常用電源</label>
                 </div><br><br><br>
 
                 <label>水の供給</label>
                 <div class='checkbox'>
-                    <input type='radio' name='q2' id='q2_0' value='1' checked><label for='q2_0' class='EX'>水道供給あり</label>
-                    <input type='radio' name='q2' id='q2_1' value='0' checked><label for='q2_1' class='TR'>水道供給なし</label>
+                    <input type='radio' name='q2' id='q2_0' value='水道供給あり' checked><label for='q2_0' class='EX'>水道供給あり</label>
+                    <input type='radio' name='q2' id='q2_1' value='水道供給無し' checked><label for='q2_1' class='TR'>水道供給無し</label>
                 </div><br><br><br>
 
                 <label>医療用ガス在庫</label>
                 <div class='checkbox'>
-                    <input type='radio' name='q3' id='q3_0' value='1' checked><label for='q3_0' class='EX'>あり</label>
-                    <input type='radio' name='q3' id='q3_1' value='0' checked><label for='q3_1' class='TR'>なし</label>
-                    <input type='radio' name='q3' id='q3_2' value='0' checked><label for='q3_2' class='UK'>不要</label>
+                    <input type='radio' name='q3' id='q3_0' value='あり' checked><label for='q3_0' class='EX'>あり</label>
+                    <input type='radio' name='q3' id='q3_1' value='無し' checked><label for='q3_1' class='TR'>無し</label>
                 </div><br><br><br>
 
                 <label>医薬品医療資材在庫</label>
                 <div class='checkbox'>
-                    <input type='radio' name='q4' id='q4_0' value='1' checked><label for='q4_0' class='EX'>あり</label>
-                    <input type='radio' name='q4' id='q4_1' value='0' checked><label for='q4_1' class='TR'>なし</label>
+                    <input type='radio' name='q4' id='q4_0' value='あり' checked><label for='q4_0' class='EX'>あり</label>
+                    <input type='radio' name='q4' id='q4_1' value='無し' checked><label for='q4_1' class='TR'>無し</label>
                 </div><br><br><br>
 
                 <label>受診患者</label>
                 <div class='checkbox'>
-                    <input type='radio' name='q5' id='q5_0' value='1' checked><label for='q5_0' class='EX'>通常</label>
-                    <input type='radio' name='q5' id='q5_1' value='0' checked><label for='q5_1' class='TR'>多数</label>
+                    <input type='radio' name='q5' id='q5_0' value='通常' checked><label for='q5_0' class='EX'>通常</label>
+                    <input type='radio' name='q5' id='q5_1' value='多数' checked><label for='q5_1' class='TR'>多数</label>
                 </div><br><br><br>
 
                 <label>職員</label>
                 <div class='checkbox'>
-                    <input type='radio' name='q6' id='q6_0' value='1' checked><label for='q6_0' class='EX'>充足</label>
-                    <input type='radio' name='q6' id='q6_1' value='0' checked><label for='q6_1' class='TR'>不足</label>
+                    <input type='radio' name='q6' id='q6_0' value='充足' checked><label for='q6_0' class='EX'>充足</label>
+                    <input type='radio' name='q6' id='q6_1' value='不足' checked><label for='q6_1' class='TR'>不足</label>
                 </div><br><br><br>
+
+                <label>支援要否</label>
+                <div class='checkbox'>
+                    <input type='radio' name='q7' id='q7_0' value='不要' checked><label for='q7_0' class='EX'>不要</label>
+                    <input type='radio' name='q7' id='q7_1' value='要' checked><label for='q7_1' class='TR'>必要</label>
+                </div><br><br><br>
+
+                <label>医療派遣ステータス</label>
+                <div class='checkbox'>
+                    <input type='radio' name='q8' id='q8_0' value='派遣済' checked><label for='q8_0' class='EX'>派遣済</label>
+                    <input type='radio' name='q8' id='q8_1' value='要請中' checked><label for='q8_1' class='TR'>要請中</label>
+                </div><br><br><br>
+
+                <label>その他備考(60文字まで)</label><br><br><br>
+                <textarea id="id_other" maxlength='60' value="" placeholder='' style="width: 80%; height: 60px; font-size: 18px;" ></textarea><br><br>
+
+                <label class="over">電話番号(半角数字のみ)</label>
+                <input id="id_TEL" maxlength='11' value="" pattern="[0-9]"><br><br><br>
+
+                <label class="over">メールアドレス</label>
+                <input id="id_MAIL" maxlength='60' value="" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"><br><br><br>
+
             </li></ul>
         <br>
 
@@ -75,13 +106,19 @@
 
 </form></fieldset>
 
-<!--<script src="../js/timestamp.js"></script>-->
+<script src="../js/timestamp.js"></script>
 <script>
 
     // mqtt pub/sub関連の変数
     var topicMsg =  "/hcrisis/assistant/schedule/";
     var createMsg;
     var tmpList; // 択一式の回答項目からチェック項目を拾い上げる際に使う変数
+    var hospital_emergency_cols = ['lon','lat','ecode','緊急時入力/入院病棟倒壊・倒壊の恐れ','緊急時入力/ライフライン・サプライ状況/電気使用不可','緊急時入力/ライフライン・サプライ状況/水使用不可','緊急時入力/ライフライン・サプライ状況/医療ガス使用不可','緊急時入力/ライフライン・サプライ状況/医薬品衛生資器材使用不可','緊急時入力/多数患者受診','緊急時入力/職員状況','緊急時入力/その他',
+        '緊急時入力/情報取得日時','緊急時入力/緊急連絡先/電話番号','緊急時入力/緊急連絡先/メールアドレス','緊急時入力/更新日時'];
+    var urlStr = location.search.substring(1);
+    var pairUrlStr = urlStr.split(',');
+    console.log(pairUrlStr);
+
 
     // タイムスタンプ関連の変数
     var nowTime = new Date();
@@ -91,15 +128,31 @@
     var nowHrs = nowTime.getHours();
     var nowMin = nowTime.getMinutes();
     var nowSec = nowTime.getSeconds();
+    var id = decodeURI(pairUrlStr[1].substr(3));
+    var name = decodeURI(pairUrlStr[2].substr(5));
+    var lon = decodeURI(pairUrlStr[3].substr(4));
+    var lat = decodeURI(pairUrlStr[4].substr(4));
+    document.getElementById('id_clinicID').value = id;
+    document.getElementById('id_clinicID').disabled = 'true';
+    document.getElementById('id_name').value = name;
 
     function createMessage() {
-        var topicMsg = "/hcrisis/assistant/clinic/crisis/" + document.getElementById('id_clinicID').value;
-        var createMsg = document.getElementById('id_name').value;
+        var topicMsg = "/hcrisis/assistant/default/emis/medicalinstitute/" + document.getElementById('id_clinicID').value;
+        var createMsg = '{"' + hospital_emergency_cols[0] + '":"' + lon + '","' + hospital_emergency_cols[1] + '":"' + lat + '","' +
+                hospital_emergency_cols[2] + '":"' + document.getElementById('id_clinicID').value + '","' +
+                hospital_emergency_cols[10] + '":"' + document.getElementById('id_other').value + '","' +
+                hospital_emergency_cols[11] + '":"' +
+                document.getElementById('id_year').value + "/" + document.getElementById('id_month').value + "/" +
+                document.getElementById('id_day').value + " " + document.getElementById('id_hour').value + ":" +
+                document.getElementById('id_minute').value +'","' +
+                hospital_emergency_cols[12] + '":"' + document.getElementById('id_TEL').value + '","' +
+                hospital_emergency_cols[13] + '":"' + document.getElementById('id_MAIL').value + '","';
+
 
         var tmpList = document.getElementsByName('q0'); //q0
         for(var j=0; j<tmpList.length; j++) {
             if (tmpList[j].checked) {
-                createMsg = createMsg + "," + tmpList[j].value;
+                createMsg += hospital_emergency_cols[3] + '":"' + tmpList[j].value + '","';
                 continue;
             }
         }
@@ -107,7 +160,7 @@
         tmpList = document.getElementsByName('q1'); // q1
         for(var j=0; j<tmpList.length; j++) {
             if (tmpList[j].checked) {
-                createMsg = createMsg + "," + tmpList[j].value;
+                createMsg += hospital_emergency_cols[4] + '":"' + tmpList[j].value + '","';
                 continue;
             }
         }
@@ -115,7 +168,7 @@
         tmpList = document.getElementsByName('q2'); // q1
         for(var j=0; j<tmpList.length; j++) {
             if (tmpList[j].checked) {
-                createMsg = createMsg + "," + tmpList[j].value;
+                createMsg += hospital_emergency_cols[5] + '":"' + tmpList[j].value + '","';
                 continue;
             }
         }
@@ -123,7 +176,7 @@
         tmpList = document.getElementsByName('q3'); // q1
         for(var j=0; j<tmpList.length; j++) {
             if (tmpList[j].checked) {
-                createMsg = createMsg + "," + tmpList[j].value;
+                createMsg += hospital_emergency_cols[6] + '":"' + tmpList[j].value + '","';
                 continue;
             }
         }
@@ -131,7 +184,7 @@
         tmpList = document.getElementsByName('q4'); // q1
         for(var j=0; j<tmpList.length; j++) {
             if (tmpList[j].checked) {
-                createMsg = createMsg + "," + tmpList[j].value;
+                createMsg += hospital_emergency_cols[7] + '":"' + tmpList[j].value + '","';
                 continue;
             }
         }
@@ -139,7 +192,7 @@
         tmpList = document.getElementsByName('q5'); // q1
         for(var j=0; j<tmpList.length; j++) {
             if (tmpList[j].checked) {
-                createMsg = createMsg + "," + tmpList[j].value;
+                createMsg += hospital_emergency_cols[8] + '":"' + tmpList[j].value + '","';
                 continue;
             }
         }
@@ -147,12 +200,28 @@
         tmpList = document.getElementsByName('q6'); // q1
         for(var j=0; j<tmpList.length; j++) {
             if (tmpList[j].checked) {
-                createMsg = createMsg + "," + tmpList[j].value;
+                createMsg += hospital_emergency_cols[9] + '":"' + tmpList[j].value + '","';
                 continue;
             }
         }
 
-        createMsg += "," + nowYer + "/" + nowMon + "/" + nowDay + " " + nowHrs + ":" + nowMin + ":" + nowSec;
+        tmpList = document.getElementsByName('q7'); // q1
+        for(var j=0; j<tmpList.length; j++) {
+            if (tmpList[j].checked) {
+                createMsg += '支援要否' + '":"' + tmpList[j].value + '","';
+                continue;
+            }
+        }
+
+        tmpList = document.getElementsByName('q8'); // q1
+        for(var j=0; j<tmpList.length; j++) {
+            if (tmpList[j].checked) {
+                createMsg += '医療派遣ステータス' + '":"' + tmpList[j].value + '","';
+                continue;
+            }
+        }
+
+        createMsg += hospital_emergency_cols[14] + '":"' + nowYer + "/" + nowMon + "/" + nowDay + " " + nowHrs + ":" + nowMin + ":" + nowSec + '"}';
         console.log(topicMsg + " : " + createMsg);
         publishMsg(topicMsg, createMsg, true);
     }
