@@ -8,11 +8,13 @@
     /*
      今日の日付データを変数todayに格納
      */
-    var optionLoop, this_day, this_month, this_year, today;
+    var optionLoop, this_minute, this_hour, this_day, this_month, this_year, today;
     today = new Date();
     this_year = today.getFullYear();
     this_month = today.getMonth() + 1;
     this_day = today.getDate();
+    this_hour = today.getHours();
+    this_minute = today.getMinutes();
 
     /*
      ループ処理（スタート数字、終了数字、表示id名、デフォルト数字）
@@ -35,9 +37,11 @@
     /*
      関数設定（スタート数字[必須]、終了数字[必須]、表示id名[省略可能]、デフォルト数字[省略可能]）
      */
-    optionLoop(1950, this_year, 'id_year', this_year);
+    optionLoop(2011, this_year, 'id_year', this_year);
     optionLoop(1, 12, 'id_month', this_month);
     optionLoop(1, 31, 'id_day', this_day);
+    optionLoop(0, 23, 'id_hour', this_hour);
+    optionLoop(0, 59, 'id_minute', this_minute);
 })();
 
 (function() {

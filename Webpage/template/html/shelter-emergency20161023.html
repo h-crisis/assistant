@@ -1,300 +1,352 @@
-<!doctype html>
-<html lang="ja">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
     <title>H-CRISIS Assistant 避難所必須情報入力</title>
     <script src="http://code.jquery.com/jquery.min.js"></script>
     <script src="../js/mqttws31.js"></script>
     <script src="../js/mqtthcrisis20160905.js"></script>
-    <link href="../css/shelterSurvey.css" type="text/css" rel="stylesheet" />
+    <link href="../css/enquete.css" type="text/css" rel="stylesheet" />
 </head>
 <body>
-<form>
-    <fieldset>
+<fieldset><form>
+
+    <img src="../img/img/assistant.png">
+
+
         <h3>避難所情報入力(全て必須項目)</h3>
-        <strong><u>※ 入力欄にあらかじめ「0」と表示されている項目は、半角数字で入力して下さい。該当欄は半角数字以外入力できません。</u></strong><br><br>
-        <div class="inputbox">
-            <label>災害コード</label>
-            <input type="text" id="eventCode" value="" style="border: 1px solid #aaaaaa;">
-            <br>
-            <label>避難所コード</label>
-            <input type="text" id="inputCode" value="" style="border: 1px solid #aaaaaa;">
-            <br>
-            <label>避難所名</label>
-            <input type="text" id="inputShelter" value="" style="border: 1px solid #aaaaaa;">
-            <br>
-            <label>記録者名</label>
-            <input type="text" id="inputHuman" value="" style="border: 1px solid #aaaaaa;">
-            <br>
+        <strong><u> ※　AからDの四択項目は、A:充足、B:改善の余地あり、C:不足・不十分、D:不全、として選択すること。</u></strong><br><br>
+    <ul class="inputbox">
+
+        <li style="text-align: left">情報取得日時
+            <select name="year" id="id_year" value=""></select>年
+            <select name="month" id="id_month" value=""></select>月
+            <select name="day" id="id_day" value=""></select>日
+            <select name="hour" id="id_hour" value=""></select>時
+            <select name="minute" id="id_minute" value=""></select>分
+        </li><br>
+
+        <li>
+            <label>避難所ID</label>
+            <input id="id_ID" maxlength='10' value=""><br><br>
+
+            <label class="over">避難所名称(30文字以内)</label>
+            <input id="id_name" maxlength='30' value=""><br><br>
+
             <label>避難者数</label>
-            <input type="text" onKeyup="this.value=this.value.replace(/[^0-9]+/,'')" id="inputNum" value="" placeholder="0" style="border: 1px solid #aaaaaa;">
-            <br>
-            <br>
-        </div>
-        <div class="radio">
-            <div class="checkbox">
-                <label class="lbl">電気</label><br><br>
-                <input type="radio" name="q0" id="q0_0" value="可">
-                <label for="q0_0" class="EX">可</label>
-                <input type="radio" name="q0" id="q0_1" value="不可">
-                <label for="q0_1" class="BD">不可</label>
-                <input type="radio" name="q0" id="q0_2" value="不明" checked>
-                <label for="q0_2" class="NT">不明</label>
-                <input type="radio" name="q0" id="q0_3" value="無し">
-                <label for="q0_3" class="UK">無</label>
-            </div>
-            <br>
-            <br>
-            <div class="checkbox">
-                <label class="lbl">ガス</label><br><br>
-                <input type="radio" name="q1" id="q1_0" value="可">
-                <label for="q1_0" class="EX">可</label>
-                <input type="radio" name="q1" id="q1_1" value="不可">
-                <label for="q1_1" class="BD">不可</label>
-                <input type="radio" name="q1" id="q1_2" value="不明" checked>
-                <label for="q1_2" class="NT">不明</label>
-                <input type="radio" name="q1" id="q1_3" value="無し">
-                <label for="q1_3" class="UK">無</label>
-            </div>
-            <br>
-            <br>
-            <div class="checkbox">
-                <label class="lbl">水道</label><br><br>
-                <input type="radio" name="q2" id="q2_0" value="可">
-                <label for="q2_0" class="EX">可</label>
-                <input type="radio" name="q2" id="q2_1" value="不可">
-                <label for="q2_1" class="BD">不可</label>
-                <input type="radio" name="q2" id="q2_2" value="不明" checked>
-                <label for="q2_2" class="NT">不明</label>
-                <input type="radio" name="q2" id="q2_3" value="無し">
-                <label for="q2_3" class="UK">無</label>
-            </div>
-            <br>
-            <br>
-            <div class="checkbox">
-                <label class="lbl">飲料水</label><br><br>
-                <input type="radio" name="q3" id="q3_0" value="飲用可">
-                <label for="q3_0" class="EX">飲用可</label>
-                <input type="radio" name="q3" id="q3_1" value="飲用不可">
-                <label for="q3_1" class="BD">飲用不可</label>
-                <input type="radio" name="q3" id="q3_2" value="不明" checked>
-                <label for="q3_2" class="NT">不明</label>
-                <input type="radio" name="q3" id="q3_3" value="無し">
-                <label for="q3_3" class="UK">無</label>
-            </div>
-            <br>
-            <br>
-            <div class="checkbox">
-                <label class="lbl">固定電話</label><br><br>
-                <input type="radio" name="q4" id="q4_0" value="可">
-                <label for="q4_0" class="EX">可</label>
-                <input type="radio" name="q4" id="q4_1" value="不可">
-                <label for="q4_1" class="BD">不可</label>
-                <input type="radio" name="q4" id="q4_2" value="不明" checked>
-                <label for="q4_2" class="NT">不明</label>
-                <input type="radio" name="q4" id="q4_3" value="無し">
-                <label for="q4_3" class="UK">無</label>
-            </div>
-            <br>
-            <br>
-            <div class="checkbox">
-                <label class="lbl">携帯電話</label><br><br>
-                <input type="radio" name="q5" id="q5_0" value="可">
-                <label for="q5_0" class="EX">可</label>
-                <input type="radio" name="q5" id="q5_1" value="不可">
-                <label for="q5_1" class="BD">不可</label>
-                <input type="radio" name="q5" id="q5_2" value="不明" checked>
-                <label for="q5_2" class="NT">不明</label>
-                <input type="radio" name="q5" id="q5_3" value="無し">
-                <label for="q5_3" class="UK">無</label>
-            </div>
-            <br>
-            <br>
-            <div class="checkbox">
-                <label class="lbl">通信</label><br><br>
-                <input type="radio" name="q6" id="q6_0" value="可">
-                <label for="q6_0" class="EX">可</label>
-                <input type="radio" name="q6" id="q6_1" value="不可">
-                <label for="q6_1" class="BD">不可</label>
-                <input type="radio" name="q6" id="q6_2" value="不明" checked>
-                <label for="q6_2" class="NT">不明</label>
-                <input type="radio" name="q6" id="q6_3" value="無し">
-                <label for="q6_3" class="UK">無</label>
-            </div>
-            <br>
-            <br>
-            <div class="checkbox">
-                <label class="lbl">トイレ</label><br><br>
-                <input type="radio" name="q7" id="q7_0" value="使用可">
-                <label for="q7_0" class="EX">使用可</label>
-                <input type="radio" name="q7" id="q7_1" value="使用不可">
-                <label for="q7_1" class="BD">使用不可</label>
-                <input type="radio" name="q7" id="q7_2" value="不明" checked>
-                <label for="q7_2" class="NT">不明</label>
-                <input type="radio" name="q7" id="q7_3" value="無し">
-                <label for="q7_3" class="UK">無</label>
-            </div>
-            <br>
-            <br>
-            <div class="checkbox">
-                <label class="lbl">食料</label><br><br>
-                <input type="radio" name="q8" id="q8_0" value="有">
-                <label for="q8_0" class="EX">有</label>
-                <label style="background-color: #ffffff"></label>
-                <input type="radio" name="q8" id="q8_2" value="不明" checked>
-                <label for="q8_2" class="NT">不明</label>
-                <input type="radio" name="q8" id="q8_1" value="無">
-                <label for="q8_1" class="UK">無</label>
-            </div>
-        </div>
-    </fieldset>
+            <input id="id_evacuee" maxlength='5' value="" placeholder="半角数字のみで入力" onKeyup="this.value=this.value.replace(/[^0-9]+/,'')"><br><br>
 
-    <center>
-        <fieldset>
-            <script>
-                function createMessage() {
-                    var topicMsg = "/hcrisis/assistant/event/" + document.getElementById('eventCode').value
-                            + "/shelter/" + document.getElementById('inputCode').value + "/emergency";
+            <label>避難所代表者</label>
+            <input id="id_top" maxlength='15' value=""><br><br>
 
-                    /*
-                     var createMsg = document.getElementById('eventCode').value +
-                     ',' + document.getElementById('inputCode').value +
-                     ',' + document.getElementById('inputShelter').value +
-                     ',' + document.getElementById('inputHuman').value +
-                     ',' + document.getElementById('inputNum').value;
+            <label>固定電話連絡先</label>
+            <input id="id_TEL" maxlength='11' value="" placeholder="半角数字のみで入力" onKeyup="this.value=this.value.replace(/[^0-9]+/,'')"><br><br>
 
-                     for(var i = 0; i < 9; i++) {
-                     var arrayValue = "q" + i;
-                     var tmpList = document.getElementsByName(arrayValue);
-                     for(var j=0; j<tmpList.length; j++) {
-                     if(tmpList[j].checked) {
-                     createMsg = createMsg + ',' + tmpList[j].value;
-                     continue;
-                     }
-                     }
-                     }
-                     */
+            <label>携帯電話連絡先</label>
+            <input id="id_celler" maxlength='11' value="" placeholder="半角数字のみで入力" onKeyup="this.value=this.value.replace(/[^0-9]+/,'')"><br><br>
 
+            <label>FAX連絡先</label>
+            <input id="id_FAX" maxlength='11' value="" placeholder="半角数字のみで入力" onKeyup="this.value=this.value.replace(/[^0-9]+/,'')"><br><br>
 
-                    var createMsg = "reporter='" + document.getElementById('inputHuman').value + "'";
-                    if(document.getElementById('inputNum').value!=='') {
-                        createMsg = createMsg + ",a01=" + document.getElementById('inputNum').value;
-                    }
+            <label class="over">緊急連絡事項(100字以内)</label><br><br><br>
+            <textarea id="id_emergency" maxlength='100' value="" placeholder='' style="width: 80%; height: 60px; font-size: 18px;" ></textarea><br><br>
 
-                    var tmpList = document.getElementsByName('q0'); //q0
-                    for(var j=0; j<tmpList.length; j++) {
-                        if (tmpList[j].checked) {
-                            createMsg = createMsg + ",c01_1='" + tmpList[j].value + "'";
-                            continue;
-                        }
-                    }
+            <label>飲料水</label>
+            <div class='checkbox'>
+                <input type='radio' name='q0' id='q0_0' value='A' checked><label for='q0_0' class='EX fourth'>A</label>
+                <input type='radio' name='q0' id='q0_1' value='B' ><label for='q0_1' class='GD fourth'>B</label>
+                <input type='radio' name='q0' id='q0_2' value='C' ><label for='q0_2' class='NT fourth'>C</label>
+                <input type='radio' name='q0' id='q0_3' value='D' ><label for='q0_3' class='TR fourth'>D</label>
+            </div><br><br><br>
 
-                    tmpList = document.getElementsByName('q1'); // q1
-                    for(var j=0; j<tmpList.length; j++) {
-                        if (tmpList[j].checked) {
-                            createMsg = createMsg + ",c01_2='" + tmpList[j].value + "'";
-                            continue;
-                        }
-                    }
+            <label>食事</label>
+            <div class='checkbox'>
+                <input type='radio' name='q1' id='q1_0' value='A' checked><label for='q1_0' class='EX fourth'>A</label>
+                <input type='radio' name='q1' id='q1_1' value='B' ><label for='q1_1' class='GD fourth'>B</label>
+                <input type='radio' name='q1' id='q1_2' value='C' ><label for='q1_2' class='NT fourth'>C</label>
+                <input type='radio' name='q1' id='q1_3' value='D' ><label for='q1_3' class='TR fourth'>D</label>
+            </div><br><br><br>
 
-                    tmpList = document.getElementsByName('q2'); // q2
-                    for(var j=0; j<tmpList.length; j++) {
-                        if (tmpList[j].checked) {
-                            createMsg = createMsg + ",c01_3='" + tmpList[j].value + "'";
-                            continue;
-                        }
-                    }
+            <label>電気</label>
+            <div class='checkbox'>
+                <input type='radio' name='q2' id='q2_0' value='A' checked><label for='q2_0' class='EX fourth'>A</label>
+                <input type='radio' name='q2' id='q2_1' value='B' ><label for='q2_1' class='GD fourth'>B</label>
+                <input type='radio' name='q2' id='q2_2' value='C' ><label for='q2_2' class='NT fourth'>C</label>
+                <input type='radio' name='q2' id='q2_3' value='D' ><label for='q2_3' class='TR fourth'>D</label>
+            </div><br><br><br>
 
-                    tmpList = document.getElementsByName('q3'); // q3
-                    for(var j=0; j<tmpList.length; j++) {
-                        if (tmpList[j].checked) {
-                            createMsg = createMsg + ",c01_4='" + tmpList[j].value + "'";
-                            continue;
-                        }
-                    }
+            <label>ガス</label>
+            <div class='checkbox'>
+                <input type='radio' name='q3' id='q3_0' value='A' checked><label for='q3_0' class='EX fourth'>A</label>
+                <input type='radio' name='q3' id='q3_1' value='B' ><label for='q3_1' class='GD fourth'>B</label>
+                <input type='radio' name='q3' id='q3_2' value='C' ><label for='q3_2' class='NT fourth'>C</label>
+                <input type='radio' name='q3' id='q3_3' value='D' ><label for='q3_3' class='TR fourth'>D</label>
+            </div><br><br><br>
 
-                    tmpList = document.getElementsByName('q4'); // q4
-                    for(var j=0; j<tmpList.length; j++) {
-                        if (tmpList[j].checked) {
-                            createMsg = createMsg + ",c01_5='" + tmpList[j].value + "'";
-                            continue;
-                        }
-                    }
+            <label>使用可能トイレ</label>
+            <div class='checkbox'>
+                <input type='radio' name='q4' id='q4_0' value='A' checked><label for='q4_0' class='EX fourth'>A</label>
+                <input type='radio' name='q4' id='q4_1' value='B' ><label for='q4_1' class='GD fourth'>B</label>
+                <input type='radio' name='q4' id='q4_2' value='C' ><label for='q4_2' class='NT fourth'>C</label>
+                <input type='radio' name='q4' id='q4_3' value='D' ><label for='q4_3' class='TR fourth'>D</label>
+            </div><br><br><br>
 
-                    tmpList = document.getElementsByName('q5'); // q5
-                    for(var j=0; j<tmpList.length; j++) {
-                        if (tmpList[j].checked) {
-                            createMsg = createMsg + ",c01_8='" + tmpList[j].value + "'";
-                            continue;
-                        }
-                    }
+            <label>生活用水</label>
+            <div class='checkbox'>
+                <input type='radio' name='q5' id='q5_0' value='A' checked><label for='q5_0' class='EX fourth'>A</label>
+                <input type='radio' name='q5' id='q5_1' value='B' ><label for='q5_1' class='GD fourth'>B</label>
+                <input type='radio' name='q5' id='q5_2' value='C' ><label for='q5_2' class='NT fourth'>C</label>
+                <input type='radio' name='q5' id='q5_3' value='D' ><label for='q5_3' class='TR fourth'>D</label>
+            </div><br><br><br>
 
-                    tmpList = document.getElementsByName('q6'); // q6
-                    for(var j=0; j<tmpList.length; j++) {
-                        if (tmpList[j].checked) {
-                            createMsg = createMsg + ",c01_9='" + tmpList[j].value + "'";
-                            continue;
-                        }
-                    }
+            <label>固定電話</label>
+            <div class='checkbox'>
+                <input type='radio' name='q6' id='q6_0' value='1' ><label for='q6_0' class='EX'>あり</label>
+                <input type='radio' name='q6' id='q6_1' value='0' checked><label for='q6_1' class='TR'>無し・不明</label>
+            </div><br><br><br>
 
-                    tmpList = document.getElementsByName('q7'); // q7
-                    for(var j=0; j<tmpList.length; j++) {
-                        if (tmpList[j].checked) {
-                            createMsg = createMsg + ",c02_6='" + tmpList[j].value + "'";
-                            continue;
-                        }
-                    }
+            <label>携帯電話</label>
+            <div class='checkbox'>
+                <input type='radio' name='q7' id='q7_0' value='1' ><label for='q7_0' class='EX'>あり</label>
+                <input type='radio' name='q7' id='q7_1' value='0' checked><label for='q7_1' class='TR'>無し・不明</label>
+            </div><br><br><br>
 
-                    tmpList = document.getElementsByName('q8'); // q8
-                    for(var j=0; j<tmpList.length; j++) {
-                        if (tmpList[j].checked) {
-                            createMsg = createMsg + ",c04_1='" + tmpList[j].value + "'";
-                            continue;
-                        }
-                    }
+            <label>衛星電話</label>
+            <div class='checkbox'>
+                <input type='radio' name='q8' id='q8_0' value='1' ><label for='q8_0' class='EX'>あり</label>
+                <input type='radio' name='q8' id='q8_1' value='0' checked><label for='q8_1' class='TR'>無し・不明</label>
+            </div><br><br><br>
 
-                    var nowTime = new Date();
-                    var nowYer = nowTime.getFullYear();
-                    var nowMon = nowTime.getMonth() + 1;
-                    var nowDay = nowTime.getDate();
-                    var nowHrs = nowTime.getHours();
-                    var nowMin = nowTime.getMinutes();
-                    var nowSec = nowTime.getSeconds();
-                    createMsg = createMsg + ", timestamp='" + nowYer + "/" + nowMon + "/" + nowDay + " " + nowHrs + ":" + nowMin + ":" + nowSec + "'";
-                    console.log(topicMsg + " : " + createMsg);
-                    publishMsg(topicMsg, createMsg, true);
-                }
-            </script>
-            <div>
-                <input style="border: 0;float: inherit;width: 70px;margin: 0;background: #6d6d6d;color: #ffffff;font-size: 16px;text-align: center;" id ="closeBtn" type="button" onclick="window.close()" value="閉じる" >
-                <input style="border: 0;float: inherit;width: 70px;margin: 0;background: #228b22;color: #ffffff;font-size: 16px;text-align: center;" id = "submitBtn" type="button" onclick="createMessage();" value="送信" >
-            </div>
-            <script>
-                var urlStr = location.search.substring(1);
-                    if(urlStr === '') {
-                    // 避難所IDと避難所名がないと送信ボタンが押せない設定
-                    document.getElementById('submitBtn').disabled = 'true';
-                }
-                else {
-                    var pairUrlStr = urlStr.split(',');
-                    if(pairUrlStr.length>=2) {
-                        console.log(pairUrlStr[0])
-                        pairUrlStr[0] = decodeURI(pairUrlStr[0].substr(6)); // event=から始まる
-                        pairUrlStr[1] = decodeURI(pairUrlStr[1].substr(3)); // id=から始まる
-                        pairUrlStr[2] = decodeURI(pairUrlStr[2].substr(5)); // name=から始まる
-                        document.getElementById('eventCode').value = pairUrlStr[0];
-                        document.getElementById('eventCode').disabled = 'true';
-                        document.getElementById('inputCode').value = pairUrlStr[1];
-                        document.getElementById('inputCode').disabled = 'true';
-                        document.getElementById('inputShelter').value = pairUrlStr[2];
-                        document.getElementById('inputShelter').disabled = 'true';
-                    }
-                }
-            </script>
+            <label>データ通信</label>
+            <div class='checkbox'>
+                <input type='radio' name='q9' id='q9_0' value='1' ><label for='q9_0' class='EX'>あり</label>
+                <input type='radio' name='q9' id='q9_1' value='0' checked><label for='q9_1' class='TR'>無し・不明</label>
+            </div><br><br><br>
 
-        </fieldset>
-    </center>
-</form>
+            <label>救護所設置</label>
+            <div class='checkbox'>
+                <input type='radio' name='q10' id='q10_0' value='1' ><label for='q10_0' class='EX'>設置済</label>
+                <input type='radio' name='q10' id='q10_1' value='0' checked><label for='q10_1' class='TR'>無し・不明</label>
+            </div><br><br><br>
+
+            <label>医療チームの巡回</label>
+            <div class='checkbox'>
+                <input type='radio' name='q11' id='q11_0' value='1' ><label for='q11_0' class='EX'>巡回あり</label>
+                <input type='radio' name='q11' id='q11_1' value='0' checked><label for='q11_1' class='TR'>無し・不明</label>
+            </div><br><br><br>
+
+            <label>調査者氏名</label>
+            <input id="id_reporterName" maxlength='10' value=""><br><br>
+
+            <label>調査者所属</label>
+            <input id="id_reporterBELONG" maxlength='20' value=""><br><br>
+
+            <label>調査者連絡先(電話)</label>
+            <input id="id_reporterTEL" maxlength='11' value="" placeholder="半角数字のみで入力" onKeyup="this.value=this.value.replace(/[^0-9]+/,'')"><br><br>
+
+        </li></ul>
+    <br>
+
+    <div>
+        <input style="border: 0;float: inherit;width: 70px;margin: 0;background: #6d6d6d;color: #ffffff;font-size: 16px;text-align: center;" id ="closeBtn" type="button" onclick="window.close()" value="閉じる" >
+        <input style="border: 0;float: inherit;width: 70px;margin: 0;background: #228b22;color: #ffffff;font-size: 16px;text-align: center;" id ="submitBtn" type="button" onclick="createMessage();" value="送信" >
+    </div>
+
+</form></fieldset>
+<script src="../js/timestamp.js"></script>
+<script>
+    var shelterKeys = ['lon','lat','情報取得日時','code','evacuee','避難所代表者','固定電話連絡先','携帯電話連絡先','FAX連絡先',
+        '緊急連絡事項','飲料水','食事','電気','ガス','使用可トイレ','生活用水','固定電話','携帯電話','衛星電話','データ通信',
+        '救護所設置','更医療チームの巡回','調査者氏名','調査者所属','調査者連絡先','更新日時'];
+
+    if (document.URL.indexOf("?_") > 0) {
+        reURL = document.URL.split(',');
+        var shelterID = reURL[1].substr(3);
+        var hcName = decodeURI(reURL[2].substr(5));
+        var lon = reURL[3].substr(4);
+        var lat = reURL[4].substr(4);
+        document.getElementById('id_ID').value = shelterID;
+        document.getElementById('id_ID').disabled = true;
+        document.getElementById('id_name').value = hcName;
+    }
+
+    // mqtt pub/sub関連の変数
+    var topicMsg =  "/hcrisis/assistant/schedule/";
+    var createMsg;
+    var tmpList; // 択一式の回答項目からチェック項目を拾い上げる際に使う変数
+
+    // タイムスタンプ関連の変数
+    var nowTime = new Date();
+    var nowYer = nowTime.getFullYear();
+    var nowMon = nowTime.getMonth() + 1;
+    var nowDay = nowTime.getDate();
+    var nowHrs = nowTime.getHours();
+    var nowMin = nowTime.getMinutes();
+    var nowSec = nowTime.getSeconds();
+
+    function createMessage() {
+        var topicMsg = "/hcrisis/assistant/shelter/crisis/" + document.getElementById('id_ID').value + "/" + shelterID.substr(2,2);
+
+        var createMsg = '{"' + shelterKeys[0] + '":"' + lon + '","' + shelterKeys[1] + '":"' + lat + '","' +
+                shelterKeys[2] + '":"' + document.getElementById('id_year').value + "/" + document.getElementById('id_month').value + "/" +
+                document.getElementById('id_day').value + " " + document.getElementById('id_hour').value + ":" +
+                document.getElementById('id_minute').value  + '","' + shelterKeys[3] + '":"' + shelterID + '","';
+
+        if (document.getElementById('id_evacuee').value.length == 0){
+            createMsg += shelterKeys[4] + '":-1,"';
+        } else {
+            createMsg += shelterKeys[4] + '":"' + document.getElementById('id_evacuee').value + '","';
+        }
+
+        if (document.getElementById('id_top').value.length == 0){
+            createMsg += shelterKeys[5] + '":" ","';
+        } else {
+            createMsg += shelterKeys[5] + '":"' + document.getElementById('id_top').value + '","';
+        }
+
+        if (document.getElementById('id_TEL').value.length == 0){
+            createMsg += shelterKeys[6] + '":" ","';
+        } else {
+            createMsg += shelterKeys[6] + '":"' + document.getElementById('id_TEL').value + '","';
+        }
+
+        if (document.getElementById('id_celler').value.length == 0){
+            createMsg += shelterKeys[7] + '":" ","';
+        } else {
+            createMsg += shelterKeys[7] + '":"' + document.getElementById('id_celler').value + '","';
+        }
+
+        if (document.getElementById('id_FAX').value.length == 0){
+            createMsg += shelterKeys[8] + '":" ","';
+        } else {
+            createMsg += shelterKeys[8] + '":"' + document.getElementById('id_FAX').value + '","';
+        }
+
+        if (document.getElementById('id_emergency').value.length == 0){
+            createMsg += shelterKeys[9] + '":" ","';
+        } else {
+            createMsg += shelterKeys[9] + '":"' + document.getElementById('id_emergency').value + '","';
+        }
+
+        var tmpList = document.getElementsByName('q0'); //q0
+        for(var j=0; j<tmpList.length; j++) {
+            if (tmpList[j].checked) {
+                createMsg += shelterKeys[10] + '":"' + tmpList[j].value + '","';
+                continue;
+            }
+        }
+
+        tmpList = document.getElementsByName('q1'); // q1
+        for(var j=0; j<tmpList.length; j++) {
+            if (tmpList[j].checked) {
+                createMsg += shelterKeys[11] + '":"' + tmpList[j].value + '","';
+                continue;
+            }
+        }
+
+        tmpList = document.getElementsByName('q2'); // q1
+        for(var j=0; j<tmpList.length; j++) {
+            if (tmpList[j].checked) {
+                createMsg += shelterKeys[12] + '":"' + tmpList[j].value + '","';
+                continue;
+            }
+        }
+
+        tmpList = document.getElementsByName('q3'); // q1
+        for(var j=0; j<tmpList.length; j++) {
+            if (tmpList[j].checked) {
+                createMsg += shelterKeys[13] + '":"' + tmpList[j].value + '","';
+                continue;
+            }
+        }
+
+        tmpList = document.getElementsByName('q4'); // q1
+        for(var j=0; j<tmpList.length; j++) {
+            if (tmpList[j].checked) {
+                createMsg += shelterKeys[14] + '":"' + tmpList[j].value + '","';
+                continue;
+            }
+        }
+
+        tmpList = document.getElementsByName('q5'); // q1
+        for(var j=0; j<tmpList.length; j++) {
+            if (tmpList[j].checked) {
+                createMsg += shelterKeys[15] + '":"' + tmpList[j].value + '","';
+                continue;
+            }
+        }
+
+        tmpList = document.getElementsByName('q6'); // q1
+        for(var j=0; j<tmpList.length; j++) {
+            if (tmpList[j].checked) {
+                createMsg += shelterKeys[16] + '":' + tmpList[j].value + ',"';
+                continue;
+            }
+        }
+
+        tmpList = document.getElementsByName('q7'); // q1
+        for(var j=0; j<tmpList.length; j++) {
+            if (tmpList[j].checked) {
+                createMsg += shelterKeys[17] + '":' + tmpList[j].value + ',"';
+                continue;
+            }
+        }
+
+        tmpList = document.getElementsByName('q8'); // q1
+        for(var j=0; j<tmpList.length; j++) {
+            if (tmpList[j].checked) {
+                createMsg += shelterKeys[18] + '":' + tmpList[j].value + ',"';
+                continue;
+            }
+        }
+
+        tmpList = document.getElementsByName('q9'); // q1
+        for(var j=0; j<tmpList.length; j++) {
+            if (tmpList[j].checked) {
+                createMsg += shelterKeys[19] + '":' + tmpList[j].value + ',"';
+                continue;
+            }
+        }
+
+        tmpList = document.getElementsByName('q10'); // q1
+        for(var j=0; j<tmpList.length; j++) {
+            if (tmpList[j].checked) {
+                createMsg += shelterKeys[20] + '":' + tmpList[j].value + ',"';
+                continue;
+            }
+        }
+
+        tmpList = document.getElementsByName('q11'); // q1
+        for(var j=0; j<tmpList.length; j++) {
+            if (tmpList[j].checked) {
+                createMsg += shelterKeys[21] + '":' + tmpList[j].value + ',"';
+                continue;
+            }
+        }
+
+        if (document.getElementById('id_reporterName').value.length == 0){
+            createMsg += shelterKeys[22] + '":" ","';
+        } else {
+            createMsg += shelterKeys[22] + '":"' + document.getElementById('id_reporterName').value + '","';
+        }
+
+        if (document.getElementById('id_reporterBELONG').value.length == 0){
+            createMsg += shelterKeys[23] + '":" ","';
+        } else {
+            createMsg += shelterKeys[23] + '":"' + document.getElementById('id_reporterBELONG').value + '","';
+        }
+
+        if (document.getElementById('id_reporterTEL').value.length == 0){
+            createMsg += shelterKeys[24] + '":" ","';
+        } else {
+            createMsg += shelterKeys[24] + '":"' + document.getElementById('id_reporterTEL').value + '","';
+        }
+
+        createMsg += shelterKeys[25] + '":"' + nowYer + "/" + nowMon + "/" + nowDay + " " + nowHrs + ":" + nowMin + '"}';
+        console.log(topicMsg + " : " + createMsg);
+        publishMsg(topicMsg, createMsg, true);
+    }
+
+</script>
 </body>
 </html>

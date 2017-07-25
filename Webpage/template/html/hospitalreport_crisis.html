@@ -78,7 +78,7 @@
                 <label>支援要否</label>
                 <div class='checkbox'>
                     <input type='radio' name='q7' id='q7_0' value='不要' checked><label for='q7_0' class='EX'>不要</label>
-                    <input type='radio' name='q7' id='q7_1' value='要' checked><label for='q7_1' class='TR'>必要</label>
+                    <input type='radio' name='q7' id='q7_1' value='必要' checked><label for='q7_1' class='TR'>必要</label>
                 </div><br><br><br>
 
                 <label>医療派遣ステータス</label>
@@ -113,8 +113,9 @@
     var topicMsg =  "/hcrisis/assistant/schedule/";
     var createMsg;
     var tmpList; // 択一式の回答項目からチェック項目を拾い上げる際に使う変数
-    var hospital_emergency_cols = ['lon','lat','ecode','緊急時入力/入院病棟倒壊・倒壊の恐れ','緊急時入力/ライフライン・サプライ状況/電気使用不可','緊急時入力/ライフライン・サプライ状況/水使用不可','緊急時入力/ライフライン・サプライ状況/医療ガス使用不可','緊急時入力/ライフライン・サプライ状況/医薬品衛生資器材使用不可','緊急時入力/多数患者受診','緊急時入力/職員状況','緊急時入力/その他',
-        '緊急時入力/情報取得日時','緊急時入力/緊急連絡先/電話番号','緊急時入力/緊急連絡先/メールアドレス','緊急時入力/更新日時'];
+    //var hospital_emergency_cols = ['lon','lat','ecode','緊急時入力/入院病棟倒壊・倒壊の恐れ','緊急時入力/ライフライン・サプライ状況/電気使用不可','緊急時入力/ライフライン・サプライ状況/水使用不可','緊急時入力/ライフライン・サプライ状況/医療ガス使用不可','緊急時入力/ライフライン・サプライ状況/医薬品衛生資器材使用不可','緊急時入力/多数患者受診','緊急時入力/職員状況','緊急時入力/その他',
+    //    '緊急時入力/情報取得日時','緊急時入力/緊急連絡先/電話番号','緊急時入力/緊急連絡先/メールアドレス','緊急時入力/更新日時'];
+    var hospital_emergency_cols = ['lon','lat','code','e001','e002','e003','e004','e005','e006','e007','e008','e009','e010','e011','e012'];
     var urlStr = location.search.substring(1);
     var pairUrlStr = urlStr.split(',');
     console.log(pairUrlStr);
@@ -208,7 +209,7 @@
         tmpList = document.getElementsByName('q7'); // q1
         for(var j=0; j<tmpList.length; j++) {
             if (tmpList[j].checked) {
-                createMsg += '支援要否' + '":"' + tmpList[j].value + '","';
+                createMsg += 'assist' + '":"' + tmpList[j].value + '","';
                 continue;
             }
         }
@@ -216,7 +217,7 @@
         tmpList = document.getElementsByName('q8'); // q1
         for(var j=0; j<tmpList.length; j++) {
             if (tmpList[j].checked) {
-                createMsg += '医療派遣ステータス' + '":"' + tmpList[j].value + '","';
+                createMsg += 'mds' + '":"' + tmpList[j].value + '","';
                 continue;
             }
         }

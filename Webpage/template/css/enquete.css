@@ -133,6 +133,19 @@ h3 {
     text-align: left;
     border-radius:5px;
 }
+.checkbox label.fourth{
+    display: block;
+    float: left;
+    width: 52px;
+    margin: 0 0 0 0;
+    padding: 15px 5px 15px 5px;
+    background: #8a8a8a;
+    color: #bcbcbc;
+    font-size: 13px;
+    text-align: center;
+    line-height: 0;
+    white-space: nowrap;
+}
 .checkbox input[type="radio"]:checked + .EX {
     background-color: #228b22;
     color: #ffffff;
